@@ -11,15 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Keith Tay
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/keitht8y.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/keitht8y)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Associate Integration Specialist
+* Responsibilities: Integration & Testing
 
 ### Jane Doe
 
