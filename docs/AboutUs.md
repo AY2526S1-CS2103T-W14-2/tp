@@ -11,15 +11,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Keith Tay
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/keitht8y.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](https://github.com/keitht8y)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Associate Integration Specialist
+* Responsibilities: Integration & Testing
 
 ### Jane Doe
 
@@ -31,14 +31,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Orion Raysher Lee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/its-me-orion.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/its-me-orion)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Developer and testing
+* Responsibilities: Testing
 
 ### Zechariah Yeo
 
@@ -50,12 +50,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Integration
 * Responsibilities: Dev Ops + Code Quality
 
-### James Doe
+### Benjamin Lua
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lkxben.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/lkxben)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Testing
+* Responsibilities: Dev Ops + Threading
