@@ -31,14 +31,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Orion Raysher Lee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/its-me-orion.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/its-me-orion)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Developer and testing
+* Responsibilities: Testing
 
 ### Jean Doe
 
