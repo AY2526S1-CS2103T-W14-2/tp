@@ -40,14 +40,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer and testing
 * Responsibilities: Testing
 
-### Jean Doe
+### Benjamin Lua
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/lkxben.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/lkxben)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
+* Role: Testing
 * Responsibilities: Dev Ops + Threading
 
 ### James Doe
