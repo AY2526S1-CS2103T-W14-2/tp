@@ -40,6 +40,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer and testing
 * Responsibilities: Testing
 
+### Zechariah Yeo
+
+<img src="images/not-a-scam.png" width="200px">
+
+[[github](https://github.com/not-a-scam)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Integration
+* Responsibilities: Dev Ops + Code Quality
+
 ### Benjamin Lua
 
 <img src="images/lkxben.png" width="200px">
@@ -49,13 +59,3 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Testing
 * Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
