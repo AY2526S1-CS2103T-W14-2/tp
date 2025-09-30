@@ -274,14 +274,20 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* Food enthusiasts / Restaurant owners and anyone who wants to keep track of their favourite dining spots
+* has a need to manage a significant number of food places contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Persona (Gordon)**:
 
+* Gordon likes to eat food and goes to many places and try out different kind of food
+* Gordon does not have a way to record the places he likes and dislikes
+* Gordon often forget places that he have tried before, what he rates them and what he thinks about them
+* Gordon have difficulty recommending food places for his friends to try out because he cannot remember them
+* Gordon have a wishlist of places he wished to try in his head but often forgets part of them
 
 ### User stories
 
