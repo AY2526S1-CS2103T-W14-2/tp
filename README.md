@@ -15,4 +15,4 @@ BiteBuddy is a desktop application built upon AddressBook Level 3, designed to h
 
 ### Want to know more?
 
-For the detailed documentation of this project, see the [BiteBuddy Product Website](https://https://ay2526s1-cs2103t-w14-2.github.io/tp)
+For the detailed documentation of this project, see the [BiteBuddy Product Website](https://ay2526s1-cs2103t-w14-2.github.io/tp)
