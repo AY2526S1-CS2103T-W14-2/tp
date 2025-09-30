@@ -332,8 +332,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Error messages must explicitly state the error and provide guidance on correcting the input.
+5.  Should not lose data if the application crashes unexpectedly.
+6.  Should store all user data locally in a human-editable text file.
+7.  Should be a single-user application and not require networked or multi-user support.
+8.  The GUI should work well at 1920×1080 and higher (100%–125% scale) and remain usable at 1280×720 and higher (150% scale).
+9.  Should not depend on a remote server.
+10. The product should be packaged as a single file and not exceed 500 MB; document files should not exceed 15 MB each.
 
 ### Glossary
 
