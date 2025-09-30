@@ -289,9 +289,13 @@ _{Explain here how the data archiving feature will be implemented}_
 * Gordon have difficulty recommending food places for his friends to try out because he cannot remember them
 * Gordon have a wishlist of places he wished to try in his head but often forgets part of them
 
-### User stories
+**Value proposition**:
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+* Provide a platform to collate information about food places that the user have visited such as, name, address, rating, cuisine, location, notes, etc.
+* Users can quickly access any information they want through extensive sorting and searching feature and make quick and informed decisions
+* Blacklist food places that the user dislike
+* Wishlist food places to keep track of places they want to try next
+* Recommend food places based on specified conditions (e.g. Recommend me a **cheap**, **Japanese** restaurant)
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
