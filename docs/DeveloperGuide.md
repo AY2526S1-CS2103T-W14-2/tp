@@ -371,9 +371,13 @@ Use case ends.
       Use case resumes at step 2.
 
 **Use case: UC02 - Add tag(s) to a food place**
+
 System: BiteBuddy
+
 Actor: User
+
 Preconditions: At least one food place exists.
+
 Guarantees: Valid tags are added and duplicates are ignored.
 
 **MSS**
@@ -399,9 +403,13 @@ Guarantees: Valid tags are added and duplicates are ignored.
       Use case resumes at step 4.
 
 **Use case: UC03 - Add a note to a food place**
+
 System: BiteBuddy
+
 Actor: User
+
 Preconditions: At least one food place exists.
+
 Guarantees: A note is stored for the food place and existing note is overwritten if present.
 
 **MSS**
@@ -423,6 +431,7 @@ Guarantees: A note is stored for the food place and existing note is overwritten
       Use case resumes at step 4.
 
 **Use case: UC04 - Rate a food place**
+
 System: BiteBuddy
 Actor: User
 Preconditions: At least one food place exists.
@@ -451,6 +460,7 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
       Use case resumes at step 2.
 
 **Use case: UC05 - Delete a food place**
+
 System: BiteBuddy
 Actor: User
 Preconditions: At least one food place exists.
