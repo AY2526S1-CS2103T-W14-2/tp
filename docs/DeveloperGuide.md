@@ -97,6 +97,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <box type="info" seamless>
 
 **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+
 </box>
 
 How the `Logic` component works:
@@ -302,7 +303,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (might have if time permits) - `*`
 
-| Priority | As a …​                          | I want to …​                                                           | So that I can…​                                                                                   |
+| Priority | As a …                           | I want to …                                                            | So that I can…                                                                                    |
 |----------|----------------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | `* * *`  | user                             | add food places entries                                                | revisit these entries or recommend them                                                           |
 | `* * *`  | user                             | delete an existing entry                                               | remove food places that I no longer need to refer to                                              |
