@@ -343,10 +343,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 Organised in alphabetical order
 
+* **CLI (Command Line Interface)**: A text-based interface that allows users to interact with the application by typing commands.
+* **Command**: An instruction entered by the user to perform a specific action in the application (e.g., add, delete, list).
 * **Custom Keyword**: A user-defined word or phrase that can be used to filter, search or tag specific entries in BiteBuddy.
 * **Food Place**: Any food place, including but not limited to restaurants, hawker stalls, food trucks, and cafes.
+* **GUI (Graphical User Interface)**: The visual interface of the application that allows users to interact with it using graphical elements.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-
+* **Tag**: A label that can be assigned to food places to categorize or group them.
 
 --------------------------------------------------------------------------------------------------------------------
 
