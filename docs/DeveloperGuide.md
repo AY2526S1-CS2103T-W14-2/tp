@@ -274,7 +274,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* Food enthusiasts / Restaurant owners and anyone who wants to keep track of their favourite dining spots
+* food enthusiasts or anyone who wants to keep track of their favourite food places
 * has a need to manage a significant number of food places contacts
 * prefer desktop apps over other types
 * can type fast
@@ -285,17 +285,17 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * Gordon likes to eat food and goes to many places and try out different kind of food
 * Gordon does not have a way to record the places he likes and dislikes
-* Gordon often forget places that he have tried before, what he rates them and what he thinks about them
-* Gordon have difficulty recommending food places for his friends to try out because he cannot remember them
-* Gordon have a wishlist of places he wished to try in his head but often forgets part of them
+* Gordon often forget places that he has tried before, what he rates them and what he thinks about them
+* Gordon has difficulty recommending food places for his friends to try out because he cannot remember them
+* Gordon has a wishlist of places he wished to try in his head but often forgets part of them
 
 **Value proposition**:
 
-* Provide a platform to collate information about food places that the user have visited such as, name, address, rating, cuisine, location, notes, etc.
-* Users can quickly access any information they want through extensive sorting and searching feature and make quick and informed decisions
-* Blacklist food places that the user dislike
+* Provide a platform to collate information about food places that the user has visited such as, name, address, rating, cuisine, location, notes, etc.
+* Users can quickly access any information they want through extensive sorting and searching feature to make quick and informed decisions
+* Blacklist food places that the user dislikes
 * Wishlist food places to keep track of places they want to try next
-* Recommend food places based on specified conditions (e.g. Recommend me a **cheap**, **Japanese** restaurant)
+* Recommend food places based on specified conditions (e.g. Recommend a **cheap**, **Japanese** restaurant)
 
 
 ### User stories
