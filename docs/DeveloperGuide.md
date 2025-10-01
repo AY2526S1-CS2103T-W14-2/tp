@@ -336,9 +336,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Glossary
+Organised in alphabetical order
 
+* **Custom Keyword**: A user-defined word or phrase that can be used to filter, search or tag specific entries in BiteBuddy.
+* **Food Place**: Any food place, including but not limited to restaurants, hawker stalls, food trucks, and cafes.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+
 
 --------------------------------------------------------------------------------------------------------------------
 
