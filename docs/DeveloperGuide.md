@@ -341,14 +341,12 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 
 (For all use cases below, the **System** is the `BiteBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
+
 **Use case: UC01 - Add a food place**
 
 System: BiteBuddy
-
 Actor: User
-
 Preconditions: BiteBuddy is running.
-
 Guarantees: If successful, the food place is stored in BiteBuddy without duplicates.
 
 **MSS**
@@ -370,14 +368,12 @@ Use case ends.
     * 3a2. User corrects the details.
       Use case resumes at step 2.
 
+
 **Use case: UC02 - Add tag(s) to a food place**
 
 System: BiteBuddy
-
 Actor: User
-
 Preconditions: At least one food place exists.
-
 Guarantees: Valid tags are added and duplicates are ignored.
 
 **MSS**
@@ -402,14 +398,12 @@ Guarantees: Valid tags are added and duplicates are ignored.
     * 3a1. BiteBuddy ignores duplicates and keeps only unique tags.
       Use case resumes at step 4.
 
+
 **Use case: UC03 - Add a note to a food place**
 
 System: BiteBuddy
-
 Actor: User
-
 Preconditions: At least one food place exists.
-
 Guarantees: A note is stored for the food place and existing note is overwritten if present.
 
 **MSS**
@@ -430,11 +424,15 @@ Guarantees: A note is stored for the food place and existing note is overwritten
     * 2b1. BiteBuddy treats this as discarding the existing note.
       Use case resumes at step 4.
 
+
 **Use case: UC04 - Rate a food place**
 
 System: BiteBuddy
+
 Actor: User
+
 Preconditions: At least one food place exists.
+
 Guarantees: A rating between 1–10 is stored and existing rating is overwritten.
 
 **MSS**
@@ -459,11 +457,15 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
     * 2c1. BiteBuddy requests a rating within range.
       Use case resumes at step 2.
 
+
 **Use case: UC05 - Delete a food place**
 
 System: BiteBuddy
+
 Actor: User
+
 Preconditions: At least one food place exists.
+
 Guarantees: The food place is deleted if index is valid.
 
 **MSS**
