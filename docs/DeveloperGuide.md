@@ -341,11 +341,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. The product should be packaged as a single file and not exceed 500 MB; document files should not exceed 15 MB each.
 
 ### Glossary
-Organised in alphabetical order
+Organized in alphabetical order
 
 * **CLI (Command Line Interface)**: A text-based interface that allows users to interact with the application by typing commands.
 * **Command**: An instruction entered by the user to perform a specific action in the application (e.g., add, delete, list).
-* **Custom Keyword**: A user-defined word or phrase that can be used to filter, search or tag specific entries in BiteBuddy.
+* **Custom Keyword**: A user-defined word or phrase that can be used to filter, search, or tag specific entries in BiteBuddy.
 * **Food Place**: Any food place, including but not limited to restaurants, hawker stalls, food trucks, and cafes.
 * **GUI (Graphical User Interface)**: The visual interface of the application that allows users to interact with it using graphical elements.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
