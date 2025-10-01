@@ -342,9 +342,13 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 (For all use cases below, the **System** is the `BiteBuddy` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Add a food place**
+
 System: BiteBuddy
+
 Actor: User
+
 Preconditions: BiteBuddy is running.
+
 Guarantees: If successful, the food place is stored in BiteBuddy without duplicates.
 
 **MSS**
