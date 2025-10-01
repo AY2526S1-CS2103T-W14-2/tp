@@ -1,4 +1,4 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions) [![codecov](https://codecov.io/gh/AY2526S1-CS2103T-W14-2/tp/graph/badge.svg?token=EgoUCaXgsh)](https://codecov.io/gh/AY2526S1-CS2103T-W14-2/tp)
+[![CI Status](https://github.com/AY2526S1-CS2103T-W14-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2526S1-CS2103T-W14-2/tp/actions) [![codecov](https://codecov.io/gh/AY2526S1-CS2103T-W14-2/tp/graph/badge.svg?token=EgoUCaXgsh)](https://codecov.io/gh/AY2526S1-CS2103T-W14-2/tp)
 
 ![Ui](docs/images/Ui.png)
 
@@ -12,4 +12,6 @@ BiteBuddy is a desktop application built upon AddressBook Level 3, designed to h
 - User-friendly interface for easy navigation
 
 ### Want to know more?
-For the detailed documentation of this project, see the [BiteBuddy Product Website](https://ay2526s1-cs2103t-w14-2.github.io/tp)
+For the detailed documentation of this project, see the [BiteBuddy Product Website](https://ay2526s1-cs2103t-w14-2.github.io/tp).
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
