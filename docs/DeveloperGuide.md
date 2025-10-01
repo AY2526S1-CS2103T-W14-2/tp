@@ -274,29 +274,68 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* food enthusiasts or anyone who wants to keep track of their favourite food places
+* has a need to manage a significant number of food places contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Persona (Gordon)**:
+
+* Gordon likes to eat food and goes to many places and try out different kind of food
+* Gordon does not have a way to record the places he likes and dislikes
+* Gordon often forget places that he has tried before, what he rates them and what he thinks about them
+* Gordon has difficulty recommending food places for his friends to try out because he cannot remember them
+* Gordon has a wishlist of places he wished to try in his head but often forgets part of them
+
+**Value proposition**:
+
+* Provide a platform to collate information about food places that the user has visited such as, name, address, rating, cuisine, location, notes, etc.
+* Users can quickly access any information they want through extensive sorting and searching feature to make quick and informed decisions
+* Blacklist food places that the user dislikes
+* Wishlist food places to keep track of places they want to try next
+* Recommend food places based on specified conditions (e.g. Recommend a **cheap**, **Japanese** restaurant)
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (might have if time permits) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+| Priority | As a …​                          | I want to …​                                                           | So that I can…​                                                                                   |
+|----------|----------------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| `* * *`  | user                             | add food places entries                                                | revisit these entries or recommend them                                                           |
+| `* * *`  | user                             | delete an existing entry                                               | remove food places that I no longer need to refer to                                              |
+| `* * *`  | user                             | rate an existing entry                                                 | refer to the rating to know how good the food place is based on my rating                         |
+| `* * *`  | user                             | add notes to an existing entry                                         | keep track of what I liked or disliked at the restaurant                                          |
+| `* * *`  | user                             | tag food places with my own custom keywords                            | filter by personal context                                                                        |
+| `* * *`  | user                             | filter based on rating / cuisine / tags                                | choose a food place that I want to go based on the specified parameters                           |
+| `* * *`  | user                             | search for a specific food place quickly                               | don't have to spend too long finding a place I visited before                                     |
+| `* * *`  | first-time user                  | have a clear guidance or help commands                                 | learn how to use and navigate around the app easily                                               |
+| `* * *`  | frequent user                    | pin my favourite food places                                           | quickly refer to them again next time                                                             |
+| `* * *`  | user                             | filter food places that are open or closed based on current time       | so that I can decide where to eat based on restaurants that are currently open only               |
+| `* * *`  | user                             | have a wishlist of food places I want to visit                         | plan for a future visit                                                                           |
+| `* * *`  | user                             | edit an existing entry                                                 | update details if they change without having to delete and adding it again                        |
+| `* *`    | user                             | create different tabs / groups                                         | organise and categorise the food places however I want                                            |
+| `* *`    | expert user                      | add alias to commands                                                  | have shortcuts to execute commands faster                                                         |
+| `* *`    | indecisive user                  | let the app randomly pick a food place for me                          | decide on what I want to eat without deciding by myself                                           |
+| `* *`    | potential user exploring the app | see the app pre-populated with sample data                             | easily see how the app will look when it is in use                                                |
+| `* *`    | user                             | keep track of the food I dislike                                       | avoid them                                                                                        |
+| `* *`    | user                             | sort by distance from my current location                              | know which food places is most conveniently located                                               |
+| `* *`    | user                             | add an average dining cost of an existing entry                        | choose a food place that best fits my current budget                                              |
+| `* *`    | expert user                      | add common keyboard shortcuts                                          | quickly add and update new food places                                                            |
+| `* *`    | frequent typer                   | autocomplete suggestions when entering name of food places or cuisines | add food places faster                                                                            |
+| `* *`    | user                             | compare two or more food places side by side                           | make a better decision when choosing where to eat                                                 |
+| `*`      | user                             | know what kind of cuisines I often frequent to                         | know what cuisines I might be favourable to                                                       |
+| `*`      | user                             | click on the food place link / email                                   | quickly contact them for reservation                                                              |
+| `*`      | user with poor eyesight          | adjust text / UI size                                                  | see the address book entries more clearly                                                         |
+| `*`      | user                             | find a place in my data using multiple filters                         | find a place that I have forgotten the name of                                                    |
+| `*`      | user                             | display a list of all food places I have recommended before            | easily share my top picks with friends                                                            |
+| `*`      | user                             | view my dining history in reverse chronological order                  | recall food places I have visited recently                                                        |
+| `*`      | user                             | see statistics on characteristics of food places I have visited        | discover patterns about my eating preferences and get recommendations for cuisines I rarely tried |
 
-*{More to be added}*
+
+*{More may be added in the future}*
 
 ### Use cases
 
