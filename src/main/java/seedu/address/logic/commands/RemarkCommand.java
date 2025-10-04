@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
+import seedu.address.commons.exceptions.CommandException;
 
 /**
  * Changes the remark of an existing person in the address book.
