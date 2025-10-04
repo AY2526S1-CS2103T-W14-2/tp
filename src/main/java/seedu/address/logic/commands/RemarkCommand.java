@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
-import seedu.address.commons.exceptions.CommandException;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
