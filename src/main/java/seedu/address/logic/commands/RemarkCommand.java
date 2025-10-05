@@ -49,7 +49,7 @@ public class RemarkCommand extends Command {
         this.index = index;
         this.remark = remark;
     }
-    
+
     /**
      * Executes the remark command.
      *
