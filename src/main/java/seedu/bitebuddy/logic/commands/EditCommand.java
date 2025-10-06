@@ -21,8 +21,11 @@ import seedu.bitebuddy.commons.util.ToStringBuilder;
 import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.Model;
-import seedu.bitebuddy.model.foodplace.*;
+import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
+import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -89,7 +92,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Foodplace} with the details of {@code foodplaceToEdit}
      * edited with {@code editFoodplaceDescriptor}.
      */
-    private static Foodplace createEditedFoodplace(Foodplace foodplaceToEdit, EditFoodplaceDescriptor editFoodplaceDescriptor) {
+    private static Foodplace createEditedFoodplace(Foodplace foodplaceToEdit,
+                                                   EditFoodplaceDescriptor editFoodplaceDescriptor) {
         assert foodplaceToEdit != null;
 
         Name updatedName = editFoodplaceDescriptor.getName().orElse(foodplaceToEdit.getName());

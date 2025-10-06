@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.ReadOnlyAddressBook;
-import seedu.bitebuddy.model.foodplace.*;
+import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
+import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**

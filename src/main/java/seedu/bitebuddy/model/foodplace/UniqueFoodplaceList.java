@@ -13,10 +13,10 @@ import seedu.bitebuddy.model.foodplace.exceptions.FoodplaceNotFoundException;
 
 /**
  * A list of foodplaces that enforces uniqueness between its elements and does not allow nulls.
- * A foodplace is considered unique by comparing using {@code Foodplace#isSamePerson(Foodplace)}. As such, adding and updating of
- * foodplaces uses Foodplace#isSamePerson(Foodplace) for equality so as to ensure that the foodplace being added or updated is
- * unique in terms of identity in the UniqueFoodplaceList. However, the removal of a foodplace uses Foodplace#equals(Object) so
- * as to ensure that the foodplace with exactly the same fields will be removed.
+ * A foodplace is considered unique by comparing using {@code Foodplace#isSamePerson(Foodplace)}. As such, adding and
+ * updating of foodplaces uses Foodplace#isSamePerson(Foodplace) for equality so as to ensure that the foodplace being
+ * added or updated is unique in terms of identity in the UniqueFoodplaceList. However, the removal of a foodplace uses
+ * Foodplace#equals(Object) so as to ensure that the foodplace with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *

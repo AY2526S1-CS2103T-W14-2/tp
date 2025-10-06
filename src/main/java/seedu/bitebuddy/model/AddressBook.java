@@ -78,7 +78,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given foodplace {@code target} in the list with {@code editedFoodplace}.
      * {@code target} must exist in the bitebuddy book.
-     * The foodplace identity of {@code editedFoodplace} must not be the same as another existing foodplace in the bitebuddy book.
+     * The foodplace identity of {@code editedFoodplace} must not be the same as another existing foodplace in the
+     * bitebuddy book.
      */
     public void setFoodplace(Foodplace target, Foodplace editedFoodplace) {
         requireNonNull(editedFoodplace);
