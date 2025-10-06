@@ -133,7 +133,8 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_FOODPLACE;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_AMY).build();
+        EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder()
+                .withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

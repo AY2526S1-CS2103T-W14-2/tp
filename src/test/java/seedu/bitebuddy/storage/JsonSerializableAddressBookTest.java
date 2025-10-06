@@ -15,10 +15,14 @@ import seedu.bitebuddy.testutil.TypicalFoodplace;
 
 public class JsonSerializableAddressBookTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableAddressBookTest");
-    private static final Path TYPICAL_FOODPLACES_FILE = TEST_DATA_FOLDER.resolve("typicalFoodplaceAddressBook.json");
-    private static final Path INVALID_FOODPLACES_FILE = TEST_DATA_FOLDER.resolve("invalidFoodplaceAddressBook.json");
-    private static final Path DUPLICATE_FOODPLACES_FILE = TEST_DATA_FOLDER.resolve("duplicateFoodplaceAddressBook.json");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "JsonSerializableAddressBookTest");
+    private static final Path TYPICAL_FOODPLACES_FILE =
+            TEST_DATA_FOLDER.resolve("typicalFoodplaceAddressBook.json");
+    private static final Path INVALID_FOODPLACES_FILE =
+            TEST_DATA_FOLDER.resolve("invalidFoodplaceAddressBook.json");
+    private static final Path DUPLICATE_FOODPLACES_FILE =
+            TEST_DATA_FOLDER.resolve("duplicateFoodplaceAddressBook.json");
 
     @Test
     public void toModelType_typicalFoodplacesFile_success() throws Exception {

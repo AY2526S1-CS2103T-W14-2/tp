@@ -50,7 +50,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validFoodplace);
         ModelStub modelStub = new ModelStubWithFoodplace(validFoodplace);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_FOODPLACE, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_FOODPLACE, () ->
+                addCommand.execute(modelStub));
     }
 
     @Test

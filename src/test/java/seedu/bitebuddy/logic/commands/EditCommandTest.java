@@ -11,9 +11,9 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.showFoodplaceAtIndex;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +41,8 @@ public class EditCommandTest {
         EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder(editedFoodplace).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FOODPLACE, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS, Messages.format(editedFoodplace));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS,
+                Messages.format(editedFoodplace));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(model.getFilteredFoodplaceList().get(0), editedFoodplace);
@@ -62,7 +63,8 @@ public class EditCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastFoodplace, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS, Messages.format(editedFoodplace));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS,
+                Messages.format(editedFoodplace));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(lastFoodplace, editedFoodplace);
@@ -75,7 +77,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FOODPLACE, new EditFoodplaceDescriptor());
         Foodplace editedFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS, Messages.format(editedFoodplace));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS,
+                Messages.format(editedFoodplace));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -91,7 +94,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FOODPLACE,
                 new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS, Messages.format(editedFoodplace));
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS,
+                Messages.format(editedFoodplace));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(model.getFilteredFoodplaceList().get(0), editedFoodplace);
@@ -113,7 +117,8 @@ public class EditCommandTest {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
 
         // edit foodplace in filtered list into a duplicate in bitebuddy book
-        Foodplace foodplaceInList = model.getAddressBook().getFoodplaceList().get(INDEX_SECOND_FOODPLACE.getZeroBased());
+        Foodplace foodplaceInList = model.getAddressBook().getFoodplaceList()
+                .get(INDEX_SECOND_FOODPLACE.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FOODPLACE,
                 new EditFoodplaceDescriptorBuilder(foodplaceInList).build());
 

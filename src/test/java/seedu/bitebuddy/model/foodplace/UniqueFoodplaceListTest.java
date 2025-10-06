@@ -159,7 +159,8 @@ public class UniqueFoodplaceListTest {
     @Test
     public void setFoodplaces_listWithDuplicateFoodplaces_throwsDuplicateFoodplaceException() {
         List<Foodplace> listWithDuplicateFoodplaces = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicateFoodplaceException.class, () -> uniqueFoodplaceList.setFoodplaces(listWithDuplicateFoodplaces));
+        assertThrows(DuplicateFoodplaceException.class, () ->
+                uniqueFoodplaceList.setFoodplaces(listWithDuplicateFoodplaces));
     }
 
     @Test

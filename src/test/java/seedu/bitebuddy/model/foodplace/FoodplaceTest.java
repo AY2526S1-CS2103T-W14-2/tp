@@ -92,8 +92,10 @@ public class FoodplaceTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Foodplace.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", bitebuddy=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+        String expected = Foodplace.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone="
+                + ALICE.getPhone()
+                + ", email=" + ALICE.getEmail() + ", bitebuddy=" + ALICE.getAddress() + ", tags="
+                + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

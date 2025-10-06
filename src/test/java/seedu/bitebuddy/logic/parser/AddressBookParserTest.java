@@ -58,7 +58,8 @@ public class AddressBookParserTest {
         Foodplace foodplace = new FoodplaceBuilder().build();
         EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder(foodplace).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_FOODPLACE.getOneBased() + " " + FoodplaceUtil.getEditFoodplaceDescriptorDetails(descriptor));
+                + INDEX_FIRST_FOODPLACE.getOneBased() + " "
+                + FoodplaceUtil.getEditFoodplaceDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_FOODPLACE, descriptor), command);
     }
 

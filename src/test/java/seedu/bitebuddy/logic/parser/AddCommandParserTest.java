@@ -37,8 +37,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.logic.commands.AddCommand;
-import seedu.bitebuddy.model.foodplace.*;
+import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
+import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.tag.Tag;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
 
@@ -55,10 +58,12 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Foodplace expectedFoodplaceMultipleTags = new FoodplaceBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Foodplace expectedFoodplaceMultipleTags = new FoodplaceBuilder(BOB).withTags(VALID_TAG_FRIEND,
+                        VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND
+                        + TAG_DESC_FRIEND,
                 new AddCommand(expectedFoodplaceMultipleTags));
     }
 
@@ -85,7 +90,8 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedFoodplaceString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
+                validExpectedFoodplaceString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY
+                        + ADDRESS_DESC_AMY
                         + validExpectedFoodplaceString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE));
 

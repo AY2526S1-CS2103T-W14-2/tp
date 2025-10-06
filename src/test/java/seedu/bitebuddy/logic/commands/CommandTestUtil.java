@@ -17,8 +17,8 @@ import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.Model;
-import seedu.bitebuddy.model.foodplace.NameContainsKeywordsPredicate;
 import seedu.bitebuddy.model.foodplace.Foodplace;
+import seedu.bitebuddy.model.foodplace.NameContainsKeywordsPredicate;
 import seedu.bitebuddy.testutil.EditFoodplaceDescriptorBuilder;
 
 /**
