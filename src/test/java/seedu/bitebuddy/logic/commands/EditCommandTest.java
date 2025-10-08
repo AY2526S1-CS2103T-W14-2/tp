@@ -3,11 +3,11 @@ package seedu.bitebuddy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.showFoodplaceAtIndex;
@@ -56,11 +56,11 @@ public class EditCommandTest {
         Foodplace lastFoodplace = model.getFilteredFoodplaceList().get(indexLastFoodplace.getZeroBased());
 
         FoodplaceBuilder foodplaceInList = new FoodplaceBuilder(lastFoodplace);
-        Foodplace editedFoodplace = foodplaceInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Foodplace editedFoodplace = foodplaceInList.withName(VALID_NAME_SWENSWAN).withPhone(VALID_PHONE_SWENSAN)
+                .withTags(VALID_TAG_RESTAURANT).build();
 
-        EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder()
+                .withName(VALID_NAME_SWENSWAN).withPhone(VALID_PHONE_SWENSAN).withTags(VALID_TAG_RESTAURANT).build();
         EditCommand editCommand = new EditCommand(indexLastFoodplace, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS,
@@ -90,9 +90,9 @@ public class EditCommandTest {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
 
         Foodplace foodplaceInFilteredList = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
-        Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceInFilteredList).withName(VALID_NAME_BOB).build();
+        Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceInFilteredList).withName(VALID_NAME_SWENSWAN).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_FOODPLACE,
-                new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_SWENSWAN).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS,
                 Messages.format(editedFoodplace));
@@ -128,7 +128,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidFoodplaceIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFoodplaceList().size() + 1);
-        EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_SWENSWAN).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
@@ -146,17 +146,17 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFoodplaceList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_SWENSWAN).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_FOODPLACE, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_FOODPLACE, DESC_MCRONALDS);
 
         // same values -> returns true
-        EditFoodplaceDescriptor copyDescriptor = new EditFoodplaceDescriptor(DESC_AMY);
+        EditFoodplaceDescriptor copyDescriptor = new EditFoodplaceDescriptor(DESC_MCRONALDS);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_FOODPLACE, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -170,10 +170,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_FOODPLACE, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_FOODPLACE, DESC_MCRONALDS)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_FOODPLACE, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_FOODPLACE, DESC_SWENSWAN)));
     }
 
     @Test

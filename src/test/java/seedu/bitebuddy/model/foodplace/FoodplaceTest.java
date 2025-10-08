@@ -3,11 +3,11 @@ package seedu.bitebuddy.model.foodplace;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.ALICE;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.BOB;
@@ -33,20 +33,21 @@ public class FoodplaceTest {
         assertFalse(ALICE.isSameFoodplace(null));
 
         // same name, all other attributes different -> returns true
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withPhone(VALID_PHONE_SWENSAN)
+                .withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
+                .withTags(VALID_TAG_RESTAURANT).build();
         assertTrue(ALICE.isSameFoodplace(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new FoodplaceBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        editedAlice = new FoodplaceBuilder(ALICE).withName(VALID_NAME_SWENSWAN).build();
         assertFalse(ALICE.isSameFoodplace(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Foodplace editedBob = new FoodplaceBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Foodplace editedBob = new FoodplaceBuilder(BOB).withName(VALID_NAME_SWENSWAN.toLowerCase()).build();
         assertFalse(BOB.isSameFoodplace(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
+        String nameWithTrailingSpaces = VALID_NAME_SWENSWAN + " ";
         editedBob = new FoodplaceBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSameFoodplace(editedBob));
     }
@@ -70,23 +71,23 @@ public class FoodplaceTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withName(VALID_NAME_SWENSWAN).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new FoodplaceBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new FoodplaceBuilder(ALICE).withPhone(VALID_PHONE_SWENSAN).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new FoodplaceBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new FoodplaceBuilder(ALICE).withEmail(VALID_EMAIL_SWENSWAN).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different bitebuddy -> returns false
-        editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_SWENSWAN).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new FoodplaceBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new FoodplaceBuilder(ALICE).withTags(VALID_TAG_RESTAURANT).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

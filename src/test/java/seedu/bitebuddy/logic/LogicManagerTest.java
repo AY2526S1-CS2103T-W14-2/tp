@@ -3,10 +3,10 @@ package seedu.bitebuddy.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_MCRONALDS;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.AMY;
 
@@ -32,6 +32,7 @@ import seedu.bitebuddy.storage.JsonAddressBookStorage;
 import seedu.bitebuddy.storage.JsonUserPrefsStorage;
 import seedu.bitebuddy.storage.StorageManager;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
+
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -165,8 +166,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS
+                + EMAIL_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS;
         Foodplace expectedFoodplace = new FoodplaceBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFoodplace(expectedFoodplace);

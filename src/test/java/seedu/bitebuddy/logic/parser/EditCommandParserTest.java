@@ -1,27 +1,27 @@
 package seedu.bitebuddy.logic.parser;
 
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_FASTFOOD;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_RESTAURANT;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -56,7 +56,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_MCRONALDS, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditCommand.MESSAGE_NOT_EDITED);
@@ -68,10 +68,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + NAME_DESC_MCRONALDS, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + NAME_DESC_MCRONALDS, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -89,28 +89,28 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_MCRONALDS, Phone.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Foodplace} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_FASTFOOD + TAG_DESC_RESTAURANT + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_FASTFOOD + TAG_EMPTY + TAG_DESC_RESTAURANT, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FASTFOOD + TAG_DESC_RESTAURANT, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_MCRONALDS
+                + VALID_PHONE_MCRONALDS, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_FOODPLACE;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_SWENSWAN + TAG_DESC_RESTAURANT
+                + EMAIL_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS + NAME_DESC_MCRONALDS + TAG_DESC_FASTFOOD;
 
-        EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder()
+                .withName(VALID_NAME_MCRONALDS).withPhone(VALID_PHONE_SWENSAN).withEmail(VALID_EMAIL_MCRONALDS)
+                .withAddress(VALID_ADDRESS_MCRONALDS).withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -119,10 +119,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_FOODPLACE;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_SWENSWAN + EMAIL_DESC_MCRONALDS;
 
-        EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
+        EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder()
+                .withPhone(VALID_PHONE_SWENSAN).withEmail(VALID_EMAIL_MCRONALDS).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -132,33 +132,33 @@ public class EditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD_FOODPLACE;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + NAME_DESC_MCRONALDS;
         EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder()
-                .withName(VALID_NAME_AMY).build();
+                .withName(VALID_NAME_MCRONALDS).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
-        descriptor = new EditFoodplaceDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
+        userInput = targetIndex.getOneBased() + PHONE_DESC_MCRONALDS;
+        descriptor = new EditFoodplaceDescriptorBuilder().withPhone(VALID_PHONE_MCRONALDS).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditFoodplaceDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        userInput = targetIndex.getOneBased() + EMAIL_DESC_MCRONALDS;
+        descriptor = new EditFoodplaceDescriptorBuilder().withEmail(VALID_EMAIL_MCRONALDS).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // bitebuddy
-        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditFoodplaceDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        userInput = targetIndex.getOneBased() + ADDRESS_DESC_MCRONALDS;
+        descriptor = new EditFoodplaceDescriptorBuilder().withAddress(VALID_ADDRESS_MCRONALDS).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditFoodplaceDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        userInput = targetIndex.getOneBased() + TAG_DESC_FASTFOOD;
+        descriptor = new EditFoodplaceDescriptorBuilder().withTags(VALID_TAG_FASTFOOD).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -170,19 +170,20 @@ public class EditCommandParserTest {
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_FOODPLACE;
-        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
+        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_SWENSWAN;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC;
+        userInput = targetIndex.getOneBased() + PHONE_DESC_SWENSWAN + INVALID_PHONE_DESC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+        userInput = targetIndex.getOneBased() + PHONE_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS
+                + TAG_DESC_FASTFOOD + PHONE_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS
+                + TAG_DESC_FASTFOOD + PHONE_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                + TAG_DESC_RESTAURANT;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));

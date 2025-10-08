@@ -3,8 +3,8 @@ package seedu.bitebuddy.model.foodplace;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.ALICE;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.BOB;
@@ -42,8 +42,8 @@ public class UniqueFoodplaceListTest {
     @Test
     public void contains_foodplaceWithSameIdentityFieldsInList_returnsTrue() {
         uniqueFoodplaceList.add(ALICE);
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_SWENSWAN)
+                .withTags(VALID_TAG_RESTAURANT).build();
         assertTrue(uniqueFoodplaceList.contains(editedAlice));
     }
 
@@ -85,8 +85,8 @@ public class UniqueFoodplaceListTest {
     @Test
     public void setFoodplace_editedFoodplaceHasSameIdentity_success() {
         uniqueFoodplaceList.add(ALICE);
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_SWENSWAN)
+                .withTags(VALID_TAG_RESTAURANT).build();
         uniqueFoodplaceList.setFoodplace(ALICE, editedAlice);
         UniqueFoodplaceList expectedUniqueFoodplaceList = new UniqueFoodplaceList();
         expectedUniqueFoodplaceList.add(editedAlice);

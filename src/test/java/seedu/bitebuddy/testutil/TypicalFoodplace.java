@@ -1,15 +1,15 @@
 package seedu.bitebuddy.testutil;
 
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,11 +49,12 @@ public class TypicalFoodplace {
             .withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Foodplace's details found in {@code CommandTestUtil}
-    public static final Foodplace AMY = new FoodplaceBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Foodplace BOB = new FoodplaceBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
+    public static final Foodplace AMY = new FoodplaceBuilder().withName(VALID_NAME_MCRONALDS)
+            .withPhone(VALID_PHONE_MCRONALDS).withEmail(VALID_EMAIL_MCRONALDS).withAddress(VALID_ADDRESS_MCRONALDS)
+            .withTags(VALID_TAG_FASTFOOD).build();
+    public static final Foodplace BOB = new FoodplaceBuilder().withName(VALID_NAME_SWENSWAN)
+            .withPhone(VALID_PHONE_SWENSAN).withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
+            .withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
