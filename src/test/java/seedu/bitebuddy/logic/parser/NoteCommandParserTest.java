@@ -19,13 +19,13 @@ public class NoteCommandParserTest {
 
     @Test
     public void parse_indexSpecified_success() {
-        // have remark
+        // have note
         Index targetIndex = INDEX_FIRST_FOODPLACE;
         String userInput = targetIndex.getOneBased() + " " + nonEmptyNote;
         NoteCommand expectedCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(nonEmptyNote));
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // no remark
+        // no note
         userInput = targetIndex.getOneBased() + " ";
         expectedCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(""));
         assertParseSuccess(parser, userInput, expectedCommand);

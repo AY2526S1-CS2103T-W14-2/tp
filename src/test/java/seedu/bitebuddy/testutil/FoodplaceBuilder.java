@@ -96,7 +96,7 @@ public class FoodplaceBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
+     * Sets the {@code Note} of the {@code Foodplace} that we are building.
      */
     public FoodplaceBuilder withNote(String note) {
         this.note = new Note(note);
