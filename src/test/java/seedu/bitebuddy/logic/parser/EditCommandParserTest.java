@@ -19,7 +19,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_MCRON
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_MCRONALDS;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -109,7 +109,7 @@ public class EditCommandParserTest {
                 + EMAIL_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS + NAME_DESC_MCRONALDS + TAG_DESC_FASTFOOD;
 
         EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder()
-                .withName(VALID_NAME_MCRONALDS).withPhone(VALID_PHONE_SWENSAN).withEmail(VALID_EMAIL_MCRONALDS)
+                .withName(VALID_NAME_MCRONALDS).withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_MCRONALDS)
                 .withAddress(VALID_ADDRESS_MCRONALDS).withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -122,7 +122,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + PHONE_DESC_SWENSWAN + EMAIL_DESC_MCRONALDS;
 
         EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder()
-                .withPhone(VALID_PHONE_SWENSAN).withEmail(VALID_EMAIL_MCRONALDS).build();
+                .withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_MCRONALDS).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

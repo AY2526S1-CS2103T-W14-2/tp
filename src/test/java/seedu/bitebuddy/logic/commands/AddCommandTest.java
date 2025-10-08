@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.ALICE;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATA;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -80,8 +80,8 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddCommand addCommand = new AddCommand(PRATA);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + PRATA + "}";
         assertEquals(expected, addCommand.toString());
     }
 

@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.ALICE;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.BOB;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATA;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.SWENSWAN;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,19 +30,19 @@ public class UniqueFoodplaceListTest {
 
     @Test
     public void contains_foodplaceNotInList_returnsFalse() {
-        assertFalse(uniqueFoodplaceList.contains(ALICE));
+        assertFalse(uniqueFoodplaceList.contains(PRATA));
     }
 
     @Test
     public void contains_foodplaceInList_returnsTrue() {
-        uniqueFoodplaceList.add(ALICE);
-        assertTrue(uniqueFoodplaceList.contains(ALICE));
+        uniqueFoodplaceList.add(PRATA);
+        assertTrue(uniqueFoodplaceList.contains(PRATA));
     }
 
     @Test
     public void contains_foodplaceWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueFoodplaceList.add(ALICE);
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_SWENSWAN)
+        uniqueFoodplaceList.add(PRATA);
+        Foodplace editedAlice = new FoodplaceBuilder(PRATA).withAddress(VALID_ADDRESS_SWENSWAN)
                 .withTags(VALID_TAG_RESTAURANT).build();
         assertTrue(uniqueFoodplaceList.contains(editedAlice));
     }
@@ -54,40 +54,40 @@ public class UniqueFoodplaceListTest {
 
     @Test
     public void add_duplicateFoodplace_throwsDuplicateFoodplaceException() {
-        uniqueFoodplaceList.add(ALICE);
-        assertThrows(DuplicateFoodplaceException.class, () -> uniqueFoodplaceList.add(ALICE));
+        uniqueFoodplaceList.add(PRATA);
+        assertThrows(DuplicateFoodplaceException.class, () -> uniqueFoodplaceList.add(PRATA));
     }
 
     @Test
     public void setFoodplace_nullTargetFoodplace_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueFoodplaceList.setFoodplace(null, ALICE));
+        assertThrows(NullPointerException.class, () -> uniqueFoodplaceList.setFoodplace(null, PRATA));
     }
 
     @Test
     public void setFoodplace_nullEditedFoodplace_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueFoodplaceList.setFoodplace(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueFoodplaceList.setFoodplace(PRATA, null));
     }
 
     @Test
     public void setFoodplace_targetFoodplaceNotInList_throwsFoodplaceNotFoundException() {
-        assertThrows(FoodplaceNotFoundException.class, () -> uniqueFoodplaceList.setFoodplace(ALICE, ALICE));
+        assertThrows(FoodplaceNotFoundException.class, () -> uniqueFoodplaceList.setFoodplace(PRATA, PRATA));
     }
 
     @Test
     public void setFoodplace_editedFoodplaceIsSameFoodplace_success() {
-        uniqueFoodplaceList.add(ALICE);
-        uniqueFoodplaceList.setFoodplace(ALICE, ALICE);
+        uniqueFoodplaceList.add(PRATA);
+        uniqueFoodplaceList.setFoodplace(PRATA, PRATA);
         UniqueFoodplaceList expectedUniqueFoodplaceList = new UniqueFoodplaceList();
-        expectedUniqueFoodplaceList.add(ALICE);
+        expectedUniqueFoodplaceList.add(PRATA);
         assertEquals(expectedUniqueFoodplaceList, uniqueFoodplaceList);
     }
 
     @Test
     public void setFoodplace_editedFoodplaceHasSameIdentity_success() {
-        uniqueFoodplaceList.add(ALICE);
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_SWENSWAN)
+        uniqueFoodplaceList.add(PRATA);
+        Foodplace editedAlice = new FoodplaceBuilder(PRATA).withAddress(VALID_ADDRESS_SWENSWAN)
                 .withTags(VALID_TAG_RESTAURANT).build();
-        uniqueFoodplaceList.setFoodplace(ALICE, editedAlice);
+        uniqueFoodplaceList.setFoodplace(PRATA, editedAlice);
         UniqueFoodplaceList expectedUniqueFoodplaceList = new UniqueFoodplaceList();
         expectedUniqueFoodplaceList.add(editedAlice);
         assertEquals(expectedUniqueFoodplaceList, uniqueFoodplaceList);
@@ -95,18 +95,18 @@ public class UniqueFoodplaceListTest {
 
     @Test
     public void setFoodplace_editedFoodplaceHasDifferentIdentity_success() {
-        uniqueFoodplaceList.add(ALICE);
-        uniqueFoodplaceList.setFoodplace(ALICE, BOB);
+        uniqueFoodplaceList.add(PRATA);
+        uniqueFoodplaceList.setFoodplace(PRATA, SWENSWAN);
         UniqueFoodplaceList expectedUniqueFoodplaceList = new UniqueFoodplaceList();
-        expectedUniqueFoodplaceList.add(BOB);
+        expectedUniqueFoodplaceList.add(SWENSWAN);
         assertEquals(expectedUniqueFoodplaceList, uniqueFoodplaceList);
     }
 
     @Test
     public void setFoodplace_editedFoodplaceHasNonUniqueIdentity_throwsDuplicateFoodplaceException() {
-        uniqueFoodplaceList.add(ALICE);
-        uniqueFoodplaceList.add(BOB);
-        assertThrows(DuplicateFoodplaceException.class, () -> uniqueFoodplaceList.setFoodplace(ALICE, BOB));
+        uniqueFoodplaceList.add(PRATA);
+        uniqueFoodplaceList.add(SWENSWAN);
+        assertThrows(DuplicateFoodplaceException.class, () -> uniqueFoodplaceList.setFoodplace(PRATA, SWENSWAN));
     }
 
     @Test
@@ -116,13 +116,13 @@ public class UniqueFoodplaceListTest {
 
     @Test
     public void remove_foodplaceDoesNotExist_throwsFoodplaceNotFoundException() {
-        assertThrows(FoodplaceNotFoundException.class, () -> uniqueFoodplaceList.remove(ALICE));
+        assertThrows(FoodplaceNotFoundException.class, () -> uniqueFoodplaceList.remove(PRATA));
     }
 
     @Test
     public void remove_existingFoodplace_removesFoodplace() {
-        uniqueFoodplaceList.add(ALICE);
-        uniqueFoodplaceList.remove(ALICE);
+        uniqueFoodplaceList.add(PRATA);
+        uniqueFoodplaceList.remove(PRATA);
         UniqueFoodplaceList expectedUniqueFoodplaceList = new UniqueFoodplaceList();
         assertEquals(expectedUniqueFoodplaceList, uniqueFoodplaceList);
     }
@@ -134,9 +134,9 @@ public class UniqueFoodplaceListTest {
 
     @Test
     public void setFoodplaces_uniqueFoodplaceList_replacesOwnListWithProvidedUniqueFoodplaceList() {
-        uniqueFoodplaceList.add(ALICE);
+        uniqueFoodplaceList.add(PRATA);
         UniqueFoodplaceList expectedUniqueFoodplaceList = new UniqueFoodplaceList();
-        expectedUniqueFoodplaceList.add(BOB);
+        expectedUniqueFoodplaceList.add(SWENSWAN);
         uniqueFoodplaceList.setFoodplaces(expectedUniqueFoodplaceList);
         assertEquals(expectedUniqueFoodplaceList, uniqueFoodplaceList);
     }
@@ -148,17 +148,17 @@ public class UniqueFoodplaceListTest {
 
     @Test
     public void setFoodplaces_list_replacesOwnListWithProvidedList() {
-        uniqueFoodplaceList.add(ALICE);
-        List<Foodplace> foodplaceList = Collections.singletonList(BOB);
+        uniqueFoodplaceList.add(PRATA);
+        List<Foodplace> foodplaceList = Collections.singletonList(SWENSWAN);
         uniqueFoodplaceList.setFoodplaces(foodplaceList);
         UniqueFoodplaceList expectedUniqueFoodplaceList = new UniqueFoodplaceList();
-        expectedUniqueFoodplaceList.add(BOB);
+        expectedUniqueFoodplaceList.add(SWENSWAN);
         assertEquals(expectedUniqueFoodplaceList, uniqueFoodplaceList);
     }
 
     @Test
     public void setFoodplaces_listWithDuplicateFoodplaces_throwsDuplicateFoodplaceException() {
-        List<Foodplace> listWithDuplicateFoodplaces = Arrays.asList(ALICE, ALICE);
+        List<Foodplace> listWithDuplicateFoodplaces = Arrays.asList(PRATA, PRATA);
         assertThrows(DuplicateFoodplaceException.class, () ->
                 uniqueFoodplaceList.setFoodplaces(listWithDuplicateFoodplaces));
     }

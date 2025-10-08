@@ -8,7 +8,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ public class EditFoodplaceDescriptorTest {
         assertFalse(DESC_MCRONALDS.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withPhone(VALID_PHONE_SWENSAN).build();
+        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withPhone(VALID_PHONE_SWENSWAN).build();
         assertFalse(DESC_MCRONALDS.equals(editedAmy));
 
         // different email -> returns false

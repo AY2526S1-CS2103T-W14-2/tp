@@ -21,7 +21,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_RESTAURANT
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -30,8 +30,8 @@ import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.AMY;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.BOB;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.MCRONALDS;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.SWENSWAN;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,7 +50,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Foodplace expectedFoodplace = new FoodplaceBuilder(BOB).withTags(VALID_TAG_FASTFOOD).build();
+        Foodplace expectedFoodplace = new FoodplaceBuilder(SWENSWAN).withTags(VALID_TAG_FASTFOOD).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
@@ -58,7 +58,7 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Foodplace expectedFoodplaceMultipleTags = new FoodplaceBuilder(BOB).withTags(VALID_TAG_FASTFOOD,
+        Foodplace expectedFoodplaceMultipleTags = new FoodplaceBuilder(SWENSWAN).withTags(VALID_TAG_FASTFOOD,
                         VALID_TAG_RESTAURANT)
                 .build();
         assertParseSuccess(parser,
@@ -135,7 +135,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Foodplace expectedFoodplace = new FoodplaceBuilder(AMY).withTags().build();
+        Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS).withTags().build();
         assertParseSuccess(parser, NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS
                 + ADDRESS_DESC_MCRONALDS,
                 new AddCommand(expectedFoodplace));
@@ -150,7 +150,7 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_SWENSWAN, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_SWENSWAN + VALID_PHONE_SWENSAN + EMAIL_DESC_SWENSWAN
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + VALID_PHONE_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + ADDRESS_DESC_SWENSWAN, expectedMessage);
 
         // missing email prefix
@@ -162,7 +162,7 @@ public class AddCommandParserTest {
                 + VALID_ADDRESS_SWENSWAN, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_SWENSWAN + VALID_PHONE_SWENSAN + VALID_EMAIL_SWENSWAN
+        assertParseFailure(parser, VALID_NAME_SWENSWAN + VALID_PHONE_SWENSWAN + VALID_EMAIL_SWENSWAN
                 + VALID_ADDRESS_SWENSWAN, expectedMessage);
     }
 

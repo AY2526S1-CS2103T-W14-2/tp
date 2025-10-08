@@ -29,7 +29,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_MCRONALDS = "McRonalds";
     public static final String VALID_NAME_SWENSWAN = "Swenswan";
     public static final String VALID_PHONE_MCRONALDS = "11111111";
-    public static final String VALID_PHONE_SWENSAN = "22222222";
+    public static final String VALID_PHONE_SWENSWAN = "22222222";
     public static final String VALID_EMAIL_MCRONALDS = "info@mcronalds.com";
     public static final String VALID_EMAIL_SWENSWAN = "boooking@swenswan.com";
     public static final String VALID_ADDRESS_MCRONALDS = "Rideout Tea Garden";
@@ -40,7 +40,7 @@ public class CommandTestUtil {
     public static final String NAME_DESC_MCRONALDS = " " + PREFIX_NAME + VALID_NAME_MCRONALDS;
     public static final String NAME_DESC_SWENSWAN = " " + PREFIX_NAME + VALID_NAME_SWENSWAN;
     public static final String PHONE_DESC_MCRONALDS = " " + PREFIX_PHONE + VALID_PHONE_MCRONALDS;
-    public static final String PHONE_DESC_SWENSWAN = " " + PREFIX_PHONE + VALID_PHONE_SWENSAN;
+    public static final String PHONE_DESC_SWENSWAN = " " + PREFIX_PHONE + VALID_PHONE_SWENSWAN;
     public static final String EMAIL_DESC_MCRONALDS = " " + PREFIX_EMAIL + VALID_EMAIL_MCRONALDS;
     public static final String EMAIL_DESC_SWENSWAN = " " + PREFIX_EMAIL + VALID_EMAIL_SWENSWAN;
     public static final String ADDRESS_DESC_MCRONALDS = " " + PREFIX_ADDRESS + VALID_ADDRESS_MCRONALDS;
@@ -65,7 +65,7 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_MCRONALDS).withEmail(VALID_EMAIL_MCRONALDS).withAddress(VALID_ADDRESS_MCRONALDS)
                 .withTags(VALID_TAG_FASTFOOD).build();
         DESC_SWENSWAN = new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_SWENSWAN)
-                .withPhone(VALID_PHONE_SWENSAN).withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
+                .withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
                 .withTags(VALID_TAG_RESTAURANT).build();
     }
 

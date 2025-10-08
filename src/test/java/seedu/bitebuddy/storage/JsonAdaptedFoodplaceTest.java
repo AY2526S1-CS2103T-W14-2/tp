@@ -3,7 +3,7 @@ package seedu.bitebuddy.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.bitebuddy.storage.JsonAdaptedFoodplace.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.BENSON;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.DAEBAK;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,18 +24,18 @@ public class JsonAdaptedFoodplaceTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = DAEBAK.getName().toString();
+    private static final String VALID_PHONE = DAEBAK.getPhone().toString();
+    private static final String VALID_EMAIL = DAEBAK.getEmail().toString();
+    private static final String VALID_ADDRESS = DAEBAK.getAddress().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = DAEBAK.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validFoodplaceDetails_returnsFoodplace() throws Exception {
-        JsonAdaptedFoodplace foodplace = new JsonAdaptedFoodplace(BENSON);
-        assertEquals(BENSON, foodplace.toModelType());
+        JsonAdaptedFoodplace foodplace = new JsonAdaptedFoodplace(DAEBAK);
+        assertEquals(DAEBAK, foodplace.toModelType());
     }
 
     @Test

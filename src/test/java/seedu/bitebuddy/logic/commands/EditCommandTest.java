@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -56,11 +56,11 @@ public class EditCommandTest {
         Foodplace lastFoodplace = model.getFilteredFoodplaceList().get(indexLastFoodplace.getZeroBased());
 
         FoodplaceBuilder foodplaceInList = new FoodplaceBuilder(lastFoodplace);
-        Foodplace editedFoodplace = foodplaceInList.withName(VALID_NAME_SWENSWAN).withPhone(VALID_PHONE_SWENSAN)
+        Foodplace editedFoodplace = foodplaceInList.withName(VALID_NAME_SWENSWAN).withPhone(VALID_PHONE_SWENSWAN)
                 .withTags(VALID_TAG_RESTAURANT).build();
 
         EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder()
-                .withName(VALID_NAME_SWENSWAN).withPhone(VALID_PHONE_SWENSAN).withTags(VALID_TAG_RESTAURANT).build();
+                .withName(VALID_NAME_SWENSWAN).withPhone(VALID_PHONE_SWENSWAN).withTags(VALID_TAG_RESTAURANT).build();
         EditCommand editCommand = new EditCommand(indexLastFoodplace, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FOODPLACE_SUCCESS,

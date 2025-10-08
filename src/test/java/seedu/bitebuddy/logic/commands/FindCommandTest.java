@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_FOODPLACES_LISTED_OVERVIEW;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.CARL;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.ELLE;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.FIONA;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.CARLSJR;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.SUSHI;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.TEA;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -67,11 +67,11 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleFoodplacesFound() {
         String expectedMessage = String.format(MESSAGE_FOODPLACES_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Junior Tei ITea");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredFoodplaceList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredFoodplaceList());
+        assertEquals(Arrays.asList(CARLSJR, SUSHI, TEA), model.getFilteredFoodplaceList());
     }
 
     @Test

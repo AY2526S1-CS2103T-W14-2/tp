@@ -8,7 +8,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_MCRONALD
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_MCRONALDS;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.AMY;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.MCRONALDS;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -168,7 +168,7 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS
                 + EMAIL_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS;
-        Foodplace expectedFoodplace = new FoodplaceBuilder(AMY).withTags().build();
+        Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFoodplace(expectedFoodplace);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

@@ -1,45 +1,45 @@
 {
   "_comment": "AddressBook save file which contains the same foodplaces values as in TypicalFoodplaces#getTypicalAddressBook()",
   "foodplaces": [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "name": "Prata Palace",
+    "phone": "94351253",
+    "email": "alice@pratapalace.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tags": [ "hawker" ]
   }, {
-    "name" : "Benson Meier",
+    "name" : "Daebak Korean BBQ",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ]
+    "tags" : ["korean", "restaurant"]
   }, {
-    "name" : "Carl Kurz",
+    "name" : "Carls Junior",
     "phone" : "95352563",
-    "email" : "heinz@example.com",
+    "email" : "carls@junior.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "tags" : [ "fastfood" ]
   }, {
-    "name" : "Daniel Meier",
+    "name" : "Laksa Paradise",
     "phone" : "87652533",
-    "email" : "cornelia@example.com",
+    "email" : "laksa@paradise.com",
     "address" : "10th street",
-    "tags" : [ "friends" ]
+    "tags" : [ "hawker" ]
   }, {
-    "name" : "Elle Meyer",
+    "name" : "Sushi Tei",
     "phone" : "9482224",
-    "email" : "werner@example.com",
+    "email" : "sushi@tei.com",
     "address" : "michegan ave",
     "tags" : [ ]
   }, {
-    "name" : "Fiona Kunz",
+    "name" : "ITea",
     "phone" : "9482427",
-    "email" : "lydia@example.com",
+    "email" : "i@tea.com",
     "address" : "little tokyo",
     "tags" : [ ]
   }, {
-    "name" : "George Best",
+    "name" : "Dominoes Pizza",
     "phone" : "9482442",
-    "email" : "anna@example.com",
+    "email" : "dominos@pizza.com",
     "address" : "4th street",
     "tags" : [ ]
   } ]
