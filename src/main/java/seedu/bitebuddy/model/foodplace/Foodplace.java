@@ -71,7 +71,10 @@ public class Foodplace {
         }
 
         return otherFoodplace != null
-                && otherFoodplace.getName().equals(getName());
+                && otherFoodplace.getName().equals(getName())
+                && otherFoodplace.getAddress().equals(getAddress())
+                && otherFoodplace.getEmail().equals(getEmail())
+                && otherFoodplace.getPhone().equals(getPhone());
     }
 
     /**
