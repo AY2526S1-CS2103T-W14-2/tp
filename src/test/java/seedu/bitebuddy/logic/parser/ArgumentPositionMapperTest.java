@@ -17,6 +17,13 @@ public class ArgumentPositionMapperTest {
     }
 
     @Test
+    public void constructor_nullString_returnsEmptyList() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(null);
+        assertTrue(mapper.getAllArguments().isEmpty(), "Expected empty list for null input");
+        assertEquals(0, mapper.size());
+    }
+
+    @Test
     public void constructor_singleWord_returnsSingleElement() {
         ArgumentPositionMapper mapper = new ArgumentPositionMapper("hello");
         assertEquals(1, mapper.size());
@@ -53,6 +60,20 @@ public class ArgumentPositionMapperTest {
     public void getRemainingArguments_startAtZero_returnsFullString() {
         ArgumentPositionMapper mapper = new ArgumentPositionMapper("note 2 testing behavior");
         assertEquals("note 2 testing behavior", mapper.getRemainingArguments(0));
+    }
+
+    @Test
+    public void getRemainingArguments_negativeIndex_returnsEmptyString() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper("rating 3 5");
+        assertEquals("", mapper.getRemainingArguments(-2),
+                "Expected empty string for negative startPosition");
+    }
+
+    @Test
+    public void getRemainingArguments_startAtSize_returnsEmptyString() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper("rating 3 5");
+        assertEquals("", mapper.getRemainingArguments(mapper.size()),
+                "Expected empty string for startPosition == size");
     }
 
     @Test
