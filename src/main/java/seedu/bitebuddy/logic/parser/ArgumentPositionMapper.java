@@ -1,0 +1,76 @@
+package seedu.bitebuddy.logic.parser;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Stores mapping of positional (non-prefixed) arguments for commands like "note 2 good taste"
+ * or "rating 3 5".
+ *
+ * Supports basic positional argument access:
+ * - index 0: usually the first argument (e.g. index in list)
+ * - index 1: usually the next value (e.g. note text or rating)
+ *
+ * This class complements {@code ArgumentMultimap} for commands that do not use prefixes.
+ */
+public class ArgumentPositionMapper {
+
+    // List of space-separated arguments parsed from input string
+    private final List<String> args;
+
+    /**
+     * Constructs a PositionalArgumentMapper by splitting the input string by whitespace.
+     * @param argsString the string containing all positional arguments
+     */
+    public ArgumentPositionMapper(String argsString) {
+        if (argsString == null || argsString.trim().isEmpty()) {
+            this.args = new ArrayList<>();
+        } else {
+            // Split by whitespace; first element usually the index
+            String[] tokens = argsString.trim().split("\\s+");
+            this.args = new ArrayList<>();
+            Collections.addAll(this.args, tokens);
+        }
+    }
+
+    /**
+     * Returns the argument at the specified position, or an empty string if out of range.
+     */
+    public String getArgument(int position) {
+        if (position < 0 || position >= args.size()) {
+            return "";
+        }
+        return args.get(position);
+    }
+
+    /**
+     * Returns all arguments as an unmodifiable list.
+     */
+    public List<String> getAllArguments() {
+        return Collections.unmodifiableList(args);
+    }
+
+    /**
+     * Returns the number of positional arguments.
+     */
+    public int size() {
+        return args.size();
+    }
+
+    /**
+     * Returns the remaining text starting from the given position,
+     * joined with spaces (useful for multi-word note content).
+     */
+    public String getRemainingArguments(int startPosition) {
+        if (startPosition < 0 || startPosition >= args.size()) {
+            return "";
+        }
+        return String.join(" ", args.subList(startPosition, args.size()));
+    }
+
+    @Override
+    public String toString() {
+        return args.toString();
+    }
+}
