@@ -27,6 +27,10 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteCommand to delete the foodplace at the specified {@code Index}.
+     * @param targetIndex index of the foodplace in the filtered foodplace list to delete
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
