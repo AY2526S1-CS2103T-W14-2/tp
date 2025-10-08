@@ -23,29 +23,29 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
  */
 public class TypicalFoodplace {
 
-    public static final Foodplace PRATA = new FoodplaceBuilder().withName("Prata Palace")
+    public static final Foodplace PRATASHOP = new FoodplaceBuilder().withName("Prata Palace")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@pratapalace.com")
             .withPhone("94351253")
             .withTags("hawker").build();
-    public static final Foodplace DAEBAK = new FoodplaceBuilder().withName("Daebak Korean BBQ")
+    public static final Foodplace DAEBAKSHOP = new FoodplaceBuilder().withName("Daebak Korean BBQ")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432")
+            .withEmail("john@daebakbbq.com").withPhone("98765432")
             .withTags("korean", "restaurant").build();
-    public static final Foodplace CARLSJR = new FoodplaceBuilder().withName("Carls Junior").withPhone("95352563")
+    public static final Foodplace CARLSHOP = new FoodplaceBuilder().withName("Carls Junior").withPhone("95352563")
              .withEmail("carls@junior.com").withAddress("wall street").withTags("fastfood").build();
-    public static final Foodplace LAKSA = new FoodplaceBuilder().withName("Laksa Paradise").withPhone("87652533")
+    public static final Foodplace LAKSASHOP = new FoodplaceBuilder().withName("Laksa Paradise").withPhone("87652533")
              .withEmail("laksa@paradise.com").withAddress("10th street").withTags("hawker").build();
-    public static final Foodplace SUSHI = new FoodplaceBuilder().withName("Sushi Tei").withPhone("9482224")
+    public static final Foodplace SUSHISHOP = new FoodplaceBuilder().withName("Sushi Tei").withPhone("9482224")
              .withEmail("sushi@tei.com").withAddress("michegan ave").build();
-    public static final Foodplace TEA = new FoodplaceBuilder().withName("ITea").withPhone("9482427")
+    public static final Foodplace TEASHOP = new FoodplaceBuilder().withName("ITea").withPhone("9482427")
              .withEmail("i@tea.com").withAddress("little tokyo").build();
-    public static final Foodplace PIZZA = new FoodplaceBuilder().withName("Dominoes Pizza").withPhone("9482442")
+    public static final Foodplace PIZZASHOP = new FoodplaceBuilder().withName("Dominoes Pizza").withPhone("9482442")
              .withEmail("dominos@pizza.com").withAddress("4th street").build();
 
     // Manually added
-    public static final Foodplace BEEHOON = new FoodplaceBuilder().withName("Beehoon Meier").withPhone("8482424")
+    public static final Foodplace BEEHOONSHOP = new FoodplaceBuilder().withName("Beehoon Meier").withPhone("8482424")
              .withEmail("meier@beehoon.com").withAddress("little india").build();
-    public static final Foodplace CAKE = new FoodplaceBuilder().withName("Cat and the fiddle").withPhone("8482131")
+    public static final Foodplace CAKESHOP = new FoodplaceBuilder().withName("Cat and the fiddle").withPhone("8482131")
              .withEmail("cat@fiddle.com").withAddress("chicago ave").build();
 
     // Manually added - Foodplace's details found in {@code CommandTestUtil}
@@ -72,6 +72,7 @@ public class TypicalFoodplace {
     }
 
     public static List<Foodplace> getTypicalFoodplaces() {
-        return new ArrayList<>(Arrays.asList(PRATA, DAEBAK, CARLSJR, LAKSA, SUSHI, TEA, PIZZA));
+        return new ArrayList<>(Arrays.asList(PRATASHOP, DAEBAKSHOP, CARLSHOP, LAKSASHOP,
+            SUSHISHOP, TEASHOP, PIZZASHOP));
     }
 }

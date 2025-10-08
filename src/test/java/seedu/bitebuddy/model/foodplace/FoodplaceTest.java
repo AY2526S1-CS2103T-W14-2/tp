@@ -9,7 +9,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATA;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATASHOP;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.SWENSWAN;
 
 import org.junit.jupiter.api.Test;
@@ -27,20 +27,20 @@ public class FoodplaceTest {
     @Test
     public void isSameFoodplace() {
         // same object -> returns true
-        assertTrue(PRATA.isSameFoodplace(PRATA));
+        assertTrue(PRATASHOP.isSameFoodplace(PRATASHOP));
 
         // null -> returns false
-        assertFalse(PRATA.isSameFoodplace(null));
+        assertFalse(PRATASHOP.isSameFoodplace(null));
 
         // same name, all other attributes different -> returns true
-        Foodplace editedAlice = new FoodplaceBuilder(PRATA).withPhone(VALID_PHONE_SWENSWAN)
+        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withPhone(VALID_PHONE_SWENSWAN)
                 .withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
                 .withTags(VALID_TAG_RESTAURANT).build();
-        assertTrue(PRATA.isSameFoodplace(editedAlice));
+        assertTrue(PRATASHOP.isSameFoodplace(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new FoodplaceBuilder(PRATA).withName(VALID_NAME_SWENSWAN).build();
-        assertFalse(PRATA.isSameFoodplace(editedAlice));
+        editedAlice = new FoodplaceBuilder(PRATASHOP).withName(VALID_NAME_SWENSWAN).build();
+        assertFalse(PRATASHOP.isSameFoodplace(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
         Foodplace editedBob = new FoodplaceBuilder(SWENSWAN).withName(VALID_NAME_SWENSWAN.toLowerCase()).build();
@@ -55,48 +55,48 @@ public class FoodplaceTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Foodplace aliceCopy = new FoodplaceBuilder(PRATA).build();
-        assertTrue(PRATA.equals(aliceCopy));
+        Foodplace aliceCopy = new FoodplaceBuilder(PRATASHOP).build();
+        assertTrue(PRATASHOP.equals(aliceCopy));
 
         // same object -> returns true
-        assertTrue(PRATA.equals(PRATA));
+        assertTrue(PRATASHOP.equals(PRATASHOP));
 
         // null -> returns false
-        assertFalse(PRATA.equals(null));
+        assertFalse(PRATASHOP.equals(null));
 
         // different type -> returns false
-        assertFalse(PRATA.equals(5));
+        assertFalse(PRATASHOP.equals(5));
 
         // different foodplace -> returns false
-        assertFalse(PRATA.equals(SWENSWAN));
+        assertFalse(PRATASHOP.equals(SWENSWAN));
 
         // different name -> returns false
-        Foodplace editedAlice = new FoodplaceBuilder(PRATA).withName(VALID_NAME_SWENSWAN).build();
-        assertFalse(PRATA.equals(editedAlice));
+        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withName(VALID_NAME_SWENSWAN).build();
+        assertFalse(PRATASHOP.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new FoodplaceBuilder(PRATA).withPhone(VALID_PHONE_SWENSWAN).build();
-        assertFalse(PRATA.equals(editedAlice));
+        editedAlice = new FoodplaceBuilder(PRATASHOP).withPhone(VALID_PHONE_SWENSWAN).build();
+        assertFalse(PRATASHOP.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new FoodplaceBuilder(PRATA).withEmail(VALID_EMAIL_SWENSWAN).build();
-        assertFalse(PRATA.equals(editedAlice));
+        editedAlice = new FoodplaceBuilder(PRATASHOP).withEmail(VALID_EMAIL_SWENSWAN).build();
+        assertFalse(PRATASHOP.equals(editedAlice));
 
         // different bitebuddy -> returns false
-        editedAlice = new FoodplaceBuilder(PRATA).withAddress(VALID_ADDRESS_SWENSWAN).build();
-        assertFalse(PRATA.equals(editedAlice));
+        editedAlice = new FoodplaceBuilder(PRATASHOP).withAddress(VALID_ADDRESS_SWENSWAN).build();
+        assertFalse(PRATASHOP.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new FoodplaceBuilder(PRATA).withTags(VALID_TAG_RESTAURANT).build();
-        assertFalse(PRATA.equals(editedAlice));
+        editedAlice = new FoodplaceBuilder(PRATASHOP).withTags(VALID_TAG_RESTAURANT).build();
+        assertFalse(PRATASHOP.equals(editedAlice));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = Foodplace.class.getCanonicalName() + "{name=" + PRATA.getName() + ", phone="
-                + PRATA.getPhone()
-                + ", email=" + PRATA.getEmail() + ", bitebuddy=" + PRATA.getAddress() + ", tags="
-                + PRATA.getTags() + "}";
-        assertEquals(expected, PRATA.toString());
+        String expected = Foodplace.class.getCanonicalName() + "{name=" + PRATASHOP.getName() + ", phone="
+                + PRATASHOP.getPhone()
+                + ", email=" + PRATASHOP.getEmail() + ", bitebuddy=" + PRATASHOP.getAddress() + ", tags="
+                + PRATASHOP.getTags() + "}";
+        assertEquals(expected, PRATASHOP.toString());
     }
 }

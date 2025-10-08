@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATA;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATASHOP;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -46,9 +46,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateFoodplaces_throwsDuplicateFoodplaceException() {
         // Two foodplaces with the same identity fields
-        Foodplace editedAlice = new FoodplaceBuilder(PRATA).withAddress(VALID_ADDRESS_SWENSWAN)
+        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withAddress(VALID_ADDRESS_SWENSWAN)
                 .withTags(VALID_TAG_RESTAURANT).build();
-        List<Foodplace> newFoodplaces = Arrays.asList(PRATA, editedAlice);
+        List<Foodplace> newFoodplaces = Arrays.asList(PRATASHOP, editedAlice);
         AddressBookStub newData = new AddressBookStub(newFoodplaces);
 
         assertThrows(DuplicateFoodplaceException.class, () -> addressBook.resetData(newData));
@@ -61,19 +61,19 @@ public class AddressBookTest {
 
     @Test
     public void hasFoodplace_foodplaceNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasFoodplace(PRATA));
+        assertFalse(addressBook.hasFoodplace(PRATASHOP));
     }
 
     @Test
     public void hasFoodplace_foodplaceInAddressBook_returnsTrue() {
-        addressBook.addFoodplace(PRATA);
-        assertTrue(addressBook.hasFoodplace(PRATA));
+        addressBook.addFoodplace(PRATASHOP);
+        assertTrue(addressBook.hasFoodplace(PRATASHOP));
     }
 
     @Test
     public void hasFoodplace_foodplaceWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addFoodplace(PRATA);
-        Foodplace editedAlice = new FoodplaceBuilder(PRATA).withAddress(VALID_ADDRESS_SWENSWAN)
+        addressBook.addFoodplace(PRATASHOP);
+        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withAddress(VALID_ADDRESS_SWENSWAN)
                 .withTags(VALID_TAG_RESTAURANT).build();
         assertTrue(addressBook.hasFoodplace(editedAlice));
     }

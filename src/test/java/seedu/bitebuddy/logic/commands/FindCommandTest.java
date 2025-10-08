@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_FOODPLACES_LISTED_OVERVIEW;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.CARLSJR;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.SUSHI;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.TEA;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.CARLSHOP;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.SUSHISHOP;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.TEASHOP;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -71,7 +71,7 @@ public class FindCommandTest {
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredFoodplaceList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARLSJR, SUSHI, TEA), model.getFilteredFoodplaceList());
+        assertEquals(Arrays.asList(CARLSHOP, SUSHISHOP, TEASHOP), model.getFilteredFoodplaceList());
     }
 
     @Test
