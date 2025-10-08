@@ -54,9 +54,9 @@ public class FoodplaceCard extends UiPart<Region> {
         phone.setText(foodplace.getPhone().value);
         address.setText(foodplace.getAddress().value);
         email.setText(foodplace.getEmail().value);
+        note.setText(foodplace.getNote().value);
         foodplace.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        note.setText(foodplace.getNote().value);
     }
 }

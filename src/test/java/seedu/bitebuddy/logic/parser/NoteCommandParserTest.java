@@ -1,5 +1,6 @@
 package seedu.bitebuddy.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.logic.commands.NoteCommand;
+import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Note;
 
 public class NoteCommandParserTest {
@@ -38,5 +40,14 @@ public class NoteCommandParserTest {
 
         // no index
         assertParseFailure(parser, NoteCommand.COMMAND_WORD + " " + nonEmptyNote, expectedMessage);
+    }
+
+    @Test
+    public void parse_emptyArgs_throwsParseException() {
+        NoteCommandParser parser = new NoteCommandParser();
+        assertThrows(ParseException.class, () -> parser.parse(""),
+                "Expected ParseException when no arguments are provided");
+        assertThrows(ParseException.class, () -> parser.parse("   "),
+                "Expected ParseException when only whitespace is provided");
     }
 }
