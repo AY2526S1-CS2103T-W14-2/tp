@@ -32,12 +32,24 @@ public class FoodplaceTest {
         // null -> returns false
         assertFalse(ALICE.isSameFoodplace(null));
 
-        // same name, all other attributes different -> returns true
+        // same identity fields, different tags -> returns true
         Foodplace editedAlice = new FoodplaceBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameFoodplace(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new FoodplaceBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertFalse(ALICE.isSameFoodplace(editedAlice));
+
+        // different phone -> returns false
+        editedAlice = new FoodplaceBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.isSameFoodplace(editedAlice));
+
+        // different email -> returns false
+        editedAlice = new FoodplaceBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.isSameFoodplace(editedAlice));
+
+        // different address -> returns false
+        editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.isSameFoodplace(editedAlice));
 
         // name differs in case, all other attributes same -> returns true
@@ -80,7 +92,7 @@ public class FoodplaceTest {
         editedAlice = new FoodplaceBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different bitebuddy -> returns false
+        // different address -> returns false
         editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
@@ -93,7 +105,7 @@ public class FoodplaceTest {
     public void toStringMethod() {
         String expected = Foodplace.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone="
                 + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", bitebuddy=" + ALICE.getAddress() + ", tags="
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags="
                 + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

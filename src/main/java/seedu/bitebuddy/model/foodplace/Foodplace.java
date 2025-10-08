@@ -112,7 +112,7 @@ public class Foodplace {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("bitebuddy", address)
+                .add("address", address)
                 .add("tags", tags)
                 .toString();
     }
