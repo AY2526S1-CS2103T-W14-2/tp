@@ -31,7 +31,7 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_MCRONALDS = "11111111";
     public static final String VALID_PHONE_SWENSWAN = "22222222";
     public static final String VALID_EMAIL_MCRONALDS = "info@mcronalds.com";
-    public static final String VALID_EMAIL_SWENSWAN = "boooking@swenswan.com";
+    public static final String VALID_EMAIL_SWENSWAN = "booking@swenswan.com";
     public static final String VALID_ADDRESS_MCRONALDS = "Rideout Tea Garden";
     public static final String VALID_ADDRESS_SWENSWAN = "Geneo Lvl 3";
     public static final String VALID_TAG_FASTFOOD = "fastfood";
