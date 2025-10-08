@@ -46,7 +46,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateFoodplaces_throwsDuplicateFoodplaceException() {
         // Two foodplaces with the same identity fields
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Foodplace> newFoodplaces = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newFoodplaces);
@@ -73,7 +73,7 @@ public class AddressBookTest {
     @Test
     public void hasFoodplace_foodplaceWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addFoodplace(ALICE);
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasFoodplace(editedAlice));
     }
