@@ -52,11 +52,7 @@ public class RateCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
         }
 
-        if (!Rate.isValidRating(rating)) {
-            throw new CommandException(Rate.MESSAGE_CONSTRAINTS);
-        }
-
-        rate.setRate(rating);
+        setRate();
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
         Foodplace editedFoodplace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
@@ -66,6 +62,14 @@ public class RateCommand extends Command {
         model.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_ALL_FOODPLACES);
 
         return new CommandResult(generateSuccessMessage(editedFoodplace));
+    }
+
+    public void setRate() throws CommandException {
+        if (!Rate.isValidRating(rating)) {
+            throw new CommandException(Rate.MESSAGE_CONSTRAINTS);
+        }
+
+        rate.setRate(rating);
     }
 
     /**

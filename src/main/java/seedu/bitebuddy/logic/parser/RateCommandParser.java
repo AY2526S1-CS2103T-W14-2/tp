@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.logic.commands.RateCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
@@ -26,7 +25,7 @@ public class RateCommandParser implements Parser<RateCommand> {
         try {
             index = ParserUtil.parseIndex(stringArgs.getArgument(0));
             rate = Integer.valueOf(stringArgs.getArgument(1));
-        } catch (IllegalValueException ive) {
+        } catch (NumberFormatException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE), ive);
         }
 

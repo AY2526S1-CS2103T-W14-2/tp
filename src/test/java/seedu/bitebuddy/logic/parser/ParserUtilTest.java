@@ -196,7 +196,17 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseRate_null_throwsNullPointerException() throws Exception {
+    public void parseRate_normal_success() throws Exception {
+        assertEquals(new Rate(5), ParserUtil.parseRatings(Arrays.asList("5")));
+    }
+
+    @Test
+    public void parseRate_multiple_success() throws Exception {
+        assertEquals(new Rate(5), ParserUtil.parseRatings(Arrays.asList("1", "2", "3", "4", "5")));
+    }
+
+    @Test
+    public void parseRate_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseRatings(null));
     }
 

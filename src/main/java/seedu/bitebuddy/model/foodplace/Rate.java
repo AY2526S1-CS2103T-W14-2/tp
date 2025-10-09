@@ -45,16 +45,11 @@ public class Rate {
     /**
      * Returns true if rate is updated, otherwise returns false.
      * @param rate The rate to update to
-     * @return Boolean
      */
-    public boolean setRate(Integer rate) {
+    public void setRate(Integer rate) {
         requireNonNull(rate);
         checkArgument(isValidRating(rate), MESSAGE_CONSTRAINTS);
-        if (isValidRating(rate)) {
-            this.value = rate;
-            return true;
-        }
-        return false;
+        this.value = rate;
     }
 
     /**
