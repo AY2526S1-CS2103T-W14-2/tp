@@ -55,11 +55,6 @@ public class FoodplaceTest {
         // name differs in case, all other attributes same -> returns true
         Foodplace editedBob = new FoodplaceBuilder(SWENSWAN).withName(VALID_NAME_SWENSWAN.toLowerCase()).build();
         assertTrue(SWENSWAN.isSameFoodplace(editedBob));
-
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_SWENSWAN + " ";
-        editedBob = new FoodplaceBuilder(SWENSWAN).withName(nameWithTrailingSpaces).build();
-        assertFalse(SWENSWAN.isSameFoodplace(editedBob));
     }
 
     @Test

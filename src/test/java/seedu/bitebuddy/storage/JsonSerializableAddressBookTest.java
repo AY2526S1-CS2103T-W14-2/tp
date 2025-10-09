@@ -40,6 +40,7 @@ public class JsonSerializableAddressBookTest {
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
+    // Duplicate foodplaces (same fields, only differing in case) should be rejected
     @Test
     public void toModelType_duplicateFoodplaces_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_FOODPLACES_FILE,
