@@ -17,6 +17,7 @@ import seedu.bitebuddy.logic.commands.ExitCommand;
 import seedu.bitebuddy.logic.commands.FindCommand;
 import seedu.bitebuddy.logic.commands.HelpCommand;
 import seedu.bitebuddy.logic.commands.ListCommand;
+import seedu.bitebuddy.logic.commands.NoteCommand;
 import seedu.bitebuddy.logic.commands.RateCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
@@ -56,6 +57,9 @@ public class AddressBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
+        case NoteCommand.COMMAND_WORD:
+            return new NoteCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

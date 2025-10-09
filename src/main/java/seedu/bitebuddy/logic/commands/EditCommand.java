@@ -26,6 +26,7 @@ import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.tag.Tag;
@@ -105,8 +106,10 @@ public class EditCommand extends Command {
         Address updatedAddress = editFoodplaceDescriptor.getAddress().orElse(foodplaceToEdit.getAddress());
         Set<Tag> updatedTags = editFoodplaceDescriptor.getTags().orElse(foodplaceToEdit.getTags());
         Rate updatedRate = editFoodplaceDescriptor.getRating().orElse(foodplaceToEdit.getRate());
+        Note updatedNote = foodplaceToEdit.getNote();
 
-        return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedRate);
+        return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNote,
+                updatedRate);
     }
 
     @Override

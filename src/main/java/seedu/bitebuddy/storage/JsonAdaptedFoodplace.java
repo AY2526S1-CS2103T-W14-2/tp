@@ -14,6 +14,7 @@ import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.tag.Tag;
@@ -30,6 +31,7 @@ class JsonAdaptedFoodplace {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String note;
     private final Integer rate;
 
     /**
@@ -39,6 +41,7 @@ class JsonAdaptedFoodplace {
     public JsonAdaptedFoodplace(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                 @JsonProperty("email") String email, @JsonProperty("bitebuddy") String address,
                                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                                @JsonProperty("note") String note,
                                 @JsonProperty("rate") Integer rate) {
         this.name = name;
         this.phone = phone;
@@ -47,6 +50,7 @@ class JsonAdaptedFoodplace {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.note = note;
         this.rate = rate;
     }
 
@@ -61,6 +65,7 @@ class JsonAdaptedFoodplace {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        note = source.getNote().value;
         rate = source.getRate().getValue();
     }
 
@@ -113,7 +118,12 @@ class JsonAdaptedFoodplace {
         final Rate modelRate = new Rate(rate);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelRate);
+
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
+        final Note modelNote = new Note(note);
+        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNote, modelRate);
     }
 
 }

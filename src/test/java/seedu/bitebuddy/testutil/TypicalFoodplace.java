@@ -27,12 +27,13 @@ public class TypicalFoodplace {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@pratapalace.com")
             .withPhone("94351253")
             .withTags("hawker")
+            .withNote("Serves the best appetisers!")
             .withRate("0").build();
     public static final Foodplace DAEBAKSHOP = new FoodplaceBuilder().withName("Daebak Korean BBQ")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("john@daebakbbq.com").withPhone("98765432")
             .withTags("korean", "restaurant")
-            .withRate("0").build();
+            .withNote("Best beef in the world!").withRate("0").build();
     public static final Foodplace CARLSHOP = new FoodplaceBuilder().withName("Carls Junior").withPhone("95352563")
              .withEmail("carls@junior.com").withAddress("wall street").withTags("fastfood").build();
     public static final Foodplace LAKSASHOP = new FoodplaceBuilder().withName("Laksa Paradise").withPhone("87652533")

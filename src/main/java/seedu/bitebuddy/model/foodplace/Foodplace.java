@@ -23,19 +23,23 @@ public class Foodplace {
 
     // Data fields
     private final Address address;
+
+    // Optional fields
     private final Set<Tag> tags = new HashSet<>();
+    private final Note note;
     private final Rate rate;
 
     /**
      * Every field must be present and not null.
      */
-    public Foodplace(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Rate rate) {
-        requireAllNonNull(name, phone, email, address, tags, rate);
+    public Foodplace(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note, Rate rate) {
+        requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.note = note;
         this.rate = rate;
     }
 
@@ -61,6 +65,10 @@ public class Foodplace {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     public Rate getRate() {

@@ -22,10 +22,12 @@ import seedu.bitebuddy.logic.commands.ExitCommand;
 import seedu.bitebuddy.logic.commands.FindCommand;
 import seedu.bitebuddy.logic.commands.HelpCommand;
 import seedu.bitebuddy.logic.commands.ListCommand;
+import seedu.bitebuddy.logic.commands.NoteCommand;
 import seedu.bitebuddy.logic.commands.RateCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.NameContainsKeywordsPredicate;
+import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.testutil.EditFoodplaceDescriptorBuilder;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
@@ -89,6 +91,14 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_note() throws Exception {
+        final Note note = new Note("Some note.");
+        NoteCommand command = (NoteCommand) parser.parseCommand(NoteCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_FOODPLACE.getOneBased() + " " + note.value);
+        assertEquals(new NoteCommand(INDEX_FIRST_FOODPLACE, note), command);
     }
 
     @Test

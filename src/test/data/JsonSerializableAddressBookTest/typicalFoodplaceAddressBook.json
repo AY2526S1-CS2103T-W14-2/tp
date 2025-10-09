@@ -6,6 +6,7 @@
     "email": "alice@pratapalace.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "hawker" ],
+    "note": "",
     "rate": 0
   }, {
     "name" : "Daebak Korean BBQ",
@@ -13,6 +14,7 @@
     "email" : "john@daebakbbq.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : ["korean", "restaurant"],
+    "note": "",
     "rate": 0
   }, {
     "name" : "Carls Junior",
@@ -20,6 +22,7 @@
     "email" : "carls@junior.com",
     "address" : "wall street",
     "tags" : [ "fastfood" ],
+    "note": "",
     "rate": 0
   }, {
     "name" : "Laksa Paradise",
@@ -27,6 +30,7 @@
     "email" : "laksa@paradise.com",
     "address" : "10th street",
     "tags" : [ "hawker" ],
+    "note": "",
     "rate": 0
   }, {
     "name" : "Sushi Tei",
@@ -34,6 +38,7 @@
     "email" : "sushi@tei.com",
     "address" : "michegan ave",
     "tags" : [ ],
+    "note": "",
     "rate": 0
   }, {
     "name" : "ITea",
@@ -41,6 +46,7 @@
     "email" : "i@tea.com",
     "address" : "little tokyo",
     "tags" : [ ],
+    "note": "",
     "rate": 0
   }, {
     "name" : "Dominoes Pizza",
@@ -48,6 +54,7 @@
     "email" : "dominos@pizza.com",
     "address" : "4th street",
     "tags" : [ ],
+    "note": "",
     "rate": 0
   } ]
 }

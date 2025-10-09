@@ -17,6 +17,7 @@ import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.tag.Tag;
@@ -48,8 +49,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Rate rate = ParserUtil.parseRatings(argMultimap.getAllValues(PREFIX_RATE));
+        Note note = new Note("");
 
-        Foodplace foodplace = new Foodplace(name, phone, email, address, tagList, rate);
+        Foodplace foodplace = new Foodplace(name, phone, email, address, tagList, note, rate);
 
         return new AddCommand(foodplace);
     }
