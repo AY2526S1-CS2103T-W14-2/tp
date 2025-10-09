@@ -23,9 +23,9 @@ public class Foodplace {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
 
     // Optional fields
+    private final Set<Tag> tags = new HashSet<>();
     private final Note note;
 
     /**

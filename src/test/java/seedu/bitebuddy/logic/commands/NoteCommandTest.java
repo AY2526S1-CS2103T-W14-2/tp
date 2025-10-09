@@ -29,6 +29,7 @@ import seedu.bitebuddy.testutil.FoodplaceBuilder;
 public class NoteCommandTest {
 
     private static final String NOTE_STUB = "Some note";
+    private static final String EMPTY_NOTE_STUB = "";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -48,9 +49,9 @@ public class NoteCommandTest {
     }
 
     @Test
-    public void execute_deletenoteUnfilteredList_success() {
+    public void execute_deleteNoteUnfilteredList_success() {
         Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
-        Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote("").build();
+        Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
                 new Note(editedFoodplace.getNote().toString()));
@@ -64,7 +65,7 @@ public class NoteCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_addNoteFilteredList_success() {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
 
         Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
@@ -74,6 +75,25 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(editedFoodplace.getNote().value));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedFoodplace);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFoodplace(firstFoodplace, editedFoodplace);
+
+        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteNoteFilteredList_success() {
+        showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
+
+        Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Foodplace editedFoodplace = new FoodplaceBuilder(model.getFilteredFoodplaceList()
+                .get(INDEX_FIRST_FOODPLACE.getZeroBased())).withNote(EMPTY_NOTE_STUB).build();
+
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
+                new Note(editedFoodplace.getNote().toString()));
+
+        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedFoodplace);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(firstFoodplace, editedFoodplace);

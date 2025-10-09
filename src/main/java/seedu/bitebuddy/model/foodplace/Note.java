@@ -25,9 +25,19 @@ public class Note {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Note // instanceof handles nulls
-                && value.equals(((Note) other).value)); // state check
+        // Check if same object reference
+        if (this == other) {
+            return true;
+        }
+
+        // Check if other is not a Note or is null
+        if (!(other instanceof Note)) {
+            return false;
+        }
+
+        // Safe to cast since we know it is a note at this point and compare value
+        Note otherNote = (Note) other;
+        return this.value.equals(otherNote.value);
     }
 
     @Override

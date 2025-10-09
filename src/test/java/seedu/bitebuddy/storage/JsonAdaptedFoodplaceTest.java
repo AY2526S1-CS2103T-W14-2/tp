@@ -15,6 +15,7 @@ import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 
 public class JsonAdaptedFoodplaceTest {
@@ -110,6 +111,15 @@ public class JsonAdaptedFoodplaceTest {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, VALID_NOTE);
         assertThrows(IllegalValueException.class, foodplace::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullNote_throwsIllegalValueException() {
+        // Null note is considered a kind of invalid note as well
+        JsonAdaptedFoodplace foodplace =
+                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
 
 }
