@@ -8,7 +8,6 @@ import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.logic.commands.RateCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
-import seedu.bitebuddy.model.foodplace.Rate;
 
 /**
  * Parses input arguments and creates a new {@code RateCommand} object
@@ -21,17 +20,18 @@ public class RateCommandParser implements Parser<RateCommand> {
      */
     public RateCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_RATE);
+        ArgumentPositionMapper stringArgs = new ArgumentPositionMapper(args);
 
         Index index;
+        Integer rate;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(stringArgs.getArgument(0));
+            rate = Integer.valueOf(stringArgs.getArgument(1));
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE), ive);
         }
 
-        String rate = argMultimap.getValue(PREFIX_RATE).orElse("");
 
-        return new RateCommand(index, new Rate(Integer.valueOf(rate)));
+        return new RateCommand(index, rate);
     }
 }

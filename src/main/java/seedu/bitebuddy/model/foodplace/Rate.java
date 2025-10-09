@@ -39,7 +39,7 @@ public class Rate {
      * Returns true if given rating is a valid rating score.
      */
     public static boolean isValidRating(Integer test) {
-        return (test == DEFAULT || MIN <= test && test <= MAX);
+        return (test.equals(DEFAULT) || MIN <= test && test <= MAX);
     }
 
     /**
@@ -55,6 +55,20 @@ public class Rate {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Sets the rating score to default (i.e. no rating).
+     */
+    public void reset() {
+        this.value = DEFAULT;
+    }
+
+    /**
+     * Check if a rating has been set.
+     */
+    public boolean isSet() {
+        return !(value.equals(DEFAULT));
     }
 
     @Override

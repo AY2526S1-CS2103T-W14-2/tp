@@ -1,7 +1,6 @@
 package seedu.bitebuddy.logic.commands;
 
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 
 import java.util.List;
 
@@ -20,12 +19,10 @@ public class RateCommand extends Command {
     public static final String COMMAND_WORD = "rate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the rate of the foodplace identified "
-            + "by the index number used in the last foodplace listing. "
+            + "by the index number used in the last foodplace listing. INDEX and RATING must be a positive integer."
             + "Existing rate will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-//            + PREFIX_RATE + "[RATING (must be a positive integer)]\n"
-//            + "Example: " + COMMAND_WORD + " 5 " + PREFIX_RATE + "1";
-            + "[RATING (must be a positive integer)]\n"
+            + "Parameters: INDEX "
+            + "RATING\n"
             + "Example: " + COMMAND_WORD + " 5 " + "1";
 
     public static final String MESSAGE_ADD_RATE_SUCCESS = "Added rate to Foodplace: %1$s";
@@ -33,17 +30,20 @@ public class RateCommand extends Command {
 
     private final Index index;
     private final Rate rate;
+    private final Integer rating;
 
     /**
      * @param index of the foodplace in the filtered foodplace list to edit the remark
-     * @param rate  of the foodplace to be updated to
+     * @param rating of the foodplace to be updated to
      */
-    public RateCommand(Index index, Rate rate) {
-        requireAllNonNull(index, rate);
+    public RateCommand(Index index, Integer rating) {
+        requireAllNonNull(index, rating);
 
         this.index = index;
-        this.rate = rate;
+        this.rating = rating;
+        this.rate = new Rate();
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Foodplace> lastShownList = model.getFilteredFoodplaceList();
@@ -51,6 +51,12 @@ public class RateCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
         }
+
+        if (!Rate.isValidRating(rating)) {
+            throw new CommandException(Rate.MESSAGE_CONSTRAINTS);
+        }
+
+        rate.setRate(rating);
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
         Foodplace editedFoodplace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(), foodPlaceToEdit.getEmail(),
