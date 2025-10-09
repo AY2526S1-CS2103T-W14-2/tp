@@ -40,6 +40,8 @@ public class FoodplaceCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label note;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Foodplace} and index to display.
@@ -52,6 +54,7 @@ public class FoodplaceCard extends UiPart<Region> {
         phone.setText(foodplace.getPhone().value);
         address.setText(foodplace.getAddress().value);
         email.setText(foodplace.getEmail().value);
+        note.setText(foodplace.getNote().value);
         foodplace.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

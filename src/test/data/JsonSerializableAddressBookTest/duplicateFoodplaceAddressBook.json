@@ -4,11 +4,13 @@
     "phone": "94351253",
     "email": "alice@pratapalace.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "hawker" ]
+    "tags": [ "hawker" ],
+    "note": "note"
   }, {
     "name": "prata palace",
     "phone": "94351253",
     "email": "Alice@pratapalace.com",
-    "address": "123, jurong west ave 6, #08-111"
+    "address": "123, jurong west ave 6, #08-111",
+    "note": "different note"
   } ]
 }

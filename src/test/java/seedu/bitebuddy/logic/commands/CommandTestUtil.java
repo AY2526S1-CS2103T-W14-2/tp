@@ -36,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_SWENSWAN = "Geneo Lvl 3";
     public static final String VALID_TAG_FASTFOOD = "fastfood";
     public static final String VALID_TAG_RESTAURANT = "restaurant";
+    public static final String VALID_NOTE_SERVICE = "Good customer service!";
+    public static final String VALID_NOTE_FAMOUS = "Famous for desserts";
 
     public static final String NAME_DESC_MCRONALDS = " " + PREFIX_NAME + VALID_NAME_MCRONALDS;
     public static final String NAME_DESC_SWENSWAN = " " + PREFIX_NAME + VALID_NAME_SWENSWAN;
