@@ -2,6 +2,7 @@ package seedu.bitebuddy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -37,18 +38,18 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         // Must have at least index + 1 tag
         if (tokens.size() < 2) {
-            throw new ParseException("Missing index and/or tag! " + "\n"
-                + "Format: tag INDEX TAG1 [TAG2]...");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    TagCommand.MESSAGE_USAGE));
         }
 
         Index index;
         try {
             index = ParserUtil.parseIndex(tokens.get(0));
         } catch (IllegalValueException e) {
-            throw new ParseException("The index provided must be a positive integer!", e);
+            throw new ParseException(MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX, e);
         }
 
-        // Remaining tokens are tags
+        // Remaining tokens are tags.
         Set<Tag> tags = new HashSet<>();
         for (int i = 1; i < tokens.size(); i++) {
             String trimmed = tokens.get(i).trim();

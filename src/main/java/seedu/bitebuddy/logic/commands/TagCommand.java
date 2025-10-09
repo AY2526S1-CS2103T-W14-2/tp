@@ -30,7 +30,8 @@ public class TagCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "Updated tags for Foodplace: %1$s";
-    public static final String MESSAGE_INVALID_INDEX = "The index is out of range!";
+    public static final String MESSAGE_INVALID_INDEX = Messages
+            .MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;;
 
     private final Index index;
     private final Set<Tag> newTags;
