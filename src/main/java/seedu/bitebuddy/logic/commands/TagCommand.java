@@ -30,13 +30,15 @@ public class TagCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "Updated tags for Foodplace: %1$s";
-    public static final String MESSAGE_EMPTY_TAG = "TAG cannot be empty!";
     public static final String MESSAGE_INVALID_INDEX = "The index is out of range!";
 
     private final Index index;
     private final Set<Tag> newTags;
 
-
+    /**
+     * @param index of the foodplace in the foodplace list to add new tags
+     * @param newTags of the foodplace to be added to
+     */
     public TagCommand(Index index, Set<Tag> newTags) {
         requireNonNull(index);
         requireNonNull(newTags);
@@ -52,8 +54,6 @@ public class TagCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX);
         }
-
-
 
         Foodplace foodplaceToEdit = lastShownList.get(index.getZeroBased());
 
