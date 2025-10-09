@@ -53,14 +53,8 @@ public class TagCommandParser implements Parser<TagCommand> {
         Set<Tag> tags = new HashSet<>();
         for (int i = 1; i < tokens.size(); i++) {
             String trimmed = tokens.get(i).trim();
-            if (trimmed.isEmpty()) {
-                throw new ParseException("TAG cannot be empty!");
-            }
-            tags.add(new Tag(trimmed));
-        }
 
-        if (tags.isEmpty()) {
-            throw new ParseException("At least one tag must be provided!");
+            tags.add(new Tag(trimmed));
         }
 
         return new TagCommand(index, tags);
