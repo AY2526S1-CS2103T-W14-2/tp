@@ -9,10 +9,8 @@ import java.util.Set;
 import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.commons.util.StringUtil;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
-import seedu.bitebuddy.model.foodplace.Address;
-import seedu.bitebuddy.model.foodplace.Email;
-import seedu.bitebuddy.model.foodplace.Name;
-import seedu.bitebuddy.model.foodplace.Phone;
+import seedu.bitebuddy.model.foodplace.*;
+import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -120,5 +118,27 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> Rate} into a {@code Set<Rate>}.
+     * Used to support how ratings are optional.
+     */
+    public static Rate parseRatings(Collection<String> ratings) throws ParseException {
+        requireNonNull(ratings);
+        String mostRecentRating = ratings.stream().reduce((prev, next) -> next).orElse(null);
+        // Default case where Rate's CLI tag is not present
+        if (mostRecentRating == null) {
+            return new Rate();
+        }
+
+        // Case where >= 1 Rate's CLI tag have been detected
+        Integer rating;
+        try {
+            rating = Integer.valueOf(mostRecentRating);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
+        }
+        return new Rate(rating);
     }
 }

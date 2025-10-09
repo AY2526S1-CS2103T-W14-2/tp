@@ -95,7 +95,7 @@ public class FoodplaceTest {
         String expected = Foodplace.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone="
                 + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", bitebuddy=" + ALICE.getAddress() + ", tags="
-                + ALICE.getTags() + "}";
+                + ALICE.getTags() + ", rate=" + ALICE.getRate() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

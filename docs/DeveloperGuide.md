@@ -291,7 +291,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Value proposition**:
 
-* Provide a platform to collate information about food places that the user has visited such as, name, address, rating, cuisine, location, notes, etc.
+* Provide a platform to collate information about food places that the user has visited such as, name, address, rate, cuisine, location, notes, etc.
 * Users can quickly access any information they want through extensive sorting and searching feature to make quick and informed decisions
 * Blacklist food places that the user dislikes
 * Wishlist food places to keep track of places they want to try next
@@ -306,10 +306,10 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 |----------|----------------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
 | `* * *`  | user                             | add food places entries                                                | revisit these entries or recommend them                                                           |
 | `* * *`  | user                             | delete an existing entry                                               | remove food places that I no longer need to refer to                                              |
-| `* * *`  | user                             | rate an existing entry                                                 | refer to the rating to know how good the food place is based on my rating                         |
+| `* * *`  | user                             | rate an existing entry                                                 | refer to the rate to know how good the food place is based on my rate                         |
 | `* * *`  | user                             | add notes to an existing entry                                         | keep track of what I liked or disliked at the restaurant                                          |
 | `* * *`  | user                             | tag food places with my own custom keywords                            | filter by personal context                                                                        |
-| `* * *`  | user                             | filter based on rating / cuisine / tags                                | choose a food place that I want to go based on the specified parameters                           |
+| `* * *`  | user                             | filter based on rate / cuisine / tags                                | choose a food place that I want to go based on the specified parameters                           |
 | `* * *`  | user                             | search for a specific food place quickly                               | don't have to spend too long finding a place I visited before                                     |
 | `* * *`  | first-time user                  | have a clear guidance or help commands                                 | learn how to use and navigate around the app easily                                               |
 | `* * *`  | frequent user                    | pin my favourite food places                                           | quickly refer to them again next time                                                             |
@@ -428,14 +428,14 @@ Guarantees: A note is stored for the food place and existing note is overwritten
 System: BiteBuddy  
 Actor: User  
 Preconditions: At least one food place exists.  
-Guarantees: A rating between 1–10 is stored and existing rating is overwritten.
+Guarantees: A rate between 1–10 is stored and existing rate is overwritten.
 
 **MSS**
 
 1. User chooses to rate a food place.
-2. User provides the index and rating value.
-3. BiteBuddy validates the index and rating.
-4. BiteBuddy updates the food place with the rating and displays confirmation.
+2. User provides the index and rate value.
+3. BiteBuddy validates the index and rate.
+4. BiteBuddy updates the food place with the rate and displays confirmation.
    Use case ends.
 
 **Extensions**
@@ -444,12 +444,12 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
     * 2a1. BiteBuddy throws an error for invalid index.
       Use case ends.
 
-* 2b. BiteBuddy detects that rating is not numeric.
-    * 2b1. BiteBuddy shows an error message for invalid rating.
+* 2b. BiteBuddy detects that rate is not numeric.
+    * 2b1. BiteBuddy shows an error message for invalid rate.
       Use case ends.
 
-* 2c. BiteBuddy detects that rating is out of range.
-    * 2c1. BiteBuddy shows an error message for rating being out of range.
+* 2c. BiteBuddy detects that rate is out of range.
+    * 2c1. BiteBuddy shows an error message for rate being out of range.
       Use case ends.
 
 

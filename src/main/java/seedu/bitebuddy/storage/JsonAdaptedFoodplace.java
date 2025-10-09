@@ -10,11 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;
-import seedu.bitebuddy.model.foodplace.Address;
-import seedu.bitebuddy.model.foodplace.Email;
-import seedu.bitebuddy.model.foodplace.Foodplace;
-import seedu.bitebuddy.model.foodplace.Name;
-import seedu.bitebuddy.model.foodplace.Phone;
+import seedu.bitebuddy.model.foodplace.*;
+import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -29,6 +26,7 @@ class JsonAdaptedFoodplace {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final Integer rate;
 
     /**
      * Constructs a {@code JsonAdaptedFoodplace} with the given foodplace details.
@@ -36,7 +34,8 @@ class JsonAdaptedFoodplace {
     @JsonCreator
     public JsonAdaptedFoodplace(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                 @JsonProperty("email") String email, @JsonProperty("bitebuddy") String address,
-                                @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                                @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                                @JsonProperty("rate") Integer rate) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +43,7 @@ class JsonAdaptedFoodplace {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.rate = rate;
     }
 
     /**
@@ -57,6 +57,7 @@ class JsonAdaptedFoodplace {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        rate = source.getRate().value;
     }
 
     /**
@@ -102,8 +103,13 @@ class JsonAdaptedFoodplace {
         }
         final Address modelAddress = new Address(address);
 
+        if (rate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));
+        }
+        final Rate modelRate = new Rate(rate);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelRate);
     }
 
 }
