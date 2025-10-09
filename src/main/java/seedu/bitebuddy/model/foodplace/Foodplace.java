@@ -71,7 +71,10 @@ public class Foodplace {
         }
 
         return otherFoodplace != null
-                && otherFoodplace.getName().equals(getName());
+                && otherFoodplace.getName().equals(getName())
+                && otherFoodplace.getAddress().equals(getAddress())
+                && otherFoodplace.getEmail().equals(getEmail())
+                && otherFoodplace.getPhone().equals(getPhone());
     }
 
     /**
@@ -109,7 +112,7 @@ public class Foodplace {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("bitebuddy", address)
+                .add("address", address)
                 .add("tags", tags)
                 .toString();
     }
