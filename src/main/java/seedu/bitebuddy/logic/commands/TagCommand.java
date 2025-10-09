@@ -15,7 +15,7 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
- * Updates the tags of an existing Foodplace in the BiteBuddy book.
+ * Adds new tags to an existing food place in the address book.
  */
 public class TagCommand extends Command {
 
@@ -36,9 +36,7 @@ public class TagCommand extends Command {
     private final Index index;
     private final Set<Tag> newTags;
 
-    /**
-     * Creates a TagCommand to replace the tags of the specified {@code Foodplace}.
-     */
+
     public TagCommand(Index index, Set<Tag> newTags) {
         requireNonNull(index);
         requireNonNull(newTags);
@@ -69,7 +67,8 @@ public class TagCommand extends Command {
                 foodplaceToEdit.getPhone(),
                 foodplaceToEdit.getEmail(),
                 foodplaceToEdit.getAddress(),
-                updatedTags
+                updatedTags,
+                foodplaceToEdit.getNote()
         );
 
         model.setFoodplace(foodplaceToEdit, updatedFoodplace);

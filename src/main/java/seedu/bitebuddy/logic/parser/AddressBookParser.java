@@ -17,8 +17,8 @@ import seedu.bitebuddy.logic.commands.ExitCommand;
 import seedu.bitebuddy.logic.commands.FindCommand;
 import seedu.bitebuddy.logic.commands.HelpCommand;
 import seedu.bitebuddy.logic.commands.ListCommand;
-import seedu.bitebuddy.logic.commands.TagCommand;
 import seedu.bitebuddy.logic.commands.NoteCommand;
+import seedu.bitebuddy.logic.commands.TagCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
 /**
