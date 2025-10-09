@@ -131,7 +131,7 @@ public class ParserUtil {
         requireNonNull(ratings);
         String mostRecentRating = ratings.stream().reduce((prev, next) -> next).orElse(null);
         if (mostRecentRating == null) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            return new Rate();
         }
 
         // Case where >= 1 Rate's CLI tag have been detected, take latest one
