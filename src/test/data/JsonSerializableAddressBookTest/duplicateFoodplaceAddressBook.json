@@ -1,14 +1,14 @@
 {
   "foodplaces": [ {
-    "name": "Alice Pauline",
+    "name": "Prata Palace",
     "phone": "94351253",
-    "email": "alice@example.com",
+    "email": "alice@pratapalace.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "tags": [ "friends" ]
+    "tags": [ "hawker" ]
   }, {
-    "name": "Alice Pauline",
+    "name": "prata palace",
     "phone": "94351253",
-    "email": "Alice@example.com",
-    "address": "123, jurong west ave 6, #08-111"
+    "email": "Alice@pratapalace.com",
+    "address": "123, jurong west ave 6, #08-111",
   } ]
 }
