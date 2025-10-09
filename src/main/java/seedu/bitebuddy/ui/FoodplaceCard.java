@@ -57,6 +57,6 @@ public class FoodplaceCard extends UiPart<Region> {
         foodplace.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        rate.setText(String.valueOf(foodplace.getRate().value));
+        rate.setText(String.valueOf(foodplace.getRate().toString()));
     }
 }

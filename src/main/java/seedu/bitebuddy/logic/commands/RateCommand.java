@@ -23,8 +23,10 @@ public class RateCommand extends Command {
             + "by the index number used in the last foodplace listing. "
             + "Existing rate will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_RATE + "[RATING (must be a positive integer)]\n"
-            + "Example: " + COMMAND_WORD + " 5 " + PREFIX_RATE + "1";
+//            + PREFIX_RATE + "[RATING (must be a positive integer)]\n"
+//            + "Example: " + COMMAND_WORD + " 5 " + PREFIX_RATE + "1";
+            + "[RATING (must be a positive integer)]\n"
+            + "Example: " + COMMAND_WORD + " 5 " + "1";
 
     public static final String MESSAGE_ADD_RATE_SUCCESS = "Added rate to Foodplace: %1$s";
     public static final String MESSAGE_DELETE_RATE_SUCCESS = "Removed rate from Foodplace: %1$s";
