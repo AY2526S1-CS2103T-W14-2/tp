@@ -69,7 +69,8 @@ public class TagCommand extends Command {
                 foodplaceToEdit.getEmail(),
                 foodplaceToEdit.getAddress(),
                 updatedTags,
-                foodplaceToEdit.getNote()
+                foodplaceToEdit.getNote(),
+                foodplaceToEdit.getRate()
         );
 
         model.setFoodplace(foodplaceToEdit, updatedFoodplace);

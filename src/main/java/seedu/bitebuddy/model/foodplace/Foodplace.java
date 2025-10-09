@@ -27,11 +27,12 @@ public class Foodplace {
     // Optional fields
     private final Set<Tag> tags = new HashSet<>();
     private final Note note;
+    private final Rate rate;
 
     /**
      * Every field must be present and not null.
      */
-    public Foodplace(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note) {
+    public Foodplace(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note, Rate rate) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -39,6 +40,7 @@ public class Foodplace {
         this.address = address;
         this.tags.addAll(tags);
         this.note = note;
+        this.rate = rate;
     }
 
     public Name getName() {
@@ -67,6 +69,10 @@ public class Foodplace {
 
     public Note getNote() {
         return note;
+    }
+
+    public Rate getRate() {
+        return rate;
     }
 
     /**
@@ -105,13 +111,14 @@ public class Foodplace {
                 && phone.equals(otherFoodplace.phone)
                 && email.equals(otherFoodplace.email)
                 && address.equals(otherFoodplace.address)
-                && tags.equals(otherFoodplace.tags);
+                && tags.equals(otherFoodplace.tags)
+                && rate.equals(otherFoodplace.rate);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, rate);
     }
 
     @Override
@@ -122,6 +129,7 @@ public class Foodplace {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("rate", rate)
                 .toString();
     }
 

@@ -234,7 +234,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/CommitActivityDiagram.puml" width="250">
 
 #### Design considerations:
 
@@ -513,12 +513,9 @@ Organized in alphabetical order
 
 Given below are instructions to test the app manually.
 
-<box type="info" seamless>
-
 **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</box>
 
 ### Launch and shutdown
 

@@ -18,6 +18,7 @@ import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Phone;
+import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -192,5 +193,30 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseRate_normal_success() throws Exception {
+        assertEquals(new Rate(5), ParserUtil.parseRatings(Arrays.asList("5")));
+    }
+
+    @Test
+    public void parseRate_multiple_success() throws Exception {
+        assertEquals(new Rate(5), ParserUtil.parseRatings(Arrays.asList("1", "2", "3", "4", "5")));
+    }
+
+    @Test
+    public void parseRate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRatings(null));
+    }
+
+    @Test
+    public void parseRate_collectionWithLetterRating_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRatings(Arrays.asList("invalid")));
+    }
+
+    @Test
+    public void parseRate_collectionWithoutRating_returnsRate() throws Exception {
+        assertEquals(new Rate(), ParserUtil.parseRatings(Arrays.asList()));
     }
 }

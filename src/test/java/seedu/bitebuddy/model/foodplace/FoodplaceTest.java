@@ -7,6 +7,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENS
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_RATE_PRATASHOP;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATASHOP;
@@ -94,6 +95,10 @@ public class FoodplaceTest {
         // different tags -> returns false
         editedAlice = new FoodplaceBuilder(PRATASHOP).withTags(VALID_TAG_RESTAURANT).build();
         assertFalse(PRATASHOP.equals(editedAlice));
+
+        // different rating -> returns false
+        editedAlice = new FoodplaceBuilder(PRATASHOP).withRate(VALID_RATE_PRATASHOP).build();
+        assertFalse(PRATASHOP.equals(editedAlice));
     }
 
     @Test
@@ -101,7 +106,7 @@ public class FoodplaceTest {
         String expected = Foodplace.class.getCanonicalName() + "{name=" + PRATASHOP.getName() + ", phone="
                 + PRATASHOP.getPhone()
                 + ", email=" + PRATASHOP.getEmail() + ", address=" + PRATASHOP.getAddress() + ", tags="
-                + PRATASHOP.getTags() + "}";
+                + PRATASHOP.getTags() + ", rate=" + PRATASHOP.getRate() + "}";
         assertEquals(expected, PRATASHOP.toString());
     }
 }

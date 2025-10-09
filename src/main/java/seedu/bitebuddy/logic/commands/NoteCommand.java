@@ -54,7 +54,8 @@ public class NoteCommand extends Command {
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
         Foodplace editedFoodPlace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
-                foodPlaceToEdit.getEmail(), foodPlaceToEdit.getAddress(), foodPlaceToEdit.getTags(), note);
+                foodPlaceToEdit.getEmail(), foodPlaceToEdit.getAddress(), foodPlaceToEdit.getTags(), note,
+                foodPlaceToEdit.getRate());
 
         model.setFoodplace(foodPlaceToEdit, editedFoodPlace);
         model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES);
