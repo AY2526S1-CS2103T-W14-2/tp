@@ -3,7 +3,6 @@ package seedu.bitebuddy.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATASHOP;
@@ -46,8 +45,8 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateFoodplaces_throwsDuplicateFoodplaceException() {
         // Two foodplaces with the same identity fields
-        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withAddress(VALID_ADDRESS_SWENSWAN)
-                .withTags(VALID_TAG_RESTAURANT).build();
+        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withTags(VALID_TAG_RESTAURANT)
+                .build();
         List<Foodplace> newFoodplaces = Arrays.asList(PRATASHOP, editedAlice);
         AddressBookStub newData = new AddressBookStub(newFoodplaces);
 
@@ -73,8 +72,8 @@ public class AddressBookTest {
     @Test
     public void hasFoodplace_foodplaceWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addFoodplace(PRATASHOP);
-        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withAddress(VALID_ADDRESS_SWENSWAN)
-                .withTags(VALID_TAG_RESTAURANT).build();
+        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withTags(VALID_TAG_RESTAURANT)
+                .build();
         assertTrue(addressBook.hasFoodplace(editedAlice));
     }
 

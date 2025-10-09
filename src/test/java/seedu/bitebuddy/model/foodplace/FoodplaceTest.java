@@ -32,24 +32,29 @@ public class FoodplaceTest {
         // null -> returns false
         assertFalse(PRATASHOP.isSameFoodplace(null));
 
-        // same name, all other attributes different -> returns true
-        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withPhone(VALID_PHONE_SWENSWAN)
-                .withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
-                .withTags(VALID_TAG_RESTAURANT).build();
+        // same identity fields, different tags -> returns true
+        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withTags(VALID_TAG_RESTAURANT).build();
         assertTrue(PRATASHOP.isSameFoodplace(editedAlice));
 
         // different name, all other attributes same -> returns false
         editedAlice = new FoodplaceBuilder(PRATASHOP).withName(VALID_NAME_SWENSWAN).build();
         assertFalse(PRATASHOP.isSameFoodplace(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Foodplace editedBob = new FoodplaceBuilder(SWENSWAN).withName(VALID_NAME_SWENSWAN.toLowerCase()).build();
-        assertFalse(SWENSWAN.isSameFoodplace(editedBob));
+        // different phone -> returns false
+        editedAlice = new FoodplaceBuilder(PRATASHOP).withPhone(VALID_PHONE_SWENSWAN).build();
+        assertFalse(PRATASHOP.isSameFoodplace(editedAlice));
 
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_SWENSWAN + " ";
-        editedBob = new FoodplaceBuilder(SWENSWAN).withName(nameWithTrailingSpaces).build();
-        assertFalse(SWENSWAN.isSameFoodplace(editedBob));
+        // different email -> returns false
+        editedAlice = new FoodplaceBuilder(PRATASHOP).withEmail(VALID_EMAIL_SWENSWAN).build();
+        assertFalse(PRATASHOP.isSameFoodplace(editedAlice));
+
+        // different address -> returns false
+        editedAlice = new FoodplaceBuilder(PRATASHOP).withAddress(VALID_ADDRESS_SWENSWAN).build();
+        assertFalse(PRATASHOP.isSameFoodplace(editedAlice));
+
+        // name differs in case, all other attributes same -> returns true
+        Foodplace editedBob = new FoodplaceBuilder(SWENSWAN).withName(VALID_NAME_SWENSWAN.toLowerCase()).build();
+        assertTrue(SWENSWAN.isSameFoodplace(editedBob));
     }
 
     @Test
@@ -82,7 +87,7 @@ public class FoodplaceTest {
         editedAlice = new FoodplaceBuilder(PRATASHOP).withEmail(VALID_EMAIL_SWENSWAN).build();
         assertFalse(PRATASHOP.equals(editedAlice));
 
-        // different bitebuddy -> returns false
+        // different address -> returns false
         editedAlice = new FoodplaceBuilder(PRATASHOP).withAddress(VALID_ADDRESS_SWENSWAN).build();
         assertFalse(PRATASHOP.equals(editedAlice));
 
@@ -95,7 +100,7 @@ public class FoodplaceTest {
     public void toStringMethod() {
         String expected = Foodplace.class.getCanonicalName() + "{name=" + PRATASHOP.getName() + ", phone="
                 + PRATASHOP.getPhone()
-                + ", email=" + PRATASHOP.getEmail() + ", bitebuddy=" + PRATASHOP.getAddress() + ", tags="
+                + ", email=" + PRATASHOP.getEmail() + ", address=" + PRATASHOP.getAddress() + ", tags="
                 + PRATASHOP.getTags() + "}";
         assertEquals(expected, PRATASHOP.toString());
     }
