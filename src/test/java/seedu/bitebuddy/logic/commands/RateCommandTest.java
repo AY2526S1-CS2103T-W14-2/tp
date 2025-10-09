@@ -1,28 +1,19 @@
 package seedu.bitebuddy.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
-import seedu.bitebuddy.commons.core.GuiSettings;
 import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.ModelManager;
-import seedu.bitebuddy.model.ReadOnlyAddressBook;
-import seedu.bitebuddy.model.ReadOnlyUserPrefs;
 import seedu.bitebuddy.model.UserPrefs;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.function.Predicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RateCommand.
