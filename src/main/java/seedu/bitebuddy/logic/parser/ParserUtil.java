@@ -9,7 +9,10 @@ import java.util.Set;
 import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.commons.util.StringUtil;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
-import seedu.bitebuddy.model.foodplace.*;
+import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Email;
+import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.tag.Tag;
 

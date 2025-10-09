@@ -5,11 +5,11 @@ import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.logic.Messages;
+import seedu.bitebuddy.logic.commands.exceptions.CommandException;
+import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Rate;
-import seedu.bitebuddy.model.Model;
 
 /**
  * Changes the remark of an existing foodplace in the address book.
@@ -59,8 +59,8 @@ public class RateCommand extends Command {
         rate.setRate(rating);
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
-        Foodplace editedFoodplace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(), foodPlaceToEdit.getEmail(),
-                foodPlaceToEdit.getAddress(), foodPlaceToEdit.getTags(), rate);
+        Foodplace editedFoodplace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
+                foodPlaceToEdit.getEmail(), foodPlaceToEdit.getAddress(), foodPlaceToEdit.getTags(), rate);
 
         model.setFoodplace(foodPlaceToEdit, editedFoodplace);
         model.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_ALL_FOODPLACES);
@@ -73,7 +73,7 @@ public class RateCommand extends Command {
      * {@code foodplaceToEdit}.
      */
     private String generateSuccessMessage(Foodplace foodPlaceToEdit) {
-        String message = rate.value.equals(Rate.DEFAULT) ? MESSAGE_DELETE_RATE_SUCCESS : MESSAGE_ADD_RATE_SUCCESS;
+        String message = rate.getValue().equals(Rate.DEFAULT) ? MESSAGE_DELETE_RATE_SUCCESS : MESSAGE_ADD_RATE_SUCCESS;
         return String.format(message, foodPlaceToEdit);
     }
 

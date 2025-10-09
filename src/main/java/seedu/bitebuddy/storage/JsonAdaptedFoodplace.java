@@ -10,7 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;
-import seedu.bitebuddy.model.foodplace.*;
+import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Email;
+import seedu.bitebuddy.model.foodplace.Foodplace;
+import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.tag.Tag;
 
@@ -57,7 +61,7 @@ class JsonAdaptedFoodplace {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        rate = source.getRate().value;
+        rate = source.getRate().getValue();
     }
 
     /**

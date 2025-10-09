@@ -1,7 +1,12 @@
 package seedu.bitebuddy.logic.parser;
 
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bitebuddy.logic.parser.CliSyntax.*;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;

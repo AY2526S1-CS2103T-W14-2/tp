@@ -2,7 +2,6 @@ package seedu.bitebuddy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 
 import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;

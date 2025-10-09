@@ -1,11 +1,9 @@
 package seedu.bitebuddy.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
+import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +33,7 @@ public class RateCommandTest {
         Foodplace firstPerson = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedPerson = new FoodplaceBuilder(firstPerson).withRate(RATE_SUCCESS_STUB).build();
 
-        RateCommand rateCommand = new RateCommand(INDEX_FIRST_FOODPLACE, editedPerson.getRate().value);
+        RateCommand rateCommand = new RateCommand(INDEX_FIRST_FOODPLACE, editedPerson.getRate().getValue());
 
         String expectedMessage = String.format(RateCommand.MESSAGE_ADD_RATE_SUCCESS, editedPerson);
 
@@ -50,7 +48,7 @@ public class RateCommandTest {
         Foodplace firstPerson = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedPerson = new FoodplaceBuilder(firstPerson).withRate(RATE_DEFAULT_STUB).build();
 
-        RateCommand rateCommand = new RateCommand(INDEX_FIRST_FOODPLACE, editedPerson.getRate().value);
+        RateCommand rateCommand = new RateCommand(INDEX_FIRST_FOODPLACE, editedPerson.getRate().getValue());
 
         String expectedMessage = String.format(RateCommand.MESSAGE_DELETE_RATE_SUCCESS, editedPerson);
 

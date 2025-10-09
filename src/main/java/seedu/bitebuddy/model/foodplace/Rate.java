@@ -15,7 +15,7 @@ public class Rate {
             String.format("Ratings should only contain numbers, and be an integer between %d to %d",
                     MIN, MAX
             );
-    public Integer value;
+    private Integer value;
 
     /**
      * Constructs a {@code Rate} without a rating.
@@ -62,6 +62,14 @@ public class Rate {
      */
     public void reset() {
         this.value = DEFAULT;
+    }
+
+    /**
+     * Gets the rating score.
+     * @return Rating
+     */
+    public Integer getValue() {
+        return this.value;
     }
 
     /**
