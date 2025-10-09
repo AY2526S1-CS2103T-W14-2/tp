@@ -20,6 +20,13 @@ import seedu.bitebuddy.model.tag.Tag;
  */
 public class TagCommandParser implements Parser<TagCommand> {
 
+    /**
+     * Parses the given arguments in the context of the {@code TagCommand}.
+     *
+     * @param args Argument from user input.
+     * @return TagCommand.
+     * @throws ParseException if user doesnt follow the format.
+     */
     @Override
     public TagCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -30,12 +37,13 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         // Must have at least index + 1 tag
         if (tokens.size() < 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+            throw new ParseException("Missing index and/or tag! " + "\n"
+                + "Format: tag INDEX TAG1 [TAG2]...");
         }
 
         Index index;
         try {
-            index = ParserUtil.parseIndex(tokens.get(0)); // first token = index
+            index = ParserUtil.parseIndex(tokens.get(0));
         } catch (IllegalValueException e) {
             throw new ParseException("The index provided must be a positive integer!", e);
         }
