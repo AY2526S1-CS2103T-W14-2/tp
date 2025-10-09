@@ -130,12 +130,11 @@ public class ParserUtil {
     public static Rate parseRatings(Collection<String> ratings) throws ParseException {
         requireNonNull(ratings);
         String mostRecentRating = ratings.stream().reduce((prev, next) -> next).orElse(null);
-        // Default case where Rate's CLI tag is not present
         if (mostRecentRating == null) {
-            return new Rate();
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
 
-        // Case where >= 1 Rate's CLI tag have been detected
+        // Case where >= 1 Rate's CLI tag have been detected, take latest one
         Integer rating;
         try {
             rating = Integer.valueOf(mostRecentRating);

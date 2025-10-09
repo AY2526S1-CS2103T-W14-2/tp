@@ -1,11 +1,11 @@
 package seedu.bitebuddy.logic.commands;
 
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;
 
 import java.util.List;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -49,7 +49,7 @@ public class RateCommand extends Command {
         List<Foodplace> lastShownList = model.getFilteredFoodplaceList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
         }
 
         if (!Rate.isValidRating(rating)) {

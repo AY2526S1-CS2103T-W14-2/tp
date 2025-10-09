@@ -193,4 +193,19 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseRate_null_throwsNullPointerException() throws Exception {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRatings(null));
+    }
+
+    @Test
+    public void parseRate_collectionWithoutRating_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRatings(Arrays.asList()));
+    }
+
+    @Test
+    public void parseRate_collectionWithLetterRating_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRatings(Arrays.asList("invalid")));
+    }
 }
