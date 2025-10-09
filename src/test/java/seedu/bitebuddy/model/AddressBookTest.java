@@ -3,10 +3,9 @@ package seedu.bitebuddy.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.ALICE;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATASHOP;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -46,9 +45,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateFoodplaces_throwsDuplicateFoodplaceException() {
         // Two foodplaces with the same identity fields
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withTags(VALID_TAG_RESTAURANT)
                 .build();
-        List<Foodplace> newFoodplaces = Arrays.asList(ALICE, editedAlice);
+        List<Foodplace> newFoodplaces = Arrays.asList(PRATASHOP, editedAlice);
         AddressBookStub newData = new AddressBookStub(newFoodplaces);
 
         assertThrows(DuplicateFoodplaceException.class, () -> addressBook.resetData(newData));
@@ -61,19 +60,19 @@ public class AddressBookTest {
 
     @Test
     public void hasFoodplace_foodplaceNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasFoodplace(ALICE));
+        assertFalse(addressBook.hasFoodplace(PRATASHOP));
     }
 
     @Test
     public void hasFoodplace_foodplaceInAddressBook_returnsTrue() {
-        addressBook.addFoodplace(ALICE);
-        assertTrue(addressBook.hasFoodplace(ALICE));
+        addressBook.addFoodplace(PRATASHOP);
+        assertTrue(addressBook.hasFoodplace(PRATASHOP));
     }
 
     @Test
     public void hasFoodplace_foodplaceWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addFoodplace(ALICE);
-        Foodplace editedAlice = new FoodplaceBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        addressBook.addFoodplace(PRATASHOP);
+        Foodplace editedAlice = new FoodplaceBuilder(PRATASHOP).withTags(VALID_TAG_RESTAURANT)
                 .build();
         assertTrue(addressBook.hasFoodplace(editedAlice));
     }
