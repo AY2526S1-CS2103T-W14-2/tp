@@ -10,12 +10,34 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Parameters: [COMMAND] \n"
+            + "Example: " + COMMAND_WORD + "\n"
+            + "Example: " + COMMAND_WORD + " find";
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    private final String usage;
+
+    /**
+     * Creates a HelpCommand to show the general help page.
+     */
+    public HelpCommand() {
+        this.usage = null;
+    }
+
+    /**
+     * Creates a HelpCommand that will display the provided usage string.
+     * @param usage usage string to display for a specific command
+     */
+    public HelpCommand(String usage) {
+        this.usage = usage;
+    }
+
     @Override
     public CommandResult execute(Model model) {
+        if (usage != null) {
+            return new CommandResult(usage, false, false);
+        }
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }
