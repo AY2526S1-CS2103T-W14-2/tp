@@ -134,7 +134,8 @@ public class StringUtilTest {
 
     @Test
     public void containsSubstringIgnoreCase_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsSubstringIgnoreCase("typical sentence", null));
+        assertThrows(NullPointerException.class,
+                () -> StringUtil.containsSubstringIgnoreCase("typical sentence", null));
     }
 
     @Test
@@ -189,7 +190,8 @@ public class StringUtilTest {
 
         // No substring match
         assertFalse(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "zz"));
-        assertFalse(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bbbb")); // Query longer than any sentence word
+        // Query longer than any sentence word
+        assertFalse(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bbbb"));
 
         // Matches substring in words (case-insensitive)
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "bb")); // middle word substring

@@ -19,14 +19,17 @@ public class FoodplaceContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        FoodplaceContainsKeywordsPredicate firstPredicate = new FoodplaceContainsKeywordsPredicate(firstPredicateKeywordList);
-        FoodplaceContainsKeywordsPredicate secondPredicate = new FoodplaceContainsKeywordsPredicate(secondPredicateKeywordList);
+        FoodplaceContainsKeywordsPredicate firstPredicate =
+                new FoodplaceContainsKeywordsPredicate(firstPredicateKeywordList);
+        FoodplaceContainsKeywordsPredicate secondPredicate =
+                new FoodplaceContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        FoodplaceContainsKeywordsPredicate firstPredicateCopy = new FoodplaceContainsKeywordsPredicate(firstPredicateKeywordList);
+        FoodplaceContainsKeywordsPredicate firstPredicateCopy =
+                new FoodplaceContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +45,8 @@ public class FoodplaceContainsKeywordsPredicateTest {
     @Test
     public void test_foodplaceContainsKeywords_returnsTrue() {
         // Name
-        FoodplaceContainsKeywordsPredicate predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("Prata"));
+        FoodplaceContainsKeywordsPredicate predicate =
+                new FoodplaceContainsKeywordsPredicate(Collections.singletonList("Prata"));
         assertTrue(predicate.test(new FoodplaceBuilder().withName("Prata Place").build()));
 
         // Phone
