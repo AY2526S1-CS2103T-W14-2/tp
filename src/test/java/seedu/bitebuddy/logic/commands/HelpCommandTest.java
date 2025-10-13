@@ -9,12 +9,19 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.ModelManager;
 
 public class HelpCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private final Model model = new ModelManager();
+    private final Model expectedModel = new ModelManager();
 
     @Test
     public void execute_help_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_helpWithUsage_showsUsage() {
+        String usage = "help for find command";
+        // when HelpCommand is constructed with a usage string, execute should return that string
+        assertCommandSuccess(new HelpCommand(usage), model, usage, expectedModel);
     }
 }

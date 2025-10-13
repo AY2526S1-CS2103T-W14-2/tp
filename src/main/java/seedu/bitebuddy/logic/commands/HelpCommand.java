@@ -40,4 +40,16 @@ public class HelpCommand extends Command {
         }
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof HelpCommand)) {
+            return false;
+        }
+        HelpCommand otherCommand = (HelpCommand) other;
+        return usage != null ? usage.equals(otherCommand.usage) : otherCommand.usage == null;
+    }
 }
