@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.ModelManager;
 import seedu.bitebuddy.model.UserPrefs;
-import seedu.bitebuddy.model.foodplace.NameContainsKeywordsPredicate;
+import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,10 +29,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        FoodplaceContainsKeywordsPredicate firstPredicate =
+                new FoodplaceContainsKeywordsPredicate(Collections.singletonList("first"));
+        FoodplaceContainsKeywordsPredicate secondPredicate =
+                new FoodplaceContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -57,7 +57,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noFoodplaceFound() {
         String expectedMessage = String.format(MESSAGE_FOODPLACES_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FoodplaceContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredFoodplaceList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -67,7 +67,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleFoodplacesFound() {
         String expectedMessage = String.format(MESSAGE_FOODPLACES_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Junior Tei ITea");
+        FoodplaceContainsKeywordsPredicate predicate = preparePredicate("Junior Tei ITea");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredFoodplaceList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,7 +76,7 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        FoodplaceContainsKeywordsPredicate predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
@@ -85,7 +85,7 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private FoodplaceContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new FoodplaceContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
