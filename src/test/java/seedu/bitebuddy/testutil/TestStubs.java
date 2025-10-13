@@ -19,6 +19,9 @@ public final class TestStubs {
 
     private TestStubs() {}
 
+    /**
+     * A stub class for Storage.
+     */
     public static class StorageStub implements Storage {
         private Optional<ReadOnlyAddressBook> addressBookOpt = Optional.empty();
         private Optional<UserPrefs> userPrefsOpt = Optional.empty();
@@ -26,16 +29,25 @@ public final class TestStubs {
 
         public StorageStub() {}
 
+        /**
+         * Sets the optional address book to return on readAddressBook.
+         */
         public StorageStub withAddressBook(Optional<ReadOnlyAddressBook> ab) {
             this.addressBookOpt = ab;
             return this;
         }
 
+        /**
+         * Sets the optional user prefs to return on readUserPrefs.
+         */
         public StorageStub withUserPrefs(Optional<UserPrefs> up) {
             this.userPrefsOpt = up;
             return this;
         }
 
+        /**
+         * Sets whether saveUserPrefs should throw an IOException.
+         */
         public StorageStub withSaveUserPrefsThrows(boolean flag) {
             this.saveUserPrefsThrows = flag;
             return this;
@@ -84,9 +96,26 @@ public final class TestStubs {
         }
     }
 
+    /**
+     * A stub class for Ui.
+     */
     public static class UiStub implements Ui {
-        public boolean started = false;
-        public Path receivedStage = null;
+        private boolean started = false;
+        private Path receivedStage = null;
+
+        /**
+         * Returns true if start() has been called.
+         */
+        public boolean isStarted() {
+            return started;
+        }
+
+        /**
+         * Returns the stage received in start().
+         */
+        public Path getReceivedStage() {
+            return receivedStage;
+        }
 
         @Override
         public void start(javafx.stage.Stage primaryStage) {
@@ -94,12 +123,18 @@ public final class TestStubs {
         }
     }
 
+    /**
+     * A stub class for UserPrefsStorage.
+     */
     public static class UserPrefsStorageStub implements seedu.bitebuddy.storage.UserPrefsStorage {
         private boolean throwOnRead = false;
         private Path prefsPath = Paths.get("stub-userprefs.json");
 
         public UserPrefsStorageStub() {}
 
+        /**
+         * Sets whether readUserPrefs should throw a DataLoadingException.
+         */
         public UserPrefsStorageStub withThrowOnRead(boolean flag) {
             this.throwOnRead = flag;
             return this;

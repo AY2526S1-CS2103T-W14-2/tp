@@ -1,13 +1,14 @@
 package seedu.bitebuddy;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -111,11 +112,11 @@ public class MainAppTest {
         TestStubs.UiStub ui = new TestStubs.UiStub();
         app.ui = ui;
         app.start(null);
-        assertTrue(ui.started);
+        assertTrue(ui.isStarted());
     }
 
     @Test
-    public void stop_handlesSavePrefsIOException() {
+    public void stop_handlesSavePrefsIoException() {
         TestMainApp app = new TestMainApp();
 
         TestStubs.StorageStub storageStub2 = new TestStubs.StorageStub().withSaveUserPrefsThrows(true);

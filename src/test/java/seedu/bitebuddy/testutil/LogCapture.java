@@ -13,11 +13,17 @@ public class LogCapture implements AutoCloseable {
     private final String loggerName;
     private final TestHandler handler = new TestHandler();
 
+    /**
+     * Attaches to the given logger.
+     */
     public LogCapture(Logger logger) {
         this.loggerName = logger.getName();
         Logger.getLogger(loggerName).addHandler(handler);
     }
 
+    /**
+     * Returns true if any captured log record contains the given substring.
+     */
     public boolean contains(String substring) {
         return handler.contains(substring);
     }
@@ -27,6 +33,9 @@ public class LogCapture implements AutoCloseable {
         Logger.getLogger(loggerName).removeHandler(handler);
     }
 
+    /**
+     * Simple handler that stores log records in a list.
+     */
     private static class TestHandler extends Handler {
         final List<LogRecord> records = new ArrayList<>();
 
