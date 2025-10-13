@@ -40,38 +40,66 @@ public class FoodplaceContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
-        // One keyword
-        FoodplaceContainsKeywordsPredicate predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new FoodplaceBuilder().withName("Alice Bob").build()));
+    public void test_foodplaceContainsKeywords_returnsTrue() {
+        // Name
+        FoodplaceContainsKeywordsPredicate predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("Prata"));
+        assertTrue(predicate.test(new FoodplaceBuilder().withName("Prata Place").build()));
 
-        // Multiple keywords
-        predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new FoodplaceBuilder().withName("Alice Bob").build()));
+        // Phone
+        predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("12345"));
+        assertTrue(predicate.test(new FoodplaceBuilder().withPhone("12345").build()));
 
-        // Only one matching keyword
-        predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new FoodplaceBuilder().withName("Alice Carol").build()));
+        // Email
+        predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("alice@email.com"));
+        assertTrue(predicate.test(new FoodplaceBuilder().withEmail("alice@email.com").build()));
+
+        // Address
+        predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("Main"));
+        assertTrue(predicate.test(new FoodplaceBuilder().withAddress("Main Street").build()));
+
+        // Note
+        predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("Delivery"));
+        assertTrue(predicate.test(new FoodplaceBuilder().withNote("Fast delivery").build()));
+
+        // Rate
+        predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("5"));
+        assertTrue(predicate.test(new FoodplaceBuilder().withRate("5").build()));
+
+        // Tags
+        predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("Spicy"));
+        assertTrue(predicate.test(new FoodplaceBuilder().withTags("Spicy").build()));
+
+        // Match in multiple fields: name, note, tags
+        predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("Prata", "Delivery", "Spicy"));
+        assertTrue(predicate.test(new FoodplaceBuilder()
+                .withName("Prata Place")
+                .withNote("Fast delivery")
+                .withTags("Spicy", "Takeaway")
+                .build()));
 
         // Mixed-case keywords
-        predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new FoodplaceBuilder().withName("Alice Bob").build()));
+        predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("pRata", "dElIvErY", "sPiCy"));
+        assertTrue(predicate.test(new FoodplaceBuilder()
+                .withName("Prata Place")
+                .withNote("Fast delivery")
+                .withTags("Spicy", "Takeaway")
+                .build()));
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_foodplaceDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         FoodplaceContainsKeywordsPredicate predicate = new FoodplaceContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new FoodplaceBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new FoodplaceBuilder().withName("Prata Place").build()));
 
         // Non-matching keyword
-        predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new FoodplaceBuilder().withName("Alice Bob").build()));
+        predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("Swensen"));
+        assertFalse(predicate.test(new FoodplaceBuilder().withName("Prata Place").build()));
 
-        // Keywords match phone, email and bitebuddy, but does not match name
-        predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new FoodplaceBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+        // Multiple non-matching keywords
+        predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("9999", "alice@email.com", "Main", "Street"));
+        assertFalse(predicate.test(new FoodplaceBuilder().withName("Prata Place").withPhone("12345")
+                .withEmail("bob@email.com").withAddress("First Ave").build()));
     }
 
     @Test
