@@ -24,6 +24,7 @@ public class JsonAdaptedFoodplaceTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_NOTE = "Nice place! \u0081";
     private static final Integer INVALID_RATING = -5;
 
     private static final String VALID_NAME = DAEBAKSHOP.getName().toString();
@@ -130,4 +131,12 @@ public class JsonAdaptedFoodplaceTest {
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidNote_throwsIllegalValueException() {
+        JsonAdaptedFoodplace foodplace =
+                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, INVALID_NOTE,
+                        VALID_RATING);
+        String expectedMessage = Note.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
+    }
 }
