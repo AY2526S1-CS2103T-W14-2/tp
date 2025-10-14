@@ -51,7 +51,8 @@ public class EditFoodplaceDescriptorTest {
         assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different bitebuddy -> returns false
-        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withAddress(VALID_ADDRESS_SWENSWAN).build();
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+                .withAddress(VALID_ADDRESS_SWENSWAN).build();
         assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different tags -> returns false
