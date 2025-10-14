@@ -49,4 +49,20 @@ public class HelpCommandParserTest {
             assertEquals(MESSAGE_UNKNOWN_COMMAND, pe.getMessage());
         }
     }
+
+    @Test
+    public void parse_nullArgs_returnsGeneralHelp() throws Exception {
+        HelpCommand cmd = parser.parse(null); // cover args == null branch
+        var result = cmd.execute(new ModelManager());
+        assertEquals(HelpCommand.SHOWING_HELP_MESSAGE, result.getFeedbackToUser());
+        assertTrue(result.isShowHelp());
+    }
+
+    @Test
+    public void parse_blankArgs_returnsGeneralHelp() throws Exception {
+        HelpCommand cmd = parser.parse("   "); // cover args == blank branch
+        var result = cmd.execute(new ModelManager());
+        assertEquals(HelpCommand.SHOWING_HELP_MESSAGE, result.getFeedbackToUser());
+        assertTrue(result.isShowHelp());
+    }
 }

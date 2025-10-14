@@ -13,6 +13,17 @@ import org.junit.jupiter.api.Test;
 public class CommandRegistryTest {
 
     @Test
+    public void classLoading_staticInitializer_executed() throws Exception {
+        // Force initialization of the class so the static block and class declaration are executed
+        Class.forName("seedu.bitebuddy.logic.commands.CommandRegistry", true,
+                    Thread.currentThread().getContextClassLoader());
+
+        Optional<String> usage = CommandRegistry.getUsage(HelpCommand.COMMAND_WORD);
+        assertTrue(usage.isPresent(), "CommandRegistry static init should have populated mappings");
+        assertEquals(HelpCommand.MESSAGE_USAGE, usage.get());
+    }
+
+    @Test
     public void getUsage_null_returnsEmpty() {
         Optional<String> res = CommandRegistry.getUsage(null);
         assertTrue(res.isEmpty(), "Expected empty Optional when passing null");
@@ -26,48 +37,32 @@ public class CommandRegistryTest {
     }
 
     @Test
+    public void getUsage_caseSensitive_returnsEmpty() {
+        assertTrue(CommandRegistry.getUsage(FindCommand.COMMAND_WORD.toUpperCase()).isEmpty());
+    }
+
+    @Test
     public void getUsage_knownCommands_returnExpectedUsage() {
-        Optional<String> helpUsage = CommandRegistry.getUsage(HelpCommand.COMMAND_WORD);
-        assertTrue(helpUsage.isPresent());
-        assertEquals(HelpCommand.MESSAGE_USAGE, helpUsage.get());
-        Optional<String> findUsage = CommandRegistry.getUsage(FindCommand.COMMAND_WORD);
-        assertTrue(findUsage.isPresent());
-        assertEquals(FindCommand.MESSAGE_USAGE, findUsage.get());
+        String[][] pairs = new String[][]{
+                {AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE},
+                {DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE},
+                {EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE},
+                {FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE},
+                {ListCommand.COMMAND_WORD, ListCommand.MESSAGE_USAGE},
+                {ExitCommand.COMMAND_WORD, ExitCommand.MESSAGE_USAGE},
+                {HelpCommand.COMMAND_WORD, HelpCommand.MESSAGE_USAGE},
+                {ClearCommand.COMMAND_WORD, ClearCommand.MESSAGE_USAGE},
+                {NoteCommand.COMMAND_WORD, NoteCommand.MESSAGE_USAGE},
+                {TagCommand.COMMAND_WORD, TagCommand.MESSAGE_USAGE},
+                {RateCommand.COMMAND_WORD, RateCommand.MESSAGE_USAGE}
+        };
 
-        Optional<String> addUsage = CommandRegistry.getUsage(AddCommand.COMMAND_WORD);
-        assertTrue(addUsage.isPresent());
-        assertEquals(AddCommand.MESSAGE_USAGE, addUsage.get());
-
-        Optional<String> deleteUsage = CommandRegistry.getUsage(DeleteCommand.COMMAND_WORD);
-        assertTrue(deleteUsage.isPresent());
-        assertEquals(DeleteCommand.MESSAGE_USAGE, deleteUsage.get());
-
-        Optional<String> editUsage = CommandRegistry.getUsage(EditCommand.COMMAND_WORD);
-        assertTrue(editUsage.isPresent());
-        assertEquals(EditCommand.MESSAGE_USAGE, editUsage.get());
-
-        Optional<String> listUsage = CommandRegistry.getUsage(ListCommand.COMMAND_WORD);
-        assertTrue(listUsage.isPresent());
-        assertEquals(ListCommand.MESSAGE_USAGE, listUsage.get());
-
-        Optional<String> exitUsage = CommandRegistry.getUsage(ExitCommand.COMMAND_WORD);
-        assertTrue(exitUsage.isPresent());
-        assertEquals(ExitCommand.MESSAGE_USAGE, exitUsage.get());
-
-        Optional<String> clearUsage = CommandRegistry.getUsage(ClearCommand.COMMAND_WORD);
-        assertTrue(clearUsage.isPresent());
-        assertEquals(ClearCommand.MESSAGE_USAGE, clearUsage.get());
-
-        Optional<String> noteUsage = CommandRegistry.getUsage(NoteCommand.COMMAND_WORD);
-        assertTrue(noteUsage.isPresent());
-        assertEquals(NoteCommand.MESSAGE_USAGE, noteUsage.get());
-
-        Optional<String> tagUsage = CommandRegistry.getUsage(TagCommand.COMMAND_WORD);
-        assertTrue(tagUsage.isPresent());
-        assertEquals(TagCommand.MESSAGE_USAGE, tagUsage.get());
-
-        Optional<String> rateUsage = CommandRegistry.getUsage(RateCommand.COMMAND_WORD);
-        assertTrue(rateUsage.isPresent());
-        assertEquals(RateCommand.MESSAGE_USAGE, rateUsage.get());
+        for (String[] pair : pairs) {
+            String cmdWord = pair[0];
+            String expected = pair[1];
+            Optional<String> got = CommandRegistry.getUsage(cmdWord);
+            assertTrue(got.isPresent(), "Expected usage to be present for command: " + cmdWord);
+            assertEquals(expected, got.get(), "Unexpected usage for command: " + cmdWord);
+        }
     }
 }
