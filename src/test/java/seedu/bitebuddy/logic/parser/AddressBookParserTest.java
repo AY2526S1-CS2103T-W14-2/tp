@@ -84,7 +84,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertEquals(new HelpCommand(FindCommand.MESSAGE_USAGE),
+                parser.parseCommand(HelpCommand.COMMAND_WORD + " " + FindCommand.COMMAND_WORD));
+        // when an unknown argument is provided, the HelpCommandParser should throw a ParseException
+        assertThrows(ParseException.class,
+                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand(HelpCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
