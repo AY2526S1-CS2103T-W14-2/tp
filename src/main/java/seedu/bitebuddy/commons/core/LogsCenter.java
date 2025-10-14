@@ -71,7 +71,7 @@ public class LogsCenter {
      * Sets it as the {@code baseLogger}, to be used as the parent logger of all other loggers.
      */
     private static Logger setBaseLogger() {
-        Logger newBaseLogger = Logger.getLogger("ab3");
+        Logger newBaseLogger = Logger.getLogger("bitebuddy");
         newBaseLogger.setUseParentHandlers(false);
         removeHandlers(newBaseLogger);
 
