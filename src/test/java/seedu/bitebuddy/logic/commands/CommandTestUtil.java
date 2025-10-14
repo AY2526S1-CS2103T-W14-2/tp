@@ -18,7 +18,7 @@ import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
-import seedu.bitebuddy.model.foodplace.NameContainsKeywordsPredicate;
+import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
 import seedu.bitebuddy.testutil.EditFoodplaceDescriptorBuilder;
 
 /**
@@ -124,7 +124,7 @@ public class CommandTestUtil {
 
         Foodplace foodplace = model.getFilteredFoodplaceList().get(targetIndex.getZeroBased());
         final String[] splitName = foodplace.getName().fullName.split("\\s+");
-        model.updateFilteredFoodplaceList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredFoodplaceList(new FoodplaceContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredFoodplaceList().size());
     }
