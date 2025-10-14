@@ -1,12 +1,20 @@
 package seedu.bitebuddy.model.foodplace;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the notes about a foodplace in the address book.
  * Guarantees: immutable; is always valid
  */
 public class Note {
+
+    public static final String MESSAGE_CONSTRAINTS = "Note can only contain up to 100 characters max\n"
+            + "Note should only contain ASCII-printable characters";
+    // Allow printable ASCII characters only - space (32) to tilde (126)
+    private static final String VALID_NOTE_REGEX = "^[ -~]*$";
+    private static final int MAX_NOTE_LENGTH = 100;
+
     public final String value;
 
     /**
@@ -15,7 +23,18 @@ public class Note {
      */
     public Note(String note) {
         requireNonNull(note);
+        checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
         this.value = note;
+    }
+
+    /**
+     * Returns if a given string is a valid note.
+     */
+    public static boolean isValidNote(String test) {
+        if (test.length() > MAX_NOTE_LENGTH) {
+            return false;
+        }
+        return test.matches(VALID_NOTE_REGEX);
     }
 
     @Override

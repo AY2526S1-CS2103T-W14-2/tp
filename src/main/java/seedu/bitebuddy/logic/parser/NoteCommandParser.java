@@ -36,8 +36,13 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE), e);
         }
 
-        String note = mapper.getRemainingArguments(INDEX_NOTE_NOTE_STRING);
-
-        return new NoteCommand(index, new Note(note));
+        Note note;
+        String noteText = mapper.getRemainingArguments(INDEX_NOTE_NOTE_STRING);
+        try {
+            note = new Note(noteText);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+        return new NoteCommand(index, note);
     }
 }

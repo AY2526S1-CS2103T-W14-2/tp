@@ -25,7 +25,8 @@ public class NoteCommand extends Command {
             + "Empty notes erase the current note in foodplace.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "note [INDEX] [NOTE]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "Very good customer service";
+            + "Example: " + COMMAND_WORD + " 1 " + "Very good customer service\n"
+            + "Restrictions: 100 characters limit";
 
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added notes to Foodplace: %1$s";
     public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed notes from Foodplace: %1$s";
