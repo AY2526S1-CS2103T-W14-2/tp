@@ -8,17 +8,17 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
 
 /**
- * Finds and lists all foodplaces in bitebuddy book whose name contains any of the argument keywords.
+ * Finds and lists all foodplaces in BiteBuddy whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all foodplaces whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all foodplaces whose entries contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " western cheap aircon";
 
     private final FoodplaceContainsKeywordsPredicate predicate;
 
@@ -47,6 +47,11 @@ public class FindCommand extends Command {
 
         FindCommand otherFindCommand = (FindCommand) other;
         return predicate.equals(otherFindCommand.predicate);
+    }
+
+    @Override
+    public int hashCode() {
+        return predicate.hashCode();
     }
 
     @Override

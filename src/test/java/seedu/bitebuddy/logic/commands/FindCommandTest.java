@@ -2,6 +2,7 @@ package seedu.bitebuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_FOODPLACES_LISTED_OVERVIEW;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -24,8 +25,8 @@ import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -48,7 +49,7 @@ public class FindCommandTest {
         assertFalse(findFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertNotEquals(findFirstCommand, null);
 
         // different foodplace -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
@@ -72,6 +73,15 @@ public class FindCommandTest {
         expectedModel.updateFilteredFoodplaceList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARLSHOP, SUSHISHOP, TEASHOP), model.getFilteredFoodplaceList());
+    }
+
+    @Test
+    public void hashcode() {
+        FoodplaceContainsKeywordsPredicate predicate = new FoodplaceContainsKeywordsPredicate(
+                Arrays.asList("first", "second"));
+        FindCommand findCommand = new FindCommand(predicate);
+        FindCommand findCommandCopy = new FindCommand(predicate);
+        assertEquals(findCommand.hashCode(), findCommandCopy.hashCode());
     }
 
     @Test
