@@ -2,6 +2,7 @@ package seedu.bitebuddy.commons.core.index;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 
@@ -39,23 +40,23 @@ public class IndexTest {
 
     @Test
     public void equals() {
-        final Index fifthPersonIndex = Index.fromOneBased(5);
+        final Index fifthFoodplaceIndex = Index.fromOneBased(5);
 
         // same values -> returns true
-        assertTrue(fifthPersonIndex.equals(Index.fromOneBased(5)));
-        assertTrue(fifthPersonIndex.equals(Index.fromZeroBased(4)));
+        assertTrue(fifthFoodplaceIndex.equals(Index.fromOneBased(5)));
+        assertTrue(fifthFoodplaceIndex.equals(Index.fromZeroBased(4)));
 
         // same object -> returns true
-        assertTrue(fifthPersonIndex.equals(fifthPersonIndex));
+        assertTrue(fifthFoodplaceIndex.equals(fifthFoodplaceIndex));
 
         // null -> returns false
-        assertFalse(fifthPersonIndex.equals(null));
+        assertNotNull(fifthFoodplaceIndex);
 
         // different types -> returns false
-        assertFalse(fifthPersonIndex.equals(5.0f));
+        assertFalse(fifthFoodplaceIndex.equals(5.0f));
 
         // different index -> returns false
-        assertFalse(fifthPersonIndex.equals(Index.fromOneBased(1)));
+        assertFalse(fifthFoodplaceIndex.equals(Index.fromOneBased(1)));
     }
 
     @Test
@@ -63,5 +64,21 @@ public class IndexTest {
         Index index = Index.fromZeroBased(0);
         String expected = Index.class.getCanonicalName() + "{zeroBasedIndex=" + index.getZeroBased() + "}";
         assertEquals(expected, index.toString());
+    }
+
+    @Test
+    public void hashcode() {
+        // same values -> same hashcode
+        Index indexA = Index.fromOneBased(1);
+        Index indexB = Index.fromOneBased(1);
+        assertEquals(indexA.hashCode(), indexB.hashCode());
+
+        // different values -> different hashcode
+        Index indexC = Index.fromOneBased(5);
+        assertFalse(indexA.hashCode() == indexC.hashCode());
+
+        // same object -> same hashcode
+        Index index = Index.fromOneBased(1);
+        assertEquals(index.hashCode(), index.hashCode());
     }
 }
