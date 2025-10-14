@@ -20,7 +20,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a foodplace to the bitebuddy book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a foodplace to BiteBuddy. "
             + "Parameters: "
             + PREFIX_NAME + "FOODPLACE NAME "
             + PREFIX_PHONE + "PHONE "
