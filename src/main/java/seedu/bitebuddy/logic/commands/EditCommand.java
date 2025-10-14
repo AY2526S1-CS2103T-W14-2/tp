@@ -42,7 +42,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed foodplace list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_NAME + "FOODPLACE NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -54,7 +54,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_FOODPLACE_SUCCESS = "Edited Foodplace: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in the bitebuddy book.";
+    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in BiteBuddy.";
 
     private final Index index;
     private final EditFoodplaceDescriptor editFoodplaceDescriptor;
@@ -129,6 +129,11 @@ public class EditCommand extends Command {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(index, editFoodplaceDescriptor);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
@@ -155,19 +160,19 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditFoodplaceDescriptor(EditFoodplaceDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
-            setRating(toCopy.rate);
+            this.name = toCopy.name;
+            this.phone = toCopy.phone;
+            this.email = toCopy.email;
+            this.address = toCopy.address;
+            this.tags = (toCopy.tags != null) ? new HashSet<>(toCopy.tags) : null;
+            this.rate = toCopy.rate;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, rate);
         }
 
         public void setName(Name name) {
@@ -243,7 +248,13 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditFoodplaceDescriptor.phone)
                     && Objects.equals(email, otherEditFoodplaceDescriptor.email)
                     && Objects.equals(address, otherEditFoodplaceDescriptor.address)
-                    && Objects.equals(tags, otherEditFoodplaceDescriptor.tags);
+                    && Objects.equals(tags, otherEditFoodplaceDescriptor.tags)
+                    && Objects.equals(rate, otherEditFoodplaceDescriptor.rate);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, phone, email, address, tags, rate);
         }
 
         @Override
@@ -252,8 +263,9 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("bitebuddy", address)
+                    .add("address", address)
                     .add("tags", tags)
+                    .add("rate", rate)
                     .toString();
         }
     }

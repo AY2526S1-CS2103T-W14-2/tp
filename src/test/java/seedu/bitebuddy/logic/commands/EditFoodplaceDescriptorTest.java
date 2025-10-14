@@ -2,6 +2,7 @@ package seedu.bitebuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
@@ -28,7 +29,7 @@ public class EditFoodplaceDescriptorTest {
         assertTrue(DESC_MCRONALDS.equals(DESC_MCRONALDS));
 
         // null -> returns false
-        assertFalse(DESC_MCRONALDS.equals(null));
+        assertNotEquals(DESC_MCRONALDS, null);
 
         // different types -> returns false
         assertFalse(DESC_MCRONALDS.equals(5));
@@ -64,9 +65,10 @@ public class EditFoodplaceDescriptorTest {
         String expected = EditCommand.EditFoodplaceDescriptor.class.getCanonicalName() + "{name="
                 + editFoodplaceDescriptor.getName().orElse(null) + ", phone="
                 + editFoodplaceDescriptor.getPhone().orElse(null) + ", email="
-                + editFoodplaceDescriptor.getEmail().orElse(null) + ", bitebuddy="
+                + editFoodplaceDescriptor.getEmail().orElse(null) + ", address="
                 + editFoodplaceDescriptor.getAddress().orElse(null) + ", tags="
-                + editFoodplaceDescriptor.getTags().orElse(null) + "}";
+                + editFoodplaceDescriptor.getTags().orElse(null) + ", rate="
+                + editFoodplaceDescriptor.getRating().orElse(null) + "}";
         assertEquals(expected, editFoodplaceDescriptor.toString());
     }
 }
