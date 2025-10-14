@@ -122,21 +122,20 @@ Examples:
 
 ### Locating foodplaces by name: `find`
 
-Finds foodplaces whose names contain any of the given keywords.
+Finds foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g `prata` will match `Prata`
+* The order of the keywords does not matter. e.g. `Prata Place` will match `Place Prata`
+* Keywords are matched against multiple fields.
+* The search uses substring matching. e.g. `Pr` will match `Prata`
+* Foodplaces matching at least one keyword will be returned (i.e. `OR` search).
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find prata` returns `Prata Place` and `The Prata House`
+* `find delivery 5` returns foodplaces with either “delivery” or “5” appearing in any field<br>
+  ![result for 'find delivery 5'](images/findDelivery5Result.png)
 
 ### Deleting a foodplace : `delete`
 
