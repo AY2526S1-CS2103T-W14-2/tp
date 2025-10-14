@@ -198,8 +198,8 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "BB")); // case difference
         assertTrue(StringUtil.containsSubstringIgnoreCase("  AAA   bBb   ccc  ", "aa")); // extra spaces in sentence
         assertTrue(StringUtil.containsSubstringIgnoreCase("Prata Place", "pra")); // prefix match
-        assertTrue(StringUtil.containsSubstringIgnoreCase("Prata Place", "LAC")); // suffix match
-        assertTrue(StringUtil.containsSubstringIgnoreCase("Coffee-Shop", "hop")); // substring with symbol
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Prata Place", "LACE")); // suffix match
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Coffee-Shop", "-Shop")); // substring with symbol
         assertTrue(StringUtil.containsSubstringIgnoreCase("bBb ccc bbb", "bb")); // multiple matching words
 
         // Only one word in sentence (boundary)
