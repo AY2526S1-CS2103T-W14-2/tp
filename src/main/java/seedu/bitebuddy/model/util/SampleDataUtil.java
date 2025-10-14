@@ -24,24 +24,24 @@ public class SampleDataUtil {
 
     public static Foodplace[] getSampleFoodplaces() {
         return new Foodplace[] {
-            new Foodplace(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), EMPTY_NOTE, new Rate()),
-            new Foodplace(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), EMPTY_NOTE, new Rate()),
-            new Foodplace(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), EMPTY_NOTE, new Rate()),
-            new Foodplace(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), EMPTY_NOTE, new Rate()),
-            new Foodplace(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), EMPTY_NOTE, new Rate()),
-            new Foodplace(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), EMPTY_NOTE, new Rate())
+            new Foodplace(new Name("McRonalds"), new Phone("68765432"), new Email("info@mcronalds.com"),
+                new Address("Blk 451, Clementi Ave 3 #01-309, S120451"),
+                getTagSet("Western", "FastFood", "Cheap"), EMPTY_NOTE, new Rate()),
+            new Foodplace(new Name("SistersRamen"), new Phone("68765431"), new Email("info@sisramen.com"),
+                new Address("10 Anson Rd, International Plaza, #01-20, S079903"),
+                getTagSet("Japanese", "Ramen"), EMPTY_NOTE, new Rate(9)),
+            new Foodplace(new Name("Changibee"), new Phone("98765432"), new Email("support@changibee.com"),
+                new Address("7 Pasir Ris Central, #B2-27, S519612"),
+                getTagSet("Filipino", "FastFood"), EMPTY_NOTE, new Rate(3)),
+            new Foodplace(new Name("Fung Tai Din"), new Phone("87654321"), new Email("cs@fungdaitin.com"),
+                new Address("23 Serangoon Central, #B1-10, S556083"),
+                getTagSet("Chinese", "Expensive"), EMPTY_NOTE, new Rate(7)),
+            new Foodplace(new Name("Gucci Y Guaca"), new Phone("65655656"), new Email("go@gyg.com"),
+                new Address("1 Tampines Walk, #01-99 Our Tampines Hub, S528523"),
+                getTagSet("Mexican", "FastFood"), EMPTY_NOTE, new Rate(5)),
+            new Foodplace(new Name("Agent 47 Thai Food"), new Phone("98762345"), new Email("agent@47thai.com"),
+                new Address("354 Clementi Ave 2, #01-235, S120354"),
+                getTagSet("Thai", "Expensive"), EMPTY_NOTE, new Rate())
         };
     }
 
