@@ -3,7 +3,10 @@ package seedu.bitebuddy.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
+import seedu.bitebuddy.logic.CommandBuffer;
+import seedu.bitebuddy.logic.commands.Command;
 import seedu.bitebuddy.logic.commands.CommandResult;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
@@ -29,6 +32,28 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        // Command Buffer listener
+        commandTextField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
+                KeyCode code = event.getCode();
+                // Fetch command buffer
+                CommandBuffer current = CommandBuffer.getCurrent();
+                // Set command box content
+                if (current != null) {
+                    commandTextField.setText(current.getCommand());
+                    if (code == KeyCode.UP) {
+                        CommandBuffer.getPrev();
+                    } else {
+                        CommandBuffer.getNext();
+                    }
+                    // Move caret to the end of line
+                    commandTextField.positionCaret(commandTextField.getText().length());
+                }
+                // Prevent cursor moving
+                event.consume();
+            }
+        });
     }
 
     /**
