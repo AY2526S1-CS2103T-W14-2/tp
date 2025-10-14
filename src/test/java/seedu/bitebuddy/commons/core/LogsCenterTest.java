@@ -1,5 +1,8 @@
 package seedu.bitebuddy.commons.core;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,8 +13,6 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class LogsCenterTest {
@@ -89,6 +90,7 @@ public class LogsCenterTest {
         try {
             Files.deleteIfExists(p);
         } catch (IOException ignored) {
+            // ignore delete failures
         }
     }
 }
