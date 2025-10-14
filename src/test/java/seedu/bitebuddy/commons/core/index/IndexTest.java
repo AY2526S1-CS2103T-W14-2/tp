@@ -3,7 +3,6 @@ package seedu.bitebuddy.commons.core.index;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 
@@ -43,15 +42,15 @@ public class IndexTest {
     public void equals() {
         final Index fifthFoodplaceIndex = Index.fromOneBased(5);
 
+        // null -> returns false
+        assertFalse(fifthFoodplaceIndex == null);
+
         // same values -> returns true
         assertTrue(fifthFoodplaceIndex.equals(Index.fromOneBased(5)));
         assertTrue(fifthFoodplaceIndex.equals(Index.fromZeroBased(4)));
 
         // same object -> returns true
         assertTrue(fifthFoodplaceIndex.equals(fifthFoodplaceIndex));
-
-        // null -> returns false
-        assertNotNull(fifthFoodplaceIndex);
 
         // different types -> returns false
         assertFalse(fifthFoodplaceIndex.equals(5.0f));
