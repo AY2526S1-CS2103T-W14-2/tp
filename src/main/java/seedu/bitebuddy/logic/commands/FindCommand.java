@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.bitebuddy.commons.util.ToStringBuilder;
 import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.model.Model;
-import seedu.bitebuddy.model.foodplace.NameContainsKeywordsPredicate;
+import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
 
 /**
  * Finds and lists all foodplaces in bitebuddy book whose name contains any of the argument keywords.
@@ -20,9 +20,9 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final FoodplaceContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(FoodplaceContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

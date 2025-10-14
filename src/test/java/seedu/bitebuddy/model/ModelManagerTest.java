@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.core.GuiSettings;
-import seedu.bitebuddy.model.foodplace.NameContainsKeywordsPredicate;
+import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
 import seedu.bitebuddy.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -118,7 +118,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = PRATASHOP.getName().fullName.split("\\s+");
-        modelManager.updateFilteredFoodplaceList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredFoodplaceList(new FoodplaceContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
