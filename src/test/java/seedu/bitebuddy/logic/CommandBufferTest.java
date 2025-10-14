@@ -75,6 +75,18 @@ public class CommandBufferTest {
     }
 
     @Test
+    public void getNext_nonEmptyBufferBackAndForth_success() {
+        for (String i : COMMAND_ARRAY_STUB) {
+            CommandBuffer.push(i);
+        }
+        assertEquals(COMMAND_ARRAY_STUB.length, CommandBuffer.getSize());
+        CommandBuffer before = CommandBuffer.getCurrent();
+        CommandBuffer.getPrev();
+        CommandBuffer.getNext();
+        assertEquals(before, CommandBuffer.getCurrent());
+    }
+
+    @Test
     public void getPrev_emptyBuffer_fail() {
         assertThrows(NullPointerException.class, CommandBuffer::getPrev);
     }
