@@ -6,7 +6,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 import seedu.bitebuddy.logic.CommandBuffer;
-import seedu.bitebuddy.logic.commands.Command;
 import seedu.bitebuddy.logic.commands.CommandResult;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;

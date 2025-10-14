@@ -6,6 +6,8 @@ package seedu.bitebuddy.logic;
 public class CommandBuffer {
     private static CommandBuffer head;
     private static CommandBuffer current;
+    private static int size = 0;
+
     private CommandBuffer next;
     private CommandBuffer prev;
     private final String command;
@@ -32,6 +34,8 @@ public class CommandBuffer {
 
         CommandBuffer.head = buffer;
         CommandBuffer.current = buffer;
+
+        size += 1;
     }
 
     /**
@@ -64,5 +68,21 @@ public class CommandBuffer {
      */
     public static CommandBuffer getCurrent() {
         return current;
+    }
+
+    /**
+     * Empties the command buffer. Used for tests.
+     */
+    public static void clear() {
+        head = null;
+        current = null;
+        size = 0;
+    }
+
+    /**
+     * Returns the size of the command buffer. Used for tests.
+     */
+    public static int getSize() {
+        return size;
     }
 }
