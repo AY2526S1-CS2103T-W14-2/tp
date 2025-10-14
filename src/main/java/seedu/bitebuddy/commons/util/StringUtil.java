@@ -31,9 +31,9 @@ public class StringUtil {
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String[] wordsInPreppedSentence = sentence.split("\\s+");
+        String[] wordsInSentence = sentence.split("\\s+");
 
-        return Arrays.stream(wordsInPreppedSentence)
+        return Arrays.stream(wordsInSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
     }
 
@@ -57,11 +57,10 @@ public class StringUtil {
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String[] wordsInSentence = sentence.split("\\s+");
         String lowerWord = preppedWord.toLowerCase();
 
-        return Arrays.stream(wordsInPreppedSentence)
+        return Arrays.stream(wordsInSentence)
                 .map(String::toLowerCase)
                 .anyMatch(s -> s.contains(lowerWord));
     }
