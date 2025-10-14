@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "cheap ";
 
     public static final String MESSAGE_SUCCESS = "New foodplace added: %1$s";
-    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in bitebuddy";
+    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in BiteBuddy";
 
     private final Foodplace toAdd;
 
