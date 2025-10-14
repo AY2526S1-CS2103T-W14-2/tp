@@ -76,7 +76,7 @@ public class Rate {
 
     @Override
     public String toString() {
-        return String.format("<%d/%d>", value, MAX);
+        return String.format("< %d/%d >", value, MAX);
     }
 
     @Override

@@ -152,11 +152,13 @@ public class ParserUtil {
 
         // Case where >= 1 Rate's CLI tag have been detected, take latest one
         Integer rating;
+        Rate rate;
         try {
             rating = Integer.valueOf(mostRecentRating);
-        } catch (NumberFormatException e) {
+            rate = new Rate(rating);
+        } catch (IllegalArgumentException e) {
             throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
         }
-        return new Rate(rating);
+        return rate;
     }
 }

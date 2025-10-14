@@ -57,13 +57,13 @@ public class FoodplaceCard extends UiPart<Region> {
         address.setText(foodplace.getAddress().value);
         email.setText(foodplace.getEmail().value);
         note.setText(String.valueOf(
-                foodplace.getNote().value.length() != 0 ? foodplace.getNote().value : ">>No notes yet<<"
+                foodplace.getNote().value.length() != 0 ? foodplace.getNote().value : "-- No notes yet --"
         ));
         foodplace.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         rate.setText(String.valueOf(
-                foodplace.getRate().isSet() ? foodplace.getRate().toString() : ">>No Rating yet<<"
+                foodplace.getRate().isSet() ? foodplace.getRate().toString() : ">> No Rating yet <<"
         ));
     }
 }
