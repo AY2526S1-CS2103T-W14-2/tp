@@ -21,7 +21,7 @@ public class LogsCenter {
     private static final int MAX_FILE_COUNT = 5;
     private static final int MAX_FILE_SIZE_IN_BYTES = (int) (Math.pow(2, 20) * 5); // 5MB
     private static final String LOG_FILE = "bitebuddy.log";
-    private static final Logger baseLogger = setBaseLogger(); // to be used as the parent of all other loggers created by this class.
+    private static final Logger baseLogger = setBaseLogger(); // the parent of all loggers
     private static Level currentLogLevel = Level.INFO;
 
     /**
