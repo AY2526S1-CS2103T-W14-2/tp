@@ -1,5 +1,6 @@
 package seedu.bitebuddy.logic.commands;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,24 +13,32 @@ public final class CommandRegistry {
 
     private static final Map<String, String> USAGE_MAP;
 
-    private static final String[][] COMMANDS = {
-        {AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE},
-        {DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE},
-        {EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE},
-        {FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE},
-        {ListCommand.COMMAND_WORD, ListCommand.MESSAGE_USAGE},
-        {ExitCommand.COMMAND_WORD, ExitCommand.MESSAGE_USAGE},
-        {HelpCommand.COMMAND_WORD, HelpCommand.MESSAGE_USAGE},
-        {ClearCommand.COMMAND_WORD, ClearCommand.MESSAGE_USAGE},
-        {NoteCommand.COMMAND_WORD, NoteCommand.MESSAGE_USAGE},
-        {TagCommand.COMMAND_WORD, TagCommand.MESSAGE_USAGE},
-        {RateCommand.COMMAND_WORD, RateCommand.MESSAGE_USAGE}
+    private static final Class<?>[] COMMANDS = {
+        AddCommand.class,
+        ClearCommand.class,
+        DeleteCommand.class,
+        EditCommand.class,
+        ExitCommand.class,
+        FindCommand.class,
+        HelpCommand.class,
+        ListCommand.class,
+        NoteCommand.class,
+        TagCommand.class,
+        RateCommand.class
     };
 
     static {
         Map<String, String> m = new HashMap<>();
-        for (String[] command : COMMANDS) {
-            m.put(command[0], command[1]);
+        try {
+            for (Class<?> command : COMMANDS) {
+                Field cwField = command.getDeclaredField("COMMAND_WORD");
+                Field muField = command.getDeclaredField("MESSAGE_USAGE");
+                Object cwVal = cwField.get(null);
+                Object muVal = muField.get(null);
+                m.put(String.valueOf(cwVal), String.valueOf(muVal));
+            }
+        } catch (ReflectiveOperationException e) {
+            throw new ExceptionInInitializerError(e);
         }
         USAGE_MAP = Collections.unmodifiableMap(m);
     }
