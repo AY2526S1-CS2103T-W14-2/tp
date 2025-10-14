@@ -41,11 +41,13 @@ public class StringUtil {
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
-        Throwable thr = requireNonNull(t, "Throwable must not be null");
+        Throwable throwable = requireNonNull(t, "Throwable must not be null");
         StringWriter sw = new StringWriter();
-        thr.printStackTrace(new PrintWriter(sw));
-        String msg = thr.getMessage() == null ? "" : thr.getMessage();
-        return msg + System.lineSeparator() + sw.toString();
+        throwable.printStackTrace(new PrintWriter(sw));
+        String msg = throwable.getMessage() == null ? "" : throwable.getMessage();
+        StringBuilder sb = new StringBuilder();
+        sb.append(msg).append(System.lineSeparator()).append(sw.toString());
+        return sb.toString();
     }
 
     /**
