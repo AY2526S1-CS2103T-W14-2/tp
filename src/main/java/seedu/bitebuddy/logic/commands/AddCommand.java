@@ -22,21 +22,21 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a foodplace to the bitebuddy book. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_NAME + "FOODPLACE NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_NAME + "McRonald's "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_EMAIL + "ronald@mcronalds.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "fastfood "
+            + PREFIX_TAG + "cheap ";
 
     public static final String MESSAGE_SUCCESS = "New foodplace added: %1$s";
-    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in the bitebuddy book";
+    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in bitebuddy";
 
     private final Foodplace toAdd;
 
@@ -73,6 +73,11 @@ public class AddCommand extends Command {
 
         AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
+    }
+
+    @Override
+    public int hashCode() {
+        return toAdd.hashCode();
     }
 
     @Override
