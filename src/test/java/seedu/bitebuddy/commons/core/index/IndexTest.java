@@ -2,6 +2,7 @@ package seedu.bitebuddy.commons.core.index;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
@@ -75,7 +76,7 @@ public class IndexTest {
 
         // different values -> different hashcode
         Index indexC = Index.fromOneBased(5);
-        assertFalse(indexA.hashCode() == indexC.hashCode());
+        assertNotEquals(indexA.hashCode(), indexC.hashCode());
 
         // same object -> same hashcode
         Index index = Index.fromOneBased(1);
