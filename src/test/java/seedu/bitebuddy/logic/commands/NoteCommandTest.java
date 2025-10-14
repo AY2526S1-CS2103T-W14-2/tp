@@ -1,6 +1,7 @@
 package seedu.bitebuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_SERVICE;
@@ -31,7 +32,7 @@ public class NoteCommandTest {
     private static final String NOTE_STUB = "Some note";
     private static final String EMPTY_NOTE_STUB = "";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addNoteUnfilteredList_success() {
@@ -138,10 +139,10 @@ public class NoteCommandTest {
         assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(standardCommand, null);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new NoteCommand(INDEX_SECOND_FOODPLACE,
@@ -150,5 +151,15 @@ public class NoteCommandTest {
         // different note -> returns false
         assertFalse(standardCommand.equals(new NoteCommand(INDEX_FIRST_FOODPLACE,
                 new Note(VALID_NOTE_FAMOUS))));
+    }
+
+    @Test
+    public void hashcode() {
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(VALID_NOTE_SERVICE));
+        NoteCommand noteCommandCopy = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(VALID_NOTE_SERVICE));
+        assertTrue(noteCommand.hashCode() == noteCommandCopy.hashCode());
+
+        NoteCommand differentNoteCommand = new NoteCommand(INDEX_SECOND_FOODPLACE, new Note(VALID_NOTE_FAMOUS));
+        assertFalse(noteCommand.hashCode() == differentNoteCommand.hashCode());
     }
 }

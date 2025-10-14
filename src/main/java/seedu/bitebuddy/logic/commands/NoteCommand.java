@@ -13,7 +13,7 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Note;
 
 /**
- * Changes the note of an existing foodplace in the address book.
+ * Changes the note of an existing foodplace in BiteBuddy.
  */
 public class NoteCommand extends Command {
 
@@ -87,5 +87,10 @@ public class NoteCommand extends Command {
         NoteCommand e = (NoteCommand) other;
         return index.equals(e.index)
                 && note.equals(e.note);
+    }
+
+    @Override
+    public int hashCode() {
+        return index.hashCode() + note.hashCode();
     }
 }
