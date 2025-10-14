@@ -14,7 +14,7 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 
 /**
- * Adds a foodplace to the bitebuddy book.
+ * Adds a foodplace to BiteBuddy.
  */
 public class AddCommand extends Command {
 
