@@ -11,7 +11,7 @@ import java.util.Optional;
 public final class CommandRegistry {
 
     private static final Map<String, String> USAGE_MAP;
-    
+
     private static final String[][] COMMANDS = {
         {AddCommand.COMMAND_WORD, AddCommand.MESSAGE_USAGE},
         {DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE},
