@@ -1,6 +1,7 @@
 package seedu.bitebuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -113,15 +114,34 @@ public class TagCommandTest {
         assertTrue(tagFirstFastFood.equals(tagFirstFastFood));
 
         // null -> false
-        assertFalse(tagFirstFastFood.equals(null));
+        assertNotEquals(tagFirstFastFood, null);
 
         // different type -> false
-        assertFalse(tagFirstFastFood.equals(new ClearCommand()));
+        assertNotEquals(tagFirstFastFood, new ClearCommand());
 
         // different index -> false
         assertFalse(tagFirstFastFood.equals(tagSecondFastFood));
 
         // different tags -> false
         assertFalse(tagFirstFastFood.equals(tagFirstCheap));
+    }
+
+    @Test
+    public void hashcode() {
+        Set<Tag> tagSetFastFood = Set.of(TAG_FASTFOOD);
+        Set<Tag> tagSetCheap = Set.of(TAG_CHEAP);
+
+        TagCommand tagFirstFastFood = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood);
+        TagCommand tagFirstFastFoodCopy = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood);
+        TagCommand tagSecondCheap = new TagCommand(INDEX_SECOND_FOODPLACE, tagSetCheap);
+
+        // same object -> same hashcode
+        assertTrue(tagFirstFastFood.hashCode() == tagFirstFastFood.hashCode());
+
+        // same values -> same hashcode
+        assertTrue(tagFirstFastFood.hashCode() == tagFirstFastFoodCopy.hashCode());
+
+        // different values -> different hashcode
+        assertFalse(tagFirstFastFood.hashCode() == tagSecondCheap.hashCode());
     }
 }
