@@ -1,5 +1,6 @@
 package seedu.bitebuddy.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -136,12 +137,12 @@ public class TagCommandTest {
         TagCommand tagSecondCheap = new TagCommand(INDEX_SECOND_FOODPLACE, tagSetCheap);
 
         // same object -> same hashcode
-        assertTrue(tagFirstFastFood.hashCode() == tagFirstFastFood.hashCode());
+        assertEquals(tagFirstFastFood.hashCode(), tagFirstFastFood.hashCode());
 
         // same values -> same hashcode
-        assertTrue(tagFirstFastFood.hashCode() == tagFirstFastFoodCopy.hashCode());
+        assertEquals(tagFirstFastFood.hashCode(), tagFirstFastFoodCopy.hashCode());
 
         // different values -> different hashcode
-        assertFalse(tagFirstFastFood.hashCode() == tagSecondCheap.hashCode());
+        assertNotEquals(tagFirstFastFood.hashCode(), tagSecondCheap.hashCode());
     }
 }

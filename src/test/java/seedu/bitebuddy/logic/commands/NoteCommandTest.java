@@ -1,5 +1,6 @@
 package seedu.bitebuddy.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -157,9 +158,9 @@ public class NoteCommandTest {
     public void hashcode() {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(VALID_NOTE_SERVICE));
         NoteCommand noteCommandCopy = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(VALID_NOTE_SERVICE));
-        assertTrue(noteCommand.hashCode() == noteCommandCopy.hashCode());
+        assertEquals(noteCommand.hashCode(), noteCommandCopy.hashCode());
 
         NoteCommand differentNoteCommand = new NoteCommand(INDEX_SECOND_FOODPLACE, new Note(VALID_NOTE_FAMOUS));
-        assertFalse(noteCommand.hashCode() == differentNoteCommand.hashCode());
+        assertNotEquals(noteCommand.hashCode(), differentNoteCommand.hashCode());
     }
 }
