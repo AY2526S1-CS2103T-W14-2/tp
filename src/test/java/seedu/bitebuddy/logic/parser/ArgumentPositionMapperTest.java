@@ -3,11 +3,22 @@ package seedu.bitebuddy.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 public class ArgumentPositionMapperTest {
+
+    private static final String SINGLE_WORD = "hello";
+
+    private static final String NOTE_MULTI_WORD = "note 2 good customer service";
+    private static final String NOTE_MULTI_WORD_NO_COMMAND_WORD = "2 good customer service";
+    private static final String NOTE_MULTI_WORD_NOTE_ARG = "good customer service";
+    private static final int NOTE_MULTI_WORD_LENGTH = NOTE_MULTI_WORD.split(" ").length;
+
+    private static final String RATING_MULTI_WORD = "rating 3 5";
+    private static final int RATING_MULTI_WORD_LENGTH = RATING_MULTI_WORD.split(" ").length;
 
     @Test
     public void constructor_emptyString_returnsEmptyList() {
@@ -25,69 +36,70 @@ public class ArgumentPositionMapperTest {
 
     @Test
     public void constructor_singleWord_returnsSingleElement() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("hello");
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(SINGLE_WORD);
         assertEquals(1, mapper.size());
-        assertEquals("hello", mapper.getArgument(0));
+        assertEquals(SINGLE_WORD, mapper.getArgument(0));
     }
 
     @Test
     public void constructor_multipleWords_splitsByWhitespace() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("note 2 good customer service");
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD);
         assertEquals(5, mapper.size());
-        assertEquals(List.of("note", "2", "good", "customer", "service"), mapper.getAllArguments());
+        assertEquals(List.of(NOTE_MULTI_WORD.split(" ")), mapper.getAllArguments());
     }
 
     @Test
     public void getArgument_outOfBounds_returnsEmptyString() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("one two three");
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD);
         assertEquals("", mapper.getArgument(-1), "Expected empty string for negative index");
-        assertEquals("", mapper.getArgument(10), "Expected empty string for out-of-range index");
+        assertEquals("", mapper.getArgument(NOTE_MULTI_WORD_LENGTH),
+                "Expected empty string for out-of-range index");
     }
 
     @Test
     public void getRemainingArguments_validIndex_returnsJoinedString() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("2 good customer service");
-        assertEquals("good customer service", mapper.getRemainingArguments(1));
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD_NO_COMMAND_WORD);
+        assertEquals(NOTE_MULTI_WORD_NOTE_ARG, mapper.getRemainingArguments(1));
     }
 
     @Test
     public void getRemainingArguments_indexOutOfRange_returnsEmptyString() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("note 1 something");
-        assertEquals("", mapper.getRemainingArguments(5));
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD);
+        assertEquals("", mapper.getRemainingArguments(NOTE_MULTI_WORD_LENGTH));
     }
 
     @Test
     public void getRemainingArguments_startAtZero_returnsFullString() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("note 2 testing behavior");
-        assertEquals("note 2 testing behavior", mapper.getRemainingArguments(0));
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD);
+        assertEquals(NOTE_MULTI_WORD, mapper.getRemainingArguments(0));
     }
 
     @Test
     public void getRemainingArguments_negativeIndex_returnsEmptyString() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("rating 3 5");
-        assertEquals("", mapper.getRemainingArguments(-2),
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(RATING_MULTI_WORD);
+        assertEquals("", mapper.getRemainingArguments(-1),
                 "Expected empty string for negative startPosition");
     }
 
     @Test
     public void getRemainingArguments_startAtSize_returnsEmptyString() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("rating 3 5");
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(RATING_MULTI_WORD);
         assertEquals("", mapper.getRemainingArguments(mapper.size()),
                 "Expected empty string for startPosition == size");
     }
 
     @Test
     public void size_returnsCorrectCount() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("rating 3 5");
-        assertEquals(3, mapper.size());
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(RATING_MULTI_WORD);
+        assertEquals(RATING_MULTI_WORD_LENGTH, mapper.size());
     }
 
     @Test
     public void getAllArguments_returnsUnmodifiableList() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("a b c");
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD);
         List<String> args = mapper.getAllArguments();
         try {
-            args.add("d");
+            args.add(SINGLE_WORD);
         } catch (UnsupportedOperationException e) {
             assertTrue(true, "List should be unmodifiable");
             return;
@@ -97,8 +109,8 @@ public class ArgumentPositionMapperTest {
 
     @Test
     public void toString_returnsReadableRepresentation() {
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper("rating 1 9");
-        String expected = "[rating, 1, 9]";
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(RATING_MULTI_WORD);
+        String expected = Arrays.toString(RATING_MULTI_WORD.split(" "));
         assertEquals(expected, mapper.toString());
     }
 }
