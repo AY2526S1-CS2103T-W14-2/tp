@@ -31,8 +31,7 @@ public class StringUtil {
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String[] wordsInPreppedSentence = sentence.split("\\s+");
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
@@ -42,10 +41,11 @@ public class StringUtil {
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
-        requireNonNull(t);
+        Throwable thr = requireNonNull(t, "Throwable must not be null");
         StringWriter sw = new StringWriter();
-        t.printStackTrace(new PrintWriter(sw));
-        return t.getMessage() + "\n" + sw.toString();
+        thr.printStackTrace(new PrintWriter(sw));
+        String msg = thr.getMessage() == null ? "" : thr.getMessage();
+        return msg + System.lineSeparator() + sw.toString();
     }
 
     /**
