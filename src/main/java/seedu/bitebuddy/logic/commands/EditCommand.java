@@ -105,7 +105,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editFoodplaceDescriptor.getEmail().orElse(foodplaceToEdit.getEmail());
         Address updatedAddress = editFoodplaceDescriptor.getAddress().orElse(foodplaceToEdit.getAddress());
         Set<Tag> updatedTags = editFoodplaceDescriptor.getTags().orElse(foodplaceToEdit.getTags());
-        Rate updatedRate = editFoodplaceDescriptor.getRating().orElse(foodplaceToEdit.getRate());
+        Rate updatedRate = editFoodplaceDescriptor.getRate().orElse(foodplaceToEdit.getRate());
         Note updatedNote = foodplaceToEdit.getNote();
 
         return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNote,
@@ -224,11 +224,11 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setRating(Rate rate) {
+        public void setRate(Rate rate) {
             this.rate = rate;
         }
 
-        public Optional<Rate> getRating() {
+        public Optional<Rate> getRate() {
             return Optional.ofNullable(rate);
         }
 

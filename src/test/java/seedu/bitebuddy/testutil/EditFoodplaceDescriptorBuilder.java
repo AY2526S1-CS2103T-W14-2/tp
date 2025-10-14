@@ -18,7 +18,7 @@ import seedu.bitebuddy.model.tag.Tag;
  */
 public class EditFoodplaceDescriptorBuilder {
 
-    private EditFoodplaceDescriptor descriptor;
+    private final EditFoodplaceDescriptor descriptor;
 
     public EditFoodplaceDescriptorBuilder() {
         descriptor = new EditCommand.EditFoodplaceDescriptor();
@@ -38,6 +38,7 @@ public class EditFoodplaceDescriptorBuilder {
         descriptor.setEmail(foodplace.getEmail());
         descriptor.setAddress(foodplace.getAddress());
         descriptor.setTags(foodplace.getTags());
+        descriptor.setRate(foodplace.getRate());
     }
 
     /**

@@ -68,7 +68,7 @@ public class EditFoodplaceDescriptorTest {
                 + editFoodplaceDescriptor.getEmail().orElse(null) + ", address="
                 + editFoodplaceDescriptor.getAddress().orElse(null) + ", tags="
                 + editFoodplaceDescriptor.getTags().orElse(null) + ", rate="
-                + editFoodplaceDescriptor.getRating().orElse(null) + "}";
+                + editFoodplaceDescriptor.getRate().orElse(null) + "}";
         assertEquals(expected, editFoodplaceDescriptor.toString());
     }
 }

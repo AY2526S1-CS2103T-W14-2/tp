@@ -6,6 +6,7 @@ import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -28,10 +29,12 @@ public class EditCommandParser implements Parser<EditCommand> {
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_TAG, PREFIX_RATE);
 
         Index index;
 
@@ -41,7 +44,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RATE);
 
         EditCommand.EditFoodplaceDescriptor editFoodplaceDescriptor = new EditCommand.EditFoodplaceDescriptor();
 
@@ -58,6 +61,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editFoodplaceDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editFoodplaceDescriptor::setTags);
+
+        // parse rating values (support multiple rate prefixes but use the last one)
+        if (!argMultimap.getAllValues(PREFIX_RATE).isEmpty()) {
+            editFoodplaceDescriptor.setRate(ParserUtil.parseRatings(argMultimap.getAllValues(PREFIX_RATE)));
+        }
 
         if (!editFoodplaceDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
