@@ -9,9 +9,11 @@ import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.core.index.Index;
+import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.ModelManager;
@@ -30,7 +32,7 @@ public class RateCommandTest {
     private static final String RATE_DEFAULT_STUB = "0";
     private static final String RATE_OUT_OF_RANGE_STUB = "1000";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addRate_success() {
@@ -97,7 +99,23 @@ public class RateCommandTest {
         rateCommand3.setRate();
 
         assertNotEquals("invalidRateCommandObject", rateCommand1);
+        assertNotEquals(null, rateCommand1);
         assertNotEquals(rateCommand2, rateCommand1);
         assertNotEquals(rateCommand3, rateCommand1);
+    }
+
+    @Test
+    public void hashcode() {
+        RateCommand rateCommand1 = new RateCommand(INDEX_FIRST_FOODPLACE, Integer.valueOf(RATE_SUCCESS_STUB));
+        RateCommand rateCommand2 = new RateCommand(INDEX_FIRST_FOODPLACE, Integer.valueOf(RATE_SUCCESS_STUB));
+        try {
+            rateCommand1.setRate();
+            rateCommand2.setRate();
+        } catch (CommandException e) {
+            Assertions.fail("Failed to set rate");
+        }
+        assertEquals(rateCommand1.hashCode(), rateCommand2.hashCode());
+        assertNotEquals(rateCommand1.hashCode(),
+                new RateCommand(INDEX_SECOND_FOODPLACE, Integer.valueOf(RATE_SUCCESS_STUB)).hashCode());
     }
 }
