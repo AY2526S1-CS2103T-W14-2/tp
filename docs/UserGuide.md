@@ -86,7 +86,7 @@ Examples:
 
 Adds a foodplace to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [no/NOTE]​`
 
 <box type="tip" seamless>
 
@@ -107,7 +107,7 @@ Format: `list`
 
 Edits an existing foodplace in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [no/NOTE]​`
 
 * Edits the foodplace at the specified `INDEX`. The index refers to the index number shown in the displayed foodplace list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -119,6 +119,21 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st foodplace to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd foodplace to be `Betsy Crower` and clears all existing tags.
+
+### Adding a note to a foodplace : `note`
+
+Adds / edits the note of an existing foodplace in the address book.
+
+Format: `note INDEX [note]`
+
+* Edits the foodplace at the specified `INDEX`. The index refers to the index number shown in the displayed foodplace list. The index **must be a positive integer** 1, 2, 3, …​
+* You can remove the foodplace’s notes by typing not specifying any notes after `INDEX`.
+* Note have a maximum character limit of 100.
+* Note only allows ASCII-printable characters. You may refer to [here](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm) for the characters that are accepted.
+
+Examples:
+* `note 2 Good customer service!` Adds / Edits the note of the 2nd foodplace to be `Good customer service!`.
+* `note 2` Removes any notes of the 2nd foodplace.
 
 ### Locating foodplaces by name: `find`
 
