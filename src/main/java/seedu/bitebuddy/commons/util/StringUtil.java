@@ -31,10 +31,9 @@ public class StringUtil {
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String[] wordsInSentence = sentence.split("\\s+");
 
-        return Arrays.stream(wordsInPreppedSentence)
+        return Arrays.stream(wordsInSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
     }
 
@@ -58,11 +57,10 @@ public class StringUtil {
         checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
         checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String[] wordsInSentence = sentence.split("\\s+");
         String lowerWord = preppedWord.toLowerCase();
 
-        return Arrays.stream(wordsInPreppedSentence)
+        return Arrays.stream(wordsInSentence)
                 .map(String::toLowerCase)
                 .anyMatch(s -> s.contains(lowerWord));
     }
@@ -71,10 +69,13 @@ public class StringUtil {
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {
-        requireNonNull(t);
+        Throwable throwable = requireNonNull(t, "Throwable must not be null");
         StringWriter sw = new StringWriter();
-        t.printStackTrace(new PrintWriter(sw));
-        return t.getMessage() + "\n" + sw.toString();
+        throwable.printStackTrace(new PrintWriter(sw));
+        String msg = throwable.getMessage() == null ? "" : throwable.getMessage();
+        StringBuilder sb = new StringBuilder();
+        sb.append(msg).append(System.lineSeparator()).append(sw.toString());
+        return sb.toString();
     }
 
     /**

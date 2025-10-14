@@ -30,7 +30,7 @@ public class JsonUtil {
 
     private static final Logger logger = LogsCenter.getLogger(JsonUtil.class);
 
-    private static ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
+    private static final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
@@ -63,14 +63,14 @@ public class JsonUtil {
         if (!Files.exists(filePath)) {
             return Optional.empty();
         }
-        logger.info("JSON file " + filePath + " found.");
+        logger.log(Level.INFO, "JSON file {0} found.", filePath);
 
         T jsonFile;
 
         try {
             jsonFile = deserializeObjectFromJsonFile(filePath, classOfObjectToDeserialize);
         } catch (IOException e) {
-            logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
+            logger.log(Level.WARNING, "Error reading from jsonFile file {0}: {1}", new Object[]{filePath, e});
             throw new DataLoadingException(e);
         }
 
