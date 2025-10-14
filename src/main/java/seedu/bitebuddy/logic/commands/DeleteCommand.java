@@ -12,7 +12,7 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 
 /**
- * Deletes a foodplace identified using it's displayed index from the bitebuddy book.
+ * Deletes a foodplace identified using it's displayed index from BiteBuddy.
  */
 public class DeleteCommand extends Command {
 
@@ -62,6 +62,11 @@ public class DeleteCommand extends Command {
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
+    }
+
+    @Override
+    public int hashCode() {
+        return targetIndex.hashCode();
     }
 
     @Override
