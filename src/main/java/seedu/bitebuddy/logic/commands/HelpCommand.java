@@ -52,4 +52,9 @@ public class HelpCommand extends Command {
         HelpCommand otherCommand = (HelpCommand) other;
         return usage != null ? usage.equals(otherCommand.usage) : otherCommand.usage == null;
     }
+
+    @Override
+    public int hashCode() {
+        return usage != null ? usage.hashCode() : 0;
+    }
 }
