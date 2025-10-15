@@ -10,6 +10,7 @@ import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.tag.Tag;
 
@@ -38,6 +39,7 @@ public class EditFoodplaceDescriptorBuilder {
         descriptor.setEmail(foodplace.getEmail());
         descriptor.setAddress(foodplace.getAddress());
         descriptor.setTags(foodplace.getTags());
+        descriptor.setNote(foodplace.getNote());
     }
 
     /**
@@ -79,6 +81,14 @@ public class EditFoodplaceDescriptorBuilder {
     public EditFoodplaceDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Note} of the {@code EditFoodplaceDescriptor} that we are building.
+     */
+    public EditFoodplaceDescriptorBuilder withNote(String note) {
+        descriptor.setNote(new Note(note));
         return this;
     }
 

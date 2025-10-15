@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
@@ -47,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_NOTE + "NOTE]"
             + "[" + PREFIX_RATE + "RATING]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -105,8 +107,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editFoodplaceDescriptor.getEmail().orElse(foodplaceToEdit.getEmail());
         Address updatedAddress = editFoodplaceDescriptor.getAddress().orElse(foodplaceToEdit.getAddress());
         Set<Tag> updatedTags = editFoodplaceDescriptor.getTags().orElse(foodplaceToEdit.getTags());
+        Note updatedNote = editFoodplaceDescriptor.getNote().orElse(foodplaceToEdit.getNote());
         Rate updatedRate = editFoodplaceDescriptor.getRating().orElse(foodplaceToEdit.getRate());
-        Note updatedNote = foodplaceToEdit.getNote();
 
         return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNote,
                 updatedRate);
@@ -146,6 +148,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Note note;
         private Rate rate;
 
         public EditFoodplaceDescriptor() {}
@@ -160,6 +163,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setNote(toCopy.note);
             setRating(toCopy.rate);
         }
 
@@ -167,7 +171,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note);
         }
 
         public void setName(Name name) {
@@ -219,6 +223,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setNote(Note note) {
+            this.note = note;
+        }
+
+        public Optional<Note> getNote() {
+            return Optional.ofNullable(note);
+        }
+
         public void setRating(Rate rate) {
             this.rate = rate;
         }
@@ -243,7 +255,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditFoodplaceDescriptor.phone)
                     && Objects.equals(email, otherEditFoodplaceDescriptor.email)
                     && Objects.equals(address, otherEditFoodplaceDescriptor.address)
-                    && Objects.equals(tags, otherEditFoodplaceDescriptor.tags);
+                    && Objects.equals(tags, otherEditFoodplaceDescriptor.tags)
+                    && Objects.equals(note, otherEditFoodplaceDescriptor.note);
         }
 
         @Override
@@ -254,6 +267,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("bitebuddy", address)
                     .add("tags", tags)
+                    .add("note", note)
                     .toString();
         }
     }

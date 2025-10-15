@@ -3,6 +3,7 @@ package seedu.bitebuddy.testutil;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -37,6 +38,7 @@ public class FoodplaceUtil {
         foodplace.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+        sb.append(PREFIX_NOTE + foodplace.getNote().value + " ");
         return sb.toString();
     }
 
@@ -49,6 +51,7 @@ public class FoodplaceUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getNote().ifPresent(note -> sb.append(PREFIX_NOTE).append(note.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
