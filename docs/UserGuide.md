@@ -121,7 +121,7 @@ Examples:
 
 Edits an existing foodplace in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [no/NOTE]​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [no/NOTE] [r/RATING]​`
 
 * Edits the foodplace at the specified `INDEX`. The index refers to the index number shown in the displayed foodplace list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -166,6 +166,27 @@ Examples:
 * Executing `rate 1 0` sets the 1st foodplace in the addressbook to have its current rating removed.
 * Executing `rate 1 5` then `rate 1 8` sets the 1st foodplace in the addressbook to have its current rating to `5`
   first then to `8`.
+
+### Adding a tag a foodplace : `tag`
+
+Adds or removes one or more tags from the specified foodplace in the address book.
+
+Format 1 : `tag INDEX TAG1 [TAG2]...`  
+Format 2 : `tag INDEX /d [TAG1] [TAG2]...`
+
+* Finds the foodplace at the specified `INDEX` and edits its tags.
+* At least one tag must be provided for Format 1.
+* Multiple tags can be added at once using Format 1.
+* Tag additions are cumulative (existing tags are kept unless deleted).
+
+Examples:  
+* `tag 3 FastFood Vegan` adds both FastFood and Vegan tags to the 3rd foodplace.
+* `tag 2 /d FastFood` removes the FastFood tag from the 2nd foodplace.
+
+<box type="tip" seamless>
+
+**Tip:** Using `tag INDEX /d` without specifying any tags will remove all tags from the selected foodplace.
+</box>
 
 ### Locating foodplaces by name: `find`
 
@@ -242,6 +263,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Note**   | `note INDEX [NOTE]`<br> e.g., `note 1 Famous for their chicken rice!`
 **Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 6`
+**Tag**    | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br> e.g., `tag 1 FastFood Expensive`<br> e.g., `tag 1 /d FastFood`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Clear**  | `clear`
 **Exit**   | `exit`
