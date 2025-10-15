@@ -11,6 +11,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWA
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_RATE_PRATASHOP;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 
 import org.junit.jupiter.api.Test;
@@ -62,6 +63,10 @@ public class EditFoodplaceDescriptorTest {
 
         // different note -> returns false
         editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withNote(VALID_NOTE_FAMOUS).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different rate -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withRate(VALID_RATE_PRATASHOP).build();
         assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
     }
 

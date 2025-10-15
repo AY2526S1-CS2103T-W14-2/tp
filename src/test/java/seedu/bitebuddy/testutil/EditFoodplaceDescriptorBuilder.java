@@ -12,6 +12,7 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
+import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -90,6 +91,14 @@ public class EditFoodplaceDescriptorBuilder {
      */
     public EditFoodplaceDescriptorBuilder withNote(String note) {
         descriptor.setNote(new Note(note));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rate} of the {@code EditFoodplaceDescriptor} that we are building.
+     */
+    public EditFoodplaceDescriptorBuilder withRate(String rate) {
+        descriptor.setRate(new Rate(Integer.valueOf(rate)));
         return this;
     }
 
