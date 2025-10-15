@@ -5,7 +5,6 @@ import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -45,18 +44,25 @@ public class TagCommandParser implements Parser<TagCommand> {
         Index index;
         try {
             index = ParserUtil.parseIndex(tokens.get(0));
+
         } catch (IllegalValueException e) {
             throw new ParseException(MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX, e);
         }
 
-        // Remaining tokens are tags.
-        Set<Tag> tags = new HashSet<>();
-        for (int i = 1; i < tokens.size(); i++) {
-            String trimmed = tokens.get(i).trim();
-
-            tags.add(new Tag(trimmed));
+        boolean isDelete = false;
+        List<String> tagTokens;
+        if (tokens.get(1).equals("/d")) {
+            isDelete = true;
+            if (tokens.size() == 2) {
+                tagTokens = List.of();
+            } else {
+                tagTokens = tokens.subList(2, tokens.size());
+            }
+        } else {
+            tagTokens = tokens.subList(1, tokens.size());
         }
+        Set<Tag> tags = ParserUtil.parseTags(tagTokens);
 
-        return new TagCommand(index, tags);
+        return new TagCommand(index, tags, isDelete);
     }
 }
