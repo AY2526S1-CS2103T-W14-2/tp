@@ -1,10 +1,6 @@
 package seedu.bitebuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
-import seedu.bitebuddy.commons.util.ToStringBuilder;
-import seedu.bitebuddy.logic.Messages;
-import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
@@ -12,6 +8,10 @@ import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.bitebuddy.commons.util.ToStringBuilder;
+import seedu.bitebuddy.logic.Messages;
+import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 
