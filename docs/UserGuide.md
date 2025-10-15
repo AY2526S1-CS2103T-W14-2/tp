@@ -86,7 +86,7 @@ Examples:
 
 Adds a foodplace to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [r/RATING]…​`
 
 <box type="tip" seamless>
 
@@ -157,6 +157,24 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Rate a foodplace : `rate`
+
+Assigns/Removes an optional rating from the specified foodplace in the address book.
+
+Format: `rate INDEX RATING`
+
+* Finds the foodplace at the specified `INDEX`.
+* The index refers to the index number shown in the displayed foodplace list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Sets the rating of the found foodplace to the specified `RATING`.
+* The rating **must be an integer between 0 and 10** e.g. 0, 1, 2, …​
+
+Examples:
+* `list` followed by `rate 2 5` sets the 2nd foodplace in the address book to have a rating of 5.
+* Executing `rate 1 0` sets the 1st foodplace in the addressbook to have its current rating removed.
+* Executing `rate 1 5` then `rate 1 8` sets the 1st foodplace in the addressbook to have its current rating to `5`
+first then to `8`.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -202,10 +220,11 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [r/RATING]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague r/6`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
 **Help**   | `help`
+**List**   | `list`
+**Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 6`
