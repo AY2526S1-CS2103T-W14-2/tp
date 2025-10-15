@@ -16,15 +16,15 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 
 /**
- * Adds a foodplace to the bitebuddy book.
+ * Adds a foodplace to BiteBuddy.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a foodplace to the bitebuddy book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a foodplace to BiteBuddy. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_NAME + "FOODPLACE NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
             + PREFIX_RATE + "9";
 
     public static final String MESSAGE_SUCCESS = "New foodplace added: %1$s";
-    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in the bitebuddy book";
+    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in BiteBuddy";
 
     private final Foodplace toAdd;
 
@@ -79,6 +79,11 @@ public class AddCommand extends Command {
 
         AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
+    }
+
+    @Override
+    public int hashCode() {
+        return toAdd.hashCode();
     }
 
     @Override

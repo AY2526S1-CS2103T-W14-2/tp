@@ -30,6 +30,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -64,6 +65,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editFoodplaceDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             editFoodplaceDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
+        }
+
+        // parse rating values (support multiple rate prefixes but use the last one)
+        if (!argMultimap.getAllValues(PREFIX_RATE).isEmpty()) {
+            editFoodplaceDescriptor.setRate(ParserUtil.parseRatings(argMultimap.getAllValues(PREFIX_RATE)));
         }
 
         if (!editFoodplaceDescriptor.isAnyFieldEdited()) {

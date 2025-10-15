@@ -20,10 +20,10 @@ public class CommandResultTest {
         assertTrue(commandResult.equals(commandResult));
 
         // null -> returns false
-        assertFalse(commandResult.equals(null));
+        assertNotEquals(commandResult, null);
 
         // different types -> returns false
-        assertFalse(commandResult.equals(0.5f));
+        assertNotEquals(commandResult, 0.5f);
 
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));

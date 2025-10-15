@@ -43,7 +43,7 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed foodplace list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_NAME + "FOODPLACE NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -56,7 +56,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_FOODPLACE_SUCCESS = "Edited Foodplace: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in the bitebuddy book.";
+    public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in BiteBuddy.";
 
     private final Index index;
     private final EditFoodplaceDescriptor editFoodplaceDescriptor;
@@ -108,7 +108,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editFoodplaceDescriptor.getAddress().orElse(foodplaceToEdit.getAddress());
         Set<Tag> updatedTags = editFoodplaceDescriptor.getTags().orElse(foodplaceToEdit.getTags());
         Note updatedNote = editFoodplaceDescriptor.getNote().orElse(foodplaceToEdit.getNote());
-        Rate updatedRate = editFoodplaceDescriptor.getRating().orElse(foodplaceToEdit.getRate());
+        Rate updatedRate = editFoodplaceDescriptor.getRate().orElse(foodplaceToEdit.getRate());
 
         return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedNote,
                 updatedRate);
@@ -128,6 +128,11 @@ public class EditCommand extends Command {
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
                 && editFoodplaceDescriptor.equals(otherEditCommand.editFoodplaceDescriptor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, editFoodplaceDescriptor);
     }
 
     @Override
@@ -158,20 +163,20 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditFoodplaceDescriptor(EditFoodplaceDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
-            setNote(toCopy.note);
-            setRating(toCopy.rate);
+            this.name = toCopy.name;
+            this.phone = toCopy.phone;
+            this.email = toCopy.email;
+            this.address = toCopy.address;
+            this.tags = (toCopy.tags != null) ? new HashSet<>(toCopy.tags) : null;
+            this.note = toCopy.note;
+            this.rate = toCopy.rate;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note, rate);
         }
 
         public void setName(Name name) {
@@ -231,11 +236,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(note);
         }
 
-        public void setRating(Rate rate) {
+        public void setRate(Rate rate) {
             this.rate = rate;
         }
 
-        public Optional<Rate> getRating() {
+        public Optional<Rate> getRate() {
             return Optional.ofNullable(rate);
         }
 
@@ -256,7 +261,13 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditFoodplaceDescriptor.email)
                     && Objects.equals(address, otherEditFoodplaceDescriptor.address)
                     && Objects.equals(tags, otherEditFoodplaceDescriptor.tags)
-                    && Objects.equals(note, otherEditFoodplaceDescriptor.note);
+                    && Objects.equals(note, otherEditFoodplaceDescriptor.note)
+                    && Objects.equals(rate, otherEditFoodplaceDescriptor.rate);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, phone, email, address, tags, rate);
         }
 
         @Override
@@ -265,9 +276,10 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("bitebuddy", address)
+                    .add("address", address)
                     .add("tags", tags)
                     .add("note", note)
+                    .add("rate", rate)
                     .toString();
         }
     }

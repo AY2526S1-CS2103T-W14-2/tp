@@ -9,8 +9,8 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.ModelManager;
 
 public class ExitCommandTest {
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private final Model model = new ModelManager();
+    private final Model expectedModel = new ModelManager();
 
     @Test
     public void execute_exit_success() {

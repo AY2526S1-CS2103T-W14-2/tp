@@ -2,6 +2,7 @@ package seedu.bitebuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
@@ -33,7 +34,7 @@ import seedu.bitebuddy.testutil.FoodplaceBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -164,16 +165,33 @@ public class EditCommandTest {
         assertTrue(standardCommand.equals(standardCommand));
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(standardCommand, null);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_FOODPLACE, DESC_MCRONALDS)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_FOODPLACE, DESC_SWENSWAN)));
+    }
+
+    @Test
+    public void hashcode() {
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_FOODPLACE, DESC_MCRONALDS);
+        EditFoodplaceDescriptor copyDescriptor = new EditFoodplaceDescriptor(DESC_MCRONALDS);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_FOODPLACE, copyDescriptor);
+        EditCommand differentCommand = new EditCommand(INDEX_SECOND_FOODPLACE, DESC_SWENSWAN);
+
+        // same object -> returns same hashcode
+        assertEquals(standardCommand.hashCode(), standardCommand.hashCode());
+
+        // same values -> returns same hashcode
+        assertEquals(standardCommand.hashCode(), commandWithSameValues.hashCode());
+
+        // different foodplace -> returns different hashcode
+        assertNotEquals(standardCommand.hashCode(), differentCommand.hashCode());
     }
 
     @Test

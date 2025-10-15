@@ -2,6 +2,7 @@ package seedu.bitebuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
@@ -10,6 +11,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWA
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_RATE_PRATASHOP;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 
 import org.junit.jupiter.api.Test;
@@ -29,10 +31,10 @@ public class EditFoodplaceDescriptorTest {
         assertTrue(DESC_MCRONALDS.equals(DESC_MCRONALDS));
 
         // null -> returns false
-        assertFalse(DESC_MCRONALDS.equals(null));
+        assertNotEquals(DESC_MCRONALDS, null);
 
         // different types -> returns false
-        assertFalse(DESC_MCRONALDS.equals(5));
+        assertNotEquals(DESC_MCRONALDS, 5);
 
         // different values -> returns false
         assertFalse(DESC_MCRONALDS.equals(DESC_SWENSWAN));
@@ -62,6 +64,10 @@ public class EditFoodplaceDescriptorTest {
         // different note -> returns false
         editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withNote(VALID_NOTE_FAMOUS).build();
         assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different rate -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withRate(VALID_RATE_PRATASHOP).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
     }
 
     @Test
@@ -70,10 +76,11 @@ public class EditFoodplaceDescriptorTest {
         String expected = EditCommand.EditFoodplaceDescriptor.class.getCanonicalName() + "{name="
                 + editFoodplaceDescriptor.getName().orElse(null) + ", phone="
                 + editFoodplaceDescriptor.getPhone().orElse(null) + ", email="
-                + editFoodplaceDescriptor.getEmail().orElse(null) + ", bitebuddy="
+                + editFoodplaceDescriptor.getEmail().orElse(null) + ", address="
                 + editFoodplaceDescriptor.getAddress().orElse(null) + ", tags="
                 + editFoodplaceDescriptor.getTags().orElse(null) + ", note="
-                + editFoodplaceDescriptor.getNote().orElse(null) + "}";
+                + editFoodplaceDescriptor.getNote().orElse(null) + ", rate="
+                + editFoodplaceDescriptor.getRate().orElse(null) + "}";
         assertEquals(expected, editFoodplaceDescriptor.toString());
     }
 }

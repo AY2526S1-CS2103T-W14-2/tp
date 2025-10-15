@@ -12,21 +12,21 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Rate;
 
 /**
- * Changes the remark of an existing foodplace in the address book.
+ * Changes the rating of an existing foodplace in BiteBuddy.
  */
 public class RateCommand extends Command {
 
     public static final String COMMAND_WORD = "rate";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the rate of the foodplace identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the rating of the foodplace identified "
             + "by the index number used in the last foodplace listing. INDEX and RATING must be a positive integer."
-            + "Existing rate will be overwritten by the input.\n"
+            + "Existing rating will be overwritten by the input.\n"
             + "Parameters: INDEX "
             + "RATING\n"
             + "Example: " + COMMAND_WORD + " 5 " + "1";
 
-    public static final String MESSAGE_ADD_RATE_SUCCESS = "Added rate to Foodplace: %1$s";
-    public static final String MESSAGE_DELETE_RATE_SUCCESS = "Removed rate from Foodplace: %1$s";
+    public static final String MESSAGE_ADD_RATE_SUCCESS = "Added rating to Foodplace: %1$s";
+    public static final String MESSAGE_DELETE_RATE_SUCCESS = "Removed rating from Foodplace: %1$s";
 
     private final Index index;
     private final Rate rate;
@@ -98,5 +98,10 @@ public class RateCommand extends Command {
         RateCommand e = (RateCommand) other;
         return index.equals(e.index)
                 && rate.equals(e.rate);
+    }
+
+    @Override
+    public int hashCode() {
+        return index.hashCode() + rate.hashCode();
     }
 }

@@ -1,5 +1,7 @@
 package seedu.bitebuddy.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bitebuddy.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
@@ -36,14 +38,14 @@ public class HelpCommandTest {
     public void equals_differentType_returnsFalse() {
         HelpCommand helpCommand = new HelpCommand();
         // different type -> returns false
-        assert(!helpCommand.equals("not a HelpCommand"));
+        assertNotEquals(helpCommand, "not a HelpCommand");
     }
 
     @Test
     public void equals_null_returnsFalse() {
         HelpCommand helpCommand = new HelpCommand();
         // null -> returns false
-        assert(!helpCommand.equals(null));
+        assertNotEquals(helpCommand, null);
     }
 
     @Test
@@ -77,5 +79,28 @@ public class HelpCommandTest {
         // one usage null, one not -> returns false
         assert(!helpCommand1.equals(helpCommand2));
         assert(!helpCommand2.equals(helpCommand1));
+    }
+
+    @Test
+    public void hashcode() {
+        // same object == same hashcode
+        HelpCommand helpCommand1 = new HelpCommand("usage");
+        assertEquals(helpCommand1.hashCode(), helpCommand1.hashCode());
+
+        // same usage == same hashcode
+        HelpCommand helpCommand2 = new HelpCommand("usage");
+        assertEquals(helpCommand1.hashCode(), helpCommand2.hashCode());
+
+        // no usage == same hashcode
+        HelpCommand helpCommand3 = new HelpCommand();
+        HelpCommand helpCommand4 = new HelpCommand();
+        assertEquals(helpCommand3.hashCode(), helpCommand4.hashCode());
+
+        // null and string usage == diff hashcode
+        assertNotEquals(helpCommand1.hashCode(), helpCommand3.hashCode());
+
+        // different usage == different hashcode
+        HelpCommand helpCommand5 = new HelpCommand("usage1");
+        assertNotEquals(helpCommand1.hashCode(), helpCommand5.hashCode());
     }
 }

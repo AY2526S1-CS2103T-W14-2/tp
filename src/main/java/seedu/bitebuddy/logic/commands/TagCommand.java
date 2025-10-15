@@ -15,7 +15,7 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
- * Adds new tags to an existing food place in the address book.
+ * Adds new tags to an existing food place in BiteBuddy.
  */
 public class TagCommand extends Command {
 
@@ -115,5 +115,10 @@ public class TagCommand extends Command {
         TagCommand otherCommand = (TagCommand) other;
         return index.equals(otherCommand.index)
                 && newTags.equals(otherCommand.newTags);
+    }
+
+    @Override
+    public int hashCode() {
+        return index.hashCode() + newTags.hashCode();
     }
 }

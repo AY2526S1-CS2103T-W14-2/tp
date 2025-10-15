@@ -2,6 +2,7 @@ package seedu.bitebuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -95,10 +96,26 @@ public class DeleteCommandTest {
         assertFalse(deleteFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertNotEquals(deleteFirstCommand, null);
 
         // different foodplace -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+    }
+
+    @Test
+    public void hashcode() {
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_FOODPLACE);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_FOODPLACE);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_FOODPLACE);
+
+        // same object -> returns same hashcode
+        assertEquals(deleteFirstCommand.hashCode(), deleteFirstCommand.hashCode());
+
+        // same values -> returns same hashcode
+        assertEquals(deleteFirstCommand.hashCode(), deleteFirstCommandCopy.hashCode());
+
+        // different foodplace -> returns different hashcode
+        assertNotEquals(deleteFirstCommand.hashCode(), deleteSecondCommand.hashCode());
     }
 
     @Test

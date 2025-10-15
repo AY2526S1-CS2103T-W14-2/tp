@@ -6,13 +6,13 @@ import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
 import seedu.bitebuddy.model.Model;
 
 /**
- * Lists all foodplaces in the bitebuddy book to the user.
+ * Lists all foodplaces in the BiteBuddy to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all foodplaces in the bitebuddy book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all foodplaces in BiteBuddy. "
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all foodplaces";

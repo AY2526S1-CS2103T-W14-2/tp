@@ -3,6 +3,7 @@ package seedu.bitebuddy.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATASHOP;
@@ -26,6 +27,11 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
 
 public class AddCommandTest {
+
+    private static final Foodplace kfc = new FoodplaceBuilder().withName("kfc").build();
+    private static final Foodplace wokhey = new FoodplaceBuilder().withName("wokhey").build();
+    private static final AddCommand addKfcCommand = new AddCommand(kfc);
+    private static final AddCommand addWokheyCommand = new AddCommand(wokhey);
 
     @Test
     public void constructor_nullFoodplace_throwsNullPointerException() {
@@ -56,26 +62,36 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Foodplace alice = new FoodplaceBuilder().withName("Alice").build();
-        Foodplace bob = new FoodplaceBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addKfcCommand.equals(addKfcCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddCommand addKfcCommandCopy = new AddCommand(kfc);
+        assertTrue(addKfcCommand.equals(addKfcCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addKfcCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(addKfcCommand, null);
 
         // different foodplace -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addKfcCommand.equals(addWokheyCommand));
+    }
+
+    @Test
+    public void hashcode() {
+        AddCommand addKfcCommandCopy = new AddCommand(kfc);
+
+        // same object -> returns same hashcode
+        assertEquals(addKfcCommand.hashCode(), addKfcCommand.hashCode());
+
+        // same values -> returns same hashcode
+        assertEquals(addKfcCommand.hashCode(), addKfcCommandCopy.hashCode());
+
+        // different foodplace -> returns different hashcode
+        assertNotEquals(addKfcCommand.hashCode(), addWokheyCommand.hashCode());
     }
 
     @Test

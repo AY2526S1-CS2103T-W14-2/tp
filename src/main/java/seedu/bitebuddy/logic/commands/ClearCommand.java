@@ -6,14 +6,14 @@ import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.Model;
 
 /**
- * Clears the bitebuddy book.
+ * Clears all entries in BiteBuddy.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears BiteBuddy. "
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "BiteBuddy has been cleared!";
 
 
     @Override
