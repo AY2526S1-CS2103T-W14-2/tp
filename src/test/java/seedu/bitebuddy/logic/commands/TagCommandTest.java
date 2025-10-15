@@ -180,9 +180,9 @@ public class TagCommandTest {
         Set<Tag> tagSetFastFood = Set.of(TAG_FASTFOOD);
         Set<Tag> tagSetCheap = Set.of(TAG_CHEAP);
 
-        TagCommand tagFirstFastFood = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood);
-        TagCommand tagFirstFastFoodCopy = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood);
-        TagCommand tagSecondCheap = new TagCommand(INDEX_SECOND_FOODPLACE, tagSetCheap);
+        TagCommand tagFirstFastFood = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood, false);
+        TagCommand tagFirstFastFoodCopy = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood, false);
+        TagCommand tagSecondCheap = new TagCommand(INDEX_SECOND_FOODPLACE, tagSetCheap, false);
 
         // same object -> same hashcode
         assertEquals(tagFirstFastFood.hashCode(), tagFirstFastFood.hashCode());
