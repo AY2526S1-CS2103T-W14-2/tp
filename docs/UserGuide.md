@@ -263,7 +263,7 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Note**   | `note INDEX [NOTE]`<br> e.g., `note 1 Famous for their chicken rice!`
 **Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 6`
-**Tag**    | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br> e.g., `tag 1 FastFood Expdnsive`<br> e.g., `tag 1 /d FastFood`
+**Tag**    | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br> e.g., `tag 1 FastFood Expensive`<br> e.g., `tag 1 /d FastFood`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Clear**  | `clear`
 **Exit**   | `exit`
