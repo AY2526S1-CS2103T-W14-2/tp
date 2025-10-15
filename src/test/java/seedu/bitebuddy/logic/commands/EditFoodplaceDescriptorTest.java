@@ -4,16 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
-
-import org.junit.jupiter.api.Test;
-
 import seedu.bitebuddy.logic.commands.EditCommand.EditFoodplaceDescriptor;
 import seedu.bitebuddy.testutil.EditFoodplaceDescriptorBuilder;
 
@@ -32,31 +32,36 @@ public class EditFoodplaceDescriptorTest {
         assertNotEquals(DESC_MCRONALDS, null);
 
         // different types -> returns false
-        assertFalse(DESC_MCRONALDS.equals(5));
+        assertNotEquals(DESC_MCRONALDS, 5);
 
         // different values -> returns false
         assertFalse(DESC_MCRONALDS.equals(DESC_SWENSWAN));
 
         // different name -> returns false
-        EditCommand.EditFoodplaceDescriptor editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+        EditCommand.EditFoodplaceDescriptor editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
                 .withName(VALID_NAME_SWENSWAN).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different phone -> returns false
-        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withPhone(VALID_PHONE_SWENSWAN).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withPhone(VALID_PHONE_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different email -> returns false
-        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withEmail(VALID_EMAIL_SWENSWAN).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withEmail(VALID_EMAIL_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different bitebuddy -> returns false
-        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withAddress(VALID_ADDRESS_SWENSWAN).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+                .withAddress(VALID_ADDRESS_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different tags -> returns false
-        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withTags(VALID_TAG_RESTAURANT).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withTags(VALID_TAG_RESTAURANT).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different note -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withNote(VALID_NOTE_FAMOUS).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
     }
 
     @Test
@@ -67,7 +72,8 @@ public class EditFoodplaceDescriptorTest {
                 + editFoodplaceDescriptor.getPhone().orElse(null) + ", email="
                 + editFoodplaceDescriptor.getEmail().orElse(null) + ", address="
                 + editFoodplaceDescriptor.getAddress().orElse(null) + ", tags="
-                + editFoodplaceDescriptor.getTags().orElse(null) + ", rate="
+                + editFoodplaceDescriptor.getTags().orElse(null) + ", note="
+                + editFoodplaceDescriptor.getNote().orElse(null) + ", rate="
                 + editFoodplaceDescriptor.getRate().orElse(null) + "}";
         assertEquals(expected, editFoodplaceDescriptor.toString());
     }

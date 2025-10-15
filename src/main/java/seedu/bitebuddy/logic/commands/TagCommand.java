@@ -21,12 +21,23 @@ public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds new tag(s) to the foodplace identified "
-            + "by the index number used in the displayed foodplace list. "
-            + "Existing tags will be preserved, and duplicate tags (case-insensitive) will be ignored.\n"
-            + "Note: Tags cannot contain spaces.\n"
-            + "Parameters: INDEX (must be a positive integer) TAG1 [TAG2]...\n"
-            + "Example: " + COMMAND_WORD + " 3 FastFood Expensive";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds or deletes tag(s) for the foodplace "
+            + "identified by the index number shown in the displayed foodplace list.\n"
+            + "Existing tags will be preserved when adding, and duplicate tags (case-insensitive) will be ignored.\n"
+            + "\n"
+            + "Format:\n"
+            + "  " + COMMAND_WORD + " INDEX TAG1 [TAG2]...      -> Add new tag(s)\n"
+            + "  " + COMMAND_WORD + " INDEX /d                  -> Delete all tags\n"
+            + "  " + COMMAND_WORD + " INDEX /d TAG1 [TAG2]...   -> Delete only the specified tag(s)\n"
+            + "\n"
+            + "Note:\n"
+            + "  • Tags must be alphanumeric (letters and numbers only).\n"
+            + "  • Tags cannot contain spaces.\n"
+            + "\n"
+            + "Examples:\n"
+            + "  " + COMMAND_WORD + " 3 FastFood Expensive\n"
+            + "  " + COMMAND_WORD + " 1 /d FastFood\n"
+            + "  " + COMMAND_WORD + " 2 /d";
 
 
     public static final String MESSAGE_SUCCESS = "Updated tags for Foodplace: %1$s";
@@ -35,16 +46,18 @@ public class TagCommand extends Command {
 
     private final Index index;
     private final Set<Tag> newTags;
+    private final boolean isDelete;
 
     /**
      * @param index of the foodplace in the foodplace list to add new tags
      * @param newTags of the foodplace to be added to
      */
-    public TagCommand(Index index, Set<Tag> newTags) {
+    public TagCommand(Index index, Set<Tag> newTags, boolean isDelete) {
         requireNonNull(index);
         requireNonNull(newTags);
         this.index = index;
         this.newTags = newTags;
+        this.isDelete = isDelete;
     }
 
     @Override
@@ -58,9 +71,19 @@ public class TagCommand extends Command {
 
         Foodplace foodplaceToEdit = lastShownList.get(index.getZeroBased());
 
-        // Combine existing + new tags
+        // Already existing tags
         Set<Tag> updatedTags = new HashSet<>(foodplaceToEdit.getTags());
-        updatedTags.addAll(newTags);
+
+        // if the command is for deleting (/d).
+        if (isDelete) {
+            // if user do not put any tags after d/ then delete all tags.
+            if (newTags.isEmpty()) {
+                updatedTags.clear();
+            }
+            updatedTags.removeAll(newTags);
+        } else {
+            updatedTags.addAll(newTags);
+        }
 
         // Create a new Foodplace with updated tags, keeping all other fields the same
         Foodplace updatedFoodplace = new Foodplace(

@@ -1,16 +1,16 @@
 package seedu.bitebuddy.testutil;
 
-import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
-import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
-
 import java.util.Set;
 
 import seedu.bitebuddy.logic.commands.AddCommand;
 import seedu.bitebuddy.logic.commands.EditCommand;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.tag.Tag;
 
@@ -35,8 +35,9 @@ public class FoodplaceUtil {
         sb.append(PREFIX_PHONE).append(foodplace.getPhone().value).append(" ");
         sb.append(PREFIX_EMAIL).append(foodplace.getEmail().value).append(" ");
         sb.append(PREFIX_ADDRESS).append(foodplace.getAddress().value).append(" ");
-        sb.append(PREFIX_RATE).append(String.valueOf(foodplace.getRate().getValue())).append(" ");
         foodplace.getTags().stream().forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+        sb.append(PREFIX_NOTE).append(foodplace.getNote().value).append(" ");
+        sb.append(PREFIX_RATE).append(String.valueOf(foodplace.getRate().getValue())).append(" ");
         return sb.toString();
     }
 
@@ -49,6 +50,7 @@ public class FoodplaceUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getNote().ifPresent(note -> sb.append(PREFIX_NOTE).append(note.value).append(" "));
         descriptor.getRate()
                 .ifPresent(rate -> sb.append(PREFIX_RATE).append(String.valueOf(rate.getValue())).append(" "));
         if (descriptor.getTags().isPresent()) {

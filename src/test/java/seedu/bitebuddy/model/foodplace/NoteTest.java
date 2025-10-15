@@ -56,7 +56,7 @@ public class NoteTest {
         assertTrue(note.equals(note));
 
         // same values -> returns true
-        Note noteCopy = new Note(note.value);
+        Note noteCopy = new Note("Hello");
         assertTrue(note.equals(noteCopy));
 
         // different types -> returns false

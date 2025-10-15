@@ -45,6 +45,8 @@ public class Messages {
                 .append(foodplace.getAddress())
                 .append("; Tags: ");
         foodplace.getTags().forEach(builder::append);
+        builder.append("; Note: ")
+                .append(foodplace.getNote());
         return builder.toString();
     }
 
