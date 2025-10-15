@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.bitebuddy.commons.util.ToStringBuilder;
@@ -26,14 +28,18 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_NOTE + "NOTE] "
+            + "[" + PREFIX_RATE + "RATE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_NAME + "Prata place "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_EMAIL + "pratad@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "Indian "
+            + PREFIX_TAG + "Cheap "
+            + PREFIX_NOTE + "Famous for tandoori chicken "
+            + PREFIX_RATE + "9";
 
     public static final String MESSAGE_SUCCESS = "New foodplace added: %1$s";
     public static final String MESSAGE_DUPLICATE_FOODPLACE = "This foodplace already exists in the bitebuddy book";

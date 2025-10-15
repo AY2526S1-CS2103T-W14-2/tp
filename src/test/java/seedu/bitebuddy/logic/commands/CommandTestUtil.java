@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
@@ -51,12 +52,15 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_SWENSWAN = " " + PREFIX_ADDRESS + VALID_ADDRESS_SWENSWAN;
     public static final String TAG_DESC_FASTFOOD = " " + PREFIX_TAG + VALID_TAG_FASTFOOD;
     public static final String TAG_DESC_RESTAURANT = " " + PREFIX_TAG + VALID_TAG_RESTAURANT;
+    public static final String NOTE_DESC_MCRONALDS = " " + PREFIX_NOTE + VALID_NOTE_SERVICE;
+    public static final String NOTE_DESC_SWENSWAN = " " + PREFIX_NOTE + VALID_NOTE_FAMOUS;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "kfc&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "bubbletea*"; // '*' not allowed in tags
+    public static final String INVALID_NOTE_DESC = " " + PREFIX_NOTE + "Nice place! \u0081";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

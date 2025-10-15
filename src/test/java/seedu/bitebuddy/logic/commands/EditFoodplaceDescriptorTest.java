@@ -8,6 +8,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 
@@ -37,25 +38,30 @@ public class EditFoodplaceDescriptorTest {
         assertFalse(DESC_MCRONALDS.equals(DESC_SWENSWAN));
 
         // different name -> returns false
-        EditCommand.EditFoodplaceDescriptor editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+        EditCommand.EditFoodplaceDescriptor editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
                 .withName(VALID_NAME_SWENSWAN).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different phone -> returns false
-        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withPhone(VALID_PHONE_SWENSWAN).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withPhone(VALID_PHONE_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different email -> returns false
-        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withEmail(VALID_EMAIL_SWENSWAN).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withEmail(VALID_EMAIL_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different bitebuddy -> returns false
-        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withAddress(VALID_ADDRESS_SWENSWAN).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+                .withAddress(VALID_ADDRESS_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
 
         // different tags -> returns false
-        editedAmy = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withTags(VALID_TAG_RESTAURANT).build();
-        assertFalse(DESC_MCRONALDS.equals(editedAmy));
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withTags(VALID_TAG_RESTAURANT).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different note -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withNote(VALID_NOTE_FAMOUS).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
     }
 
     @Test
@@ -66,7 +72,8 @@ public class EditFoodplaceDescriptorTest {
                 + editFoodplaceDescriptor.getPhone().orElse(null) + ", email="
                 + editFoodplaceDescriptor.getEmail().orElse(null) + ", bitebuddy="
                 + editFoodplaceDescriptor.getAddress().orElse(null) + ", tags="
-                + editFoodplaceDescriptor.getTags().orElse(null) + "}";
+                + editFoodplaceDescriptor.getTags().orElse(null) + ", note="
+                + editFoodplaceDescriptor.getNote().orElse(null) + "}";
         assertEquals(expected, editFoodplaceDescriptor.toString());
     }
 }

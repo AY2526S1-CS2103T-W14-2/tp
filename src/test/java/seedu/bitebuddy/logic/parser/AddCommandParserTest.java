@@ -12,6 +12,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.NOTE_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -21,6 +22,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_RESTAURANT
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
@@ -65,6 +67,15 @@ public class AddCommandParserTest {
                 NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
                         + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD,
                 new AddCommand(expectedFoodplaceMultipleTags));
+
+        // with notes
+        Foodplace expectedFoodplaceNotes = new FoodplaceBuilder(SWENSWAN).withTags(VALID_TAG_FASTFOOD,
+                        VALID_TAG_RESTAURANT).withNote(VALID_NOTE_FAMOUS)
+                .build();
+        assertParseSuccess(parser,
+                NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
+                        + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD + NOTE_DESC_SWENSWAN,
+                new AddCommand(expectedFoodplaceNotes));
     }
 
     @Test

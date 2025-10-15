@@ -8,9 +8,11 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_SWENSWAN
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_NOTE_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.NOTE_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_FASTFOOD;
@@ -18,6 +20,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_RESTAURANT
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_SERVICE;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
@@ -40,6 +43,7 @@ import seedu.bitebuddy.logic.commands.EditCommand;
 import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Name;
+import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.tag.Tag;
 import seedu.bitebuddy.testutil.EditFoodplaceDescriptorBuilder;
@@ -97,6 +101,9 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_DESC_FASTFOOD + TAG_EMPTY + TAG_DESC_RESTAURANT, Tag.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FASTFOOD + TAG_DESC_RESTAURANT, Tag.MESSAGE_CONSTRAINTS);
 
+        // invalid note
+        assertParseFailure(parser, "1" + INVALID_NOTE_DESC, Note.MESSAGE_CONSTRAINTS); // invalid phone
+
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_MCRONALDS
                 + VALID_PHONE_MCRONALDS, Name.MESSAGE_CONSTRAINTS);
@@ -106,11 +113,13 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_FOODPLACE;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_SWENSWAN + TAG_DESC_RESTAURANT
-                + EMAIL_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS + NAME_DESC_MCRONALDS + TAG_DESC_FASTFOOD;
+                + EMAIL_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS + NAME_DESC_MCRONALDS + TAG_DESC_FASTFOOD
+                + NOTE_DESC_MCRONALDS;
 
         EditCommand.EditFoodplaceDescriptor descriptor = new EditFoodplaceDescriptorBuilder()
                 .withName(VALID_NAME_MCRONALDS).withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_MCRONALDS)
-                .withAddress(VALID_ADDRESS_MCRONALDS).withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD).build();
+                .withAddress(VALID_ADDRESS_MCRONALDS).withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD)
+                .withNote(VALID_NOTE_SERVICE).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -159,6 +168,12 @@ public class EditCommandParserTest {
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FASTFOOD;
         descriptor = new EditFoodplaceDescriptorBuilder().withTags(VALID_TAG_FASTFOOD).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // note
+        userInput = targetIndex.getOneBased() + NOTE_DESC_MCRONALDS;
+        descriptor = new EditFoodplaceDescriptorBuilder().withNote(VALID_NOTE_SERVICE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

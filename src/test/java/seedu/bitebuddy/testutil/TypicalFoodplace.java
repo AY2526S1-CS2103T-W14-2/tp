@@ -6,6 +6,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MCRONAL
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
@@ -57,7 +58,7 @@ public class TypicalFoodplace {
             .withTags(VALID_TAG_FASTFOOD).build();
     public static final Foodplace SWENSWAN = new FoodplaceBuilder().withName(VALID_NAME_SWENSWAN)
             .withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
-            .withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD).build();
+            .withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD).withNote(VALID_NOTE_FAMOUS).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
