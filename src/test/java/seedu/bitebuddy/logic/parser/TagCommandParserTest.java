@@ -27,7 +27,7 @@ public class TagCommandParserTest {
         String input = "1 FastFood";
         Set<Tag> expectedTags = new HashSet<>();
         expectedTags.add(new Tag("FastFood"));
-        TagCommand expectedCommand = new TagCommand(Index.fromOneBased(1), expectedTags);
+        TagCommand expectedCommand = new TagCommand(Index.fromOneBased(1), expectedTags, false);
 
         assertEquals(expectedCommand, parser.parse(input));
     }
@@ -39,7 +39,7 @@ public class TagCommandParserTest {
         expectedTags.add(new Tag("Cheap"));
         expectedTags.add(new Tag("Popular"));
         expectedTags.add(new Tag("Local"));
-        TagCommand expectedCommand = new TagCommand(Index.fromOneBased(2), expectedTags);
+        TagCommand expectedCommand = new TagCommand(Index.fromOneBased(2), expectedTags, false);
 
         assertEquals(expectedCommand, parser.parse(input));
     }
@@ -81,8 +81,45 @@ public class TagCommandParserTest {
         Set<Tag> expectedTags = new HashSet<>();
         expectedTags.add(new Tag("FastFood"));
         expectedTags.add(new Tag("cheap"));
-        TagCommand expectedCommand = new TagCommand(Index.fromOneBased(1), expectedTags);
+        TagCommand expectedCommand = new TagCommand(Index.fromOneBased(1), expectedTags, false);
 
         assertEquals(expectedCommand, parser.parse(input));
     }
+
+    @Test
+    public void parse_deleteAllTags_success() throws Exception {
+        String input = "1 /d";
+        Set<Tag> expectedTags = new HashSet<>();
+        TagCommand expectedCommand = new TagCommand(Index.fromOneBased(1), expectedTags, true);
+
+        assertEquals(expectedCommand, parser.parse(input));
+    }
+
+    @Test
+    public void parse_deleteSpecificTags_success() throws Exception {
+        String input = "2 /d FastFood Cheap";
+        Set<Tag> expectedTags = new HashSet<>();
+        expectedTags.add(new Tag("FastFood"));
+        expectedTags.add(new Tag("Cheap"));
+
+        TagCommand expectedCommand = new TagCommand(Index.fromOneBased(2), expectedTags, true);
+        assertEquals(expectedCommand, parser.parse(input));
+    }
+
+    @Test
+    public void parse_deleteNoArgsAfterIndex_throwsParseException() {
+        String input = "3";
+        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(input));
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE),
+                exception.getMessage());
+    }
+
+    @Test
+    public void parse_deleteFlagButNoIndex_throwsParseException() {
+        String input = "/d";
+        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(input));
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE),
+                exception.getMessage());
+    }
+
 }

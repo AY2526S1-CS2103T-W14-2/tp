@@ -47,7 +47,7 @@ public class TagCommandTest {
                 .withTags(expectedTags.stream().map(tag -> tag.tagName).toArray(String[]::new))
                 .build();
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(TAG_FASTFOOD, TAG_CHEAP));
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(TAG_FASTFOOD, TAG_CHEAP), false);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, Messages.format(editedFoodplace));
 
@@ -60,7 +60,7 @@ public class TagCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFoodplaceList().size() + 1);
-        TagCommand tagCommand = new TagCommand(outOfBoundIndex, Set.of(TAG_FASTFOOD));
+        TagCommand tagCommand = new TagCommand(outOfBoundIndex, Set.of(TAG_FASTFOOD), false);
 
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
     }
@@ -74,10 +74,10 @@ public class TagCommandTest {
         expectedTags.add(TAG_FASTFOOD);
 
         Foodplace editedFoodplace = new FoodplaceBuilder(targetFoodplace)
-                .withTags(expectedTags.stream().map(tag -> tag.tagName).toArray(String[]::new))
-                .build();
+            .withTags(expectedTags.stream().map(tag -> tag.tagName).toArray(String[]::new))
+            .build();
 
-        TagCommand tagCommand = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(TAG_FASTFOOD));
+        TagCommand tagCommand = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(TAG_FASTFOOD), false);
 
         String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, Messages.format(editedFoodplace));
 
@@ -93,21 +93,69 @@ public class TagCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_FOODPLACE;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFoodplaceList().size());
 
-        TagCommand tagCommand = new TagCommand(outOfBoundIndex, Set.of(TAG_FASTFOOD));
+        TagCommand tagCommand = new TagCommand(outOfBoundIndex, Set.of(TAG_FASTFOOD), false);
         assertCommandFailure(tagCommand, model, Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
     }
+
+    @Test
+    public void execute_deleteSpecificTag_success() {
+        Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+
+        Foodplace tagged = new FoodplaceBuilder(foodplace).withTags("FastFood", "Cheap").build();
+        model.setFoodplace(foodplace, tagged);
+
+        Foodplace expected = new FoodplaceBuilder(tagged).withTags("Cheap").build();
+
+        TagCommand command = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(new Tag("FastFood")), true);
+        String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, Messages.format(expected));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFoodplace(tagged, expected);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteAllTags_success() {
+        Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+
+        Foodplace tagged = new FoodplaceBuilder(foodplace).withTags("FastFood", "Cheap").build();
+        model.setFoodplace(foodplace, tagged);
+
+        Foodplace expected = new FoodplaceBuilder(tagged).withTags().build();
+
+        TagCommand command = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(), true);
+        String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, Messages.format(expected));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFoodplace(tagged, expected);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteNonExistentTag_noChange() {
+        Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        TagCommand command = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(new Tag("NonExistent")), true);
+
+        String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, Messages.format(foodplace));
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
 
     @Test
     public void equals() {
         Set<Tag> tagSetFastFood = Set.of(TAG_FASTFOOD);
         Set<Tag> tagSetCheap = Set.of(TAG_CHEAP);
 
-        TagCommand tagFirstFastFood = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood);
-        TagCommand tagFirstCheap = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetCheap);
-        TagCommand tagSecondFastFood = new TagCommand(INDEX_SECOND_FOODPLACE, tagSetFastFood);
+        TagCommand tagFirstFastFood = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood, true);
+        TagCommand tagFirstCheap = new TagCommand(INDEX_FIRST_FOODPLACE, tagSetCheap, true);
+        TagCommand tagSecondFastFood = new TagCommand(INDEX_SECOND_FOODPLACE, tagSetFastFood, false);
 
         // same values -> true
-        assertTrue(tagFirstFastFood.equals(new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood)));
+        assertTrue(tagFirstFastFood.equals(new TagCommand(INDEX_FIRST_FOODPLACE, tagSetFastFood, true)));
 
         // same object -> true
         assertTrue(tagFirstFastFood.equals(tagFirstFastFood));
