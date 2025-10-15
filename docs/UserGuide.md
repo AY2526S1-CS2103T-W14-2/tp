@@ -103,6 +103,20 @@ Shows a list of all foodplaces in the address book.
 
 Format: `list`
 
+### Deleting a foodplace : `delete`
+
+Deletes the specified foodplace from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the foodplace at the specified `INDEX`.
+* The index refers to the index number shown in the displayed foodplace list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd foodplace in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st foodplace in the results of the `find` command.
+
 ### Editing a foodplace : `edit`
 
 Edits an existing foodplace in the address book.
@@ -127,7 +141,7 @@ Adds / edits the note of an existing foodplace in the address book.
 Format: `note INDEX [note]`
 
 * Edits the foodplace at the specified `INDEX`. The index refers to the index number shown in the displayed foodplace list. The index **must be a positive integer** 1, 2, 3, …​
-* You can remove the foodplace’s notes by typing not specifying any notes after `INDEX`.
+* You can remove the foodplace’s notes by not specifying any notes after `INDEX`.
 * Note have a maximum character limit of 100.
 * Note only allows ASCII-printable characters. You may refer to [here](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm) for the characters that are accepted.
 
@@ -151,20 +165,6 @@ Examples:
 * `find prata` returns `Prata Place` and `The Prata House`
 * `find delivery 5` returns foodplaces with either “delivery” or “5” appearing in any field<br>
   ![result for 'find delivery 5'](images/findDelivery5Result.png)
-
-### Deleting a foodplace : `delete`
-
-Deletes the specified foodplace from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the foodplace at the specified `INDEX`.
-* The index refers to the index number shown in the displayed foodplace list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd foodplace in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st foodplace in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -217,10 +217,13 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Help**   | `help`
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
+**List**   | `list`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Note**   | `note INDEX [NOTE]`<br> e.g., `note 1 Famous for their chicken rice!`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+**Clear**  | `clear`
+
+
