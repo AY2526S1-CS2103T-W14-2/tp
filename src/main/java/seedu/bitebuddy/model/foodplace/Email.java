@@ -39,9 +39,12 @@ public class Email {
      * @param email A valid email bitebuddy.
      */
     public Email(String email) {
-        requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        if (!email.isEmpty()) {
+            checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+            value = email;
+        } else {
+            value = "";
+        }
     }
 
     /**
@@ -53,7 +56,7 @@ public class Email {
 
     @Override
     public String toString() {
-        return value;
+        return value == null ? "" : value;
     }
 
     @Override

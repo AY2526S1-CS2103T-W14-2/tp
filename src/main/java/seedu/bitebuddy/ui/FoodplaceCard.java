@@ -53,11 +53,15 @@ public class FoodplaceCard extends UiPart<Region> {
         this.foodplace = foodplace;
         id.setText(displayedIndex + ". ");
         name.setText(foodplace.getName().fullName);
-        phone.setText(foodplace.getPhone().value);
+        phone.setText(String.valueOf(
+                !(foodplace.getPhone().value.isEmpty()) ? foodplace.getPhone().value : "## No phone number yet ##"
+        ));
         address.setText(foodplace.getAddress().value);
-        email.setText(foodplace.getEmail().value);
+        email.setText(String.valueOf(
+                !(foodplace.getEmail().value.isEmpty()) ? foodplace.getEmail().value : "\\\\ No email yet //"
+        ));
         note.setText(String.valueOf(
-                foodplace.getNote().value.length() != 0 ? foodplace.getNote().value : "-- No notes yet --"
+                !(foodplace.getNote().value.isEmpty()) ? foodplace.getNote().value : "-- No notes yet --"
         ));
         foodplace.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
