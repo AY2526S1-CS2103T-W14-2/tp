@@ -1,6 +1,7 @@
 package seedu.bitebuddy.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.bitebuddy.storage.JsonAdaptedFoodplace.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.DAEBAKSHOP;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Email;
+import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
@@ -84,6 +86,21 @@ public class JsonAdaptedFoodplaceTest {
                         VALID_RATING);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
+    }
+
+    @Test
+    public void toModelType_validEmailAndAddress_success() {
+        JsonAdaptedFoodplace foodplace =
+                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_NOTE,
+                        VALID_RATING);
+        Foodplace model;
+        try {
+            model = foodplace.toModelType();
+            assertEquals(VALID_EMAIL, model.getEmail().value);
+            assertEquals(VALID_ADDRESS, model.getAddress().value);
+        } catch (IllegalValueException e) {
+            fail();
+        }
     }
 
     @Test
