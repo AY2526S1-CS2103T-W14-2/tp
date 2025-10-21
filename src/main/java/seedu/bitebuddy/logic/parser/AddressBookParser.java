@@ -19,6 +19,7 @@ import seedu.bitebuddy.logic.commands.HelpCommand;
 import seedu.bitebuddy.logic.commands.ListCommand;
 import seedu.bitebuddy.logic.commands.NoteCommand;
 import seedu.bitebuddy.logic.commands.RateCommand;
+import seedu.bitebuddy.logic.commands.PinCommand;
 import seedu.bitebuddy.logic.commands.TagCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
@@ -87,6 +88,8 @@ public class AddressBookParser {
             return new TagCommandParser().parse(arguments);
         case RateCommand.COMMAND_WORD:
             return new RateCommandParser().parse(arguments);
+        case PinCommand.COMMAND_WORD:
+            return new PinCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -20,9 +20,10 @@ public class Foodplace {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Address address;
 
     // Data fields
-    private final Address address;
+    private final Pinned pinned;
 
     // Optional fields
     private final Set<Tag> tags = new HashSet<>();
@@ -41,6 +42,20 @@ public class Foodplace {
         this.tags.addAll(tags);
         this.note = note;
         this.rate = rate;
+        this.pinned = new Pinned(false);
+    }
+
+    public Foodplace(Name name, Phone phone, Email email, Address address,
+                     Set<Tag> tags, Note note, Rate rate, Pinned pinned) {
+        requireAllNonNull(name, phone, email, address, tags, pinned);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.note = note;
+        this.rate = rate;
+        this.pinned = pinned;
     }
 
     public Name getName() {
@@ -74,6 +89,8 @@ public class Foodplace {
     public Rate getRate() {
         return rate;
     }
+
+    public Pinned getPinned() { return pinned; }
 
     /**
      * Returns true if both foodplaces have the same name.

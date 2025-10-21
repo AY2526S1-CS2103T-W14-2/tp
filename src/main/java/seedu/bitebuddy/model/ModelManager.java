@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.bitebuddy.commons.core.GuiSettings;
 import seedu.bitebuddy.commons.core.LogsCenter;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -21,6 +22,8 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final ObservableList<Foodplace> observableFoodplaces;
+    private final SortedList<Foodplace> sortedFoodplaces;
     private final FilteredList<Foodplace> filteredFoodplaces;
 
     /**
@@ -33,7 +36,19 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredFoodplaces = new FilteredList<>(this.addressBook.getFoodplaceList());
+        observableFoodplaces = this.addressBook.getFoodplaceList();
+        sortedFoodplaces = new SortedList<>(observableFoodplaces,
+                (fp1, fp2) -> {
+                    int cmp = Boolean.compare(fp2.getPinned().isPinned, fp1.getPinned().isPinned);
+                    if (cmp != 0) {
+                        return cmp;
+                    }
+                    return Integer.compare(
+                            observableFoodplaces.indexOf(fp1),
+                            observableFoodplaces.indexOf(fp2)
+                    );
+                });
+        filteredFoodplaces = new FilteredList<>(sortedFoodplaces);
     }
 
     public ModelManager() {
