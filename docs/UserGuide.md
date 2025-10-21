@@ -13,33 +13,42 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+Follow these steps to install and start using **BiteBuddy**!
+
+### Step 1 — Check Java Version
+- Ensure you have Java `17` or above installed on your computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+- To check your version, open a terminal and type: `java -version`
+![Check Java Version](images/java_version.png)
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+### Step 2 — Download and Run BiteBuddy
+1. Go to our [GitHub Releases page](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases).
+2. Download the latest file named **`bitebuddy.jar`**.
+   ![Download BiteBuddy.jar](images/download_jar.png)
+3. Copy the file to the folder you want to use as the _home folder_ for your BiteBuddy.
+4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar BiteBuddy.jar` to launch the application.<br>
+   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.
+   ![Open_in_Terminal](images/open_in_terminal.png)
+   A GUI similar to the one below should appear within a few seconds. It comes preloaded with sample data for you to explore. <br>
+   ![Ui](images/Ui_image.png) 
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+### Step 3 — Try Out a Command!
+- Type the command in the Command Box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.  
+  Here are some example commands you can try:
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   * `list` : Lists all foodplaces.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+   * `add n/KFC a/John street, block 123, #01-01 t/FastFood t/Chicken r/8` : Adds the foodplace *KFC* to BiteBuddy.
 
-   * `list` : Lists all contacts.
+   * `delete 3` : Deletes the 3rd foodplace shown in the current list.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `clear` : Deletes all saved foodplaces.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `exit` : Exits BiteBuddy.
 
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+- Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -232,16 +241,12 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous BiteBuddy home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
