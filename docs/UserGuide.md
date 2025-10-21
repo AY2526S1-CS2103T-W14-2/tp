@@ -86,6 +86,8 @@ Check out the [Quick Start](#quick-start) section right below!
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+---
+
 ### Viewing help : `help`
 
 Displays detailed information about BiteBuddy or specific commands.
@@ -107,6 +109,7 @@ Examples:
 * `help` shows the help page
 * `help add` shows the usage for the `add` command
 
+---
 
 ### Adding a foodplace: `add`
 
@@ -128,6 +131,10 @@ Examples:
 * `add n/McRonalds a/John street, block 123, #01-01`
 * `add n/Sisters Ramen a/International Plaza, #01-20 t/Ramen e/info@sisramen.com p/68765431 t/Soup`
 
+<image src="images/ug_add.png">
+
+---
+
 ### Listing all foodplaces : `list`
 
 Shows a list of all foodplace entries in BiteBuddy.
@@ -138,6 +145,10 @@ Format: `list`
 list: Lists all foodplaces in BiteBuddy.
 Example: list
 ```
+
+<image src="images/ug_list.png">
+
+---
 
 ### Deleting a foodplace : `delete`
 
@@ -158,6 +169,10 @@ Example: delete 1
 Examples:
 * `list` followed by `delete 2` deletes the 2nd foodplace.
 * `find Betsy` followed by `delete 1` deletes the 1st foodplace in the results of the `find` command.
+
+<image src="images/ug_delete.png">
+
+---
 
 ### Editing a foodplace : `edit`
 
@@ -184,6 +199,10 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st foodplace to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` edits the name of the 2nd foodplace to be `Betsy Crower` and deletes all existing tags.
 
+<image src="images/ug_edit.png">
+
+---
+
 ### Adding a note to a foodplace : `note`
 
 Adds / edits the note of an existing foodplace in BiteBuddy.
@@ -209,6 +228,10 @@ Examples:
 * `note 2 Good customer service!` adds / updates the note of the 2nd foodplace to be `Good customer service!`.
 * `note 2` removes any notes of the 2nd foodplace.
 
+<image src="images/ug_note.png">
+
+---
+
 ### Rate a foodplace : `rate`
 
 Adds / edits a rating from the specified foodplace in BiteBuddy.
@@ -232,6 +255,10 @@ Examples:
 * `rate 3 0` sets the 3rd foodplace to have its current rating removed.
 * `rate 1 5` followed by `rate 1 8` sets the 1st foodplace to have its current rating to `5`
   first then to `8`.
+
+<image src="images/ug_rate.png">
+
+---
 
 ### Adding a tag a foodplace : `tag`
 
@@ -263,6 +290,10 @@ Examples:
 **Tip:** Using `tag INDEX /d` without specifying any tags will remove all tags from the selected foodplace.
 </box>
 
+<image src="images/ug_tag.png">
+
+---
+
 ### Locating foodplaces by name: `find`
 
 Finds foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords.
@@ -284,7 +315,10 @@ Example: find western cheap aircon
 Examples:
 * `find prata` returns `Prata Place` and `The Prata House`.
 * `find delivery 5` returns foodplaces with either “delivery” or “5” appearing in any field.<br>
-  ![result for 'find delivery 5'](images/findDelivery5Result.png)
+
+<image src="images/ug_find.png">
+
+---
 
 ### Clearing all entries : `clear`
 
@@ -297,6 +331,8 @@ clear: Clears BiteBuddy.
 Example: clear
 ```
 
+---
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -307,6 +343,8 @@ Format: `exit`
 exit: Exits the program.
 Example: exit
 ```
+
+---
 
 ### Saving the data
 
