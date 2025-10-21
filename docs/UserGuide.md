@@ -4,9 +4,28 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# BiteBuddy User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+_Have you ever tried thinking back to that amazing food place you had before, but couldn't quite get a hold of it before it slipped your mind?_<br>
+_Or maybe you've just visited the hottest new street, but didn't have enough time to try everything you wanted?_<br>
+
+_Not to worry, because your **BiteBuddy** is here!_
+
+BiteBuddy (BB) is our **food-place tracking app for recording all your food places, optimized for use via a Command Line Interface** (CLI).  While still having the benefits of a Graphical User Interface (GUI), BiteBuddy is a CLI-oriented application, meaning the faster you type, the faster BiteBuddy goes!<br>
+BiteBuddy is **designed by foodies, for the foodies**! Add your go-to _(and not so favourite)_ food places so that you know exactly where to revisit _(and to avoid)_ in future! BiteBuddy minimally requires the name and address of a place but for the more adventurous users, you can expand more on the place such as:
+- Jotting additional notes!
+- Tagging your entries for identifying overlaps between places with a quick glance!
+- Adding a rating so you know exactly where that restaurant stands in your own records!
+- and more!
+
+<br>For the power users, there are even more things to explore, including:
+- Adding new food places with all additional features in one inline command
+- Finding keyword matches across all your food places in a blink of an eye
+- Edit any entry any time to fix those pesky typos
+- Use the 'Find' command to filter results, before chaining the 'Edit' command on the filtered results!
+
+Curious? Give the app a try!<br>
+Check out the [Quick Start](#quick-start) section right below!
 
 <!-- * Table of Contents -->
 <page-nav-print />
