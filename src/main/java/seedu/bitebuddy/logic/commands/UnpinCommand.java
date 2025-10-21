@@ -13,26 +13,25 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Pinned;
 
-public class PinCommand extends Command{
+public class UnpinCommand extends Command{
 
-    public static final String COMMAND_WORD = "pin";
+    public static final String COMMAND_WORD = "unpin";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins the foodplace identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unpins the foodplace identified "
             + "by the index number used in the last foodplace listing. "
             + "Parameters: INDEX (must be a positive integer) "
-            + "pin [INDEX]\n"
+            + "unpin [INDEX]\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_PIN_FOODPLACE_SUCCESS = "Pinned foodplace: %1$s";
-    public static final String MESSAGE_ALREADY_PINNED = "This foodplace is already pinned";
-    public static final String MESSAGE_MAX_PIN_REACHED = "Maximum of 5 pins";
+    public static final String MESSAGE_UNPIN_FOODPLACE_SUCCESS = "Unpinned foodplace: %1$s";
+    public static final String MESSAGE_NOT_PINNED = "This foodplace was not pinned";
 
     private final Index index;
 
     /**
      * @param index of the foodplace in the filtered foodplace list to pin
      */
-    public PinCommand(Index index) {
+    public UnpinCommand(Index index) {
         requireAllNonNull(index);
 
         this.index = index;
@@ -46,30 +45,26 @@ public class PinCommand extends Command{
             throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
         }
 
-        Foodplace foodplaceToPin = lastShownList.get(index.getZeroBased());
+        Foodplace foodplaceToUnpin = lastShownList.get(index.getZeroBased());
 
-        if (Pinned.getCount() > 5)  {
-            return new CommandResult(MESSAGE_MAX_PIN_REACHED);
+        if (!foodplaceToUnpin.getPinned().isPinned) {
+            return new CommandResult(MESSAGE_NOT_PINNED);
         }
 
-        if (foodplaceToPin.getPinned().isPinned) {
-            return new CommandResult(MESSAGE_ALREADY_PINNED);
-        }
+        Foodplace unpinnedFoodplace = unpinFoodplace(foodplaceToUnpin);
+        Pinned.decrementCount();
 
-        Foodplace pinnedFoodplace = pinFoodplace(foodplaceToPin);
-        Pinned.incrementCount();
-
-        model.setFoodplace(foodplaceToPin, pinnedFoodplace);
+        model.setFoodplace(foodplaceToUnpin, unpinnedFoodplace);
 
         model.updateFilteredFoodplaceList(PREDICATE_SHOW_PINNED_FOODPLACES);
 
-        return new CommandResult(String.format(MESSAGE_PIN_FOODPLACE_SUCCESS, Messages.format(pinnedFoodplace)));
+        return new CommandResult(String.format(MESSAGE_UNPIN_FOODPLACE_SUCCESS, Messages.format(unpinnedFoodplace)));
     }
 
-    private static Foodplace pinFoodplace(Foodplace fp) {
+    private static Foodplace unpinFoodplace(Foodplace fp) {
         assert fp != null;
         return new Foodplace(fp.getName(), fp.getPhone(), fp.getEmail(), fp.getAddress(),
-                fp.getTags(), fp.getNote(), fp.getRate(), new Pinned(true));
+                fp.getTags(), fp.getNote(), fp.getRate(), new Pinned(false));
     }
 
     @Override
@@ -79,12 +74,12 @@ public class PinCommand extends Command{
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PinCommand)) {
+        if (!(other instanceof UnpinCommand)) {
             return false;
         }
 
-        PinCommand otherPinCommand = (PinCommand) other;
-        return index.equals(otherPinCommand.index);
+        UnpinCommand otherUnpinCommand = (UnpinCommand) other;
+        return index.equals(otherUnpinCommand.index);
     }
 
     @Override
