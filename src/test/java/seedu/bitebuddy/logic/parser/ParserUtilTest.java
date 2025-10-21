@@ -107,6 +107,13 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parsePhone_emptyPhone_returnsEmptyPhone() throws Exception {
+        String emptyPhone = "";
+        Phone expectedPhone = new Phone(emptyPhone);
+        assertEquals(expectedPhone, ParserUtil.parsePhone(emptyPhone));
+    }
+
+    @Test
     public void parseAddress_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
     }
@@ -150,6 +157,13 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseEmail_emptyEmail_returnsEmptyEmail() throws Exception {
+        String emptyEmail = "";
+        Email expectedEmail = new Email(emptyEmail);
+        assertEquals(expectedEmail, ParserUtil.parseEmail(emptyEmail));
     }
 
     @Test
