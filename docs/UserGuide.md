@@ -176,7 +176,7 @@ Examples:
 * Executing `rate 1 5` then `rate 1 8` sets the 1st foodplace in the addressbook to have its current rating to `5`
   first then to `8`.
 
-### Adding a tag a foodplace : `tag`
+### Adding Tag(s) to a foodplace : `tag`
 
 Adds or removes one or more tags from the specified foodplace in the address book.
 
@@ -259,16 +259,16 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**   | `help [COMMAND]` <br> e.g., `help add`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**List**   | `list`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Note**   | `note INDEX [NOTE]`<br> e.g., `note 1 Famous for their chicken rice!`
-**Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 6`
-**Tag**    | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br> e.g., `tag 1 FastFood Expensive`<br> e.g., `tag 1 /d FastFood`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Clear**  | `clear`
-**Exit**   | `exit`
+Action     | Format     | Examples
+-----------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
+[**Help**](#viewing-help--help)   | `help [COMMAND]` | `help add`
+[**Add**](#adding-a-foodplace-add)  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+[**List**](#listing-all-foodplaces--list)   | `list` | `list`
+[**Delete**](#deleting-a-foodplace--delete) | `delete INDEX`<br> | `delete 3`
+[**Edit**](#editing-a-foodplace--edit)   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | `edit 2 n/James Lee e/jameslee@example.com`
+[**Note**](#adding-a-note-to-a-foodplace--note)   | `note INDEX [NOTE]`<br> | `note 1 Famous for their chicken rice!`
+[**Rate**](#rate-a-foodplace--rate)   | `rate INDEX RATING`<br> | `rate 1 6`
+[**Tag**](#adding-tags-to-a-foodplace--tag)   | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br> | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
+[**Find**](#locating-foodplaces-by-name-find)   | `find KEYWORD [MORE_KEYWORDS]`<br> | `find James Jake`
+[**Clear**](#clearing-all-entries--clear)  | `clear` | `clear`
+[**Exit**](#exiting-the-program--exit)  | `exit` | `exit`
