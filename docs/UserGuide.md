@@ -259,16 +259,16 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-Action     | Format     | Examples
------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
-[**Help**](#viewing-help--help)   | `help [COMMAND]` | `help add`
-[**Add**](#adding-a-foodplace-add)  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-[**List**](#listing-all-foodplaces--list)   | `list` | `list`
-[**Delete**](#deleting-a-foodplace--delete) | `delete INDEX`<br> | `delete 3`
-[**Edit**](#editing-a-foodplace--edit)   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | `edit 2 n/James Lee e/jameslee@example.com`
-[**Note**](#adding-a-note-to-a-foodplace--note)   | `note INDEX [NOTE]`<br> | `note 1 Famous for their chicken rice!`
-[**Rate**](#rate-a-foodplace--rate)   | `rate INDEX RATING`<br> | `rate 1 6`
-[**Tag**](#adding-tags-to-a-foodplace--tag)   | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br> | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
-[**Find**](#locating-foodplaces-by-name-find)   | `find KEYWORD [MORE_KEYWORDS]`<br> | `find James Jake`
-[**Clear**](#clearing-all-entries--clear)  | `clear` | `clear`
-[**Exit**](#exiting-the-program--exit)  | `exit` | `exit`
+Action     | Format                                                                     | Examples
+-----------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
+[**Help**](#viewing-help--help) | `help [COMMAND]`<br>                                                       | `help add`
+[**Add**](#adding-a-foodplace-add) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>               | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+[**List**](#listing-all-foodplaces--list) | `list`                                                                     | `list`
+[**Delete**](#deleting-a-foodplace--delete) | `delete INDEX`<br>                                                         | `delete 3`
+[**Edit**](#editing-a-foodplace--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | `edit 2 n/James Lee e/jameslee@example.com`
+[**Note**](#adding-a-note-to-a-foodplace--note)   | `note INDEX [NOTE]`<br>                                                    | `note 1 Famous for their chicken rice!`
+[**Rate**](#rate-a-foodplace--rate) | `rate INDEX RATING`<br>                                                    | `rate 1 6`
+[**Tag**](#adding-tags-to-a-foodplace--tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                   | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
+[**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br>                                         | `find James Jake`
+[**Clear**](#clearing-all-entries--clear) | `clear`                                                                    | `clear`
+[**Exit**](#exiting-the-program--exit) | `exit`                                                                     | `exit`
