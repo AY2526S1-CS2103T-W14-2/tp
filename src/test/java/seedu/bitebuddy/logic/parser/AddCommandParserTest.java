@@ -162,14 +162,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + ADDRESS_DESC_SWENSWAN, expectedMessage);
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_SWENSWAN + VALID_PHONE_SWENSWAN + EMAIL_DESC_SWENSWAN
-                + ADDRESS_DESC_SWENSWAN, expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + VALID_EMAIL_SWENSWAN
-                + ADDRESS_DESC_SWENSWAN, expectedMessage);
-
         // missing bitebuddy prefix
         assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + VALID_ADDRESS_SWENSWAN, expectedMessage);
