@@ -163,7 +163,7 @@ Examples:
 * `add n/McRonalds a/John street, block 123, #01-01`
 * `add n/Sisters Ramen a/International Plaza, #01-20 t/Ramen e/info@sisramen.com p/68765431 t/Soup`
 
-<image src="images/ug_add.png">
+![ug_add](images/ug_add.png)
 
 [Go to Command Summary](#command-summary)
 
@@ -180,7 +180,7 @@ list: Lists all foodplaces in BiteBuddy.
 Example: list
 ```
 
-<image src="images/ug_list.png">
+![ug_list](images/ug_list.png)
 
 [Go to Command Summary](#command-summary)
 
@@ -206,7 +206,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd foodplace.
 * `find Betsy` followed by `delete 1` deletes the 1st foodplace in the results of the `find` command.
 
-<image src="images/ug_delete.png">
+![ug_delete](images/ug_delete.png)
 
 [Go to Command Summary](#command-summary)
 
@@ -237,7 +237,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` edits the phone number and email address of the 1st foodplace to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` edits the name of the 2nd foodplace to be `Betsy Crower` and deletes all existing tags.
 
-<image src="images/ug_edit.png">
+![ug_edit](images/ug_edit.png)
 
 [Go to Command Summary](#command-summary)
 
@@ -268,7 +268,7 @@ Examples:
 * `note 2 Good customer service!` adds / updates the note of the 2nd foodplace to be `Good customer service!`.
 * `note 2` removes any notes of the 2nd foodplace.
 
-<image src="images/ug_note.png">
+![ug_note](images/ug_note.png)
 
 [Go to Command Summary](#command-summary)
 
@@ -298,7 +298,7 @@ Examples:
 * `rate 1 5` followed by `rate 1 8` sets the 1st foodplace to have its current rating to `5`
   first then to `8`.
 
-<image src="images/ug_rate.png">
+![ug_rate](images/ug_rate.png)
 
 [Go to Command Summary](#command-summary)
 
@@ -327,7 +327,7 @@ Examples:
 * `tag 2 /d FastFood` removes the FastFood tag from the 2nd foodplace.
 * `tag INDEX /d` will remove all tags from the selected foodplace.
 
-<image src="images/ug_tag.png">
+![ug_tag](images/ug_tag.png)
 
 [Go to Command Summary](#command-summary)
 
@@ -355,7 +355,7 @@ Examples:
 * `find prata` returns `Prata Place` and `The Prata House`.
 * `find delivery 5` returns foodplaces with either “delivery” or “5” appearing in any field.<br>
 
-<image src="images/ug_find.png">
+![ug_find](images/ug_find.png)
 
 [Go to Command Summary](#command-summary)
 
