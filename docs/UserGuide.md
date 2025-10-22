@@ -6,6 +6,27 @@
 
 # BiteBuddy User Guide
 
+## Table of contents
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Help - Viewing help](#viewing-help--help)
+  - [Add - Adding a foodplace](#adding-a-foodplace-add)
+  - [List - Listing all foodplaces](#listing-all-foodplaces--list)
+  - [Delete - Deleting a foodplace](#deleting-a-foodplace--delete)
+  - [Edit - Editing a foodplace](#editing-a-foodplace--edit)
+  - [Note - Adding a note to a foodplace](#adding-a-note-to-a-foodplace--note)
+  - [Rate - Rating a foodplace](#rate-a-foodplace--rate)
+  - [Tag - Tagging a foodplace](#adding-a-tag-a-foodplace--tag)
+  - [Find - Finding a foodplace](#locating-foodplaces-by-name-find)
+  - [Clear](#clearing-all-entries--clear)
+  - [Exit](#exiting-the-program--exit)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
+
+
+## Introduction
+
 _Have you ever tried thinking back to that amazing food place you had before, but couldn't quite get a hold of it before it slipped your mind?_<br>
 _Or maybe you've just visited that newest food street, but didn't have enough time to try everything you wanted?_<br>
 
@@ -232,7 +253,7 @@ Examples:
 
 ---
 
-### Rate a foodplace : `rate`
+### Rating a foodplace : `rate`
 
 Adds / edits a rating from the specified foodplace in BiteBuddy.
 
