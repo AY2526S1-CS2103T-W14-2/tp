@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -36,7 +37,7 @@ import seedu.bitebuddy.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 2, 2, true);
+    public static final Version VERSION = new Version(1, 4, 0, false);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -73,20 +74,20 @@ public class MainApp extends Application {
      * or an empty bitebuddy book will be used instead if errors occur when reading {@code storage}'s bitebuddy book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.log(Level.INFO, "Using data file : {0}", storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with sample foodplaces.");
+                logger.log(Level.INFO, "Creating a new data file {0} populated with sample foodplaces.",
+                        storage.getAddressBookFilePath());
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty bitebuddy.");
+            logger.log(Level.WARNING, "Data file at {0} could not be loaded. Will be starting with an empty bitebuddy.",
+                    storage.getAddressBookFilePath());
             initialData = new AddressBook();
         }
 
@@ -109,21 +110,21 @@ public class MainApp extends Application {
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
         if (configFilePath != null) {
-            logger.info("Custom Config file specified " + configFilePath);
+            logger.log(Level.INFO, "Custom Config file specified {0}", configFilePath);
             configFilePathUsed = configFilePath;
         }
 
-        logger.info("Using config file : " + configFilePathUsed);
+        logger.log(Level.INFO, "Using config file : {0}", configFilePathUsed);
 
         try {
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             if (!configOptional.isPresent()) {
-                logger.info("Creating new config file " + configFilePathUsed);
+                logger.log(Level.INFO, "Creating new config file {0}", configFilePathUsed);
             }
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
-            logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
-                    + " Using default config properties.");
+            logger.log(Level.WARNING, "Config file at {0} could not be loaded. Using default config properties.",
+                    configFilePathUsed);
             initializedConfig = new Config();
         }
 
@@ -131,7 +132,7 @@ public class MainApp extends Application {
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            logger.log(Level.WARNING, "Failed to save config file : {0}", StringUtil.getDetails(e));
         }
         return initializedConfig;
     }
@@ -143,18 +144,17 @@ public class MainApp extends Application {
      */
     protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
-        logger.info("Using preference file : " + prefsFilePath);
+        logger.log(Level.INFO, "Using preference file : {0}", prefsFilePath);
 
         UserPrefs initializedPrefs;
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             if (!prefsOptional.isPresent()) {
-                logger.info("Creating new preference file " + prefsFilePath);
+                logger.log(Level.INFO, "Creating new preference file {0}", prefsFilePath);
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
-            logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                    + " Using default preferences.");
+            logger.log(Level.WARNING, "Preference file at {0} could not be loaded. Using default preferences.", prefsFilePath);
             initializedPrefs = new UserPrefs();
         }
 
@@ -162,7 +162,7 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {
-            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+            logger.log(Level.WARNING, "Failed to save config file : {0}", StringUtil.getDetails(e));
         }
 
         return initializedPrefs;
@@ -170,7 +170,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting BiteBuddy " + MainApp.VERSION);
+        logger.log(Level.INFO, "Starting BiteBuddy {0}", MainApp.VERSION);
         ui.start(primaryStage);
     }
 
@@ -180,7 +180,7 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+            logger.log(Level.SEVERE, "Failed to save preferences {0}", StringUtil.getDetails(e));
         }
     }
 }
