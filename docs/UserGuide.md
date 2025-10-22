@@ -304,7 +304,7 @@ Examples:
 
 ---
 
-### Adding Tag(s) to a foodplace: `tag`
+### Adding Tags to a foodplace: `tag`
 
 Adds / removes one or more tags from the specified foodplace in BiteBuddy.
 
@@ -312,7 +312,7 @@ Format 1 : `tag INDEX TAG1 [TAG2]...`
 Format 2 : `tag INDEX /d [TAG1] [TAG2]...`
 
 ```
-tag: Adds or deletes tag(s) for the foodplace identified by the index number shown in the displayed foodplace list.
+tag: Adds or deletes tags for the foodplace identified by the index number shown in the displayed foodplace list.
 Existing tags will be preserved when adding, and duplicate tags (case-insensitive) will be ignored.
 Parameters: INDEX [/d] TAG1 [TAG2]...
 Example: tag 3 Savoury GoodService
