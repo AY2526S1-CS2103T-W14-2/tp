@@ -19,7 +19,8 @@ Follow these steps to install and start using **BiteBuddy**!
 
 ### Step 1 — Check Java Version
 - Ensure you have Java `17` or above installed on your computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).  
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).  
 - To check your version, open a terminal and type: `java -version`
 ![Check Java Version](images/java_version.png)
 
@@ -28,10 +29,12 @@ Follow these steps to install and start using **BiteBuddy**!
 2. Download the latest file named **`bitebuddy.jar`**.
    ![Download BiteBuddy.jar](images/download_jar.png)
 3. Copy the file to the folder you want to use as the _home folder_ for your BiteBuddy.
-4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar BiteBuddy.jar` to launch the application.<br>
-   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.
-   ![Open_in_Terminal](images/open_in_terminal.png)
-   A GUI similar to the one below should appear within a few seconds. It comes preloaded with sample data for you to explore. <br>
+4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar "bitebuddy.jar"` to launch the application.<br>  
+   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.  
+   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)  
+   **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
+
+5. A GUI similar to the one below should appear within a few seconds. It comes preloaded with sample data for you to explore. <br>
    ![Ui](images/Ui_image.png) 
 
 ### Step 3 — Try Out a Command!
