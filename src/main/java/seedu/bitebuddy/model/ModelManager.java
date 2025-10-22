@@ -37,17 +37,16 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         observableFoodplaces = this.addressBook.getFoodplaceList();
-        sortedFoodplaces = new SortedList<>(observableFoodplaces,
-                (fp1, fp2) -> {
-                    int cmp = Boolean.compare(fp2.getPinned().isPinned, fp1.getPinned().isPinned);
-                    if (cmp != 0) {
-                        return cmp;
-                    }
-                    return Integer.compare(
-                            observableFoodplaces.indexOf(fp1),
-                            observableFoodplaces.indexOf(fp2)
-                    );
-                });
+        sortedFoodplaces = new SortedList<>(observableFoodplaces, (fp1, fp2) -> {
+            int cmp = Boolean.compare(fp2.getPinned().isPinned, fp1.getPinned().isPinned);
+            if (cmp != 0) {
+                return cmp;
+            }
+            return Integer.compare(
+                    observableFoodplaces.indexOf(fp1),
+                    observableFoodplaces.indexOf(fp2)
+            );
+        });
         filteredFoodplaces = new FilteredList<>(sortedFoodplaces);
     }
 

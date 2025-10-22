@@ -136,7 +136,8 @@ class JsonAdaptedFoodplace {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pinned.class.getSimpleName()));
         }
         final Pinned modelPinned = new Pinned(isPinned);
-        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelNote, modelRate, modelPinned);
+        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress,
+                modelTags, modelNote, modelRate, modelPinned);
     }
 
 }

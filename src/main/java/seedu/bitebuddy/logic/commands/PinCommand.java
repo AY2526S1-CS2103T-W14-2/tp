@@ -13,7 +13,7 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Pinned;
 
-public class PinCommand extends Command{
+public class PinCommand extends Command {
 
     public static final String COMMAND_WORD = "pin";
 

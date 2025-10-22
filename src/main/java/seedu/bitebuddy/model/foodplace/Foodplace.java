@@ -90,7 +90,9 @@ public class Foodplace {
         return rate;
     }
 
-    public Pinned getPinned() { return pinned; }
+    public Pinned getPinned() {
+        return pinned;
+    }
 
     /**
      * Returns true if both foodplaces have the same name.
