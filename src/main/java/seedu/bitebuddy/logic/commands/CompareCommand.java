@@ -2,10 +2,8 @@ package seedu.bitebuddy.logic.commands;
 
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.bitebuddy.commons.core.index.Index;
@@ -22,7 +20,7 @@ public class CompareCommand extends Command {
 
     public static final String COMMAND_WORD = "compare";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Comapares the two foodplace identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Compares the two foodplace identified "
             + "by the index numbers used in the last foodplace listing. "
             + "Parameters: INDEX1 and INDEX2 (must be a positive integer) "
             + "compare [INDEX1] [INDEX2]\n"
@@ -61,17 +59,20 @@ public class CompareCommand extends Command {
     }
 
     private String generateCompareMessage(Foodplace first, Foodplace second) {
-        Set<String> firstTags = first.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toSet());
-        Set<String> secondTags = second.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toSet());
+        List<String> firstTags = first.getTags().stream().map(tag -> tag.tagName).toList();
+        List<String> secondTags = second.getTags().stream().map(tag -> tag.tagName).toList();
 
-        Set<String> commonTags = new HashSet<>(firstTags);
-        commonTags.retainAll(secondTags);
+        List<String> commonTags = firstTags.stream()
+                .filter(secondTags::contains)
+                .collect(Collectors.toList());
 
-        Set<String> firstUnique = new HashSet<>(firstTags);
-        firstUnique.removeAll(commonTags);
+        List<String> firstUnique = firstTags.stream()
+                .filter(tag -> !commonTags.contains(tag))
+                .collect(Collectors.toList());
 
-        Set<String> secondUnique = new HashSet<>(secondTags);
-        secondUnique.removeAll(commonTags);
+        List<String> secondUnique = secondTags.stream()
+                .filter(tag -> !commonTags.contains(tag))
+                .collect(Collectors.toList());
 
         String commonStr = commonTags.isEmpty() ? "--" : String.join(", ", commonTags);
         String firstUniqueStr = firstUnique.isEmpty() ? "--" : String.join(", ", firstUnique);

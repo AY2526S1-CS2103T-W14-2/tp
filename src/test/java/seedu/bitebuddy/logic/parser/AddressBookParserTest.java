@@ -6,6 +6,7 @@ import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
+import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.logic.commands.AddCommand;
 import seedu.bitebuddy.logic.commands.ClearCommand;
+import seedu.bitebuddy.logic.commands.CompareCommand;
 import seedu.bitebuddy.logic.commands.DeleteCommand;
 import seedu.bitebuddy.logic.commands.EditCommand;
 import seedu.bitebuddy.logic.commands.EditCommand.EditFoodplaceDescriptor;
@@ -111,6 +113,13 @@ public class AddressBookParserTest {
         RateCommand command = (RateCommand) parser.parseCommand(RateCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " " + rate.getValue());
         assertEquals(new RateCommand(INDEX_FIRST_FOODPLACE, rate.getValue()), command);
+    }
+
+    @Test
+    public void parseCommand_compare() throws Exception {
+        CompareCommand command = (CompareCommand) parser.parseCommand(CompareCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_FOODPLACE.getOneBased() + " " + INDEX_SECOND_FOODPLACE.getOneBased());
+        assertEquals(new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE), command);
     }
 
     @Test
