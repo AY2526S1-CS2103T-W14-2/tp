@@ -303,6 +303,8 @@ public class ParserUtilTest {
         // missing one
         assertThrows(ParseException.class,
                 ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED, () -> ParserUtil.parseTiming("", "17:00"));
+        assertThrows(ParseException.class,
+                ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED, () -> ParserUtil.parseTiming("09:00", ""));
 
         // closing before opening
         assertThrows(ParseException.class,
@@ -347,11 +349,15 @@ public class ParserUtilTest {
 
     @Test
     public void areNoneOrBothPrefixesPresent_onePresent_returnsFalse() {
-        ArgumentMultimap map = new ArgumentMultimap();
+        ArgumentMultimap map1 = new ArgumentMultimap();
         Prefix p1 = new Prefix("ot/");
         Prefix p2 = new Prefix("ct/");
-        map.put(p1, "09:00");
-        assertFalse(ParserUtil.areNoneOrBothPrefixesPresent(map, p1, p2));
+        map1.put(p1, "09:00");
+        assertFalse(ParserUtil.areNoneOrBothPrefixesPresent(map1, p1, p2));
+
+        ArgumentMultimap map2 = new ArgumentMultimap();
+        map2.put(p2, "17:00");
+        assertFalse(ParserUtil.areNoneOrBothPrefixesPresent(map2, p1, p2));
     }
 
     @Test

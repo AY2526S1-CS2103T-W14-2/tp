@@ -97,6 +97,11 @@ public class FoodplaceTest {
         // different cuisine -> returns false
         editedPrata = new FoodplaceBuilder(PRATASHOP).withCuisine(VALID_CUISINE_SWENSWAN).build();
         assertFalse(PRATASHOP.equals(editedPrata));
+
+        // different timing -> returns false
+        editedPrata = new FoodplaceBuilder(PRATASHOP)
+                .withTiming("10:00", "22:00").build();
+        assertFalse(PRATASHOP.equals(editedPrata));
     }
 
     @Test

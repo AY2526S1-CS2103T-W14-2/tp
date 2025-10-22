@@ -50,7 +50,6 @@ import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.tag.Tag;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
 
-
 public class AddCommandParserTest {
     private final AddCommandParser parser = new AddCommandParser();
 
@@ -218,5 +217,16 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_SWENSWAN + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE)
         );
+    }
+
+    @Test
+    public void parse_singleTimingPrefix_failure() {
+        // only opening time present
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                        + ADDRESS_DESC_SWENSWAN + OPEN_TIMING_DESC_SWENSWAN, ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
+
+        // only closing time present
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                        + ADDRESS_DESC_SWENSWAN + CLOSE_TIMING_DESC_SWENSWAN, ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
     }
 }
