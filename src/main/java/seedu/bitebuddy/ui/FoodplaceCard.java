@@ -5,7 +5,6 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 
@@ -27,8 +26,6 @@ public class FoodplaceCard extends UiPart<Region> {
     public final Foodplace foodplace;
 
     @FXML
-    private HBox cardPane;
-    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -38,6 +35,8 @@ public class FoodplaceCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private Label cuisine;
     @FXML
     private FlowPane tags;
     @FXML
@@ -56,6 +55,11 @@ public class FoodplaceCard extends UiPart<Region> {
         phone.setText(foodplace.getPhone().value);
         address.setText(foodplace.getAddress().value);
         email.setText(foodplace.getEmail().value);
+        cuisine.setText(
+                foodplace.getCuisine().value.length() != 0
+                ? foodplace.getCuisine().value
+                : "-- No cuisine specified --"
+        );
         note.setText(String.valueOf(
                 foodplace.getNote().value.length() != 0 ? foodplace.getNote().value : "-- No notes yet --"
         ));

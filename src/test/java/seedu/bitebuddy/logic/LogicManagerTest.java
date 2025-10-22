@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.CUISINE_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_MCRONALDS;
@@ -41,7 +42,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
     private Logic logic;
 
     @BeforeEach
@@ -167,7 +168,7 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS
-                + EMAIL_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS;
+                + CUISINE_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS;
         Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFoodplace(expectedFoodplace);

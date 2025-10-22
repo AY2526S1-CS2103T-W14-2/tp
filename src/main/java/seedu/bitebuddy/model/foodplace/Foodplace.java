@@ -25,6 +25,7 @@ public class Foodplace {
     private final Address address;
 
     // Optional fields
+    private final Cuisine cuisine;
     private final Set<Tag> tags = new HashSet<>();
     private final Note note;
     private final Rate rate;
@@ -32,12 +33,14 @@ public class Foodplace {
     /**
      * Every field must be present and not null.
      */
-    public Foodplace(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note, Rate rate) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Foodplace(Name name, Phone phone, Email email, Address address,
+            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate) {
+        requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.cuisine = cuisine;
         this.tags.addAll(tags);
         this.note = note;
         this.rate = rate;
@@ -73,6 +76,10 @@ public class Foodplace {
 
     public Rate getRate() {
         return rate;
+    }
+
+    public Cuisine getCuisine() {
+        return cuisine;
     }
 
     /**
@@ -112,13 +119,14 @@ public class Foodplace {
                 && email.equals(otherFoodplace.email)
                 && address.equals(otherFoodplace.address)
                 && tags.equals(otherFoodplace.tags)
+                && cuisine.equals(otherFoodplace.cuisine)
                 && rate.equals(otherFoodplace.rate);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, rate);
+        return Objects.hash(name, phone, email, address, tags, rate, cuisine);
     }
 
     @Override
@@ -128,6 +136,7 @@ public class Foodplace {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("cuisine", cuisine)
                 .add("tags", tags)
                 .add("rate", rate)
                 .toString();
