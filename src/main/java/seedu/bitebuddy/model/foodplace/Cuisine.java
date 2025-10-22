@@ -9,14 +9,13 @@ import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidCuisine(String)}
  */
 public class Cuisine {
-     public static final String MESSAGE_CONSTRAINTS =
-            "Cuisine should only contain alphanumeric characters and spaces";
+    public static final String MESSAGE_CONSTRAINTS =
+        "Cuisine should contain only alphanumeric characters and spaces (empty allowed)";
 
     /*
-     * The first character of the cuisine must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    * Accepts alphanumeric characters and spaces. Allows empty string as valid.
+    */
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]*";
 
     public final String value;
     /**
