@@ -24,7 +24,7 @@ public class WishlistCommand extends Command {
             + "Wishlisting a foodplace that is already wishlisted removes its wishlist status\n"
             + "Displays all foodplaces with wishlist if no index is specified\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "wishlist [INDEX] [NOTE]\n"
+            + "wishlist [INDEX]\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_DISPLAY_SUCCESS = "Listed all foodplaces that are wishlisted";
