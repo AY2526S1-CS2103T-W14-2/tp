@@ -35,7 +35,7 @@ Follow these steps to install and start using **BiteBuddy**!
    **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
 
 5. A GUI similar to the one below should appear within a few seconds. It comes preloaded with sample data for you to explore. <br>
-   ![Ui](images/Ui_image.png) 
+   ![Ui](images/UI_image.png) 
 
 ### Step 3 — Try Out a Command!
 - Type the command in the Command Box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.  
