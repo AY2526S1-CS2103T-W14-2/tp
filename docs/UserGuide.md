@@ -280,7 +280,10 @@ Examples:
 
 ### Adding a tag to a foodplace : `tag`
 
-Adds or removes one or more tags from the specified foodplace in BiteBuddy.
+Adds / removes one or more tags from the specified foodplace in BiteBuddy.
+
+Format 1 : `tag INDEX TAG1 [TAG2]...`  
+Format 2 : `tag INDEX /d [TAG1] [TAG2]...`
 
 ```
 tag: Adds or deletes tag(s) for the foodplace identified by the index number shown in the displayed foodplace list.
@@ -289,9 +292,6 @@ Parameters: INDEX [/d] TAG1 [TAG2]...
 Example: tag 3 Savoury GoodService
 ```
 
-Format 1 : `tag INDEX TAG1 [TAG2]...`  
-Format 2 : `tag INDEX /d [TAG1] [TAG2]...`
-
 * Finds the foodplace at the specified `INDEX` and edits its tags.
 * **At least one tag** must be provided for **Format 1**.
 * Tag additions are **cumulative**, existing tags are kept until manually deleted.
@@ -299,11 +299,8 @@ Format 2 : `tag INDEX /d [TAG1] [TAG2]...`
 Examples:  
 * `tag 3 FastFood Vegan` adds both FastFood and Vegan tags to the 3rd foodplace.
 * `tag 2 /d FastFood` removes the FastFood tag from the 2nd foodplace.
+* `tag INDEX /d` will remove all tags from the selected foodplace.
 
-<box type="tip" seamless>
-
-**Tip:** Using `tag INDEX /d` without specifying any tags will remove all tags from the selected foodplace.
-</box>
 
 <image src="images/ug_tag.png">
 
