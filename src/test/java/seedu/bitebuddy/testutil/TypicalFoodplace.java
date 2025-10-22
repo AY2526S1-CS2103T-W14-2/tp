@@ -29,18 +29,22 @@ public class TypicalFoodplace {
             .withPhone("94351253")
             .withTags("hawker")
             .withNote("Serves the best appetisers!")
+            .withCuisine("Indian")
             .withRate("0").build();
     public static final Foodplace DAEBAKSHOP = new FoodplaceBuilder().withName("Daebak Korean BBQ")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("john@daebakbbq.com").withPhone("98765432")
+            .withCuisine("Korean")
             .withTags("korean", "restaurant")
             .withNote("Best beef in the world!").withRate("0").build();
     public static final Foodplace CARLSHOP = new FoodplaceBuilder().withName("Carls Junior").withPhone("95352563")
-             .withEmail("carls@junior.com").withAddress("wall street").withTags("fastfood").build();
+             .withEmail("carls@junior.com").withAddress("wall street").withTags("fastfood")
+             .withCuisine("American").build();
     public static final Foodplace LAKSASHOP = new FoodplaceBuilder().withName("Laksa Paradise").withPhone("87652533")
-             .withEmail("laksa@paradise.com").withAddress("10th street").withTags("hawker").build();
+             .withEmail("laksa@paradise.com").withAddress("10th street").withTags("hawker")
+             .withCuisine("Malaysian").build();
     public static final Foodplace SUSHISHOP = new FoodplaceBuilder().withName("Sushi Tei").withPhone("9482224")
-             .withEmail("sushi@tei.com").withAddress("michegan ave").build();
+             .withEmail("sushi@tei.com").withAddress("michegan ave").withCuisine("Japanese").build();
     public static final Foodplace TEASHOP = new FoodplaceBuilder().withName("ITea").withPhone("9482427")
              .withEmail("i@tea.com").withAddress("little tokyo").build();
     public static final Foodplace PIZZASHOP = new FoodplaceBuilder().withName("Dominoes Pizza").withPhone("9482442")
