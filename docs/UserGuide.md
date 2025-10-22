@@ -86,7 +86,7 @@ Examples:
 
 Adds a foodplace to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [no/NOTE] [r/RATING]​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CUISINE] [t/TAG]… [no/NOTE] [r/RATING]​`
 
 <box type="tip" seamless>
 
@@ -121,7 +121,7 @@ Examples:
 
 Edits an existing foodplace in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [no/NOTE] [r/RATING]​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CUISINE] [t/TAG]… [no/NOTE] [r/RATING]​`
 
 * Edits the foodplace at the specified `INDEX`. The index refers to the index number shown in the displayed foodplace list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
