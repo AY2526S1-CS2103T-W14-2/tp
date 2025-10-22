@@ -10,17 +10,17 @@
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Features](#features)
-  - [Help - Viewing help](#viewing-help--help)
+  - [Help - Viewing help](#viewing-help-help)
   - [Add - Adding a foodplace](#adding-a-foodplace-add)
-  - [List - Listing all foodplaces](#listing-all-foodplaces--list)
-  - [Delete - Deleting a foodplace](#deleting-a-foodplace--delete)
-  - [Edit - Editing a foodplace](#editing-a-foodplace--edit)
-  - [Note - Adding a note to a foodplace](#adding-a-note-to-a-foodplace--note)
-  - [Rate - Rating a foodplace](#rating-a-foodplace--rate)
-  - [Tag - Tagging a foodplace](#adding-tags-to-a-foodplace--tag)
+  - [List - Listing all foodplaces](#listing-all-foodplaces-list)
+  - [Delete - Deleting a foodplace](#deleting-a-foodplace-delete)
+  - [Edit - Editing a foodplace](#editing-a-foodplace-edit)
+  - [Note - Adding a note to a foodplace](#adding-a-note-to-a-foodplace-note)
+  - [Rate - Rating a foodplace](#rating-a-foodplace-rate)
+  - [Tag - Tagging a foodplace](#adding-tags-to-a-foodplace-tag)
   - [Find - Finding a foodplace](#locating-foodplaces-by-name-find)
-  - [Clear - Delete all foodplaces](#clearing-all-entries--clear)
-  - [Exit - Quit the program](#exiting-the-program--exit)
+  - [Clear - Delete all foodplaces](#clearing-all-entries-clear)
+  - [Exit - Quit the program](#exiting-the-program-exit)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -122,7 +122,7 @@ Follow these steps to install and start using **BiteBuddy**!
 
 ---
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Directs user to detailed information about the application or specific commands.
 
@@ -169,7 +169,7 @@ Examples:
 
 ---
 
-### Listing all foodplaces : `list`
+### Listing all foodplaces: `list`
 
 Shows a list of all foodplace entries in BiteBuddy.
 
@@ -186,7 +186,7 @@ Example: list
 
 ---
 
-### Deleting a foodplace : `delete`
+### Deleting a foodplace: `delete`
 
 Deletes the specified foodplace entry from BiteBuddy.
 
@@ -212,7 +212,7 @@ Examples:
 
 ---
 
-### Editing a foodplace : `edit`
+### Editing a foodplace: `edit`
 
 Edits an existing foodplace entry in BiteBuddy.
 
@@ -243,7 +243,7 @@ Examples:
 
 ---
 
-### Adding a note to a foodplace : `note`
+### Adding a note to a foodplace: `note`
 
 Adds / edits the note of an existing foodplace in BiteBuddy.
 
@@ -274,7 +274,7 @@ Examples:
 
 ---
 
-### Rating a foodplace : `rate`
+### Rating a foodplace: `rate`
 
 Adds / edits a rating from the specified foodplace in BiteBuddy.
 
@@ -304,7 +304,7 @@ Examples:
 
 ---
 
-### Adding Tag(s) to a foodplace : `tag`
+### Adding Tag(s) to a foodplace: `tag`
 
 Adds / removes one or more tags from the specified foodplace in BiteBuddy.
 
@@ -361,7 +361,7 @@ Examples:
 
 ---
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from BiteBuddy.
 
@@ -376,7 +376,7 @@ Example: clear
 
 ---
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -426,14 +426,14 @@ Furthermore, certain edits can cause the BiteBuddy to behave in unexpected ways 
 
 Action     | Format                                                                     | Examples
 -----------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
-[**Help**](#viewing-help--help) | `help [COMMAND]`<br>                                                       | `help add`
+[**Help**](#viewing-help-help) | `help [COMMAND]`<br>                                                       | `help add`
 [**Add**](#adding-a-foodplace-add) | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​` <br>           | `add n/James Cook a/123, Clementi Rd, 1234665 p/22224444 e/chef@jamescook.com t/MasterChef t/Expensive`
-[**List**](#listing-all-foodplaces--list) | `list`                                                                     | `list`
-[**Delete**](#deleting-a-foodplace--delete) | `delete INDEX`<br>                                                         | `delete 3`
-[**Edit**](#editing-a-foodplace--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | `edit 2 n/James Lee e/chef@jameslee.com`
-[**Note**](#adding-a-note-to-a-foodplace--note)   | `note INDEX [NOTE]`<br>                                                    | `note 1 Famous for their chicken rice!`
-[**Rate**](#rating-a-foodplace--rate) | `rate INDEX RATING`<br>                                                    | `rate 1 6`
-[**Tag**](#adding-tags-to-a-foodplace--tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                   | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
+[**List**](#listing-all-foodplaces-list) | `list`                                                                     | `list`
+[**Delete**](#deleting-a-foodplace-delete) | `delete INDEX`<br>                                                         | `delete 3`
+[**Edit**](#editing-a-foodplace-edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | `edit 2 n/James Lee e/chef@jameslee.com`
+[**Note**](#adding-a-note-to-a-foodplace-note)   | `note INDEX [NOTE]`<br>                                                    | `note 1 Famous for their chicken rice!`
+[**Rate**](#rating-a-foodplace-rate) | `rate INDEX RATING`<br>                                                    | `rate 1 6`
+[**Tag**](#adding-tags-to-a-foodplace-tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                   | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
 [**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br>                                         | `find James Jake`
-[**Clear**](#clearing-all-entries--clear) | `clear`                                                                    | `clear`
-[**Exit**](#exiting-the-program--exit) | `exit`                                                                     | `exit`
+[**Clear**](#clearing-all-entries-clear) | `clear`                                                                    | `clear`
+[**Exit**](#exiting-the-program-exit) | `exit`                                                                     | `exit`
