@@ -372,6 +372,8 @@ clear: Clears BiteBuddy.
 Example: clear
 ```
 
+[Go to Command Summary](#command-summary)
+
 ---
 
 ### Exiting the program : `exit`
@@ -384,6 +386,8 @@ Format: `exit`
 exit: Exits the program.
 Example: exit
 ```
+
+[Go to Command Summary](#command-summary)
 
 ---
 
@@ -423,10 +427,10 @@ Furthermore, certain edits can cause the BiteBuddy to behave in unexpected ways 
 Action     | Format                                                                     | Examples
 -----------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
 [**Help**](#viewing-help--help) | `help [COMMAND]`<br>                                                       | `help add`
-[**Add**](#adding-a-foodplace-add) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>               | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+[**Add**](#adding-a-foodplace-add) | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​` <br>           | `add n/James Cook a/123, Clementi Rd, 1234665 p/22224444 e/chef@jamescook.com t/MasterChef t/Expensive`
 [**List**](#listing-all-foodplaces--list) | `list`                                                                     | `list`
 [**Delete**](#deleting-a-foodplace--delete) | `delete INDEX`<br>                                                         | `delete 3`
-[**Edit**](#editing-a-foodplace--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | `edit 2 n/James Lee e/jameslee@example.com`
+[**Edit**](#editing-a-foodplace--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | `edit 2 n/James Lee e/chef@jameslee.com`
 [**Note**](#adding-a-note-to-a-foodplace--note)   | `note INDEX [NOTE]`<br>                                                    | `note 1 Famous for their chicken rice!`
 [**Rate**](#rating-a-foodplace--rate) | `rate INDEX RATING`<br>                                                    | `rate 1 6`
 [**Tag**](#adding-tags-to-a-foodplace--tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                   | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
