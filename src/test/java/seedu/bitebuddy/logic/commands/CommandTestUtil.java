@@ -3,6 +3,7 @@ package seedu.bitebuddy.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CUISINE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -35,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_SWENSWAN = "booking@swenswan.com";
     public static final String VALID_ADDRESS_MCRONALDS = "Rideout Tea Garden";
     public static final String VALID_ADDRESS_SWENSWAN = "Geneo Lvl 3";
+    public static final String VALID_CUISINE_MCRONALDS = "Fast Food";
+    public static final String VALID_CUISINE_SWENSWAN = "Western";
     public static final String VALID_TAG_FASTFOOD = "fastfood";
     public static final String VALID_TAG_RESTAURANT = "restaurant";
     public static final String VALID_RATE_PRATASHOP = "3";
@@ -50,6 +53,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_SWENSWAN = " " + PREFIX_EMAIL + VALID_EMAIL_SWENSWAN;
     public static final String ADDRESS_DESC_MCRONALDS = " " + PREFIX_ADDRESS + VALID_ADDRESS_MCRONALDS;
     public static final String ADDRESS_DESC_SWENSWAN = " " + PREFIX_ADDRESS + VALID_ADDRESS_SWENSWAN;
+    public static final String CUISINE_DESC_MCRONALDS = " " + PREFIX_CUISINE + VALID_CUISINE_MCRONALDS;
+    public static final String CUISINE_DESC_SWENSWAN = " " + PREFIX_CUISINE + VALID_CUISINE_SWENSWAN;
     public static final String TAG_DESC_FASTFOOD = " " + PREFIX_TAG + VALID_TAG_FASTFOOD;
     public static final String TAG_DESC_RESTAURANT = " " + PREFIX_TAG + VALID_TAG_RESTAURANT;
     public static final String NOTE_DESC_MCRONALDS = " " + PREFIX_NOTE + VALID_NOTE_SERVICE;

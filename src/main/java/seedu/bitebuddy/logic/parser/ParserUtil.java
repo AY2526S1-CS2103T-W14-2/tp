@@ -10,6 +10,7 @@ import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.commons.util.StringUtil;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
@@ -101,6 +102,21 @@ public class ParserUtil {
         } else {
             return new Email("");
         }
+    }
+
+    /**
+     * Parses a {@code String cuisine} into an {@code Cuisine}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cuisine} is invalid.
+     */
+    public static Cuisine parseCuisine(String cuisine) throws ParseException {
+        requireNonNull(cuisine);
+        String trimmedCuisine = cuisine.trim();
+        if (!Cuisine.isValidCuisine(trimmedCuisine)) {
+            throw new ParseException(Cuisine.MESSAGE_CONSTRAINTS);
+        }
+        return new Cuisine(trimmedCuisine);
     }
 
     /**
