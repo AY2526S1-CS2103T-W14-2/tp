@@ -140,8 +140,8 @@ Adds a new foodplace entry to BiteBuddy.
 Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [t/TAG]… [no/NOTE] [r/RATING]​`
 
 ```
-add: Adds a foodplace to BiteBuddy. Parameters: n/FOODPLACE NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [no/NOTE] [r/RATE]
-Example: add n/Prata place p/98765432 e/pratad@example.com a/311, Clementi Ave 2, #02-25 t/Indian t/Cheap no/Famous for tandoori chicken r/9
+add: Adds a foodplace to BiteBuddy. Parameters: n/NAME a/ADDRESSf [p/PHONE] [e/EMAIL] [c/CUISINE] [t/TAG]... [no/NOTE] [r/RATE]
+Example: add n/Prata place p/98765432 e/pratad@example.com a/311, Clementi Ave 2, #02-25 c/Indian t/Cheap no/Famous for tandoori chicken r/9
 ```
 
 
@@ -196,11 +196,11 @@ Examples:
 
 Edits an existing foodplace entry in BiteBuddy.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]… [no/NOTE] [r/RATING]​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CUISINE] [t/TAG]… [no/NOTE] [r/RATING]​`
 
 ```
 edit: Edits the details of the foodplace identified by the index number used in the displayed foodplace list. Existing values will be overwritten by the input values.
-Parameters: INDEX [n/FOODPLACE NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [no/NOTE][r/RATING]...
+Parameters: INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CUISINE] [t/TAG]… [no/NOTE] [r/RATING]
 Example: edit 1 p/91234567 e/johndoe@example.com
 ```
 
@@ -278,18 +278,15 @@ Examples:
 
 ---
 
-### Adding a tag a foodplace : `tag`
+### Adding a tag to a foodplace : `tag`
 
 Adds or removes one or more tags from the specified foodplace in BiteBuddy.
 
 ```
 tag: Adds or deletes tag(s) for the foodplace identified by the index number shown in the displayed foodplace list.
 Existing tags will be preserved when adding, and duplicate tags (case-insensitive) will be ignored.
-
-Format:
-  tag INDEX TAG1 [TAG2]...      -> Add new tag(s)
-  tag INDEX /d                  -> Delete all tags
-  tag INDEX /d TAG1 [TAG2]...   -> Delete only the specified tag(s)
+Parameters: INDEX [/d] TAG1 [TAG2]...
+Example: tag 3 Savoury GoodService
 ```
 
 Format 1 : `tag INDEX TAG1 [TAG2]...`  
