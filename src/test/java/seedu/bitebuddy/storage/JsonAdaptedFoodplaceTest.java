@@ -228,4 +228,13 @@ public class JsonAdaptedFoodplaceTest {
         assertThrows(IllegalValueException.class, expectedMessage, adapted::toModelType);
     }
 
+    @Test
+    public void toModelType_nullTiming_throwsIllegalValueException() {
+        JsonAdaptedFoodplace adapted = new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                null, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING);
+
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Timing.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, adapted::toModelType);
+    }
+
 }

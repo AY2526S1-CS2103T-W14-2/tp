@@ -6,6 +6,7 @@ import static seedu.bitebuddy.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -21,6 +22,7 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Timing;
 import seedu.bitebuddy.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -276,5 +278,33 @@ public class ParserUtilTest {
         Cuisine expected = new Cuisine("");
         Cuisine actual = ParserUtil.parseCuisine("   ");
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseTime_valid_returnsLocalTime() throws Exception {
+        LocalTime expected = LocalTime.of(12, 30);
+        assertEquals(expected, ParserUtil.parseTime("12:30"));
+        // whitespace trimmed
+        assertEquals(expected, ParserUtil.parseTime(" 12:30 \t"));
+    }
+
+    @Test
+    public void parseTime_invalid_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTime("25:00"));
+    }
+
+    @Test
+    public void parseTiming() throws Exception {
+        // valid
+        Timing t = ParserUtil.parseTiming("09:00", "17:00");
+        assertEquals(new Timing(LocalTime.of(9, 0), LocalTime.of(17, 0)), t);
+
+        // missing one
+        assertThrows(ParseException.class,
+                ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED, () -> ParserUtil.parseTiming("", "17:00"));
+
+        // closing before opening
+        assertThrows(ParseException.class,
+                Timing.MESSAGE_CONSTRAINTS, () -> ParserUtil.parseTiming("18:00", "09:00"));
     }
 }

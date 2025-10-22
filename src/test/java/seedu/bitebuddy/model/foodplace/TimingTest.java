@@ -1,0 +1,67 @@
+package seedu.bitebuddy.model.foodplace;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.bitebuddy.testutil.Assert.assertThrows;
+
+import java.time.LocalTime;
+
+import org.junit.jupiter.api.Test;
+
+public class TimingTest {
+
+    @Test
+    public void isValidTime() {
+        assertFalse(Timing.isValidTime(null));
+        assertTrue(Timing.isValidTime(""));
+        assertTrue(Timing.isValidTime("00:00"));
+        assertTrue(Timing.isValidTime("23:59"));
+        assertFalse(Timing.isValidTime("24:00"));
+        assertFalse(Timing.isValidTime("notatime"));
+    }
+
+    @Test
+    public void isValidTiming() {
+        assertFalse(Timing.isValidTiming(null));
+        assertTrue(Timing.isValidTiming(""));
+        assertTrue(Timing.isValidTiming("09:00-17:00"));
+        assertFalse(Timing.isValidTiming("17:00-09:00"));
+        assertThrows(IllegalArgumentException.class, () -> Timing.isValidTiming("not-a-range"));
+    }
+
+    @Test
+    public void getters() {
+        Timing t1 = new Timing("09:00", "17:00");
+        assertEquals(LocalTime.of(9, 0), t1.getOpeningTime());
+        assertEquals(LocalTime.of(17, 0), t1.getClosingTime());
+    }
+
+    @Test
+    public void tostring() {
+        Timing t1 = new Timing("09:00", "17:00");
+        assertEquals("09:00-17:00", t1.toString());
+    }
+
+    @Test
+    public void isOpenAt() {
+        Timing t1 = new Timing("09:00", "17:00");
+        assertTrue(t1.isOpenAt(LocalTime.of(9, 0)));
+        assertTrue(t1.isOpenAt(LocalTime.of(12, 0)));
+        assertTrue(t1.isOpenAt(LocalTime.of(17, 0)));
+        assertFalse(t1.isOpenAt(LocalTime.of(8, 59)));
+    }
+
+    @Test
+    public void unsetTiming_behaviour() {
+        Timing unset = new Timing("", "");
+        assertEquals("", unset.toString());
+        assertFalse(unset.isSet());
+    }
+
+    @Test
+    public void invalidConstructorRange_throws() {
+        assertThrows(IllegalArgumentException.class, () -> new Timing("09:00-08:00"));
+        assertThrows(IllegalArgumentException.class, () -> new Timing("not-a-time-range"));
+    }
+}
