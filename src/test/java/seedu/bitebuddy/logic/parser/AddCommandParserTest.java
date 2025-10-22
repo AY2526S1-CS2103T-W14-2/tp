@@ -1,13 +1,8 @@
 package seedu.bitebuddy.logic.parser;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.bitebuddy.logic.Messages;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.bitebuddy.logic.commands.AddCommand;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_SWENSWAN;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.CUISINE_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.CUISINE_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_SWENSWAN;
@@ -38,6 +33,13 @@ import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.MCRONALDS;
+import static seedu.bitebuddy.testutil.TypicalFoodplace.SWENSWAN;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.bitebuddy.logic.Messages;
+import seedu.bitebuddy.logic.commands.AddCommand;
 import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -45,8 +47,7 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.tag.Tag;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.MCRONALDS;
-import static seedu.bitebuddy.testutil.TypicalFoodplace.SWENSWAN;
+
 
 public class AddCommandParserTest {
     private final AddCommandParser parser = new AddCommandParser();
@@ -148,7 +149,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS).withTags().withCuisine("").build();
-        assertParseSuccess(parser, NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS 
+        assertParseSuccess(parser, NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS
                 + ADDRESS_DESC_MCRONALDS,
                 new AddCommand(expectedFoodplace));
     }

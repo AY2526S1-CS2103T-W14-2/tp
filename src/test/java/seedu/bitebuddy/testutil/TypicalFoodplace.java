@@ -64,7 +64,8 @@ public class TypicalFoodplace {
             .withCuisine(VALID_CUISINE_MCRONALDS).withTags(VALID_TAG_FASTFOOD).build();
     public static final Foodplace SWENSWAN = new FoodplaceBuilder().withName(VALID_NAME_SWENSWAN)
             .withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
-            .withCuisine(VALID_CUISINE_SWENSWAN).withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD).withNote(VALID_NOTE_FAMOUS).build();
+            .withCuisine(VALID_CUISINE_SWENSWAN).withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD)
+            .withNote(VALID_NOTE_FAMOUS).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

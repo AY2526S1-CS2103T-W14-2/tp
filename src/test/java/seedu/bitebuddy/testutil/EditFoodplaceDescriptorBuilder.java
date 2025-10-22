@@ -77,6 +77,9 @@ public class EditFoodplaceDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Cuisine} of the {@code EditFoodplaceDescriptor} that we are building.
+     */
     public EditFoodplaceDescriptorBuilder withCuisine(String cuisine) {
         descriptor.setCuisine(new seedu.bitebuddy.model.foodplace.Cuisine(cuisine));
         return this;

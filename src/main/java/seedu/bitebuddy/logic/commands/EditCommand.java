@@ -114,8 +114,8 @@ public class EditCommand extends Command {
         Note updatedNote = editFoodplaceDescriptor.getNote().orElse(foodplaceToEdit.getNote());
         Rate updatedRate = editFoodplaceDescriptor.getRate().orElse(foodplaceToEdit.getRate());
 
-        return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCuisine, updatedTags, updatedNote,
-                updatedRate);
+        return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCuisine,
+                updatedTags, updatedNote, updatedRate);
     }
 
     @Override

@@ -55,7 +55,11 @@ public class FoodplaceCard extends UiPart<Region> {
         phone.setText(foodplace.getPhone().value);
         address.setText(foodplace.getAddress().value);
         email.setText(foodplace.getEmail().value);
-        cuisine.setText(String.valueOf(foodplace.getCuisine().value).length() != 0 ? foodplace.getCuisine().value : "-- No cuisine specified --");
+        cuisine.setText(
+                foodplace.getCuisine().value.length() != 0
+                ? foodplace.getCuisine().value
+                : "-- No cuisine specified --"
+        );
         note.setText(String.valueOf(
                 foodplace.getNote().value.length() != 0 ? foodplace.getNote().value : "-- No notes yet --"
         ));

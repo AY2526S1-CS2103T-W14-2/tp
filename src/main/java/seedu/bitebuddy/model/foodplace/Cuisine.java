@@ -1,7 +1,6 @@
 package seedu.bitebuddy.model.foodplace;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 
 /**

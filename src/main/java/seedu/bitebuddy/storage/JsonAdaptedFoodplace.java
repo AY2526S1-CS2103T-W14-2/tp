@@ -142,7 +142,8 @@ class JsonAdaptedFoodplace {
             throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
         }
         final Note modelNote = new Note(note);
-        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelCuisine, modelTags, modelNote, modelRate);
+        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelCuisine,
+                modelTags, modelNote, modelRate);
     }
 
 }

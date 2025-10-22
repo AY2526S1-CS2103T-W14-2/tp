@@ -33,7 +33,8 @@ public class Foodplace {
     /**
      * Every field must be present and not null.
      */
-    public Foodplace(Name name, Phone phone, Email email, Address address, Cuisine cuisine, Set<Tag> tags, Note note, Rate rate) {
+    public Foodplace(Name name, Phone phone, Email email, Address address,
+            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate) {
         requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate);
         this.name = name;
         this.phone = phone;
