@@ -164,7 +164,7 @@ public class Timing {
      */
     private boolean fieldsNotEmpty(String... strings) {
         for (String s : strings) {
-            if (s == null || s.trim().isEmpty()) {
+            if (s.trim().isEmpty()) {
                 return false;
             }
         }
@@ -202,7 +202,8 @@ public class Timing {
             return false;
         }
         Timing otherTiming = (Timing) other;
-        return openingTime.equals(otherTiming.openingTime) && closingTime.equals(otherTiming.closingTime);
+        return openingTime.equals(otherTiming.openingTime)
+            && closingTime.equals(otherTiming.closingTime);
     }
 
     @Override

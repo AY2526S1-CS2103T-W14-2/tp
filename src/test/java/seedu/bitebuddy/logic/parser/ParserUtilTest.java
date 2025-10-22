@@ -1,6 +1,7 @@
 package seedu.bitebuddy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
@@ -306,5 +307,72 @@ public class ParserUtilTest {
         // closing before opening
         assertThrows(ParseException.class,
                 Timing.MESSAGE_CONSTRAINTS, () -> ParserUtil.parseTiming("18:00", "09:00"));
+    }
+
+    @Test
+    public void parseTiming_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTiming(null, "09:00"));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTiming("09:00", null));
+    }
+
+    @Test
+    public void parseTiming_invalidTimeFormat_throwsParseException() {
+        assertThrows(ParseException.class, Timing.MESSAGE_INVALID_TIME, () -> ParserUtil.parseTiming("9am", "17:00"));
+        assertThrows(ParseException.class, Timing.MESSAGE_INVALID_TIME, () -> ParserUtil.parseTiming("09:00", "5pm"));
+    }
+
+    @Test
+    public void parseTiming_trimsWhitespace_success() throws Exception {
+        Timing t = ParserUtil.parseTiming(" 09:00 ", " 17:00\t");
+        assertEquals(new Timing(LocalTime.of(9, 0), LocalTime.of(17, 0)), t);
+    }
+
+    @Test
+    public void areNoneOrBothPrefixesPresent_bothPresent_returnsTrue() {
+        ArgumentMultimap map = new ArgumentMultimap();
+        Prefix p1 = new Prefix("ot/");
+        Prefix p2 = new Prefix("ct/");
+        map.put(p1, "09:00");
+        map.put(p2, "17:00");
+        assertTrue(ParserUtil.areNoneOrBothPrefixesPresent(map, p1, p2));
+    }
+
+    @Test
+    public void areNoneOrBothPrefixesPresent_nonePresent_returnsTrue() {
+        ArgumentMultimap map = new ArgumentMultimap();
+        Prefix p1 = new Prefix("ot/");
+        Prefix p2 = new Prefix("ct/");
+        assertTrue(ParserUtil.areNoneOrBothPrefixesPresent(map, p1, p2));
+    }
+
+    @Test
+    public void areNoneOrBothPrefixesPresent_onePresent_returnsFalse() {
+        ArgumentMultimap map = new ArgumentMultimap();
+        Prefix p1 = new Prefix("ot/");
+        Prefix p2 = new Prefix("ct/");
+        map.put(p1, "09:00");
+        assertFalse(ParserUtil.areNoneOrBothPrefixesPresent(map, p1, p2));
+    }
+
+    @Test
+    public void areBothPrefixesPresent() {
+        ArgumentMultimap map = new ArgumentMultimap();
+        Prefix p1 = new Prefix("a/");
+        Prefix p2 = new Prefix("b/");
+        assertFalse(ParserUtil.areBothPrefixesPresent(map, p1, p2));
+        map.put(p1, "v1");
+        assertFalse(ParserUtil.areBothPrefixesPresent(map, p1, p2));
+        map.put(p2, "v2");
+        assertTrue(ParserUtil.areBothPrefixesPresent(map, p1, p2));
+    }
+
+    @Test
+    public void areNeitherPrefixesPresent() {
+        ArgumentMultimap map = new ArgumentMultimap();
+        Prefix p1 = new Prefix("x/");
+        Prefix p2 = new Prefix("y/");
+        assertTrue(ParserUtil.areNeitherPrefixesPresent(map, p1, p2));
+        map.put(p1, "v");
+        assertFalse(ParserUtil.areNeitherPrefixesPresent(map, p1, p2));
     }
 }

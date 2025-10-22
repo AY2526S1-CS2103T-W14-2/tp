@@ -7,10 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CLOSE_TIME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CUISINE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_OPEN_TIME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_RATE_PRATASHOP;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
@@ -73,6 +75,11 @@ public class EditFoodplaceDescriptorTest {
         // different cuisine -> returns false
         editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
                 .withCuisine(VALID_CUISINE_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different timing -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+                .withTiming(VALID_OPEN_TIME_SWENSWAN, VALID_CLOSE_TIME_SWENSWAN).build();
         assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
     }
 
