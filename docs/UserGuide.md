@@ -83,7 +83,7 @@ Follow these steps to install and start using **BiteBuddy**!
 
 Directs user to detailed information about the application or specific commands.
 
-Format: `help [COMMAND]`
+Format: `help [COMMAND]`  
 
 * If no command is given, the URL for the help page will be shown. ![help message](images/helpMessage.png)
 * If a command parameter is given, the usage for the command will be shown
@@ -91,7 +91,9 @@ Format: `help [COMMAND]`
 
 Examples:  
 * `help` shows the help page
-* `help add` shows the usage for the `add` command
+* `help add` shows the usage for the `add` command  
+
+[Go to Command Summary](#command-summary)
 
 
 ### Adding a foodplace: `add`
@@ -108,6 +110,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]… [no/NOTE] [r/RAT
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+[Go to Command Summary](#command-summary)
 
 ### Listing all foodplaces : `list`
 
@@ -129,6 +133,8 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd foodplace in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st foodplace in the results of the `find` command.
 
+[Go to Command Summary](#command-summary)  
+
 ### Editing a foodplace : `edit`
 
 Edits an existing foodplace in the address book.
@@ -146,6 +152,8 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st foodplace to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd foodplace to be `Betsy Crower` and clears all existing tags.
 
+[Go to Command Summary](#command-summary)  
+
 ### Adding a note to a foodplace : `note`
 
 Adds / edits the note of an existing foodplace in the address book.
@@ -160,6 +168,8 @@ Format: `note INDEX [note]`
 Examples:
 * `note 2 Good customer service!` Adds / Edits the note of the 2nd foodplace to be `Good customer service!`.
 * `note 2` Removes any notes of the 2nd foodplace.
+
+[Go to Command Summary](#command-summary)  
 
 ### Rate a foodplace : `rate`
 
@@ -178,6 +188,8 @@ Examples:
 * Executing `rate 1 0` sets the 1st foodplace in the addressbook to have its current rating removed.
 * Executing `rate 1 5` then `rate 1 8` sets the 1st foodplace in the addressbook to have its current rating to `5`
   first then to `8`.
+
+[Go to Command Summary](#command-summary)  
 
 ### Adding Tag(s) to a foodplace : `tag`
 
@@ -200,6 +212,8 @@ Examples:
 **Tip:** Using `tag INDEX /d` without specifying any tags will remove all tags from the selected foodplace.
 </box>
 
+[Go to Command Summary](#command-summary)  
+
 ### Locating foodplaces by name: `find`
 
 Finds foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords.
@@ -216,6 +230,8 @@ Examples:
 * `find prata` returns `Prata Place` and `The Prata House`
 * `find delivery 5` returns foodplaces with either “delivery” or “5” appearing in any field<br>
   ![result for 'find delivery 5'](images/findDelivery5Result.png)
+
+[Go to Command Summary](#command-summary)  
 
 ### Clearing all entries : `clear`
 
