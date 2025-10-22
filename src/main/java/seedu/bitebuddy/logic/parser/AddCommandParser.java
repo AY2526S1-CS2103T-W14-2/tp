@@ -40,9 +40,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     @Override
     public AddCommand parse(String args) throws ParseException {
-    ArgumentMultimap argMultimap =
-        ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-            PREFIX_CUISINE, PREFIX_TAG, PREFIX_NOTE, PREFIX_RATE, PREFIX_OPEN, PREFIX_CLOSE);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                    PREFIX_CUISINE, PREFIX_TAG, PREFIX_NOTE, PREFIX_RATE, PREFIX_OPEN, PREFIX_CLOSE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -69,7 +69,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
         Rate rate = ParserUtil.parseRatings(argMultimap.getAllValues(PREFIX_RATE));
 
-    Foodplace foodplace = new Foodplace(name, phone, email, address, timing, cuisine, tagList, note, rate);
+        Foodplace foodplace = new Foodplace(name, phone, email, address, timing, cuisine, tagList, note, rate);
 
         return new AddCommand(foodplace);
     }

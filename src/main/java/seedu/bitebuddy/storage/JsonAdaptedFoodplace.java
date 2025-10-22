@@ -73,7 +73,7 @@ class JsonAdaptedFoodplace {
         timing = source.getTiming().toString();
         cuisine = source.getCuisine().value;
         tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)   
+                .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         note = source.getNote().value;
         rate = source.getRate().getValue();
@@ -156,8 +156,8 @@ class JsonAdaptedFoodplace {
             throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
         }
         final Note modelNote = new Note(note);
-    return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming,
-        modelCuisine, modelTags, modelNote, modelRate);
+        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming,
+                modelCuisine, modelTags, modelNote, modelRate);
     }
 
 }

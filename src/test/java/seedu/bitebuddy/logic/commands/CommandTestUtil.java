@@ -36,6 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_SWENSWAN = "booking@swenswan.com";
     public static final String VALID_ADDRESS_MCRONALDS = "Rideout Tea Garden";
     public static final String VALID_ADDRESS_SWENSWAN = "Geneo Lvl 3";
+    public static final String VALID_TIMING_MCRONALDS = "08:00-22:00";
+    public static final String VALID_TIMING_SWENSWAN = "10:00-23:00";
     public static final String VALID_CUISINE_MCRONALDS = "Fast Food";
     public static final String VALID_CUISINE_SWENSWAN = "Western";
     public static final String VALID_TAG_FASTFOOD = "fastfood";

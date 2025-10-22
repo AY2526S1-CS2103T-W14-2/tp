@@ -144,7 +144,16 @@ public class FoodplaceBuilder {
      * Expects opening and closing times in HH:mm format.
      */
     public FoodplaceBuilder withTiming(String open, String close) {
-        this.timing = new Timing(LocalTime.parse(open), LocalTime.parse(close));
+        this.timing = new Timing(open, close);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Timing} of the {@code Foodplace} that we are building.
+     * Expects time range in "HH:mm-HH:mm" format.
+     */
+    public FoodplaceBuilder withTiming(String timeRange) {
+        this.timing = new Timing(timeRange);
         return this;
     }
 

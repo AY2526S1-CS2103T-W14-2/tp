@@ -27,7 +27,8 @@ import seedu.bitebuddy.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_BOTH_TIMES_REQUIRED = "Both opening and closing time (ot/ and ct/) must be provided in add command";
+    public static final String MESSAGE_BOTH_TIMES_REQUIRED = "Both opening and closing time "
+            + "(ot/ and ct/) must be provided";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -233,18 +234,28 @@ public class ParserUtil {
         return rate;
     }
 
-    public static boolean areNoneOrBothPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
+    /**
+     * Returns true if none or both of the prefixes are present in the given {@code ArgumentMultimap}.
+     */
+    public static boolean areNoneOrBothPrefixesPresent(ArgumentMultimap argumentMultimap,
+            Prefix prefix1, Prefix prefix2) {
         boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
         boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();
         return (isPrefix1Present && isPrefix2Present) || (!isPrefix1Present && !isPrefix2Present);
     }
 
+    /**
+     * Returns true if both of the prefixes are present in the given {@code ArgumentMultimap}.
+     */
     public static boolean areBothPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
         boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
         boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();
         return isPrefix1Present && isPrefix2Present;
     }
 
+    /**
+     * Returns true if both of the prefixes are present in the given {@code ArgumentMultimap}.
+     */
     public static boolean areNeitherPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
         boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
         boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();

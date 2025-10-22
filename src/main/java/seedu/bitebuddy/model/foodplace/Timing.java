@@ -7,6 +7,10 @@ import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Foodplace's timing in BiteBuddy.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTiming(String)}
+ */
 public class Timing {
 
     public static final String MESSAGE_CONSTRAINTS = "Closing time must be after or equal to opening time";
@@ -20,7 +24,12 @@ public class Timing {
     private final LocalTime openingTime;
     private final LocalTime closingTime;
     private final Boolean isSet;
-    
+
+    /**
+     * Constructs a {@code Timing}.
+     *
+     * @param timeRange A valid timing in the format "HH:mm-HH:mm".
+     */
     public Timing(String timeRange) {
         requireNonNull(timeRange);
         if (!fieldsNotEmpty(timeRange)) {
@@ -37,6 +46,12 @@ public class Timing {
         this.isSet = true;
     }
 
+    /**
+     * Constructs a {@code Timing}.
+     *
+     * @param open A valid opening time in the format "HH:mm".
+     * @param close A valid closing time in the format "HH:mm".
+     */
     public Timing(String open, String close) {
         requireAllNonNull(open, close);
         if (!fieldsNotEmpty(open, close)) {
@@ -56,6 +71,12 @@ public class Timing {
         this.isSet = true;
     }
 
+    /**
+     * Constructs a {@code Timing}.
+     *
+     * @param openingTime A valid opening time.
+     * @param closingTime A valid closing time.
+     */
     public Timing(LocalTime openingTime, LocalTime closingTime) {
         requireAllNonNull(openingTime, closingTime);
         this.openingTime = openingTime;
@@ -63,6 +84,9 @@ public class Timing {
         this.isSet = true;
     }
 
+    /**
+     * Returns true if a given string is a valid time in "HH:mm" format.
+     */
     public static boolean isValidTime(String time) {
         try {
             if (!time.matches(VALIDATION_REGEX)) {
@@ -75,6 +99,9 @@ public class Timing {
         return true;
     }
 
+    /**
+     * Returns true if a given string is a valid timing.
+     */
     public static boolean isValidTiming(String timeRange) {
         String[] parts = timeRange.split("-");
         if (parts.length != 2) {

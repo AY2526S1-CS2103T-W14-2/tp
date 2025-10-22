@@ -3,8 +3,8 @@ package seedu.bitebuddy;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -154,7 +154,11 @@ public class MainApp extends Application {
             }
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
-            logger.log(Level.WARNING, "Preference file at {0} could not be loaded. Using default preferences.", prefsFilePath);
+            logger.log(
+                    Level.WARNING,
+                    "Preference file at {0} could not be loaded. Using default preferences.",
+                    prefsFilePath
+            );
             initializedPrefs = new UserPrefs();
         }
 
