@@ -60,8 +60,8 @@ Follow these steps to install and start using **BiteBuddy**!
 
 ### Step 1 — Check Java Version
 - Ensure you have Java `17` or above installed on your computer.<br>
-   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).  
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).  
+   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows). 
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 - To check your version, open a terminal and type: `java -version`
 ![Check Java Version](images/java_version.png)
 
@@ -70,16 +70,16 @@ Follow these steps to install and start using **BiteBuddy**!
 2. Download the latest file named **`bitebuddy.jar`**.
    ![Download BiteBuddy.jar](images/download_jar.png)
 3. Copy the file to the folder you want to use as the _home folder_ for your BiteBuddy.
-4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar "bitebuddy.jar"` to launch the application.<br>  
-   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.  
-   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)  
+4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar "bitebuddy.jar"` to launch the application.<br>
+   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.
+   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)
    **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
 
 5. A GUI similar to the one below should appear within a few seconds. It comes preloaded with sample data for you to explore. <br>
-   ![Ui](images/UI_image.png) 
+   ![Ui](images/UI_image.png)
 
 ### Step 3 — Try Out a Command!
-- Type the command in the Command Box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.  
+- Type the command in the Command Box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
   Here are some example commands you can try:
 
    * `list` : Lists all foodplaces.
@@ -130,7 +130,7 @@ Format: `help [COMMAND]`
 
 ```
 help: Shows program usage instructions.
-Parameters: [COMMAND] 
+Parameters: [COMMAND]
 Example: help
 Example: help find
 ```
@@ -139,7 +139,7 @@ Example: help find
 * If a command parameter is given, the usage for the command will be shown instead.
 * Command keywords are **case-sensitive**.
 
-Examples:  
+Examples:
 * `help` shows the help page
 * `help add` shows the usage for the `add` command
 
@@ -224,7 +224,7 @@ Parameters: INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CUISINE] [t/TAG]�
 Example: edit 1 p/91234567 e/johndoe@example.com
 ```
 
-* Edits the foodplace at the specified `INDEX`. 
+* Edits the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
 * The index **must be a positive integer**: 1, 2, 3, …​
 * **At least one of the optional fields** must be provided.
@@ -308,7 +308,7 @@ Examples:
 
 Adds / removes one or more tags from the specified foodplace in BiteBuddy.
 
-Format 1 : `tag INDEX TAG1 [TAG2]...`  
+Format 1 : `tag INDEX TAG1 [TAG2]...`
 Format 2 : `tag INDEX /d [TAG1] [TAG2]...`
 
 ```
@@ -322,7 +322,7 @@ Example: tag 3 Savoury GoodService
 * **At least one tag** must be provided for **Format 1**.
 * Tag additions are **cumulative**, existing tags are kept until manually deleted.
 
-Examples:  
+Examples:
 * `tag 3 FastFood Vegan` adds both FastFood and Vegan tags to the 3rd foodplace.
 * `tag 2 /d FastFood` removes the FastFood tag from the 2nd foodplace.
 * `tag INDEX /d` will remove all tags from the selected foodplace.
