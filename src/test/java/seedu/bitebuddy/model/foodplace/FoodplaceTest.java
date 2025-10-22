@@ -2,6 +2,7 @@ package seedu.bitebuddy.model.foodplace;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
@@ -22,7 +23,7 @@ public class FoodplaceTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Foodplace foodplace = new FoodplaceBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> foodplace.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> foodplace.getTags().removeIf(t -> true));
     }
 
     @Test
@@ -68,7 +69,7 @@ public class FoodplaceTest {
         assertTrue(PRATASHOP.equals(PRATASHOP));
 
         // null -> returns false
-        assertFalse(PRATASHOP.equals(null));
+        assertNotEquals(PRATASHOP, null);
 
         // different type -> returns false
         assertFalse(PRATASHOP.equals(5));
@@ -105,8 +106,9 @@ public class FoodplaceTest {
     public void toStringMethod() {
         String expected = Foodplace.class.getCanonicalName() + "{name=" + PRATASHOP.getName() + ", phone="
                 + PRATASHOP.getPhone()
-                + ", email=" + PRATASHOP.getEmail() + ", address=" + PRATASHOP.getAddress() + ", tags="
-                + PRATASHOP.getTags() + ", rate=" + PRATASHOP.getRate() + "}";
+                + ", email=" + PRATASHOP.getEmail() + ", address=" + PRATASHOP.getAddress()
+                + ", cuisine=" + PRATASHOP.getCuisine() + ", tags=" + PRATASHOP.getTags() + ", rate="
+                + PRATASHOP.getRate() + "}";
         assertEquals(expected, PRATASHOP.toString());
     }
 }
