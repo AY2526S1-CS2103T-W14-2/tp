@@ -60,7 +60,7 @@ Follow these steps to install and start using **BiteBuddy**!
 
 ### Step 1 — Check Java Version
 - Ensure you have Java `17` or above installed on your computer.<br>
-   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows). 
+   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 - To check your version, open a terminal and type: `java -version`
 ![Check Java Version](images/java_version.png)
