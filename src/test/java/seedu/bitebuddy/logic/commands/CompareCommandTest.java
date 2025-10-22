@@ -33,9 +33,9 @@ public class CompareCommandTest {
         Foodplace secondFoodplace = model.getFilteredFoodplaceList().get(INDEX_SECOND_FOODPLACE.getZeroBased());
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE);
 
-        String expectedMessage = "Prata Palace (Rating: --) vs Daebak Korean BBQ (Rating: --)\n" +
-                "Common tags: --\n" +
-                "Unique tags: Prata Palace (hawker) | Daebak Korean BBQ (restaurant, korean)\n";
+        String expectedMessage = "Prata Palace (Rating: --) vs Daebak Korean BBQ (Rating: --)\n"
+                + "Common tags: --\n"
+                + "Unique tags: Prata Palace (hawker) | Daebak Korean BBQ (restaurant, korean)\n";
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(secondFoodplace));
@@ -61,9 +61,9 @@ public class CompareCommandTest {
 
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE);
 
-        String expectedMessage = "Prata Palace (Rating: --) vs Daebak Korean BBQ (Rating: --)\n" +
-                "Common tags: --\n" +
-                "Unique tags: Prata Palace (hawker) | Daebak Korean BBQ (restaurant, korean)\n";
+        String expectedMessage = "Prata Palace (Rating: --) vs Daebak Korean BBQ (Rating: --)\n"
+                + "Common tags: --\n"
+                + "Unique tags: Prata Palace (hawker) | Daebak Korean BBQ (restaurant, korean)\n";
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(secondFoodplace));

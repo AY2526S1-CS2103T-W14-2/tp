@@ -43,7 +43,8 @@ public class CompareCommandParserTest {
         assertParseFailure(parser, CompareCommand.COMMAND_WORD, expectedMessage);
 
         // only one index
-        assertParseFailure(parser, CompareCommand.COMMAND_WORD + " " + INDEX_FIRST_FOODPLACE.getOneBased(), expectedMessage);
+        assertParseFailure(parser,
+                CompareCommand.COMMAND_WORD + " " + INDEX_FIRST_FOODPLACE.getOneBased(), expectedMessage);
     }
 
     @Test
