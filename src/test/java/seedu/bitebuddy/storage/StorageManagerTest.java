@@ -1,5 +1,6 @@
 package seedu.bitebuddy.storage;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
@@ -63,6 +64,14 @@ public class StorageManagerTest {
     @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void saveAddressBook_withPath_delegatesToUnderlyingStorage() {
+        // Use the real JsonAddressBookStorage which writes to a temp path handled by the framework
+        JsonAddressBookStorage storage = new JsonAddressBookStorage(Path.of("build", "tmp", "test-addressbook.json"));
+        ReadOnlyAddressBook ab = new AddressBook();
+        assertDoesNotThrow(() -> storage.saveAddressBook(ab, storage.getAddressBookFilePath()));
     }
 
 }

@@ -91,6 +91,7 @@ public class TagCommand extends Command {
                 foodplaceToEdit.getPhone(),
                 foodplaceToEdit.getEmail(),
                 foodplaceToEdit.getAddress(),
+                foodplaceToEdit.getCuisine(),
                 updatedTags,
                 foodplaceToEdit.getNote(),
                 foodplaceToEdit.getRate()
