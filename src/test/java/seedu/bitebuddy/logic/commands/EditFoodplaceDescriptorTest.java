@@ -77,8 +77,8 @@ public class EditFoodplaceDescriptorTest {
                 + editFoodplaceDescriptor.getName().orElse(null) + ", phone="
                 + editFoodplaceDescriptor.getPhone().orElse(null) + ", email="
                 + editFoodplaceDescriptor.getEmail().orElse(null) + ", address="
-                + editFoodplaceDescriptor.getCuisine().orElse(null) + ", cuisine="
-                + editFoodplaceDescriptor.getAddress().orElse(null) + ", tags="
+                + editFoodplaceDescriptor.getAddress().orElse(null) + ", cuisine="
+                + editFoodplaceDescriptor.getCuisine().orElse(null) + ", tags="
                 + editFoodplaceDescriptor.getTags().orElse(null) + ", note="
                 + editFoodplaceDescriptor.getNote().orElse(null) + ", rate="
                 + editFoodplaceDescriptor.getRate().orElse(null) + "}";

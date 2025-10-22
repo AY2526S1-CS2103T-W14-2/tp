@@ -41,7 +41,7 @@ class JsonAdaptedFoodplace {
      */
     @JsonCreator
     public JsonAdaptedFoodplace(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                                @JsonProperty("email") String email, @JsonProperty("bitebuddy") String address,
+                                @JsonProperty("email") String email, @JsonProperty("address") String address,
                                 @JsonProperty("cuisine") String cuisine,
                                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                 @JsonProperty("note") String note,
