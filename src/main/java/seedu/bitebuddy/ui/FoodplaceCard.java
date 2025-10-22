@@ -36,6 +36,8 @@ public class FoodplaceCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label timing;
+    @FXML
     private Label cuisine;
     @FXML
     private FlowPane tags;
@@ -53,25 +55,38 @@ public class FoodplaceCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(foodplace.getName().fullName);
         address.setText(foodplace.getAddress().value);
-        phone.setText(String.valueOf(
-                !(foodplace.getPhone().value.isEmpty()) ? foodplace.getPhone().value : "## No phone number yet ##"
-        ));
-        email.setText(String.valueOf(
-                !(foodplace.getEmail().value.isEmpty()) ? foodplace.getEmail().value : "\\\\ No email yet //"
-        ));
+        phone.setText(
+                !(foodplace.getPhone().value.isEmpty())
+                        ? foodplace.getPhone().value
+                        : "## No phone number yet ##"
+        );
+        email.setText(
+                !(foodplace.getEmail().value.isEmpty())
+                        ? foodplace.getEmail().value
+                        : "\\\\ No email yet //"
+        );
+        timing.setText(
+                !(foodplace.getTiming().toString().isEmpty())
+                        ? foodplace.getTiming().toString()
+                        : "** No timing specified **"
+        );
         cuisine.setText(
                 foodplace.getCuisine().value.length() != 0
                         ? foodplace.getCuisine().value
                         : "== No cuisine specified =="
         );
-        note.setText(String.valueOf(
-                !(foodplace.getNote().value.isEmpty()) ? foodplace.getNote().value : "-- No notes yet --"
-        ));
+        note.setText(
+                !(foodplace.getNote().value.isEmpty())
+                        ? foodplace.getNote().value
+                        : "-- No notes yet --"
+        );
         foodplace.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        rate.setText(String.valueOf(
-                foodplace.getRate().isSet() ? foodplace.getRate().toString() : ">> No Rating yet <<"
-        ));
+        rate.setText(
+                foodplace.getRate().isSet()
+                        ? foodplace.getRate().toString()
+                        : ">> No Rating yet <<"
+        );
     }
 }
