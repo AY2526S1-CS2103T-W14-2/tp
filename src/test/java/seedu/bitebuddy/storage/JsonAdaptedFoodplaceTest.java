@@ -1,6 +1,7 @@
 package seedu.bitebuddy.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.bitebuddy.storage.JsonAdaptedFoodplace.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.DAEBAKSHOP;
@@ -15,6 +16,7 @@ import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
+import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
@@ -73,6 +75,21 @@ public class JsonAdaptedFoodplaceTest {
     }
 
     @Test
+    public void toModelType_emptyPhone_returnsPhone() {
+        JsonAdaptedFoodplace foodplace =
+                new JsonAdaptedFoodplace(VALID_NAME, "", VALID_EMAIL, VALID_ADDRESS,
+                        VALID_CUISINE, VALID_TAGS, VALID_NOTE,
+                        VALID_RATING);
+        Foodplace model;
+        try {
+            model = foodplace.toModelType();
+            assertEquals("", model.getPhone().value);
+        } catch (IllegalValueException e) {
+            fail();
+        }
+    }
+
+    @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace = new JsonAdaptedFoodplace(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
                 VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING);
@@ -87,6 +104,21 @@ public class JsonAdaptedFoodplaceTest {
                         VALID_TAGS, VALID_NOTE, VALID_RATING);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyEmail_returnsEmail() {
+        JsonAdaptedFoodplace foodplace =
+                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, "", VALID_ADDRESS,
+                        VALID_CUISINE, VALID_TAGS, VALID_NOTE,
+                        VALID_RATING);
+        Foodplace model;
+        try {
+            model = foodplace.toModelType();
+            assertEquals("", model.getEmail().value);
+        } catch (IllegalValueException e) {
+            fail();
+        }
     }
 
     @Test
