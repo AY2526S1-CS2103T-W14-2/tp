@@ -170,4 +170,19 @@ public class JsonAdaptedFoodplaceTest {
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidCuisine_throwsIllegalValueException() {
+        List<JsonAdaptedTag> tags = new ArrayList<>();
+        JsonAdaptedFoodplace adapted = new JsonAdaptedFoodplace("Alice", "91234567",
+                "alice@example.com", "123, Jurong West Ave 6", "!!invalid!!", tags, "note", 5);
+
+        try {
+            adapted.toModelType();
+        } catch (IllegalValueException ive) {
+            assertEquals(Cuisine.MESSAGE_CONSTRAINTS, ive.getMessage());
+            return;
+        }
+        throw new AssertionError("Expected IllegalValueException for invalid cuisine");
+    }
+
 }
