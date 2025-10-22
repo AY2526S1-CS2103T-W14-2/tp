@@ -13,33 +13,45 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+Follow these steps to install and start using **BiteBuddy**!
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+### Step 1 — Check Java Version
+- Ensure you have Java `17` or above installed on your computer.<br>
+   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).  
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).  
+- To check your version, open a terminal and type: `java -version`
+![Check Java Version](images/java_version.png)
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+### Step 2 — Download and Run BiteBuddy
+1. Go to our [GitHub Releases page](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases).
+2. Download the latest file named **`bitebuddy.jar`**.
+   ![Download BiteBuddy.jar](images/download_jar.png)
+3. Copy the file to the folder you want to use as the _home folder_ for your BiteBuddy.
+4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar "bitebuddy.jar"` to launch the application.<br>  
+   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.  
+   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)  
+   **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+5. A GUI similar to the one below should appear within a few seconds. It comes preloaded with sample data for you to explore. <br>
+   ![Ui](images/UI_image.png) 
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Step 3 — Try Out a Command!
+- Type the command in the Command Box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.  
+  Here are some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all foodplaces.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/KFC a/John street, block 123, #01-01 t/FastFood t/Chicken r/8` : Adds the foodplace *KFC* to BiteBuddy.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd foodplace shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all saved foodplaces.
 
-   * `exit` : Exits the app.
+   * `exit` : Exits BiteBuddy.
 
-1. Refer to the [Features](#features) below for details of each command.
+- Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -71,7 +83,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 Directs user to detailed information about the application or specific commands.
 
-Format: `help [COMMAND]`
+Format: `help [COMMAND]`  
 
 * If no command is given, the URL for the help page will be shown. ![help message](images/helpMessage.png)
 * If a command parameter is given, the usage for the command will be shown
@@ -79,7 +91,9 @@ Format: `help [COMMAND]`
 
 Examples:  
 * `help` shows the help page
-* `help add` shows the usage for the `add` command
+* `help add` shows the usage for the `add` command  
+
+[Go to Command Summary](#command-summary)
 
 
 ### Adding a foodplace: `add`
@@ -96,6 +110,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [c/CUISINE] [t/TAG]… [no/
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+[Go to Command Summary](#command-summary)
 
 ### Listing all foodplaces : `list`
 
@@ -117,6 +133,8 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd foodplace in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st foodplace in the results of the `find` command.
 
+[Go to Command Summary](#command-summary)  
+
 ### Editing a foodplace : `edit`
 
 Edits an existing foodplace in the address book.
@@ -134,6 +152,8 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st foodplace to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd foodplace to be `Betsy Crower` and clears all existing tags.
 
+[Go to Command Summary](#command-summary)  
+
 ### Adding a note to a foodplace : `note`
 
 Adds / edits the note of an existing foodplace in the address book.
@@ -148,6 +168,8 @@ Format: `note INDEX [note]`
 Examples:
 * `note 2 Good customer service!` Adds / Edits the note of the 2nd foodplace to be `Good customer service!`.
 * `note 2` Removes any notes of the 2nd foodplace.
+
+[Go to Command Summary](#command-summary)  
 
 ### Rate a foodplace : `rate`
 
@@ -167,7 +189,9 @@ Examples:
 * Executing `rate 1 5` then `rate 1 8` sets the 1st foodplace in the addressbook to have its current rating to `5`
   first then to `8`.
 
-### Adding a tag a foodplace : `tag`
+[Go to Command Summary](#command-summary)  
+
+### Adding Tag(s) to a foodplace : `tag`
 
 Adds or removes one or more tags from the specified foodplace in the address book.
 
@@ -188,6 +212,8 @@ Examples:
 **Tip:** Using `tag INDEX /d` without specifying any tags will remove all tags from the selected foodplace.
 </box>
 
+[Go to Command Summary](#command-summary)  
+
 ### Locating foodplaces by name: `find`
 
 Finds foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords.
@@ -204,6 +230,8 @@ Examples:
 * `find prata` returns `Prata Place` and `The Prata House`
 * `find delivery 5` returns foodplaces with either “delivery” or “5” appearing in any field<br>
   ![result for 'find delivery 5'](images/findDelivery5Result.png)
+
+[Go to Command Summary](#command-summary)  
 
 ### Clearing all entries : `clear`
 
@@ -232,16 +260,12 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous BiteBuddy home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -254,16 +278,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**   | `help [COMMAND]` <br> e.g., `help add`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**List**   | `list`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Note**   | `note INDEX [NOTE]`<br> e.g., `note 1 Famous for their chicken rice!`
-**Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 6`
-**Tag**    | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br> e.g., `tag 1 FastFood Expensive`<br> e.g., `tag 1 /d FastFood`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Clear**  | `clear`
-**Exit**   | `exit`
+Action     | Format                                                                     | Examples
+-----------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
+[**Help**](#viewing-help--help) | `help [COMMAND]`<br>                                                       | `help add`
+[**Add**](#adding-a-foodplace-add) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>               | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+[**List**](#listing-all-foodplaces--list) | `list`                                                                     | `list`
+[**Delete**](#deleting-a-foodplace--delete) | `delete INDEX`<br>                                                         | `delete 3`
+[**Edit**](#editing-a-foodplace--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | `edit 2 n/James Lee e/jameslee@example.com`
+[**Note**](#adding-a-note-to-a-foodplace--note)   | `note INDEX [NOTE]`<br>                                                    | `note 1 Famous for their chicken rice!`
+[**Rate**](#rate-a-foodplace--rate) | `rate INDEX RATING`<br>                                                    | `rate 1 6`
+[**Tag**](#adding-tags-to-a-foodplace--tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                   | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
+[**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br>                                         | `find James Jake`
+[**Clear**](#clearing-all-entries--clear) | `clear`                                                                    | `clear`
+[**Exit**](#exiting-the-program--exit) | `exit`                                                                     | `exit`
