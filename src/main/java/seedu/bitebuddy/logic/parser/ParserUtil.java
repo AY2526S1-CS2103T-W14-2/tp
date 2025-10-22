@@ -2,6 +2,8 @@ package seedu.bitebuddy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +18,7 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Timing;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -24,6 +27,7 @@ import seedu.bitebuddy.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_BOTH_TIMES_REQUIRED = "Both opening and closing time (ot/ and ct/) must be provided in add command";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -115,6 +119,25 @@ public class ParserUtil {
             throw new ParseException(Cuisine.MESSAGE_CONSTRAINTS);
         }
         return new Cuisine(trimmedCuisine);
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmed = time.trim();
+        // if (!Timing.isValidTiming(trimmed)) {
+        //     throw new ParseException(Timing.MESSAGE_INVALID_TIME);
+        // }
+        try {
+            return LocalTime.parse(trimmed);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Timing.MESSAGE_INVALID_TIME);
+        }
     }
 
     /**

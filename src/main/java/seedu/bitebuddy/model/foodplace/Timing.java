@@ -1,5 +1,9 @@
 package seedu.bitebuddy.model.foodplace;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
+import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
@@ -8,26 +12,62 @@ public class Timing {
     public static final String MESSAGE_CONSTRAINTS = "Timing must be in the format HH:mm. "
             + "Closing time must be after or equal to opening time";
 
+    public static final String MESSAGE_INVALID_TIME = "Invalid time provided. Time must be in HH:mm format";
+
+    public static final String VALIDATION_REGEX = "^([01]?\\d|2[0-3]):[0-5]\\d$";
+
     private final LocalTime openingTime;
     private final LocalTime closingTime;
+    
+
+    public Timing(String timeRange) {
+        requireNonNull(timeRange);
+        checkArgument(isValidTiming(timeRange), MESSAGE_CONSTRAINTS);
+        String[] parts = timeRange.split("-");
+        String openStr = parts[0].trim();
+        String closeStr = parts[1].trim();
+        this.openingTime = LocalTime.parse(openStr);
+        this.closingTime = LocalTime.parse(closeStr);
+    }
+
+    public Timing(String open, String close) {
+        requireAllNonNull(open, close);
+        checkArgument(isValidTime(open), MESSAGE_INVALID_TIME);
+        checkArgument(isValidTime(close), MESSAGE_INVALID_TIME);
+        this.openingTime = LocalTime.parse(open);
+        this.closingTime = LocalTime.parse(close);
+    }
 
     public Timing(LocalTime openingTime, LocalTime closingTime) {
         this.openingTime = openingTime;
         this.closingTime = closingTime;
     }
 
-    public static boolean isValidTiming(LocalTime openingTime, LocalTime closingTime) {
-        return !closingTime.isBefore(openingTime);
-    }
-
-    public static boolean isValidTiming(String openingTimeStr, String closingTimeStr) {
+    public static boolean isValidTime(String time) {
         try {
-            LocalTime openingTime = LocalTime.parse(openingTimeStr);
-            LocalTime closingTime = LocalTime.parse(closingTimeStr);
-            return isValidTiming(openingTime, closingTime);
+            if (!time.matches(VALIDATION_REGEX)) {
+                return false;
+            }
+            LocalTime.parse(time);
         } catch (DateTimeParseException e) {
             return false;
         }
+        return true;
+    }
+
+    public static boolean isValidTiming(String timeRange) {
+        String[] parts = timeRange.split("-");
+        if (parts.length != 2) {
+            return false;
+        }
+        String openStr = parts[0].trim();
+        String closeStr = parts[1].trim();
+        if (!isValidTime(openStr) || !isValidTime(closeStr)) {
+            return false;
+        }
+        LocalTime openingTime = LocalTime.parse(openStr);
+        LocalTime closingTime = LocalTime.parse(closeStr);
+        return !closingTime.isBefore(openingTime);
     }
 
     /**
@@ -56,10 +96,7 @@ public class Timing {
 
     @Override
     public String toString() {
-        return "Timing{" +
-                "openingTime=" + openingTime +
-                ", closingTime=" + closingTime +
-                '}';
+        return getOpeningTime().toString() + "-" + getClosingTime().toString();
     }
 
     @Override

@@ -2,10 +2,12 @@ package seedu.bitebuddy.logic.parser;
 
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CLOSE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CUISINE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_OPEN;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
@@ -23,6 +25,7 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Timing;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -37,9 +40,9 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     @Override
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_CUISINE, PREFIX_TAG, PREFIX_NOTE, PREFIX_RATE);
+    ArgumentMultimap argMultimap =
+        ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+            PREFIX_CUISINE, PREFIX_TAG, PREFIX_NOTE, PREFIX_RATE, PREFIX_OPEN, PREFIX_CLOSE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -53,11 +56,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse(""));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Cuisine cuisine = ParserUtil.parseCuisine(argMultimap.getValue(PREFIX_CUISINE).orElse(""));
+
+        // parse timing: require both open and close
+        if (!arePrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
+            throw new ParseException(ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
+        }
+        java.time.LocalTime open = ParserUtil.parseTime(argMultimap.getValue(PREFIX_OPEN).get());
+        java.time.LocalTime close = ParserUtil.parseTime(argMultimap.getValue(PREFIX_CLOSE).get());
+        Timing timing = new Timing(open, close);
+
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
         Rate rate = ParserUtil.parseRatings(argMultimap.getAllValues(PREFIX_RATE));
 
-        Foodplace foodplace = new Foodplace(name, phone, email, address, cuisine, tagList, note, rate);
+    Foodplace foodplace = new Foodplace(name, phone, email, address, timing, cuisine, tagList, note, rate);
 
         return new AddCommand(foodplace);
     }

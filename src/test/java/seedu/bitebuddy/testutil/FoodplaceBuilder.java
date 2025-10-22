@@ -1,5 +1,6 @@
 package seedu.bitebuddy.testutil;
 
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,6 +12,7 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Timing;
 import seedu.bitebuddy.model.tag.Tag;
 import seedu.bitebuddy.model.util.SampleDataUtil;
 
@@ -26,12 +28,15 @@ public class FoodplaceBuilder {
     public static final String DEFAULT_CUISINE = "Italian";
     public static final String DEFAULT_NOTE = "Serves the best appetisers!";
     public static final String DEFAULT_RATE = String.valueOf(0);
+    public static final String DEFAULT_OPEN = "09:00";
+    public static final String DEFAULT_CLOSE = "21:00";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Cuisine cuisine;
+    private Timing timing;
     private Set<Tag> tags;
     private Note note;
     private Rate rate;
@@ -48,6 +53,7 @@ public class FoodplaceBuilder {
         tags = new HashSet<>();
         note = new Note(DEFAULT_NOTE);
         rate = new Rate(Integer.valueOf(DEFAULT_RATE));
+        timing = new Timing(LocalTime.parse(DEFAULT_OPEN), LocalTime.parse(DEFAULT_CLOSE));
     }
 
     /**
@@ -58,6 +64,7 @@ public class FoodplaceBuilder {
         phone = foodplaceToCopy.getPhone();
         email = foodplaceToCopy.getEmail();
         address = foodplaceToCopy.getAddress();
+        timing = foodplaceToCopy.getTiming();
         cuisine = foodplaceToCopy.getCuisine();
         tags = new HashSet<>(foodplaceToCopy.getTags());
         note = foodplaceToCopy.getNote();
@@ -132,8 +139,17 @@ public class FoodplaceBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Timing} of the {@code Foodplace} that we are building.
+     * Expects opening and closing times in HH:mm format.
+     */
+    public FoodplaceBuilder withTiming(String open, String close) {
+        this.timing = new Timing(LocalTime.parse(open), LocalTime.parse(close));
+        return this;
+    }
+
     public Foodplace build() {
-        return new Foodplace(name, phone, email, address, cuisine, tags, note, rate);
+        return new Foodplace(name, phone, email, address, timing, cuisine, tags, note, rate);
     }
 
 }
