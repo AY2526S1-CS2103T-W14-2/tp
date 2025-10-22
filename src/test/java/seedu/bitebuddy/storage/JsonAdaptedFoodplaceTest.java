@@ -77,7 +77,8 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_emptyPhone_returnsPhone() {
         JsonAdaptedFoodplace foodplace =
-                new JsonAdaptedFoodplace(VALID_NAME, "", VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_NOTE,
+                new JsonAdaptedFoodplace(VALID_NAME, "", VALID_EMAIL, VALID_ADDRESS,
+                        VALID_CUISINE, VALID_TAGS, VALID_NOTE,
                         VALID_RATING);
         Foodplace model;
         try {
@@ -108,7 +109,8 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_emptyEmail_returnsEmail() {
         JsonAdaptedFoodplace foodplace =
-                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, "", VALID_ADDRESS, VALID_TAGS, VALID_NOTE,
+                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, "", VALID_ADDRESS,
+                        VALID_CUISINE, VALID_TAGS, VALID_NOTE,
                         VALID_RATING);
         Foodplace model;
         try {

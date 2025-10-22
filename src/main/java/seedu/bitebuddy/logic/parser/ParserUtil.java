@@ -60,15 +60,14 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-        if (!phone.isEmpty()) {
-            String trimmedPhone = phone.trim();
-            if (!Phone.isValidPhone(trimmedPhone)) {
-                throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-            }
-            return new Phone(trimmedPhone);
-        } else {
+        if (phone.isEmpty()) {
             return new Phone("");
         }
+        String trimmedPhone = phone.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        return new Phone(trimmedPhone);
     }
 
     /**
@@ -93,15 +92,14 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        if (!email.isEmpty()) {
-            String trimmedEmail = email.trim();
-            if (!Email.isValidEmail(trimmedEmail)) {
-                throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-            }
-            return new Email(trimmedEmail);
-        } else {
+        if (email.isEmpty()) {
             return new Email("");
         }
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(trimmedEmail);
     }
 
     /**
