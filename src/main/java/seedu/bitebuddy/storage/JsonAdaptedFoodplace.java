@@ -157,5 +157,4 @@ class JsonAdaptedFoodplace {
         return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelCuisine,
                 modelTags, modelNote, modelRate, modelWishlist);
     }
-
 }
