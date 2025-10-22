@@ -66,7 +66,10 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " "
                 + FoodplaceUtil.getEditFoodplaceDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_FOODPLACE, descriptor), command);
+        // Should not check for wishlist
+        EditFoodplaceDescriptor expectedDescriptor = new EditFoodplaceDescriptor(descriptor);
+        expectedDescriptor.setWishlist(null);
+        assertEquals(new EditCommand(INDEX_FIRST_FOODPLACE, expectedDescriptor), command);
     }
 
     @Test

@@ -289,7 +289,8 @@ public class EditCommand extends Command {
                     && Objects.equals(cuisine, otherEditFoodplaceDescriptor.cuisine)
                     && Objects.equals(tags, otherEditFoodplaceDescriptor.tags)
                     && Objects.equals(note, otherEditFoodplaceDescriptor.note)
-                    && Objects.equals(rate, otherEditFoodplaceDescriptor.rate);
+                    && Objects.equals(rate, otherEditFoodplaceDescriptor.rate)
+                    && Objects.equals(wishlist, otherEditFoodplaceDescriptor.wishlist);
         }
 
         @Override
@@ -308,6 +309,7 @@ public class EditCommand extends Command {
                     .add("tags", tags)
                     .add("note", note)
                     .add("rate", rate)
+                    .add("wishlist", wishlist)
                     .toString();
         }
     }

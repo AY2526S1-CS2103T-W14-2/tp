@@ -145,6 +145,7 @@ public class Foodplace {
                 .add("cuisine", cuisine)
                 .add("tags", tags)
                 .add("rate", rate)
+                .add("wishlist", wishlist)
                 .toString();
     }
 
