@@ -2,6 +2,8 @@ package seedu.bitebuddy.testutil;
 
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CUISINE_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CUISINE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_MCRONALDS;
@@ -46,23 +48,23 @@ public class TypicalFoodplace {
     public static final Foodplace SUSHISHOP = new FoodplaceBuilder().withName("Sushi Tei").withPhone("9482224")
              .withEmail("sushi@tei.com").withAddress("michegan ave").withCuisine("Japanese").build();
     public static final Foodplace TEASHOP = new FoodplaceBuilder().withName("ITea").withPhone("9482427")
-             .withEmail("i@tea.com").withAddress("little tokyo").build();
+             .withEmail("i@tea.com").withAddress("little tokyo").withCuisine("").build();
     public static final Foodplace PIZZASHOP = new FoodplaceBuilder().withName("Dominoes Pizza").withPhone("9482442")
-             .withEmail("dominos@pizza.com").withAddress("4th street").build();
+             .withEmail("dominos@pizza.com").withAddress("4th street").withCuisine("").build();
 
     // Manually added
     public static final Foodplace BEEHOONSHOP = new FoodplaceBuilder().withName("Beehoon Meier").withPhone("8482424")
-             .withEmail("meier@beehoon.com").withAddress("little india").build();
+             .withEmail("meier@beehoon.com").withAddress("little india").withCuisine("").build();
     public static final Foodplace CAKESHOP = new FoodplaceBuilder().withName("Cat and the fiddle").withPhone("8482131")
-             .withEmail("cat@fiddle.com").withAddress("chicago ave").build();
+             .withEmail("cat@fiddle.com").withAddress("chicago ave").withCuisine("").build();
 
     // Manually added - Foodplace's details found in {@code CommandTestUtil}
     public static final Foodplace MCRONALDS = new FoodplaceBuilder().withName(VALID_NAME_MCRONALDS)
             .withPhone(VALID_PHONE_MCRONALDS).withEmail(VALID_EMAIL_MCRONALDS).withAddress(VALID_ADDRESS_MCRONALDS)
-            .withTags(VALID_TAG_FASTFOOD).build();
+            .withCuisine(VALID_CUISINE_MCRONALDS).withTags(VALID_TAG_FASTFOOD).build();
     public static final Foodplace SWENSWAN = new FoodplaceBuilder().withName(VALID_NAME_SWENSWAN)
             .withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
-            .withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD).withNote(VALID_NOTE_FAMOUS).build();
+            .withCuisine(VALID_CUISINE_SWENSWAN).withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD).withNote(VALID_NOTE_FAMOUS).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

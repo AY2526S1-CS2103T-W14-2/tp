@@ -120,6 +120,9 @@ class JsonAdaptedFoodplace {
         if (rate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));
         }
+        if (!Rate.isValidRating(rate)) {
+            throw new IllegalValueException(Rate.MESSAGE_CONSTRAINTS);
+        }
         final Rate modelRate = new Rate(rate);
 
         if (cuisine == null) {
