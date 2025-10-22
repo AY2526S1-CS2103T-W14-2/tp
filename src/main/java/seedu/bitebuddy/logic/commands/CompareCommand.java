@@ -2,8 +2,11 @@ package seedu.bitebuddy.logic.commands;
 
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.commons.util.ToStringBuilder;
@@ -58,7 +61,35 @@ public class CompareCommand extends Command {
     }
 
     private String generateCompareMessage(Foodplace first, Foodplace second) {
-        return "COMPARING";
+        Set<String> firstTags = first.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toSet());
+        Set<String> secondTags = second.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toSet());
+
+        Set<String> commonTags = new HashSet<>(firstTags);
+        commonTags.retainAll(secondTags);
+
+        Set<String> firstUnique = new HashSet<>(firstTags);
+        firstUnique.removeAll(commonTags);
+
+        Set<String> secondUnique = new HashSet<>(secondTags);
+        secondUnique.removeAll(commonTags);
+
+        String commonStr = commonTags.isEmpty() ? "--" : String.join(", ", commonTags);
+        String firstUniqueStr = firstUnique.isEmpty() ? "--" : String.join(", ", firstUnique);
+        String secondUniqueStr = secondUnique.isEmpty() ? "--" : String.join(", ", secondUnique);
+
+        String firstRate = first.getRate().isSet() ? first.getRate().getValue() + "" : "--";
+        String secondRate = second.getRate().isSet() ? second.getRate().getValue() + "" : "--";
+
+        return String.format(
+                "%s (%s) vs %s (%s)%n" +
+                        "Common tags: %s%n" +
+                        "Unique tags: %s (%s) | %s (%s)%n",
+                first.getName().fullName, firstRate,
+                second.getName().fullName, secondRate,
+                commonStr,
+                first.getName().fullName, firstUniqueStr,
+                second.getName().fullName, secondUniqueStr
+        );
     }
 
     @Override
