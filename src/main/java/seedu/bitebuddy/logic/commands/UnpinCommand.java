@@ -13,6 +13,9 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Pinned;
 
+/**
+ * Unpins a foodplace in BiteBuddy.
+ */
 public class UnpinCommand extends Command {
 
     public static final String COMMAND_WORD = "unpin";

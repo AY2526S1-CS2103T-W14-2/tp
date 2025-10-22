@@ -31,7 +31,17 @@ public class Foodplace {
     private final Rate rate;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Foodplace} with all fields, defaulting {@link Pinned} to false.
+     *
+     * <p>Every field must be present and not null.
+     *
+     * @param name    The name of the foodplace
+     * @param phone   The phone number of the foodplace
+     * @param email   The email address of the foodplace
+     * @param address The physical address of the foodplace
+     * @param tags    The set of tags associated with the foodplace
+     * @param note    The note for the foodplace
+     * @param rate    The rating of the foodplace
      */
     public Foodplace(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note, Rate rate) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -45,6 +55,20 @@ public class Foodplace {
         this.pinned = new Pinned(false);
     }
 
+    /**
+     * Constructs a {@code Foodplace} with all fields, including the pinned status.
+     *
+     * <p>Every field must be present and not null.
+     *
+     * @param name    The name of the foodplace
+     * @param phone   The phone number of the foodplace
+     * @param email   The email address of the foodplace
+     * @param address The physical address of the foodplace
+     * @param tags    The set of tags associated with the foodplace
+     * @param note    The note for the foodplace
+     * @param rate    The rating of the foodplace
+     * @param pinned  The pinned status of the foodplace
+     */
     public Foodplace(Name name, Phone phone, Email email, Address address,
                      Set<Tag> tags, Note note, Rate rate, Pinned pinned) {
         requireAllNonNull(name, phone, email, address, tags, pinned);

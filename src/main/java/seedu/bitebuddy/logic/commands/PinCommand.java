@@ -13,6 +13,9 @@ import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Pinned;
 
+/**
+ * Pins a foodplace in BiteBuddy.
+ */
 public class PinCommand extends Command {
 
     public static final String COMMAND_WORD = "pin";
@@ -48,7 +51,7 @@ public class PinCommand extends Command {
 
         Foodplace foodplaceToPin = lastShownList.get(index.getZeroBased());
 
-        if (Pinned.getCount() > 5)  {
+        if (Pinned.getCount() > 5) {
             return new CommandResult(MESSAGE_MAX_PIN_REACHED);
         }
 
