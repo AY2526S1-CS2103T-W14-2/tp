@@ -72,6 +72,20 @@ public class JsonAdaptedFoodplaceTest {
     }
 
     @Test
+    public void toModelType_emptyPhone_returnsPhone() {
+        JsonAdaptedFoodplace foodplace =
+                new JsonAdaptedFoodplace(VALID_NAME, "", VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_NOTE,
+                        VALID_RATING);
+        Foodplace model;
+        try {
+            model = foodplace.toModelType();
+            assertEquals("", model.getPhone().value);
+        } catch (IllegalValueException e) {
+            fail();
+        }
+    }
+
+    @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace = new JsonAdaptedFoodplace(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
                 VALID_TAGS, VALID_NOTE, VALID_RATING);
@@ -89,15 +103,14 @@ public class JsonAdaptedFoodplaceTest {
     }
 
     @Test
-    public void toModelType_validEmailAndAddress_success() {
+    public void toModelType_emptyEmail_returnsEmail() {
         JsonAdaptedFoodplace foodplace =
-                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_NOTE,
+                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, "", VALID_ADDRESS, VALID_TAGS, VALID_NOTE,
                         VALID_RATING);
         Foodplace model;
         try {
             model = foodplace.toModelType();
-            assertEquals(VALID_EMAIL, model.getEmail().value);
-            assertEquals(VALID_ADDRESS, model.getAddress().value);
+            assertEquals("", model.getEmail().value);
         } catch (IllegalValueException e) {
             fail();
         }
