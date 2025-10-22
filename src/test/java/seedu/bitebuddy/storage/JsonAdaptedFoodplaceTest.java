@@ -155,7 +155,7 @@ public class JsonAdaptedFoodplaceTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_CUISINE, VALID_CUISINE, invalidTags, VALID_NOTE, VALID_RATING);
+                        VALID_TIMING, VALID_CUISINE, invalidTags, VALID_NOTE, VALID_RATING);
         assertThrows(IllegalValueException.class, foodplace::toModelType);
     }
 

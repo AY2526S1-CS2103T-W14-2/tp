@@ -131,9 +131,6 @@ public class ParserUtil {
     public static LocalTime parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmed = time.trim();
-        // if (!Timing.isValidTiming(trimmed)) {
-        //     throw new ParseException(Timing.MESSAGE_INVALID_TIME);
-        // }
         try {
             return LocalTime.parse(trimmed);
         } catch (DateTimeParseException e) {
@@ -254,7 +251,7 @@ public class ParserUtil {
     }
 
     /**
-     * Returns true if both of the prefixes are present in the given {@code ArgumentMultimap}.
+     * Returns true if neither of the prefixes are present in the given {@code ArgumentMultimap}.
      */
     public static boolean areNeitherPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
         boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
