@@ -60,7 +60,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
+        if (phone.isEmpty()) {
+            return new Phone("");
+        }
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
@@ -90,7 +92,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
+        if (email.isEmpty()) {
+            return new Email("");
+        }
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);

@@ -16,11 +16,11 @@
   - [Delete - Deleting a foodplace](#deleting-a-foodplace--delete)
   - [Edit - Editing a foodplace](#editing-a-foodplace--edit)
   - [Note - Adding a note to a foodplace](#adding-a-note-to-a-foodplace--note)
-  - [Rate - Rating a foodplace](#rate-a-foodplace--rate)
-  - [Tag - Tagging a foodplace](#adding-a-tag-a-foodplace--tag)
+  - [Rate - Rating a foodplace](#rating-a-foodplace--rate)
+  - [Tag - Tagging a foodplace](#adding-tags-to-a-foodplace--tag)
   - [Find - Finding a foodplace](#locating-foodplaces-by-name-find)
-  - [Clear](#clearing-all-entries--clear)
-  - [Exit](#exiting-the-program--exit)
+  - [Clear - Delete all foodplaces](#clearing-all-entries--clear)
+  - [Exit - Quit the program](#exiting-the-program--exit)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -54,33 +54,45 @@ Check out the [Quick Start](#quick-start) section right below!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+Follow these steps to install and start using **BiteBuddy**!
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+### Step 1 — Check Java Version
+- Ensure you have Java `17` or above installed on your computer.<br>
+   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).  
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).  
+- To check your version, open a terminal and type: `java -version`
+![Check Java Version](images/java_version.png)
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+### Step 2 — Download and Run BiteBuddy
+1. Go to our [GitHub Releases page](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases).
+2. Download the latest file named **`bitebuddy.jar`**.
+   ![Download BiteBuddy.jar](images/download_jar.png)
+3. Copy the file to the folder you want to use as the _home folder_ for your BiteBuddy.
+4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar "bitebuddy.jar"` to launch the application.<br>  
+   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.  
+   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)  
+   **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+5. A GUI similar to the one below should appear within a few seconds. It comes preloaded with sample data for you to explore. <br>
+   ![Ui](images/UI_image.png) 
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+### Step 3 — Try Out a Command!
+- Type the command in the Command Box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.  
+  Here are some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all foodplaces.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to BiteBuddy.
+   * `add n/KFC a/John street, block 123, #01-01 t/FastFood t/Chicken r/8` : Adds the foodplace *KFC* to BiteBuddy.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd foodplace shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all saved foodplaces.
 
-   * `exit` : Exits the app.
+   * `exit` : Exits BiteBuddy.
 
-1. Refer to the [Features](#features) below for details of each command.
+- Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -131,6 +143,8 @@ Examples:
 * `help` shows the help page
 * `help add` shows the usage for the `add` command
 
+[Go to Command Summary](#command-summary)
+
 ---
 
 ### Adding a foodplace: `add`
@@ -151,6 +165,8 @@ Examples:
 
 <image src="images/ug_add.png">
 
+[Go to Command Summary](#command-summary)
+
 ---
 
 ### Listing all foodplaces : `list`
@@ -165,6 +181,8 @@ Example: list
 ```
 
 <image src="images/ug_list.png">
+
+[Go to Command Summary](#command-summary)
 
 ---
 
@@ -189,6 +207,8 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st foodplace in the results of the `find` command.
 
 <image src="images/ug_delete.png">
+
+[Go to Command Summary](#command-summary)
 
 ---
 
@@ -219,6 +239,8 @@ Examples:
 
 <image src="images/ug_edit.png">
 
+[Go to Command Summary](#command-summary)
+
 ---
 
 ### Adding a note to a foodplace : `note`
@@ -248,6 +270,8 @@ Examples:
 
 <image src="images/ug_note.png">
 
+[Go to Command Summary](#command-summary)
+
 ---
 
 ### Rating a foodplace : `rate`
@@ -276,9 +300,11 @@ Examples:
 
 <image src="images/ug_rate.png">
 
+[Go to Command Summary](#command-summary)
+
 ---
 
-### Adding a tag to a foodplace : `tag`
+### Adding Tag(s) to a foodplace : `tag`
 
 Adds / removes one or more tags from the specified foodplace in BiteBuddy.
 
@@ -301,8 +327,9 @@ Examples:
 * `tag 2 /d FastFood` removes the FastFood tag from the 2nd foodplace.
 * `tag INDEX /d` will remove all tags from the selected foodplace.
 
-
 <image src="images/ug_tag.png">
+
+[Go to Command Summary](#command-summary)
 
 ---
 
@@ -329,6 +356,8 @@ Examples:
 * `find delivery 5` returns foodplaces with either “delivery” or “5” appearing in any field.<br>
 
 <image src="images/ug_find.png">
+
+[Go to Command Summary](#command-summary)
 
 ---
 
@@ -373,10 +402,6 @@ If your changes to the data file makes its format invalid, BiteBuddy will discar
 Furthermore, certain edits can cause the BiteBuddy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -395,16 +420,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Help**   | `help [COMMAND]` <br> e.g., `help add`
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**List**   | `list`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Note**   | `note INDEX [NOTE]`<br> e.g., `note 1 Famous for their chicken rice!`
-**Rate**   | `rate INDEX RATING`<br> e.g., `rate 1 6`
-**Tag**    | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br> e.g., `tag 1 FastFood Expensive`<br> e.g., `tag 1 /d FastFood`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Clear**  | `clear`
-**Exit**   | `exit`
+Action     | Format                                                                     | Examples
+-----------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
+[**Help**](#viewing-help--help) | `help [COMMAND]`<br>                                                       | `help add`
+[**Add**](#adding-a-foodplace-add) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br>               | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+[**List**](#listing-all-foodplaces--list) | `list`                                                                     | `list`
+[**Delete**](#deleting-a-foodplace--delete) | `delete INDEX`<br>                                                         | `delete 3`
+[**Edit**](#editing-a-foodplace--edit) | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> | `edit 2 n/James Lee e/jameslee@example.com`
+[**Note**](#adding-a-note-to-a-foodplace--note)   | `note INDEX [NOTE]`<br>                                                    | `note 1 Famous for their chicken rice!`
+[**Rate**](#rating-a-foodplace--rate) | `rate INDEX RATING`<br>                                                    | `rate 1 6`
+[**Tag**](#adding-tags-to-a-foodplace--tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                   | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
+[**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br>                                         | `find James Jake`
+[**Clear**](#clearing-all-entries--clear) | `clear`                                                                    | `clear`
+[**Exit**](#exiting-the-program--exit) | `exit`                                                                     | `exit`
