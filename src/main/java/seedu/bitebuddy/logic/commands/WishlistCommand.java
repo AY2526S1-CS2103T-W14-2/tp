@@ -4,6 +4,7 @@ import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
 import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_WISHLISTED_FOODPLACES;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.logic.Messages;
@@ -73,7 +74,7 @@ public class WishlistCommand extends Command {
      * {@code foodPlaceToEdit}.
      */
     private String generateSuccessMessage(Foodplace foodPlaceToEdit) {
-        String message = foodPlaceToEdit.getWishlist().isWishlisted
+        String message = foodPlaceToEdit.getWishlist().isWishlisted()
                 ? MESSAGE_ADD_WISHLIST_SUCCESS : MESSAGE_REMOVE_WISHLIST_SUCCESS;
         return String.format(message, foodPlaceToEdit);
     }
@@ -90,6 +91,11 @@ public class WishlistCommand extends Command {
         }
 
         WishlistCommand e = (WishlistCommand) other;
-        return index.equals(e.index);
+        return Objects.equals(index, e.index);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(index);
     }
 }

@@ -24,11 +24,13 @@ import seedu.bitebuddy.logic.commands.HelpCommand;
 import seedu.bitebuddy.logic.commands.ListCommand;
 import seedu.bitebuddy.logic.commands.NoteCommand;
 import seedu.bitebuddy.logic.commands.RateCommand;
+import seedu.bitebuddy.logic.commands.WishlistCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Wishlist;
 import seedu.bitebuddy.testutil.EditFoodplaceDescriptorBuilder;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
 import seedu.bitebuddy.testutil.FoodplaceUtil;
@@ -111,6 +113,14 @@ public class AddressBookParserTest {
         RateCommand command = (RateCommand) parser.parseCommand(RateCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " " + rate.getValue());
         assertEquals(new RateCommand(INDEX_FIRST_FOODPLACE, rate.getValue()), command);
+    }
+
+    @Test
+    public void parseCommand_wishlist() throws Exception {
+        final Wishlist wishlist = new Wishlist(true);
+        WishlistCommand command = (WishlistCommand) parser.parseCommand(WishlistCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_FOODPLACE.getOneBased());
+        assertEquals(new WishlistCommand(INDEX_FIRST_FOODPLACE), command);
     }
 
     @Test

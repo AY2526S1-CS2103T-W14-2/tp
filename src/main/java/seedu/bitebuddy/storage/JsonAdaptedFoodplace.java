@@ -36,7 +36,7 @@ class JsonAdaptedFoodplace {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String note;
     private final Integer rate;
-    private final Boolean wishlist;
+    private final Boolean isWishlisted;
 
     /**
      * Constructs a {@code JsonAdaptedFoodplace} with the given foodplace details.
@@ -48,7 +48,7 @@ class JsonAdaptedFoodplace {
                                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                 @JsonProperty("note") String note,
                                 @JsonProperty("rate") Integer rate,
-                                @JsonProperty("wishlist") Boolean wishlist) {
+                                @JsonProperty("wishlist") Boolean isWishlisted) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -59,7 +59,7 @@ class JsonAdaptedFoodplace {
         }
         this.note = note;
         this.rate = rate;
-        this.wishlist = wishlist;
+        this.isWishlisted = isWishlisted;
     }
 
     /**
@@ -76,7 +76,7 @@ class JsonAdaptedFoodplace {
                 .collect(Collectors.toList()));
         note = source.getNote().value;
         rate = source.getRate().getValue();
-        wishlist = source.getWishlist().isWishlisted;
+        isWishlisted = source.getWishlist().isWishlisted();
     }
 
     /**
@@ -148,11 +148,11 @@ class JsonAdaptedFoodplace {
         }
         final Note modelNote = new Note(note);
 
-        if (wishlist == null) {
+        if (isWishlisted == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Wishlist.class.getSimpleName()));
         }
-        final Wishlist modelWishlist = new Wishlist(wishlist);
+        final Wishlist modelWishlist = new Wishlist(isWishlisted);
 
         return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelCuisine,
                 modelTags, modelNote, modelRate, modelWishlist);

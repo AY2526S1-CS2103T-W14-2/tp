@@ -26,6 +26,14 @@ public class Wishlist {
         return new Wishlist(!isWishlisted);
     }
 
+    /**
+     * Getter method for isWishlisted
+     * @return the isWishlisted value
+     */
+    public Boolean isWishlisted() {
+        return isWishlisted;
+    }
+
     @Override
     public String toString() {
         return isWishlisted.toString();

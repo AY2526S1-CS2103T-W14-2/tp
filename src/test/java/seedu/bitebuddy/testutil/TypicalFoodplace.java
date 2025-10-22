@@ -33,7 +33,7 @@ public class TypicalFoodplace {
             .withNote("Serves the best appetisers!")
             .withCuisine("Indian")
             .withRate("0")
-            .withWishlist(true).build();
+            .withWishlist(false).build();
     public static final Foodplace DAEBAKSHOP = new FoodplaceBuilder().withName("Daebak Korean BBQ")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("john@daebakbbq.com").withPhone("98765432")
@@ -69,11 +69,11 @@ public class TypicalFoodplace {
     // Manually added - Foodplace's details found in {@code CommandTestUtil}
     public static final Foodplace MCRONALDS = new FoodplaceBuilder().withName(VALID_NAME_MCRONALDS)
             .withPhone(VALID_PHONE_MCRONALDS).withEmail(VALID_EMAIL_MCRONALDS).withAddress(VALID_ADDRESS_MCRONALDS)
-            .withCuisine(VALID_CUISINE_MCRONALDS).withTags(VALID_TAG_FASTFOOD).build();
+            .withCuisine(VALID_CUISINE_MCRONALDS).withTags(VALID_TAG_FASTFOOD).withWishlist(false).build();
     public static final Foodplace SWENSWAN = new FoodplaceBuilder().withName(VALID_NAME_SWENSWAN)
             .withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
             .withCuisine(VALID_CUISINE_SWENSWAN).withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD)
-            .withNote(VALID_NOTE_FAMOUS).build();
+            .withNote(VALID_NOTE_FAMOUS).withWishlist(true).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

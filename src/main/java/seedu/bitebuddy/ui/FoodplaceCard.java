@@ -71,6 +71,6 @@ public class FoodplaceCard extends UiPart<Region> {
         rate.setText(String.valueOf(
                 foodplace.getRate().isSet() ? foodplace.getRate().toString() : ">> No Rating yet <<"
         ));
-        wishlist.setText(foodplace.getWishlist().isWishlisted ? "Wishlisted" : "");
+        wishlist.setText(foodplace.getWishlist().isWishlisted() ? "Wishlisted" : "");
     }
 }
