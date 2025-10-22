@@ -9,8 +9,7 @@ import java.time.format.DateTimeParseException;
 
 public class Timing {
 
-    public static final String MESSAGE_CONSTRAINTS = "Timing must be in the format HH:mm. "
-            + "Closing time must be after or equal to opening time";
+    public static final String MESSAGE_CONSTRAINTS = "Closing time must be after or equal to opening time";
 
     public static final String MESSAGE_INVALID_TIME = "Invalid time provided. Time must be in HH:mm format";
 

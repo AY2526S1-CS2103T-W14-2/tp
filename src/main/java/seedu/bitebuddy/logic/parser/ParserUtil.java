@@ -141,6 +141,34 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String open} and {@code String close} into a {@code Timing}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code open} and {@code close} is invalid.
+     */
+    public static Timing parseTiming(String open, String close) throws ParseException {
+        requireNonNull(open);
+        requireNonNull(close);
+        if (open.isEmpty() || close.isEmpty()) {
+            throw new ParseException(MESSAGE_BOTH_TIMES_REQUIRED);
+        }
+        String trimmedOpen = open.trim();
+        String trimmedClose = close.trim();
+        if (!Timing.isValidTime(trimmedOpen)) {
+            throw new ParseException(Timing.MESSAGE_INVALID_TIME);
+        }
+        if (!Timing.isValidTime(trimmedClose)) {
+            throw new ParseException(Timing.MESSAGE_INVALID_TIME);
+        }
+        LocalTime opening = LocalTime.parse(trimmedOpen);
+        LocalTime closing = LocalTime.parse(trimmedClose);
+        if (closing.isBefore(opening)) {
+            throw new ParseException(Timing.MESSAGE_CONSTRAINTS);
+        }
+        return new Timing(opening, closing);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -203,5 +231,23 @@ public class ParserUtil {
             throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
         }
         return rate;
+    }
+
+    public static boolean areNoneOrBothPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
+        boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
+        boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();
+        return (isPrefix1Present && isPrefix2Present) || (!isPrefix1Present && !isPrefix2Present);
+    }
+
+    public static boolean areBothPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
+        boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
+        boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();
+        return isPrefix1Present && isPrefix2Present;
+    }
+
+    public static boolean areNeitherPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
+        boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
+        boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();
+        return !isPrefix1Present && !isPrefix2Present;
     }
 }

@@ -58,7 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Cuisine cuisine = ParserUtil.parseCuisine(argMultimap.getValue(PREFIX_CUISINE).orElse(""));
 
         // parse timing: require both open and close
-        if (!areNoneOrBothPrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
+        if (!ParserUtil.areNoneOrBothPrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
             throw new ParseException(ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
         }
         String open = argMultimap.getValue(PREFIX_OPEN).orElse("");
@@ -80,11 +80,5 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    private static boolean areNoneOrBothPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
-        boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
-        boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();
-        return (isPrefix1Present && isPrefix2Present) || (!isPrefix1Present && !isPrefix2Present);
     }
 }
