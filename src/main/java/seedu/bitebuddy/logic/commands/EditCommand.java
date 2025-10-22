@@ -172,6 +172,7 @@ public class EditCommand extends Command {
             this.phone = toCopy.phone;
             this.email = toCopy.email;
             this.address = toCopy.address;
+            this.cuisine = toCopy.cuisine;
             this.tags = (toCopy.tags != null) ? new HashSet<>(toCopy.tags) : null;
             this.note = toCopy.note;
             this.rate = toCopy.rate;
@@ -181,7 +182,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, note, rate);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, cuisine, tags, note, rate);
         }
 
         public void setName(Name name) {
