@@ -188,6 +188,48 @@ Examples:
 **Tip:** Using `tag INDEX /d` without specifying any tags will remove all tags from the selected foodplace.
 </box>
 
+### Pinning a foodplace: `pin`
+
+Pins a specified foodplace in BiteBuddy.
+
+Format: `pin INDEX`
+
+```
+pin: Pins the foodplace identified by the index number used in the last foodplace listing. INDEX must be a positive integer.
+Parameters: INDEX
+Example: pin 1
+```
+
+* Pins the foodplace at the specified `INDEX`.
+* The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
+* The index **must be a positive integer**: 1, 2, 3, ...
+* Pinned foodplaces are at the displayed foodplace list, indicated by a pin icon in the top right corner.
+* There can be a maximum of 5 pinned foodplaces.
+
+Examples: 
+* `pin 2` pins the 2nd foodplace.
+  ![result for 'pin 2'](images/pin2Result.png)
+
+### Unpinning a foodplace: `unpin`
+
+Unpins a specified foodplace in Bitebuddy.
+
+Format: `unpin INDEX'
+
+```
+unpin: Unpins the foodplace identified by the index number used in the last foodplace listing. INDEX must be a positive integer.
+Parameters: INDEX
+Example: unpin 1
+```
+
+* Unpins the foodplace at the specified `INDEX`.
+* The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
+* The index **must be a positive integer**: 1, 2, 3, ...
+
+Examples:
+* `unpin 1` unpins the 1st foodplace.
+  ![result for 'unpin 1'](images/unpin1Result.png)
+
 ### Locating foodplaces by name: `find`
 
 Finds foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords.
