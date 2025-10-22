@@ -7,6 +7,7 @@
 # BiteBuddy User Guide
 
 ## Table of contents
+- [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Features](#features)
   - [Help - Viewing help](#viewing-help--help)
