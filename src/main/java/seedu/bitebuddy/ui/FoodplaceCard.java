@@ -66,12 +66,12 @@ public class FoodplaceCard extends UiPart<Region> {
                         : "\\\\ No email yet //"
         );
         timing.setText(
-                !(foodplace.getTiming().toString().isEmpty())
+                foodplace.getTiming().isSet()
                         ? foodplace.getTiming().toString()
                         : "** No timing specified **"
         );
         cuisine.setText(
-                foodplace.getCuisine().value.length() != 0
+                !(foodplace.getCuisine().value.isEmpty())
                         ? foodplace.getCuisine().value
                         : "== No cuisine specified =="
         );

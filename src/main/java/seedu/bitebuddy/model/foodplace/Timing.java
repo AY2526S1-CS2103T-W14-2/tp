@@ -15,32 +15,53 @@ public class Timing {
     public static final String MESSAGE_INVALID_TIME = "Invalid time provided. Time must be in HH:mm format";
 
     public static final String VALIDATION_REGEX = "^([01]?\\d|2[0-3]):[0-5]\\d$";
+    private static final LocalTime DEFAULT_START = LocalTime.MIN;
+    private static final LocalTime DEFAULT_END = LocalTime.MAX;
 
     private final LocalTime openingTime;
     private final LocalTime closingTime;
+    private final Boolean isSet;
     
-
     public Timing(String timeRange) {
         requireNonNull(timeRange);
+        if (!fieldsNotEmpty(timeRange)) {
+            this.openingTime = DEFAULT_START;
+            this.closingTime = DEFAULT_END;
+            this.isSet = false;
+            return;
+        }
+
         checkArgument(isValidTiming(timeRange), MESSAGE_CONSTRAINTS);
-        String[] parts = timeRange.split("-");
-        String openStr = parts[0].trim();
-        String closeStr = parts[1].trim();
-        this.openingTime = LocalTime.parse(openStr);
-        this.closingTime = LocalTime.parse(closeStr);
+        LocalTime[] parsed = parseRange(timeRange);
+        this.openingTime = parsed[0];
+        this.closingTime = parsed[1];
+        this.isSet = true;
     }
 
     public Timing(String open, String close) {
         requireAllNonNull(open, close);
+        if (!fieldsNotEmpty(open, close)) {
+            this.openingTime = DEFAULT_START;
+            this.closingTime = DEFAULT_END;
+            this.isSet = false;
+            return;
+        }
+
         checkArgument(isValidTime(open), MESSAGE_INVALID_TIME);
         checkArgument(isValidTime(close), MESSAGE_INVALID_TIME);
-        this.openingTime = LocalTime.parse(open);
-        this.closingTime = LocalTime.parse(close);
+        LocalTime opening = LocalTime.parse(open);
+        LocalTime closing = LocalTime.parse(close);
+        checkArgument(!closing.isBefore(opening), MESSAGE_CONSTRAINTS);
+        this.openingTime = opening;
+        this.closingTime = closing;
+        this.isSet = true;
     }
 
     public Timing(LocalTime openingTime, LocalTime closingTime) {
+        requireAllNonNull(openingTime, closingTime);
         this.openingTime = openingTime;
         this.closingTime = closingTime;
+        this.isSet = true;
     }
 
     public static boolean isValidTime(String time) {
@@ -85,6 +106,13 @@ public class Timing {
     }
 
     /**
+     * Returns true if the timing is set.
+     */
+    public Boolean isSet() {
+        return isSet;
+    }
+
+    /**
      * Checks if the foodplace is open at the given time.
      *
      * @param time The time to check.
@@ -92,6 +120,30 @@ public class Timing {
      */
     public boolean isOpenAt(LocalTime time) {
         return !time.isBefore(openingTime) && !time.isAfter(closingTime);
+    }
+
+    /**
+     * Helper method to check if all provided fields are non-empty.
+     */
+    private boolean fieldsNotEmpty(String... strings) {
+        for (String s : strings) {
+            if (s == null || s.trim().isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Parse a time range string in the form "HH:mm-HH:mm" into LocalTime array [open, close].
+     */
+    private static LocalTime[] parseRange(String range) {
+        String[] parts = range.split("-");
+        String openStr = parts[0].trim();
+        String closeStr = parts[1].trim();
+        LocalTime opening = LocalTime.parse(openStr);
+        LocalTime closing = LocalTime.parse(closeStr);
+        return new LocalTime[]{opening, closing};
     }
 
     @Override
