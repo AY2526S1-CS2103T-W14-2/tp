@@ -32,6 +32,7 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Wishlist;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -113,9 +114,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editFoodplaceDescriptor.getTags().orElse(foodplaceToEdit.getTags());
         Note updatedNote = editFoodplaceDescriptor.getNote().orElse(foodplaceToEdit.getNote());
         Rate updatedRate = editFoodplaceDescriptor.getRate().orElse(foodplaceToEdit.getRate());
+        Wishlist updatedWishlist = editFoodplaceDescriptor.getWishlist().orElse(foodplaceToEdit.getWishlist());
 
         return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCuisine,
-                updatedTags, updatedNote, updatedRate);
+                updatedTags, updatedNote, updatedRate, updatedWishlist);
     }
 
     @Override
@@ -160,6 +162,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Note note;
         private Rate rate;
+        private Wishlist wishlist;
 
         public EditFoodplaceDescriptor() {}
 
@@ -176,6 +179,7 @@ public class EditCommand extends Command {
             this.tags = (toCopy.tags != null) ? new HashSet<>(toCopy.tags) : null;
             this.note = toCopy.note;
             this.rate = toCopy.rate;
+            this.wishlist = toCopy.wishlist;
         }
 
         /**
@@ -256,6 +260,14 @@ public class EditCommand extends Command {
 
         public Optional<Cuisine> getCuisine() {
             return Optional.ofNullable(cuisine);
+        }
+
+        public void setWishlist(Wishlist wishlist) {
+            this.wishlist = wishlist;
+        }
+
+        public Optional<Wishlist> getWishlist() {
+            return Optional.ofNullable(wishlist);
         }
 
         @Override

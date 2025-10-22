@@ -18,6 +18,7 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Wishlist;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -35,6 +36,7 @@ class JsonAdaptedFoodplace {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String note;
     private final Integer rate;
+    private final Boolean wishlist;
 
     /**
      * Constructs a {@code JsonAdaptedFoodplace} with the given foodplace details.
@@ -45,7 +47,8 @@ class JsonAdaptedFoodplace {
                                 @JsonProperty("cuisine") String cuisine,
                                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                 @JsonProperty("note") String note,
-                                @JsonProperty("rate") Integer rate) {
+                                @JsonProperty("rate") Integer rate,
+                                @JsonProperty("wishlist") Boolean wishlist) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,6 +59,7 @@ class JsonAdaptedFoodplace {
         }
         this.note = note;
         this.rate = rate;
+        this.wishlist = wishlist;
     }
 
     /**
@@ -72,6 +76,7 @@ class JsonAdaptedFoodplace {
                 .collect(Collectors.toList()));
         note = source.getNote().value;
         rate = source.getRate().getValue();
+        wishlist = source.getWishlist().isWishlisted;
     }
 
     /**
@@ -142,8 +147,15 @@ class JsonAdaptedFoodplace {
             throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
         }
         final Note modelNote = new Note(note);
+
+        if (wishlist == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Wishlist.class.getSimpleName()));
+        }
+        final Wishlist modelWishlist = new Wishlist(wishlist);
+
         return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelCuisine,
-                modelTags, modelNote, modelRate);
+                modelTags, modelNote, modelRate, modelWishlist);
     }
 
 }
