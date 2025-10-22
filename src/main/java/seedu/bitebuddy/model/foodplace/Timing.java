@@ -17,6 +17,9 @@ public class Timing {
 
     public static final String MESSAGE_INVALID_TIME = "Invalid time provided. Time must be in HH:mm format";
 
+    public static final String MESSAGE_INVALID_TIME_RANGE = "Invalid time range format. "
+            + "Timing must be in the format HH:mm-HH:mm";
+
     public static final String VALIDATION_REGEX = "^([01]?\\d|2[0-3]):[0-5]\\d$";
     private static final LocalTime DEFAULT_START = LocalTime.MIN;
     private static final LocalTime DEFAULT_END = LocalTime.MAX;
@@ -88,6 +91,14 @@ public class Timing {
      * Returns true if a given string is a valid time in "HH:mm" format.
      */
     public static boolean isValidTime(String time) {
+        if (time == null) {
+            return false;
+        }
+
+        if (time.trim().isEmpty()) {
+            return true;
+        }
+
         try {
             if (!time.matches(VALIDATION_REGEX)) {
                 return false;
@@ -103,17 +114,17 @@ public class Timing {
      * Returns true if a given string is a valid timing.
      */
     public static boolean isValidTiming(String timeRange) {
-        String[] parts = timeRange.split("-");
-        if (parts.length != 2) {
+        if (timeRange == null) {
             return false;
         }
-        String openStr = parts[0].trim();
-        String closeStr = parts[1].trim();
-        if (!isValidTime(openStr) || !isValidTime(closeStr)) {
-            return false;
+
+        if (timeRange.trim().isEmpty()) {
+            return true;
         }
-        LocalTime openingTime = LocalTime.parse(openStr);
-        LocalTime closingTime = LocalTime.parse(closeStr);
+
+        LocalTime[] parsed = parseRange(timeRange);
+        LocalTime openingTime = parsed[0];
+        LocalTime closingTime = parsed[1];
         return !closingTime.isBefore(openingTime);
     }
 
@@ -164,7 +175,9 @@ public class Timing {
      * Parse a time range string in the form "HH:mm-HH:mm" into LocalTime array [open, close].
      */
     private static LocalTime[] parseRange(String range) {
+        requireNonNull(range);
         String[] parts = range.split("-");
+        checkArgument(parts.length == 2, MESSAGE_INVALID_TIME_RANGE);
         String openStr = parts[0].trim();
         String closeStr = parts[1].trim();
         LocalTime opening = LocalTime.parse(openStr);
@@ -174,6 +187,9 @@ public class Timing {
 
     @Override
     public String toString() {
+        if (!isSet) {
+            return "";
+        }
         return getOpeningTime().toString() + "-" + getClosingTime().toString();
     }
 

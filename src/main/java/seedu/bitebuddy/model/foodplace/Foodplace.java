@@ -142,8 +142,8 @@ public class Foodplace {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("cuisine", cuisine)
                 .add("timing", timing)
+                .add("cuisine", cuisine)
                 .add("tags", tags)
                 .add("rate", rate)
                 .toString();

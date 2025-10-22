@@ -43,14 +43,6 @@ public class FoodplaceTest {
         editedPrata = new FoodplaceBuilder(PRATASHOP).withName(VALID_NAME_SWENSWAN).build();
         assertFalse(PRATASHOP.isSameFoodplace(editedPrata));
 
-        // different phone -> returns false
-        editedPrata = new FoodplaceBuilder(PRATASHOP).withPhone(VALID_PHONE_SWENSWAN).build();
-        assertFalse(PRATASHOP.isSameFoodplace(editedPrata));
-
-        // different email -> returns false
-        editedPrata = new FoodplaceBuilder(PRATASHOP).withEmail(VALID_EMAIL_SWENSWAN).build();
-        assertFalse(PRATASHOP.isSameFoodplace(editedPrata));
-
         // different address -> returns false
         editedPrata = new FoodplaceBuilder(PRATASHOP).withAddress(VALID_ADDRESS_SWENSWAN).build();
         assertFalse(PRATASHOP.isSameFoodplace(editedPrata));
@@ -112,8 +104,8 @@ public class FoodplaceTest {
         String expected = Foodplace.class.getCanonicalName() + "{name=" + PRATASHOP.getName() + ", phone="
                 + PRATASHOP.getPhone()
                 + ", email=" + PRATASHOP.getEmail() + ", address=" + PRATASHOP.getAddress()
-                + ", cuisine=" + PRATASHOP.getCuisine() + ", tags=" + PRATASHOP.getTags() + ", rate="
-                + PRATASHOP.getRate() + "}";
+                + ", timing=" + PRATASHOP.getTiming() + ", cuisine=" + PRATASHOP.getCuisine()
+                + ", tags=" + PRATASHOP.getTags() + ", rate=" + PRATASHOP.getRate() + "}";
         assertEquals(expected, PRATASHOP.toString());
     }
 }

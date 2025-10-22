@@ -2,6 +2,8 @@ package seedu.bitebuddy.testutil;
 
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CLOSE_TIME_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CLOSE_TIME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CUISINE_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CUISINE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MCRONALDS;
@@ -9,12 +11,12 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWA
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_OPEN_TIME_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_OPEN_TIME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TIMING_MCRONALDS;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TIMING_SWENSWAN;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +51,7 @@ public class TypicalFoodplace {
             .withTags("korean", "restaurant")
             .withNote("Best beef in the world!")
             .withRate("0")
+            .withTiming("09:00", "21:00")
             .build();
 
     public static final Foodplace CARLSHOP = new FoodplaceBuilder()
@@ -125,7 +128,7 @@ public class TypicalFoodplace {
             .withAddress(VALID_ADDRESS_MCRONALDS)
             .withCuisine(VALID_CUISINE_MCRONALDS)
             .withTags(VALID_TAG_FASTFOOD)
-            .withTiming(VALID_TIMING_MCRONALDS)
+            .withTiming(VALID_OPEN_TIME_MCRONALDS, VALID_CLOSE_TIME_MCRONALDS)
             .build();
 
     public static final Foodplace SWENSWAN = new FoodplaceBuilder()
@@ -136,7 +139,7 @@ public class TypicalFoodplace {
             .withCuisine(VALID_CUISINE_SWENSWAN)
             .withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD)
             .withNote(VALID_NOTE_FAMOUS)
-            .withTiming(VALID_TIMING_SWENSWAN)
+            .withTiming(VALID_OPEN_TIME_SWENSWAN, VALID_CLOSE_TIME_SWENSWAN)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

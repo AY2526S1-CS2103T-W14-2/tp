@@ -164,7 +164,7 @@ public class JsonAdaptedFoodplaceTest {
         // Null note is considered a kind of invalid note as well
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_CUISINE, VALID_CUISINE, VALID_TAGS, null, VALID_RATING);
+                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, null, VALID_RATING);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -200,7 +200,7 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_nullCuisine_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_CUISINE, null, VALID_TAGS, VALID_NOTE, VALID_RATING);
+                        VALID_TIMING, null, VALID_TAGS, VALID_NOTE, VALID_RATING);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Cuisine.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -224,13 +224,8 @@ public class JsonAdaptedFoodplaceTest {
         JsonAdaptedFoodplace adapted = new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING);
 
-        try {
-            adapted.toModelType();
-        } catch (IllegalValueException ive) {
-            assertEquals(Timing.MESSAGE_CONSTRAINTS, ive.getMessage());
-            return;
-        }
-        throw new AssertionError("Expected IllegalValueException for invalid timing");
+        String expectedMessage = Timing.MESSAGE_INVALID_TIME;
+        assertThrows(IllegalValueException.class, expectedMessage, adapted::toModelType);
     }
 
 }

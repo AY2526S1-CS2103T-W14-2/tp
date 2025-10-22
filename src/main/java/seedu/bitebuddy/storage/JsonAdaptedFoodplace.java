@@ -1,5 +1,6 @@
 package seedu.bitebuddy.storage;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -125,11 +126,17 @@ class JsonAdaptedFoodplace {
         if (timing == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Timing.class.getSimpleName()));
         }
-        if (!Timing.isValidTiming(timing)) {
-            throw new IllegalValueException(Timing.MESSAGE_CONSTRAINTS);
+        final Timing modelTiming;
+        try {
+            modelTiming = new Timing(timing);
+        } catch (Exception e) {
+            if (e instanceof DateTimeParseException
+                    || Timing.MESSAGE_INVALID_TIME.equals(e.getMessage())) {
+                throw new IllegalValueException(Timing.MESSAGE_INVALID_TIME);
+            } else {
+                throw new IllegalValueException(Timing.MESSAGE_CONSTRAINTS);
+            }
         }
-
-        final Timing modelTiming = new Timing(timing);
 
         if (rate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));

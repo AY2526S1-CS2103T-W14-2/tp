@@ -36,7 +36,7 @@ public class SampleDataUtil {
                 new Address("7 Pasir Ris Central, #B2-27, S519612"), new Timing("09:00", "21:00"),
                 new Cuisine("Western"), getTagSet("FastFood"), EMPTY_NOTE, new Rate(3)),
             new Foodplace(new Name("Fung Tai Din"), new Phone("87654321"), new Email("cs@fungdaitin.com"),
-                new Address("23 Serangoon Central, #B1-10, S556083"), new Timing("12:00", "00:00"),
+                new Address("23 Serangoon Central, #B1-10, S556083"), new Timing("12:00", "23:59"),
                 new Cuisine("Chinese"), getTagSet("Expensive"), EMPTY_NOTE, new Rate(7)),
             new Foodplace(new Name("Gucci Y Guaca"), new Phone("65655656"), new Email("go@gyg.com"),
                 new Address("1 Tampines Walk, #01-99 Our Tampines Hub, S528523"), new Timing("10:30", "22:30"),
