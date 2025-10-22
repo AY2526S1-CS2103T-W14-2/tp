@@ -2,6 +2,7 @@ package seedu.bitebuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CUISINE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -28,6 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_CUISINE + "CUISINE] "
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_RATE + "RATE]\n"
@@ -36,7 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "pratad@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "Indian "
+            + PREFIX_CUISINE + "Indian "
             + PREFIX_TAG + "Cheap "
             + PREFIX_NOTE + "Famous for tandoori chicken "
             + PREFIX_RATE + "9";

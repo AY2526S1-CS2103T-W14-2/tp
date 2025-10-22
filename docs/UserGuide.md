@@ -112,7 +112,7 @@ Check out the [Quick Start](#quick-start) section right below!
 
 ### Viewing help : `help`
 
-Displays detailed information about BiteBuddy or specific commands.
+Directs user to detailed information about the application or specific commands.
 
 Format: `help [COMMAND]`
 
@@ -137,17 +137,13 @@ Examples:
 
 Adds a new foodplace entry to BiteBuddy.
 
-Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]… [no/NOTE] [r/RATING]​`
+Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [t/TAG]… [no/NOTE] [r/RATING]​`
 
 ```
 add: Adds a foodplace to BiteBuddy. Parameters: n/FOODPLACE NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... [no/NOTE] [r/RATE]
 Example: add n/Prata place p/98765432 e/pratad@example.com a/311, Clementi Ave 2, #02-25 t/Indian t/Cheap no/Famous for tandoori chicken r/9
 ```
 
-<box type="tip" seamless>
-
-**Tip:** A foodplace entry can have any number of tags (including none).
-</box>
 
 Examples:
 * `add n/McRonalds a/John street, block 123, #01-01`

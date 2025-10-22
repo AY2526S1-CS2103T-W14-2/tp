@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CUISINE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
@@ -24,7 +25,7 @@ public class EditFoodplaceDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditCommand.EditFoodplaceDescriptor descriptorWithSameValues = new EditFoodplaceDescriptor(DESC_MCRONALDS);
+        EditFoodplaceDescriptor descriptorWithSameValues = new EditFoodplaceDescriptor(DESC_MCRONALDS);
         assertTrue(DESC_MCRONALDS.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -68,16 +69,22 @@ public class EditFoodplaceDescriptorTest {
         // different rate -> returns false
         editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS).withRate(VALID_RATE_PRATASHOP).build();
         assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different cuisine -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+                .withCuisine(VALID_CUISINE_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
     }
 
     @Test
     public void toStringMethod() {
-        EditCommand.EditFoodplaceDescriptor editFoodplaceDescriptor = new EditCommand.EditFoodplaceDescriptor();
-        String expected = EditCommand.EditFoodplaceDescriptor.class.getCanonicalName() + "{name="
+        EditFoodplaceDescriptor editFoodplaceDescriptor = new EditFoodplaceDescriptor();
+        String expected = EditFoodplaceDescriptor.class.getCanonicalName() + "{name="
                 + editFoodplaceDescriptor.getName().orElse(null) + ", phone="
                 + editFoodplaceDescriptor.getPhone().orElse(null) + ", email="
                 + editFoodplaceDescriptor.getEmail().orElse(null) + ", address="
-                + editFoodplaceDescriptor.getAddress().orElse(null) + ", tags="
+                + editFoodplaceDescriptor.getAddress().orElse(null) + ", cuisine="
+                + editFoodplaceDescriptor.getCuisine().orElse(null) + ", tags="
                 + editFoodplaceDescriptor.getTags().orElse(null) + ", note="
                 + editFoodplaceDescriptor.getNote().orElse(null) + ", rate="
                 + editFoodplaceDescriptor.getRate().orElse(null) + "}";
