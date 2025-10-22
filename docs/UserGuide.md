@@ -205,6 +205,26 @@ Examples:
 * `find delivery 5` returns foodplaces with either “delivery” or “5” appearing in any field<br>
   ![result for 'find delivery 5'](images/findDelivery5Result.png)
 
+### Comparing two foodplaces: `compare`
+
+Compares two foodplaces by their ratings and tags.
+
+Format: `compare [INDEX1] [INDEX2]`
+
+```
+compare: Compares the two foodplaces identified by the index numbers used in the last foodplace listing.
+Parameters: INDEX1 and INDEX2 (must be positive integers)
+Example: compare 1 2
+```
+
+* Compares the ratings of the two specified foodplaces.
+* Displays common tags shared by both foodplaces.
+* Displays unique tags for each foodplace.
+
+Examples:
+* `compare 1 3` returns a comparison summary between the 1st and 3rd foodplaces.
+  ![result for 'compare 1 3'](images/compare13Result.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.

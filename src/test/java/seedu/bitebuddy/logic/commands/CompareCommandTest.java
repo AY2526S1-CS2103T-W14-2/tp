@@ -6,12 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.bitebuddy.logic.commands.CommandTestUtil.showFoodplaceAtIndex;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
-
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,22 +33,9 @@ public class CompareCommandTest {
         Foodplace secondFoodplace = model.getFilteredFoodplaceList().get(INDEX_SECOND_FOODPLACE.getZeroBased());
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE);
 
-        String expectedCommon = "--";
-        String expectedFirstUnique = "hawker";
-        String expectedSecondUnique = "restaurant, korean";
-
-        String expectedMessage = String.format(
-                "%s (%s) vs %s (%s)%n" +
-                        "Common tags: %s%n" +
-                        "Unique tags: %s (%s) | %s (%s)%n",
-                firstFoodplace.getName().fullName,
-                firstFoodplace.getRate().isSet() ? firstFoodplace.getRate().getValue() : "--",
-                secondFoodplace.getName().fullName,
-                secondFoodplace.getRate().isSet() ? secondFoodplace.getRate().getValue() : "--",
-                expectedCommon,
-                firstFoodplace.getName().fullName, expectedFirstUnique,
-                secondFoodplace.getName().fullName, expectedSecondUnique
-        );
+        String expectedMessage = "Prata Palace (Rating: --) vs Daebak Korean BBQ (Rating: --)\n" +
+                "Common tags: --\n" +
+                "Unique tags: Prata Palace (hawker) | Daebak Korean BBQ (restaurant, korean)\n";
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(secondFoodplace));
@@ -77,22 +61,9 @@ public class CompareCommandTest {
 
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE);
 
-        String expectedCommon = "--";
-        String expectedFirstUnique = "hawker";
-        String expectedSecondUnique = "restaurant, korean";
-
-        String expectedMessage = String.format(
-                "%s (%s) vs %s (%s)%n" +
-                        "Common tags: %s%n" +
-                        "Unique tags: %s (%s) | %s (%s)%n",
-                firstFoodplace.getName().fullName,
-                firstFoodplace.getRate().isSet() ? firstFoodplace.getRate().getValue() : "--",
-                secondFoodplace.getName().fullName,
-                secondFoodplace.getRate().isSet() ? secondFoodplace.getRate().getValue() : "--",
-                expectedCommon,
-                firstFoodplace.getName().fullName, expectedFirstUnique,
-                secondFoodplace.getName().fullName, expectedSecondUnique
-        );
+        String expectedMessage = "Prata Palace (Rating: --) vs Daebak Korean BBQ (Rating: --)\n" +
+                "Common tags: --\n" +
+                "Unique tags: Prata Palace (hawker) | Daebak Korean BBQ (restaurant, korean)\n";
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(secondFoodplace));

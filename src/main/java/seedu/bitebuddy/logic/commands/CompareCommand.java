@@ -20,9 +20,9 @@ public class CompareCommand extends Command {
 
     public static final String COMMAND_WORD = "compare";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Compares the two foodplace identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Compares the two foodplaces identified "
             + "by the index numbers used in the last foodplace listing. "
-            + "Parameters: INDEX1 and INDEX2 (must be a positive integer) "
+            + "Parameters: INDEX1 and INDEX2 (must be positive integers) "
             + "compare [INDEX1] [INDEX2]\n"
             + "Example: " + COMMAND_WORD + " 1 5";
 
@@ -55,7 +55,8 @@ public class CompareCommand extends Command {
                 fp.equals(firstFoodplaceToCompare) || fp.equals(secondFoodplaceToCompare)
         );
 
-        return new CommandResult(String.format(generateCompareMessage(firstFoodplaceToCompare, secondFoodplaceToCompare)));
+        return new CommandResult(String.format(generateCompareMessage(firstFoodplaceToCompare,
+                secondFoodplaceToCompare)));
     }
 
     private String generateCompareMessage(Foodplace first, Foodplace second) {
@@ -82,9 +83,9 @@ public class CompareCommand extends Command {
         String secondRate = second.getRate().isSet() ? second.getRate().getValue() + "" : "--";
 
         return String.format(
-                "%s (%s) vs %s (%s)%n" +
-                        "Common tags: %s%n" +
-                        "Unique tags: %s (%s) | %s (%s)%n",
+                "%s (Rating: %s) vs %s (Rating: %s)%n"
+                        + "Common tags: %s%n"
+                        + "Unique tags: %s (%s) | %s (%s)%n",
                 first.getName().fullName, firstRate,
                 second.getName().fullName, secondRate,
                 commonStr,
