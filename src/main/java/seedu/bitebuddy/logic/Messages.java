@@ -43,9 +43,15 @@ public class Messages {
                 .append(foodplace.getEmail())
                 .append("; Address: ")
                 .append(foodplace.getAddress())
+                .append("; Timing: ")
+                .append(foodplace.getTiming())
+                .append("; Cuisine: ")
+                .append(foodplace.getCuisine())
                 .append("; Tags: ");
         foodplace.getTags().forEach(builder::append);
-        builder.append("; Note: ")
+        builder.append("; Rate: ")
+                .append(foodplace.getRate())
+                .append("; Note: ")
                 .append(foodplace.getNote())
                 .append("; Wishlisted: ")
                 .append(foodplace.getWishlist());

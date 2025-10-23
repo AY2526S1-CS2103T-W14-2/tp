@@ -2,6 +2,8 @@ package seedu.bitebuddy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,6 +18,7 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Timing;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -24,6 +27,8 @@ import seedu.bitebuddy.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_BOTH_TIMES_REQUIRED = "Both opening and closing time "
+            + "(ot/ and ct/) must be provided";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -118,6 +123,50 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmed = time.trim();
+        try {
+            return LocalTime.parse(trimmed);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Timing.MESSAGE_INVALID_TIME);
+        }
+    }
+
+    /**
+     * Parses a {@code String open} and {@code String close} into a {@code Timing}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code open} and {@code close} is invalid.
+     */
+    public static Timing parseTiming(String open, String close) throws ParseException {
+        requireNonNull(open);
+        requireNonNull(close);
+        if (open.isEmpty() || close.isEmpty()) {
+            throw new ParseException(MESSAGE_BOTH_TIMES_REQUIRED);
+        }
+        String trimmedOpen = open.trim();
+        String trimmedClose = close.trim();
+        if (!Timing.isValidTime(trimmedOpen)) {
+            throw new ParseException(Timing.MESSAGE_INVALID_TIME);
+        }
+        if (!Timing.isValidTime(trimmedClose)) {
+            throw new ParseException(Timing.MESSAGE_INVALID_TIME);
+        }
+        LocalTime opening = LocalTime.parse(trimmedOpen);
+        LocalTime closing = LocalTime.parse(trimmedClose);
+        if (closing.isBefore(opening)) {
+            throw new ParseException(Timing.MESSAGE_CONSTRAINTS);
+        }
+        return new Timing(opening, closing);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -180,5 +229,33 @@ public class ParserUtil {
             throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
         }
         return rate;
+    }
+
+    /**
+     * Returns true if none or both of the prefixes are present in the given {@code ArgumentMultimap}.
+     */
+    public static boolean areNoneOrBothPrefixesPresent(ArgumentMultimap argumentMultimap,
+            Prefix prefix1, Prefix prefix2) {
+        boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
+        boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();
+        return (isPrefix1Present && isPrefix2Present) || (!isPrefix1Present && !isPrefix2Present);
+    }
+
+    /**
+     * Returns true if both of the prefixes are present in the given {@code ArgumentMultimap}.
+     */
+    public static boolean areBothPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
+        boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
+        boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();
+        return isPrefix1Present && isPrefix2Present;
+    }
+
+    /**
+     * Returns true if neither of the prefixes are present in the given {@code ArgumentMultimap}.
+     */
+    public static boolean areNeitherPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix prefix1, Prefix prefix2) {
+        boolean isPrefix1Present = argumentMultimap.getValue(prefix1).isPresent();
+        boolean isPrefix2Present = argumentMultimap.getValue(prefix2).isPresent();
+        return !isPrefix1Present && !isPrefix2Present;
     }
 }
