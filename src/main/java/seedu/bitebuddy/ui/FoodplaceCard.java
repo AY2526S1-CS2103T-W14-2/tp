@@ -47,6 +47,8 @@ public class FoodplaceCard extends UiPart<Region> {
     private Label rate;
     @FXML
     private Label wishlist;
+    @FXML
+    private Label blacklist;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Foodplace} and index to display.
@@ -91,5 +93,6 @@ public class FoodplaceCard extends UiPart<Region> {
                         : ">> No Rating yet <<"
         );
         wishlist.setText(foodplace.getWishlist().isWishlisted() ? "Wishlisted" : "");
+        blacklist.setText(foodplace.getBlacklist().isBlacklisted() ? "Blacklisted" : "");
     }
 }

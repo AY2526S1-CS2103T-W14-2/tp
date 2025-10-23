@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.bitebuddy.commons.core.LogsCenter;
 import seedu.bitebuddy.logic.commands.AddCommand;
+import seedu.bitebuddy.logic.commands.BlacklistCommand;
 import seedu.bitebuddy.logic.commands.ClearCommand;
 import seedu.bitebuddy.logic.commands.Command;
 import seedu.bitebuddy.logic.commands.CompareCommand;
@@ -90,11 +91,15 @@ public class AddressBookParser {
 
         case RateCommand.COMMAND_WORD:
             return new RateCommandParser().parse(arguments);
+
         case CompareCommand.COMMAND_WORD:
             return new CompareCommandParser().parse(arguments);
 
         case WishlistCommand.COMMAND_WORD:
             return new WishlistCommandParser().parse(arguments);
+
+        case BlacklistCommand.COMMAND_WORD:
+            return new BlacklistCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

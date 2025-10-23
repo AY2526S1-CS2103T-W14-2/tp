@@ -11,6 +11,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWA
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_SERVICE;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_OPEN_TIME_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_OPEN_TIME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_MCRONALDS;
@@ -41,6 +42,7 @@ public class TypicalFoodplace {
             .withTiming("09:00", "21:00")
             .withRate("0")
             .withWishlist(false)
+            .withBlacklist(true)
             .build();
 
     public static final Foodplace DAEBAKSHOP = new FoodplaceBuilder()
@@ -54,6 +56,7 @@ public class TypicalFoodplace {
             .withRate("0")
             .withTiming("09:00", "21:00")
             .withWishlist(true)
+            .withBlacklist(false)
             .build();
 
     public static final Foodplace CARLSHOP = new FoodplaceBuilder()
@@ -62,9 +65,11 @@ public class TypicalFoodplace {
             .withEmail("carls@junior.com")
             .withAddress("wall street")
             .withTags("fastfood")
+            .withNote("Serves the best appetisers!")
             .withCuisine("American")
             .withTiming("10:00", "22:00")
             .withWishlist(false)
+            .withBlacklist(false)
             .build();
 
     public static final Foodplace LAKSASHOP = new FoodplaceBuilder()
@@ -73,9 +78,11 @@ public class TypicalFoodplace {
             .withEmail("laksa@paradise.com")
             .withAddress("10th street")
             .withTags("hawker")
+            .withNote("Serves the best appetisers!")
             .withCuisine("Malaysian")
             .withTiming("09:00", "20:00")
             .withWishlist(false)
+            .withBlacklist(false)
             .build();
 
     public static final Foodplace SUSHISHOP = new FoodplaceBuilder()
@@ -84,8 +91,10 @@ public class TypicalFoodplace {
             .withEmail("sushi@tei.com")
             .withAddress("michegan ave")
             .withCuisine("Japanese")
+            .withNote("Serves the best appetisers!")
             .withTiming("11:00", "22:00")
             .withWishlist(false)
+            .withBlacklist(false)
             .build();
 
     public static final Foodplace TEASHOP = new FoodplaceBuilder()
@@ -94,8 +103,10 @@ public class TypicalFoodplace {
             .withEmail("i@tea.com")
             .withAddress("little tokyo")
             .withCuisine("")
+            .withNote("Serves the best appetisers!")
             .withTiming("10:00", "20:00")
             .withWishlist(false)
+            .withBlacklist(false)
             .build();
 
     public static final Foodplace PIZZASHOP = new FoodplaceBuilder()
@@ -104,8 +115,10 @@ public class TypicalFoodplace {
             .withEmail("dominos@pizza.com")
             .withAddress("4th street")
             .withCuisine("")
+            .withNote("Serves the best appetisers!")
             .withTiming("12:00", "23:00")
             .withWishlist(false)
+            .withBlacklist(false)
             .build();
 
     // Manually added
@@ -115,8 +128,10 @@ public class TypicalFoodplace {
             .withEmail("meier@beehoon.com")
             .withAddress("little india")
             .withCuisine("")
+            .withNote("Serves the best appetisers!")
             .withTiming("09:00", "20:00")
             .withWishlist(false)
+            .withBlacklist(false)
             .build();
 
     public static final Foodplace CAKESHOP = new FoodplaceBuilder()
@@ -125,8 +140,10 @@ public class TypicalFoodplace {
             .withEmail("cat@fiddle.com")
             .withAddress("chicago ave")
             .withCuisine("")
+            .withNote("Serves the best appetisers!")
             .withTiming("10:00", "22:00")
             .withWishlist(false)
+            .withBlacklist(false)
             .build();
 
     // Manually added - Foodplace's details found in {@code CommandTestUtil}
@@ -137,8 +154,10 @@ public class TypicalFoodplace {
             .withAddress(VALID_ADDRESS_MCRONALDS)
             .withCuisine(VALID_CUISINE_MCRONALDS)
             .withTags(VALID_TAG_FASTFOOD)
+            .withNote(VALID_NOTE_SERVICE)
             .withTiming(VALID_OPEN_TIME_MCRONALDS, VALID_CLOSE_TIME_MCRONALDS)
             .withWishlist(false)
+            .withBlacklist(true)
             .build();
 
     public static final Foodplace SWENSWAN = new FoodplaceBuilder()
@@ -151,6 +170,7 @@ public class TypicalFoodplace {
             .withNote(VALID_NOTE_FAMOUS)
             .withTiming(VALID_OPEN_TIME_SWENSWAN, VALID_CLOSE_TIME_SWENSWAN)
             .withWishlist(true)
+            .withBlacklist(false)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

@@ -24,6 +24,7 @@ public class Foodplace {
     // Data fields
     private final Address address;
     private final Wishlist wishlist;
+    private final Blacklist blacklist;
 
     // Optional fields
     private final Cuisine cuisine;
@@ -36,8 +37,8 @@ public class Foodplace {
      * Every field must be present and not null.
      */
     public Foodplace(Name name, Phone phone, Email email, Address address, Timing timing,
-            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Wishlist wishlist) {
-        requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate, timing, wishlist);
+            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Wishlist wishlist, Blacklist blacklist) {
+        requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate, timing, wishlist, blacklist);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,6 +49,7 @@ public class Foodplace {
         this.note = note;
         this.rate = rate;
         this.wishlist = wishlist;
+        this.blacklist = blacklist;
     }
 
     public Name getName() {
@@ -94,6 +96,10 @@ public class Foodplace {
         return wishlist;
     }
 
+    public Blacklist getBlacklist() {
+        return blacklist;
+    }
+
     /**
      * Returns true if both foodplaces have the same name.
      * This defines a weaker notion of equality between two foodplaces.
@@ -131,14 +137,17 @@ public class Foodplace {
                 && tags.equals(otherFoodplace.tags)
                 && cuisine.equals(otherFoodplace.cuisine)
                 && timing.equals(otherFoodplace.timing)
-                && rate.equals(otherFoodplace.rate);
+                && rate.equals(otherFoodplace.rate)
+                && note.equals(otherFoodplace.note)
+                && wishlist.equals(otherFoodplace.wishlist)
+                && blacklist.equals(otherFoodplace.blacklist);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         // include timing
-        return Objects.hash(name, phone, email, address, tags, rate, cuisine, timing);
+        return Objects.hash(name, phone, email, address, timing, tags, rate, cuisine, note, wishlist, blacklist);
     }
 
     @Override
@@ -151,8 +160,10 @@ public class Foodplace {
                 .add("timing", timing)
                 .add("cuisine", cuisine)
                 .add("tags", tags)
+                .add("note", note)
                 .add("rate", rate)
                 .add("wishlist", wishlist)
+                .add("blacklist", blacklist)
                 .toString();
     }
 

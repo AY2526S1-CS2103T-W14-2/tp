@@ -21,6 +21,7 @@ public class CliSyntax {
     public static final int INDEX_NOTE_ENTRY_INDEX = 0;
     public static final int INDEX_NOTE_NOTE_STRING = 1;
     public static final int INDEX_WISHLIST_ENTRY_INDEX = 0;
+    public static final int INDEX_BLACKLIST_ENTRY_INDEX = 0;
     public static final int INDEX_COMPARE_FIRST_INDEX = 0;
     public static final int INDEX_COMPARE_SECOND_INDEX = 1;
 }

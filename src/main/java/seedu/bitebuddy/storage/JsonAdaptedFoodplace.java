@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Blacklist;
 import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -40,6 +41,7 @@ class JsonAdaptedFoodplace {
     private final String note;
     private final Integer rate;
     private final Boolean isWishlisted;
+    private final Boolean isBlacklisted;
 
     /**
      * Constructs a {@code JsonAdaptedFoodplace} with the given foodplace details.
@@ -51,7 +53,8 @@ class JsonAdaptedFoodplace {
                                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                 @JsonProperty("note") String note,
                                 @JsonProperty("rate") Integer rate,
-                                @JsonProperty("wishlist") Boolean isWishlisted) {
+                                @JsonProperty("wishlist") Boolean isWishlisted,
+                                @JsonProperty("blacklist") Boolean isBlacklisted) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -64,6 +67,7 @@ class JsonAdaptedFoodplace {
         this.note = note;
         this.rate = rate;
         this.isWishlisted = isWishlisted;
+        this.isBlacklisted = isBlacklisted;
     }
 
     /**
@@ -83,6 +87,7 @@ class JsonAdaptedFoodplace {
         note = source.getNote().value;
         rate = source.getRate().getValue();
         isWishlisted = source.getWishlist().isWishlisted();
+        isBlacklisted = source.getBlacklist().isBlacklisted();
     }
 
     /**
@@ -176,7 +181,13 @@ class JsonAdaptedFoodplace {
         }
         final Wishlist modelWishlist = new Wishlist(isWishlisted);
 
+        if (isBlacklisted == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Blacklist.class.getSimpleName()));
+        }
+        final Blacklist modelBlacklist = new Blacklist(isBlacklisted);
+
         return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming,
-                modelCuisine, modelTags, modelNote, modelRate, modelWishlist);
+                modelCuisine, modelTags, modelNote, modelRate, modelWishlist, modelBlacklist);
     }
 }

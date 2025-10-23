@@ -50,10 +50,10 @@ public class WishlistTest {
     @Test
     public void toString_returnsCorrectString() {
         Wishlist trueWishlist = new Wishlist(true);
-        assertEquals("true", trueWishlist.toString());
+        assertEquals("Wishlisted", trueWishlist.toString());
 
         Wishlist falseWishlist = new Wishlist(false);
-        assertEquals("false", falseWishlist.toString());
+        assertEquals("Not wishlisted", falseWishlist.toString());
     }
 
     @Test

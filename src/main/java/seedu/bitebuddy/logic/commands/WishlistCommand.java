@@ -10,6 +10,7 @@ import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.Model;
+import seedu.bitebuddy.model.foodplace.Blacklist;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 
 /**
@@ -30,6 +31,8 @@ public class WishlistCommand extends Command {
     public static final String MESSAGE_DISPLAY_SUCCESS = "Listed all foodplaces that are wishlisted";
     public static final String MESSAGE_ADD_WISHLIST_SUCCESS = "Add Foodplace to wishlist: %1$s";
     public static final String MESSAGE_REMOVE_WISHLIST_SUCCESS = "Remove Foodplace from wishlist: %1$s";
+    public static final String MESSAGE_REMOVE_BLACKLIST_STATUS_SUCCESS = "Additionally removed"
+            + " Foodplace from blacklist";
 
     private final Index index;
 
@@ -57,15 +60,24 @@ public class WishlistCommand extends Command {
         }
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
+        Blacklist foodPlaceBlacklistState = foodPlaceToEdit.getBlacklist();
+        boolean isBlacklisted = false;
+
+        // If foodplace is wishlisted --> change wishlist to false, else, remain false
+        if (foodPlaceBlacklistState.isBlacklisted()) {
+            isBlacklisted = true;
+            foodPlaceBlacklistState = foodPlaceBlacklistState.getOpposite();
+        }
+
         Foodplace editedFoodPlace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
                 foodPlaceToEdit.getEmail(), foodPlaceToEdit.getAddress(), foodPlaceToEdit.getTiming(),
                 foodPlaceToEdit.getCuisine(), foodPlaceToEdit.getTags(), foodPlaceToEdit.getNote(),
-                foodPlaceToEdit.getRate(), foodPlaceToEdit.getWishlist().getOpposite());
+                foodPlaceToEdit.getRate(), foodPlaceToEdit.getWishlist().getOpposite(), foodPlaceBlacklistState);
 
         model.setFoodplace(foodPlaceToEdit, editedFoodPlace);
         model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES);
 
-        return new CommandResult(generateSuccessMessage(editedFoodPlace));
+        return new CommandResult(generateSuccessMessage(editedFoodPlace, isBlacklisted));
     }
 
     /**
@@ -73,9 +85,12 @@ public class WishlistCommand extends Command {
      * a foodplace is added to wishlist or a foodplace is removed from wishlist
      * {@code foodPlaceToEdit}.
      */
-    private String generateSuccessMessage(Foodplace foodPlaceToEdit) {
+    private String generateSuccessMessage(Foodplace foodPlaceToEdit, boolean isBlacklisted) {
         String message = foodPlaceToEdit.getWishlist().isWishlisted()
                 ? MESSAGE_ADD_WISHLIST_SUCCESS : MESSAGE_REMOVE_WISHLIST_SUCCESS;
+        if (isBlacklisted) {
+            message = message + "\n" + MESSAGE_REMOVE_BLACKLIST_STATUS_SUCCESS;
+        }
         return String.format(message, foodPlaceToEdit);
     }
 

@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Blacklist;
 import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -48,7 +49,7 @@ public class JsonAdaptedFoodplaceTest {
     private static final String VALID_NOTE = DAEBAKSHOP.getNote().toString();
     private static final Integer VALID_RATING = 0;
     private static final Boolean VALID_WISHLIST = true;
-
+    private static final Boolean VALID_BLACKLIST = false;
 
     @Test
     public void toModelType_validFoodplaceDetails_returnsFoodplace() throws Exception {
@@ -60,7 +61,8 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                        VALID_BLACKLIST);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -68,7 +70,8 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace = new JsonAdaptedFoodplace(null, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                VALID_ADDRESS, VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                VALID_BLACKLIST);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -77,7 +80,8 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                         VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                         VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                        VALID_BLACKLIST);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -85,7 +89,8 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace = new JsonAdaptedFoodplace(VALID_NAME, null, VALID_EMAIL,
-                VALID_TIMING, VALID_ADDRESS, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                VALID_TIMING, VALID_ADDRESS, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                VALID_BLACKLIST);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -94,7 +99,7 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_TIMING,
-                        VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                        VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST, VALID_BLACKLIST);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -104,7 +109,7 @@ public class JsonAdaptedFoodplaceTest {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, "", VALID_ADDRESS,
                         VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE,
-                        VALID_RATING, VALID_WISHLIST);
+                        VALID_RATING, VALID_WISHLIST, VALID_BLACKLIST);
         Foodplace model;
         try {
             model = foodplace.toModelType();
@@ -117,7 +122,7 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace = new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
-                VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST, VALID_BLACKLIST);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -126,7 +131,7 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TIMING,
-                        VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                        VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST, VALID_BLACKLIST);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -134,7 +139,8 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace = new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                null, VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                null, VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                VALID_BLACKLIST);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -145,7 +151,8 @@ public class JsonAdaptedFoodplaceTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TIMING, VALID_CUISINE, invalidTags, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                        VALID_TIMING, VALID_CUISINE, invalidTags, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                        VALID_BLACKLIST);
         assertThrows(IllegalValueException.class, foodplace::toModelType);
     }
 
@@ -154,7 +161,8 @@ public class JsonAdaptedFoodplaceTest {
         // Null note is considered a kind of invalid note as well
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, null, VALID_RATING, VALID_WISHLIST);
+                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, null, VALID_RATING, VALID_WISHLIST,
+                        VALID_BLACKLIST);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -163,7 +171,8 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_invalidNote_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, INVALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, INVALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                        VALID_BLACKLIST);
         String expectedMessage = Note.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -172,7 +181,8 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_nullRating_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, null, VALID_WISHLIST);
+                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, null, VALID_WISHLIST,
+                        VALID_BLACKLIST);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -181,7 +191,8 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_invalidRating_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, INVALID_RATING, VALID_WISHLIST);
+                        VALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, INVALID_RATING, VALID_WISHLIST,
+                        VALID_BLACKLIST);
         String expectedMessage = Rate.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -190,7 +201,8 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_nullCuisine_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_TIMING, null, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                        VALID_TIMING, null, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                        VALID_BLACKLIST);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Cuisine.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
@@ -198,7 +210,8 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_invalidCuisine_throwsIllegalValueException() {
         JsonAdaptedFoodplace adapted = new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_TIMING, INVALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                VALID_TIMING, INVALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                VALID_BLACKLIST);
 
         try {
             adapted.toModelType();
@@ -212,7 +225,8 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_invalidTiming_throwsIllegalValueException() {
         JsonAdaptedFoodplace adapted = new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                INVALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                INVALID_TIMING, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                VALID_BLACKLIST);
 
         String expectedMessage = Timing.MESSAGE_INVALID_TIME;
         assertThrows(IllegalValueException.class, expectedMessage, adapted::toModelType);
@@ -221,7 +235,8 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_invalidTimingRange_throwsIllegalValueException() {
         JsonAdaptedFoodplace adapted = new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                INVALID_TIMING_RANGE, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                INVALID_TIMING_RANGE, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
+                VALID_BLACKLIST);
 
         String expectedMessage = Timing.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, adapted::toModelType);
@@ -230,7 +245,7 @@ public class JsonAdaptedFoodplaceTest {
     @Test
     public void toModelType_nullTiming_throwsIllegalValueException() {
         JsonAdaptedFoodplace adapted = new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                null, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST);
+                null, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST, VALID_BLACKLIST);
 
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Timing.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, adapted::toModelType);
@@ -240,8 +255,17 @@ public class JsonAdaptedFoodplaceTest {
     public void toModelType_nullWishlist_throwsIllegalValueException() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TIMING,
-                        VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, null);
+                        VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, null, VALID_BLACKLIST);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Wishlist.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullBlacklist_throwsIllegalValueException() {
+        JsonAdaptedFoodplace foodplace =
+                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TIMING,
+                        VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Blacklist.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
 }

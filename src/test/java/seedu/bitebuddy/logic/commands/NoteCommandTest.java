@@ -56,7 +56,7 @@ public class NoteCommandTest {
         Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
-                new Note(editedFoodplace.getNote().toString()));
+                new Note(editedFoodplace.getNote().value));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedFoodplace);
 
@@ -93,7 +93,7 @@ public class NoteCommandTest {
                 .get(INDEX_FIRST_FOODPLACE.getZeroBased())).withNote(EMPTY_NOTE_STUB).build();
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
-                new Note(editedFoodplace.getNote().toString()));
+                new Note(editedFoodplace.getNote().value));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedFoodplace);
 

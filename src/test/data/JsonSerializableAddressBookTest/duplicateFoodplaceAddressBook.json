@@ -9,7 +9,8 @@
     "tags": [ "hawker" ],
     "note": "note",
     "rate": 0,
-    "wishlist": false
+    "wishlist": false,
+    "blacklist": true
   }, {
     "name": "prata palace",
     "phone": "94351253",
@@ -19,6 +20,7 @@
     "cuisine": "Indian",
     "note": "different note",
     "rate": 0,
-    "wishlist": true
+    "wishlist": true,
+    "blacklist": false
   } ]
 }
