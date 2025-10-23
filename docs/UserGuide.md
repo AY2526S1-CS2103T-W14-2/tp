@@ -412,7 +412,8 @@ Example: compare 1 3
 
 Examples:
 * `compare 1 3` returns a comparison summary between the 1st and 3rd foodplaces.
-  ![result for 'compare 1 3'](images/compare13Result.png)
+
+![ug_compare](images/ug_compare.png)
 
 ### Clearing all entries: `clear`
 
