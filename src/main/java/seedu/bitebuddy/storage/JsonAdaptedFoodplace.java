@@ -1,5 +1,6 @@
 package seedu.bitebuddy.storage;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,6 +20,8 @@ import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Pinned;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Timing;
+import seedu.bitebuddy.model.foodplace.Wishlist;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -32,10 +35,12 @@ class JsonAdaptedFoodplace {
     private final String phone;
     private final String email;
     private final String address;
+    private final String timing;
     private final String cuisine;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String note;
     private final Integer rate;
+    private final Boolean isWishlisted;
     private final Boolean isPinned;
 
     /**
@@ -44,21 +49,24 @@ class JsonAdaptedFoodplace {
     @JsonCreator
     public JsonAdaptedFoodplace(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                                 @JsonProperty("email") String email, @JsonProperty("address") String address,
-                                @JsonProperty("cuisine") String cuisine,
+                                @JsonProperty("timing") String timing, @JsonProperty("cuisine") String cuisine,
                                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                 @JsonProperty("note") String note,
                                 @JsonProperty("rate") Integer rate,
+                                @JsonProperty("wishlist") Boolean isWishlisted,
                                 @JsonProperty("isPinned") Boolean isPinned) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.timing = timing;
         this.cuisine = cuisine;
         if (tags != null) {
             this.tags.addAll(tags);
         }
         this.note = note;
         this.rate = rate;
+        this.isWishlisted = isWishlisted;
         this.isPinned = isPinned;
     }
 
@@ -70,12 +78,15 @@ class JsonAdaptedFoodplace {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        // store timing as "HH:mm-HH:mm"
+        timing = source.getTiming().toString();
         cuisine = source.getCuisine().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         note = source.getNote().value;
         rate = source.getRate().getValue();
+        isWishlisted = source.getWishlist().isWishlisted();
         isPinned = source.getPinned().isPinned;
     }
 
@@ -122,6 +133,22 @@ class JsonAdaptedFoodplace {
         }
         final Address modelAddress = new Address(address);
 
+        if (timing == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Timing.class.getSimpleName()));
+        }
+        final Timing modelTiming;
+        try {
+            modelTiming = new Timing(timing);
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(Timing.MESSAGE_INVALID_TIME);
+        } catch (IllegalArgumentException e) {
+            if (Timing.MESSAGE_INVALID_TIME.equals(e.getMessage())) {
+                throw new IllegalValueException(Timing.MESSAGE_INVALID_TIME);
+            } else {
+                throw new IllegalValueException(Timing.MESSAGE_CONSTRAINTS);
+            }
+        }
+
         if (rate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));
         }
@@ -148,13 +175,19 @@ class JsonAdaptedFoodplace {
         }
         final Note modelNote = new Note(note);
 
+        if (isWishlisted == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Wishlist.class.getSimpleName()));
+        }
+        final Wishlist modelWishlist = new Wishlist(isWishlisted);
+
         if (isPinned == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pinned.class.getSimpleName()));
         }
         final Pinned modelPinned = new Pinned(isPinned);
 
-        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelCuisine,
-                modelTags, modelNote, modelRate, modelPinned);
+        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming, modelCuisine,
+                modelTags, modelNote, modelRate, modelWishlist, modelPinned);
     }
 
 }

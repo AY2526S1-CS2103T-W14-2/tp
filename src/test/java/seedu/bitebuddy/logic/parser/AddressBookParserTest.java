@@ -6,6 +6,7 @@ import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
+import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.logic.commands.AddCommand;
 import seedu.bitebuddy.logic.commands.ClearCommand;
+import seedu.bitebuddy.logic.commands.CompareCommand;
 import seedu.bitebuddy.logic.commands.DeleteCommand;
 import seedu.bitebuddy.logic.commands.EditCommand;
 import seedu.bitebuddy.logic.commands.EditCommand.EditFoodplaceDescriptor;
@@ -25,6 +27,7 @@ import seedu.bitebuddy.logic.commands.ListCommand;
 import seedu.bitebuddy.logic.commands.NoteCommand;
 import seedu.bitebuddy.logic.commands.PinCommand;
 import seedu.bitebuddy.logic.commands.RateCommand;
+import seedu.bitebuddy.logic.commands.WishlistCommand;
 import seedu.bitebuddy.logic.commands.UnpinCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -66,7 +69,10 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " "
                 + FoodplaceUtil.getEditFoodplaceDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_FOODPLACE, descriptor), command);
+        // Should not check for wishlist
+        EditFoodplaceDescriptor expectedDescriptor = new EditFoodplaceDescriptor(descriptor);
+        expectedDescriptor.setWishlist(null);
+        assertEquals(new EditCommand(INDEX_FIRST_FOODPLACE, expectedDescriptor), command);
     }
 
     @Test
@@ -113,6 +119,20 @@ public class AddressBookParserTest {
         RateCommand command = (RateCommand) parser.parseCommand(RateCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " " + rate.getValue());
         assertEquals(new RateCommand(INDEX_FIRST_FOODPLACE, rate.getValue()), command);
+    }
+
+    @Test
+    public void parseCommand_wishlist() throws Exception {
+        WishlistCommand command = (WishlistCommand) parser.parseCommand(WishlistCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_FOODPLACE.getOneBased());
+        assertEquals(new WishlistCommand(INDEX_FIRST_FOODPLACE), command);
+    }
+
+    @Test
+    public void parseCommand_compare() throws Exception {
+        CompareCommand command = (CompareCommand) parser.parseCommand(CompareCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_FOODPLACE.getOneBased() + " " + INDEX_SECOND_FOODPLACE.getOneBased());
+        assertEquals(new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE), command);
     }
 
     @Test

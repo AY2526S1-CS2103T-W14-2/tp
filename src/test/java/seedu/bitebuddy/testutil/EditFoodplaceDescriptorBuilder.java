@@ -13,6 +13,8 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Timing;
+import seedu.bitebuddy.model.foodplace.Wishlist;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -43,6 +45,7 @@ public class EditFoodplaceDescriptorBuilder {
         descriptor.setTags(foodplace.getTags());
         descriptor.setNote(foodplace.getNote());
         descriptor.setRate(foodplace.getRate());
+        descriptor.setWishlist(foodplace.getWishlist());
     }
 
     /**
@@ -111,7 +114,25 @@ public class EditFoodplaceDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Timing} of the {@code EditFoodplaceDescriptor} that we are building.
+     */
+    public EditFoodplaceDescriptorBuilder withTiming(String openTime, String closeTime) {
+        descriptor.setTiming(new Timing(openTime, closeTime));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Wishlist} of the {@code EditFoodplaceDescriptor} that we are building.
+     */
+    public EditFoodplaceDescriptorBuilder withWishlist(Boolean isWishlisted) {
+        descriptor.setWishlist(new Wishlist(isWishlisted));
+        return this;
+    }
+
     public EditCommand.EditFoodplaceDescriptor build() {
         return descriptor;
     }
+
+
 }

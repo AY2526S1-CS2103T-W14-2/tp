@@ -3,6 +3,7 @@ package seedu.bitebuddy.logic.parser;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.CLOSE_TIMING_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.CUISINE_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_SWENSWAN;
@@ -14,6 +15,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NOTE_DESC_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.OPEN_TIMING_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -48,7 +50,6 @@ import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.tag.Tag;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
 
-
 public class AddCommandParserTest {
     private final AddCommandParser parser = new AddCommandParser();
 
@@ -58,26 +59,33 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
-                + CUISINE_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN + TAG_DESC_FASTFOOD, new AddCommand(expectedFoodplace));
+                + OPEN_TIMING_DESC_SWENSWAN + CLOSE_TIMING_DESC_SWENSWAN + CUISINE_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
+                + TAG_DESC_FASTFOOD, new AddCommand(expectedFoodplace)
+        );
 
 
         // multiple tags - all accepted
         Foodplace expectedFoodplaceMultipleTags = new FoodplaceBuilder(SWENSWAN).withTags(VALID_TAG_FASTFOOD,
                         VALID_TAG_RESTAURANT)
                 .build();
-        assertParseSuccess(parser,
+        assertParseSuccess(
+                parser,
                 NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
-                        + CUISINE_DESC_SWENSWAN + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD,
-                new AddCommand(expectedFoodplaceMultipleTags));
+                        + OPEN_TIMING_DESC_SWENSWAN + CLOSE_TIMING_DESC_SWENSWAN + CUISINE_DESC_SWENSWAN
+                        + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD,
+                new AddCommand(expectedFoodplaceMultipleTags)
+        );
 
         // with notes
-        Foodplace expectedFoodplaceNotes = new FoodplaceBuilder(SWENSWAN).withTags(VALID_TAG_FASTFOOD,
-                        VALID_TAG_RESTAURANT).withNote(VALID_NOTE_FAMOUS)
-                .build();
-        assertParseSuccess(parser,
+        Foodplace expectedFoodplaceNotes = new FoodplaceBuilder(SWENSWAN)
+                .withTags(VALID_TAG_FASTFOOD, VALID_TAG_RESTAURANT).withNote(VALID_NOTE_FAMOUS).build();
+        assertParseSuccess(
+                parser,
                 NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
-                        + CUISINE_DESC_SWENSWAN + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD + NOTE_DESC_SWENSWAN,
-                new AddCommand(expectedFoodplaceNotes));
+                        + OPEN_TIMING_DESC_SWENSWAN + CLOSE_TIMING_DESC_SWENSWAN + CUISINE_DESC_SWENSWAN
+                        + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD + NOTE_DESC_SWENSWAN,
+                new AddCommand(expectedFoodplaceNotes)
+        );
     }
 
     @Test
@@ -122,7 +130,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedFoodplaceString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // invalid bitebuddy
+        // invalid address
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedFoodplaceString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
@@ -140,7 +148,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, validExpectedFoodplaceString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // invalid bitebuddy
+        // invalid address
         assertParseFailure(parser, validExpectedFoodplaceString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
@@ -148,7 +156,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS).withTags().withCuisine("").build();
+        Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS)
+            .withTags().withTiming("").withCuisine("").build();
         assertParseSuccess(parser, NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS
                 + ADDRESS_DESC_MCRONALDS,
                 new AddCommand(expectedFoodplace));
@@ -162,7 +171,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + ADDRESS_DESC_SWENSWAN, expectedMessage);
 
-        // missing bitebuddy prefix
+        // missing address prefix
         assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + VALID_ADDRESS_SWENSWAN, expectedMessage);
 
@@ -174,32 +183,50 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
-                + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                + ADDRESS_DESC_SWENSWAN + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Name.MESSAGE_CONSTRAINTS
+        );
 
         // invalid phone
-        assertParseFailure(parser, NAME_DESC_SWENSWAN + INVALID_PHONE_DESC + EMAIL_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
-                + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + INVALID_PHONE_DESC + EMAIL_DESC_SWENSWAN
+                + ADDRESS_DESC_SWENSWAN + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Phone.MESSAGE_CONSTRAINTS
+        );
 
         // invalid email
-        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + INVALID_EMAIL_DESC + ADDRESS_DESC_SWENSWAN
-                + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Email.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + INVALID_EMAIL_DESC
+                + ADDRESS_DESC_SWENSWAN + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Email.MESSAGE_CONSTRAINTS
+        );
 
-        // invalid bitebuddy
-        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN + INVALID_ADDRESS_DESC
-                + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Address.MESSAGE_CONSTRAINTS);
+        // invalid address
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                + INVALID_ADDRESS_DESC + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Address.MESSAGE_CONSTRAINTS
+        );
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
-                + ADDRESS_DESC_SWENSWAN + INVALID_TAG_DESC + VALID_TAG_FASTFOOD, Tag.MESSAGE_CONSTRAINTS);
+                + ADDRESS_DESC_SWENSWAN + INVALID_TAG_DESC + VALID_TAG_FASTFOOD, Tag.MESSAGE_CONSTRAINTS
+        );
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN + INVALID_ADDRESS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                + INVALID_ADDRESS_DESC, Name.MESSAGE_CONSTRAINTS
+        );
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + ADDRESS_DESC_SWENSWAN + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE)
+        );
+    }
+
+    @Test
+    public void parse_singleTimingPrefix_failure() {
+        // only opening time present
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                        + ADDRESS_DESC_SWENSWAN + OPEN_TIMING_DESC_SWENSWAN, ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
+
+        // only closing time present
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                        + ADDRESS_DESC_SWENSWAN + CLOSE_TIMING_DESC_SWENSWAN, ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
     }
 }

@@ -7,13 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CLOSE_TIME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CUISINE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_OPEN_TIME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_RATE_PRATASHOP;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_WISHLIST_SWENSWAN;
 
 import org.junit.jupiter.api.Test;
 
@@ -74,6 +77,16 @@ public class EditFoodplaceDescriptorTest {
         editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
                 .withCuisine(VALID_CUISINE_SWENSWAN).build();
         assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different timing -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+                .withTiming(VALID_OPEN_TIME_SWENSWAN, VALID_CLOSE_TIME_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different wishlist -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+                .withWishlist(VALID_WISHLIST_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
     }
 
     @Test
@@ -83,11 +96,13 @@ public class EditFoodplaceDescriptorTest {
                 + editFoodplaceDescriptor.getName().orElse(null) + ", phone="
                 + editFoodplaceDescriptor.getPhone().orElse(null) + ", email="
                 + editFoodplaceDescriptor.getEmail().orElse(null) + ", address="
-                + editFoodplaceDescriptor.getAddress().orElse(null) + ", cuisine="
+                + editFoodplaceDescriptor.getAddress().orElse(null) + ", timing="
+                + editFoodplaceDescriptor.getTiming().orElse(null) + ", cuisine="
                 + editFoodplaceDescriptor.getCuisine().orElse(null) + ", tags="
                 + editFoodplaceDescriptor.getTags().orElse(null) + ", note="
                 + editFoodplaceDescriptor.getNote().orElse(null) + ", rate="
-                + editFoodplaceDescriptor.getRate().orElse(null) + "}";
+                + editFoodplaceDescriptor.getRate().orElse(null) + ", wishlist="
+                + editFoodplaceDescriptor.getWishlist().orElse(null) + "}";
         assertEquals(expected, editFoodplaceDescriptor.toString());
     }
 }

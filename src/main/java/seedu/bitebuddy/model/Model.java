@@ -13,6 +13,7 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Foodplace> PREDICATE_SHOW_ALL_FOODPLACES = unused -> true;
+    Predicate<Foodplace> PREDICATE_SHOW_ALL_WISHLISTED_FOODPLACES = fp -> fp.getWishlist().isWishlisted();
     Predicate<Foodplace> PREDICATE_SHOW_PINNED_FOODPLACES = fp -> fp.getPinned().isPinned;
 
     /**

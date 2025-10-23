@@ -43,14 +43,6 @@ public class FoodplaceTest {
         editedPrata = new FoodplaceBuilder(PRATASHOP).withName(VALID_NAME_SWENSWAN).build();
         assertFalse(PRATASHOP.isSameFoodplace(editedPrata));
 
-        // different phone -> returns false
-        editedPrata = new FoodplaceBuilder(PRATASHOP).withPhone(VALID_PHONE_SWENSWAN).build();
-        assertFalse(PRATASHOP.isSameFoodplace(editedPrata));
-
-        // different email -> returns false
-        editedPrata = new FoodplaceBuilder(PRATASHOP).withEmail(VALID_EMAIL_SWENSWAN).build();
-        assertFalse(PRATASHOP.isSameFoodplace(editedPrata));
-
         // different address -> returns false
         editedPrata = new FoodplaceBuilder(PRATASHOP).withAddress(VALID_ADDRESS_SWENSWAN).build();
         assertFalse(PRATASHOP.isSameFoodplace(editedPrata));
@@ -105,6 +97,11 @@ public class FoodplaceTest {
         // different cuisine -> returns false
         editedPrata = new FoodplaceBuilder(PRATASHOP).withCuisine(VALID_CUISINE_SWENSWAN).build();
         assertFalse(PRATASHOP.equals(editedPrata));
+
+        // different timing -> returns false
+        editedPrata = new FoodplaceBuilder(PRATASHOP)
+                .withTiming("10:00", "22:00").build();
+        assertFalse(PRATASHOP.equals(editedPrata));
     }
 
     @Test
@@ -112,8 +109,9 @@ public class FoodplaceTest {
         String expected = Foodplace.class.getCanonicalName() + "{name=" + PRATASHOP.getName() + ", phone="
                 + PRATASHOP.getPhone()
                 + ", email=" + PRATASHOP.getEmail() + ", address=" + PRATASHOP.getAddress()
-                + ", cuisine=" + PRATASHOP.getCuisine() + ", tags=" + PRATASHOP.getTags() + ", rate="
-                + PRATASHOP.getRate() + "}";
+                + ", timing=" + PRATASHOP.getTiming() + ", cuisine=" + PRATASHOP.getCuisine()
+                + ", tags=" + PRATASHOP.getTags() + ", rate=" + PRATASHOP.getRate()
+                + ", wishlist=" + PRATASHOP.getWishlist() + "}";
         assertEquals(expected, PRATASHOP.toString());
     }
 }

@@ -4,19 +4,23 @@
     "phone": "94351253",
     "email": "alice@pratapalace.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "timing": "10:00-22:00",
     "cuisine": "Indian",
     "tags": [ "hawker" ],
     "note": "note",
     "rate": 0,
+    "wishlist": false,
     "isPinned": false
   }, {
     "name": "prata palace",
     "phone": "94351253",
     "email": "Alice@pratapalace.com",
     "address": "123, jurong west ave 6, #08-111",
+    "timing": "10:00-22:00",
     "cuisine": "Indian",
     "note": "different note",
     "rate": 0,
+    "wishlist": true,
     "isPinned": false
   } ]
 }

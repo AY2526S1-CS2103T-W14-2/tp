@@ -65,8 +65,8 @@ public class UnpinCommand extends Command {
 
     private static Foodplace unpinFoodplace(Foodplace fp) {
         assert fp != null;
-        return new Foodplace(fp.getName(), fp.getPhone(), fp.getEmail(), fp.getAddress(),
-                fp.getCuisine(), fp.getTags(), fp.getNote(), fp.getRate(), new Pinned(false));
+        return new Foodplace(fp.getName(), fp.getPhone(), fp.getEmail(), fp.getAddress(), fp.getTiming(),
+                fp.getCuisine(), fp.getTags(), fp.getNote(), fp.getRate(), fp.getWishlist(), new Pinned(false));
     }
 
     @Override

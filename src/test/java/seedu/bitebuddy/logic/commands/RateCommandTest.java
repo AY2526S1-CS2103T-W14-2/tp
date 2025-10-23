@@ -98,8 +98,8 @@ public class RateCommandTest {
         rateCommand2.setRate();
         rateCommand3.setRate();
 
-        assertNotEquals("invalidRateCommandObject", rateCommand1);
-        assertNotEquals(null, rateCommand1);
+        assertNotEquals(rateCommand1, "invalidRateCommandObject");
+        assertNotEquals(rateCommand1, null);
         assertNotEquals(rateCommand2, rateCommand1);
         assertNotEquals(rateCommand3, rateCommand1);
     }

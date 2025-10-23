@@ -32,6 +32,8 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Timing;
+import seedu.bitebuddy.model.foodplace.Wishlist;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -109,13 +111,15 @@ public class EditCommand extends Command {
         Phone updatedPhone = editFoodplaceDescriptor.getPhone().orElse(foodplaceToEdit.getPhone());
         Email updatedEmail = editFoodplaceDescriptor.getEmail().orElse(foodplaceToEdit.getEmail());
         Address updatedAddress = editFoodplaceDescriptor.getAddress().orElse(foodplaceToEdit.getAddress());
+        Timing updatedTiming = editFoodplaceDescriptor.getTiming().orElse(foodplaceToEdit.getTiming());
         Cuisine updatedCuisine = editFoodplaceDescriptor.getCuisine().orElse(foodplaceToEdit.getCuisine());
         Set<Tag> updatedTags = editFoodplaceDescriptor.getTags().orElse(foodplaceToEdit.getTags());
         Note updatedNote = editFoodplaceDescriptor.getNote().orElse(foodplaceToEdit.getNote());
         Rate updatedRate = editFoodplaceDescriptor.getRate().orElse(foodplaceToEdit.getRate());
+        Wishlist updatedWishlist = editFoodplaceDescriptor.getWishlist().orElse(foodplaceToEdit.getWishlist());
 
-        return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCuisine,
-                updatedTags, updatedNote, updatedRate);
+        return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTiming, updatedCuisine,
+                updatedTags, updatedNote, updatedRate, updatedWishlist);
     }
 
     @Override
@@ -157,9 +161,11 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Cuisine cuisine;
+        private Timing timing;
         private Set<Tag> tags;
         private Note note;
         private Rate rate;
+        private Wishlist wishlist;
 
         public EditFoodplaceDescriptor() {}
 
@@ -172,17 +178,19 @@ public class EditCommand extends Command {
             this.phone = toCopy.phone;
             this.email = toCopy.email;
             this.address = toCopy.address;
+            this.timing = toCopy.timing;
             this.cuisine = toCopy.cuisine;
             this.tags = (toCopy.tags != null) ? new HashSet<>(toCopy.tags) : null;
             this.note = toCopy.note;
             this.rate = toCopy.rate;
+            this.wishlist = toCopy.wishlist;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, cuisine, tags, note, rate);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, timing, cuisine, tags, note, rate);
         }
 
         public void setName(Name name) {
@@ -258,6 +266,22 @@ public class EditCommand extends Command {
             return Optional.ofNullable(cuisine);
         }
 
+        public void setTiming(Timing timing) {
+            this.timing = timing;
+        }
+
+        public Optional<Timing> getTiming() {
+            return Optional.ofNullable(timing);
+        }
+
+        public void setWishlist(Wishlist wishlist) {
+            this.wishlist = wishlist;
+        }
+
+        public Optional<Wishlist> getWishlist() {
+            return Optional.ofNullable(wishlist);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -274,15 +298,17 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditFoodplaceDescriptor.phone)
                     && Objects.equals(email, otherEditFoodplaceDescriptor.email)
                     && Objects.equals(address, otherEditFoodplaceDescriptor.address)
+                    && Objects.equals(timing, otherEditFoodplaceDescriptor.timing)
                     && Objects.equals(cuisine, otherEditFoodplaceDescriptor.cuisine)
                     && Objects.equals(tags, otherEditFoodplaceDescriptor.tags)
                     && Objects.equals(note, otherEditFoodplaceDescriptor.note)
-                    && Objects.equals(rate, otherEditFoodplaceDescriptor.rate);
+                    && Objects.equals(rate, otherEditFoodplaceDescriptor.rate)
+                    && Objects.equals(wishlist, otherEditFoodplaceDescriptor.wishlist);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(name, phone, email, address, tags, rate, cuisine, note);
+            return Objects.hash(name, phone, email, address, timing, tags, rate, cuisine, note);
         }
 
         @Override
@@ -292,10 +318,12 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("timing", timing)
                     .add("cuisine", cuisine)
                     .add("tags", tags)
                     .add("note", note)
                     .add("rate", rate)
+                    .add("wishlist", wishlist)
                     .toString();
         }
     }
