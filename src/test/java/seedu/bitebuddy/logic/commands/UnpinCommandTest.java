@@ -11,7 +11,6 @@ import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.core.index.Index;
@@ -28,8 +27,9 @@ public class UnpinCommandTest {
 
     private void pinFoodplace(Foodplace foodplace) {
         Foodplace pinnedFoodplace = new Foodplace(foodplace.getName(), foodplace.getPhone(),
-                foodplace.getEmail(), foodplace.getAddress(), foodplace.getTiming(), foodplace.getCuisine(), foodplace.getTags(),
-                foodplace.getNote(), foodplace.getRate(), foodplace.getWishlist(), new Pinned(true));
+                foodplace.getEmail(), foodplace.getAddress(), foodplace.getTiming(), foodplace.getCuisine(),
+                foodplace.getTags(), foodplace.getNote(), foodplace.getRate(),
+                foodplace.getWishlist(), new Pinned(true));
         model.setFoodplace(foodplace, pinnedFoodplace);
     }
 
@@ -41,8 +41,9 @@ public class UnpinCommandTest {
         UnpinCommand unpinCommand = new UnpinCommand(INDEX_FIRST_FOODPLACE);
 
         Foodplace unpinnedFoodplace = new Foodplace(foodplaceToUnpin.getName(), foodplaceToUnpin.getPhone(),
-                foodplaceToUnpin.getEmail(), foodplaceToUnpin.getAddress(), foodplaceToUnpin.getTiming(), foodplaceToUnpin.getCuisine(), foodplaceToUnpin.getTags(),
-                foodplaceToUnpin.getNote(), foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), new Pinned(false));
+                foodplaceToUnpin.getEmail(), foodplaceToUnpin.getAddress(), foodplaceToUnpin.getTiming(),
+                foodplaceToUnpin.getCuisine(), foodplaceToUnpin.getTags(), foodplaceToUnpin.getNote(),
+                foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), new Pinned(false));
 
         String expectedMessage = String.format(UnpinCommand.MESSAGE_UNPIN_FOODPLACE_SUCCESS,
                 Messages.format(unpinnedFoodplace));
@@ -71,8 +72,9 @@ public class UnpinCommandTest {
         UnpinCommand unpinCommand = new UnpinCommand(INDEX_FIRST_FOODPLACE);
 
         Foodplace unpinnedFoodplace = new Foodplace(foodplaceToUnpin.getName(), foodplaceToUnpin.getPhone(),
-                foodplaceToUnpin.getEmail(), foodplaceToUnpin.getAddress(), foodplaceToUnpin.getTiming(), foodplaceToUnpin.getCuisine(), foodplaceToUnpin.getTags(),
-                foodplaceToUnpin.getNote(), foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), new Pinned(false));
+                foodplaceToUnpin.getEmail(), foodplaceToUnpin.getAddress(), foodplaceToUnpin.getTiming(),
+                foodplaceToUnpin.getCuisine(), foodplaceToUnpin.getTags(), foodplaceToUnpin.getNote(),
+                foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), new Pinned(false));
 
         String expectedMessage = String.format(UnpinCommand.MESSAGE_UNPIN_FOODPLACE_SUCCESS,
                 Messages.format(unpinnedFoodplace));
