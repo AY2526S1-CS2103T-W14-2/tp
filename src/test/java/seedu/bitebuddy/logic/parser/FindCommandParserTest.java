@@ -5,30 +5,73 @@ import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseFail
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.logic.commands.FindCommand;
+import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
+import seedu.bitebuddy.model.foodplace.FoodplaceMatchesCriteriaPredicate;
+import seedu.bitebuddy.model.foodplace.Rate;
 
 public class FindCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private final FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validKeywordArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new FoodplaceContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        FindCommand expectedFindCommand = new FindCommand(
+                Optional.of(new FoodplaceContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"))),
+                Optional.empty());
+
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
     }
 
+    @Test
+    public void parse_validFieldArgs_returnsFindCommand() {
+        FindCommand expectedFindCommand = new FindCommand(
+                Optional.empty(),
+                Optional.of(new FoodplaceMatchesCriteriaPredicate(
+                        Collections.singletonList("hawker"),
+                        Optional.of(new Cuisine("Japanese")),
+                        Optional.of(new Rate(8)))));
+
+        assertParseSuccess(parser, "t/hawker c/Japanese r/8", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_invalidRating_throwsParseException() {
+        assertParseFailure(parser, "r/abc",
+                "Ratings should only contain numbers, and be an integer between 1 to 10");
+
+        assertParseFailure(parser, "r/15",
+                "Ratings should only contain numbers, and be an integer between 1 to 10");
+    }
+
+    @Test
+    public void parse_emptyPrefixValue_throwsParseException() {
+        // empty tag
+        assertParseFailure(parser, "t/",
+                "Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE);
+
+        // empty cuisine
+        assertParseFailure(parser, "c/",
+                "Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE);
+
+        // empty rating
+        assertParseFailure(parser, "r/",
+                "Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE);
+    }
 }
