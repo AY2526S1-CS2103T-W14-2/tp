@@ -19,7 +19,10 @@
   - [Rate - Rating a foodplace](#rating-a-foodplace-rate)
   - [Tag - Tagging a foodplace](#adding-tags-to-a-foodplace-tag)
   - [Wishlist - Wishlisting a foodplace](#wishlisting-a-foodplace-wishlist)
+  - [Pin - Pinning a foodplace](#pinning-a-foodplace-pin)
+  - [Unpin - Unpinning a foodplace](#unpinning-a-foodplace-unpin)
   - [Find - Finding a foodplace](#locating-foodplaces-by-name-find)
+  - [Compare - Compare two foodplaces](#comparing-two-foodplaces-compare)
   - [Clear - Delete all foodplaces](#clearing-all-entries-clear)
   - [Exit - Quit the program](#exiting-the-program-exit)
 - [FAQ](#faq)
@@ -366,6 +369,50 @@ Examples:
 
 ---
 
+### Pinning a foodplace: `pin`
+
+Pins a specified foodplace in BiteBuddy.
+
+Format: `pin INDEX`
+
+```
+pin: Pins the foodplace identified by the index number used in the last foodplace listing. INDEX must be a positive integer.
+Parameters: INDEX
+Example: pin 1
+```
+
+* Pins the foodplace at the specified `INDEX`.
+* The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
+* The index **must be a positive integer**: 1, 2, 3, ...
+* Pinned foodplaces appear at the top of the displayed foodplace list, indicated by a pin icon in the top right corner.
+* There can be a maximum of 5 pinned foodplaces.
+
+Examples:
+* `pin 2` pins the 2nd foodplace.
+
+![ug_pin](images/ug_pin.png)
+
+### Unpinning a foodplace: `unpin`
+
+Unpins a specified foodplace in Bitebuddy.
+
+Format: `unpin INDEX`
+
+```
+unpin: Unpins the foodplace identified by the index number used in the last foodplace listing. INDEX must be a positive integer.
+Parameters: INDEX
+Example: unpin 1
+```
+
+* Unpins the foodplace at the specified `INDEX`.
+* The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
+* The index **must be a positive integer**: 1, 2, 3, ...
+
+Examples:
+* `unpin 1` unpins the 1st foodplace.
+
+![ug_unpin](images/ug_unpin.png)
+
 ### Locating foodplaces by name: `find`
 
 Finds foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords.
@@ -378,7 +425,7 @@ Parameters: KEYWORD [MORE_KEYWORDS]...
 Example: find western cheap aircon
 ```
 
-* The search is **case-insensitive**: `prata` will match `Prata`
+* The search is **case-insensitive**: `prata` will match `Prata`[UserGuide.md](UserGuide.md)
 * The **order** of the keywords does **not matter**: `Prata Place` will match `Place Prata`
 * Keywords are **matched against multiple fields**.
 * The search uses **substring matching**: `Pr` will match `Prata`
@@ -489,6 +536,9 @@ Action     | Format                                                             
 [**Rate**](#rating-a-foodplace-rate) | `rate INDEX RATING`<br>                                                    | `rate 1 6`
 [**Tag**](#adding-tags-to-a-foodplace-tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                   | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
 [**Wishlist**](#wishlisting-a-foodplace-wishlist) | `wishlist [INDEX]`<br> | `wishlist 2`<br> `wishlist`
+[**Pin**](#pinning-a-foodplace-pin) | `pin [INDEX]`<br>                                         | `pin 1`
+[**Unpin](#unpinning-a-foodplace-unpin) | `unpin [INDEX]`<br>                                         | `unpin 2`
 [**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br>                                         | `find James Jake`
+[**Compare**](#comparing-two-foodplaces-compare) | `compare [INDEX1] [INDEX2]`<br>                                         | `compare 1 3`
 [**Clear**](#clearing-all-entries-clear) | `clear`                                                                    | `clear`
 [**Exit**](#exiting-the-program-exit) | `exit`                                                                     | `exit`
