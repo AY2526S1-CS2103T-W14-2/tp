@@ -20,8 +20,8 @@ public class Timing {
             + "Timing must be in the format HH:mm-HH:mm";
 
     public static final String VALIDATION_REGEX = "^([01]?\\d|2[0-3]):[0-5]\\d$";
-    private static final LocalTime DEFAULT_START = LocalTime.MIN;
-    private static final LocalTime DEFAULT_END = LocalTime.MAX;
+    private static final LocalTime DEFAULT_START = LocalTime.of(0, 0);
+    private static final LocalTime DEFAULT_END = LocalTime.of(23, 59);
 
     private final LocalTime openingTime;
     private final LocalTime closingTime;
@@ -94,10 +94,6 @@ public class Timing {
             return false;
         }
 
-        if (time.trim().isEmpty()) {
-            return true;
-        }
-
         return time.matches(VALIDATION_REGEX);
     }
 
@@ -109,11 +105,13 @@ public class Timing {
             return false;
         }
 
-        if (timeRange.trim().isEmpty()) {
-            return true;
+        LocalTime[] parsed;
+        try {
+            parsed = parseRange(timeRange);
+        } catch (IllegalArgumentException e) {
+            return false;
         }
 
-        LocalTime[] parsed = parseRange(timeRange);
         LocalTime openingTime = parsed[0];
         LocalTime closingTime = parsed[1];
         return !closingTime.isBefore(openingTime);

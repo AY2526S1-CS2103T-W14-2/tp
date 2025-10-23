@@ -1,21 +1,21 @@
 package seedu.bitebuddy.model.foodplace;
 
+import java.time.LocalTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bitebuddy.testutil.Assert.assertThrows;
-
-import java.time.LocalTime;
-
 import org.junit.jupiter.api.Test;
+
+import static seedu.bitebuddy.testutil.Assert.assertThrows;
 
 public class TimingTest {
 
     @Test
     public void isValidTime() {
         assertFalse(Timing.isValidTime(null));
-        assertTrue(Timing.isValidTime(""));
+        assertFalse(Timing.isValidTime(""));
         assertTrue(Timing.isValidTime("00:00"));
         assertTrue(Timing.isValidTime("23:59"));
         assertFalse(Timing.isValidTime("24:00"));
@@ -26,10 +26,10 @@ public class TimingTest {
     @Test
     public void isValidTiming() {
         assertFalse(Timing.isValidTiming(null));
-        assertTrue(Timing.isValidTiming(""));
+        assertFalse(Timing.isValidTiming(""));
         assertTrue(Timing.isValidTiming("09:00-17:00"));
         assertFalse(Timing.isValidTiming("17:00-09:00"));
-        assertThrows(IllegalArgumentException.class, () -> Timing.isValidTiming("not-a-range"));
+        assertFalse(Timing.isValidTiming("not-a-range"));
     }
 
     @Test
