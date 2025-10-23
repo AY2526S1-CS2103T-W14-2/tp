@@ -453,7 +453,7 @@ Examples:
 
 Compares two foodplaces by their ratings and tags.
 
-Format: `compare [INDEX1] [INDEX2]`
+Format: `compare INDEX1 INDEX2`
 
 ```
 compare: Compares the two foodplaces identified by the index numbers used in the last foodplace listing.
