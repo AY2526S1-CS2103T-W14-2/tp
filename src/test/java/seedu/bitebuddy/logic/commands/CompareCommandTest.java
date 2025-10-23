@@ -34,9 +34,10 @@ public class CompareCommandTest {
         Foodplace thirdFoodplace = model.getFilteredFoodplaceList().get(INDEX_THIRD_FOODPLACE.getZeroBased());
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_THIRD_FOODPLACE);
 
-        String expectedMessage = "Prata Palace (Rating: --) vs Carls Junior (Rating: --)\n"
-                + "Common tags: --\n"
-                + "Unique tags: Prata Palace (hawker) | Carls Junior (fastfood)\n";
+        String nl = System.lineSeparator();
+        String expectedMessage = "Prata Palace (Rating: --) vs Carls Junior (Rating: --)" + nl
+                + "Common tags: --" + nl
+                + "Unique tags: Prata Palace (hawker) | Carls Junior (fastfood)" + nl;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(thirdFoodplace));
@@ -64,9 +65,10 @@ public class CompareCommandTest {
         // Now, in the filtered list, these correspond to index 1 and index 2 (logically)
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE);
 
-        String expectedMessage = "Prata Palace (Rating: --) vs Carls Junior (Rating: --)\n"
-                + "Common tags: --\n"
-                + "Unique tags: Prata Palace (hawker) | Carls Junior (fastfood)\n";
+        String nl = System.lineSeparator();
+        String expectedMessage = "Prata Palace (Rating: --) vs Carls Junior (Rating: --)" + nl
+                + "Common tags: --" + nl
+                + "Unique tags: Prata Palace (hawker) | Carls Junior (fastfood)" + nl;
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(originalFirst) || fp.equals(originalThird));
