@@ -8,40 +8,46 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
-      </padding>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-      </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="timing" styleClass="cell_small_label" text="\$timing" />
-      <Label fx:id="cuisine" styleClass="cell_small_label" text="\$cuisine" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
-      <Label fx:id="rate" styleClass="cell_small_label" text="\$rate" />
-    </VBox>
-
-    <Label fx:id="wishlist" styleClass="cell_small_label" text="\$wishlist"
-           GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+    <AnchorPane>
+      <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
         <padding>
-            <Insets top="10" right="10" />
+          <Insets top="5" right="5" bottom="5" left="15" />
         </padding>
-    </Label>
+        <HBox spacing="0.5" alignment="CENTER_LEFT">
+          <Label fx:id="id" styleClass="cell_big_label">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        </HBox>
+        <FlowPane fx:id="tags" />
+        <Label fx:id="timing" styleClass="cell_small_label" text="\$timing" />
+        <Label fx:id="cuisine" styleClass="cell_small_label" text="\$cuisine" />
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
+        <Label fx:id="rate" styleClass="cell_small_label" text="\$rate" />
+      </VBox>
+      <Label fx:id="wishlist" styleClass="cell_small_label" text="\$wishlist"
+             AnchorPane.bottomAnchor="10"
+             AnchorPane.rightAnchor="10" />
+      <ImageView fx:id="pinIcon"
+                 fitHeight="18"
+                 fitWidth="18"
+                 visible="false"
+                 AnchorPane.rightAnchor="10"
+                 AnchorPane.topAnchor="10"/>
+    </AnchorPane>
   </GridPane>
 </HBox>

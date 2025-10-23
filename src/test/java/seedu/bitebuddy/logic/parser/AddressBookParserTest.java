@@ -10,6 +10,7 @@ import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,9 @@ import seedu.bitebuddy.logic.commands.FindCommand;
 import seedu.bitebuddy.logic.commands.HelpCommand;
 import seedu.bitebuddy.logic.commands.ListCommand;
 import seedu.bitebuddy.logic.commands.NoteCommand;
+import seedu.bitebuddy.logic.commands.PinCommand;
 import seedu.bitebuddy.logic.commands.RateCommand;
+import seedu.bitebuddy.logic.commands.UnpinCommand;
 import seedu.bitebuddy.logic.commands.WishlistCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -86,7 +89,8 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new FoodplaceContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(Optional.of(new FoodplaceContainsKeywordsPredicate(keywords)),
+                Optional.empty()), command);
     }
 
     @Test
@@ -140,6 +144,20 @@ public class AddressBookParserTest {
         CompareCommand command = (CompareCommand) parser.parseCommand(CompareCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " " + INDEX_SECOND_FOODPLACE.getOneBased());
         assertEquals(new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE), command);
+    }
+
+    @Test
+    public void parseCommand_pin() throws Exception {
+        PinCommand command = (PinCommand) parser.parseCommand(
+                PinCommand.COMMAND_WORD + " " + INDEX_FIRST_FOODPLACE.getOneBased());
+        assertEquals(new PinCommand(INDEX_FIRST_FOODPLACE), command);
+    }
+
+    @Test
+    public void parseCommand_unpin() throws Exception {
+        UnpinCommand command = (UnpinCommand) parser.parseCommand(
+                UnpinCommand.COMMAND_WORD + " " + INDEX_FIRST_FOODPLACE.getOneBased());
+        assertEquals(new UnpinCommand(INDEX_FIRST_FOODPLACE), command);
     }
 
     @Test

@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -49,6 +51,8 @@ public class FoodplaceCard extends UiPart<Region> {
     private Label wishlist;
     @FXML
     private Label blacklist;
+    @FXML
+    private ImageView pinIcon;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Foodplace} and index to display.
@@ -94,5 +98,15 @@ public class FoodplaceCard extends UiPart<Region> {
         );
         wishlist.setText(foodplace.getWishlist().isWishlisted() ? "Wishlisted" : "");
         blacklist.setText(foodplace.getBlacklist().isBlacklisted() ? "Blacklisted" : "");
+        rate.setText(String.valueOf(
+                foodplace.getRate().isSet() ? foodplace.getRate().toString() : ">> No Rating yet <<"
+        ));
+
+        if (foodplace.getPinned().isPinned) {
+            pinIcon.setVisible(true);
+            pinIcon.setImage(new Image(getClass().getResourceAsStream("/images/pin.png")));
+        } else {
+            pinIcon.setVisible(false);
+        }
     }
 }

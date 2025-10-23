@@ -19,6 +19,7 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
+import seedu.bitebuddy.model.foodplace.Pinned;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.foodplace.Timing;
 import seedu.bitebuddy.model.foodplace.Wishlist;
@@ -42,6 +43,7 @@ class JsonAdaptedFoodplace {
     private final Integer rate;
     private final Boolean isWishlisted;
     private final Boolean isBlacklisted;
+    private final Boolean isPinned;
 
     /**
      * Constructs a {@code JsonAdaptedFoodplace} with the given foodplace details.
@@ -55,6 +57,7 @@ class JsonAdaptedFoodplace {
                                 @JsonProperty("rate") Integer rate,
                                 @JsonProperty("wishlist") Boolean isWishlisted,
                                 @JsonProperty("blacklist") Boolean isBlacklisted) {
+                                @JsonProperty("isPinned") Boolean isPinned) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -68,6 +71,7 @@ class JsonAdaptedFoodplace {
         this.rate = rate;
         this.isWishlisted = isWishlisted;
         this.isBlacklisted = isBlacklisted;
+        this.isPinned = isPinned;
     }
 
     /**
@@ -88,6 +92,7 @@ class JsonAdaptedFoodplace {
         rate = source.getRate().getValue();
         isWishlisted = source.getWishlist().isWishlisted();
         isBlacklisted = source.getBlacklist().isBlacklisted();
+        isPinned = source.getPinned().isPinned;
     }
 
     /**
@@ -189,5 +194,12 @@ class JsonAdaptedFoodplace {
 
         return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming,
                 modelCuisine, modelTags, modelNote, modelRate, modelWishlist, modelBlacklist);
+        if (isPinned == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pinned.class.getSimpleName()));
+        }
+        final Pinned modelPinned = new Pinned(isPinned);
+
+        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming, modelCuisine,
+                modelTags, modelNote, modelRate, modelWishlist, modelPinned);
     }
 }

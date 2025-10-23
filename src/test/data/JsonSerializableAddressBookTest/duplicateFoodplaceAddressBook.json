@@ -10,7 +10,8 @@
     "note": "note",
     "rate": 0,
     "wishlist": false,
-    "blacklist": true
+    "blacklist": true,
+    "isPinned": false
   }, {
     "name": "prata palace",
     "phone": "94351253",
@@ -21,6 +22,7 @@
     "note": "different note",
     "rate": 0,
     "wishlist": true,
-    "blacklist": false
+    "blacklist": false,
+    "isPinned": false
   } ]
 }

@@ -11,7 +11,8 @@
     "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
-    "blacklist": true
+    "blacklist": true,
+    "isPinned": false
   }, {
     "name" : "Daebak Korean BBQ",
     "phone" : "98765432",
@@ -23,7 +24,8 @@
     "note": "Best beef in the world!",
     "rate": 0,
     "wishlist": true,
-    "blacklist": false
+    "blacklist": false,
+    "isPinned": false
   }, {
     "name" : "Carls Junior",
     "phone" : "95352563",
@@ -35,7 +37,8 @@
     "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
-    "blacklist": false
+    "blacklist": false,
+    "isPinned": false
   }, {
     "name" : "Laksa Paradise",
     "phone" : "87652533",
@@ -47,7 +50,8 @@
     "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
-    "blacklist": false
+    "blacklist": false,
+    "isPinned": false
   }, {
     "name" : "Sushi Tei",
     "phone" : "9482224",
@@ -59,7 +63,8 @@
     "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
-    "blacklist": false
+    "blacklist": false,
+    "isPinned": false
   }, {
     "name" : "ITea",
     "phone" : "9482427",
@@ -71,7 +76,8 @@
     "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
-    "blacklist": false
+    "blacklist": false,
+    "isPinned": false
   }, {
     "name": "Dominoes Pizza",
     "phone": "9482442",
@@ -83,6 +89,7 @@
     "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
-    "blacklist": false
+    "blacklist": false,
+    "isPinned": false
   } ]
 }
