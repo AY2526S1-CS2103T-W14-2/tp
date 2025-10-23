@@ -134,9 +134,10 @@ class JsonAdaptedFoodplace {
         final Timing modelTiming;
         try {
             modelTiming = new Timing(timing);
-        } catch (Exception e) {
-            if (e instanceof DateTimeParseException
-                    || Timing.MESSAGE_INVALID_TIME.equals(e.getMessage())) {
+        } catch (DateTimeParseException e) {
+            throw new IllegalValueException(Timing.MESSAGE_INVALID_TIME);
+        } catch (IllegalArgumentException e) {
+            if (Timing.MESSAGE_INVALID_TIME.equals(e.getMessage())) {
                 throw new IllegalValueException(Timing.MESSAGE_INVALID_TIME);
             } else {
                 throw new IllegalValueException(Timing.MESSAGE_CONSTRAINTS);
