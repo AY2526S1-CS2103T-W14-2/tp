@@ -37,9 +37,9 @@
     </VBox>
 
     <Label fx:id="wishlist" styleClass="cell_small_label" text="\$wishlist"
-           GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+           GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
         <padding>
-            <Insets top="10" right="10" />
+            <Insets bottom="10" right="10" />
         </padding>
     </Label>
   </GridPane>
