@@ -21,8 +21,8 @@ public class PinCommand extends Command {
     public static final String COMMAND_WORD = "pin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins the foodplace identified "
-            + "by the index number used in the last foodplace listing. "
-            + "Parameters: INDEX (must be a positive integer) "
+            + "by the index number used in the last foodplace listing.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "pin [INDEX]\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -51,7 +51,11 @@ public class PinCommand extends Command {
 
         Foodplace foodplaceToPin = lastShownList.get(index.getZeroBased());
 
-        if (Pinned.getCount() > 5) {
+        // update list to contain pinned places only
+        model.updateFilteredFoodplaceList(PREDICATE_SHOW_PINNED_FOODPLACES);
+        List<Foodplace> pinnedList = model.getFilteredFoodplaceList();
+
+        if (pinnedList.size() >= 5) {
             return new CommandResult(MESSAGE_MAX_PIN_REACHED);
         }
 
@@ -60,7 +64,6 @@ public class PinCommand extends Command {
         }
 
         Foodplace pinnedFoodplace = pinFoodplace(foodplaceToPin);
-        Pinned.incrementCount();
 
         model.setFoodplace(foodplaceToPin, pinnedFoodplace);
 

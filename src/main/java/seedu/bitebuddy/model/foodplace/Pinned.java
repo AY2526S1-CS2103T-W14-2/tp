@@ -5,9 +5,8 @@ package seedu.bitebuddy.model.foodplace;
  */
 public class Pinned {
 
-    private static int pinnedCount = 0;
-
     public final boolean isPinned;
+
     /**
      * Constructs a {@code Pinned}.
      *
@@ -41,17 +40,4 @@ public class Pinned {
     public int hashCode() {
         return Boolean.hashCode(isPinned);
     }
-
-    public static int getCount() {
-        return pinnedCount;
-    }
-
-    public static void incrementCount() {
-        pinnedCount++;
-    }
-
-    public static void decrementCount() {
-        pinnedCount--;
-    }
-
 }

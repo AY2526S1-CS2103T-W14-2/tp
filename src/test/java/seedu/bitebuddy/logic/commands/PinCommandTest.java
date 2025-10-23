@@ -29,13 +29,6 @@ public class PinCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        resetPinnedCount();
-    }
-
-    private void resetPinnedCount() {
-        while (Pinned.getCount() > 0) {
-            Pinned.decrementCount();
-        }
     }
 
     @Test
@@ -109,8 +102,10 @@ public class PinCommandTest {
 
     @Test
     public void execute_maxPinReached_returnsMaxPinMessage() {
-        for (int i = 0; i < 6; i++) {
-            Pinned.incrementCount();
+        for (int i = 0; i < 5; i++) {
+            Foodplace fp = model.getFilteredFoodplaceList().get(i);
+            model.setFoodplace(fp, new Foodplace(fp.getName(), fp.getPhone(), fp.getEmail(),
+                    fp.getAddress(), fp.getCuisine(), fp.getTags(), fp.getNote(), fp.getRate(), new Pinned(true)));
         }
         PinCommand pinCommand = new PinCommand(INDEX_FIRST_FOODPLACE);
         assertCommandSuccess(pinCommand, model, PinCommand.MESSAGE_MAX_PIN_REACHED, model);

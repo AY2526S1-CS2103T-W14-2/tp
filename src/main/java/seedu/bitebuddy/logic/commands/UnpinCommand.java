@@ -21,8 +21,8 @@ public class UnpinCommand extends Command {
     public static final String COMMAND_WORD = "unpin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unpins the foodplace identified "
-            + "by the index number used in the last foodplace listing. "
-            + "Parameters: INDEX (must be a positive integer) "
+            + "by the index number used in the last foodplace listing.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "unpin [INDEX]\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -32,7 +32,7 @@ public class UnpinCommand extends Command {
     private final Index index;
 
     /**
-     * @param index of the foodplace in the filtered foodplace list to pin
+     * @param index of the foodplace in the filtered foodplace list to unpin
      */
     public UnpinCommand(Index index) {
         requireAllNonNull(index);
@@ -55,7 +55,6 @@ public class UnpinCommand extends Command {
         }
 
         Foodplace unpinnedFoodplace = unpinFoodplace(foodplaceToUnpin);
-        Pinned.decrementCount();
 
         model.setFoodplace(foodplaceToUnpin, unpinnedFoodplace);
 

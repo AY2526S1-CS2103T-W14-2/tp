@@ -24,26 +24,13 @@ import seedu.bitebuddy.model.foodplace.Pinned;
 
 public class UnpinCommandTest {
 
-    private Model model;
-
-    @BeforeEach
-    public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        resetPinnedCount();
-    }
-
-    private void resetPinnedCount() {
-        while (Pinned.getCount() > 0) {
-            Pinned.decrementCount();
-        }
-    }
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     private void pinFoodplace(Foodplace foodplace) {
         Foodplace pinnedFoodplace = new Foodplace(foodplace.getName(), foodplace.getPhone(),
                 foodplace.getEmail(), foodplace.getAddress(), foodplace.getCuisine(), foodplace.getTags(),
                 foodplace.getNote(), foodplace.getRate(), new Pinned(true));
         model.setFoodplace(foodplace, pinnedFoodplace);
-        Pinned.incrementCount();
     }
 
     @Test
@@ -63,7 +50,6 @@ public class UnpinCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToUnpin, unpinnedFoodplace);
         expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
-        Pinned.decrementCount();
 
         assertCommandSuccess(unpinCommand, model, expectedMessage, expectedModel);
     }
@@ -94,7 +80,6 @@ public class UnpinCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToUnpin, unpinnedFoodplace);
         expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
-        Pinned.decrementCount();
 
         assertCommandSuccess(unpinCommand, model, expectedMessage, expectedModel);
     }

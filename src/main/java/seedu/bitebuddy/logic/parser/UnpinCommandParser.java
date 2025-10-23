@@ -7,7 +7,7 @@ import seedu.bitebuddy.logic.commands.UnpinCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new PinCommand object
+ * Parses input arguments and creates a new UnpinCommand object
  */
 public class UnpinCommandParser implements Parser<UnpinCommand> {
 

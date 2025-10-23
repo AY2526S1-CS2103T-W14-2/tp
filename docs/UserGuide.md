@@ -348,18 +348,19 @@ Example: pin 1
 * Pins the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
 * The index **must be a positive integer**: 1, 2, 3, ...
-* Pinned foodplaces are at the displayed foodplace list, indicated by a pin icon in the top right corner.
+* Pinned foodplaces appear at the top of the displayed foodplace list, indicated by a pin icon in the top right corner.
 * There can be a maximum of 5 pinned foodplaces.
 
 Examples: 
 * `pin 2` pins the 2nd foodplace.
-  ![result for 'pin 2'](images/pin2Result.png)
+
+![ug_pin](images/ug_pin.png)
 
 ### Unpinning a foodplace: `unpin`
 
 Unpins a specified foodplace in Bitebuddy.
 
-Format: `unpin INDEX'
+Format: `unpin INDEX`
 
 ```
 unpin: Unpins the foodplace identified by the index number used in the last foodplace listing. INDEX must be a positive integer.
@@ -373,7 +374,8 @@ Example: unpin 1
 
 Examples:
 * `unpin 1` unpins the 1st foodplace.
-  ![result for 'unpin 1'](images/unpin1Result.png)
+
+![ug_unpin](images/ug_unpin.png)
 
 ### Locating foodplaces by name: `find`
 
@@ -387,7 +389,7 @@ Parameters: KEYWORD [MORE_KEYWORDS]...
 Example: find western cheap aircon
 ```
 
-* The search is **case-insensitive**: `prata` will match `Prata`
+* The search is **case-insensitive**: `prata` will match `Prata`[UserGuide.md](UserGuide.md)
 * The **order** of the keywords does **not matter**: `Prata Place` will match `Place Prata`
 * Keywords are **matched against multiple fields**.
 * The search uses **substring matching**: `Pr` will match `Prata`
