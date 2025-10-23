@@ -10,6 +10,7 @@ import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -86,7 +87,8 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new FoodplaceContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(Optional.of(new FoodplaceContainsKeywordsPredicate(keywords)),
+                Optional.empty()), command);
     }
 
     @Test

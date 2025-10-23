@@ -2,10 +2,15 @@ package seedu.bitebuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+import java.util.function.Predicate;
+
 import seedu.bitebuddy.commons.util.ToStringBuilder;
 import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.model.Model;
+import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
+import seedu.bitebuddy.model.foodplace.FoodplaceMatchesCriteriaPredicate;
 
 /**
  * Finds and lists all foodplaces in BiteBuddy whose name contains any of the argument keywords.
@@ -15,21 +20,44 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all foodplaces whose entries contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " western cheap aircon";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all foodplaces whose entries match the given "
+            + "keywords or specified fields (case-insensitive), and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]... [t/ TAG [MORE_TAGS]...] [c/ CUISINE] [r/ RATING]\n"
+            + "Examples:\n"
+            + "  " + COMMAND_WORD + " western cheap aircon\n"
+            + "  " + COMMAND_WORD + " t/ hawker c/ japanese r/ 8\n"
+            + "  " + COMMAND_WORD + " chicken t/ hawker";
 
-    private final FoodplaceContainsKeywordsPredicate predicate;
+    private final Optional<FoodplaceContainsKeywordsPredicate> keywordPredicate;
+    private final Optional<FoodplaceMatchesCriteriaPredicate> fieldPredicate;
 
-    public FindCommand(FoodplaceContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    /**
+     * Creates a {@code FindCommand} that filters and lists food places in BiteBuddy
+     * based on either general search keywords or specific field-based criteria.
+     *
+     * @param keywordPredicate Used for general keyword-based search.
+     * @param fieldPredicate   Used for field-specific search (e.g., by cuisine, tag, or rating).
+     */
+    public FindCommand(Optional<FoodplaceContainsKeywordsPredicate> keywordPredicate,
+                       Optional<FoodplaceMatchesCriteriaPredicate> fieldPredicate) {
+        this.keywordPredicate = keywordPredicate;
+        this.fieldPredicate = fieldPredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredFoodplaceList(predicate);
+        Predicate<Foodplace> combinedPredicate = foodplace -> true;
+
+        if (keywordPredicate.isPresent()) {
+            combinedPredicate = combinedPredicate.and(keywordPredicate.get());
+        }
+        if (fieldPredicate.isPresent()) {
+            combinedPredicate = combinedPredicate.and(fieldPredicate.get());
+        }
+
+        model.updateFilteredFoodplaceList(combinedPredicate);
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_FOODPLACES_LISTED_OVERVIEW, model.getFilteredFoodplaceList().size()));
     }
@@ -46,18 +74,20 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        return keywordPredicate.equals(otherFindCommand.keywordPredicate)
+                && fieldPredicate.equals(otherFindCommand.fieldPredicate);
     }
 
     @Override
     public int hashCode() {
-        return predicate.hashCode();
+        return keywordPredicate.hashCode() + fieldPredicate.hashCode();
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("keywordPredicate", keywordPredicate)
+                .add("fieldPredicate", fieldPredicate)
                 .toString();
     }
 }
