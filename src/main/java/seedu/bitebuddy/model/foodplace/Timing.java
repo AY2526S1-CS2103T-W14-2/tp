@@ -5,7 +5,6 @@ import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Foodplace's timing in BiteBuddy.
@@ -99,15 +98,7 @@ public class Timing {
             return true;
         }
 
-        try {
-            if (!time.matches(VALIDATION_REGEX)) {
-                return false;
-            }
-            LocalTime.parse(time);
-        } catch (DateTimeParseException e) {
-            return false;
-        }
-        return true;
+        return time.matches(VALIDATION_REGEX);
     }
 
     /**
