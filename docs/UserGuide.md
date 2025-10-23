@@ -417,12 +417,16 @@ Examples:
 
 Finds foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format 1: `find KEYWORD [MORE_KEYWORDS]`
+Format 2: `find t/TAG [MORE_TAGS]... [c/CUISINE] [r/RATING]`
 
 ```
-find: Finds all foodplaces whose entries contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
-Parameters: KEYWORD [MORE_KEYWORDS]...
-Example: find western cheap aircon
+find: Finds all foodplaces that match the given keywords or field filters (case-insensitive) and displays them as a list with index numbers.
+Parameters:
+  KEYWORD [MORE_KEYWORDS]... [t/TAG MORE_TAGS...] [c/CUISINE] [r/RATING]
+Examples:
+  find western cheap aircon
+  find t/hawker c/japanese r/8
 ```
 
 * The search is **case-insensitive**: `prata` will match `Prata`[UserGuide.md](UserGuide.md)
@@ -430,10 +434,14 @@ Example: find western cheap aircon
 * Keywords are **matched against multiple fields**.
 * The search uses **substring matching**: `Pr` will match `Prata`
 * Foodplaces **matching at least one keyword** will be returned (i.e. `OR` search).
+* Tag, cuisine, and rating filters **must match exactly** (case-insensitive).
+* Multiple tags use AND logic — all must be present.
 
 Examples:
 * `find prata` returns `Prata Place` and `The Prata House`.
 * `find delivery 5` returns foodplaces with either “delivery” or “5” appearing in any field.<br>
+* `find t/hawker restaurant` returns foodplaces tagged with both “hawker” and “restaurant”.
+* `find delivery c/japanese r/8` returns Japanese foodplaces with rating 8 with delivery.
 
 ![ug_find](images/ug_find.png)
 
@@ -525,20 +533,20 @@ Furthermore, certain edits can cause the BiteBuddy to behave in unexpected ways 
 
 ## Command summary
 
-Action     | Format                                                                     | Examples
------------|----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
-[**Help**](#viewing-help-help) | `help [COMMAND]`<br>                                                       | `help add`
-[**Add**](#adding-a-foodplace-add) | `add n/NAME a/ADDRESS [ot/OPENING_TIME ct/CLOSING_TIME] [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…` <br>           | `add n/James Cook Kitchen a/123, Clementi Rd, 1234665 p/22224444 e/chef@jamescook.com t/MasterChef t/Expensive`
-[**List**](#listing-all-foodplaces-list) | `list`                                                                     | `list`
-[**Delete**](#deleting-a-foodplace-delete) | `delete INDEX`<br>                                                         | `delete 3`
+Action     | Format                                                                                                                              | Examples
+-----------|-------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
+[**Help**](#viewing-help-help) | `help [COMMAND]`<br>                                                                                                                | `help add`
+[**Add**](#adding-a-foodplace-add) | `add n/NAME a/ADDRESS [ot/OPENING_TIME ct/CLOSING_TIME] [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…` <br>  | `add n/James Cook Kitchen a/123, Clementi Rd, 1234665 p/22224444 e/chef@jamescook.com t/MasterChef t/Expensive`
+[**List**](#listing-all-foodplaces-list) | `list`                                                                                                                              | `list`
+[**Delete**](#deleting-a-foodplace-delete) | `delete INDEX`<br>                                                                                                                  | `delete 3`
 [**Edit**](#editing-a-foodplace-edit) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ot/OPENING_TIME ct/CLOSING_TIME] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`<br> | `edit 2 n/James Lee Diner e/chef@jameslee.com`
-[**Note**](#adding-a-note-to-a-foodplace-note)   | `note INDEX [NOTE]`<br>                                                    | `note 1 Famous for their chicken rice!`
-[**Rate**](#rating-a-foodplace-rate) | `rate INDEX RATING`<br>                                                    | `rate 1 6`
-[**Tag**](#adding-tags-to-a-foodplace-tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                   | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
-[**Wishlist**](#wishlisting-a-foodplace-wishlist) | `wishlist [INDEX]`<br> | `wishlist 2`<br> `wishlist`
-[**Pin**](#pinning-a-foodplace-pin) | `pin [INDEX]`<br>                                         | `pin 1`
-[**Unpin](#unpinning-a-foodplace-unpin) | `unpin [INDEX]`<br>                                         | `unpin 2`
-[**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br>                                         | `find James Jake`
-[**Compare**](#comparing-two-foodplaces-compare) | `compare [INDEX1] [INDEX2]`<br>                                         | `compare 1 3`
-[**Clear**](#clearing-all-entries-clear) | `clear`                                                                    | `clear`
-[**Exit**](#exiting-the-program-exit) | `exit`                                                                     | `exit`
+[**Note**](#adding-a-note-to-a-foodplace-note)   | `note INDEX [NOTE]`<br>                                                                                                             | `note 1 Famous for their chicken rice!`
+[**Rate**](#rating-a-foodplace-rate) | `rate INDEX RATING`<br>                                                                                                             | `rate 1 6`
+[**Tag**](#adding-tags-to-a-foodplace-tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                                                                            | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
+[**Wishlist**](#wishlisting-a-foodplace-wishlist) | `wishlist [INDEX]`<br>                                                                                                              | `wishlist 2`<br> `wishlist`
+[**Pin**](#pinning-a-foodplace-pin) | `pin [INDEX]`<br>                                                                                                                   | `pin 1`
+[**Unpin](#unpinning-a-foodplace-unpin) | `unpin [INDEX]`<br>                                                                                                                 | `unpin 2`
+[**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br> `find t/TAG [MORE_TAGS]…​ [c/CUISINE] [r/RATING]`<br>                                            | `find James Jake`<br> `find t/hawker c/japanese r/8`
+[**Compare**](#comparing-two-foodplaces-compare) | `compare [INDEX1] [INDEX2]`<br>                                                                                                     | `compare 1 3`
+[**Clear**](#clearing-all-entries-clear) | `clear`                                                                                                                             | `clear`
+[**Exit**](#exiting-the-program-exit) | `exit`                                                                                                                              | `exit`
