@@ -10,7 +10,8 @@
     "tags": [ "hawker" ],
     "note": "",
     "rate": 0,
-    "wishlist": false
+    "wishlist": false,
+    "isPinned": false
   }, {
     "name" : "Daebak Korean BBQ",
     "phone" : "98765432",
@@ -21,7 +22,8 @@
     "tags" : ["korean", "restaurant"],
     "note": "",
     "rate": 0,
-    "wishlist": true
+    "wishlist": true,
+    "isPinned": false
   }, {
     "name" : "Carls Junior",
     "phone" : "95352563",
@@ -32,7 +34,8 @@
     "tags" : [ "fastfood" ],
     "note": "",
     "rate": 0,
-    "wishlist": false
+    "wishlist": false,
+    "isPinned": false
   }, {
     "name" : "Laksa Paradise",
     "phone" : "87652533",
@@ -43,7 +46,8 @@
     "tags" : [ "hawker" ],
     "note": "",
     "rate": 0,
-    "wishlist": false
+    "wishlist": false,
+    "isPinned": false
   }, {
     "name" : "Sushi Tei",
     "phone" : "9482224",
@@ -54,7 +58,8 @@
     "tags" : [ ],
     "note": "",
     "rate": 0,
-    "wishlist": false
+    "wishlist": false,
+    "isPinned": false
   }, {
     "name" : "ITea",
     "phone" : "9482427",
@@ -65,7 +70,8 @@
     "tags" : [ ],
     "note": "",
     "rate": 0,
-    "wishlist": false
+    "wishlist": false,
+    "isPinned": false
   }, {
     "name": "Dominoes Pizza",
     "phone": "9482442",
@@ -76,6 +82,7 @@
     "tags": [],
     "note": "",
     "rate": 0,
-    "wishlist": false
+    "wishlist": false,
+    "isPinned": false
   } ]
 }

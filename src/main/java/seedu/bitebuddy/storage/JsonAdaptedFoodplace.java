@@ -18,6 +18,7 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
+import seedu.bitebuddy.model.foodplace.Pinned;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.foodplace.Timing;
 import seedu.bitebuddy.model.foodplace.Wishlist;
@@ -40,6 +41,7 @@ class JsonAdaptedFoodplace {
     private final String note;
     private final Integer rate;
     private final Boolean isWishlisted;
+    private final Boolean isPinned;
 
     /**
      * Constructs a {@code JsonAdaptedFoodplace} with the given foodplace details.
@@ -51,7 +53,8 @@ class JsonAdaptedFoodplace {
                                 @JsonProperty("tags") List<JsonAdaptedTag> tags,
                                 @JsonProperty("note") String note,
                                 @JsonProperty("rate") Integer rate,
-                                @JsonProperty("wishlist") Boolean isWishlisted) {
+                                @JsonProperty("wishlist") Boolean isWishlisted,
+                                @JsonProperty("isPinned") Boolean isPinned) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -64,6 +67,7 @@ class JsonAdaptedFoodplace {
         this.note = note;
         this.rate = rate;
         this.isWishlisted = isWishlisted;
+        this.isPinned = isPinned;
     }
 
     /**
@@ -83,6 +87,7 @@ class JsonAdaptedFoodplace {
         note = source.getNote().value;
         rate = source.getRate().getValue();
         isWishlisted = source.getWishlist().isWishlisted();
+        isPinned = source.getPinned().isPinned;
     }
 
     /**
@@ -176,7 +181,13 @@ class JsonAdaptedFoodplace {
         }
         final Wishlist modelWishlist = new Wishlist(isWishlisted);
 
-        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming,
-                modelCuisine, modelTags, modelNote, modelRate, modelWishlist);
+        if (isPinned == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pinned.class.getSimpleName()));
+        }
+        final Pinned modelPinned = new Pinned(isPinned);
+
+        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming, modelCuisine,
+                modelTags, modelNote, modelRate, modelWishlist, modelPinned);
     }
+
 }

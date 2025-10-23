@@ -24,6 +24,7 @@ public class Foodplace {
     // Data fields
     private final Address address;
     private final Wishlist wishlist;
+    private final Pinned pinned;
 
     // Optional fields
     private final Cuisine cuisine;
@@ -48,6 +49,26 @@ public class Foodplace {
         this.note = note;
         this.rate = rate;
         this.wishlist = wishlist;
+        this.pinned = new Pinned(false);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Foodplace(Name name, Phone phone, Email email, Address address, Timing timing,
+                     Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Wishlist wishlist, Pinned pinned) {
+        requireAllNonNull(name, phone, email, address, cuisine, tags, pinned);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.cuisine = cuisine;
+        this.timing = timing;
+        this.tags.addAll(tags);
+        this.note = note;
+        this.rate = rate;
+        this.wishlist = wishlist;
+        this.pinned = pinned;
     }
 
     public Name getName() {
@@ -92,6 +113,10 @@ public class Foodplace {
 
     public Wishlist getWishlist() {
         return wishlist;
+    }
+
+    public Pinned getPinned() {
+        return pinned;
     }
 
     /**
