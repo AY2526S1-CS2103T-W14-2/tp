@@ -23,7 +23,7 @@ public class CompareCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Compares the two foodplaces identified "
             + "by the index numbers used in the last foodplace listing.\n"
             + "Parameters: INDEX1 and INDEX2 (must be positive integers)\n"
-            + "compare [INDEX1] [INDEX2]\n"
+            + "compare INDEX1 INDEX2\n"
             + "Example: " + COMMAND_WORD + " 1 5";
 
     private final Index firstIndex;
