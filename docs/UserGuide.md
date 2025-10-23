@@ -387,7 +387,7 @@ Example: pin 1
 * Pinned foodplaces appear at the top of the displayed foodplace list, indicated by a pin icon in the top right corner.
 * There can be a maximum of 5 pinned foodplaces.
 
-Examples: 
+Examples:
 * `pin 2` pins the 2nd foodplace.
 
 ![ug_pin](images/ug_pin.png)
