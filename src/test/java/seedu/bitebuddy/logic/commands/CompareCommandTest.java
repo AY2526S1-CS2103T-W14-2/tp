@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
-import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
-import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
+import static seedu.bitebuddy.testutil.TypicalIndexes.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,15 +29,15 @@ public class CompareCommandTest {
     @Test
     public void execute_validIndexesUnfilteredList_success() {
         Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
-        Foodplace secondFoodplace = model.getFilteredFoodplaceList().get(INDEX_SECOND_FOODPLACE.getZeroBased());
-        CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE);
+        Foodplace thirdFoodplace = model.getFilteredFoodplaceList().get(INDEX_THIRD_FOODPLACE.getZeroBased());
+        CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_THIRD_FOODPLACE);
 
-        String expectedMessage = "Prata Palace (Rating: --) vs Daebak Korean BBQ (Rating: --)\n"
+        String expectedMessage = "Prata Palace (Rating: --) vs Carls Junior (Rating: --)\n"
                 + "Common tags: --\n"
-                + "Unique tags: Prata Palace (hawker) | Daebak Korean BBQ (restaurant, korean)\n";
+                + "Unique tags: Prata Palace (hawker) | Carls Junior (fastfood)\n";
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(secondFoodplace));
+        expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(thirdFoodplace));
 
         assertCommandSuccess(compareCommand, model, expectedMessage, expectedModel);
     }
@@ -53,20 +52,22 @@ public class CompareCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
-        Foodplace secondFoodplace = model.getFilteredFoodplaceList().get(INDEX_SECOND_FOODPLACE.getZeroBased());
+        // Select original items before filtering
+        Foodplace originalFirst = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Foodplace originalThird = model.getFilteredFoodplaceList().get(INDEX_THIRD_FOODPLACE.getZeroBased());
 
-        // manually filter model to only contain these two foodplaces
-        model.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(secondFoodplace));
+        // Filter so only these two remain; order should match how CompareCommand interprets indexes
+        model.updateFilteredFoodplaceList(fp -> fp.equals(originalFirst) || fp.equals(originalThird));
 
+        // Now, in the filtered list, these correspond to index 1 and index 2 (logically)
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_SECOND_FOODPLACE);
 
-        String expectedMessage = "Prata Palace (Rating: --) vs Daebak Korean BBQ (Rating: --)\n"
+        String expectedMessage = "Prata Palace (Rating: --) vs Carls Junior (Rating: --)\n"
                 + "Common tags: --\n"
-                + "Unique tags: Prata Palace (hawker) | Daebak Korean BBQ (restaurant, korean)\n";
+                + "Unique tags: Prata Palace (hawker) | Carls Junior (fastfood)\n";
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(secondFoodplace));
+        expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(originalFirst) || fp.equals(originalThird));
 
         assertCommandSuccess(compareCommand, model, expectedMessage, expectedModel);
     }
