@@ -1,10 +1,12 @@
 package seedu.bitebuddy.testutil;
 
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CLOSE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CUISINE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_OPEN;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
@@ -37,6 +39,8 @@ public class FoodplaceUtil {
         sb.append(PREFIX_PHONE).append(foodplace.getPhone().value).append(" ");
         sb.append(PREFIX_EMAIL).append(foodplace.getEmail().value).append(" ");
         sb.append(PREFIX_ADDRESS).append(foodplace.getAddress().value).append(" ");
+        sb.append(PREFIX_OPEN).append(foodplace.getTiming().getOpeningTime().toString()).append(" ");
+        sb.append(PREFIX_CLOSE).append(foodplace.getTiming().getClosingTime().toString()).append(" ");
         sb.append(PREFIX_CUISINE).append(foodplace.getCuisine().value).append(" ");
         foodplace.getTags().stream().forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
         sb.append(PREFIX_NOTE).append(foodplace.getNote().value).append(" ");

@@ -23,9 +23,11 @@ public class Foodplace {
 
     // Data fields
     private final Address address;
+    private final Wishlist wishlist;
 
     // Optional fields
     private final Cuisine cuisine;
+    private final Timing timing;
     private final Set<Tag> tags = new HashSet<>();
     private final Note note;
     private final Rate rate;
@@ -33,17 +35,19 @@ public class Foodplace {
     /**
      * Every field must be present and not null.
      */
-    public Foodplace(Name name, Phone phone, Email email, Address address,
-            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate) {
-        requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate);
+    public Foodplace(Name name, Phone phone, Email email, Address address, Timing timing,
+            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Wishlist wishlist) {
+        requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate, timing, wishlist);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.timing = timing;
         this.cuisine = cuisine;
         this.tags.addAll(tags);
         this.note = note;
         this.rate = rate;
+        this.wishlist = wishlist;
     }
 
     public Name getName() {
@@ -82,6 +86,14 @@ public class Foodplace {
         return cuisine;
     }
 
+    public Timing getTiming() {
+        return timing;
+    }
+
+    public Wishlist getWishlist() {
+        return wishlist;
+    }
+
     /**
      * Returns true if both foodplaces have the same name.
      * This defines a weaker notion of equality between two foodplaces.
@@ -93,9 +105,7 @@ public class Foodplace {
 
         return otherFoodplace != null
                 && otherFoodplace.getName().equals(getName())
-                && otherFoodplace.getAddress().equals(getAddress())
-                && otherFoodplace.getEmail().equals(getEmail())
-                && otherFoodplace.getPhone().equals(getPhone());
+                && otherFoodplace.getAddress().equals(getAddress());
     }
 
     /**
@@ -120,13 +130,15 @@ public class Foodplace {
                 && address.equals(otherFoodplace.address)
                 && tags.equals(otherFoodplace.tags)
                 && cuisine.equals(otherFoodplace.cuisine)
+                && timing.equals(otherFoodplace.timing)
                 && rate.equals(otherFoodplace.rate);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, rate, cuisine);
+        // include timing
+        return Objects.hash(name, phone, email, address, tags, rate, cuisine, timing);
     }
 
     @Override
@@ -136,9 +148,11 @@ public class Foodplace {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("timing", timing)
                 .add("cuisine", cuisine)
                 .add("tags", tags)
                 .add("rate", rate)
+                .add("wishlist", wishlist)
                 .toString();
     }
 

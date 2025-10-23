@@ -30,14 +30,9 @@ public class CompareCommandParser implements Parser<CompareCommand> {
         }
 
         Index firstIndex;
-        try {
-            firstIndex = ParserUtil.parseIndex(mapper.getArgument(INDEX_COMPARE_FIRST_INDEX));
-        } catch (IllegalValueException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompareCommand.MESSAGE_USAGE), e);
-        }
-
         Index secondIndex;
         try {
+            firstIndex = ParserUtil.parseIndex(mapper.getArgument(INDEX_COMPARE_FIRST_INDEX));
             secondIndex = ParserUtil.parseIndex(mapper.getArgument(INDEX_COMPARE_SECOND_INDEX));
         } catch (IllegalValueException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompareCommand.MESSAGE_USAGE), e);

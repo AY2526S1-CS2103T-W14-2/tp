@@ -91,10 +91,12 @@ public class TagCommand extends Command {
                 foodplaceToEdit.getPhone(),
                 foodplaceToEdit.getEmail(),
                 foodplaceToEdit.getAddress(),
+                foodplaceToEdit.getTiming(),
                 foodplaceToEdit.getCuisine(),
                 updatedTags,
                 foodplaceToEdit.getNote(),
-                foodplaceToEdit.getRate()
+                foodplaceToEdit.getRate(),
+                foodplaceToEdit.getWishlist()
         );
 
         model.setFoodplace(foodplaceToEdit, updatedFoodplace);

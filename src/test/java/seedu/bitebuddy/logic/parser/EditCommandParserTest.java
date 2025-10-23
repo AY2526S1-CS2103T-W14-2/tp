@@ -3,6 +3,7 @@ package seedu.bitebuddy.logic.parser;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.ADDRESS_DESC_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.CLOSE_TIMING_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -13,14 +14,17 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NOTE_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.OPEN_TIMING_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_FASTFOOD;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.TAG_DESC_RESTAURANT;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CLOSE_TIME_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_SERVICE;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_OPEN_TIME_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_FASTFOOD;
@@ -45,6 +49,7 @@ import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
+import seedu.bitebuddy.model.foodplace.Timing;
 import seedu.bitebuddy.model.tag.Tag;
 import seedu.bitebuddy.testutil.EditFoodplaceDescriptorBuilder;
 
@@ -55,7 +60,7 @@ public class EditCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private final EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -220,5 +225,28 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_bothTimingPrefixesPresent_success() {
+        String userInput = INDEX_FIRST_FOODPLACE.getOneBased() + OPEN_TIMING_DESC_MCRONALDS
+                + CLOSE_TIMING_DESC_MCRONALDS;
+
+        EditCommand.EditFoodplaceDescriptor descriptor = new EditCommand.EditFoodplaceDescriptor();
+        descriptor.setTiming(new Timing(VALID_OPEN_TIME_MCRONALDS, VALID_CLOSE_TIME_MCRONALDS));
+        EditCommand expectedCommand = new EditCommand(INDEX_FIRST_FOODPLACE, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_singleTimingPrefixPresent_failure() {
+        // only opening time present
+        String userInput = INDEX_FIRST_FOODPLACE.getOneBased() + OPEN_TIMING_DESC_MCRONALDS;
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
+
+        // only closing time present
+        userInput = INDEX_FIRST_FOODPLACE.getOneBased() + CLOSE_TIMING_DESC_MCRONALDS;
+        assertParseFailure(parser, userInput, ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
     }
 }
