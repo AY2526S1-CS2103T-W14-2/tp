@@ -69,10 +69,10 @@ public class WishlistTest {
         assertTrue(wishlistTrue.equals(wishlistTrueCopy));
 
         // different types -> returns false
-        assertFalse(wishlistTrue.equals(true));
+        assertNotEquals(wishlistTrue, true);
 
         // null -> returns false
-        assertFalse(wishlistTrue.equals(null));
+        assertNotEquals(wishlistTrue, null);
 
         // different values -> returns false
         assertFalse(wishlistTrue.equals(wishlistFalse));

@@ -11,6 +11,7 @@ import seedu.bitebuddy.commons.core.LogsCenter;
 import seedu.bitebuddy.logic.commands.AddCommand;
 import seedu.bitebuddy.logic.commands.ClearCommand;
 import seedu.bitebuddy.logic.commands.Command;
+import seedu.bitebuddy.logic.commands.CompareCommand;
 import seedu.bitebuddy.logic.commands.DeleteCommand;
 import seedu.bitebuddy.logic.commands.EditCommand;
 import seedu.bitebuddy.logic.commands.ExitCommand;
@@ -18,8 +19,10 @@ import seedu.bitebuddy.logic.commands.FindCommand;
 import seedu.bitebuddy.logic.commands.HelpCommand;
 import seedu.bitebuddy.logic.commands.ListCommand;
 import seedu.bitebuddy.logic.commands.NoteCommand;
+import seedu.bitebuddy.logic.commands.PinCommand;
 import seedu.bitebuddy.logic.commands.RateCommand;
 import seedu.bitebuddy.logic.commands.TagCommand;
+import seedu.bitebuddy.logic.commands.UnpinCommand;
 import seedu.bitebuddy.logic.commands.WishlistCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
@@ -90,8 +93,17 @@ public class AddressBookParser {
         case RateCommand.COMMAND_WORD:
             return new RateCommandParser().parse(arguments);
 
+        case CompareCommand.COMMAND_WORD:
+            return new CompareCommandParser().parse(arguments);
+
         case WishlistCommand.COMMAND_WORD:
             return new WishlistCommandParser().parse(arguments);
+
+        case PinCommand.COMMAND_WORD:
+            return new PinCommandParser().parse(arguments);
+
+        case UnpinCommand.COMMAND_WORD:
+            return new UnpinCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

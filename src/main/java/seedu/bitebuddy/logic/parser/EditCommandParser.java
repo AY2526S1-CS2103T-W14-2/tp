@@ -3,10 +3,12 @@ package seedu.bitebuddy.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CLOSE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CUISINE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_OPEN;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
@@ -36,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_CUISINE, PREFIX_TAG, PREFIX_NOTE, PREFIX_RATE);
+                        PREFIX_OPEN, PREFIX_CLOSE, PREFIX_CUISINE, PREFIX_TAG, PREFIX_NOTE, PREFIX_RATE);
 
         Index index;
 
@@ -47,7 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_CUISINE, PREFIX_NOTE, PREFIX_RATE);
+                PREFIX_CUISINE, PREFIX_NOTE, PREFIX_RATE, PREFIX_OPEN, PREFIX_CLOSE);
 
         EditCommand.EditFoodplaceDescriptor editFoodplaceDescriptor = new EditCommand.EditFoodplaceDescriptor();
 
@@ -75,6 +77,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         // parse rating values (support multiple rate prefixes but use the last one)
         if (!argMultimap.getAllValues(PREFIX_RATE).isEmpty()) {
             editFoodplaceDescriptor.setRate(ParserUtil.parseRatings(argMultimap.getAllValues(PREFIX_RATE)));
+        }
+
+        // parse timing: require both open and close
+        if (ParserUtil.areBothPrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
+            String open = argMultimap.getValue(PREFIX_OPEN).orElse("");
+            String close = argMultimap.getValue(PREFIX_CLOSE).orElse("");
+            editFoodplaceDescriptor.setTiming(ParserUtil.parseTiming(open, close));
+        } else if (!ParserUtil.areNeitherPrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
+            throw new ParseException(ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
         }
 
         if (!editFoodplaceDescriptor.isAnyFieldEdited()) {
