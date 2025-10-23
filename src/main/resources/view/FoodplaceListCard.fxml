@@ -40,11 +40,8 @@
         <Label fx:id="rate" styleClass="cell_small_label" text="\$rate" />
       </VBox>
       <Label fx:id="wishlist" styleClass="cell_small_label" text="\$wishlist"
-             GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-        <padding>
-          <Insets top="10" right="10" />
-        </padding>
-      </Label>
+             AnchorPane.bottomAnchor="10"
+             AnchorPane.rightAnchor="10" />
       <ImageView fx:id="pinIcon"
                  fitHeight="18"
                  fitWidth="18"
