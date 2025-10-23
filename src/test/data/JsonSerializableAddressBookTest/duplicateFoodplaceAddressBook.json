@@ -7,7 +7,8 @@
     "cuisine": "Indian",
     "tags": [ "hawker" ],
     "note": "note",
-    "rate": 0
+    "rate": 0,
+    "wishlist": false
   }, {
     "name": "prata palace",
     "phone": "94351253",
@@ -15,6 +16,7 @@
     "address": "123, jurong west ave 6, #08-111",
     "cuisine": "Indian",
     "note": "different note",
-    "rate": 0
+    "rate": 0,
+    "wishlist": true
   } ]
 }

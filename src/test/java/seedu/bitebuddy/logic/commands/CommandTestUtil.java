@@ -44,6 +44,7 @@ public class CommandTestUtil {
     public static final String VALID_RATE_DAEBAKSHOP = "8";
     public static final String VALID_NOTE_SERVICE = "Good customer service!";
     public static final String VALID_NOTE_FAMOUS = "Famous for desserts";
+    public static final Boolean VALID_WISHLIST_SWENSWAN = true;
 
     public static final String NAME_DESC_MCRONALDS = " " + PREFIX_NAME + VALID_NAME_MCRONALDS;
     public static final String NAME_DESC_SWENSWAN = " " + PREFIX_NAME + VALID_NAME_SWENSWAN;

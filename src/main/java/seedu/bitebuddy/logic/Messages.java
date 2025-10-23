@@ -46,7 +46,9 @@ public class Messages {
                 .append("; Tags: ");
         foodplace.getTags().forEach(builder::append);
         builder.append("; Note: ")
-                .append(foodplace.getNote());
+                .append(foodplace.getNote())
+                .append("; Wishlisted: ")
+                .append(foodplace.getWishlist());
         return builder.toString();
     }
 

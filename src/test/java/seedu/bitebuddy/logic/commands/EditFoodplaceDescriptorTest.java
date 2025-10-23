@@ -14,6 +14,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_FAMOUS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_RATE_PRATASHOP;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_WISHLIST_SWENSWAN;
 
 import org.junit.jupiter.api.Test;
 
@@ -74,6 +75,11 @@ public class EditFoodplaceDescriptorTest {
         editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
                 .withCuisine(VALID_CUISINE_SWENSWAN).build();
         assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different wishlist -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+                .withWishlist(VALID_WISHLIST_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
     }
 
     @Test
@@ -87,7 +93,8 @@ public class EditFoodplaceDescriptorTest {
                 + editFoodplaceDescriptor.getCuisine().orElse(null) + ", tags="
                 + editFoodplaceDescriptor.getTags().orElse(null) + ", note="
                 + editFoodplaceDescriptor.getNote().orElse(null) + ", rate="
-                + editFoodplaceDescriptor.getRate().orElse(null) + "}";
+                + editFoodplaceDescriptor.getRate().orElse(null) + ", wishlist="
+                + editFoodplaceDescriptor.getWishlist().orElse(null) + "}";
         assertEquals(expected, editFoodplaceDescriptor.toString());
     }
 }

@@ -32,40 +32,48 @@ public class TypicalFoodplace {
             .withTags("hawker")
             .withNote("Serves the best appetisers!")
             .withCuisine("Indian")
-            .withRate("0").build();
+            .withRate("0")
+            .withWishlist(false).build();
     public static final Foodplace DAEBAKSHOP = new FoodplaceBuilder().withName("Daebak Korean BBQ")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("john@daebakbbq.com").withPhone("98765432")
             .withCuisine("Korean")
             .withTags("korean", "restaurant")
-            .withNote("Best beef in the world!").withRate("0").build();
+            .withNote("Best beef in the world!").withRate("0")
+            .withWishlist(true).build();
     public static final Foodplace CARLSHOP = new FoodplaceBuilder().withName("Carls Junior").withPhone("95352563")
              .withEmail("carls@junior.com").withAddress("wall street").withTags("fastfood")
-             .withCuisine("American").build();
+             .withCuisine("American")
+             .withWishlist(false).build();
     public static final Foodplace LAKSASHOP = new FoodplaceBuilder().withName("Laksa Paradise").withPhone("87652533")
              .withEmail("laksa@paradise.com").withAddress("10th street").withTags("hawker")
-             .withCuisine("Malaysian").build();
+             .withCuisine("Malaysian")
+             .withWishlist(false).build();
     public static final Foodplace SUSHISHOP = new FoodplaceBuilder().withName("Sushi Tei").withPhone("9482224")
-             .withEmail("sushi@tei.com").withAddress("michegan ave").withCuisine("Japanese").build();
+             .withEmail("sushi@tei.com").withAddress("michegan ave").withCuisine("Japanese")
+             .withWishlist(false).build();
     public static final Foodplace TEASHOP = new FoodplaceBuilder().withName("ITea").withPhone("9482427")
-             .withEmail("i@tea.com").withAddress("little tokyo").withCuisine("").build();
+             .withEmail("i@tea.com").withAddress("little tokyo").withCuisine("").withWishlist(false).build();
     public static final Foodplace PIZZASHOP = new FoodplaceBuilder().withName("Dominoes Pizza").withPhone("9482442")
-             .withEmail("dominos@pizza.com").withAddress("4th street").withCuisine("").build();
+             .withEmail("dominos@pizza.com").withAddress("4th street").withCuisine("")
+             .withWishlist(false).build();
 
     // Manually added
     public static final Foodplace BEEHOONSHOP = new FoodplaceBuilder().withName("Beehoon Meier").withPhone("8482424")
-             .withEmail("meier@beehoon.com").withAddress("little india").withCuisine("").build();
+             .withEmail("meier@beehoon.com").withAddress("little india").withCuisine("")
+             .withWishlist(false).build();
     public static final Foodplace CAKESHOP = new FoodplaceBuilder().withName("Cat and the fiddle").withPhone("8482131")
-             .withEmail("cat@fiddle.com").withAddress("chicago ave").withCuisine("").build();
+             .withEmail("cat@fiddle.com").withAddress("chicago ave").withCuisine("")
+             .withWishlist(false).build();
 
     // Manually added - Foodplace's details found in {@code CommandTestUtil}
     public static final Foodplace MCRONALDS = new FoodplaceBuilder().withName(VALID_NAME_MCRONALDS)
             .withPhone(VALID_PHONE_MCRONALDS).withEmail(VALID_EMAIL_MCRONALDS).withAddress(VALID_ADDRESS_MCRONALDS)
-            .withCuisine(VALID_CUISINE_MCRONALDS).withTags(VALID_TAG_FASTFOOD).build();
+            .withCuisine(VALID_CUISINE_MCRONALDS).withTags(VALID_TAG_FASTFOOD).withWishlist(false).build();
     public static final Foodplace SWENSWAN = new FoodplaceBuilder().withName(VALID_NAME_SWENSWAN)
             .withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
             .withCuisine(VALID_CUISINE_SWENSWAN).withTags(VALID_TAG_RESTAURANT, VALID_TAG_FASTFOOD)
-            .withNote(VALID_NOTE_FAMOUS).build();
+            .withNote(VALID_NOTE_FAMOUS).withWishlist(true).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -14,6 +14,7 @@ import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.foodplace.Wishlist;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
@@ -27,22 +28,22 @@ public class SampleDataUtil {
         return new Foodplace[] {
             new Foodplace(new Name("McRonalds"), new Phone("68765432"), new Email("info@mcronalds.com"),
                 new Address("Blk 451, Clementi Ave 3 #01-309, S120451"), new Cuisine("Western"),
-                getTagSet("Western", "FastFood", "Cheap"), EMPTY_NOTE, new Rate()),
+                getTagSet("Western", "FastFood", "Cheap"), EMPTY_NOTE, new Rate(), new Wishlist(true)),
             new Foodplace(new Name("SistersRamen"), new Phone("68765431"), new Email("info@sisramen.com"),
                 new Address("10 Anson Rd, International Plaza, #01-20, S079903"), new Cuisine("Japanese"),
-                getTagSet("Japanese", "Ramen"), EMPTY_NOTE, new Rate(9)),
+                getTagSet("Japanese", "Ramen"), EMPTY_NOTE, new Rate(9), new Wishlist(false)),
             new Foodplace(new Name("Changibee"), new Phone("98765432"), new Email("support@changibee.com"),
                 new Address("7 Pasir Ris Central, #B2-27, S519612"), new Cuisine("Western"),
-                getTagSet("Filipino", "FastFood"), EMPTY_NOTE, new Rate(3)),
+                getTagSet("Filipino", "FastFood"), EMPTY_NOTE, new Rate(3), new Wishlist(false)),
             new Foodplace(new Name("Fung Tai Din"), new Phone("87654321"), new Email("cs@fungdaitin.com"),
                 new Address("23 Serangoon Central, #B1-10, S556083"), new Cuisine("Chinese"),
-                getTagSet("Chinese", "Expensive"), EMPTY_NOTE, new Rate(7)),
+                getTagSet("Chinese", "Expensive"), EMPTY_NOTE, new Rate(7), new Wishlist(false)),
             new Foodplace(new Name("Gucci Y Guaca"), new Phone("65655656"), new Email("go@gyg.com"),
                 new Address("1 Tampines Walk, #01-99 Our Tampines Hub, S528523"), new Cuisine("Mexican"),
-                getTagSet("Mexican", "FastFood"), EMPTY_NOTE, new Rate(5)),
+                getTagSet("Mexican", "FastFood"), EMPTY_NOTE, new Rate(5), new Wishlist(false)),
             new Foodplace(new Name("Agent 47 Thai Food"), new Phone("98762345"), new Email("agent@47thai.com"),
                 new Address("354 Clementi Ave 2, #01-235, S120354"), new Cuisine("Thai"),
-                getTagSet("Thai", "Expensive"), EMPTY_NOTE, new Rate())
+                getTagSet("Thai", "Expensive"), EMPTY_NOTE, new Rate(), new Wishlist(true))
         };
     }
 
