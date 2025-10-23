@@ -130,7 +130,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedFoodplaceString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // invalid bitebuddy
+        // invalid address
         assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedFoodplaceString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
@@ -148,7 +148,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, validExpectedFoodplaceString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // invalid bitebuddy
+        // invalid address
         assertParseFailure(parser, validExpectedFoodplaceString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
@@ -171,7 +171,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + ADDRESS_DESC_SWENSWAN, expectedMessage);
 
-        // missing bitebuddy prefix
+        // missing address prefix
         assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + VALID_ADDRESS_SWENSWAN, expectedMessage);
 
@@ -197,7 +197,7 @@ public class AddCommandParserTest {
                 + ADDRESS_DESC_SWENSWAN + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Email.MESSAGE_CONSTRAINTS
         );
 
-        // invalid bitebuddy
+        // invalid address
         assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + INVALID_ADDRESS_DESC + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD, Address.MESSAGE_CONSTRAINTS
         );
