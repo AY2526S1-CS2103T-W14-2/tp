@@ -30,7 +30,6 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
 import seedu.bitebuddy.model.foodplace.Note;
 import seedu.bitebuddy.model.foodplace.Rate;
-import seedu.bitebuddy.model.foodplace.Wishlist;
 import seedu.bitebuddy.testutil.EditFoodplaceDescriptorBuilder;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
 import seedu.bitebuddy.testutil.FoodplaceUtil;
@@ -120,7 +119,6 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_wishlist() throws Exception {
-        final Wishlist wishlist = new Wishlist(true);
         WishlistCommand command = (WishlistCommand) parser.parseCommand(WishlistCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased());
         assertEquals(new WishlistCommand(INDEX_FIRST_FOODPLACE), command);
