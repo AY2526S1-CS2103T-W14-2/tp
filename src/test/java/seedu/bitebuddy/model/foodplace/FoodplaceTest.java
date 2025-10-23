@@ -110,7 +110,8 @@ public class FoodplaceTest {
                 + PRATASHOP.getPhone()
                 + ", email=" + PRATASHOP.getEmail() + ", address=" + PRATASHOP.getAddress()
                 + ", timing=" + PRATASHOP.getTiming() + ", cuisine=" + PRATASHOP.getCuisine()
-                + ", tags=" + PRATASHOP.getTags() + ", rate=" + PRATASHOP.getRate() + "}";
+                + ", tags=" + PRATASHOP.getTags() + ", rate=" + PRATASHOP.getRate()
+                + ", wishlist=" + PRATASHOP.getWishlist() + "}";
         assertEquals(expected, PRATASHOP.toString());
     }
 }

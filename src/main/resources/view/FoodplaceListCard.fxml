@@ -36,5 +36,12 @@
       <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
       <Label fx:id="rate" styleClass="cell_small_label" text="\$rate" />
     </VBox>
+
+    <Label fx:id="wishlist" styleClass="cell_small_label" text="\$wishlist"
+           GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+        <padding>
+            <Insets top="10" right="10" />
+        </padding>
+    </Label>
   </GridPane>
 </HBox>

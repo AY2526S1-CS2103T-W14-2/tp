@@ -52,7 +52,9 @@ public class Messages {
         builder.append("; Rate: ")
                 .append(foodplace.getRate())
                 .append("; Note: ")
-                .append(foodplace.getNote());
+                .append(foodplace.getNote())
+                .append("; Wishlisted: ")
+                .append(foodplace.getWishlist());
         return builder.toString();
     }
 

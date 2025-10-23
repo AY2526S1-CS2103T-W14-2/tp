@@ -24,6 +24,7 @@ import seedu.bitebuddy.logic.commands.HelpCommand;
 import seedu.bitebuddy.logic.commands.ListCommand;
 import seedu.bitebuddy.logic.commands.NoteCommand;
 import seedu.bitebuddy.logic.commands.RateCommand;
+import seedu.bitebuddy.logic.commands.WishlistCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
@@ -64,7 +65,10 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " "
                 + FoodplaceUtil.getEditFoodplaceDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_FOODPLACE, descriptor), command);
+        // Should not check for wishlist
+        EditFoodplaceDescriptor expectedDescriptor = new EditFoodplaceDescriptor(descriptor);
+        expectedDescriptor.setWishlist(null);
+        assertEquals(new EditCommand(INDEX_FIRST_FOODPLACE, expectedDescriptor), command);
     }
 
     @Test
@@ -111,6 +115,13 @@ public class AddressBookParserTest {
         RateCommand command = (RateCommand) parser.parseCommand(RateCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " " + rate.getValue());
         assertEquals(new RateCommand(INDEX_FIRST_FOODPLACE, rate.getValue()), command);
+    }
+
+    @Test
+    public void parseCommand_wishlist() throws Exception {
+        WishlistCommand command = (WishlistCommand) parser.parseCommand(WishlistCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_FOODPLACE.getOneBased());
+        assertEquals(new WishlistCommand(INDEX_FIRST_FOODPLACE), command);
     }
 
     @Test

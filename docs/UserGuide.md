@@ -18,6 +18,7 @@
   - [Note - Adding a note to a foodplace](#adding-a-note-to-a-foodplace-note)
   - [Rate - Rating a foodplace](#rating-a-foodplace-rate)
   - [Tag - Tagging a foodplace](#adding-tags-to-a-foodplace-tag)
+  - [Wishlist - Wishlisting a foodplace](#wishlisting-a-foodplace-wishlist)
   - [Find - Finding a foodplace](#locating-foodplaces-by-name-find)
   - [Clear - Delete all foodplaces](#clearing-all-entries-clear)
   - [Exit - Quit the program](#exiting-the-program-exit)
@@ -256,7 +257,7 @@ Format: `note INDEX [note]`
 ```
 note: Edits the notes of the foodplace identified by the index number used in the last foodplace listing. Existing notes will be overwritten by the input.
 Empty notes erase the current note in foodplace.
-Parameters: INDEX note [INDEX] [NOTE]
+Parameters: INDEX [note]
 Example: note 1 Very good customer service
 Restrictions: 100 characters limit
 ```
@@ -332,6 +333,34 @@ Examples:
 * `tag INDEX /d` will remove all tags from the selected foodplace.
 
 ![ug_tag](images/ug_tag.png)
+
+[Go to Command Summary](#command-summary)
+
+---
+
+### Wishlisting a foodplace: `wishlist`
+
+Wishlists an existing foodplace in BiteBuddy.
+
+Format: `wishlist [INDEX]`
+
+```
+wishlist: Wishlists the foodplace identified by the index number used in the last foodplace listing.
+Empty index displays the wishlist instead.
+Parameters: [INDEX]
+Example: wishlist 2
+```
+
+* Wishlists the foodplace at the specified `INDEX`.
+* The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
+* The index **must be a positive integer**: 1, 2, 3, …​
+* You can **display your wishlist** by not specifying an `INDEX`.
+
+Examples:
+* `wishlist 2` Wishlists the 2nd foodplace.
+* `wishlist` displays all foodplaces that are wishlisted.
+
+![ug_wishlist](images/ug_wishlist.png)
 
 [Go to Command Summary](#command-summary)
 
@@ -438,6 +467,7 @@ Action     | Format                                                             
 [**Note**](#adding-a-note-to-a-foodplace-note)   | `note INDEX [NOTE]`<br>                                                    | `note 1 Famous for their chicken rice!`
 [**Rate**](#rating-a-foodplace-rate) | `rate INDEX RATING`<br>                                                    | `rate 1 6`
 [**Tag**](#adding-tags-to-a-foodplace-tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                   | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
+[**Wishlist**](#wishlisting-a-foodplace-wishlist) | `wishlist [INDEX]`<br> | `wishlist 2`<br> `wishlist`
 [**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br>                                         | `find James Jake`
 [**Clear**](#clearing-all-entries-clear) | `clear`                                                                    | `clear`
 [**Exit**](#exiting-the-program-exit) | `exit`                                                                     | `exit`

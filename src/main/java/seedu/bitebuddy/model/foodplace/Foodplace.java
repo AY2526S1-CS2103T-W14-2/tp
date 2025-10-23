@@ -23,6 +23,7 @@ public class Foodplace {
 
     // Data fields
     private final Address address;
+    private final Wishlist wishlist;
 
     // Optional fields
     private final Cuisine cuisine;
@@ -35,8 +36,8 @@ public class Foodplace {
      * Every field must be present and not null.
      */
     public Foodplace(Name name, Phone phone, Email email, Address address, Timing timing,
-            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate) {
-        requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate, timing);
+            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Wishlist wishlist) {
+        requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate, timing, wishlist);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,6 +47,7 @@ public class Foodplace {
         this.tags.addAll(tags);
         this.note = note;
         this.rate = rate;
+        this.wishlist = wishlist;
     }
 
     public Name getName() {
@@ -86,6 +88,10 @@ public class Foodplace {
 
     public Timing getTiming() {
         return timing;
+    }
+
+    public Wishlist getWishlist() {
+        return wishlist;
     }
 
     /**
@@ -146,6 +152,7 @@ public class Foodplace {
                 .add("cuisine", cuisine)
                 .add("tags", tags)
                 .add("rate", rate)
+                .add("wishlist", wishlist)
                 .toString();
     }
 
