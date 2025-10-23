@@ -1,5 +1,6 @@
 package seedu.bitebuddy.model.foodplace;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
@@ -15,8 +16,14 @@ public class PhoneTest {
 
     @Test
     public void constructor_invalidPhone_throwsIllegalArgumentException() {
-        String invalidPhone = "";
+        String invalidPhone = "1234abcd";
         assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
+    }
+
+    @Test
+    public void constructor_emptyPhone_success() {
+        String emptyPhone = "";
+        assertEquals("", new Phone(emptyPhone).value);
     }
 
     @Test

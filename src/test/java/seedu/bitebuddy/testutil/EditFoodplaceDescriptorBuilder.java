@@ -39,6 +39,7 @@ public class EditFoodplaceDescriptorBuilder {
         descriptor.setPhone(foodplace.getPhone());
         descriptor.setEmail(foodplace.getEmail());
         descriptor.setAddress(foodplace.getAddress());
+        descriptor.setCuisine(foodplace.getCuisine());
         descriptor.setTags(foodplace.getTags());
         descriptor.setNote(foodplace.getNote());
         descriptor.setRate(foodplace.getRate());
@@ -73,6 +74,14 @@ public class EditFoodplaceDescriptorBuilder {
      */
     public EditFoodplaceDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Cuisine} of the {@code EditFoodplaceDescriptor} that we are building.
+     */
+    public EditFoodplaceDescriptorBuilder withCuisine(String cuisine) {
+        descriptor.setCuisine(new seedu.bitebuddy.model.foodplace.Cuisine(cuisine));
         return this;
     }
 

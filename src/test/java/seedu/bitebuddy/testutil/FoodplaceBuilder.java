@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
@@ -22,6 +23,7 @@ public class FoodplaceBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_CUISINE = "Italian";
     public static final String DEFAULT_NOTE = "Serves the best appetisers!";
     public static final String DEFAULT_RATE = String.valueOf(0);
 
@@ -29,6 +31,7 @@ public class FoodplaceBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private Cuisine cuisine;
     private Set<Tag> tags;
     private Note note;
     private Rate rate;
@@ -41,6 +44,7 @@ public class FoodplaceBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        cuisine = new Cuisine(DEFAULT_CUISINE);
         tags = new HashSet<>();
         note = new Note(DEFAULT_NOTE);
         rate = new Rate(Integer.valueOf(DEFAULT_RATE));
@@ -54,6 +58,7 @@ public class FoodplaceBuilder {
         phone = foodplaceToCopy.getPhone();
         email = foodplaceToCopy.getEmail();
         address = foodplaceToCopy.getAddress();
+        cuisine = foodplaceToCopy.getCuisine();
         tags = new HashSet<>(foodplaceToCopy.getTags());
         note = foodplaceToCopy.getNote();
         rate = foodplaceToCopy.getRate();
@@ -119,8 +124,16 @@ public class FoodplaceBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Cuisine} of the {@code Foodplace} that we are building.
+     */
+    public FoodplaceBuilder withCuisine(String cuisine) {
+        this.cuisine = new Cuisine(cuisine);
+        return this;
+    }
+
     public Foodplace build() {
-        return new Foodplace(name, phone, email, address, tags, note, rate);
+        return new Foodplace(name, phone, email, address, cuisine, tags, note, rate);
     }
 
 }

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
@@ -107,6 +108,13 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parsePhone_emptyPhone_returnsEmptyPhone() throws Exception {
+        String emptyPhone = "";
+        Phone expectedPhone = new Phone(emptyPhone);
+        assertEquals(expectedPhone, ParserUtil.parsePhone(emptyPhone));
+    }
+
+    @Test
     public void parseAddress_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
     }
@@ -153,6 +161,13 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseEmail_emptyEmail_returnsEmptyEmail() throws Exception {
+        String emptyEmail = "";
+        Email expectedEmail = new Email(emptyEmail);
+        assertEquals(expectedEmail, ParserUtil.parseEmail(emptyEmail));
+    }
+
+    @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }
@@ -193,7 +208,7 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
@@ -237,5 +252,29 @@ public class ParserUtilTest {
     @Test
     public void parseRate_collectionWithoutRating_returnsRate() throws Exception {
         assertEquals(new Rate(), ParserUtil.parseRatings(Arrays.asList()));
+    }
+
+    @Test
+    public void parseCuisine_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCuisine(null));
+    }
+
+    @Test
+    public void parseCuisine_invalid_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCuisine("!!invalid!!"));
+    }
+
+    @Test
+    public void parseCuisine_validTrimmed_returnsCuisine() throws Exception {
+        Cuisine expected = new Cuisine("Italian");
+        Cuisine actual = ParserUtil.parseCuisine("  Italian  ");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseCuisine_spacesOnly_allowsEmptyCuisine() throws Exception {
+        Cuisine expected = new Cuisine("");
+        Cuisine actual = ParserUtil.parseCuisine("   ");
+        assertEquals(expected, actual);
     }
 }

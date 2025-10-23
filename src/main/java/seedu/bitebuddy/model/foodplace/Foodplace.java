@@ -20,35 +20,28 @@ public class Foodplace {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final Address address;
 
     // Data fields
     private final Pinned pinned;
+    private final Address address;
 
     // Optional fields
+    private final Cuisine cuisine;
     private final Set<Tag> tags = new HashSet<>();
     private final Note note;
     private final Rate rate;
 
     /**
-     * Constructs a {@code Foodplace} with all fields, defaulting {@link Pinned} to false.
-     *
-     * <p>Every field must be present and not null.
-     *
-     * @param name    The name of the foodplace
-     * @param phone   The phone number of the foodplace
-     * @param email   The email address of the foodplace
-     * @param address The physical address of the foodplace
-     * @param tags    The set of tags associated with the foodplace
-     * @param note    The note for the foodplace
-     * @param rate    The rating of the foodplace
+     * Every field must be present and not null.
      */
-    public Foodplace(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Note note, Rate rate) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Foodplace(Name name, Phone phone, Email email, Address address,
+            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate) {
+        requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.cuisine = cuisine;
         this.tags.addAll(tags);
         this.note = note;
         this.rate = rate;
@@ -56,26 +49,16 @@ public class Foodplace {
     }
 
     /**
-     * Constructs a {@code Foodplace} with all fields, including the pinned status.
-     *
-     * <p>Every field must be present and not null.
-     *
-     * @param name    The name of the foodplace
-     * @param phone   The phone number of the foodplace
-     * @param email   The email address of the foodplace
-     * @param address The physical address of the foodplace
-     * @param tags    The set of tags associated with the foodplace
-     * @param note    The note for the foodplace
-     * @param rate    The rating of the foodplace
-     * @param pinned  The pinned status of the foodplace
+     * Every field must be present and not null.
      */
     public Foodplace(Name name, Phone phone, Email email, Address address,
-                     Set<Tag> tags, Note note, Rate rate, Pinned pinned) {
-        requireAllNonNull(name, phone, email, address, tags, pinned);
+                     Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Pinned pinned) {
+        requireAllNonNull(name, phone, email, address, cuisine, tags, pinned);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.cuisine = cuisine;
         this.tags.addAll(tags);
         this.note = note;
         this.rate = rate;
@@ -112,6 +95,10 @@ public class Foodplace {
 
     public Rate getRate() {
         return rate;
+    }
+
+    public Cuisine getCuisine() {
+        return cuisine;
     }
 
     public Pinned getPinned() {
@@ -155,13 +142,14 @@ public class Foodplace {
                 && email.equals(otherFoodplace.email)
                 && address.equals(otherFoodplace.address)
                 && tags.equals(otherFoodplace.tags)
+                && cuisine.equals(otherFoodplace.cuisine)
                 && rate.equals(otherFoodplace.rate);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, rate);
+        return Objects.hash(name, phone, email, address, tags, rate, cuisine);
     }
 
     @Override
@@ -171,6 +159,7 @@ public class Foodplace {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("cuisine", cuisine)
                 .add("tags", tags)
                 .add("rate", rate)
                 .toString();

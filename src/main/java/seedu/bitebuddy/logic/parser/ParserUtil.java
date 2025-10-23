@@ -10,6 +10,7 @@ import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.commons.util.StringUtil;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Note;
@@ -59,7 +60,9 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
+        if (phone.isEmpty()) {
+            return new Phone("");
+        }
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
@@ -89,12 +92,29 @@ public class ParserUtil {
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
+        if (email.isEmpty()) {
+            return new Email("");
+        }
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String cuisine} into an {@code Cuisine}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cuisine} is invalid.
+     */
+    public static Cuisine parseCuisine(String cuisine) throws ParseException {
+        requireNonNull(cuisine);
+        String trimmedCuisine = cuisine.trim();
+        if (!Cuisine.isValidCuisine(trimmedCuisine)) {
+            throw new ParseException(Cuisine.MESSAGE_CONSTRAINTS);
+        }
+        return new Cuisine(trimmedCuisine);
     }
 
     /**
