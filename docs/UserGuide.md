@@ -19,6 +19,7 @@
   - [Rate - Rating a foodplace](#rating-a-foodplace-rate)
   - [Tag - Tagging a foodplace](#adding-tags-to-a-foodplace-tag)
   - [Wishlist - Wishlisting a foodplace](#wishlisting-a-foodplace-wishlist)
+  - [Blacklist - Blacklisting a foodplace](#blacklisting-a-foodplace-blacklist)
   - [Pin - Pinning a foodplace](#pinning-a-foodplace-pin)
   - [Unpin - Unpinning a foodplace](#unpinning-a-foodplace-unpin)
   - [Find - Finding a foodplace](#locating-foodplaces-by-name-find)
@@ -358,12 +359,42 @@ Example: wishlist 2
 * The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
 * The index **must be a positive integer**: 1, 2, 3, …​
 * You can **display your wishlist** by not specifying an `INDEX`.
+* If a foodplace **is already blacklisted**, adding this foodplace to wishlist **removes its blacklist status**.
 
 Examples:
 * `wishlist 2` Wishlists the 2nd foodplace.
 * `wishlist` displays all foodplaces that are wishlisted.
 
 ![ug_wishlist](images/ug_wishlist.png)
+
+[Go to Command Summary](#command-summary)
+
+---
+
+### Blacklisting a foodplace: `blacklist`
+
+Blacklists an existing foodplace in BiteBuddy.
+
+Format: `blacklist [INDEX]`
+
+```
+blacklist: Blacklists the foodplace identified by the index number used in the last foodplace listing.
+Empty index displays the blacklist instead.
+Parameters: [INDEX]
+Example: blacklist 2
+```
+
+* Blacklists the foodplace at the specified `INDEX`.
+* The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
+* The index **must be a positive integer**: 1, 2, 3, …​
+* You can **display your blacklist** by not specifying an `INDEX`.
+* If a foodplace **is already wishlisted**, adding this foodplace to wishlist **removes its wishlist status**.
+
+Examples:
+* `blacklist 2` Blacklists the 2nd foodplace.
+* `blacklist` displays all foodplaces that are blacklisted.
+
+![ug_blacklist](images/ug_blacklist.png)
 
 [Go to Command Summary](#command-summary)
 
@@ -533,20 +564,21 @@ Furthermore, certain edits can cause the BiteBuddy to behave in unexpected ways 
 
 ## Command summary
 
-Action     | Format                                                                                                                              | Examples
------------|-------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
-[**Help**](#viewing-help-help) | `help [COMMAND]`<br>                                                                                                                | `help add`
-[**Add**](#adding-a-foodplace-add) | `add n/NAME a/ADDRESS [ot/OPENING_TIME ct/CLOSING_TIME] [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…` <br>  | `add n/James Cook Kitchen a/123, Clementi Rd, 1234665 p/22224444 e/chef@jamescook.com t/MasterChef t/Expensive`
-[**List**](#listing-all-foodplaces-list) | `list`                                                                                                                              | `list`
-[**Delete**](#deleting-a-foodplace-delete) | `delete INDEX`<br>                                                                                                                  | `delete 3`
+Action     | Format                                                                                                                                 | Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
+[**Help**](#viewing-help-help) | `help [COMMAND]`<br>                                                                                                                   | `help add`
+[**Add**](#adding-a-foodplace-add) | `add n/NAME a/ADDRESS [ot/OPENING_TIME ct/CLOSING_TIME] [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…` <br>     | `add n/James Cook Kitchen a/123, Clementi Rd, 1234665 p/22224444 e/chef@jamescook.com t/MasterChef t/Expensive`
+[**List**](#listing-all-foodplaces-list) | `list`                                                                                                                                 | `list`
+[**Delete**](#deleting-a-foodplace-delete) | `delete INDEX`<br>                                                                                                                     | `delete 3`
 [**Edit**](#editing-a-foodplace-edit) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ot/OPENING_TIME ct/CLOSING_TIME] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`<br> | `edit 2 n/James Lee Diner e/chef@jameslee.com`
-[**Note**](#adding-a-note-to-a-foodplace-note)   | `note INDEX [NOTE]`<br>                                                                                                             | `note 1 Famous for their chicken rice!`
-[**Rate**](#rating-a-foodplace-rate) | `rate INDEX RATING`<br>                                                                                                             | `rate 1 6`
-[**Tag**](#adding-tags-to-a-foodplace-tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                                                                            | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
-[**Wishlist**](#wishlisting-a-foodplace-wishlist) | `wishlist [INDEX]`<br>                                                                                                              | `wishlist 2`<br> `wishlist`
-[**Pin**](#pinning-a-foodplace-pin) | `pin [INDEX]`<br>                                                                                                                   | `pin 1`
-[**Unpin](#unpinning-a-foodplace-unpin) | `unpin [INDEX]`<br>                                                                                                                 | `unpin 2`
-[**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br> `find t/TAG [MORE_TAGS]…​ [c/CUISINE] [r/RATING]`<br>                                            | `find James Jake`<br> `find t/hawker c/japanese r/8`
-[**Compare**](#comparing-two-foodplaces-compare) | `compare [INDEX1] [INDEX2]`<br>                                                                                                     | `compare 1 3`
-[**Clear**](#clearing-all-entries-clear) | `clear`                                                                                                                             | `clear`
-[**Exit**](#exiting-the-program-exit) | `exit`                                                                                                                              | `exit`
+[**Note**](#adding-a-note-to-a-foodplace-note)   | `note INDEX [NOTE]`<br>                                                                                                                | `note 1 Famous for their chicken rice!`
+[**Rate**](#rating-a-foodplace-rate) | `rate INDEX RATING`<br>                                                                                                                | `rate 1 6`
+[**Tag**](#adding-tags-to-a-foodplace-tag) | `tag INDEX TAG1 [TAG2]…​`<br> `tag INDEX /d [TAG]…​`<br>                                                                               | `tag 1 FastFood Expensive`<br> `tag 1 /d FastFood`
+[**Wishlist**](#wishlisting-a-foodplace-wishlist) | `wishlist [INDEX]`<br>                                                                                                                 | `wishlist 2`<br> `wishlist`
+[**Blacklist**](#blacklisting-a-foodplace-blacklist) | `blacklist [INDEX]`<br>                                                                                                                | `blacklist 2`<br> `blacklist`
+[**Pin**](#pinning-a-foodplace-pin) | `pin [INDEX]`<br>                                                                                                                      | `pin 1`
+[**Unpin**](#unpinning-a-foodplace-unpin) | `unpin [INDEX]`<br>                                                                                                                    | `unpin 2`
+[**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br> `find t/TAG [MORE_TAGS]…​ [c/CUISINE] [r/RATING]`<br>                                               | `find James Jake`<br> `find t/hawker c/japanese r/8`
+[**Compare**](#comparing-two-foodplaces-compare) | `compare [INDEX1] [INDEX2]`<br>                                                                                                        | `compare 1 3`
+[**Clear**](#clearing-all-entries-clear) | `clear`                                                                                                                                | `clear`
+[**Exit**](#exiting-the-program-exit) | `exit`                                                                                                                                 | `exit`
