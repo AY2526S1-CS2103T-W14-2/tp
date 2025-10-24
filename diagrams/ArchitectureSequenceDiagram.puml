@@ -1,4 +1,4 @@
-@startuml
+@startuml ArchitechtureSequenceDiagram
 !include style.puml
 skinparam ArrowFontStyle plain
 
