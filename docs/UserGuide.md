@@ -388,7 +388,7 @@ Example: blacklist 2
 * The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
 * The index **must be a positive integer**: 1, 2, 3, …​
 * You can **display your blacklist** by not specifying an `INDEX`.
-* If a foodplace **is already wishlisted**, adding this foodplace to wishlist **removes its wishlist status**.
+* If a foodplace **is already wishlisted**, adding this foodplace to blacklist **removes its wishlist status**.
 
 Examples:
 * `blacklist 2` Blacklists the 2nd foodplace.
