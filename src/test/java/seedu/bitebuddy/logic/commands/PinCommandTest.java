@@ -34,13 +34,15 @@ public class PinCommandTest {
                 Messages.format(new Foodplace(foodplaceToPin.getName(), foodplaceToPin.getPhone(),
                         foodplaceToPin.getEmail(), foodplaceToPin.getAddress(), foodplaceToPin.getTiming(),
                         foodplaceToPin.getCuisine(), foodplaceToPin.getTags(), foodplaceToPin.getNote(),
-                        foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), new Pinned(true))));
+                        foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), foodplaceToPin.getBlacklist(),
+                        new Pinned(true))));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Foodplace pinnedFoodplace = new Foodplace(foodplaceToPin.getName(), foodplaceToPin.getPhone(),
                 foodplaceToPin.getEmail(), foodplaceToPin.getAddress(), foodplaceToPin.getTiming(),
                 foodplaceToPin.getCuisine(), foodplaceToPin.getTags(), foodplaceToPin.getNote(),
-                foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), new Pinned(true));
+                foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), foodplaceToPin.getBlacklist(),
+                new Pinned(true));
         expectedModel.setFoodplace(foodplaceToPin, pinnedFoodplace);
         expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
 
@@ -64,13 +66,15 @@ public class PinCommandTest {
                 Messages.format(new Foodplace(foodplaceToPin.getName(), foodplaceToPin.getPhone(),
                         foodplaceToPin.getEmail(), foodplaceToPin.getAddress(), foodplaceToPin.getTiming(),
                         foodplaceToPin.getCuisine(), foodplaceToPin.getTags(), foodplaceToPin.getNote(),
-                        foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), new Pinned(true))));
+                        foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), foodplaceToPin.getBlacklist(),
+                        new Pinned(true))));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Foodplace pinnedFoodplace = new Foodplace(foodplaceToPin.getName(), foodplaceToPin.getPhone(),
                 foodplaceToPin.getEmail(), foodplaceToPin.getAddress(), foodplaceToPin.getTiming(),
                 foodplaceToPin.getCuisine(), foodplaceToPin.getTags(), foodplaceToPin.getNote(),
-                foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), new Pinned(true));
+                foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), foodplaceToPin.getBlacklist(),
+                new Pinned(true));
         expectedModel.setFoodplace(foodplaceToPin, pinnedFoodplace);
         expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
 
@@ -92,7 +96,8 @@ public class PinCommandTest {
         Foodplace pinnedFoodplace = new Foodplace(foodplaceToPin.getName(), foodplaceToPin.getPhone(),
                 foodplaceToPin.getEmail(), foodplaceToPin.getAddress(), foodplaceToPin.getTiming(),
                 foodplaceToPin.getCuisine(), foodplaceToPin.getTags(), foodplaceToPin.getNote(),
-                foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), new Pinned(true));
+                foodplaceToPin.getRate(), foodplaceToPin.getWishlist(), foodplaceToPin.getBlacklist(),
+                new Pinned(true));
         model.setFoodplace(foodplaceToPin, pinnedFoodplace);
 
         PinCommand pinCommand = new PinCommand(INDEX_FIRST_FOODPLACE);
@@ -105,7 +110,7 @@ public class PinCommandTest {
             Foodplace fp = model.getFilteredFoodplaceList().get(i);
             model.setFoodplace(fp, new Foodplace(fp.getName(), fp.getPhone(), fp.getEmail(),
                     fp.getAddress(), fp.getTiming(), fp.getCuisine(), fp.getTags(), fp.getNote(), fp.getRate(),
-                    fp.getWishlist(), new Pinned(true)));
+                    fp.getWishlist(), fp.getBlacklist(), new Pinned(true)));
         }
         PinCommand pinCommand = new PinCommand(INDEX_FIRST_FOODPLACE);
         assertCommandSuccess(pinCommand, model, PinCommand.MESSAGE_MAX_PIN_REACHED, model);

@@ -56,7 +56,7 @@ class JsonAdaptedFoodplace {
                                 @JsonProperty("note") String note,
                                 @JsonProperty("rate") Integer rate,
                                 @JsonProperty("wishlist") Boolean isWishlisted,
-                                @JsonProperty("blacklist") Boolean isBlacklisted) {
+                                @JsonProperty("blacklist") Boolean isBlacklisted,
                                 @JsonProperty("isPinned") Boolean isPinned) {
         this.name = name;
         this.phone = phone;
@@ -192,14 +192,12 @@ class JsonAdaptedFoodplace {
         }
         final Blacklist modelBlacklist = new Blacklist(isBlacklisted);
 
-        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming,
-                modelCuisine, modelTags, modelNote, modelRate, modelWishlist, modelBlacklist);
         if (isPinned == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pinned.class.getSimpleName()));
         }
         final Pinned modelPinned = new Pinned(isPinned);
 
         return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming, modelCuisine,
-                modelTags, modelNote, modelRate, modelWishlist, modelPinned);
+                modelTags, modelNote, modelRate, modelWishlist, modelBlacklist, modelPinned);
     }
 }

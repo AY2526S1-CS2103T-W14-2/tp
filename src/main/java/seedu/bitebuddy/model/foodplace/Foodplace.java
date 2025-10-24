@@ -38,7 +38,28 @@ public class Foodplace {
      * Every field must be present and not null.
      */
     public Foodplace(Name name, Phone phone, Email email, Address address, Timing timing,
-            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Wishlist wishlist, Blacklist blacklist) {
+            Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Wishlist wishlist, Blacklist blacklist,
+                     Pinned pinned) {
+        requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate, timing, wishlist, blacklist, pinned);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.timing = timing;
+        this.cuisine = cuisine;
+        this.tags.addAll(tags);
+        this.note = note;
+        this.rate = rate;
+        this.wishlist = wishlist;
+        this.blacklist = blacklist;
+        this.pinned = pinned;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Foodplace(Name name, Phone phone, Email email, Address address, Timing timing,
+                     Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Wishlist wishlist, Blacklist blacklist) {
         requireAllNonNull(name, phone, email, address, cuisine, tags, note, rate, timing, wishlist, blacklist);
         this.name = name;
         this.phone = phone;
@@ -52,25 +73,6 @@ public class Foodplace {
         this.wishlist = wishlist;
         this.blacklist = blacklist;
         this.pinned = new Pinned(false);
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Foodplace(Name name, Phone phone, Email email, Address address, Timing timing,
-                     Cuisine cuisine, Set<Tag> tags, Note note, Rate rate, Wishlist wishlist, Pinned pinned) {
-        requireAllNonNull(name, phone, email, address, cuisine, tags, pinned);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.cuisine = cuisine;
-        this.timing = timing;
-        this.tags.addAll(tags);
-        this.note = note;
-        this.rate = rate;
-        this.wishlist = wishlist;
-        this.pinned = pinned;
     }
 
     public Name getName() {

@@ -100,14 +100,14 @@ public class AddressBookParser {
         case WishlistCommand.COMMAND_WORD:
             return new WishlistCommandParser().parse(arguments);
 
+        case BlacklistCommand.COMMAND_WORD:
+            return new BlacklistCommandParser().parse(arguments);
+
         case PinCommand.COMMAND_WORD:
             return new PinCommandParser().parse(arguments);
 
         case UnpinCommand.COMMAND_WORD:
             return new UnpinCommandParser().parse(arguments);
-
-        case BlacklistCommand.COMMAND_WORD:
-            return new BlacklistCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

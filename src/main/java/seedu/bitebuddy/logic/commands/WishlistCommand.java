@@ -72,7 +72,8 @@ public class WishlistCommand extends Command {
         Foodplace editedFoodPlace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
                 foodPlaceToEdit.getEmail(), foodPlaceToEdit.getAddress(), foodPlaceToEdit.getTiming(),
                 foodPlaceToEdit.getCuisine(), foodPlaceToEdit.getTags(), foodPlaceToEdit.getNote(),
-                foodPlaceToEdit.getRate(), foodPlaceToEdit.getWishlist().getOpposite(), foodPlaceBlacklistState);
+                foodPlaceToEdit.getRate(), foodPlaceToEdit.getWishlist().getOpposite(),
+                foodPlaceBlacklistState, foodPlaceToEdit.getPinned());
 
         model.setFoodplace(foodPlaceToEdit, editedFoodPlace);
         model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES);

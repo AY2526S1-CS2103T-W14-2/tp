@@ -75,7 +75,8 @@ public class PinCommand extends Command {
     private static Foodplace pinFoodplace(Foodplace fp) {
         assert fp != null;
         return new Foodplace(fp.getName(), fp.getPhone(), fp.getEmail(), fp.getAddress(), fp.getTiming(),
-                fp.getCuisine(), fp.getTags(), fp.getNote(), fp.getRate(), fp.getWishlist(), new Pinned(true));
+                fp.getCuisine(), fp.getTags(), fp.getNote(), fp.getRate(), fp.getWishlist(), fp.getBlacklist(),
+                new Pinned(true));
     }
 
     @Override
