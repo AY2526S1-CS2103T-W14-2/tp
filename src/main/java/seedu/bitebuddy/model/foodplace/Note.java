@@ -39,7 +39,7 @@ public class Note {
 
     @Override
     public String toString() {
-        return value;
+        return value.isEmpty() ? "No note" : value;
     }
 
     @Override

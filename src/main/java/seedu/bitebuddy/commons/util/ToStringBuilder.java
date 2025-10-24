@@ -1,5 +1,8 @@
 package seedu.bitebuddy.commons.util;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Builds a string representation of an object that is suitable as the return value of {@link Object#toString()}.
  */
@@ -8,6 +11,8 @@ public class ToStringBuilder {
     private static final String OBJECT_SUFFIX = "}";
     private static final String FIELD_SEPARATOR = ", ";
     private static final String FIELD_NAME_VALUE_SEPARATOR = "=";
+    // Field names to omit display
+    private static final List<String> DO_NOT_DISPLAY_FIELD_NAMES = Arrays.asList("wishlist", "blacklist");
 
     private final StringBuilder stringBuilder = new StringBuilder();
     private boolean hasField;
@@ -38,7 +43,11 @@ public class ToStringBuilder {
         if (hasField) {
             stringBuilder.append(FIELD_SEPARATOR);
         }
-        stringBuilder.append(fieldName).append(FIELD_NAME_VALUE_SEPARATOR).append(fieldValue);
+        if (DO_NOT_DISPLAY_FIELD_NAMES.contains(fieldName)) {
+            stringBuilder.append(fieldValue);
+        } else {
+            stringBuilder.append(fieldName).append(FIELD_NAME_VALUE_SEPARATOR).append(fieldValue);
+        }
         hasField = true;
         return this;
     }

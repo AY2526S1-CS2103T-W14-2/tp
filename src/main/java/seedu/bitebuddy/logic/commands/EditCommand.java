@@ -25,6 +25,7 @@ import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Blacklist;
 import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -117,9 +118,10 @@ public class EditCommand extends Command {
         Note updatedNote = editFoodplaceDescriptor.getNote().orElse(foodplaceToEdit.getNote());
         Rate updatedRate = editFoodplaceDescriptor.getRate().orElse(foodplaceToEdit.getRate());
         Wishlist updatedWishlist = editFoodplaceDescriptor.getWishlist().orElse(foodplaceToEdit.getWishlist());
+        Blacklist updatedBlacklist = editFoodplaceDescriptor.getBlacklist().orElse(foodplaceToEdit.getBlacklist());
 
         return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTiming, updatedCuisine,
-                updatedTags, updatedNote, updatedRate, updatedWishlist);
+                updatedTags, updatedNote, updatedRate, updatedWishlist, updatedBlacklist);
     }
 
     @Override
@@ -166,6 +168,7 @@ public class EditCommand extends Command {
         private Note note;
         private Rate rate;
         private Wishlist wishlist;
+        private Blacklist blacklist;
 
         public EditFoodplaceDescriptor() {}
 
@@ -184,6 +187,7 @@ public class EditCommand extends Command {
             this.note = toCopy.note;
             this.rate = toCopy.rate;
             this.wishlist = toCopy.wishlist;
+            this.blacklist = toCopy.blacklist;
         }
 
         /**
@@ -282,6 +286,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(wishlist);
         }
 
+        public void setBlacklist(Blacklist blacklist) {
+            this.blacklist = blacklist;
+        }
+
+        public Optional<Blacklist> getBlacklist() {
+            return Optional.ofNullable(blacklist);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -303,12 +315,13 @@ public class EditCommand extends Command {
                     && Objects.equals(tags, otherEditFoodplaceDescriptor.tags)
                     && Objects.equals(note, otherEditFoodplaceDescriptor.note)
                     && Objects.equals(rate, otherEditFoodplaceDescriptor.rate)
-                    && Objects.equals(wishlist, otherEditFoodplaceDescriptor.wishlist);
+                    && Objects.equals(wishlist, otherEditFoodplaceDescriptor.wishlist)
+                    && Objects.equals(blacklist, otherEditFoodplaceDescriptor.blacklist);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(name, phone, email, address, timing, tags, rate, cuisine, note);
+            return Objects.hash(name, phone, email, address, timing, tags, rate, cuisine, note, wishlist, blacklist);
         }
 
         @Override
@@ -324,6 +337,7 @@ public class EditCommand extends Command {
                     .add("note", note)
                     .add("rate", rate)
                     .add("wishlist", wishlist)
+                    .add("blacklist", blacklist)
                     .toString();
         }
     }

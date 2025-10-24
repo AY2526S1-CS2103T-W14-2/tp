@@ -29,7 +29,7 @@ public class UnpinCommandTest {
         Foodplace pinnedFoodplace = new Foodplace(foodplace.getName(), foodplace.getPhone(),
                 foodplace.getEmail(), foodplace.getAddress(), foodplace.getTiming(), foodplace.getCuisine(),
                 foodplace.getTags(), foodplace.getNote(), foodplace.getRate(),
-                foodplace.getWishlist(), new Pinned(true));
+                foodplace.getWishlist(), foodplace.getBlacklist(), new Pinned(true));
         model.setFoodplace(foodplace, pinnedFoodplace);
     }
 
@@ -43,7 +43,8 @@ public class UnpinCommandTest {
         Foodplace unpinnedFoodplace = new Foodplace(foodplaceToUnpin.getName(), foodplaceToUnpin.getPhone(),
                 foodplaceToUnpin.getEmail(), foodplaceToUnpin.getAddress(), foodplaceToUnpin.getTiming(),
                 foodplaceToUnpin.getCuisine(), foodplaceToUnpin.getTags(), foodplaceToUnpin.getNote(),
-                foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), new Pinned(false));
+                foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), foodplaceToUnpin.getBlacklist(),
+                new Pinned(false));
 
         String expectedMessage = String.format(UnpinCommand.MESSAGE_UNPIN_FOODPLACE_SUCCESS,
                 Messages.format(unpinnedFoodplace));
@@ -74,7 +75,8 @@ public class UnpinCommandTest {
         Foodplace unpinnedFoodplace = new Foodplace(foodplaceToUnpin.getName(), foodplaceToUnpin.getPhone(),
                 foodplaceToUnpin.getEmail(), foodplaceToUnpin.getAddress(), foodplaceToUnpin.getTiming(),
                 foodplaceToUnpin.getCuisine(), foodplaceToUnpin.getTags(), foodplaceToUnpin.getNote(),
-                foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), new Pinned(false));
+                foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), foodplaceToUnpin.getBlacklist(),
+                new Pinned(false));
 
         String expectedMessage = String.format(UnpinCommand.MESSAGE_UNPIN_FOODPLACE_SUCCESS,
                 Messages.format(unpinnedFoodplace));

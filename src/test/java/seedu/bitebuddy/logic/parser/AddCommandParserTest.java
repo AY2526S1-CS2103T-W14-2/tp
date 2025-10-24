@@ -55,30 +55,33 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Foodplace expectedFoodplace = new FoodplaceBuilder(SWENSWAN).withTags(VALID_TAG_FASTFOOD).build();
+        // Default wishlist and blacklist state is false for newly added foodplace
+        Foodplace expectedFoodplace = new FoodplaceBuilder(SWENSWAN).withTags(VALID_TAG_FASTFOOD)
+                .withWishlist(false).withBlacklist(false).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                 + OPEN_TIMING_DESC_SWENSWAN + CLOSE_TIMING_DESC_SWENSWAN + CUISINE_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
-                + TAG_DESC_FASTFOOD, new AddCommand(expectedFoodplace)
+                + TAG_DESC_FASTFOOD + NOTE_DESC_SWENSWAN, new AddCommand(expectedFoodplace)
         );
 
 
         // multiple tags - all accepted
         Foodplace expectedFoodplaceMultipleTags = new FoodplaceBuilder(SWENSWAN).withTags(VALID_TAG_FASTFOOD,
-                        VALID_TAG_RESTAURANT)
+                        VALID_TAG_RESTAURANT).withWishlist(false).withBlacklist(false)
                 .build();
         assertParseSuccess(
                 parser,
                 NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
                         + OPEN_TIMING_DESC_SWENSWAN + CLOSE_TIMING_DESC_SWENSWAN + CUISINE_DESC_SWENSWAN
-                        + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD,
+                        + TAG_DESC_RESTAURANT + TAG_DESC_FASTFOOD + NOTE_DESC_SWENSWAN,
                 new AddCommand(expectedFoodplaceMultipleTags)
         );
 
         // with notes
         Foodplace expectedFoodplaceNotes = new FoodplaceBuilder(SWENSWAN)
-                .withTags(VALID_TAG_FASTFOOD, VALID_TAG_RESTAURANT).withNote(VALID_NOTE_FAMOUS).build();
+                .withTags(VALID_TAG_FASTFOOD, VALID_TAG_RESTAURANT).withNote(VALID_NOTE_FAMOUS)
+                .withWishlist(false).withBlacklist(false).build();
         assertParseSuccess(
                 parser,
                 NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN + ADDRESS_DESC_SWENSWAN
@@ -157,7 +160,8 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS)
-            .withTags().withTiming("").withCuisine("").build();
+            .withTags().withNote("").withTiming("").withCuisine("")
+                .withWishlist(false).withBlacklist(false).build();
         assertParseSuccess(parser, NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS
                 + ADDRESS_DESC_MCRONALDS,
                 new AddCommand(expectedFoodplace));

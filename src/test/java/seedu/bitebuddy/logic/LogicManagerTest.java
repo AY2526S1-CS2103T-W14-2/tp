@@ -8,6 +8,7 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.CLOSE_TIMING_DESC_M
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.CUISINE_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.EMAIL_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.NAME_DESC_MCRONALDS;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.NOTE_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.OPEN_TIMING_DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.PHONE_DESC_MCRONALDS;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
@@ -169,8 +170,9 @@ public class LogicManagerTest {
 
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS
                 + CUISINE_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS + ADDRESS_DESC_MCRONALDS
-                + OPEN_TIMING_DESC_MCRONALDS + CLOSE_TIMING_DESC_MCRONALDS;
-        Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS).withTags().build();
+                + OPEN_TIMING_DESC_MCRONALDS + CLOSE_TIMING_DESC_MCRONALDS + NOTE_DESC_MCRONALDS;
+        Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS).withTags()
+                .withWishlist(false).withBlacklist(false).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFoodplace(expectedFoodplace);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
