@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.bitebuddy.logic.commands.EditCommand;
 import seedu.bitebuddy.logic.commands.EditCommand.EditFoodplaceDescriptor;
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Blacklist;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
@@ -46,6 +47,7 @@ public class EditFoodplaceDescriptorBuilder {
         descriptor.setNote(foodplace.getNote());
         descriptor.setRate(foodplace.getRate());
         descriptor.setWishlist(foodplace.getWishlist());
+        descriptor.setBlacklist(foodplace.getBlacklist());
     }
 
     /**
@@ -127,6 +129,14 @@ public class EditFoodplaceDescriptorBuilder {
      */
     public EditFoodplaceDescriptorBuilder withWishlist(Boolean isWishlisted) {
         descriptor.setWishlist(new Wishlist(isWishlisted));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Blacklist} of the {@code EditFoodplaceDescriptor} that we are building.
+     */
+    public EditFoodplaceDescriptorBuilder withBlacklist(Boolean isBlacklisted) {
+        descriptor.setBlacklist(new Blacklist(isBlacklisted));
         return this;
     }
 

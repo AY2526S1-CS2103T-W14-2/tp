@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 import seedu.bitebuddy.logic.commands.AddCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Blacklist;
 import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -70,9 +71,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
         Rate rate = ParserUtil.parseRatings(argMultimap.getAllValues(PREFIX_RATE));
         Wishlist wishlist = new Wishlist(false);
+        Blacklist blacklist = new Blacklist(false);
 
         Foodplace foodplace = new Foodplace(name, phone, email, address, timing, cuisine,
-                tagList, note, rate, wishlist);
+                tagList, note, rate, wishlist, blacklist);
 
         return new AddCommand(foodplace);
     }

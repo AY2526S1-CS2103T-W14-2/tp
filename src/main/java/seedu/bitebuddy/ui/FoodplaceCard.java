@@ -50,6 +50,8 @@ public class FoodplaceCard extends UiPart<Region> {
     @FXML
     private Label wishlist;
     @FXML
+    private Label blacklist;
+    @FXML
     private ImageView pinIcon;
 
     /**
@@ -95,10 +97,7 @@ public class FoodplaceCard extends UiPart<Region> {
                         : ">> No Rating yet <<"
         );
         wishlist.setText(foodplace.getWishlist().isWishlisted() ? "Wishlisted" : "");
-        rate.setText(String.valueOf(
-                foodplace.getRate().isSet() ? foodplace.getRate().toString() : ">> No Rating yet <<"
-        ));
-
+        blacklist.setText(foodplace.getBlacklist().isBlacklisted() ? "Blacklisted" : "");
         if (foodplace.getPinned().isPinned) {
             pinIcon.setVisible(true);
             pinIcon.setImage(new Image(getClass().getResourceAsStream("/images/pin.png")));

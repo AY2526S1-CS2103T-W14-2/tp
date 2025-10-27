@@ -58,7 +58,7 @@ public class RateCommand extends Command {
         Foodplace editedFoodplace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
                 foodPlaceToEdit.getEmail(), foodPlaceToEdit.getAddress(), foodPlaceToEdit.getTiming(),
                 foodPlaceToEdit.getCuisine(), foodPlaceToEdit.getTags(), foodPlaceToEdit.getNote(), rate,
-                foodPlaceToEdit.getWishlist());
+                foodPlaceToEdit.getWishlist(), foodPlaceToEdit.getBlacklist());
 
         model.setFoodplace(foodPlaceToEdit, editedFoodplace);
         model.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_ALL_FOODPLACES);

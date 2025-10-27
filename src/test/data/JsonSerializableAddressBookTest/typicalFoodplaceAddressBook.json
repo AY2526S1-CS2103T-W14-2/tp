@@ -8,9 +8,10 @@
     "timing": "09:00-21:00",
     "cuisine": "Indian",
     "tags": [ "hawker" ],
-    "note": "",
+    "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
+    "blacklist": true,
     "isPinned": false
   }, {
     "name" : "Daebak Korean BBQ",
@@ -20,9 +21,10 @@
     "timing" : "09:00-21:00",
     "cuisine" : "Korean",
     "tags" : ["korean", "restaurant"],
-    "note": "",
+    "note": "Best beef in the world!",
     "rate": 0,
     "wishlist": true,
+    "blacklist": false,
     "isPinned": false
   }, {
     "name" : "Carls Junior",
@@ -32,9 +34,10 @@
     "timing" : "10:00-22:00",
     "cuisine" : "American",
     "tags" : [ "fastfood" ],
-    "note": "",
+    "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
+    "blacklist": false,
     "isPinned": false
   }, {
     "name" : "Laksa Paradise",
@@ -44,9 +47,10 @@
     "timing" : "09:00-20:00",
     "cuisine" : "Malaysian",
     "tags" : [ "hawker" ],
-    "note": "",
+    "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
+    "blacklist": false,
     "isPinned": false
   }, {
     "name" : "Sushi Tei",
@@ -56,9 +60,10 @@
     "timing" : "11:00-22:00",
     "cuisine" : "Japanese",
     "tags" : [ ],
-    "note": "",
+    "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
+    "blacklist": false,
     "isPinned": false
   }, {
     "name" : "ITea",
@@ -68,9 +73,10 @@
     "timing" : "10:00-20:00",
     "cuisine" : "",
     "tags" : [ ],
-    "note": "",
+    "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
+    "blacklist": false,
     "isPinned": false
   }, {
     "name": "Dominoes Pizza",
@@ -80,9 +86,10 @@
     "timing": "12:00-23:00",
     "cuisine": "",
     "tags": [],
-    "note": "",
+    "note": "Serves the best appetisers!",
     "rate": 0,
     "wishlist": false,
+    "blacklist": false,
     "isPinned": false
   } ]
 }

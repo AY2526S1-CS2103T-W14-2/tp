@@ -10,6 +10,7 @@
     "note": "note",
     "rate": 0,
     "wishlist": false,
+    "blacklist": true,
     "isPinned": false
   }, {
     "name": "prata palace",
@@ -21,6 +22,7 @@
     "note": "different note",
     "rate": 0,
     "wishlist": true,
+    "blacklist": false,
     "isPinned": false
   } ]
 }

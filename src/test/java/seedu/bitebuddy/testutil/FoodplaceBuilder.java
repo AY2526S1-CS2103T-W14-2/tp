@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.bitebuddy.model.foodplace.Address;
+import seedu.bitebuddy.model.foodplace.Blacklist;
 import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -32,6 +33,7 @@ public class FoodplaceBuilder {
     public static final String DEFAULT_OPEN = "09:00";
     public static final String DEFAULT_CLOSE = "21:00";
     public static final Boolean DEFAULT_WISHLIST = false;
+    public static final Boolean DEFAULT_BLACKLIST = false;
 
     private Name name;
     private Phone phone;
@@ -43,6 +45,7 @@ public class FoodplaceBuilder {
     private Note note;
     private Rate rate;
     private Wishlist wishlist;
+    private Blacklist blacklist;
 
     /**
      * Creates a {@code FoodplaceBuilder} with the default details.
@@ -58,6 +61,7 @@ public class FoodplaceBuilder {
         rate = new Rate(Integer.valueOf(DEFAULT_RATE));
         timing = new Timing(LocalTime.parse(DEFAULT_OPEN), LocalTime.parse(DEFAULT_CLOSE));
         wishlist = new Wishlist(DEFAULT_WISHLIST);
+        blacklist = new Blacklist(DEFAULT_BLACKLIST);
     }
 
     /**
@@ -74,6 +78,7 @@ public class FoodplaceBuilder {
         note = foodplaceToCopy.getNote();
         rate = foodplaceToCopy.getRate();
         wishlist = foodplaceToCopy.getWishlist();
+        blacklist = foodplaceToCopy.getBlacklist();
     }
 
     /**
@@ -170,8 +175,16 @@ public class FoodplaceBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Blacklist} of the {@code Foodplace} that we are building.
+     */
+    public FoodplaceBuilder withBlacklist(Boolean isBlacklisted) {
+        this.blacklist = new Blacklist(isBlacklisted);
+        return this;
+    }
+
     public Foodplace build() {
-        return new Foodplace(name, phone, email, address, timing, cuisine, tags, note, rate, wishlist);
+        return new Foodplace(name, phone, email, address, timing, cuisine, tags, note, rate, wishlist, blacklist);
     }
 
 }
