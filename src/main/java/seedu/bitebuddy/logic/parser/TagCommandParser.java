@@ -1,13 +1,14 @@
 package seedu.bitebuddy.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;
+
 import java.util.Arrays;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 import java.util.Set;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;
 import seedu.bitebuddy.logic.commands.TagCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.tag.Tag;

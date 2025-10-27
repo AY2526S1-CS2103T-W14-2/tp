@@ -3,8 +3,8 @@ package seedu.bitebuddy.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.bitebuddy.commons.core.GuiSettings;
