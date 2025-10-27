@@ -20,6 +20,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
      * and returns a {@code NoteCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public NoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
