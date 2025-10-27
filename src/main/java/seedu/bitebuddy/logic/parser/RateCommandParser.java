@@ -16,6 +16,7 @@ public class RateCommandParser implements Parser<RateCommand> {
      * and returns a {@code RemarkCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public RateCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentPositionMapper stringArgs = new ArgumentPositionMapper(args);
