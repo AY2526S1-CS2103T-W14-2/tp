@@ -18,6 +18,7 @@ public class BlacklistCommandParser implements Parser<BlacklistCommand> {
      * and returns a {@code BlacklistCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public BlacklistCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
