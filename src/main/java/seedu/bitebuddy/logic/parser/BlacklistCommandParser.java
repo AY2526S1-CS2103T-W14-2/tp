@@ -5,7 +5,6 @@ import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.parser.CliSyntax.INDEX_BLACKLIST_ENTRY_INDEX;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.logic.commands.BlacklistCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
@@ -32,9 +31,9 @@ public class BlacklistCommandParser implements Parser<BlacklistCommand> {
         if (mapper.size() == 1) { // Index specified in command --> parse index
             try {
                 index = ParserUtil.parseIndex(mapper.getArgument(INDEX_BLACKLIST_ENTRY_INDEX));
-            } catch (IllegalValueException e) {
+            } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        BlacklistCommand.MESSAGE_USAGE), e);
+                        BlacklistCommand.MESSAGE_USAGE), pe);
             }
             return new BlacklistCommand(index);
         }

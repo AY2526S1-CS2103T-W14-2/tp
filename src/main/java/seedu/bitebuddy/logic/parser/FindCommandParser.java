@@ -22,6 +22,10 @@ import seedu.bitebuddy.model.foodplace.Rate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+    public static final String MESSAGE_INVALID_RATING = "Ratings should only contain numbers,"
+            + " and be an integer between 1 to 10";
+    public static final String MESSAGE_NO_PREFIX = "Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE;
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -93,8 +97,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                     .filter(s -> !s.isEmpty())
                     .map(Integer::parseInt)
                     .map(Rate::new);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException("Ratings should only contain numbers, and be an integer between 1 to 10");
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(MESSAGE_INVALID_RATING);
         }
     }
 
@@ -104,7 +108,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean hasEmptyRate = argMultimap.getValue(PREFIX_RATE).map(String::isBlank).orElse(false);
 
         if (hasEmptyTag || hasEmptyCuisine || hasEmptyRate) {
-            throw new ParseException("Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE);
+            throw new ParseException(MESSAGE_NO_PREFIX);
         }
     }
 

@@ -26,8 +26,8 @@ public class RateCommandParser implements Parser<RateCommand> {
         try {
             index = ParserUtil.parseIndex(stringArgs.getArgument(0));
             rate = Integer.valueOf(stringArgs.getArgument(1));
-        } catch (NumberFormatException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE), ive);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE), nfe);
         }
 
 
