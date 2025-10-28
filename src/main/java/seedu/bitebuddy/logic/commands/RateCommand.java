@@ -22,7 +22,7 @@ public class RateCommand extends Command {
             + "by the index number used in the last foodplace listing.\n"
             + "INDEX and RATING must be a positive integer. A RATING to be set must be between "
             + Rate.MIN + " and " + Rate.MAX
-            + ". If RATING is 0, then the exiting rating will be removed.\n"
+            + ". If RATING is 0, then the existing rating will be removed.\n"
             + "Any other input RATING will overwrite the existing rating.\n"
             + "Parameters: INDEX RATING\n"
             + "Example: " + COMMAND_WORD + " 5 " + "1";
