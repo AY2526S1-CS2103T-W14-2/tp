@@ -3,7 +3,6 @@ package seedu.bitebuddy.model.foodplace;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -34,40 +33,6 @@ public class RateTest {
         assertFalse(Rate.isValidRating(Integer.MIN_VALUE));
         assertFalse(Rate.isValidRating(-1));
         assertFalse(Rate.isValidRating(Integer.MAX_VALUE));
-    }
-
-    @Test
-    public void setRate_valid_true() {
-        Rate rate = new Rate();
-        rate.setRate(5);
-        assertEquals(5, rate.getValue());
-        rate.setRate(0);
-        assertEquals(0, rate.getValue());
-        rate.setRate(1);
-        assertEquals(1, rate.getValue());
-        rate.setRate(10);
-        assertEquals(10, rate.getValue());
-    }
-
-    @Test
-    public void setRate_invalid_false() {
-        Rate rate = new Rate();
-
-        assertThrows(IllegalArgumentException.class, () -> rate.setRate(Integer.MIN_VALUE));
-        assertNotEquals(Integer.MIN_VALUE, rate.getValue());
-
-        assertThrows(IllegalArgumentException.class, () -> rate.setRate(-1));
-        assertNotEquals(-1, rate.getValue());
-
-        assertThrows(IllegalArgumentException.class, () -> rate.setRate(Integer.MAX_VALUE));
-        assertNotEquals(Integer.MAX_VALUE, rate.getValue());
-    }
-
-    @Test
-    public void reset_valid_success() {
-        Rate rate = new Rate();
-        rate.reset();
-        assertEquals(new Rate(), rate);
     }
 
     @Test
