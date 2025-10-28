@@ -45,8 +45,8 @@ public class TagCommandParser implements Parser<TagCommand> {
         return new TagCommand(index, tags, isDelete);
     }
 
-    /** Splits tokens by whitespace.
-     * 
+    /**
+     * Splits tokens by whitespace.
      * @param args Arguemnt from user input.
      * @return List of arguments
      */
@@ -58,8 +58,8 @@ public class TagCommandParser implements Parser<TagCommand> {
         return Arrays.asList(trimmedArgs.split("\\s+"));
     }
 
-    /** Parses index token.
-     * 
+    /**
+     * Parses index token.
      * @param token Index token
      * @return Index
      * @throws ParseException
@@ -73,19 +73,19 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
     }
 
-    /** Checks if token is delete token
-     * 
-     * @param tokens 
+    /**
+     * Checks if token is delete token
+     * @param tokens
      * @return true if token is the delete token, false otherwise.
      */
     private boolean isDeleteToken(List<String> tokens) {
         return tokens.size() > 1 && "/d".equals(tokens.get(1));
     }
 
-    /** Extracts tag tokens
-     * 
-     * @param tokens 
-     * @param isDelete 
+    /**
+     * Extracts tag tokens
+     * @param tokens
+     * @param isDelete
      * @return List of raw tags
      */
     private List<String> extractTagTokens(List<String> tokens, boolean isDelete) {
