@@ -488,8 +488,9 @@ Format: `compare INDEX1 INDEX2`
 
 ```
 compare: Compares the two foodplaces identified by the index numbers used in the last foodplace listing.
-Parameters: INDEX1 and INDEX2 (must be positive integers)
-Example: compare 1 3
+INDEX1 and INDEX2 must be positive integers. INDEX1 and INDEX2 must not be equal.
+Parameters: INDEX1 and INDEX2
+Example: compare 1 5
 ```
 
 * Compares the ratings of the two specified foodplaces.

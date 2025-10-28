@@ -14,7 +14,6 @@ import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_THIRD_FOODPLACE;
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.ModelManager;
