@@ -33,7 +33,6 @@ public class RateCommand extends Command {
     private final Index index;
     private final Rate rate;
 
-
     /**
      * @param index of the foodplace in the filtered foodplace list to edit the remark
      * @param rate of the foodplace to be updated to
@@ -42,7 +41,7 @@ public class RateCommand extends Command {
         requireAllNonNull(index, rate);
 
         this.index = index;
-        this.rate = rate;
+        this.rate = new Rate(rate.getValue());
     }
 
     @Override
