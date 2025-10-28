@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import seedu.bitebuddy.commons.util.StringUtil;
 import seedu.bitebuddy.commons.util.ToStringBuilder;
-import seedu.bitebuddy.model.tag.Tag;
 
 /**
  * Tests that a {@code Foodplace}'s {@code Name} matches any of the keywords given.
@@ -19,20 +18,21 @@ public class FoodplaceContainsKeywordsPredicate implements Predicate<Foodplace> 
 
     @Override
     public boolean test(Foodplace foodplace) {
-        StringBuilder searchableFields = new StringBuilder();
-        searchableFields.append(foodplace.getName().fullName).append(" ");
-        searchableFields.append(foodplace.getAddress().value).append(" ");
-        searchableFields.append(foodplace.getEmail().value).append(" ");
-        searchableFields.append(foodplace.getPhone().value).append(" ");
-        searchableFields.append(foodplace.getNote().value).append(" ");
-        searchableFields.append(foodplace.getRate().getValue()).append(" ");
+        return keywords.stream().anyMatch(keyword ->
+                containsIgnoreCase(foodplace.getName().fullName, keyword)
+                        || containsIgnoreCase(foodplace.getAddress().value, keyword)
+                        || containsIgnoreCase(foodplace.getEmail().value, keyword)
+                        || containsIgnoreCase(foodplace.getPhone().value, keyword)
+                        || containsIgnoreCase(foodplace.getNote().value, keyword)
+                        || containsIgnoreCase(foodplace.getRate().getValue().toString(), keyword)
+                        || containsIgnoreCase(foodplace.getCuisine().value, keyword)
+                        || containsIgnoreCase(foodplace.getTiming().toString(), keyword)
+                        || foodplace.getTags().stream().anyMatch(tag -> containsIgnoreCase(tag.tagName, keyword))
+        );
+    }
 
-        for (Tag tag : foodplace.getTags()) {
-            searchableFields.append(tag.tagName).append(" ");
-        }
-
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(searchableFields.toString(), keyword));
+    private boolean containsIgnoreCase(String field, String keyword) {
+        return StringUtil.containsSubstringIgnoreCase(field, keyword);
     }
 
     @Override

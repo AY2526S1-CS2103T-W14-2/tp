@@ -73,6 +73,14 @@ public class FoodplaceContainsKeywordsPredicateTest {
         predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("Spicy"));
         assertTrue(predicate.test(new FoodplaceBuilder().withTags("Spicy").build()));
 
+        // Cuisine
+        predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("West"));
+        assertTrue(predicate.test(new FoodplaceBuilder().withCuisine("Western").build()));
+
+        // Timing
+        predicate = new FoodplaceContainsKeywordsPredicate(Collections.singletonList("10:00"));
+        assertTrue(predicate.test(new FoodplaceBuilder().withTiming("10:00", "12:00").build()));
+
         // Match in multiple fields: name, note, tags
         predicate = new FoodplaceContainsKeywordsPredicate(Arrays.asList("Prata", "Delivery", "Spicy"));
         assertTrue(predicate.test(new FoodplaceBuilder()
