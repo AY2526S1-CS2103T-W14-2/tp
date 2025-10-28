@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.logic.commands.AddCommand;
+import seedu.bitebuddy.logic.commands.BlacklistCommand;
 import seedu.bitebuddy.logic.commands.ClearCommand;
 import seedu.bitebuddy.logic.commands.CompareCommand;
 import seedu.bitebuddy.logic.commands.DeleteCommand;
@@ -70,9 +71,10 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " "
                 + FoodplaceUtil.getEditFoodplaceDescriptorDetails(descriptor));
-        // Should not check for wishlist
+        // Should not check for wishlist and blacklist
         EditFoodplaceDescriptor expectedDescriptor = new EditFoodplaceDescriptor(descriptor);
         expectedDescriptor.setWishlist(null);
+        expectedDescriptor.setBlacklist(null);
         assertEquals(new EditCommand(INDEX_FIRST_FOODPLACE, expectedDescriptor), command);
     }
 
@@ -128,6 +130,13 @@ public class AddressBookParserTest {
         WishlistCommand command = (WishlistCommand) parser.parseCommand(WishlistCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased());
         assertEquals(new WishlistCommand(INDEX_FIRST_FOODPLACE), command);
+    }
+
+    @Test
+    public void parseCommand_blacklist() throws Exception {
+        BlacklistCommand command = (BlacklistCommand) parser.parseCommand(BlacklistCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_FOODPLACE.getOneBased());
+        assertEquals(new BlacklistCommand(INDEX_FIRST_FOODPLACE), command);
     }
 
     @Test

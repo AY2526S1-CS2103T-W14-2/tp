@@ -51,6 +51,9 @@ public class CommandTestUtil {
     public static final String VALID_NOTE_SERVICE = "Good customer service!";
     public static final String VALID_NOTE_FAMOUS = "Famous for desserts";
     public static final Boolean VALID_WISHLIST_SWENSWAN = true;
+    public static final Boolean VALID_BLACKLIST_SWENSWAN = false;
+    public static final Boolean VALID_WISHLIST_MCRONALDS = false;
+    public static final Boolean VALID_BLACKLIST_MCRONALDS = true;
 
     public static final String NAME_DESC_MCRONALDS = " " + PREFIX_NAME + VALID_NAME_MCRONALDS;
     public static final String NAME_DESC_SWENSWAN = " " + PREFIX_NAME + VALID_NAME_SWENSWAN;
@@ -87,10 +90,12 @@ public class CommandTestUtil {
     static {
         DESC_MCRONALDS = new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_MCRONALDS)
                 .withPhone(VALID_PHONE_MCRONALDS).withEmail(VALID_EMAIL_MCRONALDS).withAddress(VALID_ADDRESS_MCRONALDS)
-                .withTags(VALID_TAG_FASTFOOD).build();
+                .withTags(VALID_TAG_FASTFOOD).withWishlist(VALID_WISHLIST_MCRONALDS)
+                .withBlacklist(VALID_BLACKLIST_MCRONALDS).build();
         DESC_SWENSWAN = new EditFoodplaceDescriptorBuilder().withName(VALID_NAME_SWENSWAN)
                 .withPhone(VALID_PHONE_SWENSWAN).withEmail(VALID_EMAIL_SWENSWAN).withAddress(VALID_ADDRESS_SWENSWAN)
-                .withTags(VALID_TAG_RESTAURANT).build();
+                .withTags(VALID_TAG_RESTAURANT).withWishlist(VALID_WISHLIST_SWENSWAN)
+                .withBlacklist(VALID_BLACKLIST_SWENSWAN).build();
     }
 
     /**

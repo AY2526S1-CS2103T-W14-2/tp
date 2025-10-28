@@ -36,7 +36,7 @@ public class Wishlist {
 
     @Override
     public String toString() {
-        return isWishlisted.toString();
+        return isWishlisted ? "Wishlisted" : "Not wishlisted";
     }
 
     @Override

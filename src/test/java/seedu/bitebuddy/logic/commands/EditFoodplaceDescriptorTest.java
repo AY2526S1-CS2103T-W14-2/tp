@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_MCRONALDS;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.DESC_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_BLACKLIST_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CLOSE_TIME_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CUISINE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
@@ -87,6 +88,11 @@ public class EditFoodplaceDescriptorTest {
         editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
                 .withWishlist(VALID_WISHLIST_SWENSWAN).build();
         assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
+
+        // different blacklist -> returns false
+        editedMcronalds = new EditFoodplaceDescriptorBuilder(DESC_MCRONALDS)
+                .withBlacklist(VALID_BLACKLIST_SWENSWAN).build();
+        assertFalse(DESC_MCRONALDS.equals(editedMcronalds));
     }
 
     @Test
@@ -101,8 +107,9 @@ public class EditFoodplaceDescriptorTest {
                 + editFoodplaceDescriptor.getCuisine().orElse(null) + ", tags="
                 + editFoodplaceDescriptor.getTags().orElse(null) + ", note="
                 + editFoodplaceDescriptor.getNote().orElse(null) + ", rate="
-                + editFoodplaceDescriptor.getRate().orElse(null) + ", wishlist="
-                + editFoodplaceDescriptor.getWishlist().orElse(null) + "}";
+                + editFoodplaceDescriptor.getRate().orElse(null) + ", "
+                + editFoodplaceDescriptor.getWishlist().orElse(null) + ", "
+                + editFoodplaceDescriptor.getBlacklist().orElse(null) + "}";
         assertEquals(expected, editFoodplaceDescriptor.toString());
     }
 }

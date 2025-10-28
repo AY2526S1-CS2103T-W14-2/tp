@@ -5,12 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_BLACKLIST_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_CUISINE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_EMAIL_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NAME_SWENSWAN;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_NOTE_SERVICE;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_PHONE_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_RATE_PRATASHOP;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
+import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_WISHLIST_SWENSWAN;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.PRATASHOP;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.SWENSWAN;
@@ -90,8 +93,20 @@ public class FoodplaceTest {
         editedPrata = new FoodplaceBuilder(PRATASHOP).withTags(VALID_TAG_RESTAURANT).build();
         assertFalse(PRATASHOP.equals(editedPrata));
 
+        // different note -> return false
+        editedPrata = new FoodplaceBuilder(PRATASHOP).withNote(VALID_NOTE_SERVICE).build();
+        assertFalse(PRATASHOP.equals(editedPrata));
+
         // different rating -> returns false
         editedPrata = new FoodplaceBuilder(PRATASHOP).withRate(VALID_RATE_PRATASHOP).build();
+        assertFalse(PRATASHOP.equals(editedPrata));
+
+        // different wishlist state -> return false
+        editedPrata = new FoodplaceBuilder(PRATASHOP).withWishlist(VALID_WISHLIST_SWENSWAN).build();
+        assertFalse(PRATASHOP.equals(editedPrata));
+
+        // different blacklist state -> return false
+        editedPrata = new FoodplaceBuilder(PRATASHOP).withBlacklist(VALID_BLACKLIST_SWENSWAN).build();
         assertFalse(PRATASHOP.equals(editedPrata));
 
         // different cuisine -> returns false
@@ -110,8 +125,9 @@ public class FoodplaceTest {
                 + PRATASHOP.getPhone()
                 + ", email=" + PRATASHOP.getEmail() + ", address=" + PRATASHOP.getAddress()
                 + ", timing=" + PRATASHOP.getTiming() + ", cuisine=" + PRATASHOP.getCuisine()
-                + ", tags=" + PRATASHOP.getTags() + ", rate=" + PRATASHOP.getRate()
-                + ", wishlist=" + PRATASHOP.getWishlist() + "}";
+                + ", tags=" + PRATASHOP.getTags() + ", note=" + PRATASHOP.getNote()
+                + ", rate=" + PRATASHOP.getRate() + ", " + PRATASHOP.getWishlist()
+                + ", " + PRATASHOP.getBlacklist() + "}";
         assertEquals(expected, PRATASHOP.toString());
     }
 }

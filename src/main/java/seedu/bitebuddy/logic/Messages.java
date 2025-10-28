@@ -53,8 +53,10 @@ public class Messages {
                 .append(foodplace.getRate())
                 .append("; Note: ")
                 .append(foodplace.getNote())
-                .append("; Wishlisted: ")
-                .append(foodplace.getWishlist());
+                .append("; ")
+                .append(foodplace.getWishlist())
+                .append("; ")
+                .append(foodplace.getBlacklist());
         return builder.toString();
     }
 
