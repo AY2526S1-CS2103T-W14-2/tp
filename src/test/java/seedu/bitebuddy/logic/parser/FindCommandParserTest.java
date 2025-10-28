@@ -106,7 +106,8 @@ public class FindCommandParserTest {
                 List.class, Optional.class, Optional.class);
         m.setAccessible(true);
 
-        Optional<?> result = (Optional<?>) m.invoke(parser, List.of(), Optional.of(new Cuisine("Italian")), Optional.empty());
+        Optional<?> result = (Optional<?>) m.invoke(parser, List.of(),
+                Optional.of(new Cuisine("Italian")), Optional.empty());
         assertTrue(result.isPresent());
         assertTrue(result.get() instanceof FoodplaceMatchesCriteriaPredicate);
     }

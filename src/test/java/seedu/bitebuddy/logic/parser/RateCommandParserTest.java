@@ -2,9 +2,10 @@ package seedu.bitebuddy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import org.junit.jupiter.api.Test;
 
-import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.bitebuddy.logic.commands.RateCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
