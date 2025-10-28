@@ -121,7 +121,7 @@ public class EditCommand extends Command {
         Blacklist updatedBlacklist = editFoodplaceDescriptor.getBlacklist().orElse(foodplaceToEdit.getBlacklist());
 
         return new Foodplace(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTiming, updatedCuisine,
-                updatedTags, updatedNote, updatedRate, updatedWishlist, updatedBlacklist);
+                updatedTags, updatedNote, updatedRate, updatedWishlist, updatedBlacklist, foodplaceToEdit.getPinned());
     }
 
     @Override
