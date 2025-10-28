@@ -22,9 +22,15 @@ public class CompareCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Compares the two foodplaces identified "
             + "by the index numbers used in the last foodplace listing.\n"
-            + "Parameters: INDEX1 and INDEX2 (must be positive integers)\n"
+            + "INDEX1 and INDEX2 must be positive integers.\n"
+            + "Parameters: INDEX1 and INDEX2\n"
             + "compare INDEX1 INDEX2\n"
             + "Example: " + COMMAND_WORD + " 1 5";
+
+    public static final String MESSAGE_COMPARE_SAME_INDEX = "The two foodplace indexes cannot be the same";
+    public static final String MESSAGE_COMPARE_BOTH_INDEX_INVALID = "Both foodplace indexes provided are invalid";
+    public static final String MESSAGE_COMPARE_FIRST_INDEX_INVALID = "The first foodplace index provided is invalid";
+    public static final String MESSAGE_COMPARE_SECOND_INDEX_INVALID = "The second foodplace index provided is invalid";
 
     private final Index firstIndex;
     private final Index secondIndex;
@@ -44,8 +50,16 @@ public class CompareCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Foodplace> lastShownList = model.getFilteredFoodplaceList();
 
-        if (firstIndex.getZeroBased() >= lastShownList.size() || secondIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
+        if (firstIndex.getZeroBased() >= lastShownList.size() && secondIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_COMPARE_BOTH_INDEX_INVALID);
+        } else if (firstIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_COMPARE_FIRST_INDEX_INVALID);
+        } else if (secondIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_COMPARE_SECOND_INDEX_INVALID);
+        }
+
+        if (firstIndex.getZeroBased() == secondIndex.getZeroBased()) {
+            throw new CommandException(MESSAGE_COMPARE_SAME_INDEX);
         }
 
         Foodplace firstFoodplaceToCompare = lastShownList.get(firstIndex.getZeroBased());
