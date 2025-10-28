@@ -9,11 +9,9 @@ import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.ModelManager;
@@ -30,7 +28,7 @@ public class RateCommandTest {
 
     private static final String RATE_SUCCESS_STUB = "5";
     private static final String RATE_DEFAULT_STUB = "0";
-//    private static final String RATE_OUT_OF_RANGE_STUB = "1000";
+    //private static final String RATE_OUT_OF_RANGE_STUB = "1000";
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -64,13 +62,13 @@ public class RateCommandTest {
         assertCommandSuccess(rateCommand, model, expectedMessage, expectedModel);
     }
 
-//    @Test
-//    public void execute_invalidRangeOfRate_failure() {
-//        Rate rate = new Rate(Integer.valueOf(RATE_OUT_OF_RANGE_STUB));
-//        RateCommand rateCommand = new RateCommand(INDEX_FIRST_FOODPLACE, rate);
-//
-//        assertCommandFailure(rateCommand, model, Rate.MESSAGE_CONSTRAINTS);
-//    }
+    //@Test
+    //public void execute_invalidRangeOfRate_failure() {
+    //    Rate rate = new Rate(Integer.valueOf(RATE_OUT_OF_RANGE_STUB));
+    //    RateCommand rateCommand = new RateCommand(INDEX_FIRST_FOODPLACE, rate);
+    //
+    //    assertCommandFailure(rateCommand, model, Rate.MESSAGE_CONSTRAINTS);
+    //}
 
     @Test
     public void execute_invalidIndex_failure() {
