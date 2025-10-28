@@ -18,21 +18,27 @@ public class FoodplaceContainsKeywordsPredicate implements Predicate<Foodplace> 
 
     @Override
     public boolean test(Foodplace foodplace) {
+        StringBuilder searchable = new StringBuilder();
+        appendIfNotNull(searchable, foodplace.getName().fullName);
+        appendIfNotNull(searchable, foodplace.getAddress().value);
+        appendIfNotNull(searchable, foodplace.getEmail().value);
+        appendIfNotNull(searchable, foodplace.getPhone().value);
+        appendIfNotNull(searchable, foodplace.getNote().value);
+        appendIfNotNull(searchable, foodplace.getRate().getValue().toString());
+        appendIfNotNull(searchable, foodplace.getCuisine().value);
+        appendIfNotNull(searchable, foodplace.getTiming().toString());
+        foodplace.getTags().forEach(tag -> appendIfNotNull(searchable, tag.tagName));
+
+        String searchableString = searchable.toString();
+
         return keywords.stream().anyMatch(keyword ->
-                containsIgnoreCase(foodplace.getName().fullName, keyword)
-                        || containsIgnoreCase(foodplace.getAddress().value, keyword)
-                        || containsIgnoreCase(foodplace.getEmail().value, keyword)
-                        || containsIgnoreCase(foodplace.getPhone().value, keyword)
-                        || containsIgnoreCase(foodplace.getNote().value, keyword)
-                        || containsIgnoreCase(foodplace.getRate().getValue().toString(), keyword)
-                        || containsIgnoreCase(foodplace.getCuisine().value, keyword)
-                        || containsIgnoreCase(foodplace.getTiming().toString(), keyword)
-                        || foodplace.getTags().stream().anyMatch(tag -> containsIgnoreCase(tag.tagName, keyword))
-        );
+                StringUtil.containsSubstringIgnoreCase(searchableString, keyword));
     }
 
-    private boolean containsIgnoreCase(String field, String keyword) {
-        return StringUtil.containsSubstringIgnoreCase(field, keyword);
+    private void appendIfNotNull(StringBuilder sb, String field) {
+        if (field != null) {
+            sb.append(field).append(" ");
+        }
     }
 
     @Override
