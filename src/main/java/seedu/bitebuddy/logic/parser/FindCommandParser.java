@@ -41,7 +41,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             );
         }
 
-        // normalize when the first token is a prefixed value so ArgumentTokenizer treats it as a value
+        // normalize when the first token is a prefix so ArgumentTokenizer treats it as a preamble
         if (trimmedArgs.startsWith("t/") || trimmedArgs.startsWith("c/") || trimmedArgs.startsWith("r/")) {
             trimmedArgs = " " + trimmedArgs;
         }

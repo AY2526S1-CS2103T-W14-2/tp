@@ -79,6 +79,11 @@ public class EditCommandParser implements Parser<EditCommand> {
      * Builds an EditFoodplaceDescriptor from the provided ArgumentMultimap.
      * Keeps parsing details out of the top-level parse method to maintain a single
      * level of abstraction there.
+     * * level of abstraction there.
+     * 
+     * @param argMultimap The parsed arguments from the user input.
+     * @return An EditFoodplaceDescriptor containing the parsed fields for editing a food place.
+     * @throws ParseException if any of the fields to be edited are invalid
      */
     private EditCommand.EditFoodplaceDescriptor buildDescriptor(ArgumentMultimap argMultimap) throws ParseException {
         EditCommand.EditFoodplaceDescriptor descriptor = new EditCommand.EditFoodplaceDescriptor();
