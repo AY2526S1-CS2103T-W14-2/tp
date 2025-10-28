@@ -22,8 +22,8 @@ public class PinCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins the foodplace identified "
             + "by the index number used in the last foodplace listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "pin [INDEX]\n"
+            + "INDEX must be a positive integer.\n"
+            + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_PIN_FOODPLACE_SUCCESS = "Pinned foodplace: %1$s";
@@ -43,33 +43,42 @@ public class PinCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Foodplace> lastShownList = model.getFilteredFoodplaceList();
+        Foodplace foodplaceToPin = getFoodplaceToPin(model);
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
-        }
-
-        Foodplace foodplaceToPin = lastShownList.get(index.getZeroBased());
-
-        // update list to contain pinned places only
-        model.updateFilteredFoodplaceList(PREDICATE_SHOW_PINNED_FOODPLACES);
-        List<Foodplace> pinnedList = model.getFilteredFoodplaceList();
-
-        if (pinnedList.size() >= 5) {
+        showPinnedFoodplaces(model);
+        if (isMaxPinsReached(model)) {
             return new CommandResult(MESSAGE_MAX_PIN_REACHED);
         }
 
-        if (foodplaceToPin.getPinned().isPinned) {
+        if (isAlreadyPinned(foodplaceToPin)) {
             return new CommandResult(MESSAGE_ALREADY_PINNED);
         }
 
         Foodplace pinnedFoodplace = pinFoodplace(foodplaceToPin);
-
         model.setFoodplace(foodplaceToPin, pinnedFoodplace);
 
-        model.updateFilteredFoodplaceList(PREDICATE_SHOW_PINNED_FOODPLACES);
-
+        showPinnedFoodplaces(model);
         return new CommandResult(String.format(MESSAGE_PIN_FOODPLACE_SUCCESS, Messages.format(pinnedFoodplace)));
+    }
+
+    private Foodplace getFoodplaceToPin(Model model) throws CommandException {
+        List<Foodplace> lastShownList = model.getFilteredFoodplaceList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
+        }
+        return lastShownList.get(index.getZeroBased());
+    }
+
+    private boolean isMaxPinsReached(Model model) {
+        return model.getFilteredFoodplaceList().size() >= 5;
+    }
+
+    private boolean isAlreadyPinned(Foodplace foodplace) {
+        return foodplace.getPinned().isPinned();
+    }
+
+    private void showPinnedFoodplaces(Model model) {
+        model.updateFilteredFoodplaceList(PREDICATE_SHOW_PINNED_FOODPLACES);
     }
 
     private static Foodplace pinFoodplace(Foodplace fp) {
