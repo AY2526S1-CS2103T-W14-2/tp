@@ -29,8 +29,9 @@ public class RateCommand extends Command {
     public static final String MESSAGE_DELETE_RATE_SUCCESS = "Removed rating from Foodplace: %1$s";
 
     private final Index index;
-    private final Rate rate;
     private final Integer rating;
+
+    private Rate rate;
 
     /**
      * @param index of the foodplace in the filtered foodplace list to edit the remark
@@ -71,7 +72,7 @@ public class RateCommand extends Command {
             throw new CommandException(Rate.MESSAGE_CONSTRAINTS);
         }
 
-        rate.setRate(rating);
+        rate = new Rate(rating);
     }
 
     /**

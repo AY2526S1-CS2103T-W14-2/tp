@@ -37,40 +37,6 @@ public class RateTest {
     }
 
     @Test
-    public void setRate_valid_true() {
-        Rate rate = new Rate();
-        rate.setRate(5);
-        assertEquals(5, rate.getValue());
-        rate.setRate(0);
-        assertEquals(0, rate.getValue());
-        rate.setRate(1);
-        assertEquals(1, rate.getValue());
-        rate.setRate(10);
-        assertEquals(10, rate.getValue());
-    }
-
-    @Test
-    public void setRate_invalid_false() {
-        Rate rate = new Rate();
-
-        assertThrows(IllegalArgumentException.class, () -> rate.setRate(Integer.MIN_VALUE));
-        assertNotEquals(Integer.MIN_VALUE, rate.getValue());
-
-        assertThrows(IllegalArgumentException.class, () -> rate.setRate(-1));
-        assertNotEquals(-1, rate.getValue());
-
-        assertThrows(IllegalArgumentException.class, () -> rate.setRate(Integer.MAX_VALUE));
-        assertNotEquals(Integer.MAX_VALUE, rate.getValue());
-    }
-
-    @Test
-    public void reset_valid_success() {
-        Rate rate = new Rate();
-        rate.reset();
-        assertEquals(new Rate(), rate);
-    }
-
-    @Test
     public void isSet_valueNotDefault_true() {
         assertTrue(new Rate(5).isSet());
     }

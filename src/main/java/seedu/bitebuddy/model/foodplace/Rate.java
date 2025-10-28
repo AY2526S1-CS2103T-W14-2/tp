@@ -15,7 +15,7 @@ public class Rate {
             String.format("Ratings should only contain numbers, and be an integer between %d to %d",
                     MIN, MAX
             );
-    private Integer value;
+    private final Integer value;
 
     /**
      * Constructs a {@code Rate} without a rating.
@@ -40,23 +40,6 @@ public class Rate {
      */
     public static boolean isValidRating(Integer test) {
         return (test.equals(DEFAULT) || MIN <= test && test <= MAX);
-    }
-
-    /**
-     * Returns true if rate is updated, otherwise returns false.
-     * @param rate The rate to update to
-     */
-    public void setRate(Integer rate) {
-        requireNonNull(rate);
-        checkArgument(isValidRating(rate), MESSAGE_CONSTRAINTS);
-        this.value = rate;
-    }
-
-    /**
-     * Sets the rating score to default (i.e. no rating).
-     */
-    public void reset() {
-        this.value = DEFAULT;
     }
 
     /**

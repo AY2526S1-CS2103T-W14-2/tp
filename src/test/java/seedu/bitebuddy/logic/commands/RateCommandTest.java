@@ -108,14 +108,15 @@ public class RateCommandTest {
     public void hashcode() {
         RateCommand rateCommand1 = new RateCommand(INDEX_FIRST_FOODPLACE, Integer.valueOf(RATE_SUCCESS_STUB));
         RateCommand rateCommand2 = new RateCommand(INDEX_FIRST_FOODPLACE, Integer.valueOf(RATE_SUCCESS_STUB));
+        RateCommand rateCommand3 = new RateCommand(INDEX_SECOND_FOODPLACE, Integer.valueOf(RATE_SUCCESS_STUB));
         try {
             rateCommand1.setRate();
             rateCommand2.setRate();
+            rateCommand3.setRate();
         } catch (CommandException e) {
             Assertions.fail("Failed to set rate");
         }
         assertEquals(rateCommand1.hashCode(), rateCommand2.hashCode());
-        assertNotEquals(rateCommand1.hashCode(),
-                new RateCommand(INDEX_SECOND_FOODPLACE, Integer.valueOf(RATE_SUCCESS_STUB)).hashCode());
+        assertNotEquals(rateCommand1.hashCode(),rateCommand3.hashCode());
     }
 }
