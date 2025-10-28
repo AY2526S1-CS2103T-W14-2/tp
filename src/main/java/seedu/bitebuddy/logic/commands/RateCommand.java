@@ -31,20 +31,18 @@ public class RateCommand extends Command {
     public static final String MESSAGE_DELETE_RATE_SUCCESS = "Removed rating from Foodplace: %1$s";
 
     private final Index index;
-    private final Integer rating;
+    private final Rate rate;
 
-    private Rate rate;
 
     /**
      * @param index of the foodplace in the filtered foodplace list to edit the remark
-     * @param rating of the foodplace to be updated to
+     * @param rate of the foodplace to be updated to
      */
-    public RateCommand(Index index, Integer rating) {
-        requireAllNonNull(index, rating);
+    public RateCommand(Index index, Rate rate) {
+        requireAllNonNull(index, rate);
 
         this.index = index;
-        this.rating = rating;
-        this.rate = new Rate();
+        this.rate = rate;
     }
 
     @Override
@@ -54,8 +52,6 @@ public class RateCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
         }
-
-        setRate();
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
         Foodplace editedFoodplace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
@@ -67,14 +63,6 @@ public class RateCommand extends Command {
         model.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_ALL_FOODPLACES);
 
         return new CommandResult(generateSuccessMessage(editedFoodplace));
-    }
-
-    public void setRate() throws CommandException {
-        if (!Rate.isValidRating(rating)) {
-            throw new CommandException(Rate.MESSAGE_CONSTRAINTS);
-        }
-
-        rate = new Rate(rating);
     }
 
     /**

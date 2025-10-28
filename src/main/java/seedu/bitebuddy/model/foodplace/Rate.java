@@ -12,9 +12,10 @@ public class Rate {
     public static final Integer MIN = 1;
     public static final Integer DEFAULT = 0;
     public static final String MESSAGE_CONSTRAINTS =
-            String.format("Ratings should only contain numbers, and be an integer between %d to %d",
-                    MIN, MAX
-            );
+        String.format("Ratings should only contain numbers, and either: A) be an integer between %d to %d inclusive;"
+            + " OR B) be %d to remove the target foodplace's existing rating.",
+            MIN, MAX, DEFAULT
+        );
     private final Integer value;
 
     /**
