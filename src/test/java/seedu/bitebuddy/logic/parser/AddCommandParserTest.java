@@ -233,4 +233,25 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                         + ADDRESS_DESC_SWENSWAN + CLOSE_TIMING_DESC_SWENSWAN, ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
     }
+
+    @Test
+    public void parse_invalidTimeFormat_failure() {
+        // opening time invalid
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                        + ADDRESS_DESC_SWENSWAN + " ot/25:00" + CLOSE_TIMING_DESC_SWENSWAN,
+                ParserUtil.MESSAGE_INVALID_TIME_FORMAT);
+
+        // closing time invalid
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                        + ADDRESS_DESC_SWENSWAN + OPEN_TIMING_DESC_SWENSWAN + " ct/25:00",
+                ParserUtil.MESSAGE_INVALID_TIME_FORMAT);
+    }
+
+    @Test
+    public void parse_openingAfterClosing_failure() {
+        String invalidOpenClose = " ot/18:00 ct/09:00"; // open > close
+        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
+                        + ADDRESS_DESC_SWENSWAN + invalidOpenClose,
+                ParserUtil.MESSAGE_INVALID_OPENING_CLOSING_TIME);
+    }
 }
