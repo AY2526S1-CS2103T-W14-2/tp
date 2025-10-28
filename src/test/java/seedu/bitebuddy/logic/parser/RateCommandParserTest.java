@@ -2,8 +2,6 @@ package seedu.bitebuddy.logic.parser;
 
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 
 import org.junit.jupiter.api.Test;
 
