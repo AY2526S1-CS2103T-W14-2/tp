@@ -20,8 +20,10 @@ public class RateCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the rating of the foodplace identified "
             + "by the index number used in the last foodplace listing.\n"
-            + "INDEX and RATING must be a positive integer. If RATING is 0, then the rating will be removed.\n"
-            + "Any other existing rating will be overwritten by the input.\n"
+            + "INDEX and RATING must be a positive integer. A RATING to be set must be between "
+            + Rate.MIN + " and " + Rate.MAX
+            + ". If RATING is 0, then the existing rating will be removed.\n"
+            + "Any other input RATING will overwrite the existing rating.\n"
             + "Parameters: INDEX RATING\n"
             + "Example: " + COMMAND_WORD + " 5 " + "1";
 
