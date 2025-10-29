@@ -114,6 +114,7 @@ class JsonAdaptedFoodplace {
         final Note modelNote = toModelNote();
         final Wishlist modelWishlist = toModelWishlist();
         final Blacklist modelBlacklist = toModelBlacklist();
+        checkWishlistBlacklistConflict();
         final Pinned modelPinned = toModelPinned();
 
         return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming, modelCuisine,
@@ -216,10 +217,6 @@ class JsonAdaptedFoodplace {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Wishlist.class.getSimpleName()));
         }
-        // Check for conflict between wishlist and blacklist (also need ensure blacklist is not null)
-        if (isWishlisted && isBlacklisted != null && isBlacklisted) {
-            throw new IllegalValueException(String.format(WISHLIST_BLACKLIST_CONFLICT_MESSAGE));
-        }
         return new Wishlist(isWishlisted);
     }
 
@@ -228,11 +225,13 @@ class JsonAdaptedFoodplace {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Blacklist.class.getSimpleName()));
         }
-        // Check for conflict between wishlist and blacklist (also need ensure blacklist is not null)
-        if (isBlacklisted && isWishlisted != null && isWishlisted) {
-            throw new IllegalValueException(String.format(WISHLIST_BLACKLIST_CONFLICT_MESSAGE));
-        }
         return new Blacklist(isBlacklisted);
+    }
+
+    private void checkWishlistBlacklistConflict() throws IllegalValueException {
+        if (isWishlisted != null && isBlacklisted != null && isWishlisted && isBlacklisted) {
+            throw new IllegalValueException(WISHLIST_BLACKLIST_CONFLICT_MESSAGE);
+        }
     }
 
     private Pinned toModelPinned() throws IllegalValueException {
