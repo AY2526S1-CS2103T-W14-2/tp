@@ -69,9 +69,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s bitebuddy book and {@code userPrefs}. <br>
-     * The data from the sample bitebuddy book will be used instead if {@code storage}'s bitebuddy book is not found,
-     * or an empty bitebuddy book will be used instead if errors occur when reading {@code storage}'s bitebuddy book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
+     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.log(Level.INFO, "Using data file : {0}", storage.getAddressBookFilePath());
