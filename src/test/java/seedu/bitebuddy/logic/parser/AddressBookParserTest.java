@@ -122,7 +122,7 @@ public class AddressBookParserTest {
         final Rate rate = new Rate(3);
         RateCommand command = (RateCommand) parser.parseCommand(RateCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_FOODPLACE.getOneBased() + " " + rate.getValue());
-        assertEquals(new RateCommand(INDEX_FIRST_FOODPLACE, rate.getValue()), command);
+        assertEquals(new RateCommand(INDEX_FIRST_FOODPLACE, rate), command);
     }
 
     @Test
