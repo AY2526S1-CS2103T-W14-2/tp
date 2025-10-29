@@ -1,7 +1,6 @@
 package seedu.bitebuddy.model;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
@@ -46,6 +45,10 @@ public class ModelManager implements Model {
         filteredFoodplaces = new FilteredList<>(sortedFoodplaces);
     }
 
+    public ModelManager() {
+        this(new AddressBook(), new UserPrefs());
+    }
+
     private int comparePinnedStatus(Foodplace fp1, Foodplace fp2) {
         // Pinned goes first
         int cmp = Boolean.compare(fp2.getPinned().isPinned, fp1.getPinned().isPinned);
@@ -63,10 +66,6 @@ public class ModelManager implements Model {
                 observableFoodplaces.indexOf(fp1),
                 observableFoodplaces.indexOf(fp2)
         );
-    }
-
-    public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================

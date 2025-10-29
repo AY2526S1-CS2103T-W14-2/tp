@@ -37,7 +37,7 @@ public class FoodplaceMatchesCriteriaPredicateTest {
         assertNotEquals(firstPredicate, 1);
 
         // null -> false
-        assertNotEquals(firstPredicate,null);
+        assertNotEquals(firstPredicate, null);
 
         // different tags -> false
         List<String> secondTagList = Arrays.asList("restaurant", "cheap");
