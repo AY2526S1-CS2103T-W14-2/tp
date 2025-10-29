@@ -24,7 +24,12 @@ public final class CommandRegistry {
         ListCommand.class,
         NoteCommand.class,
         TagCommand.class,
-        RateCommand.class
+        RateCommand.class,
+        PinCommand.class,
+        UnpinCommand.class,
+        WishlistCommand.class,
+        BlacklistCommand.class,
+        CompareCommand.class
     };
 
     static {
@@ -37,8 +42,8 @@ public final class CommandRegistry {
                 Object muVal = muField.get(null);
                 m.put(String.valueOf(cwVal), String.valueOf(muVal));
             }
-        } catch (ReflectiveOperationException e) {
-            throw new ExceptionInInitializerError(e);
+        } catch (ReflectiveOperationException roe) {
+            throw new ExceptionInInitializerError(roe);
         }
         USAGE_MAP = Collections.unmodifiableMap(m);
     }
