@@ -17,6 +17,7 @@ public class RateCommandParser implements Parser<RateCommand> {
      * and returns a {@code RemarkCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public RateCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentPositionMapper stringArgs = new ArgumentPositionMapper(args);
@@ -26,8 +27,8 @@ public class RateCommandParser implements Parser<RateCommand> {
         try {
             index = ParserUtil.parseIndex(stringArgs.getArgument(0));
             rating = Integer.valueOf(stringArgs.getArgument(1));
-        } catch (NumberFormatException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE), ive);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE), nfe);
         }
 
         Rate rate;

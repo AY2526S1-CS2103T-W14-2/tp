@@ -1,11 +1,15 @@
 package seedu.bitebuddy.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -73,5 +77,49 @@ public class FindCommandParserTest {
         // empty rating
         assertParseFailure(parser, "r/",
                 "Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE);
+    }
+
+    @Test
+    public void buildFieldPredicate_allEmpty_returnsEmptyOptional() throws Exception {
+        Method m = FindCommandParser.class.getDeclaredMethod("buildFieldPredicate",
+                List.class, Optional.class, Optional.class);
+        m.setAccessible(true);
+
+        Optional<?> result = (Optional<?>) m.invoke(parser, List.of(), Optional.empty(), Optional.empty());
+        assertFalse(result.isPresent());
+    }
+
+    @Test
+    public void buildFieldPredicate_tagPresent_returnsPredicate() throws Exception {
+        Method m = FindCommandParser.class.getDeclaredMethod("buildFieldPredicate",
+                List.class, Optional.class, Optional.class);
+        m.setAccessible(true);
+
+        Optional<?> result = (Optional<?>) m.invoke(parser, List.of("FastFood"), Optional.empty(), Optional.empty());
+        assertTrue(result.isPresent());
+        assertTrue(result.get() instanceof FoodplaceMatchesCriteriaPredicate);
+    }
+
+    @Test
+    public void buildFieldPredicate_cuisinePresent_returnsPredicate() throws Exception {
+        Method m = FindCommandParser.class.getDeclaredMethod("buildFieldPredicate",
+                List.class, Optional.class, Optional.class);
+        m.setAccessible(true);
+
+        Optional<?> result = (Optional<?>) m.invoke(parser, List.of(),
+                Optional.of(new Cuisine("Italian")), Optional.empty());
+        assertTrue(result.isPresent());
+        assertTrue(result.get() instanceof FoodplaceMatchesCriteriaPredicate);
+    }
+
+    @Test
+    public void buildFieldPredicate_ratingPresent_returnsPredicate() throws Exception {
+        Method m = FindCommandParser.class.getDeclaredMethod("buildFieldPredicate",
+                List.class, Optional.class, Optional.class);
+        m.setAccessible(true);
+
+        Optional<?> result = (Optional<?>) m.invoke(parser, List.of(), Optional.empty(), Optional.of(new Rate(5)));
+        assertTrue(result.isPresent());
+        assertTrue(result.get() instanceof FoodplaceMatchesCriteriaPredicate);
     }
 }

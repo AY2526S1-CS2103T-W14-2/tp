@@ -5,7 +5,6 @@ import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.parser.CliSyntax.INDEX_WISHLIST_ENTRY_INDEX;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.logic.commands.WishlistCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
@@ -18,6 +17,7 @@ public class WishlistCommandParser implements Parser<WishlistCommand> {
      * and returns a {@code WishlistCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public WishlistCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
@@ -31,9 +31,9 @@ public class WishlistCommandParser implements Parser<WishlistCommand> {
         if (mapper.size() == 1) { // Index specified in command --> parse index
             try {
                 index = ParserUtil.parseIndex(mapper.getArgument(INDEX_WISHLIST_ENTRY_INDEX));
-            } catch (IllegalValueException e) {
+            } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        WishlistCommand.MESSAGE_USAGE), e);
+                        WishlistCommand.MESSAGE_USAGE), pe);
             }
             return new WishlistCommand(index);
         }

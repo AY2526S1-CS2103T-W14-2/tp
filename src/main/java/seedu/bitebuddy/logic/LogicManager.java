@@ -3,6 +3,7 @@ package seedu.bitebuddy.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -27,7 +28,7 @@ public class LogicManager implements Logic {
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+    private static final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final Storage storage;
@@ -44,7 +45,7 @@ public class LogicManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        logger.log(Level.INFO, "----------------[USER COMMAND][{0}]", commandText);
         CommandBuffer.push(commandText);
 
         CommandResult commandResult;

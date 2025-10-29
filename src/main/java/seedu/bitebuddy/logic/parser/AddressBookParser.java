@@ -3,6 +3,7 @@ package seedu.bitebuddy.logic.parser;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,9 +33,6 @@ import seedu.bitebuddy.logic.parser.exceptions.ParseException;
  */
 public class AddressBookParser {
 
-    /**
-     * Used for initial separation of command word and args.
-     */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
@@ -57,7 +55,7 @@ public class AddressBookParser {
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
-        logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+        logger.log(Level.FINE, () -> "Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
 
@@ -108,9 +106,8 @@ public class AddressBookParser {
 
         case UnpinCommand.COMMAND_WORD:
             return new UnpinCommandParser().parse(arguments);
-
         default:
-            logger.finer("This user input caused a ParseException: " + userInput);
+            logger.log(Level.FINER, () -> "This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

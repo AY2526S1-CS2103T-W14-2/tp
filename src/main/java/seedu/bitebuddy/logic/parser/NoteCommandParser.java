@@ -6,7 +6,6 @@ import static seedu.bitebuddy.logic.parser.CliSyntax.INDEX_NOTE_ENTRY_INDEX;
 import static seedu.bitebuddy.logic.parser.CliSyntax.INDEX_NOTE_NOTE_STRING;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.logic.commands.NoteCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Note;
@@ -20,6 +19,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
      * and returns a {@code NoteCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public NoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
@@ -32,15 +32,15 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         Index index;
         try {
             index = ParserUtil.parseIndex(mapper.getArgument(INDEX_NOTE_ENTRY_INDEX));
-        } catch (IllegalValueException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE), e);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE), pe);
         }
 
         Note note;
         String noteText = mapper.getRemainingArguments(INDEX_NOTE_NOTE_STRING);
         try {
             note = new Note(noteText);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException iae) {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         return new NoteCommand(index, note);
