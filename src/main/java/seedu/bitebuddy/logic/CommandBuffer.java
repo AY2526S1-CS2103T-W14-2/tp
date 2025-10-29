@@ -93,7 +93,10 @@ public class CommandBuffer {
      * Returns if the current node is the head or not.
      */
     public static boolean isHead() {
-        return current == head;
+        if (current != null && head != null) {
+            return current == head;
+        }
+        return false;
     }
 
     /**

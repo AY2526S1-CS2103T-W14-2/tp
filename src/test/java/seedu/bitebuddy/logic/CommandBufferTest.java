@@ -168,8 +168,8 @@ public class CommandBufferTest {
     }
 
     @Test
-    public void isHead_emptyBuffer_success() {
-        assertTrue(CommandBuffer.isHead());
+    public void isHead_emptyBuffer_fail() {
+        assertFalse(CommandBuffer.isHead());
     }
 
     @Test
@@ -178,7 +178,7 @@ public class CommandBufferTest {
         CommandBuffer.push(COMMAND_STUB);
         assertTrue(CommandBuffer.isHead());
 
-        // Check if added command is head
+        // Check if pointer is no longer at head
         CommandBuffer.getPrev();
         assertFalse(CommandBuffer.isHead());
     }
