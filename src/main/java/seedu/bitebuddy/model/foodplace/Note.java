@@ -10,8 +10,12 @@ import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 public class Note {
 
     public static final String MESSAGE_CONSTRAINTS = """
-            Note can only contain up to 100 characters max
-            Note should only contain ASCII-printable characters""";
+            Note given either exceeds 100 characters OR contained non-ASCII-printable characters.
+            Note constraints:
+            1. Note can only be up to 100 characters long
+            2. Note can only contain printable ASCII characters
+            Please refer to http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm
+            for the list of printable ASCII characters.""";
     // Allow printable ASCII characters only - space (32) to tilde (126)
     private static final String VALID_NOTE_REGEX = "^[ -~]*$";
     private static final int MAX_NOTE_LENGTH = 100;
