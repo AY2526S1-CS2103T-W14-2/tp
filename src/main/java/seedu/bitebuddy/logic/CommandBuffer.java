@@ -93,7 +93,8 @@ public class CommandBuffer {
      * Returns if the current node is the head or not.
      */
     public static boolean isHead() {
-        if (current != null && head != null) {
+        // Current and Head can only be set when push() is called, so there won't be a case where one isn't init
+        if (head != null) {
             return current == head;
         }
         return false;
