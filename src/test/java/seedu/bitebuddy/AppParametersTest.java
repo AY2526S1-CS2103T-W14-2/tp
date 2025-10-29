@@ -2,6 +2,7 @@ package seedu.bitebuddy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Paths;
@@ -17,33 +18,34 @@ import javafx.application.Application;
 public class AppParametersTest {
 
     private final ParametersStub parametersStub = new ParametersStub();
-    private final AppParameters expected = new AppParameters();
+    private final AppParameters expectedParams = new AppParameters();
 
     @Test
     public void parse_validConfigPath_success() {
         parametersStub.namedParameters.put("config", "config.json");
-        expected.setConfigPath(Paths.get("config.json"));
-        assertEquals(expected, AppParameters.parse(parametersStub));
+        expectedParams.setConfigPath(Paths.get("config.json"));
+        assertEquals(expectedParams, AppParameters.parse(parametersStub));
     }
 
     @Test
     public void parse_nullConfigPath_success() {
         parametersStub.namedParameters.put("config", null);
-        assertEquals(expected, AppParameters.parse(parametersStub));
+        assertEquals(expectedParams, AppParameters.parse(parametersStub));
     }
 
     @Test
     public void parse_invalidConfigPath_success() {
         parametersStub.namedParameters.put("config", "a\0");
-        expected.setConfigPath(null);
-        assertEquals(expected, AppParameters.parse(parametersStub));
+        expectedParams.setConfigPath(null);
+        assertEquals(expectedParams, AppParameters.parse(parametersStub));
     }
 
     @Test
     public void toStringMethod() {
         AppParameters appParameters = new AppParameters();
-        String expected = AppParameters.class.getCanonicalName() + "{configPath=" + appParameters.getConfigPath() + "}";
-        assertEquals(expected, appParameters.toString());
+        String expectedString = AppParameters.class.getCanonicalName()
+                + "{configPath=" + appParameters.getConfigPath() + "}";
+        assertEquals(expectedString, appParameters.toString());
     }
 
     @Test
@@ -57,10 +59,10 @@ public class AppParametersTest {
         assertTrue(appParameters.equals(appParameters));
 
         // null -> returns false
-        assertFalse(appParameters.equals(null));
+        assertNotEquals(appParameters, null);
 
         // different types -> returns false
-        assertFalse(appParameters.equals(5.0f));
+        assertNotEquals(appParameters, 5.0f);
 
         // different config path -> returns false
         AppParameters otherAppParameters = new AppParameters();
