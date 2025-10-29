@@ -1,8 +1,10 @@
 package seedu.bitebuddy.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -156,5 +158,31 @@ public class CommandBufferTest {
             CommandBuffer.push(i);
         }
         assertEquals(COMMAND_ARRAY_STUB.length, CommandBuffer.getSize());
+    }
+
+    @Test
+    public void isHead_emptyBuffer_success() {
+        assertTrue(CommandBuffer.isHead());
+    }
+
+    @Test
+    public void isHead_nonEmptyBuffer_success() {
+        // Check if head is updated
+        CommandBuffer.push(COMMAND_STUB);
+        assertTrue(CommandBuffer.isHead());
+
+        // Check if added command is head
+        CommandBuffer.getPrev();
+        assertFalse(CommandBuffer.isHead());
+    }
+
+    @Test
+    public void setPendingCommand_anyBuffer_success() {
+        CommandBuffer.push(COMMAND_ARRAY_STUB[0]);
+        CommandBuffer.getPrev();
+        assertEquals(COMMAND_ARRAY_STUB[0], CommandBuffer.getCurrent().getCommand());
+        CommandBuffer.push(COMMAND_ARRAY_STUB[1]);
+        CommandBuffer.setPendingCommand(COMMAND_ARRAY_STUB[1]);
+        assertEquals(COMMAND_ARRAY_STUB[1], CommandBuffer.getCurrent().getCommand());
     }
 }
