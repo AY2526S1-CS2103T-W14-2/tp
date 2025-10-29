@@ -106,6 +106,7 @@ public class CommandBuffer {
         head = null;
         current = null;
         size = 0;
+        pendingCommand = null;
     }
 
     /**
