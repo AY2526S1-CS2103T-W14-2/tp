@@ -8,8 +8,8 @@ import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseFail
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.logic.commands.RateCommand;
-import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
+import seedu.bitebuddy.model.foodplace.Rate;
 
 public class RateCommandParserTest {
     private final RateCommandParser parser = new RateCommandParser();
