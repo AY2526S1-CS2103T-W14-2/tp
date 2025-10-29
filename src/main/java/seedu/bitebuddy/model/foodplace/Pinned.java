@@ -16,6 +16,10 @@ public class Pinned {
         this.isPinned = isPinned;
     }
 
+    public boolean isPinned() {
+        return this.isPinned;
+    }
+
     @Override
     public String toString() {
         return String.valueOf(isPinned);
