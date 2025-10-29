@@ -1,9 +1,10 @@
 package seedu.bitebuddy.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashSet;
-import static java.util.Objects.requireNonNull;
 import java.util.Set;
 
 import seedu.bitebuddy.commons.core.index.Index;

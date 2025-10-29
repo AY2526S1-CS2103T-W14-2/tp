@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Foodplace's timing in BiteBuddy.
@@ -21,9 +21,10 @@ public class Timing {
             + "Timing must be in the format HH:mm-HH:mm";
 
     public static final String VALIDATION_REGEX = "^([01]\\d|2[0-3]):[0-5]\\d$";
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
     private static final LocalTime DEFAULT_START = LocalTime.of(0, 0);
     private static final LocalTime DEFAULT_END = LocalTime.of(23, 59);
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
     private final LocalTime openingTime;
     private final LocalTime closingTime;
@@ -67,8 +68,8 @@ public class Timing {
 
         checkArgument(isValidTime(open), MESSAGE_INVALID_TIME);
         checkArgument(isValidTime(close), MESSAGE_INVALID_TIME);
-        LocalTime opening = LocalTime.parse(open, formatter);
-        LocalTime closing = LocalTime.parse(close, formatter);
+        LocalTime opening = LocalTime.parse(open, TIME_FORMATTER);
+        LocalTime closing = LocalTime.parse(close, TIME_FORMATTER);
         checkArgument(!closing.isBefore(opening), MESSAGE_CONSTRAINTS);
         this.openingTime = opening;
         this.closingTime = closing;
@@ -171,8 +172,8 @@ public class Timing {
         checkArgument(parts.length == 2, MESSAGE_INVALID_TIME_RANGE);
         String openStr = parts[0].trim();
         String closeStr = parts[1].trim();
-        LocalTime opening = LocalTime.parse(openStr, formatter);
-        LocalTime closing = LocalTime.parse(closeStr, formatter);
+        LocalTime opening = LocalTime.parse(openStr, TIME_FORMATTER);
+        LocalTime closing = LocalTime.parse(closeStr, TIME_FORMATTER);
         return new LocalTime[]{opening, closing};
     }
 
