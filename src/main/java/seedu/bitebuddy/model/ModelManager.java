@@ -56,10 +56,10 @@ public class ModelManager implements Model {
             return cmp;
         }
 
-            // If both are pinned, sort alphabetically by name
-            if (fp1.getPinned().isPinned() && fp2.getPinned().isPinned()) {
-                return fp1.getName().fullName.compareToIgnoreCase(fp2.getName().fullName);
-            }
+        // If both are pinned, sort alphabetically by name
+        if (fp1.getPinned().isPinned() && fp2.getPinned().isPinned()) {
+            return fp1.getName().fullName.compareToIgnoreCase(fp2.getName().fullName);
+        }
 
         // If both are unpinned, keep original order (stable)
         return Integer.compare(
