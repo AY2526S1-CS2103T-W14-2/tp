@@ -12,10 +12,11 @@ public class Rate {
     public static final Integer MIN = 1;
     public static final Integer DEFAULT = 0;
     public static final String MESSAGE_CONSTRAINTS =
-            String.format("Ratings should only contain numbers, and be an integer between %d to %d",
-                    MIN, MAX
-            );
-    private Integer value;
+        String.format("Ratings should only contain numbers, and either: A) be an integer between %d to %d inclusive;"
+            + " OR B) be %d to remove the target foodplace's existing rating.",
+            MIN, MAX, DEFAULT
+        );
+    private final Integer value;
 
     /**
      * Constructs a {@code Rate} without a rating.
@@ -40,23 +41,6 @@ public class Rate {
      */
     public static boolean isValidRating(Integer test) {
         return (test.equals(DEFAULT) || MIN <= test && test <= MAX);
-    }
-
-    /**
-     * Returns true if rate is updated, otherwise returns false.
-     * @param rate The rate to update to
-     */
-    public void setRate(Integer rate) {
-        requireNonNull(rate);
-        checkArgument(isValidRating(rate), MESSAGE_CONSTRAINTS);
-        this.value = rate;
-    }
-
-    /**
-     * Sets the rating score to default (i.e. no rating).
-     */
-    public void reset() {
-        this.value = DEFAULT;
     }
 
     /**
