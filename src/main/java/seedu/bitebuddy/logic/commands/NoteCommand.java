@@ -26,7 +26,7 @@ public class NoteCommand extends Command {
             + "• Existing notes will be overwritten by the input.\n"
             + "Parameters:\n"
             + "  " + "INDEX [NOTE]\n"
-            + "Examples: \n"
+            + "Examples:\n"
             + "  " + COMMAND_WORD + " 1 " + "Very good customer service\n"
             + "  " + COMMAND_WORD + " 3";
 

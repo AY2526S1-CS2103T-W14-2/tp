@@ -126,6 +126,13 @@ Follow these steps to install and start using **BiteBuddy**!
   e.g. 12pm should be typed as `12:00` and 7pm should be typed as `19:00`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+**Using previously entered commands:**<br>
+
+* Hate retyping commands? Press the Up / Down arrow keys in the command box!
+
+* Swap between your previously-used and currently-typing commands!
+
 </box>
 
 ---
@@ -138,9 +145,11 @@ Format: `help [COMMAND]`
 
 ```
 help: Shows program usage instructions.
-Parameters: [COMMAND]
-Example: help
-Example: help find
+Parameters:
+  [COMMAND] 
+Examples:
+  help
+  help find
 ```
 
 * If no command is given, the URL for the help page will be shown. ![help message](images/helpMessage.png)
@@ -162,8 +171,11 @@ Adds a new foodplace entry to BiteBuddy.
 Format: `add n/NAME a/ADDRESS [ot/OPENING_TIME ct/CLOSING_TIME] [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`
 
 ```
-add: Adds a foodplace to BiteBuddy. Parameters: n/NAME a/ADDRESS [ot/OPENING_TIME ct/CLOSING_TIME] [p/PHONE] [e/EMAIL] [c/CUISINE] [t/TAG]... [no/NOTE] [r/RATE]
-Example: add n/Prata place ot/12:00 ct/23:00 p/98765432 e/pratad@example.com a/311, Clementi Ave 2, #02-25 c/Indian t/Cheap no/Famous for tandoori chicken r/9
+add: Adds a foodplace to BiteBuddy.
+Parameters:
+  n/FOODPLACE_NAME a/ADDRESS [p/PHONE] [e/EMAIL] [c/CUISINE] [t/TAG]... [no/NOTE] [r/RATE]
+Example:
+  add n/Prata place a/311, Clementi Ave 2, #02-25 p/98765432 e/pratad@example.com c/Indian t/Cheap no/Famous for tandoori chicken r/9
 ```
 
 
@@ -185,7 +197,8 @@ Format: `list`
 
 ```
 list: Lists all foodplaces in BiteBuddy.
-Example: list
+Example:
+  list
 ```
 
 ![ug_list](images/ug_list.png)
@@ -202,8 +215,11 @@ Format: `delete INDEX`
 
 ```
 delete: Deletes the foodplace identified by the index number used in the displayed foodplace list.
-Parameters: INDEX
-Example: delete 1
+• INDEX must be a positive integer.
+Parameters:
+  INDEX
+Example:
+  delete 1
 ```
 
 * Deletes the foodplace at the specified `INDEX`.
@@ -224,12 +240,16 @@ Examples:
 
 Edits an existing foodplace entry in BiteBuddy.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ot/OPENING_TIME ct/CLOSING_TIME] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [ot/OPENING_TIME ct/CLOSING_TIME] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`
 
 ```
-edit: Edits the details of the foodplace identified by the index number used in the displayed foodplace list. Existing values will be overwritten by the input values.
-Parameters: INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [ot/OPENING_TIME ct/CLOSING_TIME] [c/CUISINE] [t/TAG]… [no/NOTE] [r/RATING]
-Example: edit 1 p/91234567 e/order@kfc.com
+edit: Edits the details of the foodplace identified by the index number used in the displayed foodplace list.
+• INDEX must be a positive integer.
+• Existing values will only be overwritten by the supplied input values.
+Parameters:
+  INDEX [n/FOODPLACE_NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [c/CUISINE] [ot/OPENING_TIME ct/CLOSING_TIME] [no/NOTE] [r/RATING] [t/TAG]...
+Example:
+  edit 1 p/91234567 e/johndoe@example.com
 ```
 
 * Edits the foodplace at the specified `INDEX`.
@@ -259,11 +279,15 @@ Adds / edits the note of an existing foodplace in BiteBuddy.
 Format: `note INDEX [note]`
 
 ```
-note: Edits the notes of the foodplace identified by the index number used in the last foodplace listing. Existing notes will be overwritten by the input.
-Empty notes erase the current note in foodplace.
-Parameters: INDEX [note]
-Example: note 1 Very good customer service
-Restrictions: 100 characters limit
+note: Edits the notes of the foodplace identified by the index number used in the displayed foodplace list.
+If NOTE is not supplied, the current note of the foodplace will be erased instead.
+• INDEX must be a positive integer. NOTE has a 100 ASCII-character limit.
+• Existing notes will be overwritten by the input.
+Parameters:
+  INDEX [NOTE]
+Examples:
+  note 1 Very good customer service
+  note 3
 ```
 
 * Edits the foodplace at the specified `INDEX`.
@@ -290,9 +314,15 @@ Adds / edits a rating from the specified foodplace in BiteBuddy.
 Format: `rate INDEX RATING`
 
 ```
-rate: Edits the rating of the foodplace identified by the index number used in the last foodplace listing. INDEX and RATING must be a positive integer. Existing rating will be overwritten by the input.
-Parameters: INDEX RATING
-Example: rate 5 1
+rate: Edits the rating of the foodplace identified by the index number used in the displayed foodplace listing.
+If RATING is 0, then the existing rating will be removed.
+• INDEX and RATING must be positive integers. A RATING to be set must be between 1 and 10.
+• Existing ratings will be overwritten by the input ratings otherwise.
+Parameters:
+  INDEX RATING
+Example:
+  rate 5 1
+  rate 2 0
 ```
 
 * Edits the foodplace at the specified `INDEX`.
@@ -321,10 +351,17 @@ Format 1 : `tag INDEX TAG1 [TAG2]...`
 Format 2 : `tag INDEX /d [TAG1] [TAG2]...`
 
 ```
-tag: Adds or deletes tags for the foodplace identified by the index number shown in the displayed foodplace list.
-Existing tags will be preserved when adding, and duplicate tags (case-insensitive) will be ignored.
-Parameters: INDEX [/d] TAG1 [TAG2]...
-Example: tag 3 Savoury GoodService
+tag: Adds/deletes tags from the foodplace identified by the index number shown in the displayed foodplace list.
+If the '/d' field is supplied, the foodplace will have the supplied tags deleted instead if they exist.
+• INDEX must be a positive integer.
+• Tags must be alphanumeric (letters and numbers only). Tags cannot contain spaces.
+• Existing tags will be preserved when adding, and duplicate tags (case-insensitive) will be ignored.
+Parameters:
+  INDEX [/d] TAG1 [TAG2]...
+Examples:
+  tag 3 FastFood Expensive
+  tag 1 /d FastFood
+  tag 2 /d
 ```
 
 * Finds the foodplace at the specified `INDEX` and edits its tags.
@@ -349,10 +386,15 @@ Wishlists an existing foodplace in BiteBuddy.
 Format: `wishlist [INDEX]`
 
 ```
-wishlist: Wishlists the foodplace identified by the index number used in the last foodplace listing.
-Empty index displays the wishlist instead.
-Parameters: [INDEX]
-Example: wishlist 2
+wishlist: Wishlists the foodplace identified by the index number used in the displayed foodplace list.
+If no INDEX is supplied, displays all wishlisted foodplaces instead.
+• If INDEX is supplied, INDEX must be a positive integer.
+• Wishlisting an already-wishlisted foodplace removes its wishlist status.
+Parameters:
+  [INDEX]
+Examples:
+  wishlist 1
+  wishlist
 ```
 
 * Wishlists the foodplace at the specified `INDEX`.
@@ -378,10 +420,15 @@ Blacklists an existing foodplace in BiteBuddy.
 Format: `blacklist [INDEX]`
 
 ```
-blacklist: Blacklists the foodplace identified by the index number used in the last foodplace listing.
-Empty index displays the blacklist instead.
-Parameters: [INDEX]
-Example: blacklist 2
+blacklist: Blacklists the foodplace identified by the index number used in the displayed foodplace list.
+If no INDEX is supplied, displays all blacklisted foodplaces instead.
+• If INDEX is supplied, INDEX must be a positive integer.
+• Blacklisting an already-blacklisted foodplace removes its blacklist status.
+Parameters:
+  [INDEX]
+Examples:
+  blacklist 1
+  blacklist
 ```
 
 * Blacklists the foodplace at the specified `INDEX`.
@@ -407,10 +454,12 @@ Pins a specified foodplace in BiteBuddy.
 Format: `pin INDEX`
 
 ```
-pin: Pins the foodplace identified by the index number used in the last foodplace listing.
-INDEX must be a positive integer.
-Parameters: INDEX
-Example: pin 1
+pin: Pins the foodplace identified by the index number used in the last foodplace list.
+• INDEX must be a positive integer.
+Parameters:
+  INDEX
+Example:
+  pin 1
 ```
 
 * Pins the foodplace at the specified `INDEX`.
@@ -431,10 +480,12 @@ Unpins a specified foodplace in Bitebuddy.
 Format: `unpin INDEX`
 
 ```
-unpin: Unpins the foodplace identified by the index number used in the last foodplace listing.
-INDEX must be a positive integer.
-Parameters: INDEX
-Example: unpin 1
+unpin: Unpins the foodplace identified by the index number used in the last foodplace list.
+• INDEX must be a positive integer.
+Parameters:
+  INDEX
+Example:
+  unpin 1
 ```
 
 * Unpins the foodplace at the specified `INDEX`.
@@ -454,12 +505,16 @@ Format 1: `find KEYWORD [MORE_KEYWORDS]`
 Format 2: `find t/TAG [MORE_TAGS]... [c/CUISINE] [r/RATING]`
 
 ```
-find: Finds all foodplaces that match the given keywords or field filters (case-insensitive) and displays them as a list with index numbers.
+find: Finds all foodplaces in BiteBuddy whose entries match the given keywords & specified fields (e.g. t/, c/, r/), then displays them as a list.
+• Keywords and specified fields are case-insensitive.
+• For keywords, foodplaces with fields that match any substring will be returned.
+• For specified fields, only foodplaces that match exactly ALL specified fields are returned.
 Parameters:
-  KEYWORD [MORE_KEYWORDS]... [t/TAG MORE_TAGS...] [c/CUISINE] [r/RATING]
+  KEYWORD [MORE_KEYWORDS]... [t/TAG [MORE_TAGS]...] [c/CUISINE] [r/RATING]
 Examples:
   find western cheap aircon
-  find t/hawker c/japanese r/8
+  find t/ hawker c/ japanese r/ 8
+  find chicken t/ hawker
 ```
 
 * The search is **case-insensitive**: `prata` will match `Prata`[UserGuide.md](UserGuide.md)
@@ -489,10 +544,12 @@ Compares two foodplaces by their ratings and tags.
 Format: `compare INDEX1 INDEX2`
 
 ```
-compare: Compares the two foodplaces identified by the index numbers used in the last foodplace listing.
-INDEX1 and INDEX2 must be positive integers. INDEX1 and INDEX2 must not be equal.
-Parameters: INDEX1 and INDEX2
-Example: compare 1 5
+compare: Compares the two foodplaces identified by the index numbers used in the displayed foodplace list.
+• INDEX1 and INDEX2 must be positive integers. INDEX1 and INDEX2 must not be equal.
+Parameters:
+  INDEX1 INDEX2
+Example:
+  compare 1 5
 ```
 
 * Compares the ratings of the two specified foodplaces.
@@ -511,8 +568,10 @@ Clears all entries from BiteBuddy.
 Format: `clear`
 
 ```
-clear: Clears BiteBuddy.
-Example: clear
+clear: Clears all entries saved in BiteBuddy.
+• This action is IRREVERSIBLE!
+Example:
+  clear
 ```
 
 [Go to Command Summary](#command-summary)
@@ -527,7 +586,8 @@ Format: `exit`
 
 ```
 exit: Exits the program.
-Example: exit
+Example:
+  exit
 ```
 
 [Go to Command Summary](#command-summary)
