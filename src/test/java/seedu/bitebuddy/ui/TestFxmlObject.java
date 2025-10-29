@@ -23,7 +23,7 @@ public class TestFxmlObject {
         return text;
     }
 
-    public void setText(String text) {
+    public final void setText(String text) {
         this.text = text;
     }
 
@@ -40,6 +40,11 @@ public class TestFxmlObject {
 
         TestFxmlObject otherTestFxmlObject = (TestFxmlObject) other;
         return Objects.equals(text, otherTestFxmlObject.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(text);
     }
 
 }

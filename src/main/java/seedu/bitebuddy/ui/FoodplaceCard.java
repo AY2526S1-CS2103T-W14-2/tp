@@ -73,42 +73,37 @@ public class FoodplaceCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(foodplace.getName().fullName);
         address.setText(foodplace.getAddress().value);
-        phone.setText(
-                !(foodplace.getPhone().value.isEmpty())
-                        ? foodplace.getPhone().value
-                        : MESSAGE_NO_PHONE
-        );
-        email.setText(
-                !(foodplace.getEmail().value.isEmpty())
-                        ? foodplace.getEmail().value
-                        : MESSAGE_NO_EMAIL
-        );
-        timing.setText(
-                foodplace.getTiming().isSet()
-                        ? foodplace.getTiming().toString()
-                        : MESSAGE_NO_TIMING
-        );
-        cuisine.setText(
-                !(foodplace.getCuisine().value.isEmpty())
-                        ? foodplace.getCuisine().value
-                        : MESSAGE_NO_CUISINE
-        );
-        note.setText(
-                !(foodplace.getNote().value.isEmpty())
-                        ? foodplace.getNote().value
-                        : MESSAGE_NO_NOTE
-        );
+
+        // Optional fields
+        setLabelText(phone, foodplace.getPhone().value, MESSAGE_NO_PHONE);
+        setLabelText(email, foodplace.getEmail().value, MESSAGE_NO_EMAIL);
+        setLabelText(cuisine, foodplace.getCuisine().value, MESSAGE_NO_CUISINE);
+        setLabelText(note, foodplace.getNote().value, MESSAGE_NO_NOTE);
+        setLabelText(rate, foodplace.getRate().isSet() ? foodplace.getRate().toString() : "", MESSAGE_NO_RATE);
+        setTimingLabel(timing, foodplace.getTiming().toString(), foodplace.getTiming().isSet());
+        populateTags(foodplace);
+        wishlist.setText(foodplace.getWishlist().isWishlisted() ? MESSAGE_WISHLIST : "");
+        blacklist.setText(foodplace.getBlacklist().isBlacklisted() ? MESSAGE_BLACKLIST : "");
+        setPinIcon(foodplace.getPinned().isPinned());
+    }
+
+    private void setLabelText(Label label, String value, String defaultMessage) {
+        label.setText(value != null && !value.isEmpty() ? value : defaultMessage);
+    }
+
+    private void setTimingLabel(Label label, String timingValue, boolean isSet) {
+        label.setText(isSet && timingValue != null && !timingValue.isEmpty() ? timingValue : MESSAGE_NO_TIMING);
+    }
+
+    private void populateTags(Foodplace foodplace) {
+        tags.getChildren().clear();
         foodplace.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        rate.setText(
-                foodplace.getRate().isSet()
-                        ? foodplace.getRate().toString()
-                        : MESSAGE_NO_RATE
-        );
-        wishlist.setText(foodplace.getWishlist().isWishlisted() ? MESSAGE_WISHLIST : "");
-        blacklist.setText(foodplace.getBlacklist().isBlacklisted() ? MESSAGE_BLACKLIST : "");
-        if (foodplace.getPinned().isPinned()) {
+    }
+
+    private void setPinIcon(boolean pinned) {
+        if (pinned) {
             pinIcon.setVisible(true);
             pinIcon.setImage(new Image(getClass().getResourceAsStream(PIN_ICON_PATH)));
         } else {
