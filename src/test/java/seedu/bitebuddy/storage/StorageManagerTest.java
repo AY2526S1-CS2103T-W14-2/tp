@@ -74,4 +74,9 @@ public class StorageManagerTest {
         assertDoesNotThrow(() -> storage.saveAddressBook(ab, storage.getAddressBookFilePath()));
     }
 
+    @Test
+    public void getUserPrefsFilePath() {
+        assertEquals(storageManager.getUserPrefsFilePath(), getTempFilePath("prefs"));
+    }
+
 }

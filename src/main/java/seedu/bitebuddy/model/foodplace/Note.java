@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the notes about a foodplace in the address book.
+ * Represents the notes about a foodplace in BiteBuddy.
  * Guarantees: immutable; is always valid
  */
 public class Note {
 
-    public static final String MESSAGE_CONSTRAINTS = "Note can only contain up to 100 characters max\n"
-            + "Note should only contain ASCII-printable characters";
+    public static final String MESSAGE_CONSTRAINTS = """
+            Note can only contain up to 100 characters max
+            Note should only contain ASCII-printable characters""";
     // Allow printable ASCII characters only - space (32) to tilde (126)
     private static final String VALID_NOTE_REGEX = "^[ -~]*$";
     private static final int MAX_NOTE_LENGTH = 100;

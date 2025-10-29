@@ -2,6 +2,7 @@ package seedu.bitebuddy.model.foodplace;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -18,14 +19,10 @@ public class FoodplaceMatchesCriteriaPredicateTest {
     @Test
     public void equals() {
         List<String> firstTagList = Collections.singletonList("hawker");
-        List<String> secondTagList = Arrays.asList("hawker", "cheap");
 
         FoodplaceMatchesCriteriaPredicate firstPredicate =
                 new FoodplaceMatchesCriteriaPredicate(firstTagList,
                         Optional.of(new Cuisine("Japanese")), Optional.of(new Rate(8)));
-        FoodplaceMatchesCriteriaPredicate secondPredicate =
-                new FoodplaceMatchesCriteriaPredicate(secondTagList,
-                        Optional.of(new Cuisine("Korean")), Optional.of(new Rate(7)));
 
         // same object -> true
         assertTrue(firstPredicate.equals(firstPredicate));
@@ -37,13 +34,47 @@ public class FoodplaceMatchesCriteriaPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> false
-        assertFalse(firstPredicate.equals(1));
+        assertNotEquals(firstPredicate, 1);
 
         // null -> false
-        assertFalse(firstPredicate.equals(null));
+        assertNotEquals(firstPredicate, null);
 
-        // different values -> false
+        // different tags -> false
+        List<String> secondTagList = Arrays.asList("restaurant", "cheap");
+        FoodplaceMatchesCriteriaPredicate secondPredicate =
+                new FoodplaceMatchesCriteriaPredicate(secondTagList,
+                        Optional.of(new Cuisine("Japanese")), Optional.of(new Rate(8)));
         assertFalse(firstPredicate.equals(secondPredicate));
+
+        // different cuisine -> false
+        secondPredicate = new FoodplaceMatchesCriteriaPredicate(firstTagList,
+                Optional.of(new Cuisine("Italian")), Optional.of(new Rate(8)));
+        assertFalse(firstPredicate.equals(secondPredicate));
+
+        // different rating -> false
+        secondPredicate = new FoodplaceMatchesCriteriaPredicate(firstTagList,
+                Optional.of(new Cuisine("Japanese")), Optional.of(new Rate(7)));
+        assertFalse(firstPredicate.equals(secondPredicate));
+    }
+
+    @Test
+    public void hashcode() {
+        List<String> tagList = Collections.singletonList("hawker");
+
+        FoodplaceMatchesCriteriaPredicate predicate1 =
+                new FoodplaceMatchesCriteriaPredicate(tagList,
+                        Optional.of(new Cuisine("Japanese")), Optional.of(new Rate(8)));
+
+        FoodplaceMatchesCriteriaPredicate predicate1copy =
+                new FoodplaceMatchesCriteriaPredicate(tagList,
+                        Optional.of(new Cuisine("Japanese")), Optional.of(new Rate(8)));
+
+        assertEquals(predicate1.hashCode(), predicate1copy.hashCode());
+
+        FoodplaceMatchesCriteriaPredicate predicate2 =
+                new FoodplaceMatchesCriteriaPredicate(tagList,
+                        Optional.of(new Cuisine("Italian")), Optional.of(new Rate(8)));
+        assertNotEquals(predicate1.hashCode(), predicate2.hashCode());
     }
 
     @Test

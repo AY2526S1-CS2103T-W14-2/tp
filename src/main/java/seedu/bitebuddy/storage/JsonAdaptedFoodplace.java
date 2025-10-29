@@ -101,103 +101,134 @@ class JsonAdaptedFoodplace {
      * @throws IllegalValueException if there were any data constraints violated in the adapted foodplace.
      */
     public Foodplace toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
+        final Name modelName = toModelName();
+        final Phone modelPhone = toModelPhone();
+        final Email modelEmail = toModelEmail();
+        final Address modelAddress = toModelAddress();
+        final Timing modelTiming = toModelTiming();
+        final Rate modelRate = toModelRate();
+        final Cuisine modelCuisine = toModelCuisine();
+        final Set<Tag> modelTags = toModelTags();
+        final Note modelNote = toModelNote();
+        final Wishlist modelWishlist = toModelWishlist();
+        final Blacklist modelBlacklist = toModelBlacklist();
+        final Pinned modelPinned = toModelPinned();
 
+        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming, modelCuisine,
+                modelTags, modelNote, modelRate, modelWishlist, modelBlacklist, modelPinned);
+    }
+
+    private Name toModelName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        return new Name(name);
+    }
 
+    private Phone toModelPhone() throws IllegalValueException {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!phone.isEmpty() && !Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        return new Phone(phone);
+    }
 
+    private Email toModelEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!email.isEmpty() && !Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        return new Email(email);
+    }
 
+    private Address toModelAddress() throws IllegalValueException {
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        return new Address(address);
+    }
 
+    private Timing toModelTiming() throws IllegalValueException {
         if (timing == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Timing.class.getSimpleName()));
         }
-        final Timing modelTiming;
         try {
-            modelTiming = new Timing(timing);
+            return new Timing(timing);
         } catch (DateTimeParseException e) {
             throw new IllegalValueException(Timing.MESSAGE_INVALID_TIME);
         } catch (IllegalArgumentException e) {
-            if (Timing.MESSAGE_INVALID_TIME.equals(e.getMessage())) {
-                throw new IllegalValueException(Timing.MESSAGE_INVALID_TIME);
-            } else {
-                throw new IllegalValueException(Timing.MESSAGE_CONSTRAINTS);
-            }
+            throw new IllegalValueException(Timing.MESSAGE_CONSTRAINTS);
         }
+    }
 
+    private Rate toModelRate() throws IllegalValueException {
         if (rate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rate.class.getSimpleName()));
         }
         if (!Rate.isValidRating(rate)) {
             throw new IllegalValueException(Rate.MESSAGE_CONSTRAINTS);
         }
-        final Rate modelRate = new Rate(rate);
+        return new Rate(rate);
+    }
 
+    private Cuisine toModelCuisine() throws IllegalValueException {
         if (cuisine == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Cuisine.class.getSimpleName()));
         }
         if (!Cuisine.isValidCuisine(cuisine)) {
             throw new IllegalValueException(Cuisine.MESSAGE_CONSTRAINTS);
         }
-        final Cuisine modelCuisine = new Cuisine(cuisine);
+        return new Cuisine(cuisine);
+    }
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+    private Set<Tag> toModelTags() throws IllegalValueException {
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            personTags.add(tag.toModelType());
+        }
+        return new HashSet<>(personTags);
+    }
 
+    private Note toModelNote() throws IllegalValueException {
         if (note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
         }
         if (!Note.isValidNote(note)) {
             throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
         }
-        final Note modelNote = new Note(note);
+        return new Note(note);
+    }
 
+    private Wishlist toModelWishlist() throws IllegalValueException {
         if (isWishlisted == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Wishlist.class.getSimpleName()));
         }
-        final Wishlist modelWishlist = new Wishlist(isWishlisted);
+        return new Wishlist(isWishlisted);
+    }
 
+    private Blacklist toModelBlacklist() throws IllegalValueException {
         if (isBlacklisted == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Blacklist.class.getSimpleName()));
         }
-        final Blacklist modelBlacklist = new Blacklist(isBlacklisted);
+        return new Blacklist(isBlacklisted);
+    }
 
+    private Pinned toModelPinned() throws IllegalValueException {
         if (isPinned == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Pinned.class.getSimpleName()));
         }
-        final Pinned modelPinned = new Pinned(isPinned);
-
-        return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming, modelCuisine,
-                modelTags, modelNote, modelRate, modelWishlist, modelBlacklist, modelPinned);
+        return new Pinned(isPinned);
     }
 }

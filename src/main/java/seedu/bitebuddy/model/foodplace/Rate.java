@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Foodplace's Rate in the bitebuddy book.
+ * Represents a Foodplace's Rate in BiteBuddy.
  */
 public class Rate {
 

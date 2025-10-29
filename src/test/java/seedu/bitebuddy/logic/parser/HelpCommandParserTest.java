@@ -3,14 +3,13 @@ package seedu.bitebuddy.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-
-import java.util.Optional;
+import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.logic.commands.CommandRegistry;
 import seedu.bitebuddy.logic.commands.HelpCommand;
-import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.ModelManager;
 
 public class HelpCommandParserTest {
@@ -18,41 +17,22 @@ public class HelpCommandParserTest {
 
     @Test
     public void parse_noArgs_success() throws Exception {
-        HelpCommand cmd = parser.parse("");
-        assertTrue(cmd instanceof HelpCommand);
-        var result = cmd.execute(new ModelManager());
-        assertEquals(HelpCommand.SHOWING_HELP_MESSAGE, result.getFeedbackToUser());
-        assertTrue(result.isShowHelp());
-
-        // whitespace only
-        cmd = parser.parse("   ");
-        result = cmd.execute(new ModelManager());
-        assertEquals(HelpCommand.SHOWING_HELP_MESSAGE, result.getFeedbackToUser());
+        assertParseSuccess(parser, "", new HelpCommand());
     }
 
     @Test
     public void parse_knownCommandWord_success() throws Exception {
-        String input = "find";
-        HelpCommand cmd = parser.parse(input);
-        var result = cmd.execute(new ModelManager());
-        Optional<String> usage = CommandRegistry.getUsage(input);
-        assertTrue(usage.isPresent());
-        assertEquals(usage.get(), result.getFeedbackToUser());
+        assertParseSuccess(parser, "find", new HelpCommand(CommandRegistry.getUsage("find").get()));
     }
 
     @Test
     public void parse_unknownCommand_throwsParseException() {
-        try {
-            parser.parse("unknowncommand");
-            throw new AssertionError("Expected ParseException to be thrown");
-        } catch (ParseException pe) {
-            assertEquals(MESSAGE_UNKNOWN_COMMAND, pe.getMessage());
-        }
+        assertParseFailure(parser, "unknowncommand", MESSAGE_UNKNOWN_COMMAND);
     }
 
     @Test
     public void parse_nullArgs_returnsGeneralHelp() throws Exception {
-        HelpCommand cmd = parser.parse(null); // cover args == null branch
+        HelpCommand cmd = parser.parse(null);
         var result = cmd.execute(new ModelManager());
         assertEquals(HelpCommand.SHOWING_HELP_MESSAGE, result.getFeedbackToUser());
         assertTrue(result.isShowHelp());
@@ -60,7 +40,7 @@ public class HelpCommandParserTest {
 
     @Test
     public void parse_blankArgs_returnsGeneralHelp() throws Exception {
-        HelpCommand cmd = parser.parse("   "); // cover args == blank branch
+        HelpCommand cmd = parser.parse("   ");
         var result = cmd.execute(new ModelManager());
         assertEquals(HelpCommand.SHOWING_HELP_MESSAGE, result.getFeedbackToUser());
         assertTrue(result.isShowHelp());

@@ -68,7 +68,7 @@ public class FoodplaceTest {
         assertNotEquals(PRATASHOP, null);
 
         // different type -> returns false
-        assertFalse(PRATASHOP.equals(5));
+        assertNotEquals(PRATASHOP, 5);
 
         // different foodplace -> returns false
         assertFalse(PRATASHOP.equals(SWENSWAN));

@@ -14,7 +14,6 @@ import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_THIRD_FOODPLACE;
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.ModelManager;
@@ -46,11 +45,31 @@ public class CompareCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_failure() {
+    public void execute_sameIndexUnfilteredList_failure() {
+        CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_FIRST_FOODPLACE);
+        assertCommandFailure(compareCommand, model, CompareCommand.MESSAGE_COMPARE_SAME_INDEX);
+    }
+
+    @Test
+    public void execute_firstIndexInvalidUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFoodplaceList().size() + 1);
+        CompareCommand compareCommand = new CompareCommand(outOfBoundIndex, INDEX_SECOND_FOODPLACE);
+        assertCommandFailure(compareCommand, model, CompareCommand.MESSAGE_COMPARE_FIRST_INDEX_INVALID);
+    }
+
+    @Test
+    public void execute_secondIndexInvalidUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFoodplaceList().size() + 1);
         CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, outOfBoundIndex);
+        assertCommandFailure(compareCommand, model, CompareCommand.MESSAGE_COMPARE_SECOND_INDEX_INVALID);
+    }
 
-        assertCommandFailure(compareCommand, model, Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
+    @Test
+    public void execute_bothInvalidUnfilteredList_failure() {
+        Index outOfBoundFirstndex = Index.fromOneBased(model.getFilteredFoodplaceList().size() + 1);
+        Index outOfBoundSecondIndex = Index.fromOneBased(model.getFilteredFoodplaceList().size() + 2);
+        CompareCommand compareCommand = new CompareCommand(outOfBoundFirstndex, outOfBoundSecondIndex);
+        assertCommandFailure(compareCommand, model, CompareCommand.MESSAGE_COMPARE_BOTH_INDEX_INVALID);
     }
 
     @Test
