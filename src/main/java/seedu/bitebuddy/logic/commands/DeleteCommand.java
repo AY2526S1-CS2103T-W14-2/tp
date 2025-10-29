@@ -20,8 +20,11 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the foodplace identified by the index number used in the displayed foodplace list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "• INDEX must be a positive integer.\n"
+            + "Parameters:\n"
+            + "  " + "INDEX\n"
+            + "Example:\n"
+            + "  " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_FOODPLACE_SUCCESS = "Deleted Foodplace: %1$s";
 

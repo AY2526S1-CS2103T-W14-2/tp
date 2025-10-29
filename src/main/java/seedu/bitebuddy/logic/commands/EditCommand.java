@@ -2,10 +2,12 @@ package seedu.bitebuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CLOSE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CUISINE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_OPEN;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
@@ -45,18 +47,22 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the foodplace identified "
-            + "by the index number used in the displayed foodplace list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "FOODPLACE NAME] "
+            + "by the index number used in the displayed foodplace list.\n"
+            + "• INDEX must be a positive integer.\n"
+            + "• Existing values will only be overwritten by the supplied input values.\n"
+            + "Parameters:\n"
+            + "  " + "INDEX "
+            + "[" + PREFIX_NAME + "FOODPLACE_NAME] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_CUISINE + "CUISINE] "
-            + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_NOTE + "NOTE]"
-            + "[" + PREFIX_RATE + "RATING]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_OPEN + "OPENING_TIME " + PREFIX_CLOSE + "CLOSING_TIME] "
+            + "[" + PREFIX_NOTE + "NOTE] "
+            + "[" + PREFIX_RATE + "RATING] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example:\n"
+            + "  " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 

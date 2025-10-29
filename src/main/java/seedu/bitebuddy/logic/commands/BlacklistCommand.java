@@ -21,12 +21,15 @@ public class BlacklistCommand extends Command {
     public static final String COMMAND_WORD = "blacklist";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Blacklists the foodplace identified "
-            + "by the index number used in the last foodplace listing. "
-            + "Blacklisting a foodplace that is already blacklisted removes its blacklist status\n"
-            + "Displays all foodplaces with blacklist if no index is specified\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "blacklist [INDEX]\n"
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "by the index number used in the displayed foodplace list.\n"
+            + "If no INDEX is supplied, displays all blacklisted foodplaces instead.\n"
+            + "• If INDEX is supplied, INDEX must be a positive integer.\n"
+            + "• Blacklisting an already-blacklisted foodplace removes its blacklist status.\n"
+            + "Parameters:\n"
+            + "  " + "[INDEX]\n"
+            + "Examples:\n"
+            + "  " + COMMAND_WORD + " 1\n"
+            + "  " + COMMAND_WORD;
 
     public static final String MESSAGE_DISPLAY_SUCCESS = "Listed all foodplaces that are blacklisted";
     public static final String MESSAGE_ADD_BLACKLIST_SUCCESS = "Add Foodplace to blacklist: %1$s";
