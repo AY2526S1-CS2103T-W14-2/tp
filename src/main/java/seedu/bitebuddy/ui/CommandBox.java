@@ -34,18 +34,18 @@ public class CommandBox extends UiPart<Region> {
 
         // Command Buffer listener
         commandTextField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.UP || event.getCode() == KeyCode.DOWN) {
-                KeyCode code = event.getCode();
+            KeyCode code = event.getCode();
+            if (code == KeyCode.UP || code == KeyCode.DOWN) {
                 // Fetch command buffer
                 CommandBuffer current = CommandBuffer.getCurrent();
                 // Set command box content
                 if (current != null) {
-                    commandTextField.setText(current.getCommand());
                     if (code == KeyCode.UP) {
                         CommandBuffer.getPrev();
                     } else {
                         CommandBuffer.getNext();
                     }
+                    commandTextField.setText(CommandBuffer.getCurrent().getCommand());
                     // Move caret to the end of line
                     commandTextField.positionCaret(commandTextField.getText().length());
                 }

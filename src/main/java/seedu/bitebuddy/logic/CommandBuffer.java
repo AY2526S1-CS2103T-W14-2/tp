@@ -27,13 +27,18 @@ public class CommandBuffer {
     public static void push(String command) {
         CommandBuffer buffer = new CommandBuffer(command);
 
-        buffer.prev = CommandBuffer.head;
+        // Check if already initialized
         if (head != null) {
-            CommandBuffer.head.next = buffer;
+            buffer.prev = head.prev;
+            head.prev.next = buffer;
         }
 
-        CommandBuffer.head = buffer;
-        CommandBuffer.current = buffer;
+        // Create new head specifically to point to latest command
+        head = new CommandBuffer("");
+        head.prev = buffer;
+        // Stub
+        buffer.next = head;
+        current = head;
 
         size += 1;
     }
