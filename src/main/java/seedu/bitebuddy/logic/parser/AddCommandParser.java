@@ -1,10 +1,6 @@
 package seedu.bitebuddy.logic.parser;
 
-import java.util.Set;
-import java.util.stream.Stream;
-
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.bitebuddy.logic.commands.AddCommand;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CLOSE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CUISINE;
@@ -15,6 +11,11 @@ import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_OPEN;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+import java.util.stream.Stream;
+
+import seedu.bitebuddy.logic.commands.AddCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Blacklist;
