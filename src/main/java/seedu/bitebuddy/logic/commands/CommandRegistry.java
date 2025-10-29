@@ -42,8 +42,8 @@ public final class CommandRegistry {
                 Object muVal = muField.get(null);
                 m.put(String.valueOf(cwVal), String.valueOf(muVal));
             }
-        } catch (ReflectiveOperationException e) {
-            throw new ExceptionInInitializerError(e);
+        } catch (ReflectiveOperationException roe) {
+            throw new ExceptionInInitializerError(roe);
         }
         USAGE_MAP = Collections.unmodifiableMap(m);
     }
