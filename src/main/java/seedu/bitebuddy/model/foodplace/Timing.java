@@ -19,7 +19,7 @@ public class Timing {
     public static final String MESSAGE_INVALID_TIME_RANGE = "Invalid time range format. "
             + "Timing must be in the format HH:mm-HH:mm";
 
-    public static final String VALIDATION_REGEX = "^([01]?\\d|2[0-3]):[0-5]\\d$";
+    public static final String VALIDATION_REGEX = "^([01]\\d|2[0-3]):[0-5]\\d$";
     private static final LocalTime DEFAULT_START = LocalTime.of(0, 0);
     private static final LocalTime DEFAULT_END = LocalTime.of(23, 59);
 
