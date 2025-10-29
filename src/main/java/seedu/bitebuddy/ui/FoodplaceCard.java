@@ -16,6 +16,16 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 public class FoodplaceCard extends UiPart<Region> {
 
     private static final String FXML = "FoodplaceListCard.fxml";
+    private static final String PIN_ICON_PATH = "/images/pin.png";
+
+    private static final String MESSAGE_NO_PHONE = "## No phone number yet ##";
+    private static final String MESSAGE_NO_EMAIL = "\\\\ No email yet //";
+    private static final String MESSAGE_NO_TIMING = "** No timing specified **";
+    private static final String MESSAGE_NO_CUISINE = "== No cuisine specified ==";
+    private static final String MESSAGE_NO_NOTE = "-- No notes yet --";
+    private static final String MESSAGE_NO_RATE = ">> No Rating yet <<";
+    private static final String MESSAGE_WISHLIST = "Wishlisted";
+    private static final String MESSAGE_BLACKLIST = "Blacklisted";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -66,27 +76,27 @@ public class FoodplaceCard extends UiPart<Region> {
         phone.setText(
                 !(foodplace.getPhone().value.isEmpty())
                         ? foodplace.getPhone().value
-                        : "## No phone number yet ##"
+                        : MESSAGE_NO_PHONE
         );
         email.setText(
                 !(foodplace.getEmail().value.isEmpty())
                         ? foodplace.getEmail().value
-                        : "\\\\ No email yet //"
+                        : MESSAGE_NO_EMAIL
         );
         timing.setText(
                 foodplace.getTiming().isSet()
                         ? foodplace.getTiming().toString()
-                        : "** No timing specified **"
+                        : MESSAGE_NO_TIMING
         );
         cuisine.setText(
                 !(foodplace.getCuisine().value.isEmpty())
                         ? foodplace.getCuisine().value
-                        : "== No cuisine specified =="
+                        : MESSAGE_NO_CUISINE
         );
         note.setText(
                 !(foodplace.getNote().value.isEmpty())
                         ? foodplace.getNote().value
-                        : "-- No notes yet --"
+                        : MESSAGE_NO_NOTE
         );
         foodplace.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -94,13 +104,13 @@ public class FoodplaceCard extends UiPart<Region> {
         rate.setText(
                 foodplace.getRate().isSet()
                         ? foodplace.getRate().toString()
-                        : ">> No Rating yet <<"
+                        : MESSAGE_NO_RATE
         );
-        wishlist.setText(foodplace.getWishlist().isWishlisted() ? "Wishlisted" : "");
-        blacklist.setText(foodplace.getBlacklist().isBlacklisted() ? "Blacklisted" : "");
+        wishlist.setText(foodplace.getWishlist().isWishlisted() ? MESSAGE_WISHLIST : "");
+        blacklist.setText(foodplace.getBlacklist().isBlacklisted() ? MESSAGE_BLACKLIST : "");
         if (foodplace.getPinned().isPinned()) {
             pinIcon.setVisible(true);
-            pinIcon.setImage(new Image(getClass().getResourceAsStream("/images/pin.png")));
+            pinIcon.setImage(new Image(getClass().getResourceAsStream(PIN_ICON_PATH)));
         } else {
             pinIcon.setVisible(false);
         }
