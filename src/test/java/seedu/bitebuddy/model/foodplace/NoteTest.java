@@ -31,7 +31,7 @@ public class NoteTest {
 
     @Test
     public void constructor_invalidNote_throwsIllegalArgumentException() {
-        String invalidNote = "Nice place! \u0081";;
+        String invalidNote = "Nice place! \u0081";
         assertThrows(IllegalArgumentException.class, () -> new Note(invalidNote));
     }
 
@@ -60,10 +60,10 @@ public class NoteTest {
         assertTrue(note.equals(noteCopy));
 
         // different types -> returns false
-        assertFalse(note.equals(1));
+        assertNotEquals(note, 1);
 
         // null -> returns false
-        assertFalse(note.equals(null));
+        assertNotEquals(note, null);
 
         // different note -> returns false
         Note differentNote = new Note("Bye");

@@ -2,6 +2,7 @@ package seedu.bitebuddy.model.foodplace;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -33,10 +34,10 @@ public class FoodplaceContainsKeywordsPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertNotEquals(firstPredicate, 1);
 
         // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+        assertNotEquals(firstPredicate, null);
 
         // different foodplace -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));

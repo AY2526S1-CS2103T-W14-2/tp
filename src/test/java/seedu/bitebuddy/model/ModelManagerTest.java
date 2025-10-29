@@ -2,6 +2,7 @@ package seedu.bitebuddy.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
@@ -108,10 +109,10 @@ public class ModelManagerTest {
         assertTrue(modelManager.equals(modelManager));
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(modelManager, null);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(modelManager, 5);
 
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
@@ -128,5 +129,20 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void hashcode() {
+        AddressBook addressBook = new AddressBookBuilder().withFoodplace(PRATASHOP).withFoodplace(DAEBAKSHOP).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+
+        // same values -> returns same hashcode
+        assertEquals(modelManager.hashCode(), modelManagerCopy.hashCode());
+
+        // different address book -> returns different hashcode
+        AddressBook differentAddressBook = new AddressBook();
+        assertNotEquals(modelManager.hashCode(), new ModelManager(differentAddressBook, userPrefs).hashCode());
     }
 }

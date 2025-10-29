@@ -69,10 +69,10 @@ public class BlacklistTest {
         assertTrue(blacklistTrue.equals(blacklistTrueCopy));
 
         // different types -> returns false
-        assertFalse(blacklistTrue.equals(true));
+        assertNotEquals(blacklistTrue, true);
 
         // null -> returns false
-        assertFalse(blacklistTrue.equals(null));
+        assertNotEquals(blacklistTrue, null);
 
         // different values -> returns false
         assertFalse(blacklistTrue.equals(blacklistFalse));

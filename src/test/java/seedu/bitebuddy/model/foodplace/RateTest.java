@@ -50,7 +50,6 @@ public class RateTest {
         Rate rate = new Rate(5);
         assertEquals(rate, rate);
         assertEquals(new Rate(5), rate);
-        assertEquals(new Rate(3), new Rate(3));
         assertEquals(new Rate(), new Rate());
     }
 
@@ -60,5 +59,7 @@ public class RateTest {
         assertNotEquals(new Rate(), rate);
         assertNotEquals(new Rate(1), rate);
         assertNotEquals(new Rate(10), rate);
+        assertNotEquals(rate, null);
+        assertNotEquals(rate, 5);
     }
 }
