@@ -6,7 +6,6 @@ import static seedu.bitebuddy.logic.parser.CliSyntax.INDEX_COMPARE_FIRST_INDEX;
 import static seedu.bitebuddy.logic.parser.CliSyntax.INDEX_COMPARE_SECOND_INDEX;
 
 import seedu.bitebuddy.commons.core.index.Index;
-import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.logic.commands.CompareCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
 
@@ -34,8 +33,8 @@ public class CompareCommandParser implements Parser<CompareCommand> {
         try {
             firstIndex = ParserUtil.parseIndex(mapper.getArgument(INDEX_COMPARE_FIRST_INDEX));
             secondIndex = ParserUtil.parseIndex(mapper.getArgument(INDEX_COMPARE_SECOND_INDEX));
-        } catch (IllegalValueException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompareCommand.MESSAGE_USAGE), e);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CompareCommand.MESSAGE_USAGE), pe);
         }
         return new CompareCommand(firstIndex, secondIndex);
     }

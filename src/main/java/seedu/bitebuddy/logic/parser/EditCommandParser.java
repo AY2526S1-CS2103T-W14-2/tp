@@ -51,42 +51,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                 PREFIX_CUISINE, PREFIX_NOTE, PREFIX_RATE, PREFIX_OPEN, PREFIX_CLOSE);
 
-        EditCommand.EditFoodplaceDescriptor editFoodplaceDescriptor = new EditCommand.EditFoodplaceDescriptor();
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editFoodplaceDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editFoodplaceDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editFoodplaceDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editFoodplaceDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editFoodplaceDescriptor::setTags);
-        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
-            editFoodplaceDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
-        }
-
-        if (argMultimap.getValue(PREFIX_CUISINE).isPresent()) {
-            editFoodplaceDescriptor.setCuisine(ParserUtil.parseCuisine(argMultimap.getValue(PREFIX_CUISINE).get()));
-        }
-
-        // parse rating values (support multiple rate prefixes but use the last one)
-        if (!argMultimap.getAllValues(PREFIX_RATE).isEmpty()) {
-            editFoodplaceDescriptor.setRate(ParserUtil.parseRatings(argMultimap.getAllValues(PREFIX_RATE)));
-        }
-
-        // parse timing: require both open and close
-        if (ParserUtil.areBothPrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
-            String open = argMultimap.getValue(PREFIX_OPEN).orElse("");
-            String close = argMultimap.getValue(PREFIX_CLOSE).orElse("");
-            editFoodplaceDescriptor.setTiming(ParserUtil.parseTiming(open, close));
-        } else if (!ParserUtil.areNeitherPrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
-            throw new ParseException(ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
-        }
+        EditCommand.EditFoodplaceDescriptor editFoodplaceDescriptor = buildDescriptor(argMultimap);
 
         if (!editFoodplaceDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -108,5 +73,56 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Builds an EditFoodplaceDescriptor from the provided ArgumentMultimap.
+     * Keeps parsing details out of the top-level parse method to maintain a single
+     * level of abstraction there.
+     * * level of abstraction there.
+     *
+     * @param argMultimap The parsed arguments from the user input.
+     * @return An EditFoodplaceDescriptor containing the parsed fields for editing a food place.
+     * @throws ParseException if any of the fields to be edited are invalid
+     */
+    private EditCommand.EditFoodplaceDescriptor buildDescriptor(ArgumentMultimap argMultimap) throws ParseException {
+        EditCommand.EditFoodplaceDescriptor descriptor = new EditCommand.EditFoodplaceDescriptor();
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            descriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            descriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            descriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            descriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(descriptor::setTags);
+        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
+            descriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_CUISINE).isPresent()) {
+            descriptor.setCuisine(ParserUtil.parseCuisine(argMultimap.getValue(PREFIX_CUISINE).get()));
+        }
+
+        // parse rating values (support multiple rate prefixes but use the last one)
+        if (!argMultimap.getAllValues(PREFIX_RATE).isEmpty()) {
+            descriptor.setRate(ParserUtil.parseRatings(argMultimap.getAllValues(PREFIX_RATE)));
+        }
+
+        // parse timing: require both open and close
+        if (ParserUtil.areBothPrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
+            String open = argMultimap.getValue(PREFIX_OPEN).orElse("");
+            String close = argMultimap.getValue(PREFIX_CLOSE).orElse("");
+            descriptor.setTiming(ParserUtil.parseTiming(open, close));
+        } else if (!ParserUtil.areNeitherPrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
+            throw new ParseException(ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
+        }
+
+        return descriptor;
     }
 }

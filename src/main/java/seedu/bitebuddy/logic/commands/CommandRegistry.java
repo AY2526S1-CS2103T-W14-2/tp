@@ -15,7 +15,9 @@ public final class CommandRegistry {
 
     private static final Class<?>[] COMMANDS = {
         AddCommand.class,
+        BlacklistCommand.class,
         ClearCommand.class,
+        CompareCommand.class,
         DeleteCommand.class,
         EditCommand.class,
         ExitCommand.class,
@@ -23,8 +25,11 @@ public final class CommandRegistry {
         HelpCommand.class,
         ListCommand.class,
         NoteCommand.class,
+        PinCommand.class,
+        RateCommand.class,
         TagCommand.class,
-        RateCommand.class
+        UnpinCommand.class,
+        WishlistCommand.class
     };
 
     static {

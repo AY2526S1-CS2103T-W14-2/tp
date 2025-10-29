@@ -133,7 +133,7 @@ public class ParserUtil {
         String trimmed = time.trim();
         try {
             return LocalTime.parse(trimmed);
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException dte) {
             throw new ParseException(Timing.MESSAGE_INVALID_TIME);
         }
     }
@@ -225,7 +225,7 @@ public class ParserUtil {
         try {
             rating = Integer.valueOf(mostRecentRating);
             rate = new Rate(rating);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException iae) {
             throw new ParseException(Rate.MESSAGE_CONSTRAINTS);
         }
         return rate;

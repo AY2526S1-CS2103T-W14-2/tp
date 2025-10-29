@@ -51,15 +51,15 @@ public class ModelManager implements Model {
 
     private int comparePinnedStatus(Foodplace fp1, Foodplace fp2) {
         // Pinned goes first
-        int cmp = Boolean.compare(fp2.getPinned().isPinned, fp1.getPinned().isPinned);
+        int cmp = Boolean.compare(fp2.getPinned().isPinned(), fp1.getPinned().isPinned());
         if (cmp != 0) {
             return cmp;
         }
 
-        // If both are pinned, sort alphabetically by name
-        if (fp1.getPinned().isPinned && fp2.getPinned().isPinned) {
-            return fp1.getName().fullName.compareToIgnoreCase(fp2.getName().fullName);
-        }
+            // If both are pinned, sort alphabetically by name
+            if (fp1.getPinned().isPinned() && fp2.getPinned().isPinned()) {
+                return fp1.getName().fullName.compareToIgnoreCase(fp2.getName().fullName);
+            }
 
         // If both are unpinned, keep original order (stable)
         return Integer.compare(

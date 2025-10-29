@@ -42,7 +42,11 @@ public class ArgumentTokenizer {
     }
 
     /**
-     * {@see findAllPrefixPositions}
+     * Finds all zero-based positions of the given prefix in the arguments string.
+     *
+     * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
+     * @param prefix     Prefix to find in the arguments string
+     * @return           List of zero-based positions of the given prefix in the arguments string
      */
     private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
         List<PrefixPosition> positions = new ArrayList<>();

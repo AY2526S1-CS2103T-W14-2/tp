@@ -98,7 +98,7 @@ public class FoodplaceCard extends UiPart<Region> {
         );
         wishlist.setText(foodplace.getWishlist().isWishlisted() ? "Wishlisted" : "");
         blacklist.setText(foodplace.getBlacklist().isBlacklisted() ? "Blacklisted" : "");
-        if (foodplace.getPinned().isPinned) {
+        if (foodplace.getPinned().isPinned()) {
             pinIcon.setVisible(true);
             pinIcon.setImage(new Image(getClass().getResourceAsStream("/images/pin.png")));
         } else {

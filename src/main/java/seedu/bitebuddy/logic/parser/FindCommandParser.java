@@ -22,77 +22,45 @@ import seedu.bitebuddy.model.foodplace.Rate;
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
+    public static final String MESSAGE_INVALID_RATING = "Ratings should only contain numbers,"
+            + " and be an integer between 1 to 10";
+    public static final String MESSAGE_NO_PREFIX = "Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE;
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
+    @Override
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
+            );
         }
 
+        // normalize when the first token is a prefix so ArgumentTokenizer treats it as a preamble
         if (trimmedArgs.startsWith("t/") || trimmedArgs.startsWith("c/") || trimmedArgs.startsWith("r/")) {
             trimmedArgs = " " + trimmedArgs;
         }
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(trimmedArgs, PREFIX_TAG, PREFIX_CUISINE, PREFIX_RATE);
+                        ArgumentTokenizer.tokenize(trimmedArgs, PREFIX_TAG, PREFIX_CUISINE, PREFIX_RATE);
 
         String preamble = argMultimap.getPreamble().trim();
-        List<String> keywords = preamble.isEmpty()
-                ? Collections.emptyList()
-                : Arrays.asList(preamble.split("\\s+"));
+        List<String> keywords = extractKeywords(preamble);
 
-        List<String> tags = argMultimap.getAllValues(PREFIX_TAG).stream()
-                .flatMap(value -> Arrays.stream(value.trim().split("\\s+")))
-                .filter(s -> !s.isEmpty())
-                .toList();
+        List<String> tags = extractTags(argMultimap);
 
-        Optional<Cuisine> cuisine = argMultimap.getValue(PREFIX_CUISINE)
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .map(Cuisine::new);
+        Optional<Cuisine> cuisine = extractCuisine(argMultimap);
+        Optional<Rate> rating = extractRating(argMultimap);
 
-        Optional<Rate> rating;
-        try {
-            rating = argMultimap.getValue(PREFIX_RATE)
-                    .map(String::trim)
-                    .filter(s -> !s.isEmpty())
-                    .map(Integer::parseInt)
-                    .map(Rate::new);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException("Ratings should only contain numbers, and be an integer between 1 to 10");
-        }
+        ensureNoEmptyPrefixValues(argMultimap);
 
-        boolean hasEmptyTag =
-                argMultimap.getAllValues(PREFIX_TAG).stream()
-                        .anyMatch(String::isBlank);
-
-        boolean hasEmptyCuisine =
-                argMultimap.getValue(PREFIX_CUISINE).map(String::isBlank).orElse(false);
-
-        boolean hasEmptyRate =
-                argMultimap.getValue(PREFIX_RATE).map(String::isBlank).orElse(false);
-
-        boolean hasEmptyPrefixValue = hasEmptyTag || hasEmptyCuisine || hasEmptyRate;
-
-        if (hasEmptyPrefixValue) {
-            throw new ParseException("Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE);
-        }
-
-        Optional<FoodplaceContainsKeywordsPredicate> keywordPredicate =
-                keywords.isEmpty()
-                        ? Optional.empty()
-                        : Optional.of(new FoodplaceContainsKeywordsPredicate(keywords));
-
-        Optional<FoodplaceMatchesCriteriaPredicate> fieldPredicate = (!tags.isEmpty() || cuisine.isPresent()
-                || rating.isPresent())
-                        ? Optional.of(new FoodplaceMatchesCriteriaPredicate(tags, cuisine, rating))
-                        : Optional.empty();
+        Optional<FoodplaceContainsKeywordsPredicate> keywordPredicate = buildKeywordPredicate(keywords);
+        Optional<FoodplaceMatchesCriteriaPredicate> fieldPredicate = buildFieldPredicate(tags, cuisine, rating);
 
         if (keywordPredicate.isEmpty() && fieldPredicate.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -101,4 +69,57 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(keywordPredicate, fieldPredicate);
     }
 
+    private List<String> extractKeywords(String preamble) {
+        if (preamble.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return Arrays.asList(preamble.split("\\s+"));
+    }
+
+    private List<String> extractTags(ArgumentMultimap argMultimap) {
+        return argMultimap.getAllValues(PREFIX_TAG).stream()
+                .flatMap(value -> Arrays.stream(value.trim().split("\\s+")))
+                .filter(s -> !s.isEmpty())
+                .toList();
+    }
+
+    private Optional<Cuisine> extractCuisine(ArgumentMultimap argMultimap) {
+        return argMultimap.getValue(PREFIX_CUISINE)
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .map(Cuisine::new);
+    }
+
+    private Optional<Rate> extractRating(ArgumentMultimap argMultimap) throws ParseException {
+        try {
+            return argMultimap.getValue(PREFIX_RATE)
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .map(Integer::parseInt)
+                    .map(Rate::new);
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(MESSAGE_INVALID_RATING);
+        }
+    }
+
+    private void ensureNoEmptyPrefixValues(ArgumentMultimap argMultimap) throws ParseException {
+        boolean hasEmptyTag = argMultimap.getAllValues(PREFIX_TAG).stream().anyMatch(String::isBlank);
+        boolean hasEmptyCuisine = argMultimap.getValue(PREFIX_CUISINE).map(String::isBlank).orElse(false);
+        boolean hasEmptyRate = argMultimap.getValue(PREFIX_RATE).map(String::isBlank).orElse(false);
+
+        if (hasEmptyTag || hasEmptyCuisine || hasEmptyRate) {
+            throw new ParseException(MESSAGE_NO_PREFIX);
+        }
+    }
+
+    private Optional<FoodplaceContainsKeywordsPredicate> buildKeywordPredicate(List<String> keywords) {
+        return keywords.isEmpty() ? Optional.empty() : Optional.of(new FoodplaceContainsKeywordsPredicate(keywords));
+    }
+
+    private Optional<FoodplaceMatchesCriteriaPredicate> buildFieldPredicate(List<String> tags,
+                    Optional<Cuisine> cuisine, Optional<Rate> rating) {
+        return (!tags.isEmpty() || cuisine.isPresent() || rating.isPresent())
+                ? Optional.of(new FoodplaceMatchesCriteriaPredicate(tags, cuisine, rating))
+                : Optional.empty();
+    }
 }

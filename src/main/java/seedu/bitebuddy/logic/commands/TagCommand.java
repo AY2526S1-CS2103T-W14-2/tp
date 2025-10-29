@@ -97,7 +97,8 @@ public class TagCommand extends Command {
                 foodplaceToEdit.getNote(),
                 foodplaceToEdit.getRate(),
                 foodplaceToEdit.getWishlist(),
-                foodplaceToEdit.getBlacklist()
+                foodplaceToEdit.getBlacklist(),
+                foodplaceToEdit.getPinned()
         );
 
         model.setFoodplace(foodplaceToEdit, updatedFoodplace);

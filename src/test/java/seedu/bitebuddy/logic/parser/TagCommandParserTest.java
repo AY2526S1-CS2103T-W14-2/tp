@@ -1,11 +1,16 @@
 package seedu.bitebuddy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;
 
+import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -120,6 +125,32 @@ public class TagCommandParserTest {
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(input));
         assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE),
                 exception.getMessage());
+    }
+
+    @Test
+    public void isDeleteToken() throws Exception {
+        Method isDeleteMethod = TagCommandParser.class.getDeclaredMethod("isDeleteToken", List.class);
+        isDeleteMethod.setAccessible(true);
+
+        // empty tokens -> false
+        boolean resultEmpty = (boolean) isDeleteMethod.invoke(parser, Arrays.asList());
+        assertFalse(resultEmpty);
+
+        // single token -> false
+        boolean resultSingle = (boolean) isDeleteMethod.invoke(parser, Arrays.asList("1"));
+        assertFalse(resultSingle);
+
+        // second token is exact "/d" -> true
+        boolean resultDelete = (boolean) isDeleteMethod.invoke(parser, Arrays.asList("1", "/d"));
+        assertTrue(resultDelete);
+
+        // second token different (case-sensitive) -> false
+        boolean resultDifferent = (boolean) isDeleteMethod.invoke(parser, Arrays.asList("1", "/D"));
+        assertFalse(resultDifferent);
+
+        // multiple tokens, second token is "/d" -> true
+        boolean resultMulti = (boolean) isDeleteMethod.invoke(parser, Arrays.asList("2", "/d", "FastFood"));
+        assertTrue(resultMulti);
     }
 
 }

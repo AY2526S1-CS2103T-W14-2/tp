@@ -22,8 +22,8 @@ public class UnpinCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unpins the foodplace identified "
             + "by the index number used in the last foodplace listing.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "unpin [INDEX]\n"
+            + "INDEX must be a positive integer.\n"
+            + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNPIN_FOODPLACE_SUCCESS = "Unpinned foodplace: %1$s";
@@ -42,25 +42,29 @@ public class UnpinCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Foodplace> lastShownList = model.getFilteredFoodplaceList();
+        Foodplace foodplaceToUnpin = getFoodplaceToUnpin(model);
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
-        }
-
-        Foodplace foodplaceToUnpin = lastShownList.get(index.getZeroBased());
-
-        if (!foodplaceToUnpin.getPinned().isPinned) {
+        if (isAlreadyUnpinned(foodplaceToUnpin)) {
             return new CommandResult(MESSAGE_NOT_PINNED);
         }
 
         Foodplace unpinnedFoodplace = unpinFoodplace(foodplaceToUnpin);
-
         model.setFoodplace(foodplaceToUnpin, unpinnedFoodplace);
-
         model.updateFilteredFoodplaceList(PREDICATE_SHOW_PINNED_FOODPLACES);
 
         return new CommandResult(String.format(MESSAGE_UNPIN_FOODPLACE_SUCCESS, Messages.format(unpinnedFoodplace)));
+    }
+
+    private Foodplace getFoodplaceToUnpin(Model model) throws CommandException {
+        List<Foodplace> lastShownList = model.getFilteredFoodplaceList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
+        }
+        return lastShownList.get(index.getZeroBased());
+    }
+
+    private boolean isAlreadyUnpinned(Foodplace foodplace) {
+        return !foodplace.getPinned().isPinned();
     }
 
     private static Foodplace unpinFoodplace(Foodplace fp) {

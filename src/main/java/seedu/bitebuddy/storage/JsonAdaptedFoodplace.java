@@ -92,7 +92,7 @@ class JsonAdaptedFoodplace {
         rate = source.getRate().getValue();
         isWishlisted = source.getWishlist().isWishlisted();
         isBlacklisted = source.getBlacklist().isBlacklisted();
-        isPinned = source.getPinned().isPinned;
+        isPinned = source.getPinned().isPinned();
     }
 
     /**
