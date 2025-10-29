@@ -1,0 +1,19 @@
+{
+  "foodplaces": [
+    {
+      "name": "Place A",
+      "phone": "12345678",
+      "email": "",
+      "address": "1 Road",
+      "timing": "09:00-18:00",
+      "cuisine": "Thai",
+      "tags": [],
+      "note": "",
+      "rate": 0,
+      "wishlist": true,
+      "blacklist": true,
+      "isPinned": false
+    }
+  ]
+}
+

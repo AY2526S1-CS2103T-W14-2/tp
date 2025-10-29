@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.model.foodplace.Address;
-import seedu.bitebuddy.model.foodplace.Blacklist;
 import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -24,7 +23,6 @@ import seedu.bitebuddy.model.foodplace.Phone;
 import seedu.bitebuddy.model.foodplace.Pinned;
 import seedu.bitebuddy.model.foodplace.Rate;
 import seedu.bitebuddy.model.foodplace.Timing;
-import seedu.bitebuddy.model.foodplace.Wishlist;
 
 public class JsonAdaptedFoodplaceTest {
     private static final String INVALID_NAME = "R@chel";
@@ -162,14 +160,17 @@ public class JsonAdaptedFoodplaceTest {
     }
 
     @Test
-    public void toModelType_nullNote_throwsIllegalValueException() {
-        // Null note is considered a kind of invalid note as well
+    public void toModelType_nullNote_sanitizedToEmpty() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_TIMING, VALID_CUISINE, VALID_TAGS, null, VALID_RATING, VALID_WISHLIST,
                         VALID_BLACKLIST, VALID_PINNED);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
+        try {
+            Foodplace model = foodplace.toModelType();
+            assertEquals("", model.getNote().value);
+        } catch (IllegalValueException e) {
+            fail();
+        }
     }
 
     @Test
@@ -258,21 +259,29 @@ public class JsonAdaptedFoodplaceTest {
     }
 
     @Test
-    public void toModelType_nullWishlist_throwsIllegalValueException() {
+    public void toModelType_nullWishlist_defaultsToFalse() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TIMING,
                         VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, null, VALID_BLACKLIST, VALID_PINNED);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Wishlist.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
+        try {
+            Foodplace model = foodplace.toModelType();
+            assertEquals(false, model.getWishlist().isWishlisted());
+        } catch (IllegalValueException e) {
+            fail();
+        }
     }
 
     @Test
-    public void toModelType_nullBlacklist_throwsIllegalValueException() {
+    public void toModelType_nullBlacklist_defaultsToFalse() {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TIMING,
                         VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST, null, VALID_PINNED);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Blacklist.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
+        try {
+            Foodplace model = foodplace.toModelType();
+            assertEquals(false, model.getBlacklist().isBlacklisted());
+        } catch (IllegalValueException e) {
+            fail();
+        }
     }
 
     @Test

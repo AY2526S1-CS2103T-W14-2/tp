@@ -176,15 +176,34 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.log(Level.INFO, "Starting BiteBuddy {0}", MainApp.VERSION);
         ui.start(primaryStage);
+        // After UI is up, show auto-fix summary if storage reported fixes during load.
+        if (storage != null && ui != null) {
+            try {
+                java.util.List<seedu.bitebuddy.storage.AutoFixRecord> fixes = storage.getLastAutoFixes();
+                ui.showAutoFixSummary(fixes);
+            } catch (Exception e) {
+                logger.log(Level.WARNING, "Unable to show auto-fix summary: {0}", e.getMessage());
+            }
+        }
     }
 
     @Override
     public void stop() {
         logger.info("============================ [ Stopping BiteBuddy ] =============================");
         try {
-            storage.saveUserPrefs(model.getUserPrefs());
+            if (storage != null && model != null) {
+                // If there were auto-fixes during load, save the repaired address book back to json.
+                java.util.List<seedu.bitebuddy.storage.AutoFixRecord> fixes = storage.getLastAutoFixes();
+                if (fixes != null && !fixes.isEmpty()) {
+                    logger.info("Auto-fixes detected on load; saving repaired address book to disk.");
+                    storage.saveAddressBook(model.getAddressBook());
+                }
+                // Save user preferences.
+                storage.saveUserPrefs(model.getUserPrefs());
+            }
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "Failed to save preferences {0}", StringUtil.getDetails(e));
+            logger.log(Level.SEVERE, "Failed to save data on exit: {0}", StringUtil.getDetails(e));
         }
     }
+
 }

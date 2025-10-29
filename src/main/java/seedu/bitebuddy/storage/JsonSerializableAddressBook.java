@@ -47,9 +47,13 @@ class JsonSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public AddressBook toModelType() throws IllegalValueException {
+        return toModelType(new java.util.ArrayList<>());
+    }
+
+    public AddressBook toModelType(java.util.List<AutoFixRecord> fixes) throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedFoodplace jsonAdaptedFoodplace : foodplaces) {
-            Foodplace foodplace = jsonAdaptedFoodplace.toModelType();
+            Foodplace foodplace = jsonAdaptedFoodplace.toModelType(fixes);
             if (addressBook.hasFoodplace(foodplace)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_FOODPLACE);
             }

@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.bitebuddy.commons.core.LogsCenter;
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.model.foodplace.Address;
 import seedu.bitebuddy.model.foodplace.Blacklist;
@@ -31,6 +33,8 @@ import seedu.bitebuddy.model.tag.Tag;
 class JsonAdaptedFoodplace {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Foodplace's %s field is missing!";
+
+    private static final Logger logger = LogsCenter.getLogger(JsonAdaptedFoodplace.class);
 
     private final String name;
     private final String phone;
@@ -98,9 +102,19 @@ class JsonAdaptedFoodplace {
     /**
      * Converts this Jackson-friendly adapted foodplace object into the model's {@code Foodplace} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted foodplace.
+     * Auto-fixes common issues introduced by manual edits:
+     * - null or whitespace-only notes -> treated as empty note
+     * - missing wishlist/blacklist fields -> default to false for both statuses
+     * - conflicting wishlist & blacklist both true -> reset both status to false
+     *
+     * @throws IllegalValueException if there were any data constraints violated in
+     *         the adapted foodplace (other than the above fixes).
      */
     public Foodplace toModelType() throws IllegalValueException {
+        return toModelType(null);
+    }
+
+    public Foodplace toModelType(java.util.List<AutoFixRecord> fixes) throws IllegalValueException {
         final Name modelName = toModelName();
         final Phone modelPhone = toModelPhone();
         final Email modelEmail = toModelEmail();
@@ -109,10 +123,56 @@ class JsonAdaptedFoodplace {
         final Rate modelRate = toModelRate();
         final Cuisine modelCuisine = toModelCuisine();
         final Set<Tag> modelTags = toModelTags();
-        final Note modelNote = toModelNote();
-        final Wishlist modelWishlist = toModelWishlist();
-        final Blacklist modelBlacklist = toModelBlacklist();
+
+        // Safe note - treat null as empty
+        final String safeNote = (note == null) ? "" : note;
+        // record if we auto-fixed a null note or a whitespace-only note
+        boolean noteAutoFixed = false;
+        if (note == null) {
+            noteAutoFixed = true;
+        } else if (note.length() > 0 && note.trim().isEmpty()) {
+            // contains only whitespace characters, treat as auto-fixed
+            noteAutoFixed = true;
+        }
+        final Note modelNote = toModelNote(safeNote);
+
+        // Safe wishlist/blacklist - default missing to false
+        final boolean safeWishlist = (isWishlisted == null) ? false : isWishlisted;
+        final boolean safeBlacklist = (isBlacklisted == null) ? false : isBlacklisted;
+
+        // If both wishlist and blacklist are true in the data, prefer no status (reset both to false)
+        boolean finalWishlist = safeWishlist;
+        boolean finalBlacklist = safeBlacklist;
+        boolean conflictAutoFixed = false;
+        if (safeWishlist && safeBlacklist) {
+            logger.log(java.util.logging.Level.WARNING, "Both wishlist and blacklist set for foodplace {0}. "
+                    + "Auto-fixing to no status.", name);
+            finalWishlist = false;
+            finalBlacklist = false;
+            conflictAutoFixed = true;
+        }
+
+        final Wishlist modelWishlist = new Wishlist(finalWishlist);
+        final Blacklist modelBlacklist = new Blacklist(finalBlacklist);
         final Pinned modelPinned = toModelPinned();
+
+        // Append AutoFix records if provided
+        if (fixes != null) {
+            if (noteAutoFixed) {
+                fixes.add(new AutoFixRecord(name == null ? "<unknown>" : name, "note -> empty"));
+            }
+            if (conflictAutoFixed) {
+                fixes.add(new AutoFixRecord(name == null ? "<unknown>" : name,
+                        "Remove Wishlist and Blacklist status"));
+            }
+            // also record missing wishlist/blacklist defaults
+            if (isWishlisted == null) {
+                fixes.add(new AutoFixRecord(name == null ? "<unknown>" : name, "wishlist -> false"));
+            }
+            if (isBlacklisted == null) {
+                fixes.add(new AutoFixRecord(name == null ? "<unknown>" : name, "blacklist -> false"));
+            }
+        }
 
         return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming, modelCuisine,
                 modelTags, modelNote, modelRate, modelWishlist, modelBlacklist, modelPinned);
@@ -199,30 +259,11 @@ class JsonAdaptedFoodplace {
         return new HashSet<>(personTags);
     }
 
-    private Note toModelNote() throws IllegalValueException {
-        if (note == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
-        }
+    private Note toModelNote(String note) throws IllegalValueException {
         if (!Note.isValidNote(note)) {
             throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
         }
         return new Note(note);
-    }
-
-    private Wishlist toModelWishlist() throws IllegalValueException {
-        if (isWishlisted == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Wishlist.class.getSimpleName()));
-        }
-        return new Wishlist(isWishlisted);
-    }
-
-    private Blacklist toModelBlacklist() throws IllegalValueException {
-        if (isBlacklisted == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Blacklist.class.getSimpleName()));
-        }
-        return new Blacklist(isBlacklisted);
     }
 
     private Pinned toModelPinned() throws IllegalValueException {

@@ -10,4 +10,9 @@ public interface Ui {
     /** Starts the UI (and the App).  */
     void start(Stage primaryStage);
 
+    /**
+     * Optional hook to display auto-fix summary detected during data load.
+     * Default implementation does nothing.
+     */
+    void showAutoFixSummary(java.util.List<seedu.bitebuddy.storage.AutoFixRecord> fixes);
 }

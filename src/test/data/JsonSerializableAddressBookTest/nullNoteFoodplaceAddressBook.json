@@ -1,0 +1,19 @@
+{
+  "foodplaces": [
+    {
+      "name": "Place B",
+      "phone": "87654321",
+      "email": "",
+      "address": "2 Lane",
+      "timing": "09:00-18:00",
+      "cuisine": "Korean",
+      "tags": [],
+      "note": null,
+      "rate": 0,
+      "wishlist": false,
+      "blacklist": false,
+      "isPinned": false
+    }
+  ]
+}
+

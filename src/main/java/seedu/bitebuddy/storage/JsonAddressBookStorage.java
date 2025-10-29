@@ -23,6 +23,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
     private final Path filePath;
+    private java.util.List<AutoFixRecord> lastAutoFixes = new java.util.ArrayList<>();
 
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
@@ -38,12 +39,6 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         return readAddressBook(filePath);
     }
 
-    /**
-     * Similar to {@link #readAddressBook()}.
-     *
-     * @param filePath location of the data. Cannot be null.
-     * @throws DataLoadingException if loading the data from storage failed.
-     */
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
@@ -55,7 +50,10 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            java.util.List<AutoFixRecord> fixes = new java.util.ArrayList<>();
+            ReadOnlyAddressBook model = jsonAddressBook.get().toModelType(fixes);
+            this.lastAutoFixes = fixes;
+            return Optional.of(model);
         } catch (IllegalValueException ive) {
             logger.log(Level.INFO, "Illegal values found in {0}: {1}", new Object[] { filePath, ive.getMessage() });
             throw new DataLoadingException(ive);
@@ -79,6 +77,11 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+    }
+
+    // Expose last auto-fix records for callers to display a summary if desired
+    public java.util.List<AutoFixRecord> getLastAutoFixes() {
+        return new java.util.ArrayList<>(lastAutoFixes);
     }
 
 }

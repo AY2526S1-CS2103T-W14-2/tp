@@ -85,4 +85,18 @@ public class UiManager implements Ui {
         System.exit(1);
     }
 
+    @Override
+    public void showAutoFixSummary(java.util.List<seedu.bitebuddy.storage.AutoFixRecord> fixes) {
+        if (fixes == null || fixes.isEmpty()) {
+            return;
+        }
+        StringBuilder content = new StringBuilder();
+        content.append("Auto-fixes applied: ").append(fixes.size()).append("\n\n");
+        for (seedu.bitebuddy.storage.AutoFixRecord r : fixes) {
+            content.append(r.toString()).append("\n");
+        }
+        showAlertDialogAndWait(Alert.AlertType.INFORMATION, "Data Auto-Fix Summary",
+                "Some data issues were detected and automatically fixed.", content.toString());
+    }
+
 }

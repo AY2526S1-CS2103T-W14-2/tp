@@ -42,4 +42,9 @@ public interface AddressBookStorage {
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
+    /**
+     * Returns the list of auto-fix records collected during the last call to {@link ReadOnlyAddressBook}.
+     * Implementations may return an empty list if no auto-fixes were applied.
+     */
+    java.util.List<AutoFixRecord> getLastAutoFixes();
 }

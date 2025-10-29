@@ -76,4 +76,9 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    @Override
+    public java.util.List<AutoFixRecord> getLastAutoFixes() {
+        return addressBookStorage.getLastAutoFixes();
+    }
+
 }

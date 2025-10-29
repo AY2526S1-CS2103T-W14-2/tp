@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.bitebuddy.commons.exceptions.IllegalValueException;
 import seedu.bitebuddy.commons.util.JsonUtil;
 import seedu.bitebuddy.model.AddressBook;
+import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.testutil.TypicalFoodplace;
 
 public class JsonSerializableAddressBookTest {
@@ -23,6 +24,10 @@ public class JsonSerializableAddressBookTest {
             TEST_DATA_FOLDER.resolve("invalidFoodplaceAddressBook.json");
     private static final Path DUPLICATE_FOODPLACES_FILE =
             TEST_DATA_FOLDER.resolve("duplicateFoodplaceAddressBook.json");
+    private static final Path CONFLICTING_WISHLIST_BLACKLIST_FILE =
+            TEST_DATA_FOLDER.resolve("conflictingWishlistBlacklist.json");
+    private static final Path NULL_NOTE_FILE =
+            TEST_DATA_FOLDER.resolve("nullNoteFoodplaceAddressBook.json");
 
     @Test
     public void toModelType_typicalFoodplacesFile_success() throws Exception {
@@ -47,6 +52,25 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_FOODPLACE,
                 dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_conflictingWishlistBlacklist_autofixesToNoStatus() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(CONFLICTING_WISHLIST_BLACKLIST_FILE,
+                JsonSerializableAddressBook.class).get();
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        Foodplace fp = addressBookFromFile.getFoodplaceList().get(0);
+        assertEquals(false, fp.getWishlist().isWishlisted());
+        assertEquals(false, fp.getBlacklist().isBlacklisted());
+    }
+
+    @Test
+    public void toModelType_nullNote_autofixesToEmptyNote() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(NULL_NOTE_FILE,
+                JsonSerializableAddressBook.class).get();
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        Foodplace fp = addressBookFromFile.getFoodplaceList().get(0);
+        assertEquals("", fp.getNote().value);
     }
 
 }

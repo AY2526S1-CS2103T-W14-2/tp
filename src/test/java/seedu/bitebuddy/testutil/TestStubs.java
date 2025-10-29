@@ -3,12 +3,14 @@ package seedu.bitebuddy.testutil;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 import seedu.bitebuddy.commons.exceptions.DataLoadingException;
 import seedu.bitebuddy.model.ReadOnlyAddressBook;
 import seedu.bitebuddy.model.ReadOnlyUserPrefs;
 import seedu.bitebuddy.model.UserPrefs;
+import seedu.bitebuddy.storage.AutoFixRecord;
 import seedu.bitebuddy.storage.Storage;
 import seedu.bitebuddy.ui.Ui;
 
@@ -94,6 +96,11 @@ public final class TestStubs {
                 throw new IOException("stub save prefs failure");
             }
         }
+
+        @Override
+        public java.util.List<seedu.bitebuddy.storage.AutoFixRecord> getLastAutoFixes() {
+            return new java.util.ArrayList<>();
+        }
     }
 
     /**
@@ -120,6 +127,11 @@ public final class TestStubs {
         @Override
         public void start(javafx.stage.Stage primaryStage) {
             started = true;
+        }
+
+        @Override
+        public void showAutoFixSummary(List<AutoFixRecord> fixes) {
+            return;
         }
     }
 

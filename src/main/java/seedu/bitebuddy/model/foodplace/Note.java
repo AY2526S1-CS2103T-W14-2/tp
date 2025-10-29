@@ -19,11 +19,16 @@ public class Note {
     public final String value;
 
     /**
-     * Constructs Note object, the string can be empty
+     * Constructs Note object, the string can be empty or consist only of whitespace which is treated as empty.
      * @param note the note for a foodplace
      */
     public Note(String note) {
         requireNonNull(note);
+        // Treat whitespace-only notes (e.g. "   ") as empty notes.
+        if (note.trim().isEmpty()) {
+            this.value = "";
+            return;
+        }
         checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
         this.value = note;
     }
