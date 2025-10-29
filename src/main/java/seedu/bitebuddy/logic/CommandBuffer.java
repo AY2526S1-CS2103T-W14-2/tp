@@ -7,6 +7,7 @@ public class CommandBuffer {
     private static CommandBuffer head;
     private static CommandBuffer current;
     private static int size = 0;
+    private static String pendingCommand = null;
 
     private CommandBuffer next;
     private CommandBuffer prev;
@@ -40,6 +41,9 @@ public class CommandBuffer {
         buffer.next = head;
         current = head;
 
+        // Reset pending command
+        pendingCommand = null;
+
         size += 1;
     }
 
@@ -47,6 +51,9 @@ public class CommandBuffer {
      * Returns the stored command in a node.
      */
     public String getCommand() {
+        if (current == head && pendingCommand != null) {
+            return pendingCommand;
+        }
         return command;
     }
 
@@ -73,6 +80,20 @@ public class CommandBuffer {
      */
     public static CommandBuffer getCurrent() {
         return current;
+    }
+
+    /**
+     * Sets the current command that hasn't been passed yet to be saved
+     */
+    public static void setPendingCommand(String command) {
+        pendingCommand = command;
+    }
+
+    /**
+     * Returns if the current node is the head or not.
+     */
+    public static boolean isHead() {
+        return current == head;
     }
 
     /**

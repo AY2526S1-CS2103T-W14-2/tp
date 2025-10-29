@@ -36,8 +36,15 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(event -> {
             KeyCode code = event.getCode();
             if (code == KeyCode.UP || code == KeyCode.DOWN) {
+
+                // Check if to update pending command
+                if (CommandBuffer.isHead()) {
+                    CommandBuffer.setPendingCommand(commandTextField.getText());
+                }
+
                 // Fetch command buffer
                 CommandBuffer current = CommandBuffer.getCurrent();
+
                 // Set command box content
                 if (current != null) {
                     if (code == KeyCode.UP) {
