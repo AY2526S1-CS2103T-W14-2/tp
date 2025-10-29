@@ -229,7 +229,8 @@ class JsonAdaptedFoodplace {
     }
 
     private void checkWishlistBlacklistConflict() throws IllegalValueException {
-        if (isWishlisted != null && isBlacklisted != null && isWishlisted && isBlacklisted) {
+        // isWishlisted and isBlacklisted are guaranteed to be non-null here
+        if (isWishlisted && isBlacklisted) {
             throw new IllegalValueException(WISHLIST_BLACKLIST_CONFLICT_MESSAGE);
         }
     }
