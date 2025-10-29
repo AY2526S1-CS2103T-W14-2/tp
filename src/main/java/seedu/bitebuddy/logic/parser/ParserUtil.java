@@ -29,6 +29,8 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_BOTH_TIMES_REQUIRED = "Both opening and closing time "
             + "(ot/ and ct/) must be provided";
+    public static final String MESSAGE_INVALID_TIME_FORMAT = "Opening and closing time should be in HH:mm format";
+    public static final String MESSAGE_INVALID_OPENING_CLOSING_TIME = "Closing time should be after opening time";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

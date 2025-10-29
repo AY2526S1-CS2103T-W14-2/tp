@@ -65,7 +65,23 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         String open = argMultimap.getValue(PREFIX_OPEN).orElse("");
         String close = argMultimap.getValue(PREFIX_CLOSE).orElse("");
-        Timing timing = new Timing(open, close);
+
+        Timing timing;
+
+        // Both open and close times are empty
+        if (open.isEmpty() && close.isEmpty()) {
+            timing = new Timing("", "");
+
+        // Either open or close time is invalid
+        } else if (!Timing.isValidTime(open) || !Timing.isValidTime(close)) {
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_TIME_FORMAT);
+
+        // Closing time before opening time
+        } else if (!Timing.isValidTiming(open + "-" + close)) {
+            throw new ParseException(ParserUtil.MESSAGE_INVALID_OPENING_CLOSING_TIME);
+        } else {
+            timing = new Timing(open, close);
+        }
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
