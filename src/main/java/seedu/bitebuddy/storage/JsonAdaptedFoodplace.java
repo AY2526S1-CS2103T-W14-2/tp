@@ -114,7 +114,7 @@ class JsonAdaptedFoodplace {
         final Note modelNote = toModelNote();
         final Wishlist modelWishlist = toModelWishlist();
         final Blacklist modelBlacklist = toModelBlacklist();
-        checkWishlistBlacklistConflict();
+        checkWishlistBlacklistConflict(modelWishlist, modelBlacklist);
         final Pinned modelPinned = toModelPinned();
 
         return new Foodplace(modelName, modelPhone, modelEmail, modelAddress, modelTiming, modelCuisine,
@@ -228,11 +228,8 @@ class JsonAdaptedFoodplace {
         return new Blacklist(isBlacklisted);
     }
 
-    private void checkWishlistBlacklistConflict() throws IllegalValueException {
-        // isWishlisted and isBlacklisted are guaranteed to be non-null here
-        assert isWishlisted != null;
-        assert isBlacklisted != null;
-        if (isWishlisted && isBlacklisted) {
+    private void checkWishlistBlacklistConflict(Wishlist wishlist, Blacklist blacklist) throws IllegalValueException {
+        if (wishlist.isWishlisted && blacklist.isBlacklisted) {
             throw new IllegalValueException(WISHLIST_BLACKLIST_CONFLICT_MESSAGE);
         }
     }
