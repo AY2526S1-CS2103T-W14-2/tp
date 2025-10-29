@@ -37,7 +37,6 @@ public class FoodplaceListPanel extends UiPart<Region> {
         @Override
         protected void updateItem(Foodplace foodplace, boolean empty) {
             super.updateItem(foodplace, empty);
-            logger.fine("Updating foodplace list view cell.");
 
             if (empty || foodplace == null) {
                 setGraphic(null);

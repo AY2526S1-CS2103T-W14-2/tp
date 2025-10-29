@@ -43,7 +43,6 @@ public class AddressBookParser {
 
     static {
         // Parsers for commands that need to parse arguments
-        // static or built once would be better; shown inline for readability
         parserMap.put(AddCommand.COMMAND_WORD, new AddCommandParser());
         parserMap.put(NoteCommand.COMMAND_WORD, new NoteCommandParser());
         parserMap.put(EditCommand.COMMAND_WORD, new EditCommandParser());
