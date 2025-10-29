@@ -12,10 +12,10 @@ public class PinnedTest {
     @Test
     public void constructor_validValue_success() {
         Pinned truePinned = new Pinned(true);
-        assertTrue(truePinned.isPinned);
+        assertTrue(truePinned.isPinned());
 
         Pinned falsePinned = new Pinned(false);
-        assertFalse(falsePinned.isPinned);
+        assertFalse(falsePinned.isPinned());
     }
 
     @Test

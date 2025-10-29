@@ -407,7 +407,8 @@ Pins a specified foodplace in BiteBuddy.
 Format: `pin INDEX`
 
 ```
-pin: Pins the foodplace identified by the index number used in the last foodplace listing. INDEX must be a positive integer.
+pin: Pins the foodplace identified by the index number used in the last foodplace listing.
+INDEX must be a positive integer.
 Parameters: INDEX
 Example: pin 1
 ```
@@ -430,7 +431,8 @@ Unpins a specified foodplace in Bitebuddy.
 Format: `unpin INDEX`
 
 ```
-unpin: Unpins the foodplace identified by the index number used in the last foodplace listing. INDEX must be a positive integer.
+unpin: Unpins the foodplace identified by the index number used in the last foodplace listing.
+INDEX must be a positive integer.
 Parameters: INDEX
 Example: unpin 1
 ```

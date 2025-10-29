@@ -25,32 +25,39 @@ public class UnpinCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    private void pinFoodplace(Foodplace foodplace) {
-        Foodplace pinnedFoodplace = new Foodplace(foodplace.getName(), foodplace.getPhone(),
-                foodplace.getEmail(), foodplace.getAddress(), foodplace.getTiming(), foodplace.getCuisine(),
-                foodplace.getTags(), foodplace.getNote(), foodplace.getRate(),
-                foodplace.getWishlist(), foodplace.getBlacklist(), new Pinned(true));
-        model.setFoodplace(foodplace, pinnedFoodplace);
+    private void setPinned(Foodplace foodplace, boolean pinned) {
+        Foodplace updated = new Foodplace(
+                foodplace.getName(), foodplace.getPhone(), foodplace.getEmail(), foodplace.getAddress(),
+                foodplace.getTiming(), foodplace.getCuisine(), foodplace.getTags(), foodplace.getNote(),
+                foodplace.getRate(), foodplace.getWishlist(), foodplace.getBlacklist(),
+                new Pinned(pinned)
+        );
+        model.setFoodplace(foodplace, updated);
+    }
+
+    private Foodplace createUnpinned(Foodplace foodplace) {
+        return new Foodplace(
+                foodplace.getName(), foodplace.getPhone(), foodplace.getEmail(), foodplace.getAddress(),
+                foodplace.getTiming(), foodplace.getCuisine(), foodplace.getTags(), foodplace.getNote(),
+                foodplace.getRate(), foodplace.getWishlist(), foodplace.getBlacklist(),
+                new Pinned(false)
+        );
     }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Foodplace foodplaceToUnpin = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
-        pinFoodplace(foodplaceToUnpin);
+        Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        setPinned(foodplace, true);
 
         UnpinCommand unpinCommand = new UnpinCommand(INDEX_FIRST_FOODPLACE);
 
-        Foodplace unpinnedFoodplace = new Foodplace(foodplaceToUnpin.getName(), foodplaceToUnpin.getPhone(),
-                foodplaceToUnpin.getEmail(), foodplaceToUnpin.getAddress(), foodplaceToUnpin.getTiming(),
-                foodplaceToUnpin.getCuisine(), foodplaceToUnpin.getTags(), foodplaceToUnpin.getNote(),
-                foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), foodplaceToUnpin.getBlacklist(),
-                new Pinned(false));
+        Foodplace unpinnedFoodplace = createUnpinned(foodplace);
 
         String expectedMessage = String.format(UnpinCommand.MESSAGE_UNPIN_FOODPLACE_SUCCESS,
                 Messages.format(unpinnedFoodplace));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setFoodplace(foodplaceToUnpin, unpinnedFoodplace);
+        expectedModel.setFoodplace(foodplace, unpinnedFoodplace);
         expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
 
         assertCommandSuccess(unpinCommand, model, expectedMessage, expectedModel);
@@ -65,24 +72,19 @@ public class UnpinCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        Foodplace original = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
-        pinFoodplace(original);
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
 
-        Foodplace foodplaceToUnpin = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
-        UnpinCommand unpinCommand = new UnpinCommand(INDEX_FIRST_FOODPLACE);
+        Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        setPinned(foodplace, true);
 
-        Foodplace unpinnedFoodplace = new Foodplace(foodplaceToUnpin.getName(), foodplaceToUnpin.getPhone(),
-                foodplaceToUnpin.getEmail(), foodplaceToUnpin.getAddress(), foodplaceToUnpin.getTiming(),
-                foodplaceToUnpin.getCuisine(), foodplaceToUnpin.getTags(), foodplaceToUnpin.getNote(),
-                foodplaceToUnpin.getRate(), foodplaceToUnpin.getWishlist(), foodplaceToUnpin.getBlacklist(),
-                new Pinned(false));
+        UnpinCommand unpinCommand = new UnpinCommand(INDEX_FIRST_FOODPLACE);
+        Foodplace unpinnedFoodplace = createUnpinned(foodplace);
 
         String expectedMessage = String.format(UnpinCommand.MESSAGE_UNPIN_FOODPLACE_SUCCESS,
                 Messages.format(unpinnedFoodplace));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setFoodplace(foodplaceToUnpin, unpinnedFoodplace);
+        expectedModel.setFoodplace(foodplace, unpinnedFoodplace);
         expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
 
         assertCommandSuccess(unpinCommand, model, expectedMessage, expectedModel);
@@ -93,6 +95,7 @@ public class UnpinCommandTest {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
         Index outOfBoundIndex = INDEX_SECOND_FOODPLACE;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFoodplaceList().size());
+
         UnpinCommand unpinCommand = new UnpinCommand(outOfBoundIndex);
         assertCommandFailure(unpinCommand, model, Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
     }
@@ -100,6 +103,8 @@ public class UnpinCommandTest {
     @Test
     public void execute_notPinned_returnsNotPinnedMessage() {
         Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        setPinned(foodplace, false);
+
         UnpinCommand unpinCommand = new UnpinCommand(INDEX_FIRST_FOODPLACE);
         assertCommandSuccess(unpinCommand, model, UnpinCommand.MESSAGE_NOT_PINNED, model);
     }
