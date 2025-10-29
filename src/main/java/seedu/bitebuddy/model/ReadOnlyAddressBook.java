@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 
 /**
- * Unmodifiable view of an bitebuddy book
+ * Unmodifiable view of the address book data.
  */
 public interface ReadOnlyAddressBook {
 

@@ -38,17 +38,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' bitebuddy book file path.
+     * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' bitebuddy book file path.
+     * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces bitebuddy book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
@@ -56,27 +56,27 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a foodplace with the same identity as {@code foodplace} exists in the bitebuddy book.
+     * Returns true if a foodplace with the same identity as {@code foodplace} exists in the address book.
      */
     boolean hasFoodplace(Foodplace foodplace);
 
     /**
      * Deletes the given foodplace.
-     * The foodplace must exist in the bitebuddy book.
+     * The foodplace must exist in the address book.
      */
     void deleteFoodplace(Foodplace target);
 
     /**
      * Adds the given foodplace.
-     * {@code foodplace} must not already exist in the bitebuddy book.
+     * {@code foodplace} must not already exist in the address book.
      */
     void addFoodplace(Foodplace foodplace);
 
     /**
      * Replaces the given foodplace {@code target} with {@code editedFoodplace}.
-     * {@code target} must exist in the bitebuddy book.
+     * {@code target} must exist in the address book.
      * The foodplace identity of {@code editedFoodplace} must not be the same as another existing foodplace in the
-     * bitebuddy book.
+     * address book.
      */
     void setFoodplace(Foodplace target, Foodplace editedFoodplace);
 
