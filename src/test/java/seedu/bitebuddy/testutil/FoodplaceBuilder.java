@@ -23,9 +23,9 @@ import seedu.bitebuddy.model.util.SampleDataUtil;
  */
 public class FoodplaceBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_NAME = "Amy Bee Cafe";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_EMAIL = "amybeecafe@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_CUISINE = "Italian";
     public static final String DEFAULT_NOTE = "Serves the best appetisers!";
