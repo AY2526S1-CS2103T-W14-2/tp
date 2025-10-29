@@ -118,11 +118,11 @@ How the parsing works:
 Argument processing helper classes:
 
 There are two common styles of argument processing used by command parsers:
-- Prefix-based commands uses `ArgumentTokenizer` + `ArgumentMultimap` (e.g. `AddCommand`, `EditCommand`, etc.).
+- Prefix-based commands use `ArgumentTokenizer` + `ArgumentMultimap` (e.g. `AddCommand`, `EditCommand`, etc.).
     - For commands that accept labelled fields using prefixes (e.g. `add n/NAME p/PHONE t/TAG ...`).
     - Tokenize the raw arguments with `ArgumentTokenizer` using the expected prefixes, then read values from the returned `ArgumentMultimap`.
 
-- Positional-based (whitespace-separated) commands uses `ArgumentPositionMapper` (e.g. `NoteCommand`, `RateCommand`, `CompareCommand`, etc.).
+- Positional-based (whitespace-separated) commands use `ArgumentPositionMapper` (e.g. `NoteCommand`, `RateCommand`, `CompareCommand`, etc.).
     - For commands that accept a fixed sequence of whitespace-separated values (e.g. `note 1 Good customer service!`).
     - `ArgumentPositionMapper` maps tokens by their position into parameters.
 
