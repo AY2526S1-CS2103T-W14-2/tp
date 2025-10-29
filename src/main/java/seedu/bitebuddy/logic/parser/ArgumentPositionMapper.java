@@ -37,12 +37,17 @@ public class ArgumentPositionMapper {
     /**
      * Constructs a PositionalArgumentMapper by splitting the input string by whitespace up till the given index.
      * @param argsString the string containing all positional arguments
-     * @param ignoreSplitIndex index to ignore splitting at
+     * @param ignoreSplitIndex ignoreSplitIndex the last index to split at, with all remaining text combined into one
+     *                         final token (i.e., the maximum number of tokens to split into minus 1)
      */
     public ArgumentPositionMapper(String argsString, int ignoreSplitIndex) {
         if (argsString == null || argsString.trim().isEmpty()) {
             this.args = new ArrayList<>();
         } else {
+            // Ensure ignoreSplitIndex is non-negative (because it splits all if negative)
+            if (ignoreSplitIndex < 0) {
+                ignoreSplitIndex = 0;
+            }
             // Split by whitespace
             String[] tokens = argsString.trim().split("\\s+", ignoreSplitIndex + 1);
             this.args = new ArrayList<>();

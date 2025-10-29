@@ -50,11 +50,46 @@ public class ArgumentPositionMapperTest {
     }
 
     @Test
-    public void constructor_withIgnoreSplitIndex_combinesRemainingTokens() {
+    public void constructor2_withIgnoreSplitIndex_combinesRemainingTokens() {
         ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD_WITH_WHITESPACES, 1);
         assertEquals(2, mapper.size());
         assertEquals("2", mapper.getArgument(0));
         assertEquals("good   customer   service", mapper.getArgument(1));
+    }
+
+    @Test
+    public void constructor2_negativeIgnoreSplitIndex_combinesRemainingTokens() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD_WITH_WHITESPACES, -1);
+        assertEquals(1, mapper.size());
+        assertEquals("2 good   customer   service", mapper.getArgument(0));
+    }
+
+    @Test
+    public void constructor2_zeroIgnoreSplitIndex_combinesRemainingTokens() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD_WITH_WHITESPACES, 0);
+        assertEquals(1, mapper.size());
+        assertEquals("2 good   customer   service", mapper.getArgument(0));
+    }
+
+    @Test
+    public void constructor2_emptyString_returnsEmptyList() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper("", 2);
+        assertTrue(mapper.getAllArguments().isEmpty(), "Expected empty list for empty input");
+        assertEquals(0, mapper.size());
+    }
+
+    @Test
+    public void constructor2_nullString_returnsEmptyList() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(null, 2);
+        assertTrue(mapper.getAllArguments().isEmpty(), "Expected empty list for null input");
+        assertEquals(0, mapper.size());
+    }
+
+    @Test
+    public void constructor2_singleWord_returnsSingleElement() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(SINGLE_WORD, 2);
+        assertEquals(1, mapper.size());
+        assertEquals(SINGLE_WORD, mapper.getArgument(0));
     }
 
     @Test
