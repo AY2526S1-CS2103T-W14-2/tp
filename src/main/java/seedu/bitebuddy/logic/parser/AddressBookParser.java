@@ -3,6 +3,9 @@ package seedu.bitebuddy.logic.parser;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -35,6 +38,32 @@ public class AddressBookParser {
 
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final Map<String, Parser<? extends Command>> parserMap = new HashMap<>();
+    private static final Map<String, Supplier<Command>> supplierMap = new HashMap<>();
+
+    static {
+        // Parsers for commands that need to parse arguments
+        // static or built once would be better; shown inline for readability
+        parserMap.put(AddCommand.COMMAND_WORD, new AddCommandParser());
+        parserMap.put(NoteCommand.COMMAND_WORD, new NoteCommandParser());
+        parserMap.put(EditCommand.COMMAND_WORD, new EditCommandParser());
+        parserMap.put(DeleteCommand.COMMAND_WORD, new DeleteCommandParser());
+        parserMap.put(FindCommand.COMMAND_WORD, new FindCommandParser());
+        parserMap.put(HelpCommand.COMMAND_WORD, new HelpCommandParser());
+        parserMap.put(TagCommand.COMMAND_WORD, new TagCommandParser());
+        parserMap.put(RateCommand.COMMAND_WORD, new RateCommandParser());
+        parserMap.put(CompareCommand.COMMAND_WORD, new CompareCommandParser());
+        parserMap.put(WishlistCommand.COMMAND_WORD, new WishlistCommandParser());
+        parserMap.put(BlacklistCommand.COMMAND_WORD, new BlacklistCommandParser());
+        parserMap.put(PinCommand.COMMAND_WORD, new PinCommandParser());
+        parserMap.put(UnpinCommand.COMMAND_WORD, new UnpinCommandParser());
+
+        // Suppliers for simple no-argument commands
+        supplierMap.put(ClearCommand.COMMAND_WORD, ClearCommand::new);
+        supplierMap.put(ListCommand.COMMAND_WORD, ListCommand::new);
+        supplierMap.put(ExitCommand.COMMAND_WORD, ExitCommand::new);
+    }
+
 
     /**
      * Parses user input into command for execution.
@@ -52,64 +81,19 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
-        // log messages such as the one below.
-        // Lower level log messages are used sparingly to minimize noise in the code.
         logger.log(Level.FINE, () -> "Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case NoteCommand.COMMAND_WORD:
-            return new NoteCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommandParser().parse(arguments);
-
-        case TagCommand.COMMAND_WORD:
-            return new TagCommandParser().parse(arguments);
-
-        case RateCommand.COMMAND_WORD:
-            return new RateCommandParser().parse(arguments);
-
-        case CompareCommand.COMMAND_WORD:
-            return new CompareCommandParser().parse(arguments);
-
-        case WishlistCommand.COMMAND_WORD:
-            return new WishlistCommandParser().parse(arguments);
-
-        case BlacklistCommand.COMMAND_WORD:
-            return new BlacklistCommandParser().parse(arguments);
-
-        case PinCommand.COMMAND_WORD:
-            return new PinCommandParser().parse(arguments);
-
-        case UnpinCommand.COMMAND_WORD:
-            return new UnpinCommandParser().parse(arguments);
-        default:
-            logger.log(Level.FINER, () -> "This user input caused a ParseException: " + userInput);
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        if (parserMap.containsKey(commandWord)) {
+            Parser<? extends Command> p = parserMap.get(commandWord);
+            return p.parse(arguments);
         }
+
+        if (supplierMap.containsKey(commandWord)) {
+            return supplierMap.get(commandWord).get();
+        }
+
+        logger.log(Level.FINER, () -> "This user input caused a ParseException: " + userInput);
+        throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 
 }
