@@ -65,7 +65,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         String open = argMultimap.getValue(PREFIX_OPEN).orElse("");
         String close = argMultimap.getValue(PREFIX_CLOSE).orElse("");
-        Timing timing = new Timing(open, close);
+        Timing timing = ParserUtil.parseTiming(open, close);
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
