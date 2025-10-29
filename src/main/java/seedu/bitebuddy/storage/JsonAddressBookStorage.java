@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.bitebuddy.commons.core.LogsCenter;
@@ -21,12 +22,13 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
     public JsonAddressBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
+    @Override
     public Path getAddressBookFilePath() {
         return filePath;
     }
@@ -42,6 +44,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
+    @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
@@ -54,7 +57,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         try {
             return Optional.of(jsonAddressBook.get().toModelType());
         } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+            logger.log(Level.INFO, "Illegal values found in {0}: {1}", new Object[] { filePath, ive.getMessage() });
             throw new DataLoadingException(ive);
         }
     }
@@ -69,6 +72,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
+    @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
