@@ -13,7 +13,15 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- SE-EDU AddressBook Level 3 project — used as the primary template for architecture, componentisation and many example snippets: https://github.com/se-edu/addressbook-level3
+- PlantUML — used to author sequence/class/activity diagrams: https://plantuml.com/
+- OpenJFX (JavaFX) — UI components and FXML usage: https://openjfx.io/
+- Jackson (FasterXML) — JSON read/write helpers: https://github.com/FasterXML/jackson
+- Gradle — build scripts and dependency management: https://gradle.org/
+- JUnit 5 — unit testing framework: https://junit.org/junit5/
+- OpenJDK / Java 17 — target runtime: https://openjdk.org/
+- Markbind - used to generate app website: https://markbind.org/
+- Github Copilot - used for autocompleting and drafting code, as well as doing initial reviews for pull requests :https://github.com/features/copilot
 
 --------------------------------------------------------------------------------------------------------------------
 
