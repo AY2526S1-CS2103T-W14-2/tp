@@ -31,6 +31,8 @@ import seedu.bitebuddy.model.tag.Tag;
 class JsonAdaptedFoodplace {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Foodplace's %s field is missing!";
+    public static final String WISHLIST_BLACKLIST_CONFLICT_MESSAGE =
+            "A foodplace cannot be both wishlisted and blacklisted!";
 
     private final String name;
     private final String phone;
@@ -214,6 +216,10 @@ class JsonAdaptedFoodplace {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Wishlist.class.getSimpleName()));
         }
+        // Check for conflict between wishlist and blacklist (also need ensure blacklist is not null)
+        if (isWishlisted && isBlacklisted != null && isBlacklisted) {
+            throw new IllegalValueException(String.format(WISHLIST_BLACKLIST_CONFLICT_MESSAGE));
+        }
         return new Wishlist(isWishlisted);
     }
 
@@ -221,6 +227,10 @@ class JsonAdaptedFoodplace {
         if (isBlacklisted == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Blacklist.class.getSimpleName()));
+        }
+        // Check for conflict between wishlist and blacklist (also need ensure blacklist is not null)
+        if (isBlacklisted && isWishlisted != null && isWishlisted) {
+            throw new IllegalValueException(String.format(WISHLIST_BLACKLIST_CONFLICT_MESSAGE));
         }
         return new Blacklist(isBlacklisted);
     }

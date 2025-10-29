@@ -3,6 +3,7 @@ package seedu.bitebuddy.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.bitebuddy.storage.JsonAdaptedFoodplace.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.bitebuddy.storage.JsonAdaptedFoodplace.WISHLIST_BLACKLIST_CONFLICT_MESSAGE;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.DAEBAKSHOP;
 
@@ -272,6 +273,15 @@ public class JsonAdaptedFoodplaceTest {
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TIMING,
                         VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST, null, VALID_PINNED);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Blacklist.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
+    }
+
+    @Test
+    public void toModelType_wishlistTrueBlacklistTrue_throwsIllegalValueException() {
+        JsonAdaptedFoodplace foodplace =
+                new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TIMING,
+                        VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, true, true, VALID_PINNED);
+        String expectedMessage = String.format(WISHLIST_BLACKLIST_CONFLICT_MESSAGE);
         assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
     }
 

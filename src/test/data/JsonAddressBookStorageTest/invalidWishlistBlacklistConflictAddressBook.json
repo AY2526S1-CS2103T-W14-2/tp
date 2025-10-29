@@ -1,0 +1,11 @@
+{
+  "foodplaces": [ {
+    "name": "Conflicted Shop",
+    "phone": "9123456",
+    "email": "conflict@example.com",
+    "address": "Conflict street",
+    "wishlist": true,
+    "blacklist": true
+  } ]
+}
+

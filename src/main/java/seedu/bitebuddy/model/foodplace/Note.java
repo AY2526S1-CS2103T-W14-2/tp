@@ -25,13 +25,14 @@ public class Note {
     public Note(String note) {
         requireNonNull(note);
         checkArgument(isValidNote(note), MESSAGE_CONSTRAINTS);
-        this.value = note;
+        this.value = note.trim();
     }
 
     /**
      * Returns if a given string is a valid note.
      */
     public static boolean isValidNote(String test) {
+        // Exceeds length --> invalid
         if (test.length() > MAX_NOTE_LENGTH) {
             return false;
         }

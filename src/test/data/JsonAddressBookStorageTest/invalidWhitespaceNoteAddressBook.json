@@ -1,0 +1,10 @@
+{
+  "foodplaces": [ {
+    "name": "Whitespace Note Shop",
+    "phone": "9482424",
+    "email": "ws@example.com",
+    "address": "Some street",
+    "note": "   "
+  } ]
+}
+
