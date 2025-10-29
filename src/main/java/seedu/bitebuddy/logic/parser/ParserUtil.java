@@ -3,7 +3,6 @@ package seedu.bitebuddy.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,8 +28,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_BOTH_TIMES_REQUIRED = "Both opening and closing time "
             + "(ot/ and ct/) must be provided";
-    public static final String MESSAGE_INVALID_TIME_FORMAT = "Opening and closing time should be in HH:mm format";
-    public static final String MESSAGE_INVALID_OPENING_CLOSING_TIME = "Closing time should be after opening time";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -125,22 +122,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String time} into a {@code LocalTime}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code time} is invalid.
-     */
-    public static LocalTime parseTime(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmed = time.trim();
-        try {
-            return LocalTime.parse(trimmed);
-        } catch (DateTimeParseException dte) {
-            throw new ParseException(Timing.MESSAGE_INVALID_TIME);
-        }
-    }
-
-    /**
      * Parses a {@code String open} and {@code String close} into a {@code Timing}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -149,7 +130,11 @@ public class ParserUtil {
     public static Timing parseTiming(String open, String close) throws ParseException {
         requireNonNull(open);
         requireNonNull(close);
-        if (open.isEmpty() || close.isEmpty()) {
+        if (open.isEmpty() && close.isEmpty()) {
+            return new Timing(open, close);
+        }
+
+        if (open.isEmpty() ^ close.isEmpty()) {
             throw new ParseException(MESSAGE_BOTH_TIMES_REQUIRED);
         }
         String trimmedOpen = open.trim();

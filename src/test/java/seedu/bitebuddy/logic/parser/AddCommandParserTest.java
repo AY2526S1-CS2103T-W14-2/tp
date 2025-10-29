@@ -47,6 +47,7 @@ import seedu.bitebuddy.model.foodplace.Email;
 import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.Name;
 import seedu.bitebuddy.model.foodplace.Phone;
+import seedu.bitebuddy.model.foodplace.Timing;
 import seedu.bitebuddy.model.tag.Tag;
 import seedu.bitebuddy.testutil.FoodplaceBuilder;
 
@@ -239,12 +240,12 @@ public class AddCommandParserTest {
         // opening time invalid
         assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                         + ADDRESS_DESC_SWENSWAN + " ot/25:00" + CLOSE_TIMING_DESC_SWENSWAN,
-                ParserUtil.MESSAGE_INVALID_TIME_FORMAT);
+                Timing.MESSAGE_INVALID_TIME);
 
         // closing time invalid
         assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                         + ADDRESS_DESC_SWENSWAN + OPEN_TIMING_DESC_SWENSWAN + " ct/25:00",
-                ParserUtil.MESSAGE_INVALID_TIME_FORMAT);
+                Timing.MESSAGE_INVALID_TIME);
     }
 
     @Test
@@ -252,6 +253,6 @@ public class AddCommandParserTest {
         String invalidOpenClose = " ot/18:00 ct/09:00"; // open > close
         assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
                         + ADDRESS_DESC_SWENSWAN + invalidOpenClose,
-                ParserUtil.MESSAGE_INVALID_OPENING_CLOSING_TIME);
+                Timing.MESSAGE_CONSTRAINTS);
     }
 }
