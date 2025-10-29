@@ -60,6 +60,13 @@ public class CommandBufferTest {
     }
 
     @Test
+    public void getCommand_isHeadHasPendingCommand_returnsPendingCommand() {
+        CommandBuffer.push(COMMAND_ARRAY_STUB[0]);
+        CommandBuffer.setPendingCommand(COMMAND_ARRAY_STUB[1]);
+        assertEquals(COMMAND_ARRAY_STUB[1], CommandBuffer.getCurrent().getCommand());
+    }
+
+    @Test
     public void getNext_emptyBuffer_fail() {
         assertThrows(NullPointerException.class, CommandBuffer::getNext);
     }
