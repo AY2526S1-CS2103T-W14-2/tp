@@ -28,6 +28,8 @@ public class CommandBufferTest {
     public void push_emptyBuffer_success() {
         CommandBuffer.push(COMMAND_STUB);
         assertEquals(1, CommandBuffer.getSize());
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
         assertEquals(COMMAND_STUB, CommandBuffer.getCurrent().getCommand());
     }
 
@@ -37,6 +39,8 @@ public class CommandBufferTest {
             CommandBuffer.push(i);
         }
         assertEquals(COMMAND_ARRAY_STUB.length, CommandBuffer.getSize());
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
         assertEquals(COMMAND_ARRAY_STUB[COMMAND_ARRAY_STUB.length - 1], CommandBuffer.getCurrent().getCommand());
     }
 
@@ -48,6 +52,8 @@ public class CommandBufferTest {
     @Test
     public void getCommand_nonEmptyBuffer_success() {
         CommandBuffer.push(COMMAND_STUB);
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
         assertEquals(COMMAND_STUB, CommandBuffer.getCurrent().getCommand());
     }
 
@@ -62,7 +68,10 @@ public class CommandBufferTest {
             CommandBuffer.push(i);
         }
         assertEquals(COMMAND_ARRAY_STUB.length, CommandBuffer.getSize());
+        // Attempt to increment to next command
         CommandBuffer.getNext();
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
         assertEquals(COMMAND_ARRAY_STUB[COMMAND_ARRAY_STUB.length - 1], CommandBuffer.getCurrent().getCommand());
     }
 
@@ -106,7 +115,11 @@ public class CommandBufferTest {
     @Test
     public void getPrev_nonEmptyBufferNoPrev_success() {
         CommandBuffer.push(COMMAND_STUB);
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
+
         CommandBuffer before = CommandBuffer.getCurrent();
+        // Attempt going back out of bounds
         CommandBuffer.getPrev();
         assertEquals(before, CommandBuffer.getCurrent());
     }
