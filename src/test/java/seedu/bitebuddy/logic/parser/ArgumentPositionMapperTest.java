@@ -14,6 +14,7 @@ public class ArgumentPositionMapperTest {
 
     private static final String NOTE_MULTI_WORD = "note 2 good customer service";
     private static final String NOTE_MULTI_WORD_NO_COMMAND_WORD = "2 good customer service";
+    private static final String NOTE_MULTI_WORD_WITH_WHITESPACES = "2 good   customer   service";
     private static final String NOTE_MULTI_WORD_NOTE_ARG = "good customer service";
     private static final int NOTE_MULTI_WORD_LENGTH = NOTE_MULTI_WORD.split(" ").length;
 
@@ -46,6 +47,14 @@ public class ArgumentPositionMapperTest {
         ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD);
         assertEquals(5, mapper.size());
         assertEquals(List.of(NOTE_MULTI_WORD.split(" ")), mapper.getAllArguments());
+    }
+
+    @Test
+    public void constructor_withIgnoreSplitIndex_combinesRemainingTokens() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD_WITH_WHITESPACES, 1);
+        assertEquals(2, mapper.size());
+        assertEquals("2", mapper.getArgument(0));
+        assertEquals("good   customer   service", mapper.getArgument(1));
     }
 
     @Test

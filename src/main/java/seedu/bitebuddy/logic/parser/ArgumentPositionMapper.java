@@ -8,7 +8,7 @@ import java.util.List;
  * Stores mapping of positional (non-prefixed) arguments for commands like "note 2 good taste"
  * or "rating 3 5".
  *
- * Supports basic positional argument access:
+ * Supports basic positional argument access (can be found at CliSyntax.java):
  * - index 0: usually the first argument (e.g. index in list)
  * - index 1: usually the next value (e.g. note text or rating)
  *
@@ -27,8 +27,24 @@ public class ArgumentPositionMapper {
         if (argsString == null || argsString.trim().isEmpty()) {
             this.args = new ArrayList<>();
         } else {
-            // Split by whitespace; first element usually the index
+            // Split by whitespace
             String[] tokens = argsString.trim().split("\\s+");
+            this.args = new ArrayList<>();
+            Collections.addAll(this.args, tokens);
+        }
+    }
+
+    /**
+     * Constructs a PositionalArgumentMapper by splitting the input string by whitespace up till the given index.
+     * @param argsString the string containing all positional arguments
+     * @param ignoreSplitIndex index to ignore splitting at
+     */
+    public ArgumentPositionMapper(String argsString, int ignoreSplitIndex) {
+        if (argsString == null || argsString.trim().isEmpty()) {
+            this.args = new ArrayList<>();
+        } else {
+            // Split by whitespace
+            String[] tokens = argsString.trim().split("\\s+", ignoreSplitIndex + 1);
             this.args = new ArrayList<>();
             Collections.addAll(this.args, tokens);
         }
@@ -61,6 +77,7 @@ public class ArgumentPositionMapper {
     /**
      * Returns the remaining text starting from the given position,
      * joined with spaces (useful for multi-word note content).
+     * @param startPosition the position to return remaining arguments from
      */
     public String getRemainingArguments(int startPosition) {
         if (startPosition < 0 || startPosition >= args.size()) {
