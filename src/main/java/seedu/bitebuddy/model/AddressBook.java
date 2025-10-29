@@ -10,7 +10,7 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
 import seedu.bitebuddy.model.foodplace.UniqueFoodplaceList;
 
 /**
- * Wraps all data at the bitebuddy-book level
+ * Wraps all data at the BiteBuddy level
  * Duplicates are not allowed (by .isSameFoodplace comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
@@ -35,7 +35,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
-        resetData(toBeCopied);
+        requireNonNull(toBeCopied);
+        this.foodplaces.setFoodplaces(toBeCopied.getFoodplaceList());
     }
 
     //// list overwrite operations

@@ -1,6 +1,7 @@
 package seedu.bitebuddy.model.foodplace;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -72,6 +73,11 @@ public class FoodplaceMatchesCriteriaPredicate implements Predicate<Foodplace> {
         return tags.equals(otherPredicate.tags)
                 && cuisine.equals(otherPredicate.cuisine)
                 && rating.equals(otherPredicate.rating);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tags, cuisine, rating);
     }
 
     @Override

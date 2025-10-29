@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the notes about a foodplace in the address book.
+ * Represents the notes about a foodplace in BiteBuddy.
  * Guarantees: immutable; is always valid
  */
 public class Note {

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Foodplace's name in the bitebuddy book.
+ * Represents a Foodplace's name in BiteBuddy.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
@@ -13,7 +13,7 @@ public class Name {
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
-     * The first character of the bitebuddy must not be a whitespace,
+     * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";

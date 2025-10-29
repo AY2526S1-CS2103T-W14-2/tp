@@ -52,6 +52,11 @@ public class FoodplaceContainsKeywordsPredicate implements Predicate<Foodplace> 
     }
 
     @Override
+    public int hashCode() {
+        return keywords.hashCode();
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
