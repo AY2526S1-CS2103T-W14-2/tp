@@ -63,6 +63,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!ParserUtil.areNoneOrBothPrefixesPresent(argMultimap, PREFIX_OPEN, PREFIX_CLOSE)) {
             throw new ParseException(ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED);
         }
+
         String open = argMultimap.getValue(PREFIX_OPEN).orElse("");
         String close = argMultimap.getValue(PREFIX_CLOSE).orElse("");
         Timing timing = ParserUtil.parseTiming(open, close);
