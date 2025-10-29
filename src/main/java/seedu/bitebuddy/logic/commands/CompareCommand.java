@@ -20,10 +20,12 @@ public class CompareCommand extends Command {
     public static final String COMMAND_WORD = "compare";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Compares the two foodplaces identified "
-            + "by the index numbers used in the last foodplace listing.\n"
-            + "INDEX1 and INDEX2 must be positive integers. INDEX1 and INDEX2 must not be equal.\n"
-            + "Parameters: INDEX1 and INDEX2\n"
-            + "Example: " + COMMAND_WORD + " 1 5";
+            + "by the index numbers used in the displayed foodplace list.\n"
+            + "• INDEX1 and INDEX2 must be positive integers. INDEX1 and INDEX2 must not be equal.\n"
+            + "Parameters:\n"
+            + "  " + "INDEX1 INDEX2\n"
+            + "Example:\n"
+            + "  " + COMMAND_WORD + " 1 5";
 
     public static final String MESSAGE_COMPARE_SAME_INDEX = "The two foodplace indexes cannot be the same";
     public static final String MESSAGE_COMPARE_BOTH_INDEX_INVALID = "Both foodplace indexes provided are invalid";

@@ -21,10 +21,12 @@ public class UnpinCommand extends Command {
     public static final String COMMAND_WORD = "unpin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unpins the foodplace identified "
-            + "by the index number used in the last foodplace listing.\n"
-            + "INDEX must be a positive integer.\n"
-            + "Parameters: INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "by the index number used in the last foodplace list.\n"
+            + "• INDEX must be a positive integer.\n"
+            + "Parameters:\n"
+            + "  " + "INDEX\n"
+            + "Example:\n"
+            + "  " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_UNPIN_FOODPLACE_SUCCESS = "Unpinned foodplace: %1$s";
     public static final String MESSAGE_NOT_PINNED = "This foodplace was not pinned";

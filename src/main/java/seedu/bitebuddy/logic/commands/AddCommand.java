@@ -23,9 +23,9 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a foodplace to BiteBuddy. "
-            + "Parameters: "
-            + PREFIX_NAME + "FOODPLACE NAME "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a foodplace to BiteBuddy.\n"
+            + "Parameters:\n"
+            + "  " + PREFIX_NAME + "FOODPLACE_NAME "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -33,7 +33,8 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_RATE + "RATE]\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example:\n"
+            + "  " + COMMAND_WORD + " "
             + PREFIX_NAME + "Prata place "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_PHONE + "98765432 "

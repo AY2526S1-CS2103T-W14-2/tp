@@ -11,8 +11,10 @@ import seedu.bitebuddy.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears BiteBuddy. "
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears all entries saved in BiteBuddy.\n"
+            + "• This action is IRREVERSIBLE!\n"
+            + "Example:\n"
+            + "  " + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "BiteBuddy has been cleared!";
 
 

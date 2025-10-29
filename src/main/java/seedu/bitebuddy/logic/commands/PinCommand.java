@@ -21,10 +21,12 @@ public class PinCommand extends Command {
     public static final String COMMAND_WORD = "pin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins the foodplace identified "
-            + "by the index number used in the last foodplace listing.\n"
-            + "INDEX must be a positive integer.\n"
-            + "Parameters: INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "by the index number used in the last foodplace list.\n"
+            + "• INDEX must be a positive integer.\n"
+            + "Parameters:\n"
+            + "  " + "INDEX\n"
+            + "Example:\n"
+            + "  " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_PIN_FOODPLACE_SUCCESS = "Pinned foodplace: %1$s";
     public static final String MESSAGE_ALREADY_PINNED = "This foodplace is already pinned";

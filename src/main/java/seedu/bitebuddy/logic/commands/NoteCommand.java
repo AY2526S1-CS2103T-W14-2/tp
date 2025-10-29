@@ -20,13 +20,15 @@ public class NoteCommand extends Command {
     public static final String COMMAND_WORD = "note";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the notes of the foodplace identified "
-            + "by the index number used in the last foodplace listing. "
-            + "Existing notes will be overwritten by the input.\n"
-            + "Empty notes erase the current note in foodplace.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "note [INDEX] [NOTE]\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "Very good customer service\n"
-            + "Restrictions: 100 characters limit";
+            + "by the index number used in the displayed foodplace list.\n"
+            + "If NOTE is not supplied, the current note of the foodplace will be erased instead.\n"
+            + "• INDEX must be a positive integer. NOTE has a 100 ASCII-character limit.\n"
+            + "• Existing notes will be overwritten by the input.\n"
+            + "Parameters:\n"
+            + "  " + "INDEX [NOTE]\n"
+            + "Examples: \n"
+            + "  " + COMMAND_WORD + " 1 " + "Very good customer service\n"
+            + "  " + COMMAND_WORD + " 3";
 
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added notes to Foodplace: %1$s";
     public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed notes from Foodplace: %1$s";

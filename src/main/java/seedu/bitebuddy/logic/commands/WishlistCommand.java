@@ -21,12 +21,15 @@ public class WishlistCommand extends Command {
     public static final String COMMAND_WORD = "wishlist";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Wishlists the foodplace identified "
-            + "by the index number used in the last foodplace listing. "
-            + "Wishlisting a foodplace that is already wishlisted removes its wishlist status\n"
-            + "Displays all foodplaces with wishlist if no index is specified\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "wishlist [INDEX]\n"
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "by the index number used in the displayed foodplace list.\n"
+            + "If no INDEX is supplied, displays all wishlisted foodplaces instead.\n"
+            + "• If INDEX is supplied, INDEX must be a positive integer.\n"
+            + "• Wishlisting an already-wishlisted foodplace removes its wishlist status.\n"
+            + "Parameters:\n"
+            + "  " + "[INDEX]\n"
+            + "Examples:\n"
+            + "  " + COMMAND_WORD + " 1\n"
+            + "  " + COMMAND_WORD;
 
     public static final String MESSAGE_DISPLAY_SUCCESS = "Listed all foodplaces that are wishlisted";
     public static final String MESSAGE_ADD_WISHLIST_SUCCESS = "Add Foodplace to wishlist: %1$s";
