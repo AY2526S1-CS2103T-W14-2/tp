@@ -23,7 +23,8 @@ public class TagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds/deletes tags from the foodplace "
             + "identified by the index number shown in the displayed foodplace list.\n"
-            + "If the '/d' field is supplied, the foodplace will have the supplied tags deleted instead if they exist.\n"
+            + "If the '/d' field is supplied, the foodplace will have the supplied tags "
+            + "deleted instead if they exist.\n"
             + "• INDEX must be a positive integer.\n"
             + "• Tags must be alphanumeric (letters and numbers only). Tags cannot contain spaces.\n"
             + "• Existing tags will be preserved when adding, and duplicate tags (case-insensitive) will be ignored.\n"

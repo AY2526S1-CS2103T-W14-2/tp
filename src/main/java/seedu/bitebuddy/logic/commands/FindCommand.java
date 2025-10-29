@@ -20,8 +20,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all foodplaces in BiteBuddy whose entries match" +
-            " the given keywords & specified fields (e.g. t/, c/, r/), then displays them as a list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all foodplaces in BiteBuddy whose entries match"
+            + " the given keywords & specified fields (e.g. t/, c/, r/), then displays them as a list.\n"
             + "• Keywords and specified fields are case-insensitive.\n"
             + "• For keywords, foodplaces with fields that match any substring will be returned.\n"
             + "• For specified fields, only foodplaces that match exactly ALL specified fields are returned.\n"
