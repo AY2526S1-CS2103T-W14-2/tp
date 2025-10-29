@@ -281,8 +281,7 @@ public class JsonAdaptedFoodplaceTest {
         JsonAdaptedFoodplace foodplace =
                 new JsonAdaptedFoodplace(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TIMING,
                         VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, true, true, VALID_PINNED);
-        String expectedMessage = String.format(WISHLIST_BLACKLIST_CONFLICT_MESSAGE);
-        assertThrows(IllegalValueException.class, expectedMessage, foodplace::toModelType);
+        assertThrows(IllegalValueException.class, WISHLIST_BLACKLIST_CONFLICT_MESSAGE, foodplace::toModelType);
     }
 
     @Test
