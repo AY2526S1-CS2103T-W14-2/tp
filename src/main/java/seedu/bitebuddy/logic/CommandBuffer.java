@@ -7,6 +7,7 @@ public class CommandBuffer {
     private static CommandBuffer head;
     private static CommandBuffer current;
     private static int size = 0;
+    private static String pendingCommand = null;
 
     private CommandBuffer next;
     private CommandBuffer prev;
@@ -27,13 +28,21 @@ public class CommandBuffer {
     public static void push(String command) {
         CommandBuffer buffer = new CommandBuffer(command);
 
-        buffer.prev = CommandBuffer.head;
+        // Check if already initialized
         if (head != null) {
-            CommandBuffer.head.next = buffer;
+            buffer.prev = head.prev;
+            head.prev.next = buffer;
         }
 
-        CommandBuffer.head = buffer;
-        CommandBuffer.current = buffer;
+        // Create new head specifically to point to latest command
+        head = new CommandBuffer("");
+        head.prev = buffer;
+        // Stub
+        buffer.next = head;
+        current = head;
+
+        // Reset pending command
+        pendingCommand = null;
 
         size += 1;
     }
@@ -42,6 +51,9 @@ public class CommandBuffer {
      * Returns the stored command in a node.
      */
     public String getCommand() {
+        if (current == head && pendingCommand != null) {
+            return pendingCommand;
+        }
         return command;
     }
 
@@ -71,12 +83,31 @@ public class CommandBuffer {
     }
 
     /**
+     * Sets the current command that hasn't been passed yet to be saved
+     */
+    public static void setPendingCommand(String command) {
+        pendingCommand = command;
+    }
+
+    /**
+     * Returns if the current node is the head or not.
+     */
+    public static boolean isHead() {
+        // Current and Head can only be set when push() is called, so there won't be a case where one isn't init
+        if (head != null) {
+            return current == head;
+        }
+        return false;
+    }
+
+    /**
      * Empties the command buffer. Used for tests.
      */
     public static void clear() {
         head = null;
         current = null;
         size = 0;
+        pendingCommand = null;
     }
 
     /**

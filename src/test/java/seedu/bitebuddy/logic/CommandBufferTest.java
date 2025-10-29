@@ -1,8 +1,10 @@
 package seedu.bitebuddy.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +30,8 @@ public class CommandBufferTest {
     public void push_emptyBuffer_success() {
         CommandBuffer.push(COMMAND_STUB);
         assertEquals(1, CommandBuffer.getSize());
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
         assertEquals(COMMAND_STUB, CommandBuffer.getCurrent().getCommand());
     }
 
@@ -37,6 +41,8 @@ public class CommandBufferTest {
             CommandBuffer.push(i);
         }
         assertEquals(COMMAND_ARRAY_STUB.length, CommandBuffer.getSize());
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
         assertEquals(COMMAND_ARRAY_STUB[COMMAND_ARRAY_STUB.length - 1], CommandBuffer.getCurrent().getCommand());
     }
 
@@ -48,7 +54,22 @@ public class CommandBufferTest {
     @Test
     public void getCommand_nonEmptyBuffer_success() {
         CommandBuffer.push(COMMAND_STUB);
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
         assertEquals(COMMAND_STUB, CommandBuffer.getCurrent().getCommand());
+    }
+
+    @Test
+    public void getCommand_isHeadHasPendingCommand_returnsPendingCommand() {
+        CommandBuffer.push(COMMAND_ARRAY_STUB[0]);
+        CommandBuffer.setPendingCommand(COMMAND_ARRAY_STUB[1]);
+        assertEquals(COMMAND_ARRAY_STUB[1], CommandBuffer.getCurrent().getCommand());
+    }
+
+    @Test
+    public void getCommand_isHeadNoPendingCommand_returnsPendingCommand() {
+        CommandBuffer.push(COMMAND_ARRAY_STUB[0]);
+        assertEquals("", CommandBuffer.getCurrent().getCommand());
     }
 
     @Test
@@ -62,7 +83,10 @@ public class CommandBufferTest {
             CommandBuffer.push(i);
         }
         assertEquals(COMMAND_ARRAY_STUB.length, CommandBuffer.getSize());
+        // Attempt to increment to next command
         CommandBuffer.getNext();
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
         assertEquals(COMMAND_ARRAY_STUB[COMMAND_ARRAY_STUB.length - 1], CommandBuffer.getCurrent().getCommand());
     }
 
@@ -106,7 +130,11 @@ public class CommandBufferTest {
     @Test
     public void getPrev_nonEmptyBufferNoPrev_success() {
         CommandBuffer.push(COMMAND_STUB);
+        // Read from top of valid commands
+        CommandBuffer.getPrev();
+
         CommandBuffer before = CommandBuffer.getCurrent();
+        // Attempt going back out of bounds
         CommandBuffer.getPrev();
         assertEquals(before, CommandBuffer.getCurrent());
     }
@@ -143,5 +171,31 @@ public class CommandBufferTest {
             CommandBuffer.push(i);
         }
         assertEquals(COMMAND_ARRAY_STUB.length, CommandBuffer.getSize());
+    }
+
+    @Test
+    public void isHead_emptyBuffer_fail() {
+        assertFalse(CommandBuffer.isHead());
+    }
+
+    @Test
+    public void isHead_nonEmptyBuffer_success() {
+        // Check if head is updated
+        CommandBuffer.push(COMMAND_STUB);
+        assertTrue(CommandBuffer.isHead());
+
+        // Check if pointer is no longer at head
+        CommandBuffer.getPrev();
+        assertFalse(CommandBuffer.isHead());
+    }
+
+    @Test
+    public void setPendingCommand_anyBuffer_success() {
+        CommandBuffer.push(COMMAND_ARRAY_STUB[0]);
+        CommandBuffer.getPrev();
+        assertEquals(COMMAND_ARRAY_STUB[0], CommandBuffer.getCurrent().getCommand());
+        CommandBuffer.push(COMMAND_ARRAY_STUB[1]);
+        CommandBuffer.setPendingCommand(COMMAND_ARRAY_STUB[1]);
+        assertEquals(COMMAND_ARRAY_STUB[1], CommandBuffer.getCurrent().getCommand());
     }
 }
