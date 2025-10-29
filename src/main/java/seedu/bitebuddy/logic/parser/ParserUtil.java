@@ -1,11 +1,11 @@
 package seedu.bitebuddy.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
+import static java.util.Objects.requireNonNull;
 import java.util.Set;
 
 import seedu.bitebuddy.commons.core.index.Index;
@@ -131,8 +131,12 @@ public class ParserUtil {
     public static LocalTime parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmed = time.trim();
+        // enforce strict HH:mm format (no single-digit hours like "9:05")
+        if (!Timing.isValidTime(trimmed)) {
+            throw new ParseException(Timing.MESSAGE_INVALID_TIME);
+        }
         try {
-            return LocalTime.parse(trimmed);
+            return LocalTime.parse(trimmed, Timing.formatter);
         } catch (DateTimeParseException dte) {
             throw new ParseException(Timing.MESSAGE_INVALID_TIME);
         }
