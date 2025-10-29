@@ -3,7 +3,7 @@ package seedu.bitebuddy.model.foodplace;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents if the foodplace is wishlisted in the address book.
+ * Represents if the foodplace is wishlisted in BiteBuddy.
  * Guarantees: immutable; is always valid
  */
 public class Wishlist {

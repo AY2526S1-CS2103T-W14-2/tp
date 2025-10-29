@@ -1,6 +1,7 @@
 package seedu.bitebuddy.model.foodplace;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 
@@ -49,10 +50,10 @@ public class NameTest {
         assertTrue(name.equals(name));
 
         // null -> returns false
-        assertFalse(name.equals(null));
+        assertNotEquals(name, null);
 
         // different types -> returns false
-        assertFalse(name.equals(5.0f));
+        assertNotEquals(name, 5.0f);
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));

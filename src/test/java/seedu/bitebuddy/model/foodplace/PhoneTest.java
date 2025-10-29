@@ -2,6 +2,7 @@ package seedu.bitebuddy.model.foodplace;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
 
@@ -56,10 +57,10 @@ public class PhoneTest {
         assertTrue(phone.equals(phone));
 
         // null -> returns false
-        assertFalse(phone.equals(null));
+        assertNotEquals(phone, null);
 
         // different types -> returns false
-        assertFalse(phone.equals(5.0f));
+        assertNotEquals(phone, 5.0f);
 
         // different values -> returns false
         assertFalse(phone.equals(new Phone("995")));

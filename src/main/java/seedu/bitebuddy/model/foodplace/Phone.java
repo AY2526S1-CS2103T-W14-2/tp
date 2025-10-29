@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Foodplace's phone number in the bitebuddy book.
+ * Represents a Foodplace's phone number in BiteBuddy.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {

@@ -30,6 +30,8 @@ public class Cuisine {
 
     /**
      * Returns true if a given string is a valid cuisine.
+     * @param test the string to be tested
+     * @return true if the string is a valid cuisine, false otherwise
      */
     public static boolean isValidCuisine(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -2,6 +2,7 @@ package seedu.bitebuddy.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
 import static seedu.bitebuddy.testutil.Assert.assertThrows;
@@ -102,6 +103,36 @@ public class AddressBookTest {
         public ObservableList<Foodplace> getFoodplaceList() {
             return foodplaces;
         }
+    }
+
+    @Test
+    public void equals() {
+        AddressBook anotherAddressBook = new AddressBook();
+        // same values -> returns true
+        assertEquals(addressBook, anotherAddressBook);
+
+        // same object -> returns true
+        assertEquals(addressBook, addressBook);
+
+        // null -> returns false
+        assertNotEquals(addressBook, null);
+
+        // different type -> returns false
+        assertNotEquals(addressBook, 5);
+
+        // different address book -> returns false
+        anotherAddressBook.addFoodplace(PRATASHOP);
+        assertNotEquals(addressBook, anotherAddressBook);
+    }
+
+    @Test
+    public void hashcode() {
+        AddressBook anotherAddressBook = new AddressBook();
+        // same values -> returns same hashcode
+        assertEquals(addressBook.hashCode(), anotherAddressBook.hashCode());
+        // different address book -> returns different hashcode
+        anotherAddressBook.addFoodplace(PRATASHOP);
+        assertNotEquals(addressBook.hashCode(), anotherAddressBook.hashCode());
     }
 
 }

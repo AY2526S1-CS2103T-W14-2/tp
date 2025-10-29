@@ -11,7 +11,7 @@ import seedu.bitebuddy.commons.util.ToStringBuilder;
 import seedu.bitebuddy.model.tag.Tag;
 
 /**
- * Represents a Foodplace in the bitebuddy book.
+ * Represents a Foodplace in BiteBuddy.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Foodplace {
@@ -172,8 +172,6 @@ public class Foodplace {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        // include timing
         return Objects.hash(name, phone, email, address, timing, tags, rate, cuisine, note, wishlist, blacklist);
     }
 

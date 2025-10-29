@@ -2,6 +2,7 @@ package seedu.bitebuddy.model.foodplace;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_ADDRESS_SWENSWAN;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.VALID_TAG_RESTAURANT;
@@ -170,7 +171,45 @@ public class UniqueFoodplaceListTest {
     }
 
     @Test
+    public void iterator_success() {
+        uniqueFoodplaceList.add(PRATASHOP);
+        uniqueFoodplaceList.add(SWENSWAN);
+        List<Foodplace> foodplaces = Arrays.asList(PRATASHOP, SWENSWAN);
+        int index = 0;
+        for (Foodplace foodplace : uniqueFoodplaceList) {
+            assertEquals(foodplaces.get(index), foodplace);
+            index++;
+        }
+    }
+
+    @Test
     public void toStringMethod() {
         assertEquals(uniqueFoodplaceList.asUnmodifiableObservableList().toString(), uniqueFoodplaceList.toString());
+    }
+
+    @Test
+    public void equals() {
+        UniqueFoodplaceList anotherUniqueFoodplaceList = new UniqueFoodplaceList();
+        // same object -> returns true
+        assertTrue(uniqueFoodplaceList.equals(uniqueFoodplaceList));
+        // same values -> returns true
+        assertTrue(uniqueFoodplaceList.equals(anotherUniqueFoodplaceList));
+        // null -> returns false
+        assertNotEquals(uniqueFoodplaceList, null);
+        // different types -> returns false
+        assertFalse(uniqueFoodplaceList.equals(5));
+        // different lists -> returns false
+        anotherUniqueFoodplaceList.add(PRATASHOP);
+        assertFalse(uniqueFoodplaceList.equals(anotherUniqueFoodplaceList));
+    }
+
+    @Test
+    public void hashcode() {
+        UniqueFoodplaceList anotherUniqueFoodplaceList = new UniqueFoodplaceList();
+        // same values -> returns same hashcode
+        assertEquals(uniqueFoodplaceList.hashCode(), anotherUniqueFoodplaceList.hashCode());
+        // different lists -> returns different hashcode
+        anotherUniqueFoodplaceList.add(PRATASHOP);
+        assertNotEquals(uniqueFoodplaceList.hashCode(), anotherUniqueFoodplaceList.hashCode());
     }
 }
