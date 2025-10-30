@@ -38,7 +38,8 @@ public class TagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Updated tags for Foodplace: %1$s";
     public static final String MESSAGE_INVALID_INDEX = Messages
-            .MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;;
+            .MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX;
+    public static final String MESSAGE_NO_TAGS_DELETED = "No matching tags found to delete.";
 
     private final Index index;
     private final Set<Tag> newTags;
@@ -72,11 +73,22 @@ public class TagCommand extends Command {
 
         // if the command is for deleting (/d).
         if (isDelete) {
-            // if user do not put any tags after d/ then delete all tags.
+            Set<Tag> originalTags = new HashSet<>(updatedTags);
+
             if (newTags.isEmpty()) {
                 updatedTags.clear();
+            } else {
+                updatedTags.removeAll(newTags);
             }
-            updatedTags.removeAll(newTags);
+
+            // Check if any tag was actually removed
+            if (!newTags.isEmpty() & originalTags.equals(updatedTags)) {
+                return new CommandResult(String.format(
+                        "%s\nNo changes made to: %s",
+                        MESSAGE_NO_TAGS_DELETED,
+                        Messages.format(foodplaceToEdit)
+                ));
+            }
         } else {
             updatedTags.addAll(newTags);
         }
