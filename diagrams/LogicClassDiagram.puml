@@ -1,4 +1,4 @@
-@startuml
+@startuml LogicClassDiagram
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
@@ -11,10 +11,12 @@ package "Parser Classes" as ParserClasses{
 Class XYZCommand
 Class CommandResult
 Class "{abstract}\nCommand" as Command
+class CommandBuffer
 
 
 Class "<<interface>>\nLogic" as Logic
 Class LogicManager
+Class CommandRegistry
 }
 
 package Model {
@@ -28,19 +30,22 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
-LogicManager -right->"1" ParserClasses
+LogicManager -->"1" ParserClasses
 ParserClasses ..> XYZCommand : <<create>>
 
 XYZCommand -up-|> Command
-LogicManager .left.> Command : <<call>>
+LogicManager ..> Command : <<call>>
 
 LogicManager --> Model
 LogicManager --> Storage
+LogicManager ..right> CommandBuffer
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
+ParserClasses ..> CommandRegistry
+CommandRegistry --> XYZCommand
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
 Command .up.> CommandResult : <<create>>
