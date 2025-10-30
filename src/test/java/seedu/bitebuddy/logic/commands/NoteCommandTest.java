@@ -104,28 +104,63 @@ public class NoteCommandTest {
     }
 
     @Test
-    public void execute_noNoteToRemoveUnfilteredList_failure() {
+    public void execute_noNoteToRemoveUnfilteredList_success() {
         Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
 
+        // Set up initial model with no note
         model.setFoodplace(firstFoodplace, editedFoodplace);
+        // Expects no change to expectedModel
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(EMPTY_NOTE_STUB));
 
-        assertCommandFailure(noteCommand, model, NoteCommand.MESSAGE_NO_NOTE_TO_REMOVE);
+        assertCommandSuccess(noteCommand, model, NoteCommand.MESSAGE_NO_NOTE_TO_REMOVE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_noNoteToRemoveFilteredList_failure() {
+    public void execute_noNoteToRemoveFilteredList_success() {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
         Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
 
+        // Set up initial model with no note
         model.setFoodplace(firstFoodplace, editedFoodplace);
+        // Expects no change to expectedModel
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showFoodplaceAtIndex(expectedModel, INDEX_FIRST_FOODPLACE);
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(EMPTY_NOTE_STUB));
 
-        assertCommandFailure(noteCommand, model, NoteCommand.MESSAGE_NO_NOTE_TO_REMOVE);
+        assertCommandSuccess(noteCommand, model, NoteCommand.MESSAGE_NO_NOTE_TO_REMOVE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_addSameNoteUnfilteredList_success() {
+        Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Note foodplaceNote = foodplace.getNote();
+
+        // Expects no change to expectedModel
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, foodplaceNote);
+
+        assertCommandSuccess(noteCommand, model, NoteCommand.MESSAGE_SAME_NOTE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_addSameNoteFilteredList_success() {
+        showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
+        Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Note foodplaceNote = foodplace.getNote();
+
+        // Expects no change to expectedModel
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        showFoodplaceAtIndex(expectedModel, INDEX_FIRST_FOODPLACE);
+
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, foodplaceNote);
+
+        assertCommandSuccess(noteCommand, model, NoteCommand.MESSAGE_SAME_NOTE_SUCCESS, expectedModel);
     }
 
     @Test
