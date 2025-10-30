@@ -35,6 +35,7 @@ public class BlacklistCommandParser implements Parser<BlacklistCommand> {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         BlacklistCommand.MESSAGE_USAGE), pe);
             }
+            assert index != null : "Index should not be null here.";
             return new BlacklistCommand(index);
         }
 

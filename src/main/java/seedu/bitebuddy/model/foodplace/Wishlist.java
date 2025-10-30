@@ -27,7 +27,7 @@ public class Wishlist {
     }
 
     /**
-     * Getter method for isWishlisted
+     * Gets isWishlisted
      * @return the isWishlisted value
      */
     public Boolean isWishlisted() {

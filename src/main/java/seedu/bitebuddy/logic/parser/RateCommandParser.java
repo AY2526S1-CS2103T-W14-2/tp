@@ -2,6 +2,8 @@ package seedu.bitebuddy.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.bitebuddy.logic.parser.CliSyntax.INDEX_RATING_ENTRY_INDEX;
+import static seedu.bitebuddy.logic.parser.CliSyntax.INDEX_RATING_RATING_VALUE;
 
 import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.logic.commands.RateCommand;
@@ -25,8 +27,8 @@ public class RateCommandParser implements Parser<RateCommand> {
         Index index;
         Integer rating;
         try {
-            index = ParserUtil.parseIndex(stringArgs.getArgument(0));
-            rating = Integer.valueOf(stringArgs.getArgument(1));
+            index = ParserUtil.parseIndex(stringArgs.getArgument(INDEX_RATING_ENTRY_INDEX));
+            rating = Integer.valueOf(stringArgs.getArgument(INDEX_RATING_RATING_VALUE));
         } catch (NumberFormatException nfe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE), nfe);
         }

@@ -4,7 +4,9 @@ import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.bitebuddy.commons.core.LogsCenter;
 import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
@@ -39,6 +41,9 @@ public class NoteCommand extends Command {
     public static final String MESSAGE_SAME_NOTE_SUCCESS = "The new note is the same as the current note\n"
             + "No changes were made.";
 
+    // Used for debugging purposes only (fine level)
+    private static final Logger logger = LogsCenter.getLogger(NoteCommand.class);
+
     private final Index index;
     private final Note note;
 
@@ -55,21 +60,27 @@ public class NoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.fine("------------------------------ Executing NoteCommand");
         List<Foodplace> lastShownList = model.getFilteredFoodplaceList();
 
+        // Check if index is valid
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.fine(String.format("Error executing NoteCommand for index: %d; listSize: %d",
+                    index.getOneBased(), lastShownList.size()));
             throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
         }
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
         String noteToEdit = foodPlaceToEdit.getNote().value;
 
-        // If no existing note to remove --> no change made
+        // If no existing note to remove --> return with no change made
         if (note.value.isEmpty() && noteToEdit.isEmpty()) {
+            logger.fine("Successfully executed NoteCommand (No existing note to remove)");
             return new CommandResult(MESSAGE_NO_NOTE_TO_REMOVE_SUCCESS);
         }
-        // If new note is the same as existing note --> no change made
+        // If new note is the same as existing note --> return with no change made
         if (note.value.equals(noteToEdit)) {
+            logger.fine(String.format("Successfully executed NoteCommand (Same existing note: '%s')", noteToEdit));
             return new CommandResult(MESSAGE_SAME_NOTE_SUCCESS);
         }
 
@@ -80,7 +91,8 @@ public class NoteCommand extends Command {
 
         model.setFoodplace(foodPlaceToEdit, editedFoodPlace);
         model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES);
-
+        logger.fine(String.format("Successfully executed NoteCommand (Edited existing note from:'%s' to: '%s')",
+                foodPlaceToEdit.getNote().value, editedFoodPlace.getNote().value));
         return new CommandResult(generateSuccessMessage(editedFoodPlace));
     }
 

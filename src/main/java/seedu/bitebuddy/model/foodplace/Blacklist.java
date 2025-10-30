@@ -27,7 +27,7 @@ public class Blacklist {
     }
 
     /**
-     * Getter method for isBlacklisted
+     * Gets isBlacklisted
      * @return the isBlacklisted value
      */
     public Boolean isBlacklisted() {

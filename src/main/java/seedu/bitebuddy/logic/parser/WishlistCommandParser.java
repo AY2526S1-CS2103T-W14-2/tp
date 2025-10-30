@@ -24,17 +24,20 @@ public class WishlistCommandParser implements Parser<WishlistCommand> {
         ArgumentPositionMapper mapper = new ArgumentPositionMapper(args);
         Index index;
 
-        if (mapper.size() == 0) { // No index specified --> display wishlist (no parsing required)
+        // No index specified --> display wishlist (no parsing required)
+        if (mapper.size() == 0) {
             return new WishlistCommand(null);
         }
 
-        if (mapper.size() == 1) { // Index specified in command --> parse index
+        // Index specified in command --> parse index
+        if (mapper.size() == 1) {
             try {
                 index = ParserUtil.parseIndex(mapper.getArgument(INDEX_WISHLIST_ENTRY_INDEX));
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         WishlistCommand.MESSAGE_USAGE), pe);
             }
+            assert index != null : "Index should not be null here.";
             return new WishlistCommand(index);
         }
 

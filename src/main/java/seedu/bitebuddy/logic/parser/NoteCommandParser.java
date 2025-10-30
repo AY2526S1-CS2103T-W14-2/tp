@@ -25,6 +25,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         ArgumentPositionMapper mapper = new ArgumentPositionMapper(args, INDEX_NOTE_NOTE_STRING);
 
+        // no args given
         if (mapper.size() < 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
         }
@@ -37,9 +38,9 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         }
 
         Note note;
-        String noteText = mapper.getRemainingArguments(INDEX_NOTE_NOTE_STRING);
+        String noteString = mapper.getRemainingArguments(INDEX_NOTE_NOTE_STRING);
         try {
-            note = new Note(noteText);
+            note = new Note(noteString);
         } catch (IllegalArgumentException iae) {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }

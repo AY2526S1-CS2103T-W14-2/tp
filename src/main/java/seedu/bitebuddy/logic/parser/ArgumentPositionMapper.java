@@ -44,11 +44,11 @@ public class ArgumentPositionMapper {
         if (argsString == null || argsString.trim().isEmpty()) {
             this.args = new ArrayList<>();
         } else {
-            // Ensure ignoreSplitIndex is non-negative (because it splits all if negative)
+            // Ensure ignoreSplitIndex is non-negative (because it splits the whole string if index is negative)
             if (ignoreSplitIndex < 0) {
                 ignoreSplitIndex = 0;
             }
-            // Split by whitespace
+            // Split by whitespace till index
             String[] tokens = argsString.trim().split("\\s+", ignoreSplitIndex + 1);
             this.args = new ArrayList<>();
             Collections.addAll(this.args, tokens);
@@ -57,6 +57,7 @@ public class ArgumentPositionMapper {
 
     /**
      * Returns the argument at the specified position, or an empty string if out of range.
+     * @param position the position of the argument to retrieve
      */
     public String getArgument(int position) {
         if (position < 0 || position >= args.size()) {
@@ -80,8 +81,7 @@ public class ArgumentPositionMapper {
     }
 
     /**
-     * Returns the remaining text starting from the given position,
-     * joined with spaces (useful for multi-word note content).
+     * Returns the remaining text starting from the given position, joined with spaces.
      * @param startPosition the position to return remaining arguments from
      */
     public String getRemainingArguments(int startPosition) {
