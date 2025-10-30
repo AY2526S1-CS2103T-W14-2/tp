@@ -634,7 +634,6 @@ Deleting a foodplace while all foodplaces are being shown
      - No foodplace is deleted.
      - Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
 
-
 ### Editing a foodplace
 
 Editing a foodplace while all foodplaces are being shown
@@ -744,7 +743,31 @@ Rating a foodplace while all foodplaces are being shown
     - No foodplace will be rated.
     - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
+### Getting Help
 
+- *Prerequisites:* <br> 
+    - BiteBuddy is running.  
+
+1. Valid Test Case - Using the help button:<br>
+    Steps:
+    - Click the help button on the top left side of the window
+    Expected:
+      - Help window should open with a link to the user guide.
+
+1. Valid Test Case - Using the help command to get user guide:<br>
+    Command: `help`<br>
+    Expected:
+      - Help window should open with a link to the user guide.
+
+1. Valid Test Case - Using the help command to get specific command usage:<br>
+    Command: `help list`<br>
+    Expected:
+    - Command usage of `list` is shown in status message: `list: Lists all foodplaces in BiteBuddy...`
+
+1. Invalid Test Case - Using an **invalid command word** as a parameter for the help command:<br>
+    Command: `help unknown`<br>
+    Expected:
+    - Error details shown in the status message: `Unknown command`
 
 ### Saving data
 
