@@ -5,7 +5,9 @@ import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Logger;
 
+import seedu.bitebuddy.commons.core.LogsCenter;
 import seedu.bitebuddy.commons.core.index.Index;
 import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
@@ -37,6 +39,9 @@ public class BlacklistCommand extends Command {
     public static final String MESSAGE_REMOVE_WISHLIST_STATUS_SUCCESS = "Additionally removed"
             + " Foodplace from wishlist";
 
+    // Used for debugging purposes only (fine level)
+    private static final Logger logger = LogsCenter.getLogger(WishlistCommand.class);
+
     private final Index index;
 
     /**
@@ -48,27 +53,31 @@ public class BlacklistCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        logger.fine("------------------------------ Executing BlacklistCommand");
 
         // No index specified --> Display blacklist
         if (index == null) {
             model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_BLACKLISTED_FOODPLACES);
+            logger.fine("Successfully executed BlacklistCommand (Display blacklist)");
             return new CommandResult(MESSAGE_DISPLAY_SUCCESS);
         }
 
-        // Modify blacklist status at specified index
         List<Foodplace> lastShownList = model.getFilteredFoodplaceList();
 
+        // Check if index is valid
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.fine(String.format("Error executing BlacklistCommand for index: %d; listSize: %d",
+                    index.getOneBased(), lastShownList.size()));
             throw new CommandException(Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
         }
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
         Wishlist foodPlaceWishlistState = foodPlaceToEdit.getWishlist();
-        boolean isWishlisted = false;
+        boolean isFoodPlaceToEditWishlisted = false;
 
-        // If foodplace is wishlisted --> change wishlist to false, else, remain false
+        // If foodplace is already wishlisted --> change wishlist to false, so that there is no conflict
         if (foodPlaceWishlistState.isWishlisted()) {
-            isWishlisted = true;
+            isFoodPlaceToEditWishlisted = true;
             foodPlaceWishlistState = foodPlaceWishlistState.getOpposite();
         }
 
@@ -78,10 +87,14 @@ public class BlacklistCommand extends Command {
                 foodPlaceToEdit.getRate(), foodPlaceWishlistState, foodPlaceToEdit.getBlacklist().getOpposite(),
                 foodPlaceToEdit.getPinned());
 
+        assert !(editedFoodPlace.getBlacklist().isBlacklisted && editedFoodPlace.getWishlist().isWishlisted)
+                : "A foodplace should not be both blacklisted and wishlisted here.";
         model.setFoodplace(foodPlaceToEdit, editedFoodPlace);
         model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES);
 
-        return new CommandResult(generateSuccessMessage(editedFoodPlace, isWishlisted));
+        logger.fine(String.format("Successfully executed BlacklistCommand (Edited blacklist status to '%s')",
+                editedFoodPlace.getBlacklist().isBlacklisted));
+        return new CommandResult(generateSuccessMessage(editedFoodPlace, isFoodPlaceToEditWishlisted));
     }
 
     /**

@@ -20,6 +20,7 @@ public class Note {
     private static final String VALID_NOTE_REGEX = "^[ -~]*$";
     private static final int MAX_NOTE_LENGTH = 100;
 
+    // Always trimmed
     public final String value;
 
     /**
@@ -36,8 +37,9 @@ public class Note {
      * Returns if a given string is a valid note.
      */
     public static boolean isValidNote(String test) {
+        test = test.trim();
         // Exceeds length --> invalid
-        if (test.length() > MAX_NOTE_LENGTH) {
+        if (test.trim().length() > MAX_NOTE_LENGTH) {
             return false;
         }
         return test.matches(VALID_NOTE_REGEX);
