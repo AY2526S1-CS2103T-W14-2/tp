@@ -58,10 +58,12 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidRating_throwsParseException() {
         assertParseFailure(parser, "r/abc",
-                "Ratings should only contain numbers, and be an integer between 1 to 10");
+                "Ratings should only contain numbers, and be an integer between 0 to 10 "
+                        + "(use 0 for unrated food places)");
 
         assertParseFailure(parser, "r/15",
-                "Ratings should only contain numbers, and be an integer between 1 to 10");
+                "Ratings should only contain numbers, and be an integer between 0 to 10 "
+                        + "(use 0 for unrated food places)");
     }
 
     @Test

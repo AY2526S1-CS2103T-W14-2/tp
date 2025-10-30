@@ -21,9 +21,8 @@ import seedu.bitebuddy.model.foodplace.Rate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-
     public static final String MESSAGE_INVALID_RATING = "Ratings should only contain numbers,"
-            + " and be an integer between 1 to 10";
+            + " and be an integer between 0 to 10 (use 0 for unrated food places)";
     public static final String MESSAGE_INVALID_CUISINE = "Cuisine should only contain alphanumeric characters";
     public static final String MESSAGE_NO_PREFIX = "Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE;
 
