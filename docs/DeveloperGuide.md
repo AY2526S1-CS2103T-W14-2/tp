@@ -928,46 +928,45 @@ testers are expected to do more *exploratory* testing.
     - Use the `list` command first to show current foodplaces and note the count.
 
 1. Valid Test case — Adding a complete foodplace:<br>
-     Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`<br>  
-     Expected:
-     - Foodplace is added to the list; `list` shows one additional entry.
-     - Status message: `Added Foodplace: Golden Wok ...` with the provided details displayed.
-     - Tags `chinese`, `dinner` are present on the new entry.
+    Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`<br>
+    Expected:
+    - Foodplace is added to the list; `list` shows one additional entry.
+    - Status message: `Added Foodplace: Golden Wok ...` with the provided details displayed.
+    - Tags `chinese`, `dinner` are present on the new entry.
 
 1. Valid Test case — Adding with only required fields:<br>
-     Command: `add n/Coffee Corner a/50 Coffee St`<br>  
-     Expected:
-     - Foodplace is added successfully.
-     - Optional fields are empty/unset.
-     - Status message shows the new entry details.
+    Command: `add n/Coffee Corner a/50 Coffee St`<br>  
+    Expected:
+    - Foodplace is added successfully.
+    - Optional fields are empty/unset.
+    - Status message shows the new entry details.
 
 1. Invalid Test case — Adding with **missing required field**:<br>  
-     Command: `add p/91234567 e/a@b.com a/1 Example St`<br>
-     Expected:
-     - No foodplace is added.
-     - Error message explaining invalid command format or missing required field `Invalid command format! add: ...`.
+    Command: `add p/91234567 e/a@b.com a/1 Example St`<br>
+    Expected:
+    - No foodplace is added.
+    - Error message explaining invalid command format or missing required field `Invalid command format! add: ...`.
 
 1. Invalid Test case — Adding with **invalid optional field**:<br>
-     Command: `add n/BadPhone p/phone123 a/12 Some Rd`<br>  
-     Expected:
-     - No foodplace is added.
-     - Error message describing phone validation failure (e.g., `Phone numbers should only contain numbers...`).
+    Command: `add n/BadPhone p/phone123 a/12 Some Rd`<br>  
+    Expected:
+    - No foodplace is added.
+    - Error message describing phone validation failure (e.g., `Phone numbers should only contain numbers...`).
 
 1. Invalid Test case — Adding a **duplicate foodplace**:<br>  
-     Steps:
-     - Add a foodplace: `add n/Duplicate a/10 Rd`
-     - Attempt to add the same details again. 
- 
-     Expected:
-     - Second add fails.
-     - Error message indicating a duplicate entry (e.g., `This foodplace already exists in BiteBuddy.`).
-     - `list` shows only one instance.
+    Steps:
+    - Add a foodplace: `add n/Duplicate a/10 Rd`
+    - Attempt to add the same details again.
+    Expected:
+    - Second add fails.
+    - Error message indicating a duplicate entry (e.g., `This foodplace already exists in BiteBuddy.`).
+    - `list` shows only one instance.
 
 1. Edge case — Multiple tags and spacing handling:<br>  
-     Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor`<br>  
-     Expected:
-     - Multiple tags parsed correctly (whitespace around tags trimmed).
-     - Status message shows all unique tags attached.
+    Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor`<br>  
+    Expected:
+    - Multiple tags parsed correctly (whitespace around tags trimmed).
+    - Status message shows all unique tags attached.
 
 ### Deleting a foodplace
 
@@ -979,16 +978,16 @@ Deleting a foodplace while all foodplaces are being shown
 
 
 1. Valid Test case - Deleting a valid foodplace:<br>
-   Command: `delete 1`<br>
-   Expected:
-     - First foodplace is deleted from the list.
-     - Details of the deleted foodplace shown in the status message: `Deleted Foodplace: ...`
+    Command: `delete 1`<br>
+    Expected:
+    - First foodplace is deleted from the list.
+    - Details of the deleted foodplace shown in the status message: `Deleted Foodplace: ...`
 
 1. Invalid Test case - Deleting a **foodplace at an invalid index**:<br>
-   Command: `delete 0`<br>
-   Expected:
-     - No foodplace is deleted.
-     - Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
+    Command: `delete 0`<br>
+    Expected:
+    - No foodplace is deleted.
+    - Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
 
 ### Editing a foodplace
 
@@ -1067,36 +1066,36 @@ Rating a foodplace while all foodplaces are being shown
 1. Valid Test case - Assigning a valid rating to a valid foodplace:<br> 
     Command: `rate 1 5`<br>
     Expected:
-      - First foodplace in the list will be assigned a rating: `< 5/10 >`
-      - Details of the rated foodplace shown in the status message: `Added Rating to Foodplace: ...`
+    - First foodplace in the list will be assigned a rating: `< 5/10 >`
+    - Details of the rated foodplace shown in the status message: `Added Rating to Foodplace: ...`
 
 1. Valid Test case - Unassigning any existing rating from a valid foodplace:<br>
-   Command: `rate 1 0`<br>
-   Expected: 
-     - First foodplace in the list will become unrated: `>> No Rating Yet <<`
-     - Details of the unrated foodplace shown in the status message: `Removed Rating from Foodplace: ...`
+    Command: `rate 1 0`<br>
+    Expected: 
+    - First foodplace in the list will become unrated: `>> No Rating Yet <<`
+    - Details of the unrated foodplace shown in the status message: `Removed Rating from Foodplace: ...`
 
 1. Invalid Test case - Assigning a valid rating to a **foodplace at an invalid index**:<br>
-   Command: `rate 0 5`<br>
-   Expected:
-     - No foodplace will be rated.
-     - Error details shown in the status message: `Index is not a non-zero unsigned integer.`
+    Command: `rate 0 5`<br>
+    Expected:
+    - No foodplace will be rated.
+    - Error details shown in the status message: `Index is not a non-zero unsigned integer.`
 
 1. Invalid Test case - Assigning a **negative rating** to a valid foodplace:<br>
-   Command: `rate 1 -1`<br>
-   Expected:
-     - No foodplace will be rated.
-     - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
+    Command: `rate 1 -1`<br>
+    Expected:
+    - No foodplace will be rated.
+    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
 
 1. Invalid Test case - Assigning an **out-of-range rating** to a valid foodplace:<br>
-   Command: `rate 1 11`<br>
-   Expected:
-     - No foodplace will be rated.
-     - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
+    Command: `rate 1 11`<br>
+    Expected:
+    - No foodplace will be rated.
+    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
 
 1. Invalid Test case - Assigning an **unsigned non-integer rating** to a valid foodplace:<br>
-  Command: `rate 1 1.1`<br>
-  Expected:
+    Command: `rate 1 1.1`<br>
+    Expected:
     - No foodplace will be rated.
     - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
@@ -1109,12 +1108,12 @@ Rating a foodplace while all foodplaces are being shown
     Steps:
     - Click the help button on the top left side of the window.
     Expected:
-      - Help window should open with a link to the user guide.
+    - Help window should open with a link to the user guide.
 
 1. Valid Test case - Using the help command to get user guide:<br>
     Command: `help`<br>
     Expected:
-      - Help window should open with a link to the user guide.
+    - Help window should open with a link to the user guide.
 
 1. Valid Test case - Using the help command to get specific command usage:<br>
     Command: `help list`<br>
@@ -1143,6 +1142,12 @@ Pinning a foodplace while all foodplaces are being shown
     - The first foodplace will be pinned.
     - Details of the pinned foodplace shown in the status message: `Pinned Foodplace: ...`
 
+1. Invalid Test case - Pinning a **foodplace at an invalid index**:<br>
+   Command: `pin 0`<br>
+   Expected:
+    - No foodplace will be pinned.
+    - Error details shown in the status message: `Invalid command format!...`
+
 1. Invalid Test case - Pinning a previously pinned foodplace:<br>
     Steps:
     - Pin the first foodplace using `pin 1`
@@ -1158,6 +1163,62 @@ Pinning a foodplace while all foodplaces are being shown
     Expected:
     - The foodplace will not be pinned.
     - Error details shown in the status message: `This foodplace is not pinned. A maximum of 5 pins have been reached`
+
+### Unpinning a foodplace
+
+Unpinning a foodplace while all foodplaces are being shown
+
+- *Prerequisites:*<br>
+    - **At least one foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
+    - Foodplace being unpinned is currently pinned.
+
+
+1. Valid Test case - Unpinning an pinned foodplace:<br>
+    Command: `unpin 1`<br>
+    Expected:
+    - The first foodplace will be unpinned.
+    - Details of the unpinned foodplace shown in the status message: `Unpinned Foodplace: ...`
+
+1. Invalid Test case - Unpinning a **foodplace at an invalid index**:<br>
+   Command: `unpin 0`<br>
+   Expected:
+    - No foodplace will be pinned.
+    - Error details shown in the status message: `Invalid command format!...`
+
+1. Invalid Test case - Unpinning a foodplace that is not pinned:<br>
+    Command: `unpin 2`<br>
+    Expected:
+    - The second foodplace remains the same.
+    - Error details shown in the status message: `This foodplace was not pinned`
+
+### Comparing two foodplaces
+
+Comparing two foodplaces from the list shown
+
+- *Prerequisites:*<br>
+    - **At least two foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
+
+
+1. Valid Test case - Comparing two different foodplaces:<br>
+    Command: `compare 1 2`<br>
+    Expected:
+    - The first and second foodplace will be compared.
+    - Details of the comparison shown in the status message.
+
+1. Invalid Test case - Comparing the same foodplace:<br>
+    Command: `compare 1 1`<br>
+    Expected:
+     - No comparison will be made.
+    - Error details shown in the status message: `The two foodplace indexes cannot be the same`
+
+1. Invalid Test case - Comparing a **foodplace at an invalid index**:<br>
+   Command: `compare 1 999`<br>
+   Expected:
+    - No comparison will be made.
+    - Error details shown in the status message: `The second foodplace index provided is invalid`
+
 
 ### Saving data
 
