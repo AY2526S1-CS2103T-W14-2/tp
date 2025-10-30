@@ -19,6 +19,7 @@ import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
 import seedu.bitebuddy.model.foodplace.FoodplaceMatchesCriteriaPredicate;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.tag.Tag;
 
 public class FindCommandParserTest {
 
@@ -127,5 +128,11 @@ public class FindCommandParserTest {
     public void parse_invalidCuisine_throwsParseException() {
         assertParseFailure(parser, "c/**1",
                 FindCommandParser.MESSAGE_INVALID_CUISINE);
+    }
+
+    @Test
+    public void parse_invalidTag_throwsParseException() {
+        assertParseFailure(parser, "t/**1",
+                Tag.MESSAGE_CONSTRAINTS);
     }
 }

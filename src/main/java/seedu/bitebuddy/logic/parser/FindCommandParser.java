@@ -16,6 +16,8 @@ import seedu.bitebuddy.model.foodplace.Cuisine;
 import seedu.bitebuddy.model.foodplace.FoodplaceContainsKeywordsPredicate;
 import seedu.bitebuddy.model.foodplace.FoodplaceMatchesCriteriaPredicate;
 import seedu.bitebuddy.model.foodplace.Rate;
+import seedu.bitebuddy.model.tag.Tag;
+
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -77,11 +79,18 @@ public class FindCommandParser implements Parser<FindCommand> {
         return Arrays.asList(preamble.split("\\s+"));
     }
 
-    private List<String> extractTags(ArgumentMultimap argMultimap) {
-        return argMultimap.getAllValues(PREFIX_TAG).stream()
+    private List<String> extractTags(ArgumentMultimap argMultimap) throws ParseException {
+        List<String> tags = argMultimap.getAllValues(PREFIX_TAG).stream()
                 .flatMap(value -> Arrays.stream(value.trim().split("\\s+")))
                 .filter(s -> !s.isEmpty())
                 .toList();
+        for (String tag : tags) {
+            if (!Tag.isValidTagName(tag)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+        }
+
+        return tags;
     }
 
     private Optional<Cuisine> extractCuisine(ArgumentMultimap argMultimap) throws ParseException {
