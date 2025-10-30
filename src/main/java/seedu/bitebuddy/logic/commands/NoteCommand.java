@@ -22,7 +22,8 @@ public class NoteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the notes of the foodplace identified "
             + "by the index number used in the displayed foodplace list.\n"
             + "If NOTE is not supplied, the current note of the foodplace will be erased instead.\n"
-            + "• INDEX must be a positive integer. NOTE has a 100 ASCII-character limit.\n"
+            + "• INDEX must be a positive integer. NOTE has a 100 ASCII-character limit. "
+            + "Refer to http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm for accepted characters\n"
             + "• Existing notes will be overwritten by the input.\n"
             + "Parameters:\n"
             + "  " + "INDEX [NOTE]\n"
@@ -32,7 +33,11 @@ public class NoteCommand extends Command {
 
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added notes to Foodplace: %1$s";
     public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed notes from Foodplace: %1$s";
-    public static final String MESSAGE_NO_NOTE_TO_REMOVE = "No notes to remove from specified Foodplace";
+    // Set as success messages but no changes will be made to the address book
+    public static final String MESSAGE_NO_NOTE_TO_REMOVE_SUCCESS = "No notes to remove from specified Foodplace\n"
+            + "No changes were made.";
+    public static final String MESSAGE_SAME_NOTE_SUCCESS = "The new note is the same as the current note\n"
+            + "No changes were made.";
 
     private final Index index;
     private final Note note;
@@ -57,9 +62,17 @@ public class NoteCommand extends Command {
         }
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
-        if (note.value.isEmpty() && foodPlaceToEdit.getNote().value.isEmpty()) {
-            throw new CommandException(MESSAGE_NO_NOTE_TO_REMOVE);
+        String noteToEdit = foodPlaceToEdit.getNote().value;
+
+        // If no existing note to remove --> no change made
+        if (note.value.isEmpty() && noteToEdit.isEmpty()) {
+            return new CommandResult(MESSAGE_NO_NOTE_TO_REMOVE_SUCCESS);
         }
+        // If new note is the same as existing note --> no change made
+        if (note.value.equals(noteToEdit)) {
+            return new CommandResult(MESSAGE_SAME_NOTE_SUCCESS);
+        }
+
         Foodplace editedFoodPlace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
                 foodPlaceToEdit.getEmail(), foodPlaceToEdit.getAddress(), foodPlaceToEdit.getTiming(),
                 foodPlaceToEdit.getCuisine(), foodPlaceToEdit.getTags(), note, foodPlaceToEdit.getRate(),
