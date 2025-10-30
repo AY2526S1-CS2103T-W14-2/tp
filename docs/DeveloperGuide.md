@@ -1053,6 +1053,64 @@ Editing a foodplace while all foodplaces are being shown
     - No changes applied.
     - Error details shown in the status message: `At least one field to edit must be provided.`
 
+### Adding/deleting tags to a food place
+Adding/deleting tags to a foodplace while all foodplaces are being shown
+
+- *Prerequisites:*<br>
+    - **At least one foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
+
+
+1. Valid Test case – Adding tags to a valid foodplace:<br>
+    Command: `tag 1 FastFood Cheap`<br>
+    Expected:
+    - First foodplace in the list will be assigned tags: `FastFood` and `Cheap`.
+    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+
+1. Valid Test case – Deleting a specific tag from a valid foodplace:<br>
+   Command: `tag 1 /d FastFood`<br>
+   Expected:
+    - Tag `FastFood` is deleted from the first foodplace (case-insensitive).
+    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+
+1. Valid Test case - Deleting all tags from a valid foodplace:<br>
+   Command: `tag 1 /d`<br>
+   Expected:
+    - All tags are cleared from the first foodplace.
+    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+
+1. Valid Test case - Adding duplicate tags with different casing:<br>
+   Command: `tag 1 cheap CHEAP`<br>
+   Expected:
+    - Only one tag cheap remains (duplicate ignored case-insensitively).
+    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+
+1. Valid Test case - Overriding existing tag casing:<br>
+   Command: `tag 1 Cheap` followed by `tag 1 cheap`<br>
+   Expected:
+    - The existing tag Cheap is replaced with cheap.
+    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+
+1. Invalid Test case - Deleting a non-existent tag:<br>
+   Command: `tag 1 /d NonExistent`<br>
+   Expected:
+    - No tags are deleted.
+    - Message displayed: `No matching tags found to delete ...`
+
+1. Invalid Test case - Adding tags to a foodplace at an invalid index:<br>
+   Command: `tag 0 FastFood`<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `The foodplace index provided is invalid`
+
+1. Invalid Test case - Adding an empty tag value:<br>
+   Command: `tag 1` (with a space after the index)<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `Invalid command format! tag: ...`
+
+
+
 ### Adding note to a foodplace
 
 Adding note to a foodplace while all foodplaces are being shown
