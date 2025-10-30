@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
-import seedu.bitebuddy.logic.CommandBuffer;
 import seedu.bitebuddy.logic.commands.CommandResult;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
@@ -18,7 +17,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
-    private final CommandExecutor commandExecutor; 
+    private final CommandExecutor commandExecutor;
 
     @FXML
     private TextField commandTextField;
@@ -97,12 +96,14 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    /**
+     * Represents a function that can retrieve commands from the command buffer.
+     */
     @FunctionalInterface
     public interface BufferRetriever {
-
         /**
          * Retrieves command from command buffer based on direction.
-         * 
+         *
          * @see seedu.bitebuddy.logic.Logic#retrieveCommandFromBuffer(Boolean, String)
          */
         String retrieveCommandFromBuffer(Boolean isPrev, String currentText);
