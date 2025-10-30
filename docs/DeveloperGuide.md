@@ -169,7 +169,7 @@ The `Storage` component,
 
 ### Common classes
 
-The following common classes live in `seedu.bitebuddy.commons` and are reused across multiple components:
+The following are a non-exhaustive list of common classes that live in `seedu.bitebuddy.commons` and are reused across multiple components:
 
 - AppParameters — parses and holds command-line/startup arguments.
 - Config and GuiSettings — store application and UI preferences (window size, position, theme, etc.).
@@ -181,8 +181,9 @@ The following common classes live in `seedu.bitebuddy.commons` and are reused ac
 
 <box type="info" seamless>
 
-**Guideline:** interact with these classes through their public APIs (interfaces/static helpers) rather than implementation details to preserve loose coupling and ease testing.
+**Guideline:** interact with these classes through their public APIs (interfaces/static helpers) rather than implementation details to preserve loose coupling and ease testing.<br>
 
+**Disclaimer:** This is a non-exhaustive list of common classes meant to give the developer an idea on what kind of classes are contained within the package. Please see [`commons`](https://github.com/AY2526S1-CS2103T-W14-2/tp/tree/master/src/main/java/seedu/bitebuddy/commons) for a full list of classes.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
