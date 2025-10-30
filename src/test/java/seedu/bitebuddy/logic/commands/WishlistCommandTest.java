@@ -28,7 +28,7 @@ import seedu.bitebuddy.testutil.FoodplaceBuilder;
 
 public class WishlistCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addWishlistUnfilteredList_success() {
@@ -139,8 +139,8 @@ public class WishlistCommandTest {
 
         assertTrue(standardCommand.equals(new WishlistCommand(INDEX_FIRST_FOODPLACE))); // same values
         assertTrue(standardCommand.equals(standardCommand)); // same object
-        assertFalse(standardCommand.equals(null)); // null
-        assertFalse(standardCommand.equals(new ClearCommand())); // different types
+        assertNotEquals(standardCommand, null); // null
+        assertNotEquals(standardCommand, new ClearCommand()); // different types
         assertFalse(standardCommand.equals(new WishlistCommand(INDEX_SECOND_FOODPLACE))); // different index
         assertFalse(standardCommand.equals(displayCommand)); // index vs null
     }

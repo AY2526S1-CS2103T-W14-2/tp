@@ -101,7 +101,7 @@ public final class TestStubs {
      */
     public static class UiStub implements Ui {
         private boolean started = false;
-        private Path receivedStage = null;
+        private final Path receivedStage = null;
 
         /**
          * Returns true if start() has been called.
@@ -128,7 +128,7 @@ public final class TestStubs {
      */
     public static class UserPrefsStorageStub implements seedu.bitebuddy.storage.UserPrefsStorage {
         private boolean throwOnRead = false;
-        private Path prefsPath = Paths.get("stub-userprefs.json");
+        private final Path prefsPath = Paths.get("stub-userprefs.json");
 
         public UserPrefsStorageStub() {}
 

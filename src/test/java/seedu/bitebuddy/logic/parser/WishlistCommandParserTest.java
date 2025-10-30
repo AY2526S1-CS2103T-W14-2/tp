@@ -11,7 +11,7 @@ import seedu.bitebuddy.logic.commands.WishlistCommand;
 
 public class WishlistCommandParserTest {
 
-    private WishlistCommandParser parser = new WishlistCommandParser();
+    private final WishlistCommandParser parser = new WishlistCommandParser();
 
     @Test
     public void parse_indexSpecified_success() {

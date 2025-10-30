@@ -28,7 +28,7 @@ import seedu.bitebuddy.testutil.FoodplaceBuilder;
 
 public class BlacklistCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_addBlacklistUnfilteredList_success() {
@@ -139,8 +139,8 @@ public class BlacklistCommandTest {
 
         assertTrue(standardCommand.equals(new BlacklistCommand(INDEX_FIRST_FOODPLACE)));
         assertTrue(standardCommand.equals(standardCommand));
-        assertFalse(standardCommand.equals(null));
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, null);
+        assertNotEquals(standardCommand, new ClearCommand());
         assertFalse(standardCommand.equals(new BlacklistCommand(INDEX_SECOND_FOODPLACE)));
         assertFalse(standardCommand.equals(displayCommand));
     }
