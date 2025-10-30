@@ -566,8 +566,52 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a foodplace
 
+- *Prerequisites:* <br> 
+    - BiteBuddy is running.  
+    - Use the `list` command first to show current foodplaces and note the count.
+
+1. Valid Test case — Adding a complete foodplace  
+     Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`  
+     Expected:
+     - Foodplace is added to the list; `list` shows one additional entry.
+     - Status message: `Added Foodplace: Golden Wok ...` with the provided details displayed.
+     - Tags `chinese`, `dinner` are present on the new entry.
+
+1. Valid Test case — Adding with only required fields  
+     Command: `add n/Coffee Corner a/50 Coffee St`  
+     Expected:
+     - Foodplace is added successfully.
+     - Optional fields are empty/unset.
+     - Status message shows the new entry details.
+
+1. Invalid Test case — Missing required field (name)  
+     Command: `add p/91234567 e/a@b.com a/1 Example St`  
+     Expected:
+     - No foodplace is added.
+     - Error message explaining invalid command format or missing required field (e.g., `Invalid command format! add: ...`).
+
+1. Invalid Test case — Invalid optional field
+     Command: `add n/BadPhone p/phone123 a/12 Some Rd`  
+     Expected:
+     - No foodplace is added.
+     - Error message describing phone validation failure (e.g., `Phone numbers should only contain numbers...`).
+
+1. Invalid Test case — Duplicate foodplace  
+     Steps:
+     - Add a foodplace: `add n/Duplicate a/10 Rd`
+     - Attempt to add the same details again.  
+     Expected:
+     - Second add fails.
+     - Error message indicating a duplicate entry (e.g., `This foodplace already exists in BiteBuddy.`).
+     - `list` shows only one instance.
+
+1. Edge case — Multiple tags and spacing handling  
+     Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor`  
+     Expected:
+     - Multiple tags parsed correctly (whitespace around tags trimmed).
+     - Status message shows all unique tags attached.
 
 ### Deleting a foodplace
 
@@ -590,8 +634,70 @@ Deleting a foodplace while all foodplaces are being shown
      - No foodplace is deleted.
      - Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
 
-1. _{ more test cases …​ }_
 
+### Editing a foodplace
+
+Editing a foodplace while all foodplaces are being shown
+
+- *Prerequisites:*  
+    - **At least one foodplace** must exist in the list.  
+    - Use the `list` command first to list all foodplaces and note the current details.
+
+1. Valid Test case — Edit all fields of a valid foodplace  
+    Command: `edit 1 n/Cafe Luna p/91234567 e/cafe@example.com a/20 Baker St t/cafe t/coffee`  
+    Expected:
+    - Foodplace at index 1 is updated with the new name, phone, email, address and tags.
+    - Status message shows the updated details: `Edited Foodplace: Cafe Luna ...`
+
+1. Valid Test case — Edit only some fields (partial update)  
+    Command: `edit 1 n/Cafe Luna`  
+    Expected:
+    - Only the name of the first foodplace is changed; other fields remain unchanged.
+    - Status message shows the edited entry with unchanged fields preserved.
+
+1. Valid Test case — Replace tags with a new set  
+    Command: `edit 1 t/brunch t/outdoor`  
+    Expected:
+    - Tags of the first foodplace are replaced by `brunch` and `outdoor`.
+    - Status message shows the edited entry with unchanged fields preserved.
+
+1. Valid Test case — Clear all tags
+    Command: `edit 1 t/`  
+    Expected:
+    - All tags are removed from the first foodplace.
+    - Status message shows the edited entry with unchanged fields preserved.
+
+1. Invalid Test case — Editing a foodplace at an invalid index 
+    Command: `edit 0 n/NewName`  
+    Expected:
+    - No changes applied.
+    - Error message: `Invalid command format!...`
+
+1. Invalid Test case — Editing a foodplace at an out-of-range index  
+    Command: `edit 999 n/Nowhere`  
+    Expected:
+    - No changes applied.
+    - Error message indicating the index is out of bounds (e.g., `The foodplace index provided is invalid`).
+
+1. Invalid Test case — Invalid field format  
+    Command: `edit 1 p/phone123`  
+    Expected:
+    - No changes applied.
+    - Error message describing phone validation failure (e.g., `Phone numbers should only contain numbers...`).
+
+1. Invalid Test case — Edit results in a duplicate entry  
+    Steps:
+    - run `add n/ExistingName a/Existing Address`
+    - run `edit 1 n/ExistingName a/Existing Address`  
+    Expected:
+    - No changes applied.
+    - Error message: `This foodplace already exists in BiteBuddy.`
+
+1. Edge case — No fields provided to edit  
+    Command: `edit 1`  
+    Expected:
+    - No changes applied.
+    - Error message: `At least one field to edit must be provided.`
 
 ### Rating a foodplace
 
@@ -637,6 +743,7 @@ Rating a foodplace while all foodplaces are being shown
   Expected:
     - No foodplace will be rated.
     - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
+
 
 
 ### Saving data
