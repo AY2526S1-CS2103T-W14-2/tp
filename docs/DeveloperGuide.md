@@ -560,9 +560,8 @@ Guarantees: The specified tag(s) are removed from the food place. Deletion is ca
 
 1. User requests to list food places
 2. BiteBuddy shows a list of food places
-3. User issues a delete-tag command with the /d prefix and one or more tag names.
-4. BiteBuddy removes the specified tag(s) from the target food place.
-5. BiteBuddy displays a confirmation message that tags were updated.
+3. User issues a delete-tag command with one or more tag names.
+4. BiteBuddy removes the specified tag(s) from the target food place and displays a confirmation message.
 
    Use case ends.
 
@@ -578,7 +577,7 @@ Guarantees: The specified tag(s) are removed from the food place. Deletion is ca
 
       Use case ends.
 
-* 3c. The user omits all tags after /d.
+* 3c. No tags given.
     * 3c1. BiteBuddy removes all tags from the specified food place.
     * 3c2. BiteBuddy displays a confirmation message that tags were updated.
 
