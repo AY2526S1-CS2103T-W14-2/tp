@@ -87,4 +87,27 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
+
+    @Override
+    public String retrieveCommandFromBuffer(boolean isPrev, String currentText) {
+        // Check if to update pending command
+        if (CommandBuffer.isHead()) {
+            CommandBuffer.setPendingCommand(currentText);
+        }
+
+        // Fetch command buffer
+        CommandBuffer current = CommandBuffer.getCurrent();
+
+        // Set command box content
+        if (current != null) {
+            if (isPrev) {
+                CommandBuffer.getPrev();
+            } else {
+                CommandBuffer.getNext();
+            }
+            return CommandBuffer.getCurrent().getCommand();
+        } else {
+            return currentText;
+        }
+    }
 }
