@@ -78,7 +78,11 @@ public class TagCommand extends Command {
             }
             updatedTags.removeAll(newTags);
         } else {
-            updatedTags.addAll(newTags);
+            for (Tag newTag : newTags) {
+                updatedTags.removeIf(tag ->
+                        tag.tagName.equalsIgnoreCase(newTag.tagName));
+                updatedTags.add(newTag);
+            }
         }
 
         // Create a new Foodplace with updated tags, keeping all other fields the same

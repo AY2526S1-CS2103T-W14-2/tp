@@ -193,4 +193,22 @@ public class TagCommandTest {
         // different values -> different hashcode
         assertNotEquals(tagFirstFastFood.hashCode(), tagSecondCheap.hashCode());
     }
+
+    @Test
+    public void execute_addDuplicateTagWithDifferentCase_overridesExistingTag() {
+        Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Foodplace tagged = new FoodplaceBuilder(foodplace).withTags("Cheap").build();
+        model.setFoodplace(foodplace, tagged);
+
+        // Add tag with different casing
+        TagCommand command = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(new Tag("cheap")), false);
+
+        Foodplace expected = new FoodplaceBuilder(tagged).withTags("cheap").build(); // new casing overrides
+        String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, Messages.format(expected));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFoodplace(tagged, expected);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
 }
