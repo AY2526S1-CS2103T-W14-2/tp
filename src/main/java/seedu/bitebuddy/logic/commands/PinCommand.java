@@ -31,7 +31,7 @@ public class PinCommand extends Command {
     public static final String MESSAGE_PIN_FOODPLACE_SUCCESS = "Pinned foodplace: %1$s";
     public static final String MESSAGE_ALREADY_PINNED = "This foodplace is already pinned";
     public static final String MESSAGE_MAX_PIN_REACHED = "This foodplace is not pinned. "
-        + "A maximum of 5 pins have been reached";
+        + "The maximum of 5 pins has been reached";
 
     private final Index index;
 

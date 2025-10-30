@@ -1293,7 +1293,7 @@ Pinning a foodplace while all foodplaces are being shown
     - Pin the first foodplace using `pin 1`
     - Attempt to pin the same foodplace again using `pin 1`
     Expected:
-    - The first foodplace will remained pinned.
+    - The first foodplace will remain pinned.
     - Error details shown in the status message: `This foodplace is already pinned`
 
 1. Invalid Test case - Pinning an unpinned foodplace when there are 5 pins already:<br>
@@ -1302,7 +1302,7 @@ Pinning a foodplace while all foodplaces are being shown
     - Attempt to pin another foodplace using `pin x`
     Expected:
     - The foodplace will not be pinned.
-    - Error details shown in the status message: `This foodplace is not pinned. A maximum of 5 pins have been reached`
+    - Error details shown in the status message: `This foodplace is not pinned. The maximum of 5 pins has been reached`
 
 ### Unpinning a foodplace
 
