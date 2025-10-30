@@ -1148,43 +1148,43 @@ Adding note to a foodplace while all foodplaces are being shown
 Rating a foodplace while all foodplaces are being shown
 
 - *Prerequisites:*<br>
-  - **At least one foodplace** must exist in the list.
-  - Use the `list` command first to list all foodplaces.
+    - **At least one foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
 
 
 1. Valid Test case - Assigning a valid rating to a valid foodplace:<br> 
     Command: `rate 1 5`<br>
     Expected:
-      - First foodplace in the list will be assigned a rating: `< 5/10 >`
-      - Details of the rated foodplace shown in the status message: `Added rating to Foodplace: ...`
+    - First foodplace in the list will be assigned a rating: `< 5/10 >`
+    - Details of the rated foodplace shown in the status message: `Added rating to Foodplace: ...`
 
 1. Valid Test case - Unassigning any existing rating from a valid foodplace:<br>
    Command: `rate 1 0`<br>
    Expected: 
-     - First foodplace in the list will become unrated: `>> No Rating Yet <<`
-     - Details of the unrated foodplace shown in the status message: `Removed rating from Foodplace: ...`
+    - First foodplace in the list will become unrated: `>> No Rating Yet <<`
+    - Details of the unrated foodplace shown in the status message: `Removed rating from Foodplace: ...`
 
 1. Invalid Test case - Assigning a valid rating to a **foodplace at an invalid index**:<br>
    Command: `rate 0 5`<br>
    Expected:
-     - No foodplace will be rated.
-     - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
+    - No foodplace will be rated.
+    - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
 1. Invalid Test case - Assigning a **negative rating** to a valid foodplace:<br>
    Command: `rate 1 -1`<br>
    Expected:
-     - No foodplace will be rated.
-     - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
+    - No foodplace will be rated.
+    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
 
 1. Invalid Test case - Assigning an **out-of-range rating** to a valid foodplace:<br>
    Command: `rate 1 11`<br>
    Expected:
-     - No foodplace will be rated.
-     - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
+    - No foodplace will be rated.
+    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
 
 1. Invalid Test case - Assigning an **unsigned non-integer rating** to a valid foodplace:<br>
-  Command: `rate 1 1.1`<br>
-  Expected:
+    Command: `rate 1 1.1`<br>
+    Expected:
     - No foodplace will be rated.
     - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
