@@ -69,6 +69,10 @@
         "rating-a-foodplace": "Rating a foodplace",
         "wishlisting-a-foodplace": "Wishlisting a foodplace",
         "blacklisting-a-foodplace": "Blacklisting a foodplace",
+        "pinning-a-foodplace": "Pinning a foodplace",
+        "unpinning-a-foodplace": "Unpinning a foodplace",
+        "finding-a-foodplace": "Finding a foodplace",
+        "comparing-two-foodplaces": "Comparing two foodplaces",
         "getting-help": "Getting Help",
         "saving-data": "Saving data"
       },
