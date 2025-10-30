@@ -136,11 +136,16 @@ public class TagCommandTest {
     }
 
     @Test
-    public void execute_deleteNonExistentTag_noChange() {
+    public void execute_deleteNonExistentTag_showsNoTagsDeletedMessage() {
         Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         TagCommand command = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(new Tag("NonExistent")), true);
 
-        String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, Messages.format(foodplace));
+        String expectedMessage = String.format(
+                "%s\nNo changes made to: %s",
+                TagCommand.MESSAGE_NO_TAGS_DELETED,
+                Messages.format(foodplace)
+        );
+
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -192,5 +197,26 @@ public class TagCommandTest {
 
         // different values -> different hashcode
         assertNotEquals(tagFirstFastFood.hashCode(), tagSecondCheap.hashCode());
+    }
+
+    @Test
+    public void executeDeleteTag_caseInsensitive_success() {
+        Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+
+        // Foodplace initially has tag [FastFood]
+        Foodplace tagged = new FoodplaceBuilder(foodplace).withTags("FastFood").build();
+        model.setFoodplace(foodplace, tagged);
+
+        // Delete tag using different case
+        TagCommand command = new TagCommand(INDEX_FIRST_FOODPLACE, Set.of(new Tag("fastfood")), true);
+
+        // Expected: all tags removed
+        Foodplace expected = new FoodplaceBuilder(tagged).withTags().build();
+        String expectedMessage = String.format(TagCommand.MESSAGE_SUCCESS, Messages.format(expected));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFoodplace(tagged, expected);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 }
