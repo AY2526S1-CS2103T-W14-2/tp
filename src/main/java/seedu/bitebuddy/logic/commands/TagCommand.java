@@ -82,7 +82,7 @@ public class TagCommand extends Command {
             }
 
             // Check if any tag was actually removed
-            if (!newTags.isEmpty() & originalTags.equals(updatedTags)) {
+            if (!newTags.isEmpty() && originalTags.equals(updatedTags)) {
                 return new CommandResult(String.format(
                         "%s\nNo changes made to: %s",
                         MESSAGE_NO_TAGS_DELETED,
