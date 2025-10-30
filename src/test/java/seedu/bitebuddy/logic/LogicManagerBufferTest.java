@@ -2,19 +2,11 @@ package seedu.bitebuddy.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.bitebuddy.commons.exceptions.DataLoadingException;
 import seedu.bitebuddy.model.ModelManager;
-import seedu.bitebuddy.model.ReadOnlyAddressBook;
-import seedu.bitebuddy.model.ReadOnlyUserPrefs;
-import seedu.bitebuddy.model.UserPrefs;
-import seedu.bitebuddy.storage.Storage;
+import seedu.bitebuddy.testutil.TestStubs;
 
 /**
  * Unit tests for LogicManager command buffer retrieval.
@@ -28,48 +20,7 @@ public class LogicManagerBufferTest {
         // Ensure clean buffer state for each test
         CommandBuffer.clear();
 
-        // Minimal storage stub: methods not used by retrieveCommandFromBuffer
-        Storage storageStub = new Storage() {
-            @Override
-            public Path getUserPrefsFilePath() {
-                return Path.of(".");
-            }
-
-            @Override
-            public Optional<UserPrefs> readUserPrefs() throws DataLoadingException {
-                return Optional.empty();
-            }
-
-            @Override
-            public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
-                // no-op
-            }
-
-            @Override
-            public Path getAddressBookFilePath() {
-                return Path.of(".");
-            }
-
-            @Override
-            public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-                return Optional.empty();
-            }
-
-            @Override
-            public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
-                return Optional.empty();
-            }
-
-            @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-                // no-op
-            }
-
-            @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-                // no-op
-            }
-        };
+        TestStubs.StorageStub storageStub = new TestStubs.StorageStub();
 
         logicManager = new LogicManager(new ModelManager(), storageStub);
     }
