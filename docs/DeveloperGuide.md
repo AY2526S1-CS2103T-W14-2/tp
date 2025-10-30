@@ -864,7 +864,7 @@ Guarantees: Relevant help information is shown to the user.
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.
+Preconditions: At least one food place exists.  
 Guarantees: If successful, all food places are removed from the address book.
 
 **MSS**
@@ -872,6 +872,33 @@ Guarantees: If successful, all food places are removed from the address book.
 2. BiteBuddy deletes all food places from the address book and displays a confirmation message.
 
 Use case ends.
+
+**Use case: UC20 - Reuse previously entered commands**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one command has been used.  
+Guarantees: If successful, user can reuse a previous command.
+
+**MSS**
+1. User requests to view all previous commands.
+2. BiteBuddy returns all the user's previous commands.
+3. User selects a previous command to execute.
+4. BiteBuddy executes the command.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. There is no previous command.
+    * 3a1. BiteBuddy does not change the current command and executes it.
+
+      Use case ends.
+
+* 3b. User selects the latest command.
+    * 3a1. BiteBuddy executes the latest command the user was originally typing.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
