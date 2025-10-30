@@ -123,6 +123,17 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Argument processing helper classes:
+
+There are two common styles of argument processing used by command parsers:
+- Prefix-based commands use `ArgumentTokenizer` + `ArgumentMultimap` (e.g. `AddCommand`, `EditCommand`, etc.).
+    - For commands that accept labelled fields using prefixes (e.g. `add n/NAME p/PHONE t/TAG ...`).
+    - Tokenize the raw arguments with `ArgumentTokenizer` using the expected prefixes, then read values from the returned `ArgumentMultimap`.
+
+- Positional-based (whitespace-separated) commands use `ArgumentPositionMapper` (e.g. `NoteCommand`, `RateCommand`, `CompareCommand`, etc.).
+    - For commands that accept a fixed sequence of whitespace-separated values (e.g. `note 1 Good customer service!`).
+    - `ArgumentPositionMapper` maps tokens by their position into parameters.
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 

@@ -15,7 +15,7 @@ import seedu.bitebuddy.model.foodplace.Foodplace;
  */
 public class FoodplaceListPanel extends UiPart<Region> {
     private static final String FXML = "FoodplaceListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(FoodplaceListPanel.class);
+    private static final Logger logger = LogsCenter.getLogger(FoodplaceListPanel.class);
 
     @FXML
     private ListView<Foodplace> foodplaceListView;
@@ -25,6 +25,7 @@ public class FoodplaceListPanel extends UiPart<Region> {
      */
     public FoodplaceListPanel(ObservableList<Foodplace> foodplaceList) {
         super(FXML);
+        logger.fine("Initializing foodplace list panel.");
         foodplaceListView.setItems(foodplaceList);
         foodplaceListView.setCellFactory(listView -> new FoodplaceListViewCell());
     }

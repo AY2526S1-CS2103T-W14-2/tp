@@ -11,7 +11,7 @@ import seedu.bitebuddy.logic.commands.UnpinCommand;
 
 public class UnpinCommandParserTest {
 
-    private UnpinCommandParser parser = new UnpinCommandParser();
+    private final UnpinCommandParser parser = new UnpinCommandParser();
 
     @Test
     public void parse_validArgs_returnsUnpinCommand() {

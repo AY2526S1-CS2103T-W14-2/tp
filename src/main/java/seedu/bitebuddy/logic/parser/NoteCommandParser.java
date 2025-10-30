@@ -23,7 +23,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
     public NoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentPositionMapper mapper = new ArgumentPositionMapper(args);
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(args, INDEX_NOTE_NOTE_STRING);
 
         if (mapper.size() < 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));

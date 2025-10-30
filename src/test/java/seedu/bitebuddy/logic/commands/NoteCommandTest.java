@@ -104,6 +104,31 @@ public class NoteCommandTest {
     }
 
     @Test
+    public void execute_noNoteToRemoveUnfilteredList_failure() {
+        Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
+
+        model.setFoodplace(firstFoodplace, editedFoodplace);
+
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(EMPTY_NOTE_STUB));
+
+        assertCommandFailure(noteCommand, model, NoteCommand.MESSAGE_NO_NOTE_TO_REMOVE);
+    }
+
+    @Test
+    public void execute_noNoteToRemoveFilteredList_failure() {
+        showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
+        Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
+
+        model.setFoodplace(firstFoodplace, editedFoodplace);
+
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(EMPTY_NOTE_STUB));
+
+        assertCommandFailure(noteCommand, model, NoteCommand.MESSAGE_NO_NOTE_TO_REMOVE);
+    }
+
+    @Test
     public void execute_invalidFoodplaceIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredFoodplaceList().size() + 1);
         NoteCommand noteCommand = new NoteCommand(outOfBoundIndex, new Note(VALID_NOTE_FAMOUS));

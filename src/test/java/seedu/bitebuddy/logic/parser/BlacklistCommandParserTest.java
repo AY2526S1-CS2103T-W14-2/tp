@@ -11,7 +11,7 @@ import seedu.bitebuddy.logic.commands.BlacklistCommand;
 
 public class BlacklistCommandParserTest {
 
-    private BlacklistCommandParser parser = new BlacklistCommandParser();
+    private final BlacklistCommandParser parser = new BlacklistCommandParser();
 
     @Test
     public void parse_indexSpecified_success() {

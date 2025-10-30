@@ -282,19 +282,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTime_valid_returnsLocalTime() throws Exception {
-        LocalTime expected = LocalTime.of(12, 30);
-        assertEquals(expected, ParserUtil.parseTime("12:30"));
-        // whitespace trimmed
-        assertEquals(expected, ParserUtil.parseTime(" 12:30 \t"));
-    }
-
-    @Test
-    public void parseTime_invalid_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTime("25:00"));
-    }
-
-    @Test
     public void parseTiming() throws Exception {
         // valid
         Timing t = ParserUtil.parseTiming("09:00", "17:00");

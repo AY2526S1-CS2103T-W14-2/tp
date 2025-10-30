@@ -32,6 +32,7 @@ public class NoteCommand extends Command {
 
     public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added notes to Foodplace: %1$s";
     public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed notes from Foodplace: %1$s";
+    public static final String MESSAGE_NO_NOTE_TO_REMOVE = "No notes to remove from specified Foodplace";
 
     private final Index index;
     private final Note note;
@@ -56,6 +57,9 @@ public class NoteCommand extends Command {
         }
 
         Foodplace foodPlaceToEdit = lastShownList.get(index.getZeroBased());
+        if (note.value.isEmpty() && foodPlaceToEdit.getNote().value.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_NOTE_TO_REMOVE);
+        }
         Foodplace editedFoodPlace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
                 foodPlaceToEdit.getEmail(), foodPlaceToEdit.getAddress(), foodPlaceToEdit.getTiming(),
                 foodPlaceToEdit.getCuisine(), foodPlaceToEdit.getTags(), note, foodPlaceToEdit.getRate(),
