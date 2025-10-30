@@ -948,6 +948,52 @@ Deleting a foodplace while all foodplaces are being shown
 1. _{ more test cases …​ }_
 
 
+### Adding note to a foodplace
+
+Adding note to a foodplace while all foodplaces are being shown
+
+- *Prerequisites:*<br>
+    - **At least one foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
+
+
+1. Valid Test case - Assigning a valid note to a valid foodplace:<br>
+   Command: `note 1 Good customer service!`<br>
+   Expected:
+    - First foodplace in the list will be assigned a note: `Good customer service!`
+    - Details of the updated foodplace shown in the status message: `Added Notes to Foodplace: ...`
+
+1. Valid Test case - Unassigning any existing note from a valid foodplace:<br>
+   Command: `note 1`<br>
+   Expected:
+    - First foodplace in the list will have no note: `-- No Notes Yet --`
+    - Details of the updated foodplace shown in the status message: `Removed Notes from Foodplace: ...`
+
+1. Invalid Test case - Assigning a valid note to a **foodplace at an invalid index**:<br>
+   Command: `note 0 Good customer service!`<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `Index is not a non-zero unsigned integer.`
+
+1. Invalid Test case - Assigning a **note that exceeds the character limit of 100** to a valid foodplace:<br>
+   Command: `note 1 aaaaaaa...` (101 `a`s)<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `Note given either exceeds 100 characters OR contained non-ASCII-printable characters...`
+
+1. Invalid Test case - Assigning a **note that contains non-ASCII-printable characters** to a valid foodplace:<br>
+   Command: `note 1 ¤¤¤¤`<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `Note given either exceeds 100 characters OR contained non-ASCII-printable characters...`
+
+1. Invalid Test case - Assigning an **unsigned non-integer rating** to a valid foodplace:<br>
+   Command: `rate 1 1.1`<br>
+   Expected:
+    - No foodplace will be rated.
+    - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
+
+
 ### Rating a foodplace
 
 Rating a foodplace while all foodplaces are being shown
