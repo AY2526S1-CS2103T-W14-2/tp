@@ -61,7 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// foodplace-level operations
 
     /**
-     * Returns true if a foodplace with the same identity as {@code foodplace} exists in the bitebuddy book.
+     * Returns true if a foodplace with the same identity as {@code foodplace} exists in the address book.
      */
     public boolean hasFoodplace(Foodplace foodplace) {
         requireNonNull(foodplace);
@@ -69,8 +69,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a foodplace to the bitebuddy book.
-     * The foodplace must not already exist in the bitebuddy book.
+     * Adds a foodplace to the address book.
+     * The foodplace must not already exist in the address book.
      */
     public void addFoodplace(Foodplace p) {
         foodplaces.add(p);
@@ -78,9 +78,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given foodplace {@code target} in the list with {@code editedFoodplace}.
-     * {@code target} must exist in the bitebuddy book.
+     * {@code target} must exist in the address book.
      * The foodplace identity of {@code editedFoodplace} must not be the same as another existing foodplace in the
-     * bitebuddy book.
+     * address book.
      */
     public void setFoodplace(Foodplace target, Foodplace editedFoodplace) {
         requireNonNull(editedFoodplace);
@@ -90,7 +90,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the bitebuddy book.
+     * {@code key} must exist in the address book.
      */
     public void removeFoodplace(Foodplace key) {
         foodplaces.remove(key);
