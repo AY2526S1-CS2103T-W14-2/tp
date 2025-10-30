@@ -25,6 +25,7 @@ Class Rate
 Class Tag
 Class Timing
 Class Wishlist
+Class Blacklist
 
 Class I #FFFFFF
 }
@@ -54,6 +55,7 @@ Foodplace *--> Note
 Foodplace *--> Pinned
 Foodplace *--> Rate
 Foodplace *--> Wishlist
+Foodplace *--> Blacklist
 
 Foodplace -[hidden]up--> I
 UniqueFoodplaceList -[hidden]right-> I

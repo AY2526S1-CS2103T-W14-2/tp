@@ -13,7 +13,15 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- SE-EDU AddressBook Level 3 project — used as the primary template for architecture, componentisation and many example snippets: https://github.com/se-edu/addressbook-level3
+- PlantUML — used to author sequence/class/activity diagrams: https://plantuml.com/
+- OpenJFX (JavaFX) — UI components and FXML usage: https://openjfx.io/
+- Jackson (FasterXML) — JSON read/write helpers: https://github.com/FasterXML/jackson
+- Gradle — build scripts and dependency management: https://gradle.org/
+- JUnit 5 — unit testing framework: https://junit.org/junit5/
+- OpenJDK / Java 17 — target runtime: https://openjdk.org/
+- Markbind - used to generate app website: https://markbind.org/
+- GitHub Copilot - used for autocompleting and drafting code, as well as doing initial reviews for pull requests: https://github.com/features/copilot
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +43,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/Main.java) and [`MainApp`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +75,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `FoodplaceListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +92,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -102,7 +110,8 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, the command is first saved to the `CommandBuffer`
+1. The command is then passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a foodplace).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -128,7 +137,7 @@ There are two common styles of argument processing used by command parsers:
     - `ArgumentPositionMapper` maps tokens by their position into parameters.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -140,18 +149,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Foodplace` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Foodplace` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
-
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -160,9 +160,32 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+
+<box type="info" seamless>
+
+**Note:** In storage, `AddressBook` refers to the collection of `Foodplace`, as they all contain addresses as mandatory fields. We decided that keeping AddressBook from AB3 would make more sense than changing its symbol to mean something related to `Foodplace`, since the word Foodplaces implies an address.<br>
+
+</box>
+
+
 ### Common classes
 
-Classes used by multiple components are in the `seedu.bitebuddy.commons` package.
+The following are a non-exhaustive list of common classes that live in `seedu.bitebuddy.commons` and are reused across multiple components:
+
+- AppParameters — parses and holds command-line/startup arguments.
+- Config and GuiSettings — store application and UI preferences (window size, position, theme, etc.).
+- LogsCenter — configures and exposes java.util.logging loggers used throughout the app.
+- Index — 1-based index wrapper used by commands and UI to avoid off-by-one errors.
+- StringUtil, CollectionUtil, DateTimeUtil — small, well-tested utility helpers for common string, collection and date/time operations.
+- IllegalValueException — exception type thrown when parsed input violates domain constraints.
+- ConfigUtil and FileUtil — helpers for reading/writing config and data files in a safe, testable manner.
+
+<box type="info" seamless>
+
+**Guideline:** interact with these classes through their public APIs (interfaces/static helpers) rather than implementation details to preserve loose coupling and ease testing.<br>
+
+**Disclaimer:** This is a non-exhaustive list of common classes meant to give the developer an idea on what kind of classes are contained within the package. Please see [`commons`](https://github.com/AY2526S1-CS2103T-W14-2/tp/tree/master/src/main/java/seedu/bitebuddy/commons) for a full list of classes.
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
