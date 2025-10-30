@@ -572,43 +572,43 @@ testers are expected to do more *exploratory* testing.
     - BiteBuddy is running.  
     - Use the `list` command first to show current foodplaces and note the count.
 
-1. Valid Test case — Adding a complete foodplace  
-     Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`  
+1. Valid Test case — Adding a complete foodplace:<br>
+     Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`<br>  
      Expected:
      - Foodplace is added to the list; `list` shows one additional entry.
      - Status message: `Added Foodplace: Golden Wok ...` with the provided details displayed.
      - Tags `chinese`, `dinner` are present on the new entry.
 
-1. Valid Test case — Adding with only required fields  
-     Command: `add n/Coffee Corner a/50 Coffee St`  
+1. Valid Test case — Adding with only required fields:<br>
+     Command: `add n/Coffee Corner a/50 Coffee St`<br>  
      Expected:
      - Foodplace is added successfully.
      - Optional fields are empty/unset.
      - Status message shows the new entry details.
 
-1. Invalid Test case — Missing required field (name)  
-     Command: `add p/91234567 e/a@b.com a/1 Example St`  
+1. Invalid Test case — Adding with **missing required field**:<br>  
+     Command: `add p/91234567 e/a@b.com a/1 Example St`<br>
      Expected:
      - No foodplace is added.
-     - Error message explaining invalid command format or missing required field (e.g., `Invalid command format! add: ...`).
+     - Error message explaining invalid command format or missing required field `Invalid command format! add: ...`.
 
-1. Invalid Test case — Invalid optional field
-     Command: `add n/BadPhone p/phone123 a/12 Some Rd`  
+1. Invalid Test case — Adding with **invalid optional field**:<br>
+     Command: `add n/BadPhone p/phone123 a/12 Some Rd`<br>  
      Expected:
      - No foodplace is added.
      - Error message describing phone validation failure (e.g., `Phone numbers should only contain numbers...`).
 
-1. Invalid Test case — Duplicate foodplace  
+1. Invalid Test case — Adding a **duplicate foodplace**:<br>  
      Steps:
-     - Add a foodplace: `add n/Duplicate a/10 Rd`
+     - Add a foodplace: `add n/Duplicate a/10 Rd`:<br>
      - Attempt to add the same details again.  
      Expected:
      - Second add fails.
      - Error message indicating a duplicate entry (e.g., `This foodplace already exists in BiteBuddy.`).
      - `list` shows only one instance.
 
-1. Edge case — Multiple tags and spacing handling  
-     Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor`  
+1. Edge case — Multiple tags and spacing handling:<br>  
+     Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor`<br>  
      Expected:
      - Multiple tags parsed correctly (whitespace around tags trimmed).
      - Status message shows all unique tags attached.
@@ -642,58 +642,59 @@ Editing a foodplace while all foodplaces are being shown
     - **At least one foodplace** must exist in the list.  
     - Use the `list` command first to list all foodplaces and note the current details.
 
-1. Valid Test case — Edit all fields of a valid foodplace  
-    Command: `edit 1 n/Cafe Luna p/91234567 e/cafe@example.com a/20 Baker St t/cafe t/coffee`  
+1. Valid Test case — Editing all fields of a valid foodplace:<br>
+    Command: `edit 1 n/Cafe Luna p/91234567 e/cafe@example.com a/20 Baker St t/cafe t/coffee`<br>  
     Expected:
     - Foodplace at index 1 is updated with the new name, phone, email, address and tags.
     - Status message shows the updated details: `Edited Foodplace: Cafe Luna ...`
 
-1. Valid Test case — Edit only some fields (partial update)  
-    Command: `edit 1 n/Cafe Luna`  
+1. Valid Test case — Editing only some fields:<br>
+    Command: `edit 1 n/Cafe Luna`<br>  
     Expected:
     - Only the name of the first foodplace is changed; other fields remain unchanged.
     - Status message shows the edited entry with unchanged fields preserved.
 
-1. Valid Test case — Replace tags with a new set  
-    Command: `edit 1 t/brunch t/outdoor`  
+1. Valid Test case — Replacing tags with a new set:<br>
+    Command: `edit 1 t/brunch t/outdoor`<br> 
     Expected:
     - Tags of the first foodplace are replaced by `brunch` and `outdoor`.
     - Status message shows the edited entry with unchanged fields preserved.
 
-1. Valid Test case — Clear all tags
-    Command: `edit 1 t/`  
+1. Valid Test case — Clearing all tags:<br>
+    Command: `edit 1 t/`<br>  
     Expected:
     - All tags are removed from the first foodplace.
     - Status message shows the edited entry with unchanged fields preserved.
 
-1. Invalid Test case — Editing a foodplace at an invalid index 
-    Command: `edit 0 n/NewName`  
+1. Invalid Test case — Editing a foodplace at an **invalid index**:<br>
+    Command: `edit 0 n/NewName`<br>  
     Expected:
     - No changes applied.
     - Error message: `Invalid command format!...`
 
-1. Invalid Test case — Editing a foodplace at an out-of-range index  
+1. Invalid Test case — Editing a foodplace at an **out-of-range index**:<br> 
     Command: `edit 999 n/Nowhere`  
     Expected:
     - No changes applied.
     - Error message indicating the index is out of bounds (e.g., `The foodplace index provided is invalid`).
 
-1. Invalid Test case — Invalid field format  
-    Command: `edit 1 p/phone123`  
+1. Invalid Test case — Editing with an **invalid field**:<br>
+    Command: `edit 1 p/phone123`<br>  
     Expected:
     - No changes applied.
     - Error message describing phone validation failure (e.g., `Phone numbers should only contain numbers...`).
 
-1. Invalid Test case — Edit results in a duplicate entry  
+1. Invalid Test case — Editing results in a **duplicate entry**:<br>  
     Steps:
     - run `add n/ExistingName a/Existing Address`
-    - run `edit 1 n/ExistingName a/Existing Address`  
+    - run `edit 1 n/ExistingName a/Existing Address`
+ 
     Expected:
     - No changes applied.
     - Error message: `This foodplace already exists in BiteBuddy.`
 
-1. Edge case — No fields provided to edit  
-    Command: `edit 1`  
+1. Edge case — No fields provided to edit:<br>
+    Command: `edit 1`<br>  
     Expected:
     - No changes applied.
     - Error message: `At least one field to edit must be provided.`
