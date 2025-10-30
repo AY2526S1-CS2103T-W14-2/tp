@@ -385,109 +385,24 @@ Guarantees: If successful, the food place is stored in BiteBuddy without duplica
 
 **MSS**
 
-1. User chooses to add a new food place.
-2. User provides the details for the food place(Name, phone number, email address and postal address)
-3. BiteBuddy validates the details.
-4. BiteBuddy adds the food place and displays confirmation.
-Use case ends.
+1. User provides the details for the food place(Name, phone number, email address and postal address)
+2. BiteBuddy adds the food place and displays confirmation.
+
+    Use case ends.
 
 **Extensions**
 
-* 2a. User omits a required detail.
-    * 2a1. BiteBuddy shows an error message for missing fields.
-      Use case ends.
-* 3a. Validation fails (e.g., phone number not numeric, email format invalid, or duplicate entry).
-    * 3a1. BiteBuddy shows an appropriate error message.
+* 1a. User omits a required detail.
+    * 1a1. BiteBuddy shows an error message for missing fields.
+    
       Use case ends.
 
+* 2a. Validation fails (e.g., phone number not numeric, email format invalid, or duplicate entry).
+    * 2a1. BiteBuddy shows an appropriate error message.
 
-**Use case: UC02 - Add tag(s) to a food place**
-
-System: BiteBuddy
-Actor: User
-Preconditions: At least one food place exists.
-Guarantees: Valid tags are added and duplicates are ignored.
-
-**MSS**
-
-1. User chooses to add tag(s) to a food place.
-2. User provides the index of the food place and the new tag(s).
-3. BiteBuddy validates the index and tag(s).
-4. BiteBuddy updates the food place with the new tag(s) and displays confirmation.
-   Use case ends.
-
-**Extensions**
-
-* 2a. BiteBuddy detects that the index is not a positive integer or out of range.
-    * 2a1. BiteBuddy shows an error message for invalid index.
       Use case ends.
 
-* 2b. BiteBuddy detects that the tag is empty.
-    * 2b1. BiteBuddy shows an error message for empty tag.
-      Use case ends.
-
-* 3a. BiteBuddy detects that the user provides duplicate tags.
-    * 3a1. BiteBuddy ignores duplicates and keeps only unique tags.
-      Use case ends.
-
-
-**Use case: UC03 - Add a note to a food place**
-
-System: BiteBuddy
-Actor: User
-Preconditions: At least one food place exists.
-Guarantees: A note is stored for the food place and existing note is overwritten if present.
-
-**MSS**
-
-1. User chooses to add a note to a food place.
-2. User provides the index and note text.
-3. BiteBuddy validates the index and note.
-4. BiteBuddy updates the food place with the note and displays confirmation.
-   Use case ends.
-
-**Extensions**
-
-* 2a. BiteBuddy detects invalid index.
-    * 2a1. BiteBuddy throws an error for invalid index.
-      Use case ends.
-
-* 2b. BiteBuddy detects an empty note.
-    * 2b1. BiteBuddy treats this as discarding the existing note.
-      Use case ends.
-
-
-**Use case: UC04 - Rate a food place**
-
-System: BiteBuddy
-Actor: User
-Preconditions: At least one food place exists.
-Guarantees: A rating between 1–10 is stored and existing rating is overwritten.
-
-**MSS**
-
-1. User chooses to rate a food place.
-2. User provides the index and rating value.
-3. BiteBuddy validates the index and rating.
-4. BiteBuddy updates the food place with the rating and displays confirmation.
-   Use case ends.
-
-**Extensions**
-
-* 2a. BiteBuddy detects invalid index.
-    * 2a1. BiteBuddy throws an error for invalid index.
-      Use case ends.
-
-* 2b. BiteBuddy detects that rating is not numeric.
-    * 2b1. BiteBuddy shows an error message for invalid rating.
-      Use case ends.
-
-* 2c. BiteBuddy detects that rating is out of range.
-    * 2c1. BiteBuddy shows an error message for rating being out of range.
-      Use case ends.
-
-
-**Use case: UC05 - Delete a food place**
+**Use case: UC02 - Delete a food place**
 
 System: BiteBuddy
 Actor: User
@@ -496,26 +411,466 @@ Guarantees: The food place is deleted if index is valid.
 
 **MSS**
 
-1. User chooses to delete a food place.
-2. User provides the index.
-3. BiteBuddy validates the index.
+1. User requests to list food places
+2. BiteBuddy shows a list of food places
+3. User chooses to delete a specific food place from the list.
 4. BiteBuddy deletes the food place and displays confirmation.
+
    Use case ends.
 
 **Extensions**
 
-* 2a. BiteBuddy detects invalid index.
-    * 2a1. BiteBuddy throws an error for invalid index.
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error for invalid index.
+
       Use case ends.
 
-* 2b. BiteBuddy detects that user enters more than one index.
-    * 2b1. BiteBuddy shows an error message that only one index can be entered at a time.
+* 3b. Multiple indexes are given.
+    * 3b1. BiteBuddy shows an error message that details correct usage.
+
       Use case ends.
 
-* 4a. Deletion fails due to file write error.
-    * 4a1. BiteBuddy restores original list and requests retry.
+**Use case: UC03 - Edit a food place**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one food place exists.  
+Guarantees: If successful, the specified food place is updated with the new details.
+
+**MSS**
+
+1. User requests to list food places
+2. BiteBuddy shows a list of food places
+3. User chooses to edit an existing food place from the list and provides the index of the food place and the new fields to update (e.g., name, address, rating, tags).
+4. BiteBuddy updates the food place and displays confirmation.  
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User omits all editable fields.
+    * 3a1. BiteBuddy shows an error message indicating no fields provided.  
+
       Use case ends.
 
+* 3b. The given index is invalid.
+    * 3b1. BiteBuddy shows an error for invalid index. 
+
+      Use case ends.
+
+* 3c. One or more given fields are invalid.
+    * 3c1. BiteBuddy shows an appropriate error message and does not apply changes.  
+
+      Use case ends.
+
+* 3a. Edit results in a duplicate (conflicts with an existing entry).
+    * 3a1. BiteBuddy rejects the edit and shows a duplicate-entry error. 
+    
+      Use case ends.
+
+**Use case: UC04 - List all food places**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: BiteBuddy is running.  
+Guarantees: The full list of food places is displayed.
+
+**MSS**
+1. User requests to list all food places.
+2. BiteBuddy retrieves the full address book and updates the displayed list to show all food places.
+
+    Use case ends.
+
+**Extensions**
+* 1a. Address book contains pinned food places.
+    * 1a1. BiteBuddy displays pinned food places at the top of the list.
+    
+    Use case resumes at step 2.
+
+**Use case: UC05 - Find food places**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one food place exists.  
+Guarantees: If successful, a filtered list of food places matching the query is displayed.
+
+**MSS**
+1. User requests to find food places with one or more search keywords or filters.
+2. BiteBuddy updates the displayed list to show only matching food places and displays a summary message indicating the number of results found.
+
+    Use case ends.
+
+**Extensions**
+* 1a. No keywords/filters provided.
+    * 1a1. BiteBuddy shows an error message with correct usage.
+    
+      Use case ends.
+
+* 2a. No matches found.
+    * 2a1. BiteBuddy displays an empty list and a message indicating no results.
+    
+      Use case ends.
+
+* 2b. Invalid filter/value provided.
+    * 2b1. BiteBuddy shows an error message describing the invalid filter or value.
+    
+      Use case ends.
+
+**Use case: UC06 - Add tag(s) to a food place**
+
+System: BiteBuddy
+Actor: User
+Preconditions: At least one food place exists.
+Guarantees: Valid tags are added and duplicates are ignored.
+
+**MSS**
+
+1. User requests to list food places
+2. BiteBuddy shows a list of food places
+3. User requests to add tag(s) to a specific food place in the list.
+4. BiteBuddy updates the food place with the new tag(s) and displays confirmation.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error message for invalid index.
+
+      Use case ends.
+
+* 3b. The given tag is empty.
+    * 3b1. BiteBuddy shows an error message for empty tag.
+
+      Use case ends.
+
+* 3c. The user provides duplicate tags.
+    * 3a1. BiteBuddy ignores duplicates and keeps only unique tags.
+
+      Use case ends.
+
+
+**Use case: UC07 - Add a note to a food place**
+
+System: BiteBuddy
+Actor: User
+Preconditions: At least one food place exists.
+Guarantees: A note is stored for the food place and existing note is overwritten if present.
+
+**MSS**
+
+1. User requests to list food places
+2. BiteBuddy shows a list of food places
+3. User chooses to add a note to a specific food place in the list.
+4. BiteBuddy updates the food place with the note and displays confirmation.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error for invalid index.
+
+      Use case ends.
+
+* 3b. The given note is empty.
+    * 3b1. BiteBuddy treats this as discarding the existing note.
+
+      Use case ends.
+
+* 3c. The given note is a duplicate of the existing note.
+    * 3c1. BiteBuddy does not change the entry.
+
+      Use case ends.
+
+**Use case: UC08 - Rate a food place**
+
+System: BiteBuddy
+Actor: User
+Preconditions: At least one food place exists.
+Guarantees: A rating between 1–10 is stored and existing rating is overwritten.
+
+**MSS**
+
+1. User requests to list food places
+2. BiteBuddy shows a list of food places
+3. User chooses to rate a specific food place from the list.
+4. BiteBuddy updates the food place with the rating and displays confirmation.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error for invalid index.
+
+      Use case ends.
+
+* 3b. The given rating is invalid.
+    * 3b1. BiteBuddy shows an error message for invalid rating.
+
+      Use case ends.
+
+**Use case: UC09 - Add a food place to wishlist**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one food place exists. The specified food place is not wishlisted.
+Guarantees: If successful, the food place is added to the user's wishlist.
+
+**MSS**
+
+1. User requests to list food places
+2. BiteBuddy shows a list of food places
+3. User chooses to add a food place in the list to the wishlist.
+4. BiteBuddy adds the food place to the wishlist and displays confirmation.  
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error for invalid index.  
+
+      Use case ends.
+
+* 3b. The chosen food place is blacklisted.
+    * 3b1. BiteBuddy removes the food place from the blacklist
+
+      Use case resumes from step 4.
+
+**Use case: UC10 - Remove a food place from wishlist**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one food place exists. The specified food place is currently on the user's wishlist.  
+Guarantees: If successful, the food place is removed from the user's wishlist.
+
+**MSS**
+
+1. User requests to list food places.
+2. BiteBuddy shows a list of food places.
+3. User requests to unwishlist a specific food place in the list.
+4. BiteBuddy removes the food place from the wishlist and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error message for invalid index.  
+
+     Use case ends.
+
+**Use case: UC11 - List all wishlisted food places**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one wishlisted food place exists.
+Guarantees: The full list of wishlisted food places is displayed.
+
+**MSS**
+1. User requests to list all wishlisted food places.
+2. BiteBuddy retrieves all wishlisted food places and updates the displayed list to show all food places.
+
+    Use case ends.
+
+**Use case: UC12 - Add a food place to the blacklist**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one food place exists.  
+Guarantees: If successful, the food place is marked as blacklisted and excluded from certain recommendations or listings.
+
+**MSS**
+
+1. User requests to list food places.
+2. BiteBuddy shows a list of food places.
+3. User chooses to blacklist a specific food place from the list.
+4. BiteBuddy marks the food place as blacklisted and displays confirmation.  
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error for invalid index. 
+
+      Use case ends.
+
+* 3b. The chosen food place is on the wishlist.
+    * 3a1. BiteBuddy removes the food place from the wishlist
+    
+      Use case resumes from step 4.
+
+**Use case: UC13 - Remove a food place from blacklist**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one food place exists. The specified food place is currently on the user's blacklist.  
+Guarantees: If successful, the food place is removed from the user's blacklist.
+
+**MSS**
+
+1. User requests to list food places.
+2. BiteBuddy shows a list of food places.
+3. User requests to un-blacklist a specific food place in the list.
+4. BiteBuddy removes the food place from the blacklist and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error message for invalid index.  
+
+        Use case ends.
+
+**Use case: UC14 - List all blacklisted food places**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one blacklisted food place exists.
+Guarantees: The full list of blacklisted food places is displayed.
+
+**MSS**
+1. User requests to list all blacklisted food places.
+2. BiteBuddy retrieves all blacklisted food places and updates the displayed list to show all food places.
+
+    Use case ends.
+
+**Use case: UC15 - Pin a food place**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one food place exists.  
+Guarantees: If successful, the food place is pinned.
+
+**MSS**
+
+1. User requests to list food places.
+2. BiteBuddy shows a list of food places.
+3. User chooses to pin a specific food place on the list.
+4. BiteBuddy pins the food place and displays confirmation.  
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error for invalid index. 
+
+      Use case ends.
+
+* 3b. Food place already pinned.
+    * 3b1. BiteBuddy informs the user and makes no change.
+
+      Use case ends.
+
+* 3c. Pin limit reached.
+    * 3c1. BiteBuddy informs the user that the pin limit has been reached and makes no change.
+
+      Use case ends.
+
+**Use case: UC16 - Unpin a food place**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one food place exists. The specified food place is currently pinned.  
+Guarantees: If successful, the food place is unpinned.
+
+**MSS**
+
+1. User requests to list food places.  
+2. BiteBuddy shows a list of food places.  
+3. User chooses to unpin a specific food place in the list.  
+4. BiteBuddy validates the index, unpins the food place, and displays a confirmation message.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error message for invalid index.  
+
+      Use case ends.
+
+* 3b. The chosen food place is not pinned.
+    * 3b1. BiteBuddy informs the user that the food place is not pinned and makes no change.
+
+      Use case ends.
+
+
+**Use case: UC17 - Compare two or more food places**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least two food places exist.  
+Guarantees: If successful, a comparison view or summary of the selected food places is presented to the user.
+
+**MSS**
+
+1. User requests to list food places.  
+2. BiteBuddy shows a list of food places.  
+3. User issues the compare command with two valid indexes.  
+4. BiteBuddy retrieves the corresponding food places, and displays a comparison view and summary showing key attributes (e.g., name, rating, cuisine, notes, tags).  
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. Fewer than two indexes are provided.  
+    * 3a1. BiteBuddy shows an error message with correct usage example.  
+
+      Use case ends.
+
+* 3b. One or more given indexes are invalid.  
+    * 3b1. BiteBuddy shows an error message identifying the invalid index(es) and does not perform the comparison.  
+
+      Use case ends.
+
+* 3c. Duplicate indexes are provided.  
+    * 3c1. BiteBuddy shows an error message that states duplicate indexes are not allowed.  
+
+      Use case ends.
+
+* 3d. More than two indexes are provided.  
+    * 3d1. BiteBuddy compares the first 2 indexes only and ignores the additional indexes.  
+
+      Use case resumes from step 4.
+
+**Use case: UC18 - Display help information**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: BiteBuddy is running.  
+Guarantees: Relevant help information is shown to the user.
+
+**MSS**
+1. User requests for help with a specific command.
+2. BiteBuddy displays detailed usage for the specified command.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given command is invalid.
+    * 1a1. BiteBuddy shows a message that the command is unrecognized.
+    
+      Use case ends.
+
+**Use case: UC19 - Clear all food places**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one food place exists.
+Guarantees: If successful, all food places are removed from the address book.
+
+**MSS**
+1. User requests to clear all food places.
+2. BiteBuddy deletes all food places from the address book and displays a confirmation message.
+
+Use case ends.
 
 ### Non-Functional Requirements
 
