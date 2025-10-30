@@ -306,7 +306,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * Users can quickly access any information they want through extensive sorting and searching feature to make quick and informed decisions
 * Blacklist food places that the user dislikes
 * Wishlist food places to keep track of places they want to try next
-* Recommend food places based on specified conditions (e.g. Recommend a **cheap**, **Japanese** restaurant)
+* Pin food places that can users frequently refer to (e.g., favourite food places, recommended food places, etc.)
 
 
 ### User stories
