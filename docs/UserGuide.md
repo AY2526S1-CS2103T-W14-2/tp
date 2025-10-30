@@ -22,7 +22,7 @@
   - [Blacklist - Blacklisting a foodplace](#blacklisting-a-foodplace-blacklist)
   - [Pin - Pinning a foodplace](#pinning-a-foodplace-pin)
   - [Unpin - Unpinning a foodplace](#unpinning-a-foodplace-unpin)
-  - [Find - Finding a foodplace](#locating-foodplaces-by-name-find)
+  - [Find - Finding a foodplace](#finding-a-foodplace-find)
   - [Compare - Compare two foodplaces](#comparing-two-foodplaces-compare)
   - [Clear - Delete all foodplaces](#clearing-all-entries-clear)
   - [Exit - Quit the program](#exiting-the-program-exit)
@@ -497,7 +497,7 @@ Examples:
 
 ![ug_unpin](images/ug_unpin.png)
 
-### Locating foodplaces by name: `find`
+### Finding a foodplace: `find`
 
 Finds foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords.
 
@@ -641,7 +641,7 @@ Action     | Format                                                             
 [**Blacklist**](#blacklisting-a-foodplace-blacklist) | `blacklist [INDEX]`<br>                                                                                                                | `blacklist 2`<br> `blacklist`
 [**Pin**](#pinning-a-foodplace-pin) | `pin [INDEX]`<br>                                                                                                                      | `pin 1`
 [**Unpin**](#unpinning-a-foodplace-unpin) | `unpin [INDEX]`<br>                                                                                                                    | `unpin 2`
-[**Find**](#locating-foodplaces-by-name-find) | `find KEYWORD [MORE_KEYWORDS]`<br> `find t/TAG [MORE_TAGS]…​ [c/CUISINE] [r/RATING]`<br>                                               | `find James Jake`<br> `find t/hawker c/japanese r/8`
+[**Find**](#finding-a-foodplace-find) | `find KEYWORD [MORE_KEYWORDS]`<br> `find t/TAG [MORE_TAGS]…​ [c/CUISINE] [r/RATING]`<br>                                               | `find James Jake`<br> `find t/hawker c/japanese r/8`
 [**Compare**](#comparing-two-foodplaces-compare) | `compare [INDEX1] [INDEX2]`<br>                                                                                                        | `compare 1 3`
 [**Clear**](#clearing-all-entries-clear) | `clear`                                                                                                                                | `clear`
 [**Exit**](#exiting-the-program-exit) | `exit`                                                                                                                                 | `exit`
