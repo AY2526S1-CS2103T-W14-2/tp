@@ -432,7 +432,7 @@ Guarantees: A note is stored for the food place and existing note is overwritten
 **Extensions**
 
 * 3a. The given index is invalid.
-    * 3a1. BiteBuddy throws an error for invalid index.
+    * 3a1. BiteBuddy shows an error for invalid index.
 
       Use case ends.
 
@@ -465,7 +465,7 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 **Extensions**
 
 * 3a. The given index is invalid.
-    * 3a1. BiteBuddy throws an error for invalid index.
+    * 3a1. BiteBuddy shows an error for invalid index.
 
       Use case ends.
 
@@ -493,7 +493,7 @@ Guarantees: The food place is deleted if index is valid.
 **Extensions**
 
 * 3a. The given index is invalid.
-    * 3a1. BiteBuddy throws an error for invalid index.
+    * 3a1. BiteBuddy shows an error for invalid index.
 
       Use case ends.
 
@@ -509,7 +509,7 @@ Actor: User
 Preconditions: At least one food place exists.  
 Guarantees: If successful, the specified food place is updated with the new details.
 
-MSS
+**MSS**
 
 1. User requests to list food places
 2. BiteBuddy shows a list of food places
@@ -518,7 +518,7 @@ MSS
 
     Use case ends.
 
-Extensions
+**Extensions**
 
 * 3a. User omits all editable fields.
     * 3a1. BiteBuddy shows an error message indicating no fields provided.  
@@ -548,7 +548,7 @@ Actor: User
 Preconditions: At least one food place exists. The specified food place is not wishlisted 
 Guarantees: If successful, the food place is added to the user's wishlist.
 
-MSS
+**MSS**
 
 1. User requests to list food places
 2. BiteBuddy shows a list of food places
@@ -557,7 +557,7 @@ MSS
 
     Use case ends.
 
-Extensions
+**Extensions**
 
 * 3a. The given index is invalid.
     * 3a1. BiteBuddy shows an error for invalid index.  
@@ -576,7 +576,7 @@ Actor: User
 Preconditions: At least one food place exists. The specified food place is currently on the user's wishlist.  
 Guarantees: If successful, the food place is removed from the user's wishlist.
 
-MSS
+**MSS**
 
 1. User requests to list food places.
 2. BiteBuddy shows a list of food places.
@@ -585,7 +585,7 @@ MSS
 
     Use case ends.
 
-Extensions
+**Extensions**
 
 * 3a. The given index is invalid.
     * 3a1. BiteBuddy shows an error message for invalid index.  
@@ -599,7 +599,7 @@ Actor: User
 Preconditions: At least one food place exists.  
 Guarantees: If successful, the food place is marked as blacklisted and excluded from certain recommendations or listings.
 
-MSS
+**MSS**
 
 1. User requests to list food places.
 2. BiteBuddy shows a list of food places.
@@ -608,7 +608,7 @@ MSS
 
     Use case ends.
 
-Extensions
+**Extensions**
 
 * 3a. The given index is invalid.
     * 3a1. BiteBuddy shows an error for invalid index. 
@@ -627,7 +627,7 @@ Actor: User
 Preconditions: At least one food place exists. The specified food place is currently on the user's blacklist.  
 Guarantees: If successful, the food place is removed from the user's blacklist.
 
-MSS
+**MSS**
 
 1. User requests to list food places.
 2. BiteBuddy shows a list of food places.
@@ -636,7 +636,7 @@ MSS
 
     Use case ends.
 
-Extensions
+**Extensions**
 
 * 3a. The given index is invalid.
     * 3a1. BiteBuddy shows an error message for invalid index.  
@@ -650,7 +650,7 @@ Actor: User
 Preconditions: At least one food place exists.  
 Guarantees: If successful, the food place is pinned.
 
-MSS
+**MSS**
 
 1. User requests to list food places.
 2. BiteBuddy shows a list of food places.
@@ -659,20 +659,20 @@ MSS
 
     Use case ends.
 
-Extensions
+**Extensions**
 
 * 3a. The given index is invalid.
     * 3a1. BiteBuddy shows an error for invalid index. 
 
       Use case ends.
 
-* 3a. Food place already pinned.
-    * 3a1. BiteBuddy informs the user and makes no change.
+* 3b. Food place already pinned.
+    * 3b1. BiteBuddy informs the user and makes no change.
 
       Use case ends.
 
-* 3a. Pin limit reached.
-    * 3a1. BiteBuddy informs the user that the pin limit has been reached and makes no change.
+* 3c. Pin limit reached.
+    * 3c1. BiteBuddy informs the user that the pin limit has been reached and makes no change.
 
       Use case ends.
 
@@ -683,7 +683,7 @@ Actor: User
 Preconditions: At least one food place exists. The specified food place is currently pinned.  
 Guarantees: If successful, the food place is unpinned.
 
-MSS
+**MSS**
 
 1. User requests to list food places.  
 2. BiteBuddy shows a list of food places.  
@@ -692,7 +692,7 @@ MSS
 
 Use case ends.
 
-Extensions
+**Extensions**
 
 * 3a. The given index is invalid.
     * 3a1. BiteBuddy shows an error message for invalid index.  
@@ -712,7 +712,7 @@ Actor: User
 Preconditions: At least two food places exist.  
 Guarantees: If successful, a comparison view or summary of the selected food places is presented to the user.
 
-MSS
+**MSS**
 
 1. User requests to list food places.  
 2. BiteBuddy shows a list of food places.  
@@ -721,7 +721,7 @@ MSS
 
     Use case ends.
 
-Extensions
+**Extensions**
 
 * 3a. Fewer than two indexes are provided.  
     * 3a1. BiteBuddy shows an error message with correct usage example.  
@@ -739,7 +739,7 @@ Extensions
       Use case ends.
 
 * 3d. More than two indexes are provided.  
-    * 3d1. BiteBuddy compares the first 2 indexes only and ignore the additional indexes.  
+    * 3d1. BiteBuddy compares the first 2 indexes only and ignores the additional indexes.  
 
       Use case resumes from step 4.
 
