@@ -24,6 +24,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     public static final String MESSAGE_INVALID_RATING = "Ratings should only contain numbers,"
             + " and be an integer between 1 to 10";
+    public static final String MESSAGE_INVALID_CUISINE = "Cuisine should only contain alphanumeric characters";
     public static final String MESSAGE_NO_PREFIX = "Prefix provided without value.\n" + FindCommand.MESSAGE_USAGE;
 
     /**
@@ -83,11 +84,15 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .toList();
     }
 
-    private Optional<Cuisine> extractCuisine(ArgumentMultimap argMultimap) {
-        return argMultimap.getValue(PREFIX_CUISINE)
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .map(Cuisine::new);
+    private Optional<Cuisine> extractCuisine(ArgumentMultimap argMultimap) throws ParseException {
+        try {
+            return argMultimap.getValue(PREFIX_CUISINE)
+                    .map(String::trim)
+                    .filter(s -> !s.isEmpty())
+                    .map(Cuisine::new);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(MESSAGE_INVALID_CUISINE);
+        }
     }
 
     private Optional<Rate> extractRating(ArgumentMultimap argMultimap) throws ParseException {

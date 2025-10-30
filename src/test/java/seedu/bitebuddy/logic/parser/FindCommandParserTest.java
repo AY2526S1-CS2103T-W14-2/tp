@@ -122,4 +122,10 @@ public class FindCommandParserTest {
         assertTrue(result.isPresent());
         assertTrue(result.get() instanceof FoodplaceMatchesCriteriaPredicate);
     }
+
+    @Test
+    public void parse_invalidCuisine_throwsParseException() {
+        assertParseFailure(parser, "c/**1",
+                FindCommandParser.MESSAGE_INVALID_CUISINE);
+    }
 }
