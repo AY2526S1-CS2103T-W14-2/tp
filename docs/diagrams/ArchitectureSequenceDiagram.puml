@@ -23,7 +23,7 @@ deactivate model
 logic -[LOGIC_COLOR]> storage : saveAddressBook(addressBook)
 activate storage STORAGE_COLOR
 
-storage -[STORAGE_COLOR]> storage : JsonUtil.saveJsonFile(addressBook, filePath)
+storage -[STORAGE_COLOR]> storage : Save to File
 activate storage STORAGE_COLOR_T1
 storage --[STORAGE_COLOR]> storage
 deactivate storage
