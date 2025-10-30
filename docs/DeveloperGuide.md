@@ -556,20 +556,20 @@ Deleting a foodplace while all foodplaces are being shown
     - Use the `list` command first to list all foodplaces.
 
 
-   1. Valid Test case - Deleting a valid foodplace:<br>
-      Command: `delete 1`<br>
-      Expected:
-        - First foodplace is deleted from the list.
-        - Details of the deleted foodplace shown in the status message: `Deleted Foodplace: ...`
+1. Valid Test case - Deleting a valid foodplace:<br>
+   Command: `delete 1`<br>
+   Expected:
+     - First foodplace is deleted from the list.
+     - Details of the deleted foodplace shown in the status message: `Deleted Foodplace: ...`
 
-   1. Invalid Test case - Deleting a **foodplace at an invalid index**:<br>
-      Command: `delete 0`<br>
-      Expected:
-        - No foodplace is deleted.
-        - Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
+1. Invalid Test case - Deleting a **foodplace at an invalid index**:<br>
+   Command: `delete 0`<br>
+   Expected:
+     - No foodplace is deleted.
+     - Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -583,39 +583,39 @@ Rating a foodplace while all foodplaces are being shown
   - Use the `list` command first to list all foodplaces.
 
 
-  1. Valid Test Case - Assigning a valid rating to a valid foodplace:<br> 
-      Command: `rate 1 5`<br>
-      Expected:
-        - First foodplace in the list will be assigned a rating: `< 5/10 >`
-        - Details of the rated foodplace shown in the status message: `Added Rating to Foodplace: ...`
+1. Valid Test Case - Assigning a valid rating to a valid foodplace:<br> 
+    Command: `rate 1 5`<br>
+    Expected:
+      - First foodplace in the list will be assigned a rating: `< 5/10 >`
+      - Details of the rated foodplace shown in the status message: `Added Rating to Foodplace: ...`
 
-  1. Valid Test case - Unassigning any existing rating from a valid foodplace:<br>
-     Command: `rate 1 0`<br>
-     Expected: 
-       - First foodplace in the list will become unrated: `>> No Rating Yet <<`
-       - Details of the unrated foodplace shown in the status message: `Removed Rating from Foodplace: ...`
+1. Valid Test case - Unassigning any existing rating from a valid foodplace:<br>
+   Command: `rate 1 0`<br>
+   Expected: 
+     - First foodplace in the list will become unrated: `>> No Rating Yet <<`
+     - Details of the unrated foodplace shown in the status message: `Removed Rating from Foodplace: ...`
 
-  1. Invalid Test case - Assigning a valid rating to a **foodplace at an invalid index**:<br>
-     Command: `rate 0 5`<br>
-     Expected:
-       - No foodplace will be rated.
-       - Error details shown in the status message: `Index is not a non-zero unsigned integer.`
-
-  1. Invalid Test case - Assigning a **negative rating** to a valid foodplace:<br>
-     Command: `rate 1 -1`<br>
-     Expected:
-       - No foodplace will be rated.
-       - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
-
-  1. Invalid Test case - Assigning an **out-of-range rating** to a valid foodplace:<br>
-     Command: `rate 1 11`<br>
-     Expected:
-       - No foodplace will be rated.
-       - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
-
-1. Invalid Test case - Assigning a **unsigned non-integer rating** to a valid foodplace:<br>
-   Command: `rate 1 1.1`<br>
+1. Invalid Test case - Assigning a valid rating to a **foodplace at an invalid index**:<br>
+   Command: `rate 0 5`<br>
    Expected:
+     - No foodplace will be rated.
+     - Error details shown in the status message: `Index is not a non-zero unsigned integer.`
+
+1. Invalid Test case - Assigning a **negative rating** to a valid foodplace:<br>
+   Command: `rate 1 -1`<br>
+   Expected:
+     - No foodplace will be rated.
+     - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
+
+1. Invalid Test case - Assigning an **out-of-range rating** to a valid foodplace:<br>
+   Command: `rate 1 11`<br>
+   Expected:
+     - No foodplace will be rated.
+     - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
+
+1. Invalid Test case - Assigning an **unsigned non-integer rating** to a valid foodplace:<br>
+  Command: `rate 1 1.1`<br>
+  Expected:
     - No foodplace will be rated.
     - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
