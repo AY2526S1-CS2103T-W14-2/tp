@@ -896,7 +896,7 @@ Guarantees: If successful, user can reuse a previous command.
       Use case ends.
 
 * 3b. User selects the latest command.
-    * 3a1. BiteBuddy executes the latest command the user was originally typing.
+    * 3b1. BiteBuddy executes the latest command the user was originally typing.
 
       Use case ends.
 
@@ -1099,7 +1099,7 @@ Adding note to a foodplace while all foodplaces are being shown
 1. Valid Test case - Unassigning any existing note from a valid foodplace:<br>
     Command: `note 1`<br>
     Expected:
-    - First foodplace in the list will have no note: `-- No notes Yet --`
+    - First foodplace in the list will have no note: `-- No notes yet --`
     - Details of the updated foodplace shown in the status message: `Removed notes from Foodplace: ...`
 
 1. Valid Test case - Assigning same note to a valid foodplace:<br>
@@ -1161,7 +1161,7 @@ Rating a foodplace while all foodplaces are being shown
 1. Valid Test case - Unassigning any existing rating from a valid foodplace:<br>
    Command: `rate 1 0`<br>
    Expected: 
-    - First foodplace in the list will become unrated: `>> No Rating Yet <<`
+    - First foodplace in the list will become unrated: `>> No rating yet <<`
     - Details of the unrated foodplace shown in the status message: `Removed rating from Foodplace: ...`
 
 1. Invalid Test case - Assigning a valid rating to a **foodplace at an invalid index**:<br>
