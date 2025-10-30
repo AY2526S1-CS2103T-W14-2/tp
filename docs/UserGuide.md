@@ -517,7 +517,7 @@ Examples:
   find chicken t/ hawker
 ```
 
-* The search is **case-insensitive**: `prata` will match `Prata`[UserGuide.md](UserGuide.md)
+* The search is **case-insensitive**: `prata` will match `Prata`
 * The **order** of the keywords does **not matter**: `Prata Place` will match `Place Prata`
 * Keywords are **matched against multiple fields**.
 * The search uses **substring matching**: `Pr` will match `Prata`
