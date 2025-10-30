@@ -31,7 +31,7 @@ public class Wishlist {
      * @return the isWishlisted value
      */
     public Boolean isWishlisted() {
-        return isWishlisted ? Boolean.TRUE : Boolean.FALSE;
+        return isWishlisted;
     }
 
     @Override

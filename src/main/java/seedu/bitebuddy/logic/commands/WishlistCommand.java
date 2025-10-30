@@ -87,7 +87,7 @@ public class WishlistCommand extends Command {
                 foodPlaceToEdit.getRate(), foodPlaceToEdit.getWishlist().getOpposite(),
                 foodPlaceBlacklistState, foodPlaceToEdit.getPinned());
 
-        assert !(editedFoodPlace.getBlacklist().isBlacklisted && editedFoodPlace.getWishlist().isWishlisted)
+        assert !(editedFoodPlace.getBlacklist().isBlacklisted() && editedFoodPlace.getWishlist().isWishlisted())
                 : "A foodplace should not be both blacklisted and wishlisted here.";
         model.setFoodplace(foodPlaceToEdit, editedFoodPlace);
         model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES);

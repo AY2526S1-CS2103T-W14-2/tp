@@ -39,7 +39,7 @@ public class Note {
     public static boolean isValidNote(String test) {
         test = test.trim();
         // Exceeds length --> invalid
-        if (test.trim().length() > MAX_NOTE_LENGTH) {
+        if (test.length() > MAX_NOTE_LENGTH) {
             return false;
         }
         return test.matches(VALID_NOTE_REGEX);
