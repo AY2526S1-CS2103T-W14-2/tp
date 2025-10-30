@@ -47,4 +47,12 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Retrieves command from command buffer based on direction.
+     * @param isPrev true if retrieving previous command, false if retrieving next command
+     * @param currentText current text in the command box
+     * @return the command from the buffer
+     */
+    String retrieveCommandFromBuffer(Boolean isPrev, String currentText);
 }
