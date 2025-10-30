@@ -1076,11 +1076,33 @@ Adding note to a foodplace while all foodplaces are being shown
     - First foodplace in the list will have no note: `-- No Notes Yet --`
     - Details of the updated foodplace shown in the status message: `Removed Notes from Foodplace: ...`
 
+1. Valid Test case - Assigning same note to a valid foodplace:<br>
+   Steps:
+    - Run `note 1 Good customer service!`<br>
+    - Run `note 1 Good customer service!` again<br>
+   Expected:
+    - No foodplace will be updated.
+    - Info details shown in the status message: `The new note is the same as the current note...`
+
+1. Valid Test case - Unassigning any non-existent note from a valid foodplace:<br>
+   Steps:
+    - Run `note 1`<br>
+    - Run `note 1` again<br>
+   Expected:
+    - No foodplace will be updated.
+    - Info details shown in the status message: `No notes to remove from specified Foodplace...`
+
 1. Invalid Test case - Assigning a valid note to a **foodplace at an invalid index**:<br>
    Command: `note 0 Good customer service!`<br>
    Expected:
     - No foodplace will be updated.
-    - Error details shown in the status message: `Index is not a non-zero unsigned integer.`
+    - Error details shown in the status message: `Invalid command format! ...`
+
+1. Invalid Test case - Assigning a valid note at an **out-of-range index**:<br>
+   Command: `note 999 Good customer service!`<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `The foodplace index provided is invalid`
 
 1. Invalid Test case - Assigning a **note that exceeds the character limit of 100** to a valid foodplace:<br>
    Command: `note 1 aaaaaaa...` (101 `a`s)<br>
@@ -1093,12 +1115,6 @@ Adding note to a foodplace while all foodplaces are being shown
    Expected:
     - No foodplace will be updated.
     - Error details shown in the status message: `Note given either exceeds 100 characters OR contained non-ASCII-printable characters...`
-
-1. Invalid Test case - Assigning an **unsigned non-integer rating** to a valid foodplace:<br>
-   Command: `rate 1 1.1`<br>
-   Expected:
-    - No foodplace will be rated.
-    - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
 
 ### Rating a foodplace
@@ -1145,6 +1161,111 @@ Rating a foodplace while all foodplaces are being shown
   Expected:
     - No foodplace will be rated.
     - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
+
+
+### Wishlisting a foodplace
+
+Wishlisting a foodplace while all foodplaces are being shown
+
+- *Prerequisites:*<br>
+    - **At least one foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
+
+
+1. Valid Test case - Adding a valid foodplace to wishlist:<br>
+   Command: `wishlist 1`<br>
+   Expected:
+    - First foodplace in the list will be added to wishlist.
+    - Details of the updated foodplace shown in the status message: `Add Foodplace to wishlist: ...`
+
+1. Valid Test case - Removing a valid foodplace from wishlist:<br>
+   Steps:
+    - Run `wishlist 1` to add the foodplace to wishlist first<br>
+    - Run `wishlist 1` again to remove the foodplace from wishlist<br>
+   Expected:
+    - First foodplace in the list will be removed from wishlist.
+    - Details of the updated foodplace shown in the status message: `Remove Foodplace from wishlist: ...`
+
+1. Valid Test case - Adding a valid foodplace that is **blacklisted** to wishlist:<br>
+   Steps:
+    - Run `blacklist 1` to add the foodplace to blacklist first<br>
+    - Run `wishlist 1` to remove the foodplace from blacklist and add it to wishlist<br>
+   Expected:
+    - First foodplace in the list will be added to wishlist.
+    - First foodplace in the list will be removed from blacklist.
+    - Details of the updated foodplace shown in the status message: `Add Foodplace to wishlist: ...`
+    - Extra details of the updated foodplace shown in the status message: `Additionally removed Foodplace from blacklist`
+
+1. Valid Test case - Displaying wishlist:<br>
+   Command: `wishlist`<br>
+   Expected:
+    - Displays all foodplaces that are added to wishlist.
+    - Info details shown in the status message: `Listed all foodplaces that are wishlisted`
+
+1. Invalid Test case - Adding / removing a foodplace to wishlist at an **invalid index**:<br>
+   Command: `wishlist 0`<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `Invalid command format! ...`
+
+1. Invalid Test case - Adding / removing a foodplace to wishlist at an **out-of-range index**:<br>
+   Command: `wishlist 999`<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `The foodplace index provided is invalid`
+
+
+### Blacklisting a foodplace
+
+Blacklisting a foodplace while all foodplaces are being shown
+
+- *Prerequisites:*<br>
+    - **At least one foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
+
+
+1. Valid Test case - Adding a valid foodplace to blacklist:<br>
+   Command: `blacklist 1`<br>
+   Expected:
+    - First foodplace in the list will be added to blacklist.
+    - Details of the updated foodplace shown in the status message: `Add Foodplace to blacklist: ...`
+
+1. Valid Test case - Removing a valid foodplace from blacklist:<br>
+   Steps:
+    - Run `blacklist 1` to add the foodplace to blacklist first<br>
+    - Run `blacklist 1` again to remove the foodplace from blacklist<br>
+      Expected:
+    - First foodplace in the list will be removed from blacklist.
+    - Details of the updated foodplace shown in the status message: `Remove Foodplace from blacklist: ...`
+
+1. Valid Test case - Adding a valid foodplace that is **wishlisted** to blacklist:<br>
+   Steps:
+    - Run `wishlist 1` to add the foodplace to wishlist first<br>
+    - Run `blacklist 1` to remove the foodplace from wishlist and add it to blacklist<br>
+      Expected:
+    - First foodplace in the list will be added to blacklist.
+    - First foodplace in the list will be removed from wishlist.
+    - Details of the updated foodplace shown in the status message: `Add Foodplace to blacklist: ...`
+    - Extra details of the updated foodplace shown in the status message: `Additionally removed Foodplace from wishlist`
+
+1. Valid Test case - Displaying blacklist:<br>
+   Command: `blacklist`<br>
+   Expected:
+        - Displays all foodplaces that are added to blacklist.
+    - Info details shown in the status message: `Listed all foodplaces that are blacklisted`
+
+1. Invalid Test case - Adding / removing a foodplace to blacklist at an **invalid index**:<br>
+   Command: `blacklist 0`<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `Invalid command format! ...`
+
+1. Invalid Test case - Adding / removing a foodplace to blacklist at an **out-of-range index**:<br>
+   Command: `blacklist 999`<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `The foodplace index provided is invalid`
+
 
 ### Getting Help
 
