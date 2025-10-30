@@ -1053,7 +1053,7 @@ Editing a foodplace while all foodplaces are being shown
     - No changes applied.
     - Error details shown in the status message: `At least one field to edit must be provided.`
 
-### Adding/deleting tags to a food place
+### Adding/deleting tags to a foodplace
 Adding/deleting tags to a foodplace while all foodplaces are being shown
 
 - *Prerequisites:*<br>
