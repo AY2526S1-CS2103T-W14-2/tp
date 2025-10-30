@@ -29,7 +29,7 @@ public class RateCommandParser implements Parser<RateCommand> {
         try {
             index = ParserUtil.parseIndex(stringArgs.getArgument(INDEX_RATING_ENTRY_INDEX));
             rating = Integer.valueOf(stringArgs.getArgument(INDEX_RATING_RATING_VALUE));
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException | ParseException nfe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE), nfe);
         }
 
