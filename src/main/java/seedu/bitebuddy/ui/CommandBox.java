@@ -18,7 +18,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
-    private final CommandExecutor commandExecutor;
+    private final CommandExecutor commandExecutor; 
 
     @FXML
     private TextField commandTextField;
@@ -26,7 +26,7 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, BufferRetriever bufferRetriever) {
         super(FXML);
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
@@ -36,26 +36,10 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setOnKeyPressed(event -> {
             KeyCode code = event.getCode();
             if (code == KeyCode.UP || code == KeyCode.DOWN) {
-
-                // Check if to update pending command
-                if (CommandBuffer.isHead()) {
-                    CommandBuffer.setPendingCommand(commandTextField.getText());
-                }
-
-                // Fetch command buffer
-                CommandBuffer current = CommandBuffer.getCurrent();
-
-                // Set command box content
-                if (current != null) {
-                    if (code == KeyCode.UP) {
-                        CommandBuffer.getPrev();
-                    } else {
-                        CommandBuffer.getNext();
-                    }
-                    commandTextField.setText(CommandBuffer.getCurrent().getCommand());
-                    // Move caret to the end of line
-                    commandTextField.positionCaret(commandTextField.getText().length());
-                }
+                boolean isPrev = code == KeyCode.UP;
+                String command = bufferRetriever.retrieveCommandFromBuffer(isPrev, commandTextField.getText());
+                commandTextField.setText(command);
+                commandTextField.positionCaret(command.length());
                 // Prevent cursor moving
                 event.consume();
             }
@@ -111,6 +95,17 @@ public class CommandBox extends UiPart<Region> {
          * @see seedu.bitebuddy.logic.Logic#execute(String)
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
+    }
+
+    @FunctionalInterface
+    public interface BufferRetriever {
+
+        /**
+         * Retrieves command from command buffer based on direction.
+         * 
+         * @see seedu.bitebuddy.logic.Logic#retrieveCommandFromBuffer(Boolean, String)
+         */
+        String retrieveCommandFromBuffer(Boolean isPrev, String currentText);
     }
 
 }
