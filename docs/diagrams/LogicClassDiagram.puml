@@ -16,6 +16,7 @@ class CommandBuffer
 
 Class "<<interface>>\nLogic" as Logic
 Class LogicManager
+Class CommandRegistry
 }
 
 package Model {
@@ -37,12 +38,14 @@ LogicManager ..> Command : <<call>>
 
 LogicManager --> Model
 LogicManager --> Storage
-LogicManager ..> CommandBuffer
+LogicManager ..right> CommandBuffer
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
 Command .right.> Model
 note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
 
+ParserClasses ..> CommandRegistry
+CommandRegistry --> Command
 Logic ..> CommandResult
 LogicManager .down.> CommandResult
 Command .up.> CommandResult : <<create>>
