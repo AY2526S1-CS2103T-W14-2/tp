@@ -108,8 +108,9 @@ public class NoteCommandTest {
         Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
 
-        // Expects no change to model
+        // Set up initial model with no note
         model.setFoodplace(firstFoodplace, editedFoodplace);
+        // Expects no change to expectedModel
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(EMPTY_NOTE_STUB));
@@ -123,8 +124,9 @@ public class NoteCommandTest {
         Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
 
-        // Expects no change to model
+        // Set up initial model with no note
         model.setFoodplace(firstFoodplace, editedFoodplace);
+        // Expects no change to expectedModel
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showFoodplaceAtIndex(expectedModel, INDEX_FIRST_FOODPLACE);
 
@@ -138,7 +140,7 @@ public class NoteCommandTest {
         Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Note foodplaceNote = foodplace.getNote();
 
-        // Expects no change to model
+        // Expects no change to expectedModel
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, foodplaceNote);
@@ -152,7 +154,7 @@ public class NoteCommandTest {
         Foodplace foodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Note foodplaceNote = foodplace.getNote();
 
-        // Expects no change to model
+        // Expects no change to expectedModel
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         showFoodplaceAtIndex(expectedModel, INDEX_FIRST_FOODPLACE);
 
