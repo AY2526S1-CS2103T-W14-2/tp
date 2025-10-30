@@ -159,6 +159,14 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+
+<box type="info" seamless>
+
+**Note:** In storage, `AddressBook` refers to the collection of `Foodplace`, as they all contain addresses as mandatory fields. We decided that keeping AddressBook from AB3 would make more sense than changing its symbol to mean something related to `Foodplace`, since the word Foodplaces implies an address.<br>
+
+</box>
+
+
 ### Common classes
 
 Classes used by multiple components are in the `seedu.bitebuddy.commons` package.
