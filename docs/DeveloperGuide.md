@@ -169,7 +169,21 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.bitebuddy.commons` package.
+The following common classes live in `seedu.bitebuddy.commons` and are reused across multiple components:
+
+- AppParameters — parses and holds command-line/startup arguments.
+- Config and GuiSettings — store application and UI preferences (window size, position, theme, etc.).
+- LogsCenter — configures and exposes java.util.logging loggers used throughout the app.
+- Index — 1-based index wrapper used by commands and UI to avoid off-by-one errors.
+- StringUtil, CollectionUtil, DateTimeUtil — small, well-tested utility helpers for common string, collection and date/time operations.
+- IllegalValueException — exception type thrown when parsed input violates domain constraints.
+- ConfigUtil and FileUtil — helpers for reading/writing config and data files in a safe, testable manner.
+
+<box type="info" seamless>
+
+**Guideline:** interact with these classes through their public APIs (interfaces/static helpers) rather than implementation details to preserve loose coupling and ease testing.
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
