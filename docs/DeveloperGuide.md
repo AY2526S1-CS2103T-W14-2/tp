@@ -906,7 +906,7 @@ Guarantees: If successful, all food places are removed from the address book.
 
 Use case ends.
 
-**Use case: UC20 - Reuse previously entered commands**
+**Use case: UC21 - Reuse previously entered commands**
 
 System: BiteBuddy  
 Actor: User  
@@ -914,19 +914,24 @@ Preconditions: At least one command has been used.
 Guarantees: If successful, user can reuse a previous command.
 
 **MSS**
-1. User requests to view all previous commands.
-2. BiteBuddy returns all the user's previous commands.
-3. User selects a previous command to execute.
+1. User requests to view a previous command.
+2. BiteBuddy returns the user's previous command.
+3. User selects this previous command to execute.
 4. BiteBuddy executes the command.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. There is no previous command.
-    * 3a1. BiteBuddy does not change the current command and executes it.
+* 2a. There is no previous command.
+    * 2a1. BiteBuddy does not change the current command.
 
-      Use case ends.
+      Use case resumes from step 4.
+
+* 2b. There is another previous command.
+    * 2b1. User can choose this other previous command instead.
+
+      Use case resumes from step 3.
 
 * 3b. User selects the latest command.
     * 3b1. BiteBuddy executes the latest command the user was originally typing.
