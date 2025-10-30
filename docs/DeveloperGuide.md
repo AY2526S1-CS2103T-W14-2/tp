@@ -549,8 +549,42 @@ Guarantees: Valid tags are added and duplicates are ignored.
 
       Use case ends.
 
+**Use case: UC07 - Delete tag(s) from a food place**
 
-**Use case: UC07 - Add a note to a food place**
+System: BiteBuddy
+Actor: User
+Preconditions: At least one food place exists.
+Guarantees: The specified tag(s) are removed from the food place. Deletion is case-insensitive, and if no tags are provided, all tags are cleared.
+
+**MSS**
+
+1. User requests to list food places
+2. BiteBuddy shows a list of food places
+3. User issues a delete-tag command with the /d prefix and one or more tag names.
+4. BiteBuddy removes the specified tag(s) from the target food place.  
+5. BiteBuddy displays a confirmation message that tags were updated.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+    * 3a1. BiteBuddy shows an error message for invalid index.
+
+      Use case ends.
+
+* 3b. The given tag(s) do not exist on the food place.
+    * 3b1. BiteBuddy shows an error message for no matching tags found to delete.
+
+      Use case ends.
+
+* 3c. The user omits all tags after /d.
+    * 3c1. BiteBuddy removes all tags from the specified food place.
+    * 3c2. BiteBuddy displays a confirmation message that tags were updated.
+      
+      Use case ends.
+
+**Use case: UC08 - Add a note to a food place**
 
 System: BiteBuddy
 Actor: User
@@ -583,7 +617,7 @@ Guarantees: A note is stored for the food place and existing note is overwritten
 
       Use case ends.
 
-**Use case: UC08 - Rate a food place**
+**Use case: UC09 - Rate a food place**
 
 System: BiteBuddy
 Actor: User
@@ -611,7 +645,7 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
       Use case ends.
 
-**Use case: UC09 - Add a food place to wishlist**
+**Use case: UC10 - Add a food place to wishlist**
 
 System: BiteBuddy  
 Actor: User  
@@ -639,7 +673,7 @@ Guarantees: If successful, the food place is added to the user's wishlist.
 
       Use case resumes from step 4.
 
-**Use case: UC10 - Remove a food place from wishlist**
+**Use case: UC11 - Remove a food place from wishlist**
 
 System: BiteBuddy  
 Actor: User  
@@ -662,7 +696,7 @@ Guarantees: If successful, the food place is removed from the user's wishlist.
 
      Use case ends.
 
-**Use case: UC11 - List all wishlisted food places**
+**Use case: UC12 - List all wishlisted food places**
 
 System: BiteBuddy  
 Actor: User  
@@ -675,7 +709,7 @@ Guarantees: The full list of wishlisted food places is displayed.
 
     Use case ends.
 
-**Use case: UC12 - Add a food place to the blacklist**
+**Use case: UC13 - Add a food place to the blacklist**
 
 System: BiteBuddy  
 Actor: User  
@@ -703,7 +737,7 @@ Guarantees: If successful, the food place is marked as blacklisted and excluded 
     
       Use case resumes from step 4.
 
-**Use case: UC13 - Remove a food place from blacklist**
+**Use case: UC14 - Remove a food place from blacklist**
 
 System: BiteBuddy  
 Actor: User  
@@ -726,7 +760,7 @@ Guarantees: If successful, the food place is removed from the user's blacklist.
 
         Use case ends.
 
-**Use case: UC14 - List all blacklisted food places**
+**Use case: UC15 - List all blacklisted food places**
 
 System: BiteBuddy  
 Actor: User  
@@ -739,7 +773,7 @@ Guarantees: The full list of blacklisted food places is displayed.
 
     Use case ends.
 
-**Use case: UC15 - Pin a food place**
+**Use case: UC16 - Pin a food place**
 
 System: BiteBuddy  
 Actor: User  
@@ -772,7 +806,7 @@ Guarantees: If successful, the food place is pinned.
 
       Use case ends.
 
-**Use case: UC16 - Unpin a food place**
+**Use case: UC17 - Unpin a food place**
 
 System: BiteBuddy  
 Actor: User  
@@ -801,7 +835,7 @@ Guarantees: If successful, the food place is unpinned.
       Use case ends.
 
 
-**Use case: UC17 - Compare two or more food places**
+**Use case: UC18 - Compare two or more food places**
 
 System: BiteBuddy  
 Actor: User  
@@ -839,7 +873,7 @@ Guarantees: If successful, a comparison view or summary of the selected food pla
 
       Use case resumes from step 4.
 
-**Use case: UC18 - Display help information**
+**Use case: UC19 - Display help information**
 
 System: BiteBuddy  
 Actor: User  
@@ -859,7 +893,7 @@ Guarantees: Relevant help information is shown to the user.
     
       Use case ends.
 
-**Use case: UC19 - Clear all food places**
+**Use case: UC20 - Clear all food places**
 
 System: BiteBuddy  
 Actor: User  
