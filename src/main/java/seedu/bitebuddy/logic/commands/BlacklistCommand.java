@@ -40,7 +40,7 @@ public class BlacklistCommand extends Command {
             + " Foodplace from wishlist";
 
     // Used for debugging purposes only (fine level)
-    private static final Logger logger = LogsCenter.getLogger(WishlistCommand.class);
+    private static final Logger logger = LogsCenter.getLogger(BlacklistCommand.class);
 
     private final Index index;
 
