@@ -600,8 +600,9 @@ testers are expected to do more *exploratory* testing.
 
 1. Invalid Test case — Adding a **duplicate foodplace**:<br>  
      Steps:
-     - Add a foodplace: `add n/Duplicate a/10 Rd`:<br>
-     - Attempt to add the same details again.  
+     - Add a foodplace: `add n/Duplicate a/10 Rd`
+     - Attempt to add the same details again. 
+ 
      Expected:
      - Second add fails.
      - Error message indicating a duplicate entry (e.g., `This foodplace already exists in BiteBuddy.`).
@@ -686,8 +687,8 @@ Editing a foodplace while all foodplaces are being shown
 
 1. Invalid Test case — Editing results in a **duplicate entry**:<br>  
     Steps:
-    - run `add n/ExistingName a/Existing Address`
-    - run `edit 1 n/ExistingName a/Existing Address`
+    - Run `add n/ExistingName a/Existing Address`
+    - Run `edit 1 n/ExistingName a/Existing Address`
  
     Expected:
     - No changes applied.
@@ -749,23 +750,23 @@ Rating a foodplace while all foodplaces are being shown
 - *Prerequisites:* <br> 
     - BiteBuddy is running.  
 
-1. Valid Test Case - Using the help button:<br>
+1. Valid Test case - Using the help button:<br>
     Steps:
     - Click the help button on the top left side of the window
     Expected:
       - Help window should open with a link to the user guide.
 
-1. Valid Test Case - Using the help command to get user guide:<br>
+1. Valid Test case - Using the help command to get user guide:<br>
     Command: `help`<br>
     Expected:
       - Help window should open with a link to the user guide.
 
-1. Valid Test Case - Using the help command to get specific command usage:<br>
+1. Valid Test case - Using the help command to get specific command usage:<br>
     Command: `help list`<br>
     Expected:
     - Command usage of `list` is shown in status message: `list: Lists all foodplaces in BiteBuddy...`
 
-1. Invalid Test Case - Using an **invalid command word** as a parameter for the help command:<br>
+1. Invalid Test case - Using an **invalid command word** as a parameter for the help command:<br>
     Command: `help unknown`<br>
     Expected:
     - Error details shown in the status message: `Unknown command`
