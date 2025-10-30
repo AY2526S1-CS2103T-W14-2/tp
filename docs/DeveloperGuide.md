@@ -455,11 +455,11 @@ Guarantees: The full list of food places is displayed.
 1. User requests to list all food places.
 2. BiteBuddy retrieves the full address book and updates the displayed list to show all food places.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
-* 1a. Address book contains pinned foodplaces.
-    * 1a1. BiteBuddy displays pinned foodplaces at the top of the list.
+* 1a. Address book contains pinned food places.
+    * 1a1. BiteBuddy displays pinned food places at the top of the list.
     
     Use case resumes at step 2.
 
@@ -471,10 +471,10 @@ Preconditions: At least one food place exists.
 Guarantees: If successful, a filtered list of food places matching the query is displayed.
 
 **MSS**
-1. User requests to find foodplace with one or more search keywords or filters.
+1. User requests to find food places with one or more search keywords or filters.
 2. BiteBuddy updates the displayed list to show only matching food places and displays a summary message indicating the number of results found.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
 * 1a. No keywords/filters provided.
@@ -591,7 +591,7 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists. The specified food place is not wishlisted 
+Preconditions: At least one food place exists. The specified food place is not wishlisted.
 Guarantees: If successful, the food place is added to the user's wishlist.
 
 **MSS**
@@ -649,7 +649,7 @@ Guarantees: The full list of wishlisted food places is displayed.
 1. User requests to list all wishlisted food places.
 2. BiteBuddy retrieves all wishlisted food places and updates the displayed list to show all food places.
 
-Use case ends.
+    Use case ends.
 
 **Use case: UC12 - Add a food place to the blacklist**
 
@@ -713,7 +713,7 @@ Guarantees: The full list of blacklisted food places is displayed.
 1. User requests to list all blacklisted food places.
 2. BiteBuddy retrieves all blacklisted food places and updates the displayed list to show all food places.
 
-Use case ends.
+    Use case ends.
 
 **Use case: UC15 - Pin a food place**
 
@@ -762,7 +762,7 @@ Guarantees: If successful, the food place is unpinned.
 3. User chooses to unpin a specific food place in the list.  
 4. BiteBuddy validates the index, unpins the food place, and displays a confirmation message.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
 
@@ -826,13 +826,14 @@ Guarantees: Relevant help information is shown to the user.
 1. User requests for help with a specific command.
 2. BiteBuddy displays detailed usage for the specified command.
 
-Use case ends.
+    Use case ends.
 
 **Extensions**
+
 * 1a. The given command is invalid.
     * 1a1. BiteBuddy shows a message that the command is unrecognized.
     
-    Use case ends.
+      Use case ends.
 
 **Use case: UC19 - Clear all food places**
 
