@@ -104,9 +104,9 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Retrieves command from command buffer based on direction.
          *
-         * @see seedu.bitebuddy.logic.Logic#retrieveCommandFromBuffer(Boolean, String)
+         * @see seedu.bitebuddy.logic.Logic#retrieveCommandFromBuffer(boolean, String)
          */
-        String retrieveCommandFromBuffer(Boolean isPrev, String currentText);
+        String retrieveCommandFromBuffer(boolean isPrev, String currentText);
     }
 
 }

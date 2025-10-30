@@ -89,7 +89,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public String retrieveCommandFromBuffer(Boolean isPrev, String currentText) {
+    public String retrieveCommandFromBuffer(boolean isPrev, String currentText) {
         // Check if to update pending command
         if (CommandBuffer.isHead()) {
             CommandBuffer.setPendingCommand(currentText);

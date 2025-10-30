@@ -54,5 +54,5 @@ public interface Logic {
      * @param currentText current text in the command box
      * @return the command from the buffer
      */
-    String retrieveCommandFromBuffer(Boolean isPrev, String currentText);
+    String retrieveCommandFromBuffer(boolean isPrev, String currentText);
 }
