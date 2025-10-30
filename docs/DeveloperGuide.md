@@ -1088,7 +1088,7 @@ Adding/deleting tags to a foodplace while all foodplaces are being shown
 1. Valid Test case - Overriding existing tag casing:<br>
    Command: `tag 1 Cheap` followed by `tag 1 cheap`<br>
    Expected:
-    - The existing tag Cheap is replaced with `cheap`.
+    - The existing tag `Cheap` is replaced with `cheap`.
     - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
 
 1. Invalid Test case - Deleting a non-existent tag:<br>
