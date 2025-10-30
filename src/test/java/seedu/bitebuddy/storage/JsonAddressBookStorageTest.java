@@ -61,6 +61,12 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
+    public void readAddressBook_invalidWishlistBlacklistConflictAddressBook_throwDataLoadingException() {
+        assertThrows(DataLoadingException.class, () ->
+                readAddressBook("invalidWishlistBlacklistConflictAddressBook.json"));
+    }
+
+    @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
         AddressBook original = getTypicalAddressBook();
