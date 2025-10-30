@@ -1234,7 +1234,7 @@ Blacklisting a foodplace while all foodplaces are being shown
    Steps:
     - Run `blacklist 1` to add the foodplace to blacklist first<br>
     - Run `blacklist 1` again to remove the foodplace from blacklist<br>
-      Expected:
+    Expected:
     - First foodplace in the list will be removed from blacklist.
     - Details of the updated foodplace shown in the status message: `Remove Foodplace from blacklist: ...`
 
@@ -1242,7 +1242,7 @@ Blacklisting a foodplace while all foodplaces are being shown
    Steps:
     - Run `wishlist 1` to add the foodplace to wishlist first<br>
     - Run `blacklist 1` to remove the foodplace from wishlist and add it to blacklist<br>
-      Expected:
+   Expected:
     - First foodplace in the list will be added to blacklist.
     - First foodplace in the list will be removed from wishlist.
     - Details of the updated foodplace shown in the status message: `Add Foodplace to blacklist: ...`
@@ -1251,7 +1251,7 @@ Blacklisting a foodplace while all foodplaces are being shown
 1. Valid Test case - Displaying blacklist:<br>
    Command: `blacklist`<br>
    Expected:
-        - Displays all foodplaces that are added to blacklist.
+    - Displays all foodplaces that are added to blacklist.
     - Info details shown in the status message: `Listed all foodplaces that are blacklisted`
 
 1. Invalid Test case - Adding / removing a foodplace to blacklist at an **invalid index**:<br>
