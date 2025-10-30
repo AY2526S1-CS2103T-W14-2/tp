@@ -1,9 +1,10 @@
-@startuml
+@startuml DeleteSequenceDiagram
 !include style.puml
 skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant "<<class>>\n:CommandBuffer" as CommandBuffer LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
 participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
@@ -16,6 +17,11 @@ end box
 
 [-> LogicManager : execute("delete 1")
 activate LogicManager
+
+LogicManager -> CommandBuffer : push("delete 1")
+activate CommandBuffer
+CommandBuffer --> LogicManager
+deactivate CommandBuffer
 
 LogicManager -> AddressBookParser : parseCommand("delete 1")
 activate AddressBookParser
