@@ -568,9 +568,6 @@ Deleting a foodplace while all foodplaces are being shown
      - No foodplace is deleted.
      - Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
 
-1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-   Expected: Similar to previous.
-
 1. _{ more test cases …​ }_
 
 
@@ -583,7 +580,7 @@ Rating a foodplace while all foodplaces are being shown
   - Use the `list` command first to list all foodplaces.
 
 
-1. Valid Test Case - Assigning a valid rating to a valid foodplace:<br> 
+1. Valid Test case - Assigning a valid rating to a valid foodplace:<br> 
     Command: `rate 1 5`<br>
     Expected:
       - First foodplace in the list will be assigned a rating: `< 5/10 >`
