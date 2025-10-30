@@ -56,14 +56,14 @@ public class TimingTest {
     }
 
     @Test
-    public void unsetTiming_behaviour() {
+    public void constructor_unsetTiming_isNotSet() {
         Timing unset = new Timing("", "");
         assertEquals("", unset.toString());
         assertFalse(unset.isSet());
     }
 
     @Test
-    public void invalidConstructorRange_throws() {
+    public void constructor_invalidRange_throwsException() {
         assertThrows(IllegalArgumentException.class, () -> new Timing("09:00-08:00"));
         assertThrows(IllegalArgumentException.class, () -> new Timing("not-a-time-range"));
     }
