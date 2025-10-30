@@ -21,7 +21,7 @@
 - JUnit 5 — unit testing framework: https://junit.org/junit5/
 - OpenJDK / Java 17 — target runtime: https://openjdk.org/
 - Markbind - used to generate app website: https://markbind.org/
-- Github Copilot - used for autocompleting and drafting code, as well as doing initial reviews for pull requests :https://github.com/features/copilot
+- GitHub Copilot - used for autocompleting and drafting code, as well as doing initial reviews for pull requests: https://github.com/features/copilot
 
 --------------------------------------------------------------------------------------------------------------------
 
