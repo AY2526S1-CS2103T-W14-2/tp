@@ -1107,7 +1107,7 @@ Rating a foodplace while all foodplaces are being shown
 
 1. Valid Test case - Using the help button:<br>
     Steps:
-    - Click the help button on the top left side of the window
+    - Click the help button on the top left side of the window.
     Expected:
       - Help window should open with a link to the user guide.
 
@@ -1125,6 +1125,39 @@ Rating a foodplace while all foodplaces are being shown
     Command: `help unknown`<br>
     Expected:
     - Error details shown in the status message: `Unknown command`
+
+### Pinning a foodplace
+
+Pinning a foodplace while all foodplaces are being shown
+
+- *Prerequisites:*<br>
+    - **At least one foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
+    - Foodplace being pinned is currently not pinned.
+    - There are less than 5 pinned foodplaces.
+
+
+1. Valid Test case - Pinning an unpinned foodplace when there are less than 5 pins:<br>
+    Command: `pin 1`<br>
+    Expected:
+    - The first foodplace will be pinned.
+    - Details of the pinned foodplace shown in the status message: `Pinned Foodplace: ...`
+
+1. Invalid Test case - Pinning a previously pinned foodplace:<br>
+    Steps:
+    - Pin the first foodplace using `pin 1`
+    - Attempt to pin the same foodplace again using `pin 1`
+    Expected:
+    - The first foodplace will remained pinned.
+    - Error details shown in the status message: `This foodplace is already pinned`
+
+1. Invalid Test case - Pinning an unpinned foodplace when there are 5 pins already:<br>
+    Steps:
+    - Pin 5 foodplaces using `pin x` 5 times.
+    - Attempt to pin another foodplace using `pin x`
+    Expected:
+    - The foodplace will not be pinned.
+    - Error details shown in the status message: `This foodplace is not pinned. A maximum of 5 pins have been reached`
 
 ### Saving data
 
