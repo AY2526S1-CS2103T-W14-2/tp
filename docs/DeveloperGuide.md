@@ -1219,6 +1219,24 @@ Comparing two foodplaces from the list shown
     - No comparison will be made.
     - Error details shown in the status message: `The second foodplace index provided is invalid`
 
+### Finding a foodplace
+
+- *Prerequisites:*<br>
+    - **At least two foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
+
+1. Valid Test case - Finding a foodplace by keywords:<br>
+    Command: `find western`<br>
+    Expected:
+    - The list updates to show foodplaces with matching fields.
+    - Info details shown in the status message: `2 foodplaces listed!`
+
+1. Valid Test case - Finding a foodplace by specified fields:<br>
+   Command: `find t/hawker r/8`<br>
+   Expected:
+    - The list updates to show foodplaces with matching fields.
+    - Info details shown in the status message: `2 foodplaces listed!`
+
 
 ### Saving data
 
