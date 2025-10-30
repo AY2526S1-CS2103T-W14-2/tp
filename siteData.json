@@ -62,8 +62,11 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
+        "adding-a-foodplace": "Adding a foodplace",
         "deleting-a-foodplace": "Deleting a foodplace",
+        "editing-a-foodplace": "Editing a foodplace",
         "rating-a-foodplace": "Rating a foodplace",
+        "getting-help": "Getting Help",
         "saving-data": "Saving data"
       },
       "headingKeywords": {}
