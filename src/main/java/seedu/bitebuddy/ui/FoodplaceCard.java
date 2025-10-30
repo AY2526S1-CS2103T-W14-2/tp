@@ -23,7 +23,7 @@ public class FoodplaceCard extends UiPart<Region> {
     private static final String MESSAGE_NO_TIMING = "** No timing specified **";
     private static final String MESSAGE_NO_CUISINE = "== No cuisine specified ==";
     private static final String MESSAGE_NO_NOTE = "-- No notes yet --";
-    private static final String MESSAGE_NO_RATE = ">> No Rating yet <<";
+    private static final String MESSAGE_NO_RATE = ">> No rating yet <<";
     private static final String MESSAGE_WISHLIST = "Wishlisted";
     private static final String MESSAGE_BLACKLIST = "Blacklisted";
 

@@ -185,6 +185,7 @@ The following are a non-exhaustive list of common classes that live in `seedu.bi
 **Guideline:** interact with these classes through their public APIs (interfaces/static helpers) rather than implementation details to preserve loose coupling and ease testing.<br>
 
 **Disclaimer:** This is a non-exhaustive list of common classes meant to give the developer an idea on what kind of classes are contained within the package. Please see [`commons`](https://github.com/AY2526S1-CS2103T-W14-2/tp/tree/master/src/main/java/seedu/bitebuddy/commons) for a full list of classes.
+
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -896,7 +897,7 @@ Guarantees: Relevant help information is shown to the user.
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.
+Preconditions: At least one food place exists.  
 Guarantees: If successful, all food places are removed from the address book.
 
 **MSS**
@@ -904,6 +905,33 @@ Guarantees: If successful, all food places are removed from the address book.
 2. BiteBuddy deletes all food places from the address book and displays a confirmation message.
 
 Use case ends.
+
+**Use case: UC20 - Reuse previously entered commands**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one command has been used.  
+Guarantees: If successful, user can reuse a previous command.
+
+**MSS**
+1. User requests to view all previous commands.
+2. BiteBuddy returns all the user's previous commands.
+3. User selects a previous command to execute.
+4. BiteBuddy executes the command.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. There is no previous command.
+    * 3a1. BiteBuddy does not change the current command and executes it.
+
+      Use case ends.
+
+* 3b. User selects the latest command.
+    * 3b1. BiteBuddy executes the latest command the user was originally typing.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
@@ -1099,13 +1127,13 @@ Adding note to a foodplace while all foodplaces are being shown
     Command: `note 1 Good customer service!`<br>
     Expected:
     - First foodplace in the list will be assigned a note: `Good customer service!`
-    - Details of the updated foodplace shown in the status message: `Added Notes to Foodplace: ...`
+    - Details of the updated foodplace shown in the status message: `Added notes to Foodplace: ...`
 
 1. Valid Test case - Unassigning any existing note from a valid foodplace:<br>
     Command: `note 1`<br>
     Expected:
-    - First foodplace in the list will have no note: `-- No Notes Yet --`
-    - Details of the updated foodplace shown in the status message: `Removed Notes from Foodplace: ...`
+    - First foodplace in the list will have no note: `-- No notes yet --`
+    - Details of the updated foodplace shown in the status message: `Removed notes from Foodplace: ...`
 
 1. Valid Test case - Assigning same note to a valid foodplace:<br>
     Steps:
@@ -1153,39 +1181,39 @@ Adding note to a foodplace while all foodplaces are being shown
 Rating a foodplace while all foodplaces are being shown
 
 - *Prerequisites:*<br>
-  - **At least one foodplace** must exist in the list.
-  - Use the `list` command first to list all foodplaces.
+    - **At least one foodplace** must exist in the list.
+    - Use the `list` command first to list all foodplaces.
 
 
 1. Valid Test case - Assigning a valid rating to a valid foodplace:<br> 
     Command: `rate 1 5`<br>
     Expected:
     - First foodplace in the list will be assigned a rating: `< 5/10 >`
-    - Details of the rated foodplace shown in the status message: `Added Rating to Foodplace: ...`
+    - Details of the rated foodplace shown in the status message: `Added rating to Foodplace: ...`
 
 1. Valid Test case - Unassigning any existing rating from a valid foodplace:<br>
-    Command: `rate 1 0`<br>
-    Expected: 
-    - First foodplace in the list will become unrated: `>> No Rating Yet <<`
-    - Details of the unrated foodplace shown in the status message: `Removed Rating from Foodplace: ...`
+   Command: `rate 1 0`<br>
+   Expected: 
+    - First foodplace in the list will become unrated: `>> No rating yet <<`
+    - Details of the unrated foodplace shown in the status message: `Removed rating from Foodplace: ...`
 
 1. Invalid Test case - Assigning a valid rating to a **foodplace at an invalid index**:<br>
-    Command: `rate 0 5`<br>
-    Expected:
+   Command: `rate 0 5`<br>
+   Expected:
     - No foodplace will be rated.
-    - Error details shown in the status message: `Index is not a non-zero unsigned integer.`
+    - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
 1. Invalid Test case - Assigning a **negative rating** to a valid foodplace:<br>
-    Command: `rate 1 -1`<br>
-    Expected:
+   Command: `rate 1 -1`<br>
+   Expected:
     - No foodplace will be rated.
-    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
+    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
 
 1. Invalid Test case - Assigning an **out-of-range rating** to a valid foodplace:<br>
-    Command: `rate 1 11`<br>
-    Expected:
+   Command: `rate 1 11`<br>
+   Expected:
     - No foodplace will be rated.
-    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be an integer between 1 to 10 inclusive; OR B) be 0 to remove the target foodplace's existing rating.`
+    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
 
 1. Invalid Test case - Assigning an **unsigned non-integer rating** to a valid foodplace:<br>
     Command: `rate 1 1.1`<br>
