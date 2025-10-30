@@ -921,8 +921,53 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a foodplace
 
+- *Prerequisites:* <br> 
+    - BiteBuddy is running.  
+    - Use the `list` command first to show current foodplaces and note the count.
+
+1. Valid Test case — Adding a complete foodplace:<br>
+     Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`<br>  
+     Expected:
+     - Foodplace is added to the list; `list` shows one additional entry.
+     - Status message: `Added Foodplace: Golden Wok ...` with the provided details displayed.
+     - Tags `chinese`, `dinner` are present on the new entry.
+
+1. Valid Test case — Adding with only required fields:<br>
+     Command: `add n/Coffee Corner a/50 Coffee St`<br>  
+     Expected:
+     - Foodplace is added successfully.
+     - Optional fields are empty/unset.
+     - Status message shows the new entry details.
+
+1. Invalid Test case — Adding with **missing required field**:<br>  
+     Command: `add p/91234567 e/a@b.com a/1 Example St`<br>
+     Expected:
+     - No foodplace is added.
+     - Error message explaining invalid command format or missing required field `Invalid command format! add: ...`.
+
+1. Invalid Test case — Adding with **invalid optional field**:<br>
+     Command: `add n/BadPhone p/phone123 a/12 Some Rd`<br>  
+     Expected:
+     - No foodplace is added.
+     - Error message describing phone validation failure (e.g., `Phone numbers should only contain numbers...`).
+
+1. Invalid Test case — Adding a **duplicate foodplace**:<br>  
+     Steps:
+     - Add a foodplace: `add n/Duplicate a/10 Rd`
+     - Attempt to add the same details again. 
+ 
+     Expected:
+     - Second add fails.
+     - Error message indicating a duplicate entry (e.g., `This foodplace already exists in BiteBuddy.`).
+     - `list` shows only one instance.
+
+1. Edge case — Multiple tags and spacing handling:<br>  
+     Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor`<br>  
+     Expected:
+     - Multiple tags parsed correctly (whitespace around tags trimmed).
+     - Status message shows all unique tags attached.
 
 ### Deleting a foodplace
 
@@ -945,8 +990,70 @@ Deleting a foodplace while all foodplaces are being shown
      - No foodplace is deleted.
      - Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
 
-1. _{ more test cases …​ }_
+### Editing a foodplace
 
+Editing a foodplace while all foodplaces are being shown
+
+- *Prerequisites:*  
+    - **At least one foodplace** must exist in the list.  
+    - Use the `list` command first to list all foodplaces and note the current details.
+
+1. Valid Test case — Editing all fields of a valid foodplace:<br>
+    Command: `edit 1 n/Cafe Luna p/91234567 e/cafe@example.com a/20 Baker St t/cafe t/coffee`<br>  
+    Expected:
+    - Foodplace at index 1 is updated with the new name, phone, email, address and tags.
+    - Status message shows the updated details: `Edited Foodplace: Cafe Luna ...`
+
+1. Valid Test case — Editing only some fields:<br>
+    Command: `edit 1 n/Cafe Luna`<br>  
+    Expected:
+    - Only the name of the first foodplace is changed; other fields remain unchanged.
+    - Status message shows the edited entry with unchanged fields preserved.
+
+1. Valid Test case — Replacing tags with a new set:<br>
+    Command: `edit 1 t/brunch t/outdoor`<br> 
+    Expected:
+    - Tags of the first foodplace are replaced by `brunch` and `outdoor`.
+    - Status message shows the edited entry with unchanged fields preserved.
+
+1. Valid Test case — Clearing all tags:<br>
+    Command: `edit 1 t/`<br>  
+    Expected:
+    - All tags are removed from the first foodplace.
+    - Status message shows the edited entry with unchanged fields preserved.
+
+1. Invalid Test case — Editing a foodplace at an **invalid index**:<br>
+    Command: `edit 0 n/NewName`<br>  
+    Expected:
+    - No changes applied.
+    - Error message: `Invalid command format!...`
+
+1. Invalid Test case — Editing a foodplace at an **out-of-range index**:<br> 
+    Command: `edit 999 n/Nowhere`  
+    Expected:
+    - No changes applied.
+    - Error message indicating the index is out of bounds (e.g., `The foodplace index provided is invalid`).
+
+1. Invalid Test case — Editing with an **invalid field**:<br>
+    Command: `edit 1 p/phone123`<br>  
+    Expected:
+    - No changes applied.
+    - Error message describing phone validation failure (e.g., `Phone numbers should only contain numbers...`).
+
+1. Invalid Test case — Editing results in a **duplicate entry**:<br>  
+    Steps:
+    - Run `add n/ExistingName a/Existing Address`
+    - Run `edit 1 n/ExistingName a/Existing Address`
+ 
+    Expected:
+    - No changes applied.
+    - Error message: `This foodplace already exists in BiteBuddy.`
+
+1. Edge case — No fields provided to edit:<br>
+    Command: `edit 1`<br>  
+    Expected:
+    - No changes applied.
+    - Error message: `At least one field to edit must be provided.`
 
 ### Rating a foodplace
 
@@ -993,6 +1100,31 @@ Rating a foodplace while all foodplaces are being shown
     - No foodplace will be rated.
     - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
+### Getting Help
+
+- *Prerequisites:* <br> 
+    - BiteBuddy is running.  
+
+1. Valid Test case - Using the help button:<br>
+    Steps:
+    - Click the help button on the top left side of the window
+    Expected:
+      - Help window should open with a link to the user guide.
+
+1. Valid Test case - Using the help command to get user guide:<br>
+    Command: `help`<br>
+    Expected:
+      - Help window should open with a link to the user guide.
+
+1. Valid Test case - Using the help command to get specific command usage:<br>
+    Command: `help list`<br>
+    Expected:
+    - Command usage of `list` is shown in status message: `list: Lists all foodplaces in BiteBuddy...`
+
+1. Invalid Test case - Using an **invalid command word** as a parameter for the help command:<br>
+    Command: `help unknown`<br>
+    Expected:
+    - Error details shown in the status message: `Unknown command`
 
 ### Saving data
 
