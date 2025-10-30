@@ -1109,6 +1109,11 @@ Adding/deleting tags to a foodplace while all foodplaces are being shown
     - No foodplace will be updated.
     - Error details shown in the status message: `Invalid command format! tag: ...`
 
+1. Invalid Test case - Adding a non-alphanumeric tag:<br>
+   Command: `tag 1 $$$$`<br>
+   Expected:
+    - No foodplace will be updated.
+    - Error details shown in the status message: `Tags names should be alphanumeric`
 
 
 ### Adding note to a foodplace
