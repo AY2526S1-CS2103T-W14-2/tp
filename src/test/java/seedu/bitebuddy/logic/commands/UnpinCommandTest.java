@@ -58,7 +58,7 @@ public class UnpinCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setFoodplace(foodplace, unpinnedFoodplace);
-        expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
+        expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_ALL_FOODPLACES);
 
         assertCommandSuccess(unpinCommand, model, expectedMessage, expectedModel);
     }
@@ -85,7 +85,7 @@ public class UnpinCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setFoodplace(foodplace, unpinnedFoodplace);
-        expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
+        expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_ALL_FOODPLACES);
 
         assertCommandSuccess(unpinCommand, model, expectedMessage, expectedModel);
     }
