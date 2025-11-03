@@ -29,7 +29,17 @@ public class TimingTest {
         assertFalse(Timing.isValidTiming(""));
         assertTrue(Timing.isValidTiming("09:00-17:00"));
         assertTrue(Timing.isValidTiming("17:00-09:00"));
+        // opening and closing must be different
+        assertFalse(Timing.isValidTiming("09:00-09:00"));
         assertFalse(Timing.isValidTiming("not-a-range"));
+    }
+
+    @Test
+    public void constructor_equalTimes_throwsException() {
+        // string-based
+        assertThrows(IllegalArgumentException.class, () -> new Timing("09:00", "09:00"));
+        // LocalTime-based
+        assertThrows(IllegalArgumentException.class, () -> new Timing(LocalTime.of(9, 0), LocalTime.of(9, 0)));
     }
 
     @Test

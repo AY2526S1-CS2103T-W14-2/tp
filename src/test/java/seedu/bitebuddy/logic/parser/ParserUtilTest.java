@@ -317,6 +317,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseTiming_equalTimes_throwsParseException() {
+        assertThrows(ParseException.class, Timing.MESSAGE_EQUAL_TIMES, () -> ParserUtil.parseTiming("09:00", "09:00"));
+    }
+
+    @Test
     public void areNoneOrBothPrefixesPresent_bothPresent_returnsTrue() {
         ArgumentMultimap map = new ArgumentMultimap();
         Prefix p1 = new Prefix("ot/");
