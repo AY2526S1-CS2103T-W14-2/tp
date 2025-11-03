@@ -245,6 +245,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [ot/OPENING_TIME ct
 ```
 edit: Edits the details of the foodplace identified by the index number used in the displayed foodplace list.
 • INDEX must be a positive integer.
+• At least one optional field must be provided.
 • Existing values will only be overwritten by the supplied input values.
 Parameters:
   INDEX [n/FOODPLACE_NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [c/CUISINE] [ot/OPENING_TIME ct/CLOSING_TIME] [no/NOTE] [r/RATING] [t/TAG]...
