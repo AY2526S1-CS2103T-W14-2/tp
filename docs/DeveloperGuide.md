@@ -20,8 +20,9 @@
 - Gradle — build scripts and dependency management: https://gradle.org/
 - JUnit 5 — unit testing framework: https://junit.org/junit5/
 - OpenJDK / Java 17 — target runtime: https://openjdk.org/
-- Markbind - used to generate app website: https://markbind.org/
-- GitHub Copilot - used for autocompleting and drafting code, as well as doing initial reviews for pull requests: https://github.com/features/copilot
+- Markbind — used to generate app website: https://markbind.org/
+- GitHub Copilot — used for autocompleting and drafting code, as well as doing initial reviews for pull requests: https://github.com/features/copilot
+- “Pin 3” icon used in the application GUI — [Icons8](https://icons8.com), licensed under [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/). Source: [https://www.iconsdb.com/gray-icons/pin-3-icon.html](https://www.iconsdb.com/gray-icons/pin-3-icon.html)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -121,11 +122,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
-How the parsing works:
+###### How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-Argument processing helper classes:
+###### Argument processing helper classes:
 
 There are two common styles of argument processing used by command parsers:
 - Prefix-based commands use `ArgumentTokenizer` + `ArgumentMultimap` (e.g. `AddCommand`, `EditCommand`, etc.).
@@ -139,7 +140,7 @@ There are two common styles of argument processing used by command parsers:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" />
 
 
 The `Model` component,
@@ -153,7 +154,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -327,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 
 **Use case: UC01 - Add a foodplace**
 
-System: BiteBuddy  
+System: BiteBuddy
 Actor: User  
 Preconditions: BiteBuddy is running.  
 Guarantees: If successful, the foodplace is stored in BiteBuddy without duplicates.
@@ -390,7 +391,7 @@ Guarantees: If successful, the specified foodplace is updated with the new detai
 
 1. User requests to list foodplaces.
 2. BiteBuddy shows a list of foodplaces.
-3. User chooses to edit an existing foodplace from the list and provides and provides new values for one or more editable fields (e.g., name, address, rating, tags).
+3. User chooses to edit an existing foodplace from the list and provides new values for one or more editable fields.
 4. BiteBuddy updates the foodplace and displays confirmation.
 
     Use case ends.
@@ -514,7 +515,7 @@ Guarantees: The specified tag(s) are removed from the foodplace. Deletion is cas
 
 1. User requests to list foodplaces.
 2. BiteBuddy shows a list of foodplaces.
-3. User issues a delete-tag command with one or more tag names.
+3. User requests to delete tag(s) and provides tag name(s).
 4. BiteBuddy removes the specified tag(s) from the target foodplace and displays a confirmation message.
 
    Use case ends.
@@ -586,7 +587,7 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
 1. User requests to list foodplaces.
 2. BiteBuddy shows a list of foodplaces.
-3. User chooses to rate a specific foodplace from the list.
+3. User chooses to rate a specific foodplace from the list and provides rating.
 4. BiteBuddy updates the foodplace with the rating and displays confirmation.
 
    Use case ends.
@@ -598,8 +599,13 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
       Use case ends.
 
-* 3b. The given rating is invalid.
-    * 3b1. BiteBuddy shows an error message for invalid rating.
+* 3b. The given rating is 0.
+    * 3b1. BiteBuddy removes the rating from the foodplace.
+
+      Use case ends.
+
+* 3c. The given rating is invalid.
+    * 3c1. BiteBuddy shows an error message for invalid rating.
 
       Use case ends.
 
@@ -804,8 +810,8 @@ Guarantees: If successful, a comparison view or summary of the selected foodplac
 
 1. User requests to list foodplaces.  
 2. BiteBuddy shows a list of foodplaces.  
-3. User issues the compare command with two valid indexes.  
-4. BiteBuddy retrieves the corresponding foodplaces, and displays a comparison view and summary showing key attributes (e.g., name, rating, cuisine, notes, tags).  
+3. User requests to compare 2 foodplaces on the list.  
+4. BiteBuddy retrieves the corresponding foodplaces, and displays a comparison view and summary showing key attributes.  
 
     Use case ends.
 
@@ -1680,4 +1686,37 @@ Steps:
 Expected:
 - BiteBuddy opens in a blank state.
 
+--------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Effort**
+
+This appendix summarises the overall effort, difficulty, challenges, reuse, and achievements of the project, using AB3 as a reference point.
+
+##### Difficulty level and scope relative to AB3
+
+While AB3 manages a single entity (Person) with basic features, BiteBuddy expands the single entity model (now Foodplace) with more relevant fields to cater for our target users and have constraints of higher complexity:
+- Rating (bounded integer constraints)
+- Note (ASCII + length constraints)
+- Tags (case-insensitive duplicate constraints)
+- Pin/Unpin (global cap)
+- Wishlist/Blacklist (mutual status exclusivity + conflict resolution)
+- Compare (multiple index validation)  
+
+These additional complexities require more intricate designing and testing to ensure correctness within BiteBuddy while maintaining a pleasant user experience.
+Higher parser complexity is achieved through different commands requiring [different parsing strategies](#argument-processing-helper-classes) (i.e. prefix-based and positional/whitespace-based), requiring careful integration to maintain consistency and usability.
+
+##### Reuse and effort savings
+
+- We reused a substantial portion of AB3’s architecture and scaffolding: the Logic/Model/Storage layering, command pattern and parsing framework, Jackson-based JSON storage, JavaFX UI skeleton, Gradle configuration, and the documentation site structure. This reuse enabled us to focus on the features we wanted to build rather than reinventing the foundational architecture.
+- Concrete examples of reuse/adaptation:
+    - Storage and JSON pipeline (Jackson) were extended to accommodate richer `Foodplace` fields without redesigning the persistence layer.
+    - The command pattern and parser framework were adapted to implement new commands with custom parsing logic while preserving the overall flow.
+    - The JavaFX UI components were customized for BiteBuddy’s domain while reusing the overall structure and patterns from AB3.
+    - Using Copilot to perform code reviews and generate boilerplate code snippets, saving time on routine coding tasks.
+
+##### Notable achievements
+
+- Proper and disciplined workflow using Git and GitHub, with frequent commits, descriptive messages, feature branching, and effective collaboration via pull requests and code reviews.
+- Mandatory enforcement of coding standards, tests, and documentation, ensuring code quality and maintainability at all times.
+    - Whenever features were added or bugs fixed, corresponding tests and documentation were updated in the same PR.
+    - This is evident from our high test coverage (almost 90%) as indicated by Codecov reports

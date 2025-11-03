@@ -1,5 +1,7 @@
 package seedu.bitebuddy.testutil;
 
+import static seedu.bitebuddy.model.foodplace.Note.EMPTY_NOTE;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -180,8 +182,8 @@ public final class TestStubs {
          * @param noteAfter the note that is changing to
          */
         public static String generateDifferentNoteMessage(String noteBefore, String noteAfter) {
-            String formattedNoteBefore = noteBefore.isEmpty() ? "<Empty note>" : "\"" + noteBefore + "\"";
-            String formattedNoteAfter = noteAfter.isEmpty() ? "<Empty note>" : "\"" + noteAfter + "\"";
+            String formattedNoteBefore = noteBefore.isEmpty() ? EMPTY_NOTE : "\"" + noteBefore + "\"";
+            String formattedNoteAfter = noteAfter.isEmpty() ? EMPTY_NOTE : "\"" + noteAfter + "\"";
             return String.format("Note changed from %s to %s.", formattedNoteBefore, formattedNoteAfter);
         }
     }

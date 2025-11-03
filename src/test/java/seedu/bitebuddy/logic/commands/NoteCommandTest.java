@@ -38,17 +38,20 @@ public class NoteCommandTest {
     @Test
     public void execute_addNoteUnfilteredList_success() {
         Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Foodplace firstFoodplaceWithNoNote = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
+        // Set up initial model with no note
+        model.setFoodplace(firstFoodplace, firstFoodplaceWithNoNote);
+
         Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(NOTE_STUB).build();
-        String firstFoodplaceNote = firstFoodplace.getNote().value;
         String editedFoodplaceNote = editedFoodplace.getNote().value;
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(editedFoodplaceNote));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedFoodplace,
-                TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
+        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, Messages.format(editedFoodplace),
+                TestStubs.NoteCommandStub.generateDifferentNoteMessage(EMPTY_NOTE_STUB, editedFoodplaceNote));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setFoodplace(firstFoodplace, editedFoodplace);
+        expectedModel.setFoodplace(firstFoodplaceWithNoNote, editedFoodplace);
 
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
@@ -63,7 +66,8 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
                 new Note(editedFoodplaceNote));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedFoodplace,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
+                Messages.format(editedFoodplace),
                 TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -85,7 +89,7 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
                 new Note(editedFoodplaceNote));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedFoodplace,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, Messages.format(editedFoodplace),
                 TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -107,7 +111,8 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
                 new Note(editedFoodplaceNote));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedFoodplace,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
+                Messages.format(editedFoodplace),
                 TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());

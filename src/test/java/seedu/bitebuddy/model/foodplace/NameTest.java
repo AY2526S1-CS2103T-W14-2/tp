@@ -30,13 +30,17 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName("&startsWithSpecial")); // starts with special character
+        assertFalse(Name.isValidName(" startswithspace")); // starts with space
 
         // valid name
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("olive garden")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
+        assertTrue(Name.isValidName("4 fingers")); // alphanumeric characters
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName("Super long Restaurant name")); // long names
+        assertTrue(Name.isValidName("McDonald's @ Downtown!")); // with special characters
+        assertTrue(Name.isValidName("Cat, & the_fiddle: #deluxe-edition$.")); // with more special characters
     }
 
     @Test
