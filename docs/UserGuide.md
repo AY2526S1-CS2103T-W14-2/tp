@@ -76,9 +76,11 @@ Follow these steps to install and start using **BiteBuddy**!
    ![Download BiteBuddy.jar](images/download_jar.png)
 3. Copy the file to the folder you want to use as the _home folder_ for your BiteBuddy.
 4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar "bitebuddy.jar"` to launch the application.<br>
-   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.
-   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)
-   **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
+  You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.
+
+| Mac users | Windows users |
+|---:|:---|
+| ![](images/open_in_terminal_Mac.png) |![](images/open_in_terminal_Windows.png) |
 
 5. A GUI similar to the one below should appear within a few seconds. It comes preloaded with sample data for you to explore. <br>
    ![Ui](images/UI_image.png)
