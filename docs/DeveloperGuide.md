@@ -211,7 +211,7 @@ At the model level, both values are stored inside the `Foodplace` entity with an
 - Accepts an optional `INDEX`. If omitted, they act as a filter command to show only wishlisted/blacklisted foodplaces.
 - When an `INDEX` is supplied, toggles the relevant state on the specified `Foodplace` by index creating a new immutable `Foodplace` with the updated field, and then calling `model.setFoodplace(old, updated)` to update the change.
 
-Conflict resolution is handled inside each command before constructing the edited `Foodplace`:
+Conflict resolution of status is handled inside each command before constructing the edited `Foodplace`:
 - In `WishlistCommand`, if the target is already blacklisted but not wishlisted, it first set `Blacklist` to `false` and set `Wishlist` to `true`. A secondary status line clarifies that the blacklist status was removed.
 - Otherwise, it simply toggles the `Wishlist` status. (if `true`, set to `false` and vice versa)
 - This is similar for `BlacklistCommand`.
@@ -230,7 +230,7 @@ The following activity diagram summarises the control flow when a user executes 
   * Cons: Hides the conflict resolution logic away from the commands into `Model#setFoodplace()`
 
 
-### [Proposed] Undo/redo feature
+### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
