@@ -194,7 +194,41 @@ The following are a non-exhaustive list of common classes that live in `seedu.bi
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Wishlist/blacklist feature
+
+#### Implementation
+
+The wishlist/blacklist feature is implemented as two different boolean value objects on each `Foodplace` to indicate whether it is wishlisted or blacklisted respectively:
+
+- `Wishlist` — `isWishlisted()` returns an immutable boolean value to determine whether the foodplace is wishlisted (`true` if wishlisted, `false` otherwise)
+- `Blacklist` — `isBlacklisted()`
+- Both have a `getOpposite()` method that returns a new instance with the opposite boolean value.
+- Both have a `toString()` method that returns a user-friendly string representation of the status (e.g., "Wishlisted" or "Not Wishlisted").
+
+At the model level, both values are stored inside the `Foodplace` entity with an invariant where a `Foodplace` **cannot be both wishlisted and blacklisted at the same time**.
+
+`WishlistCommand` and `BlacklistCommand`:
+- Accepts an optional `INDEX`. If omitted, they act as a filter command to show only wishlisted/blacklisted foodplaces.
+- When an `INDEX` is supplied, toggles the relevant state on the specified `Foodplace` by index creating a new immutable `Foodplace` with the updated field, and then calling `model.setFoodplace(old, updated)` to update the change.
+
+Conflict resolution is handled inside each command before constructing the edited `Foodplace`:
+- In `WishlistCommand`, if the target is already blacklisted but not wishlisted, it first set `Blacklist` to `false` and toggle `Wishlist` to `true`. A secondary status line clarifies that the blacklist status was removed.
+
+The following activity diagram summarises the control flow a user executes a `wishlist` command:
+
+<puml src="diagrams/WishBlackActivityDiagram.puml" />
+
+#### Design considerations
+* Conflict resolution is handled in the `WishlistCommand` and `BlacklistCommand`.
+  * Pros: Simple, localised logic to handle the invariant.
+  * Cons: Some duplication of conflict resolution logic is added for both commands.
+
+* Alternatively, conflict resolution could be handled in the `Model#setFoodplace()` method.
+  * Pros: Centralised logic for maintaining the invariant.
+  * Cons: Hides the conflict resolution logic away from the commands into `Model#setFoodplace()`
+
+
+### [Proposed] Undo/redo feature
 
 #### Proposed Implementation
 
@@ -284,13 +318,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the foodplace being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1539,3 +1566,4 @@ Comparing two foodplaces from the list shown
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
