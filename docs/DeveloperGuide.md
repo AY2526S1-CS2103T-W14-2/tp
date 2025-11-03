@@ -1004,50 +1004,58 @@ testers are expected to do more *exploratory* testing.
 * BiteBuddy is running.
 * Use the `list` command first to show current foodplaces and note the count.
 
-1. **Valid Test case — Adding a complete foodplace:**
+#### Valid Test case 1 — Adding a complete foodplace:
 
-    Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`
+Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`
 
-    Expected:
-    * Foodplace is added to the list; `list` shows one additional entry. 
-    * Details of the new foodplace shown in the status message: `Added Foodplace: Golden Wok ...`
-    * Tags `chinese`, `dinner` are present on the new entry.
+Expected:
+* Foodplace is added to the list; `list` shows one additional entry. 
+* Details of the new foodplace shown in the status message: `Added Foodplace: Golden Wok ...`
+* Tags `chinese`, `dinner` are present on the new entry.
 
-2. **Valid Test case — Adding with only required fields:**
+#### Valid Test case 2 — Adding with only required fields:
     
-    Command: `add n/Coffee Corner a/50 Coffee St`
-    
-    Expected:
-    * Foodplace is added successfully.
-    * Optional fields are empty/unset.
-    * Details of the new foodplace shown in the status message: `Added Foodplace: Coffee Corner ...`
+Command: `add n/Coffee Corner a/50 Coffee St`
 
-1. Invalid Test case — Adding with **missing required field**:<br>  
-    Command: `add p/91234567 e/a@b.com a/1 Example St`<br>
-    Expected:
-    - No foodplace is added.
-    - Error details shown in the status message: `Invalid command format! add: ...`
+Expected:
+* Foodplace is added successfully.
+* Optional fields are empty/unset.
+* Details of the new foodplace shown in the status message: `Added Foodplace: Coffee Corner ...`
 
-1. Invalid Test case — Adding with **invalid optional field**:<br>
-    Command: `add n/BadPhone p/phone123 a/12 Some Rd`<br>  
-    Expected:
-    - No foodplace is added.
-    - Error details shown in the status message: `Phone numbers should only contain numbers...`
+#### Invalid Test case 1 — Adding with **missing required field**:
 
-1. Invalid Test case — Adding a **duplicate foodplace**:<br>  
-    Steps:
-    - Add a foodplace: `add n/Duplicate a/10 Rd`
-    - Attempt to add the same details again.
-    Expected:
-    - Second add fails.
-    - Error details shown in the status message: `This foodplace already exists in BiteBuddy.`
-    - `list` shows only one instance.
+Command: `add p/91234567 e/a@b.com a/1 Example St`
 
-1. Edge case — Multiple tags and spacing handling:<br>  
-    Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor`<br>  
-    Expected:
-    - Multiple tags parsed correctly (whitespace around tags trimmed).
-    - Status message shows all unique tags attached.
+Expected:
+- No foodplace is added.
+- Error details shown in the status message: `Invalid command format! add: ...`
+
+#### Invalid Test case 2 — Adding with **invalid optional field**:
+
+Command: `add n/BadPhone p/phone123 a/12 Some Rd`<br>  
+
+Expected:
+- No foodplace is added.
+- Error details shown in the status message: `Phone numbers should only contain numbers...`
+
+#### Invalid Test case 3 — Adding a **duplicate foodplace**:
+
+Steps:
+- Add a foodplace: `add n/Duplicate a/10 Rd`
+- Attempt to add the same details again.
+
+Expected:
+- Second add fails.
+- Error details shown in the status message: `This foodplace already exists in BiteBuddy.`
+- `list` shows only one instance.
+
+#### Edge case 1 — Multiple tags and spacing handling: 
+
+Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor`
+
+Expected:
+- Multiple tags parsed correctly (whitespace around tags trimmed).
+- Status message shows all unique tags attached.
 
 ### Deleting a foodplace
 
