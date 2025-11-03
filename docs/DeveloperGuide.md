@@ -1582,6 +1582,46 @@ Expected:
 - The list updates to show foodplaces with matching fields.
 - Info details shown in the status message: `3 foodplaces listed!`
 
+##### Valid Test case 3 – Finding with multiple tags (AND search):
+
+Command: `find t/cheap t/clean`
+
+Expected:
+- Displays foodplaces that contain both tags `cheap` and `clean`.
+- Status message shows number of matches.
+
+##### Invalid Test case 1 – Missing arguments:
+
+Command: `find`
+
+Expected:
+- The command fails and no search is performed.
+- Error details shown in the status message: `Invalid command format! find ...`
+
+##### Invalid Test case 2 – Empty prefix value:
+
+Command: `find t/`
+
+Expected:
+- The command fails and no search is performed.
+- Error details shown in the status message: `Prefix provided without value. find: ...`
+
+##### Invalid Test case 3 – Multiple cuisine prefixes:
+
+Command: `find c/japanese c/korean`
+
+Expected:
+- The command fails and no search is performed.
+- Error details shown in the status message: `Only one cuisine (c/) can be specified in a find command.`
+
+##### Invalid Test case 4 – Invalid tag name:
+
+Command: `find t/***`
+
+Expected:
+- The command fails and no search is performed.
+- Error details shown in the status message: `Tags names should be alphanumeric`
+
 ### Comparing two foodplaces
 
 Comparing two foodplaces from the list shown
