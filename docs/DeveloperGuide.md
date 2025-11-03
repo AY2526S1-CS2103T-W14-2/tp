@@ -593,13 +593,16 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
 **Extensions**
 
-* 3a. The given index is invalid.
-    * 3a1. BiteBuddy shows an error for invalid index.
+* 3a. The given index is 0.
+    * 3a1. BiteBuddy removes the rating from the foodplace.
+
+* 3b. The given index is invalid.
+    * 3b1. BiteBuddy shows an error for invalid index.
 
       Use case ends.
 
-* 3b. The given rating is invalid.
-    * 3b1. BiteBuddy shows an error message for invalid rating.
+* 3c. The given rating is invalid.
+    * 3c1. BiteBuddy shows an error message for invalid rating.
 
       Use case ends.
 
