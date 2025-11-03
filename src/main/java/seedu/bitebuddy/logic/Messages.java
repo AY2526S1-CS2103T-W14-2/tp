@@ -43,15 +43,9 @@ public class Messages {
                 .append(foodplace.getEmail())
                 .append("; Address: ")
                 .append(foodplace.getAddress())
-                .append("; Timing: ");
-
-        if (foodplace.getTiming().isSet()) {
-            builder.append(foodplace.getTiming());
-        } else {
-            builder.append("<Empty timing>");
-        }
-
-        builder.append("; Cuisine: ")
+                .append("; Timing: ")
+                .append(foodplace.getTiming().isSet() ? foodplace.getTiming() : "<Empty timing>")
+                .append("; Cuisine: ")
                 .append(foodplace.getCuisine())
                 .append("; Tags: ");
         if (!foodplace.getTags().isEmpty()) {
