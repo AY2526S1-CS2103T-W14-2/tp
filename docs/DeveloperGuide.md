@@ -1694,6 +1694,9 @@ While AB3 manages a single entity (Person) with basic features, BiteBuddy expand
 These additional complexities require more intricate designing and testing to ensure correctness within BiteBuddy while maintaining a pleasant user experience.
 Higher parser complexity is achieved through different commands requiring [different parsing strategies](#argument-processing-helper-classes) (i.e. prefix-based and positional/whitespace-based), requiring careful integration to maintain consistency and usability.
 
+Developing our past command history buffer was also a unique challenge. To track past commands and save the state of our user's typing-in-progress commands for rolling back, learning how to hook to the user's key inputs while typing commands was required,
+but the ease of calling previous commands was well worth, bringing us closer to realizing a more realistic CLI experience.
+
 ##### Reuse and effort savings
 
 - We reused a substantial portion of AB3’s architecture and scaffolding: the Logic/Model/Storage layering, command pattern and parsing framework, Jackson-based JSON storage, JavaFX UI skeleton, Gradle configuration, and the documentation site structure. This reuse enabled us to focus on the features we wanted to build rather than reinventing the foundational architecture.
