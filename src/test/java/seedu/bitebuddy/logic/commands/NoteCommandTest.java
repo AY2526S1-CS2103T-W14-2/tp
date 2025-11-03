@@ -44,7 +44,7 @@ public class NoteCommandTest {
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE, new Note(editedFoodplaceNote));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedFoodplace,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, Messages.format(editedFoodplace),
                 TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -63,7 +63,8 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
                 new Note(editedFoodplaceNote));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedFoodplace,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
+                Messages.format(editedFoodplace),
                 TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -85,7 +86,7 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
                 new Note(editedFoodplaceNote));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedFoodplace,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS, Messages.format(editedFoodplace),
                 TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -107,7 +108,8 @@ public class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
                 new Note(editedFoodplaceNote));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedFoodplace,
+        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
+                Messages.format(editedFoodplace),
                 TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
