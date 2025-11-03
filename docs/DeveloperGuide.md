@@ -121,11 +121,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
-How the parsing works:
+###### How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-Argument processing helper classes:
+###### Argument processing helper classes:
 
 There are two common styles of argument processing used by command parsers:
 - Prefix-based commands use `ArgumentTokenizer` + `ArgumentMultimap` (e.g. `AddCommand`, `EditCommand`, etc.).
@@ -1685,4 +1685,37 @@ Steps:
 Expected:
 - BiteBuddy opens in a blank state.
 
+--------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Effort**
+
+This appendix summarises the overall effort, difficulty, challenges, reuse, and achievements of the project, using AB3 as a reference point.
+
+##### Difficulty level and scope relative to AB3
+
+While AB3 manages a single entity (Person) with basic features, BiteBuddy expands the single entity model (now Foodplace) with more relevant fields to cater for our target users and have constraints of higher complexity:
+- Rating (bounded integer constraints)
+- Note (ASCII + length constraints)
+- Tags (case-insensitive duplicate constraints)
+- Pin/Unpin (global cap)
+- Wishlist/Blacklist (mutual status exclusivity + conflict resolution)
+- Compare (multiple index validation)  
+
+These additional complexities require more intricate designing and testing to ensure correctness within BiteBuddy while maintaining a pleasant user experience.
+Higher parser complexity is achieved through different commands requiring [different parsing strategies](#argument-processing-helper-classes) (i.e. prefix-based and positional/whitespace-based), requiring careful integration to maintain consistency and usability.
+
+##### Reuse and effort savings
+
+- We reused a substantial portion of AB3’s architecture and scaffolding: the Logic/Model/Storage layering, command pattern and parsing framework, Jackson-based JSON storage, JavaFX UI skeleton, Gradle configuration, and the documentation site structure. This reuse enabled us to focus on the features we wanted to build rather than reinventing the foundational architecture.
+- Concrete examples of reuse/adaptation:
+    - Storage and JSON pipeline (Jackson) were extended to accommodate richer `Foodplace` fields without redesigning the persistence layer.
+    - The command pattern and parser framework were adapted to implement new commands with custom parsing logic while preserving the overall flow.
+    - The JavaFX UI components were customized for BiteBuddy’s domain while reusing the overall structure and patterns from AB3.
+    - Using Copilot to perform code reviews and generate boilerplate code snippets, saving time on routine coding tasks.
+
+##### Notable achievements
+
+- Proper and disciplined workflow using Git and GitHub, with frequent commits, descriptive messages, feature branching, and effective collaboration via pull requests and code reviews.
+- Mandatory enforcement of coding standards, tests, and documentation, ensuring code quality and maintainability at all times.
+    - Whenever features were added or bugs fixed, corresponding tests and documentation were updated in the same PR.
+    - This is evident from our high test coverage (almost 90%) as indicated by Codecov reports
