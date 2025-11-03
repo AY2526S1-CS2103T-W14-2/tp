@@ -1,0 +1,27 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User executes wishlist command;
+if () then ([INDEX not supplied])
+    :Filter and display all foodplaces that are wishlisted;
+    :Display success message;
+
+else ([else])
+    if () then ([INDEX is invalid])
+        :Display error message;
+    else ([else])
+        if () then ([Foodplace is blacklisted])
+            :Remove foodplace specified by INDEX from blacklist;
+            :Add foodplace specified by INDEX to wishlist;
+            :Display success message;
+            :Display info that the foodplace is also removed from blacklist;
+        else ([else])
+            :Toggle wishlist status of foodplace specified by INDEX;
+            :Display success message;
+        endif
+    endif
+endif
+stop
+@enduml
