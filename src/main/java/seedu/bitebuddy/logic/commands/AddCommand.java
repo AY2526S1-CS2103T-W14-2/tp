@@ -2,10 +2,12 @@ package seedu.bitebuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CLOSE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_CUISINE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_OPEN;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.bitebuddy.logic.parser.CliSyntax.PREFIX_TAG;
@@ -27,6 +29,7 @@ public class AddCommand extends Command {
             + "Parameters:\n"
             + "  " + PREFIX_NAME + "FOODPLACE_NAME "
             + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_OPEN + "OPENING_TIME " + PREFIX_CLOSE + "CLOSING_TIME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_CUISINE + "CUISINE] "

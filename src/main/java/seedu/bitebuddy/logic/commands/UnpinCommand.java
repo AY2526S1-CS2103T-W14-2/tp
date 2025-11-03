@@ -1,7 +1,7 @@
 package seedu.bitebuddy.logic.commands;
 
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_PINNED_FOODPLACES;
+import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
 
 import java.util.List;
 
@@ -52,7 +52,7 @@ public class UnpinCommand extends Command {
 
         Foodplace unpinnedFoodplace = unpinFoodplace(foodplaceToUnpin);
         model.setFoodplace(foodplaceToUnpin, unpinnedFoodplace);
-        model.updateFilteredFoodplaceList(PREDICATE_SHOW_PINNED_FOODPLACES);
+        model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES);
 
         return new CommandResult(String.format(MESSAGE_UNPIN_FOODPLACE_SUCCESS, Messages.format(unpinnedFoodplace)));
     }
