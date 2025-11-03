@@ -245,6 +245,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [ot/OPENING_TIME ct
 ```
 edit: Edits the details of the foodplace identified by the index number used in the displayed foodplace list.
 • INDEX must be a positive integer.
+• At least one optional field must be provided.
 • Existing values will only be overwritten by the supplied input values.
 Parameters:
   INDEX [n/FOODPLACE_NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [c/CUISINE] [ot/OPENING_TIME ct/CLOSING_TIME] [no/NOTE] [r/RATING] [t/TAG]...
@@ -473,6 +474,10 @@ Examples:
 
 ![ug_pin](images/ug_pin.png)
 
+[Go to Command Summary](#command-summary)
+
+---
+
 ### Unpinning a foodplace: `unpin`
 
 Unpins a specified foodplace in Bitebuddy.
@@ -496,6 +501,10 @@ Examples:
 * `unpin 1` unpins the 1st foodplace.
 
 ![ug_unpin](images/ug_unpin.png)
+
+[Go to Command Summary](#command-summary)
+
+---
 
 ### Finding a foodplace: `find`
 
@@ -560,6 +569,10 @@ Examples:
 * `compare 1 3` returns a comparison summary between the 1st and 3rd foodplaces.
 
 ![ug_compare](images/ug_compare.png)
+
+[Go to Command Summary](#command-summary)
+
+---
 
 ### Clearing all entries: `clear`
 

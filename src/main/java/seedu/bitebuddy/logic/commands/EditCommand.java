@@ -49,6 +49,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the foodplace identified "
             + "by the index number used in the displayed foodplace list.\n"
             + "• INDEX must be a positive integer.\n"
+            + "• At least one optional field must be provided.\n"
             + "• Existing values will only be overwritten by the supplied input values.\n"
             + "Parameters:\n"
             + "  " + "INDEX "
