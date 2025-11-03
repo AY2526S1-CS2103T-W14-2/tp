@@ -1685,4 +1685,11 @@ Steps:
 Expected:
 - BiteBuddy opens in a blank state.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+This section describes the planned enhancements for existing features for future versions of BiteBuddy.  
+
+Team size: 5  
 
