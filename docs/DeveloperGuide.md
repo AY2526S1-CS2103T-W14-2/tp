@@ -1724,7 +1724,7 @@ Higher parser complexity is achieved through different commands requiring [diffe
 
 ## **Appendix: Planned Enhancements**
 
-This section describes the planned enhancements for existing features for future versions of BiteBuddy.  
+This section describes the planned enhancements for future versions of BiteBuddy.  
 
 Team size: 5  
 
@@ -1734,7 +1734,7 @@ Team size: 5
 4. Make `find` command support logical operators. The current implementation of `find` command only supports AND logic for different fields. (e.g. `find t/chinese r/8` finds all `Foodplaces` that are tagged with `chinese` AND have `rating` of 8). We plan to extend the functionality to support more complex queries using logical operators like >, >=, <, <= for numerical fields like `rating` (e.g. `find r/>5` finds all `Foodplaces` with `rating` greater than 5).
 5. Make `compare` command support more than 2 `Foodplaces`. The current implementation of `compare` command only supports comparing 2 `Foodplaces` at a time. We plan to extend the functionality to allow users to compare multiple `Foodplaces` simultaneously (e.g. `compare 1 2 3` compares `Foodplaces` at index 1, 2 and 3).
 6. Make `note` field support character limit warning. The current implementation of `note` field allows users to enter notes up to 100 characters without any warning. We plan to implement a character limit warning that notifies users when they are approaching the 100-character limit, helping them manage their note length effectively. 
-7. Make `rating` field support half-star ratings. The current implementation of `rating` field only supports whole number ratings from 0 to 10. We plan to enhance the `rating` field to support half-star ratings (e.g. 7.5) to provide users with more granular control over their ratings. 
+7. Make `rating` field support decimal ratings. The current implementation of `rating` field only supports whole number ratings from 1 to 10. We plan to enhance the `rating` field to support decimal ratings (e.g. 7.8) to provide users with more granular control over their ratings. 
 8. Add support for auto-completion and command suggestions in the CLI. The current implementation of the CLI requires users to type out full commands without any assistance. We plan to implement an auto-completion feature that suggests possible commands and parameters as users type, improving usability and reducing input errors. 
 9. Make `wishlist` and `blacklist` commands support bulk operations. The current implementation of `wishlist` and `blacklist` commands only supports adding or removing one `Foodplace` at a time. We plan to extend the functionality to modify multiple `Foodplaces` in a single command (e.g. `wishlist 1 2 3` adds `Foodplaces` at index 1, 2 and 3 to the wishlist). May require changes to `Wishlist` and `Blacklist` command as current implementation toggles the state instead of setting it to a specific state.
 10. Make `pin` command support reordering of pinned `Foodplaces`. The current implementation of `pin` command pins `Foodplaces` in a lexicographical order based on their names. We plan to implement a feature that allows users to reorder their pinned `Foodplaces` according to their preferences (e.g. `pin reorder 1 3 2` reorders pinned `Foodplaces` to have the `Foodplace` at index 1 first, followed by index 3 and then index 2).
