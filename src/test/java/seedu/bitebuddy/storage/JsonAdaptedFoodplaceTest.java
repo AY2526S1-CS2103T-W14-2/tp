@@ -1,5 +1,4 @@
 package seedu.bitebuddy.storage;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.bitebuddy.storage.JsonAdaptedFoodplace.MISSING_FIELD_MESSAGE_FORMAT;
@@ -36,7 +35,7 @@ public class JsonAdaptedFoodplaceTest {
     private static final String INVALID_NOTE = "Nice place! \u0081";
     private static final String INVALID_CUISINE = "!!invalid!!";
     private static final String INVALID_TIMING = "25:00-26:00";
-    private static final String INVALID_TIMING_RANGE = "23:00-01:00";
+    private static final String INVALID_TIMING_RANGE = "23:00------01:00";
     private static final Integer INVALID_RATING = -5;
 
     private static final String VALID_NAME = DAEBAKSHOP.getName().toString();
@@ -244,7 +243,7 @@ public class JsonAdaptedFoodplaceTest {
                 INVALID_TIMING_RANGE, VALID_CUISINE, VALID_TAGS, VALID_NOTE, VALID_RATING, VALID_WISHLIST,
                 VALID_BLACKLIST, VALID_PINNED);
 
-        String expectedMessage = Timing.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Timing.MESSAGE_INVALID_TIME_RANGE;
         assertThrows(IllegalValueException.class, expectedMessage, adapted::toModelType);
     }
 

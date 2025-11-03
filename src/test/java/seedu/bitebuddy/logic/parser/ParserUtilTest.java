@@ -294,8 +294,8 @@ public class ParserUtilTest {
                 ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED, () -> ParserUtil.parseTiming("09:00", ""));
 
         // closing before opening
-        assertThrows(ParseException.class,
-                Timing.MESSAGE_CONSTRAINTS, () -> ParserUtil.parseTiming("18:00", "09:00"));
+        Timing closeBeforeOpen = ParserUtil.parseTiming("18:00", "09:00");
+        assertEquals(new Timing(LocalTime.of(18, 0), LocalTime.of(9, 0)), closeBeforeOpen);
     }
 
     @Test
