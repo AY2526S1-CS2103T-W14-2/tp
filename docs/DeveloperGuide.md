@@ -139,7 +139,7 @@ There are two common styles of argument processing used by command parsers:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="450" />
+<puml src="diagrams/ModelClassDiagram.puml" />
 
 
 The `Model` component,
@@ -153,7 +153,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" />
+<puml src="diagrams/StorageClassDiagram.puml" width="550"/>
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
