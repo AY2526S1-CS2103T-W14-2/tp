@@ -236,8 +236,6 @@ BiteBuddy understands, so go ahead and **edit** any foodplace entry whenever!
 Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [ot/OPENING_TIME ct/CLOSING_TIME] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`
 
 * Edits the foodplace at the specified `INDEX`.
-* The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
-* The index **must be a positive integer**: 1, 2, 3, …​
 * **At least one of the optional fields** must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the **existing tags of the foodplace will be removed**: adding of tags is **not cumulative**.
@@ -263,8 +261,6 @@ You can add / edit the **note** for a foodplace in BiteBuddy!
 Format: `note INDEX [NOTE]`
 
 * Edits the foodplace at the specified `INDEX`.
-* The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
-* The index **must be a positive integer**: 1, 2, 3, …​
 * By not specifying any `[NOTE]`, you will **remove the foodplace’s notes**.
 * A note has a **maximum character limit of 100**.
 * A note only allows **ASCII-printable characters**. You may refer to [here](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm) for the characters that are accepted.
@@ -288,8 +284,6 @@ You can add / edit a *rating* for a foodplace in BiteBuddy!
 Format: `rate INDEX RATING`
 
 * Edits the foodplace at the specified `INDEX`.
-* The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
-* The index **must be a positive integer**: 1, 2, 3, …​
 * Sets the rating of the foodplace to the specified `RATING`.
 * The rating must be **an integer between 0 and 10**: 0, 1, 2, …​
 * If rating is 0, any existing rating will be removed from the foodplace.
@@ -341,8 +335,6 @@ Wishlist a foodplace in BiteBuddy so you can finally stop making excuses about f
 Format: `wishlist [INDEX]`
 
 * Wishlists the foodplace at the specified `INDEX`.
-* The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
-* The index **must be a positive integer**: 1, 2, 3, …​
 * You can **display your wishlist** by not specifying an `INDEX`.
 * If a foodplace is currently wishlisted, you can use `wishlist` on it again to **remove the wishlist status**.
 * If a foodplace **is currently blacklisted**, adding this foodplace to wishlist **removes its blacklist status**.
@@ -365,8 +357,6 @@ That's why we let you blacklist a foodplace in BiteBuddy too!
 Format: `blacklist [INDEX]`
 
 * Blacklists the foodplace at the specified `INDEX`.
-* The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
-* The index **must be a positive integer**: 1, 2, 3, …​
 * You can **display your blacklist** by not specifying an `INDEX`.
 * If a foodplace is currently **blacklisted**, you can use `blacklist` on it again to **remove the blacklist status**.
 * If a foodplace is currently **wishlisted**, adding this foodplace to blacklist **removes its wishlist status**.
@@ -384,13 +374,11 @@ Examples:
 ### Pinning a foodplace: `pin`
 
 You can pin an existing unpinned foodplace in BiteBuddy for a quick reference!<br>
-Pinned foodplaces always display before regular foodplaces when applicable, so you'll never have to scroll too far to look for them!
+Pinned foodplaces always appear before regular foodplaces when applicable, so you'll never have to scroll too far to look for them!
 
 Format: `pin INDEX`
 
 * Pins the foodplace at the specified `INDEX`.
-* The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
-* The index **must be a positive integer**: 1, 2, 3, ...
 * Pinned foodplaces appear at the top of the displayed foodplace list, indicated by a pin icon in the top right corner.
 * There can be a **maximum of 5** pinned foodplaces.
 
@@ -411,8 +399,6 @@ You can also unpin an existing pinned foodplace in Bitebuddy!
 Format: `unpin INDEX`
 
 * Unpins the foodplace at the specified `INDEX`.
-* The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
-* The index **must be a positive integer**: 1, 2, 3, ...
 
 Examples:
 * `unpin 1` unpins the 1st foodplace.
@@ -426,10 +412,11 @@ Examples:
 ### Finding a foodplace: `find`
 
 Craving for something you've had, or need a quick refresh on a foodplace you've visited before?<br>
-Let BiteBuddy help you find foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords!
+BiteBuddy can search for your keywords across all relevant fields to help you find it quickly!
 
-Format: `find KEYWORD [MORE_KEYWORDS]... [t/TAG [MORE_TAGS]...] [c/CUISINE] [r/RATING]`
+Format: `find [KEYWORD]... [t/TAG [MORE TAGS]] [c/CUISINE] [r/RATING]`
 
+* **At least one of the optional fields** must be provided.
 * The search is **case-insensitive**: `prata` will match `Prata`
 * The **order** of the keywords does **not matter**: `Prata Place` will match `Place Prata`
 * Keywords are **matched against multiple fields**, including names, notes, addresses, etc.
@@ -478,7 +465,11 @@ If you're dead set on clearing the list *after thinking about it long and hard*,
 
 Format: `clear`
 
+<box type="warning">
+
 * **This action is IRREVERSIBLY DESTRUCTIVE! Be extremely careful!**
+
+</box>
 
 [Go to Command Summary](#command-summary)
 
@@ -487,7 +478,7 @@ Format: `clear`
 ### Exiting the program: `exit`
 
 Calling it a day after an exhausting day of *"reviewing"* delicacies from all over?<br>
-You can automatically save BiteBuddy's data before exiting the program.
+BiteBuddy saves your progress automatically, so everything is safe.
 
 Format: `exit`
 
@@ -554,7 +545,7 @@ Action     | Format                                                             
 [**Blacklist**](#blacklisting-a-foodplace-blacklist) | `blacklist [INDEX]`<br>                                                                                                                | `blacklist 2`<br> `blacklist`
 [**Pin**](#pinning-a-foodplace-pin) | `pin [INDEX]`<br>                                                                                                                      | `pin 1`
 [**Unpin**](#unpinning-a-foodplace-unpin) | `unpin [INDEX]`<br>                                                                                                                    | `unpin 2`
-[**Find**](#finding-a-foodplace-find) | `find KEYWORD [MORE_KEYWORDS]`<br> `find t/TAG [MORE_TAGS]…​ [c/CUISINE] [r/RATING]`<br>                                               | `find James Jake`<br> `find t/hawker c/japanese r/8`
+[**Find**](#finding-a-foodplace-find) | `find [KEYWORD]... [t/TAG [MORE TAGS]] [c/CUISINE] [r/RATING]`<br>                                               | `find James Jake`<br> `find t/hawker c/japanese r/8`
 [**Compare**](#comparing-two-foodplaces-compare) | `compare [INDEX1] [INDEX2]`<br>                                                                                                        | `compare 1 3`
 [**Clear**](#clearing-all-entries-clear) | `clear`                                                                                                                                | `clear`
 [**Exit**](#exiting-the-program-exit) | `exit`                                                                                                                                 | `exit`
@@ -576,7 +567,8 @@ Action     | Format                                                             
     - Example: In a displayed list of 5 foodplaces, INDEX must be between 1 and 5
 
 - **n/NAME**: Refers to the name of a Foodplace
-  - Contains only alphanumeric characters and whitespaces (` `)
+  - The 1st character **cannot be a non-alphanumeric character**.
+  - Contains only alphanumeric characters, whitespaces (` `) and certain special characters (`&,'-_@:$#!.`)
 
 - **a/ADDRESS**: Refers to the address of a Foodplace
   - The 1st character **cannot be a space character**. All whitespace leading to a non-space character will be removed
@@ -586,22 +578,24 @@ Action     | Format                                                             
   - Must form a pair with a **closing time** (see below)
   - Cannot be equal to the corresponding closing time
   - Must follow the **HH:mm 24-hour format**
-    - Examples: `12:00` for 12pm, `19:00` for 7pm
+    - Times with single-digit hours must be padded with a `0` prefix to become double-digit hours
+    - Examples: `09:00` for 9am, `12:00` for 12pm, `19:00` for 7pm
 
 - **ct/CLOSING_TIME**: Refers to the closing time of a Foodplace
   - Must form a pair with an **opening time** (see above)
   - Cannot be equal to the corresponding opening time
   - Must follow the **HH:mm 24-hour format**
-    - Examples: `12:00` for 12pm, `19:00` for 7pm
+    - Times with single-digit hours must be padded with a `0` prefix to become double-digit hours
+    - Examples: `09:00` for 9am, `12:00` for 12pm, `19:00` for 7pm
 
 - **p/PHONE_NUMBER**: Refers to the phone number linked to a Foodplace
-  - Contains only numbers (`0 - 9`), no other characters allowed
+  - Contains only numbers, no other characters allowed
   - Must be between 3 and 15 digits long
     - Examples: `999`, `98765432`, `1234432101`
 
 - **e/EMAIL**: Refers to the email linked to a Foodplace
   - It must be in the format `LOCAL@DOMAINS`:
-    - `LOCAL` contains only alphanumeric characters and `+ _ . -`, and the 1st character cannot be `+ _ . -`.
+    - `LOCAL` contains only alphanumeric characters and `+_.-`, and the 1st character cannot be `+_.-`.
     - `DOMAINS` consist of at least one domain label(s) seperated by `.`
       - Must end with a domain label at least 2 characters long
       - Each domain label starts and ends with alphanumeric characters
@@ -615,7 +609,7 @@ Action     | Format                                                             
   - Can be up to 100 characters long
 
 - **r/RATING**: Refers to the score linked to a Foodplace
-  - Contains only numbers (`0 - 9`)
+  - Contains only numbers
   - A valid rating must be between 1 and 10
   - A rating of 0 can be used for removing ratings in applicable commands (e.g. `rate`, `edit`, `add`, etc)
 
