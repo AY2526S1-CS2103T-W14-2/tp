@@ -113,7 +113,7 @@ Follow these steps to install and start using **BiteBuddy**!
 **Some tips about the command format:**<br>
 
 * You must replace the words in `UPPER_CASE` with your input parameters. Different parameters have different rules, so check out the commands' section below first if you need help!<br>
-  - In `add n/NAME`, `NAME` is a required parameter here, so you can use the command as `add n/KFC`.
+  - In `delete INDEX`, `INDEX` is a required parameter here and `delete` expects a numerical input, so you can use the command as `delete 3`.
 
 * Items (e.g. `n/NAME`, `t/TAG`) in square brackets are optional, meaning you don't always have to provide these!<br>
   - In the items `n/NAME [t/TAG]`, they can be used as either `n/KFC t/fried` or `n/KFC`.
@@ -121,10 +121,14 @@ Follow these steps to install and start using **BiteBuddy**!
 * You can use items with a trailing `…`​ any number of times, including removing them.<br>
   - `[t/TAG]…​` can be an empty space (` `, i.e. 0 times), `t/famous`, `t/famous t/hawker`, etc.
 
-* The order of all input parameters doesn't matter.<br>
+* The order of all items doesn't matter.<br>
   - If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also accepted!
 
-* For your commands that do not accept any input parameters (e.g. `list`, `exit`, `clear`), if provided then the parameters will be ignored!<br>
+* When running commands that have required items (i.e. without square brackets), you must minimally provide all items the command requires!
+  - For the `add n/NAME a/ADDRESS [p/PHONE_NUMBER] <shortened for brevity>…` command, you have to provide both `NAME` and `ADDRESS`, but `PHONE_NUMBER` is optional!
+  - A pair of valid examples are `add n/HFC a/1 Seasame Street` and `add n/OlDonald a/10 Dimmsdale Avenue`.
+
+* For the commands that do not accept any items or input parameters (e.g. `list`, `exit`, `clear`), if provided then the parameters will be ignored!<br>
   - If the command specifies `list 123`, it will be interpreted as just `list`.
 
 * If you are providing any timings, they must all follow the HH:mm 24-hour format!<br>
