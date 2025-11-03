@@ -92,7 +92,7 @@ OpenJDK 64-Bit Server VM Zulu17.56+15-CA (build 17.0.14+7-LTS, mixed mode, shari
 5. In the terminal, type the command `java -jar "bitebuddy.jar"` and hit your 'Enter' key to start BiteBuddy!
 
 6. After BiteBuddy starts, you'll soon be greeted by a window similar to the one below. There'll be some sample foodplaces provided to get you started! <br>
-   ![Ui](images/UI_image.png)
+   ![Ui](images/Ui.png)
 
 ### Step 3 — Try Out a Command!
 - To get started, in the Command Box, try typing **`help`** and hitting 'Enter' to open the help window!<br>
