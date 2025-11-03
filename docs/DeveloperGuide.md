@@ -1535,8 +1535,28 @@ Comparing two foodplaces from the list shown
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Valid Test case - Saving data after adding entries:<br>
+    Steps:
+    - Add a new foodplace using `add` command.
+    - Close BiteBuddy.
+    Expected:
+    - Data is persisted correctly in the `addressbook.json` file.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Valid Test case - Missing data file:<br>
+    Steps:
+    - Navigate to the `data` folder.
+    - Delete the `addressbook.json` file.
+    - Launch BiteBuddy.
+    Expected:
+   - BiteBuddy generates a new empty `addressbook.json` file.
 
-1. _{ more test cases …​ }_
+1. Valid Test case - Corrupted data file:<br>
+    Steps:
+    - Navigate to the `data` folder.
+    - Open the `addressbook.json` file.
+    - Delete or modify one or more fields such that the data file is no longer valid.
+    - Save the changes.
+    - Launch BiteBuddy.
+    Expected:
+    - BiteBuddy opens in a blank state.
+
