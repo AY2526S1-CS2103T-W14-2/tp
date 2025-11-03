@@ -514,7 +514,12 @@ Guarantees: If successful, a filtered list of foodplaces matching the query is d
 
 * 2b. Invalid filter/value provided.
     * 2b1. BiteBuddy shows an error message describing the invalid filter or value.
-    
+
+      Use case ends.
+
+* 2c. Pinned items exist in the filtered results.
+    * 2c1. BiteBuddy displays pinned foodplaces at the top of the list, followed by unpinned matches.
+
       Use case ends.
 
 **Use case: UC06 - Add tag(s) to a foodplace**
@@ -1548,7 +1553,7 @@ Comparing two foodplaces from the list shown
     - Delete the `addressbook.json` file.
     - Launch BiteBuddy.
     Expected:
-   - BiteBuddy generates a new empty `addressbook.json` file.
+    - BiteBuddy generates a new empty `addressbook.json` file.
 
 1. Valid Test case - Corrupted data file:<br>
     Steps:
