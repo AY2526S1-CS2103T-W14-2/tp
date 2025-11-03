@@ -390,7 +390,7 @@ Guarantees: If successful, the specified foodplace is updated with the new detai
 
 1. User requests to list foodplaces.
 2. BiteBuddy shows a list of foodplaces.
-3. User chooses to edit an existing foodplace from the list and provides and provides new values for one or more editable fields (e.g., name, address, rating, tags).
+3. User chooses to edit an existing foodplace from the list and provides new values for one or more editable fields.
 4. BiteBuddy updates the foodplace and displays confirmation.
 
     Use case ends.
@@ -514,7 +514,7 @@ Guarantees: The specified tag(s) are removed from the foodplace. Deletion is cas
 
 1. User requests to list foodplaces.
 2. BiteBuddy shows a list of foodplaces.
-3. User issues a delete-tag command with one or more tag names.
+3. User requests to delete tag(s) and provides tag name(s).
 4. BiteBuddy removes the specified tag(s) from the target foodplace and displays a confirmation message.
 
    Use case ends.
@@ -586,7 +586,7 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
 1. User requests to list foodplaces.
 2. BiteBuddy shows a list of foodplaces.
-3. User chooses to rate a specific foodplace from the list.
+3. User chooses to rate a specific foodplace from the list and provides rating.
 4. BiteBuddy updates the foodplace with the rating and displays confirmation.
 
    Use case ends.
@@ -598,8 +598,13 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
       Use case ends.
 
-* 3b. The given rating is invalid.
-    * 3b1. BiteBuddy shows an error message for invalid rating.
+* 3b. The given rating is 0.
+    * 3b1. BiteBuddy removes the rating from the foodplace.
+
+      Use case ends.
+
+* 3c. The given rating is invalid.
+    * 3c1. BiteBuddy shows an error message for invalid rating.
 
       Use case ends.
 
@@ -804,8 +809,8 @@ Guarantees: If successful, a comparison view or summary of the selected foodplac
 
 1. User requests to list foodplaces.  
 2. BiteBuddy shows a list of foodplaces.  
-3. User issues the compare command with two valid indexes.  
-4. BiteBuddy retrieves the corresponding foodplaces, and displays a comparison view and summary showing key attributes (e.g., name, rating, cuisine, notes, tags).  
+3. User requests to compare 2 foodplaces on the list.  
+4. BiteBuddy retrieves the corresponding foodplaces, and displays a comparison view and summary showing key attributes.  
 
     Use case ends.
 
