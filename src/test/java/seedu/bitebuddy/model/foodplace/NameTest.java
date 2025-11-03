@@ -40,7 +40,7 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("Super long Restaurant name")); // long names
         assertTrue(Name.isValidName("McDonald's @ Downtown!")); // with special characters
-        assertTrue(Name.isValidName("Cat, & the_fiddle: #deluxe-edition$.")); // with spaces
+        assertTrue(Name.isValidName("Cat, & the_fiddle: #deluxe-edition$.")); // with more special characters
     }
 
     @Test
