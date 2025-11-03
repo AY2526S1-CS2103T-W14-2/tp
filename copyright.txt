@@ -9,6 +9,6 @@ Copyright by Jan Jan Kovařík - http://glyphicons.com/
 - edit.png
 
 Copyright by Icons8 - https://icons8.com/
-- "Pin 3" icon (used in the application GUI)
+- pin.png
   License: CC BY-ND 3.0
   Source: https://www.iconsdb.com/gray-icons/pin-3-icon.html
