@@ -2,6 +2,7 @@ package seedu.bitebuddy.logic.commands;
 
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
+import static seedu.bitebuddy.model.foodplace.Note.EMPTY_NOTE;
 
 import java.util.List;
 import java.util.Objects;
@@ -103,15 +104,16 @@ public class NoteCommand extends Command {
      */
     private String generateSuccessMessage(Foodplace foodPlaceToEdit, String noteBefore, String noteAfter) {
         String message = !noteAfter.isEmpty() ? MESSAGE_ADD_NOTE_SUCCESS : MESSAGE_DELETE_NOTE_SUCCESS;
-        return String.format(message, foodPlaceToEdit, generateNoteChangeMessage(noteBefore, noteAfter));
+        return String.format(message, Messages.format(foodPlaceToEdit),
+                generateNoteChangeMessage(noteBefore, noteAfter));
     }
 
     private String generateNoteChangeMessage(String noteBefore, String noteAfter) {
         if (Objects.equals(noteBefore, noteAfter)) {
             return "No changes were made.";
         } else {
-            String formattedNoteBefore = noteBefore.isEmpty() ? "<Empty note>" : "\"" + noteBefore + "\"";
-            String formattedNoteAfter = noteAfter.isEmpty() ? "<Empty note>" : "\"" + noteAfter + "\"";
+            String formattedNoteBefore = noteBefore.isEmpty() ? EMPTY_NOTE : "\"" + noteBefore + "\"";
+            String formattedNoteAfter = noteAfter.isEmpty() ? EMPTY_NOTE : "\"" + noteAfter + "\"";
             return String.format("Note changed from %s to %s.", formattedNoteBefore, formattedNoteAfter);
         }
     }

@@ -6,6 +6,7 @@ import static seedu.bitebuddy.logic.Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED
 import java.util.List;
 
 import seedu.bitebuddy.commons.core.index.Index;
+import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.logic.commands.exceptions.CommandException;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.foodplace.Foodplace;
@@ -73,7 +74,7 @@ public class RateCommand extends Command {
      */
     private String generateSuccessMessage(Foodplace foodPlaceToEdit) {
         String message = rate.getValue().equals(Rate.DEFAULT) ? MESSAGE_DELETE_RATE_SUCCESS : MESSAGE_ADD_RATE_SUCCESS;
-        return String.format(message, foodPlaceToEdit);
+        return String.format(message, Messages.format(foodPlaceToEdit));
     }
 
     @Override

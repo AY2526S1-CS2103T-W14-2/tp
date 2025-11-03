@@ -35,7 +35,8 @@ public class BlacklistCommandTest {
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_THIRD_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withBlacklist(true).build();
         BlacklistCommand command = new BlacklistCommand(INDEX_THIRD_FOODPLACE);
-        String expectedMessage = String.format(BlacklistCommand.MESSAGE_ADD_BLACKLIST_SUCCESS, editedFoodplace);
+        String expectedMessage = String.format(BlacklistCommand.MESSAGE_ADD_BLACKLIST_SUCCESS,
+                Messages.format(editedFoodplace));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -47,7 +48,8 @@ public class BlacklistCommandTest {
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withBlacklist(true).build();
         BlacklistCommand command = new BlacklistCommand(INDEX_FIRST_FOODPLACE); // Filtered index is 1
-        String expectedMessage = String.format(BlacklistCommand.MESSAGE_ADD_BLACKLIST_SUCCESS, editedFoodplace);
+        String expectedMessage = String.format(BlacklistCommand.MESSAGE_ADD_BLACKLIST_SUCCESS,
+                Messages.format(editedFoodplace));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
         expectedModel.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES); // Command resets filter
@@ -59,7 +61,8 @@ public class BlacklistCommandTest {
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withBlacklist(false).build();
         BlacklistCommand command = new BlacklistCommand(INDEX_FIRST_FOODPLACE);
-        String expectedMessage = String.format(BlacklistCommand.MESSAGE_REMOVE_BLACKLIST_SUCCESS, editedFoodplace);
+        String expectedMessage = String.format(BlacklistCommand.MESSAGE_REMOVE_BLACKLIST_SUCCESS,
+                Messages.format(editedFoodplace));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -71,7 +74,8 @@ public class BlacklistCommandTest {
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withBlacklist(false).build();
         BlacklistCommand command = new BlacklistCommand(INDEX_FIRST_FOODPLACE); // Filtered index is 1
-        String expectedMessage = String.format(BlacklistCommand.MESSAGE_REMOVE_BLACKLIST_SUCCESS, editedFoodplace);
+        String expectedMessage = String.format(BlacklistCommand.MESSAGE_REMOVE_BLACKLIST_SUCCESS,
+                Messages.format(editedFoodplace));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
         expectedModel.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES); // Command resets filter
@@ -84,7 +88,8 @@ public class BlacklistCommandTest {
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withWishlist(false)
                 .withBlacklist(true).build();
         BlacklistCommand command = new BlacklistCommand(INDEX_SECOND_FOODPLACE);
-        String expectedMessage = String.format(BlacklistCommand.MESSAGE_ADD_BLACKLIST_SUCCESS, editedFoodplace)
+        String expectedMessage = String.format(BlacklistCommand.MESSAGE_ADD_BLACKLIST_SUCCESS,
+                Messages.format(editedFoodplace))
                 + "\n" + MESSAGE_REMOVE_WISHLIST_STATUS_SUCCESS;
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
@@ -98,7 +103,8 @@ public class BlacklistCommandTest {
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withWishlist(false)
                 .withBlacklist(true).build();
         BlacklistCommand command = new BlacklistCommand(INDEX_FIRST_FOODPLACE); // Filtered index is 1
-        String expectedMessage = String.format(BlacklistCommand.MESSAGE_ADD_BLACKLIST_SUCCESS, editedFoodplace)
+        String expectedMessage = String.format(BlacklistCommand.MESSAGE_ADD_BLACKLIST_SUCCESS,
+                Messages.format(editedFoodplace))
                 + "\n" + MESSAGE_REMOVE_WISHLIST_STATUS_SUCCESS;
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
