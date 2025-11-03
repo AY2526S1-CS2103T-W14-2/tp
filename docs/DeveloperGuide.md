@@ -390,7 +390,7 @@ Guarantees: If successful, the specified foodplace is updated with the new detai
 
 1. User requests to list foodplaces.
 2. BiteBuddy shows a list of foodplaces.
-3. User chooses to edit an existing foodplace from the list and provides and provides new values for one or more editable fields (e.g., name, address, rating, tags).
+3. User chooses to edit an existing foodplace from the list and provides new values for one or more editable fields.
 4. BiteBuddy updates the foodplace and displays confirmation.
 
     Use case ends.
