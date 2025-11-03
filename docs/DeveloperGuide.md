@@ -23,6 +23,7 @@
 - Markbind — used to generate app website: https://markbind.org/
 - GitHub Copilot — used for autocompleting and drafting code, as well as doing initial reviews for pull requests: https://github.com/features/copilot
 - “Pin 3” icon used in the application GUI — [Icons8](https://icons8.com), licensed under [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/). Source: [https://www.iconsdb.com/gray-icons/pin-3-icon.html](https://www.iconsdb.com/gray-icons/pin-3-icon.html)
+- "Burger" icon - used in application GUI: [Asryraf Aribi](https://www.behance.net/asyrafaribi)
 
 --------------------------------------------------------------------------------------------------------------------
 
