@@ -960,7 +960,8 @@ Organized in alphabetical order
 * **Food Place**: Any food place, including but not limited to restaurants, hawker stalls, food trucks, and cafes.
 * **GUI (Graphical User Interface)**: The visual interface of the application that allows users to interact with it using graphical elements.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Tag**: A label that can be assigned to food places to categorize or group them.
+* **Tag**: A label that can be assigned to foodplaces to categorize or group them.
+* **Pin**: A foodplace marked with a pin icon that always appears at the top of the displayed list when it meets the conditions for being shown. At most 5 foodplaces can be pinned at any time.
 
 --------------------------------------------------------------------------------------------------------------------
 
