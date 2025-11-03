@@ -121,7 +121,7 @@ public class FoodplaceTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Foodplace.class.getCanonicalName() + "{name=" + PRATASHOP.getName() + ", phone="
+        String expected = "{name=" + PRATASHOP.getName() + ", phone="
                 + PRATASHOP.getPhone()
                 + ", email=" + PRATASHOP.getEmail() + ", address=" + PRATASHOP.getAddress()
                 + ", timing=" + PRATASHOP.getTiming() + ", cuisine=" + PRATASHOP.getCuisine()
