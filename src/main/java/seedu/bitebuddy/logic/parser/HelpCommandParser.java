@@ -2,7 +2,6 @@ package seedu.bitebuddy.logic.parser;
 
 import java.util.Optional;
 
-import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.logic.commands.CommandRegistry;
 import seedu.bitebuddy.logic.commands.HelpCommand;
 import seedu.bitebuddy.logic.parser.exceptions.ParseException;
@@ -12,6 +11,8 @@ import seedu.bitebuddy.logic.parser.exceptions.ParseException;
  * whose usage should be shown. If the provided command word is unknown, a ParseException is thrown.
  */
 public class HelpCommandParser implements Parser<HelpCommand> {
+
+    public static final String COMMAND_WORD_UNKNOWN = "The command word provided to help is unknown.";
 
     // Use CommandRegistry to obtain usage strings
 
@@ -30,7 +31,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         Optional<String> usage = CommandRegistry.getUsage(commandWord);
         if (usage.isEmpty()) {
-            throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(COMMAND_WORD_UNKNOWN);
         }
         return new HelpCommand(usage.get());
     }
