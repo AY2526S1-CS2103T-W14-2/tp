@@ -361,7 +361,7 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 | ½            | `* *`    | user                             | add an average dining cost of an existing entry                        | choose a food place that best fits my current budget                                              | Can use NoteCommand tentatively                      |
 | ½            | `* *`    | expert user                      | add common keyboard shortcuts                                          | quickly add and update new food places                                                            | ↑ and ↓ arrows to cycle command execution history    |
 | ❌            | `* *`    | frequent typer                   | autocomplete suggestions when entering name of food places or cuisines | add food places faster                                                                            |                                                      |
-| ✅            | `* *`    | user                             | compare two or more food places side by side                           | make a better decision when choosing where to eat                                                 | CompareCommand                                       |
+| ✅            | `* *`    | user                             | compare two food places side by side                                   | make a better decision when choosing where to eat                                                 | CompareCommand                                       |
 | ❌            | `*`      | user                             | know what kind of cuisines I often frequent to                         | know what cuisines I might be favourable to                                                       |                                                      |
 | ❌            | `*`      | user                             | click on the food place link / email                                   | quickly contact them for reservation                                                              |                                                      |
 | ❌            | `*`      | user with poor eyesight          | adjust text / UI size                                                  | see the address book entries more clearly                                                         |                                                      |
@@ -386,7 +386,7 @@ Guarantees: If successful, the food place is stored in BiteBuddy without duplica
 
 **MSS**
 
-1. User provides the details for the food place(Name, phone number, email address and postal address)
+1. User provides the details for the food place.
 2. BiteBuddy adds the food place and displays confirmation.
 
     Use case ends.
@@ -940,7 +940,7 @@ Guarantees: If successful, user can reuse a previous command.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed. On macOS, a compatible Java 17 JDK+FX distribution is required.
 2.  Should be able to hold up to 1000 food places without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Error messages must explicitly state the error and provide guidance on correcting the input.
