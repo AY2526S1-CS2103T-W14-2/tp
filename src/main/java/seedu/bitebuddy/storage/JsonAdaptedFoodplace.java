@@ -169,6 +169,8 @@ class JsonAdaptedFoodplace {
             return new Timing(timing);
         } catch (DateTimeParseException e) {
             throw new IllegalValueException(Timing.MESSAGE_INVALID_TIME);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalValueException(Timing.MESSAGE_INVALID_TIME_RANGE);
         }
     }
 
