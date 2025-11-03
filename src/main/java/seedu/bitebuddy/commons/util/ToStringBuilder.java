@@ -33,6 +33,13 @@ public class ToStringBuilder {
     }
 
     /**
+     * Constructs a {@code ToStringBuilder} with just the formatted output to hide the object name.
+     */
+    public ToStringBuilder() {
+        stringBuilder.append(OBJECT_PREFIX);
+    }
+
+    /**
      * Adds a field name/value pair to the output string.
      *
      * @param fieldName The name of the field.

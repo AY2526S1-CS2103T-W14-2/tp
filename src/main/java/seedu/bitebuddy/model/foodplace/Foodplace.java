@@ -177,7 +177,7 @@ public class Foodplace {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        return new ToStringBuilder()
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
