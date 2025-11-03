@@ -1694,14 +1694,14 @@ While AB3 manages a single entity (Person) with basic features, BiteBuddy expand
 - Tags (case-insensitive duplicate constraints)
 - Pin/Unpin (global cap)
 - Wishlist/Blacklist (mutual status exclusivity + conflict resolution)
-- Compare (Multiple index validation)  
+- Compare (multiple index validation)  
 
 These added complexity required more intricate design and testing to ensure correctness and a good user experience.
 Parser complexity is also higher with different commands requiring [different parsing strategies](#argument-processing-helper-classes) (prefix-based and positional/whitespace-based), needing careful integration to maintain consistency and usability.
 
 ##### Reuse and effort savings
 
-- We reused a substantial portion of AB3’s architecture and scaffolding: the Logic/Model/Storage layering, command pattern and parsing framework, Jackson-based JSON storage, JavaFX UI skeleton, Gradle configuration, the documentation site structure. This reuse enable us to focus on the features we wanted to build rather than reinventing the foundational architecture.
+- We reused a substantial portion of AB3’s architecture and scaffolding: the Logic/Model/Storage layering, command pattern and parsing framework, Jackson-based JSON storage, JavaFX UI skeleton, Gradle configuration, the documentation site structure. This reuse enabled us to focus on the features we wanted to build rather than reinventing the foundational architecture.
 - Concrete examples of reuse/adaptation:
     - Storage and JSON pipeline (Jackson) were extended to accommodate richer `Foodplace` fields without redesigning the persistence layer.
     - The command pattern and parser framework were adapted to implement new commands with custom parsing logic while preserving the overall flow.
@@ -1712,4 +1712,4 @@ Parser complexity is also higher with different commands requiring [different pa
 
 - Proper and disciplined workflow using Git and GitHub, with frequent commits, descriptive messages, feature branching, and effective collaboration via pull requests and code reviews.
 - Mandatory enforcement of coding standards, tests, and documentation, ensuring code quality and maintainability at all times.
-    - Whenever features were added or bugs fixed, corresponding tests and documentation are updated in the same PR.
+    - Whenever features were added or bugs fixed, corresponding tests and documentation were updated in the same PR.
