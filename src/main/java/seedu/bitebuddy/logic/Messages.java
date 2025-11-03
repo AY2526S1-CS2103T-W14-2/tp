@@ -43,16 +43,21 @@ public class Messages {
                 .append(foodplace.getEmail())
                 .append("; Address: ")
                 .append(foodplace.getAddress())
-                .append("; Timing: ")
-                .append(foodplace.getTiming().isSet() ? foodplace.getTiming() : "<Empty timing>")
-                .append("; Cuisine: ")
+                .append("; Timing: ");
+
+        if (foodplace.getTiming().isSet()) {
+            builder.append(foodplace.getTiming());
+        } else {
+            builder.append("<Empty timing>");
+        }
+
+                builder.append("; Cuisine: ")
                 .append(foodplace.getCuisine())
                 .append("; Tags: ");
         if (!foodplace.getTags().isEmpty()) {
             foodplace.getTags().forEach(builder::append);
         } else {
-            builder.append("; Tags: ")
-                    .append("<Empty tags>");
+            builder.append("<Empty tags>");
         }
         builder.append("; Rate: ")
                 .append(foodplace.getRate())

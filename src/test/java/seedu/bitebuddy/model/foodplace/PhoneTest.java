@@ -37,6 +37,7 @@ public class PhoneTest {
     public void constructor_emptyPhone_success() {
         String emptyPhone = "";
         assertEquals("", new Phone(emptyPhone).value);
+        assertEquals("<Empty phone>", new Phone(emptyPhone).toString());
     }
 
     @Test
