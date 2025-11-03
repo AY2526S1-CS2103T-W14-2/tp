@@ -475,7 +475,7 @@ Guarantees: If successful, the specified foodplace is updated with the new detai
 
       Use case ends.
 
-* 3a. Edit results in a duplicate (conflicts with an existing entry).
+* 3d. Edit results in a duplicate (conflicts with an existing entry).
     * 3a1. BiteBuddy rejects the edit and shows a duplicate-entry error.
     
       Use case ends.
