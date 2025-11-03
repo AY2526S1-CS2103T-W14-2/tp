@@ -51,7 +51,7 @@ public class Messages {
             builder.append("<Empty timing>");
         }
 
-                builder.append("; Cuisine: ")
+        builder.append("; Cuisine: ")
                 .append(foodplace.getCuisine())
                 .append("; Tags: ");
         if (!foodplace.getTags().isEmpty()) {
