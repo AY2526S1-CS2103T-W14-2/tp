@@ -386,7 +386,7 @@ Guarantees: If successful, the foodplace is stored in BiteBuddy without duplicat
 
 **MSS**
 
-1. User provides the details for the foodplace.
+1. User provides the details of the foodplace.
 2. BiteBuddy adds the foodplace and displays confirmation.
 
     Use case ends.
@@ -412,8 +412,8 @@ Guarantees: The foodplace is deleted if index is valid.
 
 **MSS**
 
-1. User requests to list foodplaces
-2. BiteBuddy shows a list of foodplaces
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
 3. User chooses to delete a specific foodplace from the list.
 4. BiteBuddy deletes the foodplace and displays confirmation.
 
@@ -440,32 +440,32 @@ Guarantees: If successful, the specified foodplace is updated with the new detai
 
 **MSS**
 
-1. User requests to list foodplaces
-2. BiteBuddy shows a list of foodplaces
-3. User chooses to edit an existing foodplace from the list and provides the index of the foodplace and the new fields to update (e.g., name, address, rating, tags).
-4. BiteBuddy updates the foodplace and displays confirmation.  
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to edit an existing foodplace from the list and provides and provides new values for one or more editable fields (e.g., name, address, rating, tags).
+4. BiteBuddy updates the foodplace and displays confirmation.
 
     Use case ends.
 
 **Extensions**
 
 * 3a. User omits all editable fields.
-    * 3a1. BiteBuddy shows an error message indicating no fields provided.  
+    * 3a1. BiteBuddy shows an error message indicating no fields provided.
 
       Use case ends.
 
 * 3b. The given index is invalid.
-    * 3b1. BiteBuddy shows an error for invalid index. 
+    * 3b1. BiteBuddy shows an error for invalid index.
 
       Use case ends.
 
 * 3c. One or more given fields are invalid.
-    * 3c1. BiteBuddy shows an appropriate error message and does not apply changes.  
+    * 3c1. BiteBuddy shows an appropriate error message and does not apply changes.
 
       Use case ends.
 
 * 3a. Edit results in a duplicate (conflicts with an existing entry).
-    * 3a1. BiteBuddy rejects the edit and shows a duplicate-entry error. 
+    * 3a1. BiteBuddy rejects the edit and shows a duplicate-entry error.
     
       Use case ends.
 
@@ -490,9 +490,9 @@ Guarantees: The full list of foodplaces is displayed.
 
 **Use case: UC05 - Find foodplaces**
 
-System: BiteBuddy  
-Actor: User  
-Preconditions: At least one foodplace exists.  
+System: BiteBuddy
+Actor: User
+Preconditions: At least one foodplace exists.
 Guarantees: If successful, a filtered list of foodplaces matching the query is displayed.
 
 **MSS**
@@ -526,8 +526,8 @@ Guarantees: Valid tags are added and duplicates are ignored.
 
 **MSS**
 
-1. User requests to list foodplaces
-2. BiteBuddy shows a list of foodplaces
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
 3. User requests to add tag(s) to a specific foodplace in the list.
 4. BiteBuddy updates the foodplace with the new tag(s) and displays confirmation.
 
@@ -559,8 +559,8 @@ Guarantees: The specified tag(s) are removed from the foodplace. Deletion is cas
 
 **MSS**
 
-1. User requests to list foodplaces
-2. BiteBuddy shows a list of foodplaces
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
 3. User issues a delete-tag command with one or more tag names.
 4. BiteBuddy removes the specified tag(s) from the target foodplace and displays a confirmation message.
 
@@ -593,8 +593,8 @@ Guarantees: A note is stored for the foodplace and existing note is overwritten 
 
 **MSS**
 
-1. User requests to list foodplaces
-2. BiteBuddy shows a list of foodplaces
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
 3. User chooses to add a note to a specific foodplace in the list.
 4. BiteBuddy updates the foodplace with the note and displays confirmation.
 
@@ -626,8 +626,8 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
 **MSS**
 
-1. User requests to list foodplaces
-2. BiteBuddy shows a list of foodplaces
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
 3. User chooses to rate a specific foodplace from the list.
 4. BiteBuddy updates the foodplace with the rating and displays confirmation.
 
@@ -654,8 +654,8 @@ Guarantees: If successful, the foodplace is added to the user's wishlist.
 
 **MSS**
 
-1. User requests to list foodplaces
-2. BiteBuddy shows a list of foodplaces
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
 3. User chooses to add a foodplace in the list to the wishlist.
 4. BiteBuddy adds the foodplace to the wishlist and displays confirmation.  
 
@@ -733,7 +733,7 @@ Guarantees: If successful, the foodplace is marked as blacklisted and excluded f
       Use case ends.
 
 * 3b. The chosen foodplace is on the wishlist.
-    * 3a1. BiteBuddy removes the foodplace from the wishlist
+    * 3a1. BiteBuddy removes the foodplace from the wishlist.
     
       Use case resumes from step 4.
 
@@ -960,7 +960,7 @@ Organized in alphabetical order
 * **Foodplace**: A location where food is sold or served, such as a restaurant, hawker stall, food truck, or cafe.
 * **GUI (Graphical User Interface)**: The visual interface of the application that allows users to interact with it using graphical elements.
 * **Pin**: A foodplace marked with a pin icon that always appears at the top of the displayed list when it meets the conditions for being shown. At most 5 foodplaces can be pinned at any time.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
 * **Tag**: A label that can be assigned to foodplaces to categorize or group them.
 
 --------------------------------------------------------------------------------------------------------------------
