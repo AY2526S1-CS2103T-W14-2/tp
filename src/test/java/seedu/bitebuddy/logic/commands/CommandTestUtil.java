@@ -74,7 +74,7 @@ public class CommandTestUtil {
     public static final String NOTE_DESC_MCRONALDS = " " + PREFIX_NOTE + VALID_NOTE_SERVICE;
     public static final String NOTE_DESC_SWENSWAN = " " + PREFIX_NOTE + VALID_NOTE_FAMOUS;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "kfc^"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "kfc^"; // '^' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
