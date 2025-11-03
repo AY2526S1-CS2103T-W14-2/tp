@@ -66,7 +66,7 @@ Follow these steps to install and start using **BiteBuddy**!
 ### Step 1 — Check Java Version
 - Check that you have Java `17` or above installed on your computer.<br>
    **On Windows 🪟:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).<br>
-   **On Mac 🍎:** Check that you have the JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+   **On Mac 🍎:** Follow the JDK installation guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 - To check your Java version on any system, open a terminal and type: `java -version`
 ![Check Java Version](images/java_version.png)
 
@@ -75,16 +75,16 @@ Follow these steps to install and start using **BiteBuddy**!
 2. Download the latest file named **`bitebuddy.jar`**. There may be other files shown, but you'll only need `bitebuddy.jar`.
    ![Download BiteBuddy.jar](images/download_jar.png)
 3. Choose a folder you want to use as the **home folder** for your BiteBuddy installation, choosing any folder is fine! Then, place `bitebuddy.jar` in this folder.
-4. In your file explorer, right-click an empty space and select **“Open in Terminal”** to start a command terminal directly from this folder. We will be using this terminal over the next steps!<br>
-   *If the above didn't work, stay calm and don't panic!*<br>
-   - Open a command terminal (`cmd` for Windows or `Terminal` for Mac), then type in `cd YOUR/FILE/PATH` while replacing `YOUR/FILE/PATH` with where you've placed the folder holding `bitebuddy.jar` and hit your 'Enter' key.<br>
-   - Then, type in the command `java -jar "bitebuddy.jar"` and hit your 'Enter' key to start BiteBuddy!
+4. Open a command terminal in the folder where you placed `bitebuddy.jar`:<br>
+    - **Recommended:** In your file explorer, right-click an empty space and select **“Open in Terminal”** to start a command terminal directly from this folder.<br>
+    - **If the above didn't work:** Open a command terminal (`cmd` for Windows or `Terminal` for Mac), then type in `cd YOUR/FILE/PATH` (replacing `YOUR/FILE/PATH` with the path to the folder holding `bitebuddy.jar`) and hit your 'Enter' key.<br>
 
    **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)
    **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
-   
 
-5. After BiteBuddy starts, you'll soon be greeted by a window similar to the one below. There'll be some sample foodplaces provided to get you started! <br>
+5. In the terminal, type the command `java -jar "bitebuddy.jar"` and hit your 'Enter' key to start BiteBuddy!
+
+6. After BiteBuddy starts, you'll soon be greeted by a window similar to the one below. There'll be some sample foodplaces provided to get you started! <br>
    ![Ui](images/UI_image.png)
 
 ### Step 3 — Try Out a Command!
@@ -359,7 +359,7 @@ Format: `blacklist [INDEX]`
 * The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
 * The index **must be a positive integer**: 1, 2, 3, …​
 * You can **display your blacklist** by not specifying an `INDEX`.
-* If a foodplace is currently **blacklisted**, you can use `wishlist` on it again to **remove the blacklist status**.
+* If a foodplace is currently **blacklisted**, you can use `blacklist` on it again to **remove the blacklist status**.
 * If a foodplace is currently **wishlisted**, adding this foodplace to blacklist **removes its wishlist status**.
 
 Examples:
