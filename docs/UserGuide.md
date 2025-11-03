@@ -84,10 +84,18 @@ OpenJDK 64-Bit Server VM Zulu17.56+15-CA (build 17.0.14+7-LTS, mixed mode, shari
 2. Download the latest file named **`bitebuddy.jar`**. There may be other files shown, but you'll only need `bitebuddy.jar`.
    ![Download BiteBuddy.jar](images/download_jar.png)
 3. Copy the file to the folder you want to use as the _home folder_ for your BiteBuddy.
-4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar "bitebuddy.jar"` to launch the application.<br>
-   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.
-   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)
-   **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
+4. Open a command terminal, navigate (`cd`) to the folder where you placed the `bitebuddy.jar` file.<br>
+
+<div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap">
+    <figure style="flex:1 1 320px;margin:0">
+        <img src="images/open_in_terminal_Mac.png" alt="Open in Terminal Mac" style="width:100%;height:auto"/>
+        <figcaption style="text-align:center;font-weight:bold">Mac users</figcaption>
+    </figure>
+    <figure style="flex:1 1 320px;margin:0">
+        <img src="images/open_in_terminal_Windows.png" alt="Open in Terminal Windows" style="width:100%;height:auto"/>
+        <figcaption style="text-align:center;font-weight:bold">Windows users</figcaption>
+    </figure>
+</div>
 
 5. In the terminal, type the command `java -jar "bitebuddy.jar"` and hit your 'Enter' key to start BiteBuddy!
 
