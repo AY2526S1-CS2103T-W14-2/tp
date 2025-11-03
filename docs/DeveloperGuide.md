@@ -1588,7 +1588,7 @@ Unpinning a foodplace while all foodplaces are being shown
 * Foodplace being unpinned is currently pinned.
 
 
-##### Valid Test case 1 - Unpinning an pinned foodplace:
+##### Valid Test case 1 - Unpinning a pinned foodplace:
 
 Command: `unpin 1`
 
