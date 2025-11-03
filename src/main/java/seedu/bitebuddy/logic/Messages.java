@@ -44,11 +44,16 @@ public class Messages {
                 .append("; Address: ")
                 .append(foodplace.getAddress())
                 .append("; Timing: ")
-                .append(foodplace.getTiming())
+                .append(foodplace.getTiming().isSet() ? foodplace.getTiming() : "<Empty timing>")
                 .append("; Cuisine: ")
                 .append(foodplace.getCuisine())
                 .append("; Tags: ");
-        foodplace.getTags().forEach(builder::append);
+        if (!foodplace.getTags().isEmpty()) {
+            foodplace.getTags().forEach(builder::append);
+        } else {
+            builder.append("; Tags: ")
+                    .append("<Empty tags>");
+        }
         builder.append("; Rate: ")
                 .append(foodplace.getRate())
                 .append("; Note: ")
