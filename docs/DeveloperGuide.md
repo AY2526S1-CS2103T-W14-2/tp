@@ -676,67 +676,15 @@ Guarantees: The full list of wishlisted foodplaces is displayed.
 
 **Use case: UC13 - Add a foodplace to the blacklist**
 
-System: BiteBuddy  
-Actor: User  
-Preconditions: At least one foodplace exists.  
-Guarantees: If successful, the foodplace is marked as blacklisted and excluded from certain recommendations or listings.
-
-**MSS**
-
-1. User requests to list foodplaces.
-2. BiteBuddy shows a list of foodplaces.
-3. User chooses to blacklist a specific foodplace from the list.
-4. BiteBuddy marks the foodplace as blacklisted and displays confirmation.  
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The given index is invalid.
-    * 3a1. BiteBuddy shows an error for invalid index. 
-
-      Use case ends.
-
-* 3b. The chosen foodplace is on the wishlist.
-    * 3a1. BiteBuddy removes the foodplace from the wishlist.
-    
-      Use case resumes from step 4.
+Similar to UC10 - Add a foodplace to wishlist, but for blacklist.
 
 **Use case: UC14 - Remove a foodplace from blacklist**
 
-System: BiteBuddy  
-Actor: User  
-Preconditions: At least one foodplace exists. The specified foodplace is currently on the user's blacklist.  
-Guarantees: If successful, the foodplace is removed from the user's blacklist.
-
-**MSS**
-
-1. User requests to list foodplaces.
-2. BiteBuddy shows a list of foodplaces.
-3. User requests to un-blacklist a specific foodplace in the list.
-4. BiteBuddy removes the foodplace from the blacklist and displays a confirmation message.
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The given index is invalid.
-    * 3a1. BiteBuddy shows an error message for invalid index.  
-
-        Use case ends.
+Similar to UC11 - Remove a foodplace from wishlist, but for blacklist.
 
 **Use case: UC15 - List all blacklisted foodplaces**
 
-System: BiteBuddy  
-Actor: User  
-Preconditions: At least one blacklisted foodplace exists.  
-Guarantees: The full list of blacklisted foodplaces is displayed.
-
-**MSS**
-1. User requests to list all blacklisted foodplaces.
-2. BiteBuddy retrieves all blacklisted foodplaces and updates the displayed list to show all foodplaces.
-
-    Use case ends.
+Similar to UC12 - List all wishlisted foodplaces, but for blacklist.
 
 **Use case: UC16 - Pin a foodplace**
 
