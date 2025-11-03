@@ -9,7 +9,7 @@ import static seedu.bitebuddy.commons.util.AppUtil.checkArgument;
  */
 public class Name {
 
-    public static final String SPECIAL_CHARACTERS = "&,\'- _@: $#!.";
+    public static final String SPECIAL_CHARACTERS = "&,\'-_@:$#!.";
     public static final String MESSAGE_CONSTRAINTS = String.format("""
             Names should only contain alphanumeric characters, spaces, and these special characters (%s).
             Names cannot start with a special character and cannot be blank.
@@ -19,7 +19,7 @@ public class Name {
      * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}&,\'\\- _@: $#!.]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} &,\'\\-_@:$#!.]*";
 
     public final String fullName;
 
