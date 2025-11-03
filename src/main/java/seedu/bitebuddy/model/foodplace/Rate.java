@@ -60,7 +60,7 @@ public class Rate {
 
     @Override
     public String toString() {
-        return String.format("< %d/%d >", value, MAX);
+        return isSet() ? String.format("< %d/%d >", value, MAX) : "<Empty rating>";
     }
 
     @Override
