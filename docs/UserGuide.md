@@ -10,22 +10,22 @@
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Features](#features)
-  - [Help - Viewing help](#viewing-help-help)
-  - [Add - Adding a foodplace](#adding-a-foodplace-add)
-  - [List - Listing all foodplaces](#listing-all-foodplaces-list)
-  - [Delete - Deleting a foodplace](#deleting-a-foodplace-delete)
-  - [Edit - Editing a foodplace](#editing-a-foodplace-edit)
-  - [Note - Adding a note to a foodplace](#adding-a-note-to-a-foodplace-note)
-  - [Rate - Rating a foodplace](#rating-a-foodplace-rate)
-  - [Tag - Tagging a foodplace](#adding-tags-to-a-foodplace-tag)
-  - [Wishlist - Wishlisting a foodplace](#wishlisting-a-foodplace-wishlist)
-  - [Blacklist - Blacklisting a foodplace](#blacklisting-a-foodplace-blacklist)
-  - [Pin - Pinning a foodplace](#pinning-a-foodplace-pin)
-  - [Unpin - Unpinning a foodplace](#unpinning-a-foodplace-unpin)
-  - [Find - Finding a foodplace](#finding-a-foodplace-find)
-  - [Compare - Compare two foodplaces](#comparing-two-foodplaces-compare)
-  - [Clear - Delete all foodplaces](#clearing-all-entries-clear)
-  - [Exit - Quit the program](#exiting-the-program-exit)
+  - [`help` - Viewing help](#viewing-help-help)
+  - [`add` - Adding a foodplace](#adding-a-foodplace-add)
+  - [`list` - Listing all foodplaces](#listing-all-foodplaces-list)
+  - [`delete` - Deleting a foodplace](#deleting-a-foodplace-delete)
+  - [`edit` - Editing a foodplace](#editing-a-foodplace-edit)
+  - [`note` - Adding a note to a foodplace](#adding-a-note-to-a-foodplace-note)
+  - [`rate` - Rating a foodplace](#rating-a-foodplace-rate)
+  - [`tag` - Tagging a foodplace](#adding-tags-to-a-foodplace-tag)
+  - [`wishlist` - Wishlisting a foodplace](#wishlisting-a-foodplace-wishlist)
+  - [`blacklist` - Blacklisting a foodplace](#blacklisting-a-foodplace-blacklist)
+  - [`pin` - Pinning a foodplace](#pinning-a-foodplace-pin)
+  - [`unpin` - Unpinning a foodplace](#unpinning-a-foodplace-unpin)
+  - [`find` - Finding a foodplace](#finding-a-foodplace-find)
+  - [`compare` - Compare two foodplaces](#comparing-two-foodplaces-compare)
+  - [`clear` - Delete all foodplaces](#clearing-all-entries-clear)
+  - [`exit` - Quit the program](#exiting-the-program-exit)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -64,40 +64,43 @@ Check out the [Quick Start](#quick-start) section right below!
 Follow these steps to install and start using **BiteBuddy**!
 
 ### Step 1 — Check Java Version
-- Ensure you have Java `17` or above installed on your computer.<br>
-   **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-- To check your version, open a terminal and type: `java -version`
+- Check that you have Java `17` or above installed on your computer.<br>
+   **On Windows 🪟:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).<br>
+   **On Mac 🍎:** Check that you have the JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+- To check your Java version on any system, open a terminal and type: `java -version`
 ![Check Java Version](images/java_version.png)
 
 ### Step 2 — Download and Run BiteBuddy
-1. Go to our [GitHub Releases page](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases).
-2. Download the latest file named **`bitebuddy.jar`**.
+1. Head over to our [GitHub Releases page here](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases)!
+2. Download the latest file named **`bitebuddy.jar`**. There may be other files shown, but you'll only need `bitebuddy.jar` minimally.
    ![Download BiteBuddy.jar](images/download_jar.png)
-3. Copy the file to the folder you want to use as the _home folder_ for your BiteBuddy.
-4. Open a command terminal, navigate (`cd`) to the folder where you placed the `BiteBuddy.jar` file, and run the command `java -jar "bitebuddy.jar"` to launch the application.<br>
-   You can also open the terminal **directly from the folder** by right-clicking it and selecting **“Open in Terminal”**.
+3. Choose a folder you want to use as the **home folder** for your BiteBuddy installation, choosing any folder is fine! Then, place `bitebuddy.jar` in this folder.
+4. In your file explorer, right-click an empty space and select **“Open in Terminal”** to start a command terminal directly from this folder. We will be using this terminal over the next steps!<br>
    **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)
    **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
+   *If the above didn't work, stay calm and don't panic!*<br>
+   Open a command terminal (`cmd` for Windows or `Terminal` for Mac), then type in `cd YOUR/FILE/PATH` while replacing `YOUR/FILE/PATH` with where you've placed the folder holding `bitebuddy.jar` and hit your 'Enter' key.<br>
+   Then, type in the command `java -jar "bitebuddy.jar"` and hit your 'Enter' key to start BiteBuddy!
 
-5. A GUI similar to the one below should appear within a few seconds. It comes preloaded with sample data for you to explore. <br>
+5. After BiteBuddy starts, you'll soon be greeted by a window similar to the one below. There'll be some sample foodplaces provided to get you started! <br>
    ![Ui](images/UI_image.png)
 
 ### Step 3 — Try Out a Command!
-- Type the command in the Command Box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.
-  Here are some example commands you can try:
+- To get started, in the Command Box, try typing **`help`** and hitting 'Enter' to open the help window!<br>
+  This will be how commands are ran: *type a command in the Command Box and press the 'Enter' key to execute it*.<br>
+  Here are some example commands you can try to get the ball rolling:
 
-   * `list` : Lists all foodplaces.
+   * `list` : This shows you all foodplaces in BiteBuddy!
 
-   * `add n/KFC a/John street, block 123, #01-01 t/FastFood t/Chicken r/8` : Adds the foodplace *KFC* to BiteBuddy.
+   * `add n/KFC a/John street, block 123, #01-01 t/FastFood t/Chicken r/8` : This adds a new foodplace called *KFC* to BiteBuddy.
 
-   * `delete 3` : Deletes the 3rd foodplace shown in the current list.
+   * `delete 3` : This deletes the 3rd foodplace shown in the current list.
 
-   * `clear` : Deletes all saved foodplaces.
+   * `find KFC` : This gets a list of all places that have the keyword '*KFC*' in BiteBuddy.
 
-   * `exit` : Exits BiteBuddy.
+   * `exit` : This saves BiteBuddy's data and exits BiteBuddy.
 
-- Refer to the [Features](#features) below for details of each command.
+- For details of each command, refer to the [Features](#features) below.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -107,31 +110,31 @@ Follow these steps to install and start using **BiteBuddy**!
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/KFC`.
+* You have to replace the words in `UPPER_CASE` as your input parameters. Different parameters have different rules, check out the commands' section below if you need help!<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter here, so you can use it as `add n/KFC`.
 
-* Items in square brackets are optional.<br>
+* Items in square brackets are optional, meaning you don't always have to provide these!<br>
   e.g `n/NAME [t/TAG]` can be used as `n/KFC t/fried` or as `n/KFC`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them can be used any number of times, including not at all.<br>
   e.g. `[t/TAG]…​` can be an empty space (` `, i.e. 0 times), `t/famous`, `t/famous t/hawker` etc.
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* The order of all input parameters doesn't matter.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also accepted!
 
-* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`.
+* Additional input parameters for commands that do not expect any will be ignored (e.g. `list`, `exit` and `clear`).<br>
+  e.g. if the command specifies `list 123`, it will be interpreted as just `list`.
 
-* All timings must follow the HH:mm 24 hours format.<br>
+* All timings must follow the HH:mm 24-hour format.<br>
   e.g. 12pm should be typed as `12:00` and 7pm should be typed as `19:00`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 **Using previously entered commands:**<br>
 
-* Hate retyping commands? Press the Up / Down arrow keys in the command box!
+* Hate retyping commands? Press the `↑` / `↓` arrow keys in the command box!
 
-* Swap between your previously-used and currently-typing commands!
+* Swap between your previously-used and currently-typing-in-progress commands!
 
 </box>
 
