@@ -311,7 +311,7 @@ Format (2 types):<br>
 
 * Finds the foodplace at the specified `INDEX` and edits its tags.
 * Tags must be made of **any letters and numbers only**, meaning special characters like whitespaces and `/`, `-`, etc aren't allowed!
-* Tag duplicates are case-insensitive and will be ignored!
+* Tag duplicates are case-insensitive and will be overridden by the newly added tag."
 * For the **1st format, at least one tag** must be provided.
 * For the **2nd format**, the provided tag(s) will be deleted.
 * Tag additions are **cumulative**, existing tags are kept until manually deleted.
