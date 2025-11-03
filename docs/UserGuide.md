@@ -150,7 +150,9 @@ Follow these steps to install and start using **BiteBuddy**!
 
 ### Viewing help: `help`
 
-Directs you to more information about BiteBuddy or a requested command's usage!
+Want to try something new, but don't know what's available? Use **help** to find more information about BiteBuddy!<br>
+If you've got a command in mind but have a tough time figuring it out, you can also ask BiteBuddy, who's more than willing
+to help!
 
 Format: `help [COMMAND]`
 
@@ -168,7 +170,8 @@ Examples:
 
 ### Adding a foodplace: `add`
 
-Lets you add a new foodplace entry to BiteBuddy!
+Just had the most satisfying meal of your day with the intention of coming back in future?<br>
+You should **add** a new foodplace to BiteBuddy right before the food coma kicks in! *(He's always hungry for more!)*
 
 Format: `add n/NAME a/ADDRESS [ot/OPENING_TIME ct/CLOSING_TIME] [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`
 
@@ -184,7 +187,8 @@ Examples:
 
 ### Listing all foodplaces: `list`
 
-Shows you a list of all foodplaces in BiteBuddy!
+Sometimes, we all have to check if all of our things are still there! *(Especially foodplaces, no excuses!)*<br>
+Let BiteBuddy pull out the **list** of all foodplaces!
 
 Format: `list`
 
@@ -196,7 +200,8 @@ Format: `list`
 
 ### Deleting a foodplace: `delete`
 
-Lets you delete any existing foodplace entry from the current list!
+Sometimes, it's best to forget ever having visited a foodplace, especially one that you wished you never knew.<br>
+**Delete** any foodplace entry from the current list, no questions asked!
 
 Format: `delete INDEX`
 
@@ -216,7 +221,8 @@ Examples:
 
 ### Editing a foodplace: `edit`
 
-Lets you edit an existing foodplace entry!
+Did your cat roll over your keyboard when you turned away for a split-second?<br>
+BiteBuddy understands, so go ahead and **edit** any foodplace entry whenever!
 
 Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [ot/OPENING_TIME ct/CLOSING_TIME] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`
 
@@ -242,7 +248,8 @@ Examples:
 
 ### Adding a note to a foodplace: `note`
 
-Lets you add / edit the note from an existing foodplace in BiteBuddy!
+Why make mental notes when BiteBuddy has a mental dictionary?<br>
+You can add / edit the **note** for a foodplace in BiteBuddy!
 
 Format: `note INDEX [NOTE]`
 
@@ -266,7 +273,8 @@ Examples:
 
 ### Rating a foodplace: `rate`
 
-Lets you add / edit a rating from an existing foodplace in BiteBuddy!
+Trust your food palate to know exactly how much you like a foodplace, and trust BiteBuddy to remember it for you!<br>
+You can add / edit a *rating* for a foodplace in BiteBuddy!
 
 Format: `rate INDEX RATING`
 
@@ -291,7 +299,8 @@ Examples:
 
 ### Adding Tags to a foodplace: `tag`
 
-Lets you add / remove one or more tags from an existing foodplace in BiteBuddy!
+Ever walked into a japanese restaurant and ended up ordering the best Pizza and Fried Chicken you've had?<br>
+BiteBuddy knows life can be confusing, so why not just add / remove one or more **tags** from a foodplace!
 
 Format (2 types):<br>
 \- `tag INDEX TAG1 [TAG2]...`<br>
@@ -317,7 +326,8 @@ Examples:
 
 ### Wishlisting a foodplace: `wishlist`
 
-Lets you wishlist an existing foodplace in BiteBuddy!
+Have a foodplace that you've had your eye on for some time, but it just keeps getting buried by other foodplaces?<br>
+Wishlist a foodplace in BiteBuddy so you can finally stop making excuses about forgetting all about it!
 
 Format: `wishlist [INDEX]`
 
@@ -340,7 +350,8 @@ Examples:
 
 ### Blacklisting a foodplace: `blacklist`
 
-Lets you blacklist an existing foodplace in BiteBuddy!
+Ever gone to a foodplace whose food made your stomach churn just from the thought of it? We definitely have!<br>
+That's why we let you blacklist a foodplace in BiteBuddy too!
 
 Format: `blacklist [INDEX]`
 
@@ -363,7 +374,8 @@ Examples:
 
 ### Pinning a foodplace: `pin`
 
-Lets you pin an existing foodplace in BiteBuddy!
+You can pin an existing unpinned foodplace in BiteBuddy for a quick reference!<br>
+Pinned foodplaces always display before regular foodplaces when applicable, so you'll never have to scroll too far to look for them!
 
 Format: `pin INDEX`
 
@@ -384,7 +396,8 @@ Examples:
 
 ### Unpinning a foodplace: `unpin`
 
-Lets you unpin an existing pinned foodplace in Bitebuddy!
+Changed your mind on a pinned foodplace, or gotten sick of it after trying it one time too many?<br>
+You can also unpin an existing pinned foodplace in Bitebuddy!
 
 Format: `unpin INDEX`
 
@@ -403,7 +416,8 @@ Examples:
 
 ### Finding a foodplace: `find`
 
-Lets you find existing foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords!
+Craving for something you've had, or need a quick refresh on a foodplace you've visited before?<br>
+Let BiteBuddy help you find foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords!
 
 Format: `find KEYWORD [MORE_KEYWORDS]... [t/TAG [MORE_TAGS]...] [c/CUISINE] [r/RATING]`
 
@@ -429,7 +443,8 @@ Examples:
 
 ### Comparing two foodplaces: `compare`
 
-Lets you compare two foodplaces by their ratings and tags!
+Torn between picking from two tough contenders for today's lunch, and can't trust your gut?<br>
+Make a more informed decision by comparing the ratings and tags of any two foodplaces!
 
 Format: `compare INDEX1 INDEX2`
 
@@ -448,11 +463,13 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-Lets you clear all foodplaces from BiteBuddy!
+Sometimes, there's just no hope for every foodplace on the list, and you're looking for a clean slate to start again.<br>
+If you're dead set on clearing the list *after thinking about it long and hard*, you could clear all foodplaces from BiteBuddy 
+*(although we wouldn't recommend it since we believe in second chances!)*.
 
 Format: `clear`
 
-* **This action is IRREVERSIBLE! Be extremely careful!**
+* **This action is IRREVERSIBLY DESTRUCTIVE! Be extremely careful!**
 
 [Go to Command Summary](#command-summary)
 
@@ -460,7 +477,8 @@ Format: `clear`
 
 ### Exiting the program: `exit`
 
-Saves BiteBuddy's data before exiting the program.
+Calling it a day after an exhausting day of *"reviewing"* delicacies from all over?<br>
+You can automatically save BiteBuddy's data before exiting the program.
 
 Format: `exit`
 
