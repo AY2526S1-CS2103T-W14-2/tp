@@ -72,15 +72,16 @@ Follow these steps to install and start using **BiteBuddy**!
 
 ### Step 2 — Download and Run BiteBuddy
 1. Head over to our [GitHub Releases page here](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases)!
-2. Download the latest file named **`bitebuddy.jar`**. There may be other files shown, but you'll only need `bitebuddy.jar` minimally.
+2. Download the latest file named **`bitebuddy.jar`**. There may be other files shown, but you'll only need `bitebuddy.jar`.
    ![Download BiteBuddy.jar](images/download_jar.png)
 3. Choose a folder you want to use as the **home folder** for your BiteBuddy installation, choosing any folder is fine! Then, place `bitebuddy.jar` in this folder.
 4. In your file explorer, right-click an empty space and select **“Open in Terminal”** to start a command terminal directly from this folder. We will be using this terminal over the next steps!<br>
-   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)
-   **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
    *If the above didn't work, stay calm and don't panic!*<br>
    Open a command terminal (`cmd` for Windows or `Terminal` for Mac), then type in `cd YOUR/FILE/PATH` while replacing `YOUR/FILE/PATH` with where you've placed the folder holding `bitebuddy.jar` and hit your 'Enter' key.<br>
-   Then, type in the command `java -jar "bitebuddy.jar"` and hit your 'Enter' key to start BiteBuddy!
+   Then, type in the command `java -jar "bitebuddy.jar"` and hit your 'Enter' key to start BiteBuddy!<br>
+   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)
+   **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
+   
 
 5. After BiteBuddy starts, you'll soon be greeted by a window similar to the one below. There'll be some sample foodplaces provided to get you started! <br>
    ![Ui](images/UI_image.png)
