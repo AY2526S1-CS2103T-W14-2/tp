@@ -33,7 +33,7 @@ public class ToStringBuilder {
     }
 
     /**
-     * Constructs a {@code ToStringBuilder} with just the formatted output to hide the object name.
+     * Constructs a {@code ToStringBuilder} with just the formatted output without the object name prefix.
      */
     public ToStringBuilder() {
         stringBuilder.append(OBJECT_PREFIX);
