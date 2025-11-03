@@ -56,7 +56,9 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return fullName.equalsIgnoreCase(otherName.fullName);
+        String fn = fullName.replaceAll("\\s+", "");
+        String on = otherName.fullName.replaceAll("\\s+", "");
+        return fn.equalsIgnoreCase(on);
     }
 
     @Override
