@@ -13,10 +13,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Timing {
 
-    public static final String MESSAGE_INVALID_TIME = "Invalid time provided. Time must be in HH:mm format";
-
-    public static final String MESSAGE_INVALID_TIME_RANGE = "Invalid time range format. "
-            + "Timing must be in the format HH:mm-HH:mm";
+    public static final String MESSAGE_INVALID_TIME = """
+            Invalid time provided.
+            Time must be in HH:mm format where HH is 00-23 and mm is 00-59
+            """;
+    public static final String MESSAGE_INVALID_TIME_RANGE = """
+            Invalid time range format.
+            Timing must be in the format HH:mm-HH:mm where HH is 00-23 and mm is 00-59
+            """;
 
     public static final String MESSAGE_EQUAL_TIMES = "Opening and closing times must be different";
 
