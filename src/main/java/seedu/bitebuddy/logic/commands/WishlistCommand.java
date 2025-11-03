@@ -108,7 +108,7 @@ public class WishlistCommand extends Command {
         if (isBlacklisted) {
             message = message + "\n" + MESSAGE_REMOVE_BLACKLIST_STATUS_SUCCESS;
         }
-        return String.format(message, foodPlaceToEdit);
+        return String.format(message, Messages.format(foodPlaceToEdit));
     }
 
     @Override

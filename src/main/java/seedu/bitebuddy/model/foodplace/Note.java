@@ -16,6 +16,8 @@ public class Note {
             2. Note can only contain printable ASCII characters
             Please refer to http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm
             for the list of printable ASCII characters.""";
+    public static final String EMPTY_NOTE = "<Empty note>";
+
     // Allow printable ASCII characters only - space (32) to tilde (126)
     private static final String VALID_NOTE_REGEX = "^[ -~]*$";
     private static final int MAX_NOTE_LENGTH = 100;
@@ -47,7 +49,7 @@ public class Note {
 
     @Override
     public String toString() {
-        return value.isEmpty() ? "No note" : value;
+        return value.isEmpty() ? EMPTY_NOTE : value;
     }
 
     @Override

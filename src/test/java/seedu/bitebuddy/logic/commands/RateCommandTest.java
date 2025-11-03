@@ -12,6 +12,7 @@ import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 import org.junit.jupiter.api.Test;
 
 import seedu.bitebuddy.commons.core.index.Index;
+import seedu.bitebuddy.logic.Messages;
 import seedu.bitebuddy.model.AddressBook;
 import seedu.bitebuddy.model.Model;
 import seedu.bitebuddy.model.ModelManager;
@@ -38,7 +39,7 @@ public class RateCommandTest {
 
         RateCommand rateCommand = new RateCommand(INDEX_FIRST_FOODPLACE, editedPerson.getRate());
 
-        String expectedMessage = String.format(RateCommand.MESSAGE_ADD_RATE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(RateCommand.MESSAGE_ADD_RATE_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(firstPerson, editedPerson);
@@ -53,7 +54,7 @@ public class RateCommandTest {
 
         RateCommand rateCommand = new RateCommand(INDEX_FIRST_FOODPLACE, editedPerson.getRate());
 
-        String expectedMessage = String.format(RateCommand.MESSAGE_DELETE_RATE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(RateCommand.MESSAGE_DELETE_RATE_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(firstPerson, editedPerson);

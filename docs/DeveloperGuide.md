@@ -327,7 +327,7 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 
 **Use case: UC01 - Add a foodplace**
 
-System: BiteBuddy  
+System: BiteBuddy
 Actor: User  
 Preconditions: BiteBuddy is running.  
 Guarantees: If successful, the foodplace is stored in BiteBuddy without duplicates.
