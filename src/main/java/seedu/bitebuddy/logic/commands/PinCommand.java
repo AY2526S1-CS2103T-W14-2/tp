@@ -1,6 +1,7 @@
 package seedu.bitebuddy.logic.commands;
 
 import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
 import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_PINNED_FOODPLACES;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public class PinCommand extends Command {
         Foodplace pinnedFoodplace = pinFoodplace(foodplaceToPin);
         model.setFoodplace(foodplaceToPin, pinnedFoodplace);
 
-        showPinnedFoodplaces(model);
+        model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES);
         return new CommandResult(String.format(MESSAGE_PIN_FOODPLACE_SUCCESS, Messages.format(pinnedFoodplace)));
     }
 
