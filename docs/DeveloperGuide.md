@@ -336,7 +336,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### User stories
 Legends: ✅ - Implemented, ❌ - Not implemented, ½ - Partially implemented
+
 Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (might have if time permits) - `*`
+
+<box type="info" seamless>
+
+**Note:** Developers should refer to this section to verify features already implemented and continue working on features that needs implementing to align to the user needs.
+
+</box>
 
 | Implemented? | Priority | As a …​                          | I want to …​                                                           | So that I can…​                                                                                   | Remarks                                              |
 |--------------|----------|----------------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|------------------------------------------------------|
@@ -374,7 +381,11 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 
 ### Use cases
 
-(For all use cases below, the **System** is `BiteBuddy` and the **Actor** is the `user`, unless specified otherwise)
+<box type="info" seamless>
+
+**Note:** For all use cases below, the **System** is `BiteBuddy` and the **Actor** is the `user`, unless specified otherwise
+
+</box>
 
 
 **Use case: UC01 - Add a food place**
@@ -989,23 +1000,27 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a foodplace
 
-- *Prerequisites:* <br> 
-    - BiteBuddy is running.  
-    - Use the `list` command first to show current foodplaces and note the count.
+*Prerequisites:*
+* BiteBuddy is running.
+* Use the `list` command first to show current foodplaces and note the count.
 
-1. Valid Test case — Adding a complete foodplace:<br>
-    Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`<br>
-    Expected:
-    - Foodplace is added to the list; `list` shows one additional entry.
-    - Details of the new foodplace shown in the status message: `Added Foodplace: Golden Wok ...`
-    - Tags `chinese`, `dinner` are present on the new entry.
+1. **Valid Test case — Adding a complete foodplace:**
 
-1. Valid Test case — Adding with only required fields:<br>
-    Command: `add n/Coffee Corner a/50 Coffee St`<br>  
+    Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`
+
     Expected:
-    - Foodplace is added successfully.
-    - Optional fields are empty/unset.
-    - Details of the new foodplace shown in the status message: `Added Foodplace: Coffee Corner ...`
+    * Foodplace is added to the list; `list` shows one additional entry. 
+    * Details of the new foodplace shown in the status message: `Added Foodplace: Golden Wok ...`
+    * Tags `chinese`, `dinner` are present on the new entry.
+
+2. **Valid Test case — Adding with only required fields:**
+    
+    Command: `add n/Coffee Corner a/50 Coffee St`
+    
+    Expected:
+    * Foodplace is added successfully.
+    * Optional fields are empty/unset.
+    * Details of the new foodplace shown in the status message: `Added Foodplace: Coffee Corner ...`
 
 1. Invalid Test case — Adding with **missing required field**:<br>  
     Command: `add p/91234567 e/a@b.com a/1 Example St`<br>
