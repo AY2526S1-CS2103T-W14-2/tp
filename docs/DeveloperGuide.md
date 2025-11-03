@@ -212,11 +212,13 @@ At the model level, both values are stored inside the `Foodplace` entity with an
 - When an `INDEX` is supplied, toggles the relevant state on the specified `Foodplace` by index creating a new immutable `Foodplace` with the updated field, and then calling `model.setFoodplace(old, updated)` to update the change.
 
 Conflict resolution is handled inside each command before constructing the edited `Foodplace`:
-- In `WishlistCommand`, if the target is already blacklisted but not wishlisted, it first set `Blacklist` to `false` and toggle `Wishlist` to `true`. A secondary status line clarifies that the blacklist status was removed.
+- In `WishlistCommand`, if the target is already blacklisted but not wishlisted, it first set `Blacklist` to `false` and set `Wishlist` to `true`. A secondary status line clarifies that the blacklist status was removed.
+- Otherwise, it simply toggles the `Wishlist` status. (if `true`, set to `false` and vice versa)
+- This is similar for `BlacklistCommand`.
 
-The following activity diagram summarises the control flow a user executes a `wishlist` command:
+The following activity diagram summarises the control flow when a user executes a `wishlist` command:
 
-<puml src="diagrams/WishBlackActivityDiagram.puml" />
+<puml src="diagrams/WishlistActivityDiagram.puml" />
 
 #### Design considerations
 * Conflict resolution is handled in the `WishlistCommand` and `BlacklistCommand`.
