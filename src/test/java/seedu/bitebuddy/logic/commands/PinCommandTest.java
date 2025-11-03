@@ -55,7 +55,7 @@ public class PinCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setFoodplace(foodplace, pinnedFoodplace);
-        expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
+        expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_ALL_FOODPLACES);
 
         assertCommandSuccess(pinCommand, model, expectedMessage, expectedModel);
     }
@@ -79,7 +79,7 @@ public class PinCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setFoodplace(foodplace, pinnedFoodplace);
-        expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_PINNED_FOODPLACES);
+        expectedModel.updateFilteredFoodplaceList(Model.PREDICATE_SHOW_ALL_FOODPLACES);
 
         assertCommandSuccess(pinCommand, model, expectedMessage, expectedModel);
     }

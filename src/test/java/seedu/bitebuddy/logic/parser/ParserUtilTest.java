@@ -294,8 +294,8 @@ public class ParserUtilTest {
                 ParserUtil.MESSAGE_BOTH_TIMES_REQUIRED, () -> ParserUtil.parseTiming("09:00", ""));
 
         // closing before opening
-        assertThrows(ParseException.class,
-                Timing.MESSAGE_CONSTRAINTS, () -> ParserUtil.parseTiming("18:00", "09:00"));
+        Timing closeBeforeOpen = ParserUtil.parseTiming("18:00", "09:00");
+        assertEquals(new Timing(LocalTime.of(18, 0), LocalTime.of(9, 0)), closeBeforeOpen);
     }
 
     @Test
@@ -314,6 +314,11 @@ public class ParserUtilTest {
     public void parseTiming_trimsWhitespace_success() throws Exception {
         Timing t = ParserUtil.parseTiming(" 09:00 ", " 17:00\t");
         assertEquals(new Timing(LocalTime.of(9, 0), LocalTime.of(17, 0)), t);
+    }
+
+    @Test
+    public void parseTiming_equalTimes_throwsParseException() {
+        assertThrows(ParseException.class, Timing.MESSAGE_EQUAL_TIMES, () -> ParserUtil.parseTiming("09:00", "09:00"));
     }
 
     @Test

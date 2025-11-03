@@ -13,12 +13,12 @@ import java.time.format.DateTimeFormatter;
  */
 public class Timing {
 
-    public static final String MESSAGE_CONSTRAINTS = "Closing time must be after or equal to opening time";
-
     public static final String MESSAGE_INVALID_TIME = "Invalid time provided. Time must be in HH:mm format";
 
     public static final String MESSAGE_INVALID_TIME_RANGE = "Invalid time range format. "
             + "Timing must be in the format HH:mm-HH:mm";
+
+    public static final String MESSAGE_EQUAL_TIMES = "Opening and closing times must be different";
 
     public static final String VALIDATION_REGEX = "^([01]\\d|2[0-3]):[0-5]\\d$";
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
@@ -44,7 +44,7 @@ public class Timing {
             return;
         }
 
-        checkArgument(isValidTiming(timeRange), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTiming(timeRange), MESSAGE_INVALID_TIME_RANGE);
         LocalTime[] parsed = parseRange(timeRange);
         this.openingTime = parsed[0];
         this.closingTime = parsed[1];
@@ -70,7 +70,7 @@ public class Timing {
         checkArgument(isValidTime(close), MESSAGE_INVALID_TIME);
         LocalTime opening = LocalTime.parse(open, TIME_FORMATTER);
         LocalTime closing = LocalTime.parse(close, TIME_FORMATTER);
-        checkArgument(!closing.isBefore(opening), MESSAGE_CONSTRAINTS);
+        checkArgument(!opening.equals(closing), MESSAGE_EQUAL_TIMES);
         this.openingTime = opening;
         this.closingTime = closing;
         this.isSet = true;
@@ -84,6 +84,7 @@ public class Timing {
      */
     public Timing(LocalTime openingTime, LocalTime closingTime) {
         requireAllNonNull(openingTime, closingTime);
+        checkArgument(!openingTime.equals(closingTime), MESSAGE_EQUAL_TIMES);
         this.openingTime = openingTime;
         this.closingTime = closingTime;
         this.isSet = true;
@@ -108,16 +109,12 @@ public class Timing {
             return false;
         }
 
-        LocalTime[] parsed;
         try {
-            parsed = parseRange(timeRange);
+            parseRange(timeRange);
+            return true;
         } catch (IllegalArgumentException e) {
             return false;
         }
-
-        LocalTime openingTime = parsed[0];
-        LocalTime closingTime = parsed[1];
-        return !closingTime.isBefore(openingTime);
     }
 
     /**
@@ -139,16 +136,6 @@ public class Timing {
      */
     public Boolean isSet() {
         return isSet;
-    }
-
-    /**
-     * Checks if the foodplace is open at the given time.
-     *
-     * @param time The time to check.
-     * @return true if the foodplace is open at the given time, false otherwise.
-     */
-    public boolean isOpenAt(LocalTime time) {
-        return !time.isBefore(openingTime) && !time.isAfter(closingTime);
     }
 
     /**
@@ -174,6 +161,7 @@ public class Timing {
         String closeStr = parts[1].trim();
         LocalTime opening = LocalTime.parse(openStr, TIME_FORMATTER);
         LocalTime closing = LocalTime.parse(closeStr, TIME_FORMATTER);
+        checkArgument(!opening.equals(closing), MESSAGE_EQUAL_TIMES);
         return new LocalTime[]{opening, closing};
     }
 

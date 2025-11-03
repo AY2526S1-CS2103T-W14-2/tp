@@ -139,16 +139,13 @@ public class ParserUtil {
         }
         String trimmedOpen = open.trim();
         String trimmedClose = close.trim();
-        if (!Timing.isValidTime(trimmedOpen)) {
-            throw new ParseException(Timing.MESSAGE_INVALID_TIME);
-        }
-        if (!Timing.isValidTime(trimmedClose)) {
+        if (!Timing.isValidTime(trimmedOpen) || !Timing.isValidTime(trimmedClose)) {
             throw new ParseException(Timing.MESSAGE_INVALID_TIME);
         }
         LocalTime opening = LocalTime.parse(trimmedOpen);
         LocalTime closing = LocalTime.parse(trimmedClose);
-        if (closing.isBefore(opening)) {
-            throw new ParseException(Timing.MESSAGE_CONSTRAINTS);
+        if (opening.equals(closing)) {
+            throw new ParseException(Timing.MESSAGE_EQUAL_TIMES);
         }
         return new Timing(opening, closing);
     }

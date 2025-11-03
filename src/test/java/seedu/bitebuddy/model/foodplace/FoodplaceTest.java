@@ -53,6 +53,16 @@ public class FoodplaceTest {
         // name differs in case, all other attributes same -> returns true
         Foodplace editedSwenswan = new FoodplaceBuilder(SWENSWAN).withName(VALID_NAME_SWENSWAN.toLowerCase()).build();
         assertTrue(SWENSWAN.isSameFoodplace(editedSwenswan));
+
+        // name differs in trailing spaces, all other attributes same -> returns true
+        String nameWithTrailingSpaces = VALID_NAME_SWENSWAN + " ";
+        editedSwenswan = new FoodplaceBuilder(SWENSWAN).withName(nameWithTrailingSpaces).build();
+        assertTrue(SWENSWAN.isSameFoodplace(editedSwenswan));
+
+        // address differs in extra spaces, all other attributes same -> returns true
+        String addressWithExtraSpaces = "Geneo Lvl      3";
+        editedSwenswan = new FoodplaceBuilder(SWENSWAN).withAddress(addressWithExtraSpaces).build();
+        assertTrue(SWENSWAN.isSameFoodplace(editedSwenswan));
     }
 
     @Test
