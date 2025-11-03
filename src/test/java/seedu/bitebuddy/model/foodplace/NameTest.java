@@ -49,6 +49,9 @@ public class NameTest {
         // same object -> returns true
         assertTrue(name.equals(name));
 
+        // additional spaces -> returns true
+        assertTrue(name.equals(new Name("Valid        Name  ")));
+
         // null -> returns false
         assertNotEquals(name, null);
 
