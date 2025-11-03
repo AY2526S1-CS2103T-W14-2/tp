@@ -153,7 +153,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="700" />
+<puml src="diagrams/StorageClassDiagram.puml" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
