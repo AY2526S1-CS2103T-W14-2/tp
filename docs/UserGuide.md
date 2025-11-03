@@ -152,9 +152,7 @@ Follow these steps to install and start using **BiteBuddy**!
 
 Directs you to more information about BiteBuddy or a requested command's usage!
 
-Format (2 types):<br>
-\- `help`<br>
-\- `help [COMMAND]`
+Format: `help [COMMAND]`
 
 * If no command is given, the URL for the help page will be shown. ![help message](images/helpMessage.png)
 * If a command parameter is given, the usage for the command will be shown instead.
@@ -246,9 +244,7 @@ Examples:
 
 Lets you add / edit the note from an existing foodplace in BiteBuddy!
 
-Format (2 types):<br>
-\- `note INDEX [note]`<br>
-\- `note INDEX`
+Format: `note INDEX [NOTE]`
 
 * Edits the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
@@ -321,30 +317,19 @@ Examples:
 
 ### Wishlisting a foodplace: `wishlist`
 
-Wishlists an existing foodplace in BiteBuddy.
+Lets you wishlist an existing foodplace in BiteBuddy!
 
 Format: `wishlist [INDEX]`
-
-```
-wishlist: Wishlists the foodplace identified by the index number used in the displayed foodplace list.
-If no INDEX is supplied, displays all wishlisted foodplaces instead.
-• If INDEX is supplied, INDEX must be a positive integer.
-• Wishlisting an already-wishlisted foodplace removes its wishlist status.
-Parameters:
-  [INDEX]
-Examples:
-  wishlist 1
-  wishlist
-```
 
 * Wishlists the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
 * The index **must be a positive integer**: 1, 2, 3, …​
 * You can **display your wishlist** by not specifying an `INDEX`.
-* If a foodplace **is already blacklisted**, adding this foodplace to wishlist **removes its blacklist status**.
+* If a foodplace is currently wishlisted, you can use `wishlist` on it again to **remove the wishlist status**.
+* If a foodplace **is currently blacklisted**, adding this foodplace to wishlist **removes its blacklist status**.
 
 Examples:
-* `wishlist 2` Wishlists the 2nd foodplace.
+* `wishlist 2` wishlists the 2nd foodplace.
 * `wishlist` displays all foodplaces that are wishlisted.
 
 ![ug_wishlist](images/ug_wishlist.png)
@@ -355,27 +340,16 @@ Examples:
 
 ### Blacklisting a foodplace: `blacklist`
 
-Blacklists an existing foodplace in BiteBuddy.
+Lets you blacklist an existing foodplace in BiteBuddy!
 
 Format: `blacklist [INDEX]`
-
-```
-blacklist: Blacklists the foodplace identified by the index number used in the displayed foodplace list.
-If no INDEX is supplied, displays all blacklisted foodplaces instead.
-• If INDEX is supplied, INDEX must be a positive integer.
-• Blacklisting an already-blacklisted foodplace removes its blacklist status.
-Parameters:
-  [INDEX]
-Examples:
-  blacklist 1
-  blacklist
-```
 
 * Blacklists the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
 * The index **must be a positive integer**: 1, 2, 3, …​
 * You can **display your blacklist** by not specifying an `INDEX`.
-* If a foodplace **is already wishlisted**, adding this foodplace to blacklist **removes its wishlist status**.
+* If a foodplace is currently **blacklisted**, you can use `wishlist` on it again to **remove the blacklist status**.
+* If a foodplace is currently **wishlisted**, adding this foodplace to blacklist **removes its wishlist status**.
 
 Examples:
 * `blacklist 2` Blacklists the 2nd foodplace.
@@ -389,24 +363,15 @@ Examples:
 
 ### Pinning a foodplace: `pin`
 
-Pins a specified foodplace in BiteBuddy.
+Lets you pin an existing foodplace in BiteBuddy!
 
 Format: `pin INDEX`
-
-```
-pin: Pins the foodplace identified by the index number used in the last foodplace list.
-• INDEX must be a positive integer.
-Parameters:
-  INDEX
-Example:
-  pin 1
-```
 
 * Pins the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
 * The index **must be a positive integer**: 1, 2, 3, ...
 * Pinned foodplaces appear at the top of the displayed foodplace list, indicated by a pin icon in the top right corner.
-* There can be a maximum of 5 pinned foodplaces.
+* There can be a **maximum of 5** pinned foodplaces.
 
 Examples:
 * `pin 2` pins the 2nd foodplace.
@@ -419,18 +384,9 @@ Examples:
 
 ### Unpinning a foodplace: `unpin`
 
-Unpins a specified foodplace in Bitebuddy.
+Lets you unpin an existing pinned foodplace in Bitebuddy!
 
 Format: `unpin INDEX`
-
-```
-unpin: Unpins the foodplace identified by the index number used in the last foodplace list.
-• INDEX must be a positive integer.
-Parameters:
-  INDEX
-Example:
-  unpin 1
-```
 
 * Unpins the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
@@ -447,27 +403,13 @@ Examples:
 
 ### Finding a foodplace: `find`
 
-Finds foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords.
+Lets you find existing foodplaces whose name, phone, email, address, note, rating, or tags contain any of the given keywords!
 
-Format 1: `find KEYWORD [MORE_KEYWORDS]`
-Format 2: `find t/TAG [MORE_TAGS]... [c/CUISINE] [r/RATING]`
-
-```
-find: Finds all foodplaces in BiteBuddy whose entries match the given keywords & specified fields (e.g. t/, c/, r/), then displays them as a list.
-• Keywords and specified fields are case-insensitive.
-• For keywords, foodplaces with fields that match any substring will be returned.
-• For specified fields, only foodplaces that match exactly ALL specified fields are returned.
-Parameters:
-  KEYWORD [MORE_KEYWORDS]... [t/TAG [MORE_TAGS]...] [c/CUISINE] [r/RATING]
-Examples:
-  find western cheap aircon
-  find t/ hawker c/ japanese r/ 8
-  find chicken t/ hawker
-```
+Format: `find KEYWORD [MORE_KEYWORDS]... [t/TAG [MORE_TAGS]...] [c/CUISINE] [r/RATING]`
 
 * The search is **case-insensitive**: `prata` will match `Prata`
 * The **order** of the keywords does **not matter**: `Prata Place` will match `Place Prata`
-* Keywords are **matched against multiple fields**.
+* Keywords are **matched against multiple fields**, including names, notes, addresses, etc.
 * The search uses **substring matching**: `Pr` will match `Prata`
 * Foodplaces **matching at least one keyword** will be returned (i.e. `OR` search).
 * Tag, cuisine, and rating filters **must match exactly** (case-insensitive).
@@ -487,18 +429,9 @@ Examples:
 
 ### Comparing two foodplaces: `compare`
 
-Compares two foodplaces by their ratings and tags.
+Lets you compare two foodplaces by their ratings and tags!
 
 Format: `compare INDEX1 INDEX2`
-
-```
-compare: Compares the two foodplaces identified by the index numbers used in the displayed foodplace list.
-• INDEX1 and INDEX2 must be positive integers. INDEX1 and INDEX2 must not be equal.
-Parameters:
-  INDEX1 INDEX2
-Example:
-  compare 1 5
-```
 
 * Compares the ratings of the two specified foodplaces.
 * Displays common tags shared by both foodplaces.
@@ -515,16 +448,11 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-Clears all entries from BiteBuddy.
+Lets you clear all foodplaces from BiteBuddy!
 
 Format: `clear`
 
-```
-clear: Clears all entries saved in BiteBuddy.
-• This action is IRREVERSIBLE!
-Example:
-  clear
-```
+* **This action is IRREVERSIBLE! Be extremely careful!**
 
 [Go to Command Summary](#command-summary)
 
@@ -532,15 +460,9 @@ Example:
 
 ### Exiting the program: `exit`
 
-Exits the program.
+Saves BiteBuddy's data before exiting the program.
 
 Format: `exit`
-
-```
-exit: Exits the program.
-Example:
-  exit
-```
 
 [Go to Command Summary](#command-summary)
 
@@ -550,9 +472,20 @@ Example:
 
 BiteBuddy data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+Closing BiteBuddy after running it for the first time with 1) no existing data folder and 2) without executing any commands also causes
+this data folder with the JSON file to be generated. This is one of the 2 intended ways to generate the data file, the other being
+whenever a command successfully executes for the first time.
+
 ### Editing the data file
 
 BiteBuddy data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+
+Users are intended to only edit BiteBuddy's JSON file when BiteBuddy is not open. On startup, if the JSON file exists,
+BiteBuddy will only read all data from the JSON file **once** into the program's memory. No subsequent reads to this file  
+are made, and successful commands will cause a write to this file. Closing BiteBuddy will cause the JSON file to be 
+overwritten with BiteBuddy's latest data from the program.
+
+Any external modifications to the JSON file will not influence a running instance of BiteBuddy. If any are made, when the running instance of BiteBuddy exits, it will overwrite all external modifications made and replace it with the program's data.
 
 <box type="warning" seamless>
 
