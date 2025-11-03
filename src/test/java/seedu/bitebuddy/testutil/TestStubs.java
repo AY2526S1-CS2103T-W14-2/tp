@@ -158,4 +158,31 @@ public final class TestStubs {
             // no-op
         }
     }
+
+    /**
+     * A stub class for NoteCommandStub.
+     */
+    public static class NoteCommandStub {
+        // Stub is used for separating note message generation logic in order to test it independently.
+        public static final String NOTE_STUB = "Some note.";
+        public static final String EMPTY_NOTE_STUB = "";
+
+        /**
+         * Generates the expected message assuming the two notes are the same.
+         */
+        public static String generateSameNoteMessage() {
+            return "No changes were made.";
+        }
+
+        /**
+         * Generates the expected message assuming the two notes are different.
+         * @param noteBefore the note that is changing from
+         * @param noteAfter the note that is changing to
+         */
+        public static String generateDifferentNoteMessage(String noteBefore, String noteAfter) {
+            String formattedNoteBefore = noteBefore.isEmpty() ? "<Empty note>" : "\"" + noteBefore + "\"";
+            String formattedNoteAfter = noteAfter.isEmpty() ? "<Empty note>" : "\"" + noteAfter + "\"";
+            return String.format("Note changed from %s to %s.", formattedNoteBefore, formattedNoteAfter);
+        }
+    }
 }
