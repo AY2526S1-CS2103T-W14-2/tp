@@ -153,7 +153,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -310,8 +310,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* food enthusiasts or anyone who wants to keep track of their favourite food places
-* has a need to manage a significant number of food places contacts
+* food enthusiasts or anyone who wants to keep track of their favourite foodplaces
+* has a need to manage a significant number of foodplaces contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -322,16 +322,16 @@ _{Explain here how the data archiving feature will be implemented}_
 * Gordon likes to eat food and goes to many places and try out different kind of food
 * Gordon does not have a way to record the places he likes and dislikes
 * Gordon often forget places that he has tried before, what he rates them and what he thinks about them
-* Gordon has difficulty recommending food places for his friends to try out because he cannot remember them
+* Gordon has difficulty recommending foodplaces for his friends to try out because he cannot remember them
 * Gordon has a wishlist of places he wished to try in his head but often forgets part of them
 
 **Value proposition**:
 
-* Provide a platform to collate information about food places that the user has visited such as, name, address, rating, cuisine, location, notes, etc.
+* Provide a platform to collate information about foodplaces that the user has visited such as, name, address, rating, cuisine, location, notes, etc.
 * Users can quickly access any information they want through extensive sorting and searching feature to make quick and informed decisions
-* Blacklist food places that the user dislikes
-* Wishlist food places to keep track of places they want to try next
-* Pin food places that users can frequently refer to (e.g., favourite food places, use for recommendation purposes, etc.)
+* Blacklist foodplaces that the user dislikes
+* Wishlist foodplaces to keep track of places they want to try next
+* Pin foodplaces that users can frequently refer to (e.g., favourite foodplaces, use for recommendation purposes, etc.)
 
 
 ### User stories
@@ -345,37 +345,37 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 
 </box>
 
-| Implemented? | Priority | As a …​                          | I want to …​                                                           | So that I can…​                                                                                   | Remarks                                              |
-|--------------|----------|----------------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|------------------------------------------------------|
-| ✅            | `* * *`  | user                             | add food places entries                                                | revisit these entries or recommend them                                                           | AddCommand                                           |
-| ✅            | `* * *`  | user                             | delete an existing entry                                               | remove food places that I no longer need to refer to                                              | DeleteCommand                                        |
-| ✅            | `* * *`  | user                             | edit an existing entry                                                 | update details if they change without having to delete and adding it again                        | EditCommand                                          |
-| ✅            | `* * *`  | user                             | rate an existing entry                                                 | refer to the rating to know how good the food place is based on my rating                         | RateCommand                                          |
-| ✅            | `* * *`  | user                             | add notes to an existing entry                                         | keep track of what I liked or disliked at the restaurant                                          | NoteCommand                                          |
-| ✅            | `* * *`  | user                             | tag food places with my own custom keywords                            | filter by personal context                                                                        | TagCommand                                           |
-| ✅            | `* * *`  | user                             | search for a specific food place quickly                               | don't have to spend too long finding a place I visited before                                     | FindCommand                                          |
-| ✅            | `* * *`  | user                             | search based on rating / cuisine / tags                                | choose a food place that I want to go based on the specified parameters                           | FindCommand                                          |
-| ✅            | `* * *`  | first-time user                  | have a clear guidance or help commands                                 | learn how to use and navigate around the app easily                                               | HelpCommand                                          |
-| ✅            | `* * *`  | frequent user                    | pin my favourite food places                                           | quickly refer to them again next time                                                             | PinCommand, UnpinCommand                             |
-| ✅            | `* * *`  | user                             | have a wishlist of food places I want to visit                         | plan for a future visit                                                                           | WishlistCommand                                      |
-| ❌            | `* *`    | user                             | create different tabs / groups                                         | organise and categorise the food places however I want                                            |                                                      |
-| ❌            | `* *`    | expert user                      | add alias to commands                                                  | have shortcuts to execute commands faster                                                         |                                                      |
-| ❌            | `* *`    | indecisive user                  | let the app randomly pick a food place for me                          | decide on what I want to eat without deciding by myself                                           |                                                      |
-| ✅            | `* *`    | potential user exploring the app | see the app pre-populated with sample data                             | easily see how the app will look when it is in use                                                | If no address book is found, default data is created |
-| ✅            | `* *`    | user                             | keep track of the food I dislike                                       | avoid them                                                                                        | BlacklistCommand                                     |
-| ❌            | `* *`    | user                             | filter food places that are open or closed based on current time       | so that I can decide where to eat based on restaurants that are currently open only               |                                                      |
-| ❌            | `* *`    | user                             | sort by distance from my current location                              | know which food places is most conveniently located                                               |                                                      |
-| ½            | `* *`    | user                             | add an average dining cost of an existing entry                        | choose a food place that best fits my current budget                                              | Can use NoteCommand tentatively                      |
-| ½            | `* *`    | expert user                      | add common keyboard shortcuts                                          | quickly add and update new food places                                                            | ↑ and ↓ arrows to cycle command execution history    |
-| ❌            | `* *`    | frequent typer                   | autocomplete suggestions when entering name of food places or cuisines | add food places faster                                                                            |                                                      |
-| ✅            | `* *`    | user                             | compare two or more food places side by side                           | make a better decision when choosing where to eat                                                 | CompareCommand                                       |
-| ❌            | `*`      | user                             | know what kind of cuisines I often frequent to                         | know what cuisines I might be favourable to                                                       |                                                      |
-| ❌            | `*`      | user                             | click on the food place link / email                                   | quickly contact them for reservation                                                              |                                                      |
-| ❌            | `*`      | user with poor eyesight          | adjust text / UI size                                                  | see the address book entries more clearly                                                         |                                                      |
-| ❌            | `*`      | user                             | find a place in my data using multiple filters                         | find a place that I have forgotten the name of                                                    |                                                      |
-| ½            | `*`      | user                             | display a list of all food places I have recommended before            | easily share my top picks with friends                                                            | Can use PinCommand tentatively                       |
-| ❌            | `*`      | user                             | view my dining history in reverse chronological order                  | recall food places I have visited recently                                                        |                                                      |
-| ❌            | `*`      | user                             | see statistics on characteristics of food places I have visited        | discover patterns about my eating preferences and get recommendations for cuisines I rarely tried |                                                      |
+| Implemented? | Priority | As a …​                          | I want to …​                                                          | So that I can…​                                                                                   | Remarks                                              |
+|--------------|----------|----------------------------------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|------------------------------------------------------|
+| ✅            | `* * *`  | user                             | add foodplaces entries                                                | revisit these entries or recommend them                                                           | AddCommand                                           |
+| ✅            | `* * *`  | user                             | delete an existing entry                                              | remove foodplaces that I no longer need to refer to                                               | DeleteCommand                                        |
+| ✅            | `* * *`  | user                             | edit an existing entry                                                | update details if they change without having to delete and adding it again                        | EditCommand                                          |
+| ✅            | `* * *`  | user                             | rate an existing entry                                                | refer to the rating to know how good the foodplace is based on my rating                          | RateCommand                                          |
+| ✅            | `* * *`  | user                             | add notes to an existing entry                                        | keep track of what I liked or disliked at the restaurant                                          | NoteCommand                                          |
+| ✅            | `* * *`  | user                             | tag foodplaces with my own custom keywords                            | filter by personal context                                                                        | TagCommand                                           |
+| ✅            | `* * *`  | user                             | search for a specific foodplace quickly                               | don't have to spend too long finding a place I visited before                                     | FindCommand                                          |
+| ✅            | `* * *`  | user                             | search based on rating / cuisine / tags                               | choose a foodplace that I want to go based on the specified parameters                            | FindCommand                                          |
+| ✅            | `* * *`  | first-time user                  | have a clear guidance or help commands                                | learn how to use and navigate around the app easily                                               | HelpCommand                                          |
+| ✅            | `* * *`  | frequent user                    | pin my favourite foodplaces                                           | quickly refer to them again next time                                                             | PinCommand, UnpinCommand                             |
+| ✅            | `* * *`  | user                             | have a wishlist of foodplaces I want to visit                         | plan for a future visit                                                                           | WishlistCommand                                      |
+| ❌            | `* *`    | user                             | create different tabs / groups                                        | organise and categorise the foodplaces however I want                                             |                                                      |
+| ❌            | `* *`    | expert user                      | add alias to commands                                                 | have shortcuts to execute commands faster                                                         |                                                      |
+| ❌            | `* *`    | indecisive user                  | let the app randomly pick a foodplace for me                          | decide on what I want to eat without deciding by myself                                           |                                                      |
+| ✅            | `* *`    | potential user exploring the app | see the app pre-populated with sample data                            | easily see how the app will look when it is in use                                                | If no address book is found, default data is created |
+| ✅            | `* *`    | user                             | keep track of the food I dislike                                      | avoid them                                                                                        | BlacklistCommand                                     |
+| ❌            | `* *`    | user                             | filter foodplaces that are open or closed based on current time       | so that I can decide where to eat based on restaurants that are currently open only               |                                                      |
+| ❌            | `* *`    | user                             | sort by distance from my current location                             | know which foodplaces is most conveniently located                                                |                                                      |
+| ½            | `* *`    | user                             | add an average dining cost of an existing entry                       | choose a foodplace that best fits my current budget                                               | Can use NoteCommand tentatively                      |
+| ½            | `* *`    | expert user                      | add common keyboard shortcuts                                         | quickly add and update new foodplaces                                                             | ↑ and ↓ arrows to cycle command execution history    |
+| ❌            | `* *`    | frequent typer                   | autocomplete suggestions when entering name of foodplaces or cuisines | add foodplaces faster                                                                             |                                                      |
+| ✅            | `* *`    | user                             | compare two foodplaces side by side                                   | make a better decision when choosing where to eat                                                 | CompareCommand                                       |
+| ❌            | `*`      | user                             | know what kind of cuisines I often frequent to                        | know what cuisines I might be favourable to                                                       |                                                      |
+| ❌            | `*`      | user                             | click on the foodplace link / email                                   | quickly contact them for reservation                                                              |                                                      |
+| ❌            | `*`      | user with poor eyesight          | adjust text / UI size                                                 | see the address book entries more clearly                                                         |                                                      |
+| ❌            | `*`      | user                             | find a place in my data using multiple filters                        | find a place that I have forgotten the name of                                                    |                                                      |
+| ½            | `*`      | user                             | display a list of all foodplaces I have recommended before            | easily share my top picks with friends                                                            | Can use PinCommand tentatively                       |
+| ❌            | `*`      | user                             | view my dining history in reverse chronological order                 | recall foodplaces I have visited recently                                                         |                                                      |
+| ❌            | `*`      | user                             | see statistics on characteristics of foodplaces I have visited        | discover patterns about my eating preferences and get recommendations for cuisines I rarely tried |                                                      |
 
 *{More may be added in the future}*
 
@@ -388,17 +388,17 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 </box>
 
 
-**Use case: UC01 - Add a food place**
+**Use case: UC01 - Add a foodplace**
 
 System: BiteBuddy
 Actor: User
 Preconditions: BiteBuddy is running.
-Guarantees: If successful, the food place is stored in BiteBuddy without duplicates.
+Guarantees: If successful, the foodplace is stored in BiteBuddy without duplicates.
 
 **MSS**
 
-1. User provides the details for the food place(Name, phone number, email address and postal address)
-2. BiteBuddy adds the food place and displays confirmation.
+1. User provides the details of the foodplace.
+2. BiteBuddy adds the foodplace and displays confirmation.
 
     Use case ends.
 
@@ -414,19 +414,19 @@ Guarantees: If successful, the food place is stored in BiteBuddy without duplica
 
       Use case ends.
 
-**Use case: UC02 - Delete a food place**
+**Use case: UC02 - Delete a foodplace**
 
 System: BiteBuddy
 Actor: User
-Preconditions: At least one food place exists.
-Guarantees: The food place is deleted if index is valid.
+Preconditions: At least one foodplace exists.
+Guarantees: The foodplace is deleted if index is valid.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to delete a specific food place from the list.
-4. BiteBuddy deletes the food place and displays confirmation.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to delete a specific foodplace from the list.
+4. BiteBuddy deletes the foodplace and displays confirmation.
 
    Use case ends.
 
@@ -442,73 +442,73 @@ Guarantees: The food place is deleted if index is valid.
 
       Use case ends.
 
-**Use case: UC03 - Edit a food place**
+**Use case: UC03 - Edit a foodplace**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, the specified food place is updated with the new details.
+Preconditions: At least one foodplace exists.  
+Guarantees: If successful, the specified foodplace is updated with the new details.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to edit an existing food place from the list and provides the index of the food place and the new fields to update (e.g., name, address, rating, tags).
-4. BiteBuddy updates the food place and displays confirmation.  
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to edit an existing foodplace from the list and provides and provides new values for one or more editable fields (e.g., name, address, rating, tags).
+4. BiteBuddy updates the foodplace and displays confirmation.
 
     Use case ends.
 
 **Extensions**
 
 * 3a. User omits all editable fields.
-    * 3a1. BiteBuddy shows an error message indicating no fields provided.  
+    * 3a1. BiteBuddy shows an error message indicating no fields provided.
 
       Use case ends.
 
 * 3b. The given index is invalid.
-    * 3b1. BiteBuddy shows an error for invalid index. 
+    * 3b1. BiteBuddy shows an error for invalid index.
 
       Use case ends.
 
 * 3c. One or more given fields are invalid.
-    * 3c1. BiteBuddy shows an appropriate error message and does not apply changes.  
+    * 3c1. BiteBuddy shows an appropriate error message and does not apply changes.
 
       Use case ends.
 
 * 3a. Edit results in a duplicate (conflicts with an existing entry).
-    * 3a1. BiteBuddy rejects the edit and shows a duplicate-entry error. 
+    * 3a1. BiteBuddy rejects the edit and shows a duplicate-entry error.
     
       Use case ends.
 
-**Use case: UC04 - List all food places**
+**Use case: UC04 - List all foodplaces**
 
 System: BiteBuddy  
 Actor: User  
 Preconditions: BiteBuddy is running.  
-Guarantees: The full list of food places is displayed.
+Guarantees: The full list of foodplaces is displayed.
 
 **MSS**
-1. User requests to list all food places.
-2. BiteBuddy retrieves the full address book and updates the displayed list to show all food places.
+1. User requests to list all foodplaces.
+2. BiteBuddy retrieves the full address book and updates the displayed list to show all foodplaces.
 
     Use case ends.
 
 **Extensions**
-* 1a. Address book contains pinned food places.
-    * 1a1. BiteBuddy displays pinned food places at the top of the list.
+* 1a. Address book contains pinned foodplaces.
+    * 1a1. BiteBuddy displays pinned foodplaces at the top of the list.
     
     Use case resumes at step 2.
 
-**Use case: UC05 - Find food places**
+**Use case: UC05 - Find foodplaces**
 
-System: BiteBuddy  
-Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, a filtered list of food places matching the query is displayed.
+System: BiteBuddy
+Actor: User
+Preconditions: At least one foodplace exists.
+Guarantees: If successful, a filtered list of foodplaces matching the query is displayed.
 
 **MSS**
-1. User requests to find food places with one or more search keywords or filters.
-2. BiteBuddy updates the displayed list to show only matching food places and displays a summary message indicating the number of results found.
+1. User requests to find foodplaces with one or more search keywords or filters.
+2. BiteBuddy updates the displayed list to show only matching foodplaces and displays a summary message indicating the number of results found.
 
     Use case ends.
 
@@ -525,22 +525,27 @@ Guarantees: If successful, a filtered list of food places matching the query is 
 
 * 2b. Invalid filter/value provided.
     * 2b1. BiteBuddy shows an error message describing the invalid filter or value.
-    
+
       Use case ends.
 
-**Use case: UC06 - Add tag(s) to a food place**
+* 2c. Pinned items exist in the filtered results.
+    * 2c1. BiteBuddy displays pinned foodplaces at the top of the list, followed by unpinned matches.
+
+      Use case ends.
+
+**Use case: UC06 - Add tag(s) to a foodplace**
 
 System: BiteBuddy
 Actor: User
-Preconditions: At least one food place exists.
+Preconditions: At least one foodplace exists.
 Guarantees: Valid tags are added and duplicates are ignored.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User requests to add tag(s) to a specific food place in the list.
-4. BiteBuddy updates the food place with the new tag(s) and displays confirmation.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User requests to add tag(s) to a specific foodplace in the list.
+4. BiteBuddy updates the foodplace with the new tag(s) and displays confirmation.
 
    Use case ends.
 
@@ -561,19 +566,19 @@ Guarantees: Valid tags are added and duplicates are ignored.
 
       Use case ends.
 
-**Use case: UC07 - Delete tag(s) from a food place**
+**Use case: UC07 - Delete tag(s) from a foodplace**
 
 System: BiteBuddy
 Actor: User
-Preconditions: At least one food place exists.
-Guarantees: The specified tag(s) are removed from the food place. Deletion is case-insensitive, and if no tags are provided, all tags are cleared.
+Preconditions: At least one foodplace exists.
+Guarantees: The specified tag(s) are removed from the foodplace. Deletion is case-insensitive, and if no tags are provided, all tags are cleared.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
 3. User issues a delete-tag command with one or more tag names.
-4. BiteBuddy removes the specified tag(s) from the target food place and displays a confirmation message.
+4. BiteBuddy removes the specified tag(s) from the target foodplace and displays a confirmation message.
 
    Use case ends.
 
@@ -584,30 +589,30 @@ Guarantees: The specified tag(s) are removed from the food place. Deletion is ca
 
       Use case ends.
 
-* 3b. The given tag(s) do not exist on the food place.
+* 3b. The given tag(s) do not exist on the foodplace.
     * 3b1. BiteBuddy shows an error message for no matching tags found to delete.
 
       Use case ends.
 
 * 3c. No tags given.
-    * 3c1. BiteBuddy removes all tags from the specified food place.
+    * 3c1. BiteBuddy removes all tags from the specified foodplace.
     * 3c2. BiteBuddy displays a confirmation message that tags were updated.
 
       Use case ends.
 
-**Use case: UC08 - Add a note to a food place**
+**Use case: UC08 - Add a note to a foodplace**
 
 System: BiteBuddy
 Actor: User
-Preconditions: At least one food place exists.
-Guarantees: A note is stored for the food place and existing note is overwritten if present.
+Preconditions: At least one foodplace exists.
+Guarantees: A note is stored for the foodplace and existing note is overwritten if present.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to add a note to a specific food place in the list.
-4. BiteBuddy updates the food place with the note and displays confirmation.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to add a note to a specific foodplace in the list.
+4. BiteBuddy updates the foodplace with the note and displays confirmation.
 
    Use case ends.
 
@@ -628,19 +633,19 @@ Guarantees: A note is stored for the food place and existing note is overwritten
 
       Use case ends.
 
-**Use case: UC09 - Rate a food place**
+**Use case: UC09 - Rate a foodplace**
 
 System: BiteBuddy
 Actor: User
-Preconditions: At least one food place exists.
+Preconditions: At least one foodplace exists.
 Guarantees: A rating between 1–10 is stored and existing rating is overwritten.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to rate a specific food place from the list.
-4. BiteBuddy updates the food place with the rating and displays confirmation.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to rate a specific foodplace from the list.
+4. BiteBuddy updates the foodplace with the rating and displays confirmation.
 
    Use case ends.
 
@@ -656,19 +661,19 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
       Use case ends.
 
-**Use case: UC10 - Add a food place to wishlist**
+**Use case: UC10 - Add a foodplace to wishlist**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists. The specified food place is not wishlisted.
-Guarantees: If successful, the food place is added to the user's wishlist.
+Preconditions: At least one foodplace exists. The specified foodplace is not wishlisted.
+Guarantees: If successful, the foodplace is added to the user's wishlist.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to add a food place in the list to the wishlist.
-4. BiteBuddy adds the food place to the wishlist and displays confirmation.  
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to add a foodplace in the list to the wishlist.
+4. BiteBuddy adds the foodplace to the wishlist and displays confirmation.  
 
     Use case ends.
 
@@ -679,24 +684,24 @@ Guarantees: If successful, the food place is added to the user's wishlist.
 
       Use case ends.
 
-* 3b. The chosen food place is blacklisted.
-    * 3b1. BiteBuddy removes the food place from the blacklist
+* 3b. The chosen foodplace is blacklisted.
+    * 3b1. BiteBuddy removes the foodplace from the blacklist
 
       Use case resumes from step 4.
 
-**Use case: UC11 - Remove a food place from wishlist**
+**Use case: UC11 - Remove a foodplace from wishlist**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists. The specified food place is currently on the user's wishlist.  
-Guarantees: If successful, the food place is removed from the user's wishlist.
+Preconditions: At least one foodplace exists. The specified foodplace is currently on the user's wishlist.  
+Guarantees: If successful, the foodplace is removed from the user's wishlist.
 
 **MSS**
 
-1. User requests to list food places.
-2. BiteBuddy shows a list of food places.
-3. User requests to unwishlist a specific food place in the list.
-4. BiteBuddy removes the food place from the wishlist and displays a confirmation message.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User requests to unwishlist a specific foodplace in the list.
+4. BiteBuddy removes the foodplace from the wishlist and displays a confirmation message.
 
     Use case ends.
 
@@ -707,32 +712,32 @@ Guarantees: If successful, the food place is removed from the user's wishlist.
 
      Use case ends.
 
-**Use case: UC12 - List all wishlisted food places**
+**Use case: UC12 - List all wishlisted foodplaces**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one wishlisted food place exists.
-Guarantees: The full list of wishlisted food places is displayed.
+Preconditions: At least one wishlisted foodplace exists.
+Guarantees: The full list of wishlisted foodplaces is displayed.
 
 **MSS**
-1. User requests to list all wishlisted food places.
-2. BiteBuddy retrieves all wishlisted food places and updates the displayed list to show all food places.
+1. User requests to list all wishlisted foodplaces.
+2. BiteBuddy retrieves all wishlisted foodplaces and updates the displayed list to show all foodplaces.
 
     Use case ends.
 
-**Use case: UC13 - Add a food place to the blacklist**
+**Use case: UC13 - Add a foodplace to the blacklist**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, the food place is marked as blacklisted and excluded from certain recommendations or listings.
+Preconditions: At least one foodplace exists.  
+Guarantees: If successful, the foodplace is marked as blacklisted and excluded from certain recommendations or listings.
 
 **MSS**
 
-1. User requests to list food places.
-2. BiteBuddy shows a list of food places.
-3. User chooses to blacklist a specific food place from the list.
-4. BiteBuddy marks the food place as blacklisted and displays confirmation.  
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to blacklist a specific foodplace from the list.
+4. BiteBuddy marks the foodplace as blacklisted and displays confirmation.  
 
     Use case ends.
 
@@ -743,24 +748,24 @@ Guarantees: If successful, the food place is marked as blacklisted and excluded 
 
       Use case ends.
 
-* 3b. The chosen food place is on the wishlist.
-    * 3a1. BiteBuddy removes the food place from the wishlist
+* 3b. The chosen foodplace is on the wishlist.
+    * 3a1. BiteBuddy removes the foodplace from the wishlist.
     
       Use case resumes from step 4.
 
-**Use case: UC14 - Remove a food place from blacklist**
+**Use case: UC14 - Remove a foodplace from blacklist**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists. The specified food place is currently on the user's blacklist.  
-Guarantees: If successful, the food place is removed from the user's blacklist.
+Preconditions: At least one foodplace exists. The specified foodplace is currently on the user's blacklist.  
+Guarantees: If successful, the foodplace is removed from the user's blacklist.
 
 **MSS**
 
-1. User requests to list food places.
-2. BiteBuddy shows a list of food places.
-3. User requests to un-blacklist a specific food place in the list.
-4. BiteBuddy removes the food place from the blacklist and displays a confirmation message.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User requests to un-blacklist a specific foodplace in the list.
+4. BiteBuddy removes the foodplace from the blacklist and displays a confirmation message.
 
     Use case ends.
 
@@ -771,32 +776,32 @@ Guarantees: If successful, the food place is removed from the user's blacklist.
 
         Use case ends.
 
-**Use case: UC15 - List all blacklisted food places**
+**Use case: UC15 - List all blacklisted foodplaces**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one blacklisted food place exists.
-Guarantees: The full list of blacklisted food places is displayed.
+Preconditions: At least one blacklisted foodplace exists.
+Guarantees: The full list of blacklisted foodplaces is displayed.
 
 **MSS**
-1. User requests to list all blacklisted food places.
-2. BiteBuddy retrieves all blacklisted food places and updates the displayed list to show all food places.
+1. User requests to list all blacklisted foodplaces.
+2. BiteBuddy retrieves all blacklisted foodplaces and updates the displayed list to show all foodplaces.
 
     Use case ends.
 
-**Use case: UC16 - Pin a food place**
+**Use case: UC16 - Pin a foodplace**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, the food place is pinned.
+Preconditions: At least one foodplace exists.  
+Guarantees: If successful, the foodplace is pinned.
 
 **MSS**
 
-1. User requests to list food places.
-2. BiteBuddy shows a list of food places.
-3. User chooses to pin a specific food place on the list.
-4. BiteBuddy pins the food place and displays confirmation.  
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to pin a specific foodplace on the list.
+4. BiteBuddy pins the foodplace and displays confirmation.  
 
     Use case ends.
 
@@ -807,7 +812,7 @@ Guarantees: If successful, the food place is pinned.
 
       Use case ends.
 
-* 3b. Food place already pinned.
+* 3b. Foodplace already pinned.
     * 3b1. BiteBuddy informs the user and makes no change.
 
       Use case ends.
@@ -817,19 +822,19 @@ Guarantees: If successful, the food place is pinned.
 
       Use case ends.
 
-**Use case: UC17 - Unpin a food place**
+**Use case: UC17 - Unpin a foodplace**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists. The specified food place is currently pinned.  
-Guarantees: If successful, the food place is unpinned.
+Preconditions: At least one foodplace exists. The specified foodplace is currently pinned.  
+Guarantees: If successful, the foodplace is unpinned.
 
 **MSS**
 
-1. User requests to list food places.  
-2. BiteBuddy shows a list of food places.  
-3. User chooses to unpin a specific food place in the list.  
-4. BiteBuddy validates the index, unpins the food place, and displays a confirmation message.
+1. User requests to list foodplaces.  
+2. BiteBuddy shows a list of foodplaces.  
+3. User chooses to unpin a specific foodplace in the list.  
+4. BiteBuddy validates the index, unpins the foodplace, and displays a confirmation message.
 
     Use case ends.
 
@@ -840,25 +845,25 @@ Guarantees: If successful, the food place is unpinned.
 
       Use case ends.
 
-* 3b. The chosen food place is not pinned.
-    * 3b1. BiteBuddy informs the user that the food place is not pinned and makes no change.
+* 3b. The chosen foodplace is not pinned.
+    * 3b1. BiteBuddy informs the user that the foodplace is not pinned and makes no change.
 
       Use case ends.
 
 
-**Use case: UC18 - Compare two or more food places**
+**Use case: UC18 - Compare two or more foodplaces**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least two food places exist.  
-Guarantees: If successful, a comparison view or summary of the selected food places is presented to the user.
+Preconditions: At least two foodplaces exist.  
+Guarantees: If successful, a comparison view or summary of the selected foodplaces is presented to the user.
 
 **MSS**
 
-1. User requests to list food places.  
-2. BiteBuddy shows a list of food places.  
+1. User requests to list foodplaces.  
+2. BiteBuddy shows a list of foodplaces.  
 3. User issues the compare command with two valid indexes.  
-4. BiteBuddy retrieves the corresponding food places, and displays a comparison view and summary showing key attributes (e.g., name, rating, cuisine, notes, tags).  
+4. BiteBuddy retrieves the corresponding foodplaces, and displays a comparison view and summary showing key attributes (e.g., name, rating, cuisine, notes, tags).  
 
     Use case ends.
 
@@ -904,16 +909,16 @@ Guarantees: Relevant help information is shown to the user.
     
       Use case ends.
 
-**Use case: UC20 - Clear all food places**
+**Use case: UC20 - Clear all foodplaces**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, all food places are removed from the address book.
+Preconditions: At least one foodplace exists.  
+Guarantees: If successful, all foodplaces are removed from the address book.
 
 **MSS**
-1. User requests to clear all food places.
-2. BiteBuddy deletes all food places from the address book and displays a confirmation message.
+1. User requests to clear all foodplaces.
+2. BiteBuddy deletes all foodplaces from the address book and displays a confirmation message.
 
 Use case ends.
 
@@ -951,8 +956,8 @@ Guarantees: If successful, user can reuse a previous command.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 food places without a noticeable sluggishness in performance for typical usage.
+1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed. On macOS, a compatible Java 17 JDK+FX distribution is required.
+2.  Should be able to hold up to 1000 foodplaces without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Error messages must explicitly state the error and provide guidance on correcting the input.
 5.  Should not lose data if the application crashes unexpectedly.
@@ -968,10 +973,11 @@ Organized in alphabetical order
 * **CLI (Command Line Interface)**: A text-based interface that allows users to interact with the application by typing commands.
 * **Command**: An instruction entered by the user to perform a specific action in the application (e.g., add, delete, list).
 * **Custom Keyword**: A user-defined word or phrase that can be used to filter, search, or tag specific entries in BiteBuddy.
-* **Food Place**: Any food place, including but not limited to restaurants, hawker stalls, food trucks, and cafes.
+* **Foodplace**: A location where food is sold or served, such as a restaurant, hawker stall, food truck, or cafe.
 * **GUI (Graphical User Interface)**: The visual interface of the application that allows users to interact with it using graphical elements.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Tag**: A label that can be assigned to food places to categorize or group them.
+* **Pin**: A foodplace marked with a pin icon that always appears at the top of the displayed list when it meets the conditions for being shown. At most 5 foodplaces can be pinned at any time.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Tag**: A label that can be assigned to foodplaces to categorize or group them.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1557,8 +1563,28 @@ Comparing two foodplaces from the list shown
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Valid Test case - Saving data after adding entries:<br>
+    Steps:
+    - Add a new foodplace using `add` command.
+    - Close BiteBuddy.
+    Expected:
+    - Data is persisted correctly in the `addressbook.json` file.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+1. Valid Test case - Missing data file:<br>
+    Steps:
+    - Navigate to the `data` folder.
+    - Delete the `addressbook.json` file.
+    - Launch BiteBuddy.
+    Expected:
+    - BiteBuddy generates a new empty `addressbook.json` file.
 
-1. _{ more test cases …​ }_
+1. Valid Test case - Corrupted data file:<br>
+    Steps:
+    - Navigate to the `data` folder.
+    - Open the `addressbook.json` file.
+    - Delete or modify one or more fields such that the data file is no longer valid.
+    - Save the changes.
+    - Launch BiteBuddy.
+    Expected:
+    - BiteBuddy opens in a blank state.
+
