@@ -10,6 +10,7 @@ import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_THIRD_FOODPLACE;
+import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FOURTH_FOODPLACE;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +41,24 @@ public class CompareCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(thirdFoodplace));
+
+        assertCommandSuccess(compareCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_caseInsensitiveTags_success() {
+        Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Foodplace fourthFoodplace = model.getFilteredFoodplaceList().get(INDEX_FOURTH_FOODPLACE.getZeroBased());
+
+        CompareCommand compareCommand = new CompareCommand(INDEX_FIRST_FOODPLACE, INDEX_FOURTH_FOODPLACE);
+
+        String nl = System.lineSeparator();
+        String expectedMessage = "Prata Palace (Rating: --) vs Laksa Paradise (Rating: --)" + nl
+                + "Common tags: hawker" + nl
+                + "Unique tags: Prata Palace (--) | Laksa Paradise (--)" + nl;
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.updateFilteredFoodplaceList(fp -> fp.equals(firstFoodplace) || fp.equals(fourthFoodplace));
 
         assertCommandSuccess(compareCommand, model, expectedMessage, expectedModel);
     }
