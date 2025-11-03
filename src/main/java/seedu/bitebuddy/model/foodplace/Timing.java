@@ -18,6 +18,8 @@ public class Timing {
     public static final String MESSAGE_INVALID_TIME_RANGE = "Invalid time range format. "
             + "Timing must be in the format HH:mm-HH:mm";
 
+    public static final String MESSAGE_EQUAL_TIMES = "Opening and closing times must be different";
+
     public static final String VALIDATION_REGEX = "^([01]\\d|2[0-3]):[0-5]\\d$";
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -68,6 +70,7 @@ public class Timing {
         checkArgument(isValidTime(close), MESSAGE_INVALID_TIME);
         LocalTime opening = LocalTime.parse(open, TIME_FORMATTER);
         LocalTime closing = LocalTime.parse(close, TIME_FORMATTER);
+        checkArgument(!opening.equals(closing), MESSAGE_EQUAL_TIMES);
         this.openingTime = opening;
         this.closingTime = closing;
         this.isSet = true;
@@ -81,6 +84,7 @@ public class Timing {
      */
     public Timing(LocalTime openingTime, LocalTime closingTime) {
         requireAllNonNull(openingTime, closingTime);
+        checkArgument(!openingTime.equals(closingTime), MESSAGE_EQUAL_TIMES);
         this.openingTime = openingTime;
         this.closingTime = closingTime;
         this.isSet = true;
@@ -157,6 +161,7 @@ public class Timing {
         String closeStr = parts[1].trim();
         LocalTime opening = LocalTime.parse(openStr, TIME_FORMATTER);
         LocalTime closing = LocalTime.parse(closeStr, TIME_FORMATTER);
+        checkArgument(!opening.equals(closing), MESSAGE_EQUAL_TIMES);
         return new LocalTime[]{opening, closing};
     }
 
