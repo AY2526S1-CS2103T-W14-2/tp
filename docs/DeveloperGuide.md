@@ -390,9 +390,9 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 
 **Use case: UC01 - Add a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: BiteBuddy is running.
+System: BiteBuddy  
+Actor: User  
+Preconditions: BiteBuddy is running.  
 Guarantees: If successful, the foodplace is stored in BiteBuddy without duplicates.
 
 **MSS**
@@ -416,9 +416,9 @@ Guarantees: If successful, the foodplace is stored in BiteBuddy without duplicat
 
 **Use case: UC02 - Delete a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one foodplace exists.
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
 Guarantees: The foodplace is deleted if index is valid.
 
 **MSS**
@@ -475,7 +475,7 @@ Guarantees: If successful, the specified foodplace is updated with the new detai
 
       Use case ends.
 
-* 3a. Edit results in a duplicate (conflicts with an existing entry).
+* 3d. Edit results in a duplicate (conflicts with an existing entry).
     * 3a1. BiteBuddy rejects the edit and shows a duplicate-entry error.
     
       Use case ends.
@@ -501,9 +501,9 @@ Guarantees: The full list of foodplaces is displayed.
 
 **Use case: UC05 - Find foodplaces**
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one foodplace exists.
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
 Guarantees: If successful, a filtered list of foodplaces matching the query is displayed.
 
 **MSS**
@@ -535,9 +535,9 @@ Guarantees: If successful, a filtered list of foodplaces matching the query is d
 
 **Use case: UC06 - Add tag(s) to a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one foodplace exists.
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
 Guarantees: Valid tags are added and duplicates are ignored.
 
 **MSS**
@@ -568,9 +568,9 @@ Guarantees: Valid tags are added and duplicates are ignored.
 
 **Use case: UC07 - Delete tag(s) from a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one foodplace exists.
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
 Guarantees: The specified tag(s) are removed from the foodplace. Deletion is case-insensitive, and if no tags are provided, all tags are cleared.
 
 **MSS**
@@ -602,9 +602,9 @@ Guarantees: The specified tag(s) are removed from the foodplace. Deletion is cas
 
 **Use case: UC08 - Add a note to a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one foodplace exists.
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
 Guarantees: A note is stored for the foodplace and existing note is overwritten if present.
 
 **MSS**
@@ -623,21 +623,26 @@ Guarantees: A note is stored for the foodplace and existing note is overwritten 
 
       Use case ends.
 
-* 3b. The given note is empty.
-    * 3b1. BiteBuddy treats this as discarding the existing note.
+* 3b. The given note is invalid.
+    * 3b1. BiteBuddy shows an error for invalid note.
 
       Use case ends.
 
-* 3c. The given note is a duplicate of the existing note.
-    * 3c1. BiteBuddy does not change the entry.
+* 3c. The given note is empty.
+    * 3c1. BiteBuddy treats this as discarding the existing note.
+
+      Use case ends.
+
+* 3d. The given note is a duplicate of the existing note.
+    * 3d1. BiteBuddy does not change the entry.
 
       Use case ends.
 
 **Use case: UC09 - Rate a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one foodplace exists.
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
 Guarantees: A rating between 1–10 is stored and existing rating is overwritten.
 
 **MSS**
@@ -665,7 +670,7 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one foodplace exists. The specified foodplace is not wishlisted.
+Preconditions: At least one foodplace exists. The specified foodplace is not wishlisted.  
 Guarantees: If successful, the foodplace is added to the user's wishlist.
 
 **MSS**
@@ -716,7 +721,7 @@ Guarantees: If successful, the foodplace is removed from the user's wishlist.
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one wishlisted foodplace exists.
+Preconditions: At least one wishlisted foodplace exists.  
 Guarantees: The full list of wishlisted foodplaces is displayed.
 
 **MSS**
@@ -780,7 +785,7 @@ Guarantees: If successful, the foodplace is removed from the user's blacklist.
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one blacklisted foodplace exists.
+Preconditions: At least one blacklisted foodplace exists.  
 Guarantees: The full list of blacklisted foodplaces is displayed.
 
 **MSS**
