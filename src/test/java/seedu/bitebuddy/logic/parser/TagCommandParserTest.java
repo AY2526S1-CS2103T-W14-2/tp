@@ -128,6 +128,16 @@ public class TagCommandParserTest {
     }
 
     @Test
+    public void parse_misplacedDeleteFlag_throwsParseException() {
+        // /d appears after tags instead of right after index
+        String input = "1 FastFood /d Cheap";
+        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(input));
+
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE),
+                exception.getMessage());
+    }
+
+    @Test
     public void isDeleteToken() throws Exception {
         Method isDeleteMethod = TagCommandParser.class.getDeclaredMethod("isDeleteToken", List.class);
         isDeleteMethod.setAccessible(true);
