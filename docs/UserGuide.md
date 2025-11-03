@@ -580,13 +580,13 @@ Action     | Format                                                             
   - All other characters of an address can be anything, there is no length limit
 
 - **ot/OPENING_TIME**: Refers to the opening time of a Foodplace
-- Must form a pair with a closing time (see below)
-- Cannot be equal to the corresponding closing time
-- Must follow the **HH:mm 24-hour format**
-  - Examples: `12:00` for 12pm, `19:00` for 7pm
+  - Must form a pair with a **closing time** (see below)
+  - Cannot be equal to the corresponding closing time
+  - Must follow the **HH:mm 24-hour format**
+    - Examples: `12:00` for 12pm, `19:00` for 7pm
 
 - **ct/CLOSING_TIME**: Refers to the closing time of a Foodplace
-  - Must form a pair with a opening time (see above)
+  - Must form a pair with an **opening time** (see above)
   - Cannot be equal to the corresponding opening time
   - Must follow the **HH:mm 24-hour format**
     - Examples: `12:00` for 12pm, `19:00` for 7pm
@@ -598,9 +598,9 @@ Action     | Format                                                             
 
 - **e/EMAIL**: Refers to the email linked to a Foodplace
   - It must be in the format `LOCAL@DOMAINS`:
-    - `LOCAL` contains only alphanumeric characters and `+_.-`, and the 1st character cannot be `+_.-`.
-    - `DOMAINS` consist of at least one `DOMAIN` label(s) seperated by `.`
-      - It must end with a domain label at least 2 characters long
+    - `LOCAL` contains only alphanumeric characters and `+ _ . -`, and the 1st character cannot be `+ _ . -`.
+    - `DOMAINS` consist of at least one domain label(s) seperated by `.`
+      - Must end with a domain label at least 2 characters long
       - Each domain label starts and ends with alphanumeric characters
       - Each domain label consists of alphanumeric characters, separated only by hyphens `-`, if any.
 
@@ -609,7 +609,7 @@ Action     | Format                                                             
 
 - **no/NOTE**: Refers to the note linked to a Foodplace
   - Contains only ASCII printable characters [here](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm)
-  - Must be up to 100 characters long
+  - Can be up to 100 characters long
 
 - **r/RATING**: Refers to the score linked to a Foodplace
   - Contains only numbers (`0 - 9`)
