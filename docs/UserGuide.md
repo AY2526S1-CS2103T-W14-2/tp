@@ -642,7 +642,7 @@ Furthermore, certain edits can cause the BiteBuddy to behave in unexpected ways 
 
 Action     | Format                                                                                                                                 | Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------
-[**Help**](#viewing-help-help) | `help [COMMAND]`<br>                                                                                                                   | `help add`
+[**Help**](#viewing-help-help) | `help [COMMAND]`<br>                                                                                                                   | `help add`, `help find`
 [**Add**](#adding-a-foodplace-add) | `add n/NAME a/ADDRESS [ot/OPENING_TIME ct/CLOSING_TIME] [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…` <br>     | `add n/James Cook Kitchen a/123, Clementi Rd, 1234665 p/22224444 e/chef@jamescook.com t/MasterChef t/Expensive`
 [**List**](#listing-all-foodplaces-list) | `list`                                                                                                                                 | `list`
 [**Delete**](#deleting-a-foodplace-delete) | `delete INDEX`<br>                                                                                                                     | `delete 3`
