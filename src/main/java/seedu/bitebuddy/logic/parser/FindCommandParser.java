@@ -51,6 +51,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                         ArgumentTokenizer.tokenize(trimmedArgs, PREFIX_TAG, PREFIX_CUISINE, PREFIX_RATE);
 
+        if (argMultimap.getAllValues(PREFIX_CUISINE).size() > 1) {
+            throw new ParseException("Only one cuisine (c/) can be specified in a find command.");
+        }
+        if (argMultimap.getAllValues(PREFIX_RATE).size() > 1) {
+            throw new ParseException("Only one rating (r/) can be specified in a find command.");
+        }
+
         String preamble = argMultimap.getPreamble().trim();
         List<String> keywords = extractKeywords(preamble);
 
