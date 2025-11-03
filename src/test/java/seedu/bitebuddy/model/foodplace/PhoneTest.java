@@ -22,6 +22,18 @@ public class PhoneTest {
     }
 
     @Test
+    public void constructor_overMaxLengthPhone_throwsIllegalArgumentException() {
+        String invalidPhone = "1234567890123456"; // 16 digits
+        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
+    }
+
+    @Test
+    public void constructor_underMinLengthPhone_throwsIllegalArgumentException() {
+        String invalidPhone = "12"; // 2 digits
+        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
+    }
+
+    @Test
     public void constructor_emptyPhone_success() {
         String emptyPhone = "";
         assertEquals("", new Phone(emptyPhone).value);
@@ -36,6 +48,7 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("1234567890123456")); // more than 15 numbers
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits

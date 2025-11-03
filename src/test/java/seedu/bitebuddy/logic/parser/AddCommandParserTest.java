@@ -249,10 +249,13 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_openingAfterClosing_failure() {
-        String invalidOpenClose = " ot/18:00 ct/09:00"; // open > close
-        assertParseFailure(parser, NAME_DESC_SWENSWAN + PHONE_DESC_SWENSWAN + EMAIL_DESC_SWENSWAN
-                        + ADDRESS_DESC_SWENSWAN + invalidOpenClose,
-                Timing.MESSAGE_CONSTRAINTS);
+    public void parse_openingAfterClosing_success() {
+        String openAfterClose = " ot/18:00 ct/09:00"; // open > close
+        Foodplace expectedFoodplace = new FoodplaceBuilder(MCRONALDS)
+            .withTags().withNote("").withCuisine("").withTiming("18:00", "09:00")
+            .withWishlist(false).withBlacklist(false).build();
+        assertParseSuccess(parser, NAME_DESC_MCRONALDS + PHONE_DESC_MCRONALDS + EMAIL_DESC_MCRONALDS
+                + ADDRESS_DESC_MCRONALDS + openAfterClose,
+                new AddCommand(expectedFoodplace));
     }
 }

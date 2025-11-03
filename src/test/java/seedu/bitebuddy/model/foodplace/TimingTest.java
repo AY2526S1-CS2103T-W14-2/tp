@@ -28,8 +28,18 @@ public class TimingTest {
         assertFalse(Timing.isValidTiming(null));
         assertFalse(Timing.isValidTiming(""));
         assertTrue(Timing.isValidTiming("09:00-17:00"));
-        assertFalse(Timing.isValidTiming("17:00-09:00"));
+        assertTrue(Timing.isValidTiming("17:00-09:00"));
+        // opening and closing must be different
+        assertFalse(Timing.isValidTiming("09:00-09:00"));
         assertFalse(Timing.isValidTiming("not-a-range"));
+    }
+
+    @Test
+    public void constructor_equalTimes_throwsException() {
+        // string-based
+        assertThrows(IllegalArgumentException.class, () -> new Timing("09:00", "09:00"));
+        // LocalTime-based
+        assertThrows(IllegalArgumentException.class, () -> new Timing(LocalTime.of(9, 0), LocalTime.of(9, 0)));
     }
 
     @Test
@@ -46,16 +56,6 @@ public class TimingTest {
     }
 
     @Test
-    public void isOpenAt() {
-        Timing t1 = new Timing("09:00", "17:00");
-        assertTrue(t1.isOpenAt(LocalTime.of(9, 0)));
-        assertTrue(t1.isOpenAt(LocalTime.of(12, 0)));
-        assertTrue(t1.isOpenAt(LocalTime.of(17, 0)));
-        assertFalse(t1.isOpenAt(LocalTime.of(8, 59)));
-        assertFalse(t1.isOpenAt(LocalTime.of(17, 1)));
-    }
-
-    @Test
     public void constructor_unsetTiming_isNotSet() {
         Timing unset = new Timing("", "");
         assertEquals("", unset.toString());
@@ -64,7 +64,6 @@ public class TimingTest {
 
     @Test
     public void constructor_invalidRange_throwsException() {
-        assertThrows(IllegalArgumentException.class, () -> new Timing("09:00-08:00"));
         assertThrows(IllegalArgumentException.class, () -> new Timing("not-a-time-range"));
     }
 

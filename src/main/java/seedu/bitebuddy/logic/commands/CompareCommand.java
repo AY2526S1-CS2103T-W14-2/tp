@@ -4,6 +4,7 @@ import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.bitebuddy.commons.core.index.Index;
@@ -86,17 +87,19 @@ public class CompareCommand extends Command {
     private String generateCompareMessage(Foodplace first, Foodplace second) {
         List<String> firstTags = first.getTags().stream().map(tag -> tag.tagName).toList();
         List<String> secondTags = second.getTags().stream().map(tag -> tag.tagName).toList();
+        Set<String> firstLower = firstTags.stream().map(String::toLowerCase).collect(Collectors.toSet());
+        Set<String> secondLower = secondTags.stream().map(String::toLowerCase).collect(Collectors.toSet());
 
         List<String> commonTags = firstTags.stream()
-                .filter(secondTags::contains)
+                .filter(tag -> secondLower.contains(tag.toLowerCase()))
                 .collect(Collectors.toList());
 
         List<String> firstUnique = firstTags.stream()
-                .filter(tag -> !commonTags.contains(tag))
+                .filter(tag -> !secondLower.contains(tag.toLowerCase()))
                 .collect(Collectors.toList());
 
         List<String> secondUnique = secondTags.stream()
-                .filter(tag -> !commonTags.contains(tag))
+                .filter(tag -> !firstLower.contains(tag.toLowerCase()))
                 .collect(Collectors.toList());
 
         String commonStr = formatTagsForDisplay(commonTags);

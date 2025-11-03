@@ -153,7 +153,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2526S1-CS2103T-W14-2/tp/blob/master/src/main/java/seedu/bitebuddy/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml" />
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -194,103 +194,40 @@ The following are a non-exhaustive list of common classes that live in `seedu.bi
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Wishlist/blacklist feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The wishlist/blacklist feature is implemented as two different boolean value objects on each `Foodplace` to indicate whether it is wishlisted or blacklisted respectively:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+- `Wishlist` — `isWishlisted()` returns an immutable boolean value to determine whether the foodplace is wishlisted (`true` if wishlisted, `false` otherwise)
+- `Blacklist` — `isBlacklisted()` returns an immutable boolean value to determine whether the foodplace is blacklisted (`true` if blacklisted, `false` otherwise)
+- Both have a `getOpposite()` method that returns a new instance with the opposite boolean value.
+- Both have a `toString()` method that returns a user-friendly string representation of the status (e.g., "Wishlisted" or "Not Wishlisted").
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+At the model level, both values are stored inside the `Foodplace` entity with an invariant where a `Foodplace` **cannot be both wishlisted and blacklisted at the same time**.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+`WishlistCommand` and `BlacklistCommand`:
+- Accepts an optional `INDEX`. If omitted, they act as a filter command to show only wishlisted/blacklisted foodplaces.
+- When an `INDEX` is supplied, toggles the relevant state on the specified `Foodplace` by index creating a new immutable `Foodplace` with the updated field, and then calling `model.setFoodplace(old, updated)` to update the change.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Conflict resolution of status is handled inside each command before constructing the edited `Foodplace`:
+- In `WishlistCommand`, if the target is already blacklisted but not wishlisted, it first sets `Blacklist` to `false` and then sets `Wishlist` to `true`. A secondary status line clarifies that the blacklist status was removed.
+- Otherwise, it simply toggles the `Wishlist` status. (if `true`, set to `false` and vice versa)
+- This is similar for `BlacklistCommand`.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+The following activity diagram summarises the control flow when a user executes a `wishlist` command:
 
-Step 2. The user executes `delete 5` command to delete the 5th foodplace in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+<puml src="diagrams/WishlistActivityDiagram.puml" />
 
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+#### Design considerations
+* Conflict resolution is handled in the `WishlistCommand` and `BlacklistCommand`.
+  * Pros: Simple, localised logic to handle the invariant.
+  * Cons: Some duplication of conflict resolution logic is added for both commands.
 
-Step 3. The user executes `add n/David …​` to add a new foodplace. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the foodplace was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the foodplace being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* Alternatively, conflict resolution could be handled in the `Model#setFoodplace()` method.
+  * Pros: Centralised logic for maintaining the invariant.
+  * Cons: Hides the conflict resolution logic away from the commands into `Model#setFoodplace()`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -310,8 +247,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* food enthusiasts or anyone who wants to keep track of their favourite food places
-* has a need to manage a significant number of food places contacts
+* food enthusiasts or anyone who wants to keep track of their favourite foodplaces
+* has a need to manage a significant number of foodplaces contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -322,16 +259,16 @@ _{Explain here how the data archiving feature will be implemented}_
 * Gordon likes to eat food and goes to many places and try out different kind of food
 * Gordon does not have a way to record the places he likes and dislikes
 * Gordon often forget places that he has tried before, what he rates them and what he thinks about them
-* Gordon has difficulty recommending food places for his friends to try out because he cannot remember them
+* Gordon has difficulty recommending foodplaces for his friends to try out because he cannot remember them
 * Gordon has a wishlist of places he wished to try in his head but often forgets part of them
 
 **Value proposition**:
 
-* Provide a platform to collate information about food places that the user has visited such as, name, address, rating, cuisine, location, notes, etc.
+* Provide a platform to collate information about foodplaces that the user has visited such as, name, address, rating, cuisine, location, notes, etc.
 * Users can quickly access any information they want through extensive sorting and searching feature to make quick and informed decisions
-* Blacklist food places that the user dislikes
-* Wishlist food places to keep track of places they want to try next
-* Pin food places that users can frequently refer to (e.g., favourite food places, use for recommendation purposes, etc.)
+* Blacklist foodplaces that the user dislikes
+* Wishlist foodplaces to keep track of places they want to try next
+* Pin foodplaces that users can frequently refer to (e.g., favourite foodplaces, use for recommendation purposes, etc.)
 
 
 ### User stories
@@ -345,37 +282,37 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 
 </box>
 
-| Implemented? | Priority | As a …​                          | I want to …​                                                           | So that I can…​                                                                                   | Remarks                                              |
-|--------------|----------|----------------------------------|------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|------------------------------------------------------|
-| ✅            | `* * *`  | user                             | add food places entries                                                | revisit these entries or recommend them                                                           | AddCommand                                           |
-| ✅            | `* * *`  | user                             | delete an existing entry                                               | remove food places that I no longer need to refer to                                              | DeleteCommand                                        |
-| ✅            | `* * *`  | user                             | edit an existing entry                                                 | update details if they change without having to delete and adding it again                        | EditCommand                                          |
-| ✅            | `* * *`  | user                             | rate an existing entry                                                 | refer to the rating to know how good the food place is based on my rating                         | RateCommand                                          |
-| ✅            | `* * *`  | user                             | add notes to an existing entry                                         | keep track of what I liked or disliked at the restaurant                                          | NoteCommand                                          |
-| ✅            | `* * *`  | user                             | tag food places with my own custom keywords                            | filter by personal context                                                                        | TagCommand                                           |
-| ✅            | `* * *`  | user                             | search for a specific food place quickly                               | don't have to spend too long finding a place I visited before                                     | FindCommand                                          |
-| ✅            | `* * *`  | user                             | search based on rating / cuisine / tags                                | choose a food place that I want to go based on the specified parameters                           | FindCommand                                          |
-| ✅            | `* * *`  | first-time user                  | have a clear guidance or help commands                                 | learn how to use and navigate around the app easily                                               | HelpCommand                                          |
-| ✅            | `* * *`  | frequent user                    | pin my favourite food places                                           | quickly refer to them again next time                                                             | PinCommand, UnpinCommand                             |
-| ✅            | `* * *`  | user                             | have a wishlist of food places I want to visit                         | plan for a future visit                                                                           | WishlistCommand                                      |
-| ❌            | `* *`    | user                             | create different tabs / groups                                         | organise and categorise the food places however I want                                            |                                                      |
-| ❌            | `* *`    | expert user                      | add alias to commands                                                  | have shortcuts to execute commands faster                                                         |                                                      |
-| ❌            | `* *`    | indecisive user                  | let the app randomly pick a food place for me                          | decide on what I want to eat without deciding by myself                                           |                                                      |
-| ✅            | `* *`    | potential user exploring the app | see the app pre-populated with sample data                             | easily see how the app will look when it is in use                                                | If no address book is found, default data is created |
-| ✅            | `* *`    | user                             | keep track of the food I dislike                                       | avoid them                                                                                        | BlacklistCommand                                     |
-| ❌            | `* *`    | user                             | filter food places that are open or closed based on current time       | so that I can decide where to eat based on restaurants that are currently open only               |                                                      |
-| ❌            | `* *`    | user                             | sort by distance from my current location                              | know which food places is most conveniently located                                               |                                                      |
-| ½            | `* *`    | user                             | add an average dining cost of an existing entry                        | choose a food place that best fits my current budget                                              | Can use NoteCommand tentatively                      |
-| ½            | `* *`    | expert user                      | add common keyboard shortcuts                                          | quickly add and update new food places                                                            | ↑ and ↓ arrows to cycle command execution history    |
-| ❌            | `* *`    | frequent typer                   | autocomplete suggestions when entering name of food places or cuisines | add food places faster                                                                            |                                                      |
-| ✅            | `* *`    | user                             | compare two or more food places side by side                           | make a better decision when choosing where to eat                                                 | CompareCommand                                       |
-| ❌            | `*`      | user                             | know what kind of cuisines I often frequent to                         | know what cuisines I might be favourable to                                                       |                                                      |
-| ❌            | `*`      | user                             | click on the food place link / email                                   | quickly contact them for reservation                                                              |                                                      |
-| ❌            | `*`      | user with poor eyesight          | adjust text / UI size                                                  | see the address book entries more clearly                                                         |                                                      |
-| ❌            | `*`      | user                             | find a place in my data using multiple filters                         | find a place that I have forgotten the name of                                                    |                                                      |
-| ½            | `*`      | user                             | display a list of all food places I have recommended before            | easily share my top picks with friends                                                            | Can use PinCommand tentatively                       |
-| ❌            | `*`      | user                             | view my dining history in reverse chronological order                  | recall food places I have visited recently                                                        |                                                      |
-| ❌            | `*`      | user                             | see statistics on characteristics of food places I have visited        | discover patterns about my eating preferences and get recommendations for cuisines I rarely tried |                                                      |
+| Implemented? | Priority | As a …​                          | I want to …​                                                          | So that I can…​                                                                                   | Remarks                                              |
+|--------------|----------|----------------------------------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|------------------------------------------------------|
+| ✅            | `* * *`  | user                             | add foodplaces entries                                                | revisit these entries or recommend them                                                           | AddCommand                                           |
+| ✅            | `* * *`  | user                             | delete an existing entry                                              | remove foodplaces that I no longer need to refer to                                               | DeleteCommand                                        |
+| ✅            | `* * *`  | user                             | edit an existing entry                                                | update details if they change without having to delete and adding it again                        | EditCommand                                          |
+| ✅            | `* * *`  | user                             | rate an existing entry                                                | refer to the rating to know how good the foodplace is based on my rating                          | RateCommand                                          |
+| ✅            | `* * *`  | user                             | add notes to an existing entry                                        | keep track of what I liked or disliked at the restaurant                                          | NoteCommand                                          |
+| ✅            | `* * *`  | user                             | tag foodplaces with my own custom keywords                            | filter by personal context                                                                        | TagCommand                                           |
+| ✅            | `* * *`  | user                             | search for a specific foodplace quickly                               | don't have to spend too long finding a place I visited before                                     | FindCommand                                          |
+| ✅            | `* * *`  | user                             | search based on rating / cuisine / tags                               | choose a foodplace that I want to go based on the specified parameters                            | FindCommand                                          |
+| ✅            | `* * *`  | first-time user                  | have a clear guidance or help commands                                | learn how to use and navigate around the app easily                                               | HelpCommand                                          |
+| ✅            | `* * *`  | frequent user                    | pin my favourite foodplaces                                           | quickly refer to them again next time                                                             | PinCommand, UnpinCommand                             |
+| ✅            | `* * *`  | user                             | have a wishlist of foodplaces I want to visit                         | plan for a future visit                                                                           | WishlistCommand                                      |
+| ❌            | `* *`    | user                             | create different tabs / groups                                        | organise and categorise the foodplaces however I want                                             |                                                      |
+| ❌            | `* *`    | expert user                      | add alias to commands                                                 | have shortcuts to execute commands faster                                                         |                                                      |
+| ❌            | `* *`    | indecisive user                  | let the app randomly pick a foodplace for me                          | decide on what I want to eat without deciding by myself                                           |                                                      |
+| ✅            | `* *`    | potential user exploring the app | see the app pre-populated with sample data                            | easily see how the app will look when it is in use                                                | If no address book is found, default data is created |
+| ✅            | `* *`    | user                             | keep track of the food I dislike                                      | avoid them                                                                                        | BlacklistCommand                                     |
+| ❌            | `* *`    | user                             | filter foodplaces that are open or closed based on current time       | so that I can decide where to eat based on restaurants that are currently open only               |                                                      |
+| ❌            | `* *`    | user                             | sort by distance from my current location                             | know which foodplaces is most conveniently located                                                |                                                      |
+| ½            | `* *`    | user                             | add an average dining cost of an existing entry                       | choose a foodplace that best fits my current budget                                               | Can use NoteCommand tentatively                      |
+| ½            | `* *`    | expert user                      | add common keyboard shortcuts                                         | quickly add and update new foodplaces                                                             | ↑ and ↓ arrows to cycle command execution history    |
+| ❌            | `* *`    | frequent typer                   | autocomplete suggestions when entering name of foodplaces or cuisines | add foodplaces faster                                                                             |                                                      |
+| ✅            | `* *`    | user                             | compare two foodplaces side by side                                   | make a better decision when choosing where to eat                                                 | CompareCommand                                       |
+| ❌            | `*`      | user                             | know what kind of cuisines I often frequent to                        | know what cuisines I might be favourable to                                                       |                                                      |
+| ❌            | `*`      | user                             | click on the foodplace link / email                                   | quickly contact them for reservation                                                              |                                                      |
+| ❌            | `*`      | user with poor eyesight          | adjust text / UI size                                                 | see the address book entries more clearly                                                         |                                                      |
+| ❌            | `*`      | user                             | find a place in my data using multiple filters                        | find a place that I have forgotten the name of                                                    |                                                      |
+| ½            | `*`      | user                             | display a list of all foodplaces I have recommended before            | easily share my top picks with friends                                                            | Can use PinCommand tentatively                       |
+| ❌            | `*`      | user                             | view my dining history in reverse chronological order                 | recall foodplaces I have visited recently                                                         |                                                      |
+| ❌            | `*`      | user                             | see statistics on characteristics of foodplaces I have visited        | discover patterns about my eating preferences and get recommendations for cuisines I rarely tried |                                                      |
 
 *{More may be added in the future}*
 
@@ -388,17 +325,17 @@ Priorities: High (must have) - `* * *`, Medium (good to have) - `* *`, Low (migh
 </box>
 
 
-**Use case: UC01 - Add a food place**
+**Use case: UC01 - Add a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: BiteBuddy is running.
-Guarantees: If successful, the food place is stored in BiteBuddy without duplicates.
+System: BiteBuddy  
+Actor: User  
+Preconditions: BiteBuddy is running.  
+Guarantees: If successful, the foodplace is stored in BiteBuddy without duplicates.
 
 **MSS**
 
-1. User provides the details for the food place(Name, phone number, email address and postal address)
-2. BiteBuddy adds the food place and displays confirmation.
+1. User provides the details of the foodplace.
+2. BiteBuddy adds the foodplace and displays confirmation.
 
     Use case ends.
 
@@ -414,19 +351,19 @@ Guarantees: If successful, the food place is stored in BiteBuddy without duplica
 
       Use case ends.
 
-**Use case: UC02 - Delete a food place**
+**Use case: UC02 - Delete a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one food place exists.
-Guarantees: The food place is deleted if index is valid.
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
+Guarantees: The foodplace is deleted if index is valid.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to delete a specific food place from the list.
-4. BiteBuddy deletes the food place and displays confirmation.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to delete a specific foodplace from the list.
+4. BiteBuddy deletes the foodplace and displays confirmation.
 
    Use case ends.
 
@@ -442,73 +379,73 @@ Guarantees: The food place is deleted if index is valid.
 
       Use case ends.
 
-**Use case: UC03 - Edit a food place**
+**Use case: UC03 - Edit a foodplace**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, the specified food place is updated with the new details.
+Preconditions: At least one foodplace exists.  
+Guarantees: If successful, the specified foodplace is updated with the new details.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to edit an existing food place from the list and provides the index of the food place and the new fields to update (e.g., name, address, rating, tags).
-4. BiteBuddy updates the food place and displays confirmation.  
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to edit an existing foodplace from the list and provides and provides new values for one or more editable fields (e.g., name, address, rating, tags).
+4. BiteBuddy updates the foodplace and displays confirmation.
 
     Use case ends.
 
 **Extensions**
 
 * 3a. User omits all editable fields.
-    * 3a1. BiteBuddy shows an error message indicating no fields provided.  
+    * 3a1. BiteBuddy shows an error message indicating no fields provided.
 
       Use case ends.
 
 * 3b. The given index is invalid.
-    * 3b1. BiteBuddy shows an error for invalid index. 
+    * 3b1. BiteBuddy shows an error for invalid index.
 
       Use case ends.
 
 * 3c. One or more given fields are invalid.
-    * 3c1. BiteBuddy shows an appropriate error message and does not apply changes.  
+    * 3c1. BiteBuddy shows an appropriate error message and does not apply changes.
 
       Use case ends.
 
-* 3a. Edit results in a duplicate (conflicts with an existing entry).
-    * 3a1. BiteBuddy rejects the edit and shows a duplicate-entry error. 
+* 3d. Edit results in a duplicate (conflicts with an existing entry).
+    * 3a1. BiteBuddy rejects the edit and shows a duplicate-entry error.
     
       Use case ends.
 
-**Use case: UC04 - List all food places**
+**Use case: UC04 - List all foodplaces**
 
 System: BiteBuddy  
 Actor: User  
 Preconditions: BiteBuddy is running.  
-Guarantees: The full list of food places is displayed.
+Guarantees: The full list of foodplaces is displayed.
 
 **MSS**
-1. User requests to list all food places.
-2. BiteBuddy retrieves the full address book and updates the displayed list to show all food places.
+1. User requests to list all foodplaces.
+2. BiteBuddy retrieves the full address book and updates the displayed list to show all foodplaces.
 
     Use case ends.
 
 **Extensions**
-* 1a. Address book contains pinned food places.
-    * 1a1. BiteBuddy displays pinned food places at the top of the list.
+* 1a. Address book contains pinned foodplaces.
+    * 1a1. BiteBuddy displays pinned foodplaces at the top of the list.
     
     Use case resumes at step 2.
 
-**Use case: UC05 - Find food places**
+**Use case: UC05 - Find foodplaces**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, a filtered list of food places matching the query is displayed.
+Preconditions: At least one foodplace exists.  
+Guarantees: If successful, a filtered list of foodplaces matching the query is displayed.
 
 **MSS**
-1. User requests to find food places with one or more search keywords or filters.
-2. BiteBuddy updates the displayed list to show only matching food places and displays a summary message indicating the number of results found.
+1. User requests to find foodplaces with one or more search keywords or filters.
+2. BiteBuddy updates the displayed list to show only matching foodplaces and displays a summary message indicating the number of results found.
 
     Use case ends.
 
@@ -525,22 +462,27 @@ Guarantees: If successful, a filtered list of food places matching the query is 
 
 * 2b. Invalid filter/value provided.
     * 2b1. BiteBuddy shows an error message describing the invalid filter or value.
-    
+
       Use case ends.
 
-**Use case: UC06 - Add tag(s) to a food place**
+* 2c. Pinned items exist in the filtered results.
+    * 2c1. BiteBuddy displays pinned foodplaces at the top of the list, followed by unpinned matches.
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one food place exists.
+      Use case ends.
+
+**Use case: UC06 - Add tag(s) to a foodplace**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
 Guarantees: Valid tags are added and duplicates are ignored.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User requests to add tag(s) to a specific food place in the list.
-4. BiteBuddy updates the food place with the new tag(s) and displays confirmation.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User requests to add tag(s) to a specific foodplace in the list.
+4. BiteBuddy updates the foodplace with the new tag(s) and displays confirmation.
 
    Use case ends.
 
@@ -561,19 +503,19 @@ Guarantees: Valid tags are added and duplicates are ignored.
 
       Use case ends.
 
-**Use case: UC07 - Delete tag(s) from a food place**
+**Use case: UC07 - Delete tag(s) from a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one food place exists.
-Guarantees: The specified tag(s) are removed from the food place. Deletion is case-insensitive, and if no tags are provided, all tags are cleared.
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
+Guarantees: The specified tag(s) are removed from the foodplace. Deletion is case-insensitive, and if no tags are provided, all tags are cleared.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
 3. User issues a delete-tag command with one or more tag names.
-4. BiteBuddy removes the specified tag(s) from the target food place and displays a confirmation message.
+4. BiteBuddy removes the specified tag(s) from the target foodplace and displays a confirmation message.
 
    Use case ends.
 
@@ -584,30 +526,30 @@ Guarantees: The specified tag(s) are removed from the food place. Deletion is ca
 
       Use case ends.
 
-* 3b. The given tag(s) do not exist on the food place.
+* 3b. The given tag(s) do not exist on the foodplace.
     * 3b1. BiteBuddy shows an error message for no matching tags found to delete.
 
       Use case ends.
 
 * 3c. No tags given.
-    * 3c1. BiteBuddy removes all tags from the specified food place.
+    * 3c1. BiteBuddy removes all tags from the specified foodplace.
     * 3c2. BiteBuddy displays a confirmation message that tags were updated.
 
       Use case ends.
 
-**Use case: UC08 - Add a note to a food place**
+**Use case: UC08 - Add a note to a foodplace**
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one food place exists.
-Guarantees: A note is stored for the food place and existing note is overwritten if present.
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
+Guarantees: A note is stored for the foodplace and existing note is overwritten if present.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to add a note to a specific food place in the list.
-4. BiteBuddy updates the food place with the note and displays confirmation.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to add a note to a specific foodplace in the list.
+4. BiteBuddy updates the foodplace with the note and displays confirmation.
 
    Use case ends.
 
@@ -618,29 +560,34 @@ Guarantees: A note is stored for the food place and existing note is overwritten
 
       Use case ends.
 
-* 3b. The given note is empty.
-    * 3b1. BiteBuddy treats this as discarding the existing note.
+* 3b. The given note is invalid.
+    * 3b1. BiteBuddy shows an error for invalid note.
 
       Use case ends.
 
-* 3c. The given note is a duplicate of the existing note.
-    * 3c1. BiteBuddy does not change the entry.
+* 3c. The given note is empty.
+    * 3c1. BiteBuddy treats this as discarding the existing note.
 
       Use case ends.
 
-**Use case: UC09 - Rate a food place**
+* 3d. The given note is a duplicate of the existing note.
+    * 3d1. BiteBuddy does not change the entry.
 
-System: BiteBuddy
-Actor: User
-Preconditions: At least one food place exists.
+      Use case ends.
+
+**Use case: UC09 - Rate a foodplace**
+
+System: BiteBuddy  
+Actor: User  
+Preconditions: At least one foodplace exists.  
 Guarantees: A rating between 1–10 is stored and existing rating is overwritten.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to rate a specific food place from the list.
-4. BiteBuddy updates the food place with the rating and displays confirmation.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to rate a specific foodplace from the list.
+4. BiteBuddy updates the foodplace with the rating and displays confirmation.
 
    Use case ends.
 
@@ -656,19 +603,19 @@ Guarantees: A rating between 1–10 is stored and existing rating is overwritten
 
       Use case ends.
 
-**Use case: UC10 - Add a food place to wishlist**
+**Use case: UC10 - Add a foodplace to wishlist**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists. The specified food place is not wishlisted.
-Guarantees: If successful, the food place is added to the user's wishlist.
+Preconditions: At least one foodplace exists. The specified foodplace is not wishlisted.  
+Guarantees: If successful, the foodplace is added to the user's wishlist.
 
 **MSS**
 
-1. User requests to list food places
-2. BiteBuddy shows a list of food places
-3. User chooses to add a food place in the list to the wishlist.
-4. BiteBuddy adds the food place to the wishlist and displays confirmation.  
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to add a foodplace in the list to the wishlist.
+4. BiteBuddy adds the foodplace to the wishlist and displays confirmation.  
 
     Use case ends.
 
@@ -679,24 +626,24 @@ Guarantees: If successful, the food place is added to the user's wishlist.
 
       Use case ends.
 
-* 3b. The chosen food place is blacklisted.
-    * 3b1. BiteBuddy removes the food place from the blacklist
+* 3b. The chosen foodplace is blacklisted.
+    * 3b1. BiteBuddy removes the foodplace from the blacklist
 
       Use case resumes from step 4.
 
-**Use case: UC11 - Remove a food place from wishlist**
+**Use case: UC11 - Remove a foodplace from wishlist**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists. The specified food place is currently on the user's wishlist.  
-Guarantees: If successful, the food place is removed from the user's wishlist.
+Preconditions: At least one foodplace exists. The specified foodplace is currently on the user's wishlist.  
+Guarantees: If successful, the foodplace is removed from the user's wishlist.
 
 **MSS**
 
-1. User requests to list food places.
-2. BiteBuddy shows a list of food places.
-3. User requests to unwishlist a specific food place in the list.
-4. BiteBuddy removes the food place from the wishlist and displays a confirmation message.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User requests to unwishlist a specific foodplace in the list.
+4. BiteBuddy removes the foodplace from the wishlist and displays a confirmation message.
 
     Use case ends.
 
@@ -707,32 +654,32 @@ Guarantees: If successful, the food place is removed from the user's wishlist.
 
      Use case ends.
 
-**Use case: UC12 - List all wishlisted food places**
+**Use case: UC12 - List all wishlisted foodplaces**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one wishlisted food place exists.
-Guarantees: The full list of wishlisted food places is displayed.
+Preconditions: At least one wishlisted foodplace exists.  
+Guarantees: The full list of wishlisted foodplaces is displayed.
 
 **MSS**
-1. User requests to list all wishlisted food places.
-2. BiteBuddy retrieves all wishlisted food places and updates the displayed list to show all food places.
+1. User requests to list all wishlisted foodplaces.
+2. BiteBuddy retrieves all wishlisted foodplaces and updates the displayed list to show all foodplaces.
 
     Use case ends.
 
-**Use case: UC13 - Add a food place to the blacklist**
+**Use case: UC13 - Add a foodplace to the blacklist**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, the food place is marked as blacklisted and excluded from certain recommendations or listings.
+Preconditions: At least one foodplace exists.  
+Guarantees: If successful, the foodplace is marked as blacklisted and excluded from certain recommendations or listings.
 
 **MSS**
 
-1. User requests to list food places.
-2. BiteBuddy shows a list of food places.
-3. User chooses to blacklist a specific food place from the list.
-4. BiteBuddy marks the food place as blacklisted and displays confirmation.  
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to blacklist a specific foodplace from the list.
+4. BiteBuddy marks the foodplace as blacklisted and displays confirmation.  
 
     Use case ends.
 
@@ -743,24 +690,24 @@ Guarantees: If successful, the food place is marked as blacklisted and excluded 
 
       Use case ends.
 
-* 3b. The chosen food place is on the wishlist.
-    * 3a1. BiteBuddy removes the food place from the wishlist
+* 3b. The chosen foodplace is on the wishlist.
+    * 3a1. BiteBuddy removes the foodplace from the wishlist.
     
       Use case resumes from step 4.
 
-**Use case: UC14 - Remove a food place from blacklist**
+**Use case: UC14 - Remove a foodplace from blacklist**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists. The specified food place is currently on the user's blacklist.  
-Guarantees: If successful, the food place is removed from the user's blacklist.
+Preconditions: At least one foodplace exists. The specified foodplace is currently on the user's blacklist.  
+Guarantees: If successful, the foodplace is removed from the user's blacklist.
 
 **MSS**
 
-1. User requests to list food places.
-2. BiteBuddy shows a list of food places.
-3. User requests to un-blacklist a specific food place in the list.
-4. BiteBuddy removes the food place from the blacklist and displays a confirmation message.
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User requests to un-blacklist a specific foodplace in the list.
+4. BiteBuddy removes the foodplace from the blacklist and displays a confirmation message.
 
     Use case ends.
 
@@ -771,32 +718,32 @@ Guarantees: If successful, the food place is removed from the user's blacklist.
 
         Use case ends.
 
-**Use case: UC15 - List all blacklisted food places**
+**Use case: UC15 - List all blacklisted foodplaces**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one blacklisted food place exists.
-Guarantees: The full list of blacklisted food places is displayed.
+Preconditions: At least one blacklisted foodplace exists.  
+Guarantees: The full list of blacklisted foodplaces is displayed.
 
 **MSS**
-1. User requests to list all blacklisted food places.
-2. BiteBuddy retrieves all blacklisted food places and updates the displayed list to show all food places.
+1. User requests to list all blacklisted foodplaces.
+2. BiteBuddy retrieves all blacklisted foodplaces and updates the displayed list to show all foodplaces.
 
     Use case ends.
 
-**Use case: UC16 - Pin a food place**
+**Use case: UC16 - Pin a foodplace**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, the food place is pinned.
+Preconditions: At least one foodplace exists.  
+Guarantees: If successful, the foodplace is pinned.
 
 **MSS**
 
-1. User requests to list food places.
-2. BiteBuddy shows a list of food places.
-3. User chooses to pin a specific food place on the list.
-4. BiteBuddy pins the food place and displays confirmation.  
+1. User requests to list foodplaces.
+2. BiteBuddy shows a list of foodplaces.
+3. User chooses to pin a specific foodplace on the list.
+4. BiteBuddy pins the foodplace and displays confirmation.  
 
     Use case ends.
 
@@ -807,7 +754,7 @@ Guarantees: If successful, the food place is pinned.
 
       Use case ends.
 
-* 3b. Food place already pinned.
+* 3b. Foodplace already pinned.
     * 3b1. BiteBuddy informs the user and makes no change.
 
       Use case ends.
@@ -817,19 +764,19 @@ Guarantees: If successful, the food place is pinned.
 
       Use case ends.
 
-**Use case: UC17 - Unpin a food place**
+**Use case: UC17 - Unpin a foodplace**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists. The specified food place is currently pinned.  
-Guarantees: If successful, the food place is unpinned.
+Preconditions: At least one foodplace exists. The specified foodplace is currently pinned.  
+Guarantees: If successful, the foodplace is unpinned.
 
 **MSS**
 
-1. User requests to list food places.  
-2. BiteBuddy shows a list of food places.  
-3. User chooses to unpin a specific food place in the list.  
-4. BiteBuddy validates the index, unpins the food place, and displays a confirmation message.
+1. User requests to list foodplaces.  
+2. BiteBuddy shows a list of foodplaces.  
+3. User chooses to unpin a specific foodplace in the list.  
+4. BiteBuddy validates the index, unpins the foodplace, and displays a confirmation message.
 
     Use case ends.
 
@@ -840,25 +787,25 @@ Guarantees: If successful, the food place is unpinned.
 
       Use case ends.
 
-* 3b. The chosen food place is not pinned.
-    * 3b1. BiteBuddy informs the user that the food place is not pinned and makes no change.
+* 3b. The chosen foodplace is not pinned.
+    * 3b1. BiteBuddy informs the user that the foodplace is not pinned and makes no change.
 
       Use case ends.
 
 
-**Use case: UC18 - Compare two or more food places**
+**Use case: UC18 - Compare two or more foodplaces**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least two food places exist.  
-Guarantees: If successful, a comparison view or summary of the selected food places is presented to the user.
+Preconditions: At least two foodplaces exist.  
+Guarantees: If successful, a comparison view or summary of the selected foodplaces is presented to the user.
 
 **MSS**
 
-1. User requests to list food places.  
-2. BiteBuddy shows a list of food places.  
+1. User requests to list foodplaces.  
+2. BiteBuddy shows a list of foodplaces.  
 3. User issues the compare command with two valid indexes.  
-4. BiteBuddy retrieves the corresponding food places, and displays a comparison view and summary showing key attributes (e.g., name, rating, cuisine, notes, tags).  
+4. BiteBuddy retrieves the corresponding foodplaces, and displays a comparison view and summary showing key attributes (e.g., name, rating, cuisine, notes, tags).  
 
     Use case ends.
 
@@ -904,16 +851,16 @@ Guarantees: Relevant help information is shown to the user.
     
       Use case ends.
 
-**Use case: UC20 - Clear all food places**
+**Use case: UC20 - Clear all foodplaces**
 
 System: BiteBuddy  
 Actor: User  
-Preconditions: At least one food place exists.  
-Guarantees: If successful, all food places are removed from the address book.
+Preconditions: At least one foodplace exists.  
+Guarantees: If successful, all foodplaces are removed from the address book.
 
 **MSS**
-1. User requests to clear all food places.
-2. BiteBuddy deletes all food places from the address book and displays a confirmation message.
+1. User requests to clear all foodplaces.
+2. BiteBuddy deletes all foodplaces from the address book and displays a confirmation message.
 
 Use case ends.
 
@@ -951,8 +898,8 @@ Guarantees: If successful, user can reuse a previous command.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 food places without a noticeable sluggishness in performance for typical usage.
+1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed. On macOS, a compatible Java 17 JDK+FX distribution is required.
+2.  Should be able to hold up to 1000 foodplaces without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Error messages must explicitly state the error and provide guidance on correcting the input.
 5.  Should not lose data if the application crashes unexpectedly.
@@ -968,10 +915,11 @@ Organized in alphabetical order
 * **CLI (Command Line Interface)**: A text-based interface that allows users to interact with the application by typing commands.
 * **Command**: An instruction entered by the user to perform a specific action in the application (e.g., add, delete, list).
 * **Custom Keyword**: A user-defined word or phrase that can be used to filter, search, or tag specific entries in BiteBuddy.
-* **Food Place**: Any food place, including but not limited to restaurants, hawker stalls, food trucks, and cafes.
+* **Foodplace**: A location where food is sold or served, such as a restaurant, hawker stall, food truck, or cafe.
 * **GUI (Graphical User Interface)**: The visual interface of the application that allows users to interact with it using graphical elements.
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Tag**: A label that can be assigned to food places to categorize or group them.
+* **Pin**: A foodplace marked with a pin icon that always appears at the top of the displayed list when it meets the conditions for being shown. At most 5 foodplaces can be pinned at any time.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Tag**: A label that can be assigned to foodplaces to categorize or group them.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -985,18 +933,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-1. Initial launch
+##### Initial launch:
 
-   1. Download the jar file and copy into an empty folder
+Steps:
+- Download the [jar file](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases) from the latest release and copy into an empty folder 
+- Double-click the jar file 
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample foodplaces. The window size may not be optimum.
+Expected: 
+- Shows the GUI with a set of sample foodplaces. The window size may not be optimum.
 
-1. Saving window preferences
+##### Saving window preferences:
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+Steps:
+- Resize the window to an optimum size. 
+- Move the window to a different location. 
+- Close the window.
+- Re-launch the app by double-clicking the jar file.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+Expected: 
+- The most recent window size and location is retained.
 
 ### Adding a foodplace
 
@@ -1004,41 +959,41 @@ testers are expected to do more *exploratory* testing.
 * BiteBuddy is running.
 * Use the `list` command first to show current foodplaces and note the count.
 
-#### Valid Test case 1 — Adding a complete foodplace:
+##### Valid Test case 1 — Adding a complete foodplace:
 
 Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/chinese t/dinner`
 
 Expected:
-* Foodplace is added to the list; `list` shows one additional entry. 
-* Details of the new foodplace shown in the status message: `Added Foodplace: Golden Wok ...`
-* Tags `chinese`, `dinner` are present on the new entry.
+- Foodplace is added to the list; `list` shows one additional entry. 
+- Details of the new foodplace shown in the status message: `Added Foodplace: Golden Wok ...`
+- Tags `chinese`, `dinner` are present on the new entry.
 
-#### Valid Test case 2 — Adding with only required fields:
+##### Valid Test case 2 — Adding with only required fields:
     
 Command: `add n/Coffee Corner a/50 Coffee St`
 
 Expected:
-* Foodplace is added successfully.
-* Optional fields are empty/unset.
-* Details of the new foodplace shown in the status message: `Added Foodplace: Coffee Corner ...`
+- Foodplace is added successfully.
+- Optional fields are empty/unset.
+- Details of the new foodplace shown in the status message: `Added Foodplace: Coffee Corner ...`
 
-#### Invalid Test case 1 — Adding with **missing required field**:
+##### Invalid Test case 1 — Adding with **missing required field**:
 
 Command: `add p/91234567 e/a@b.com a/1 Example St`
 
 Expected:
 - No foodplace is added.
-- Error details shown in the status message: `Invalid command format! add: ...`
+- Error details shown in the status message: `Invalid command format! add: Adds a foodplace...`
 
-#### Invalid Test case 2 — Adding with **invalid optional field**:
+##### Invalid Test case 2 — Adding with **invalid optional field**:
 
-Command: `add n/BadPhone p/phone123 a/12 Some Rd`<br>  
+Command: `add n/BadPhone p/phone123 a/12 Some Rd`
 
 Expected:
 - No foodplace is added.
 - Error details shown in the status message: `Phone numbers should only contain numbers...`
 
-#### Invalid Test case 3 — Adding a **duplicate foodplace**:
+##### Invalid Test case 3 — Adding a **duplicate foodplace**:
 
 Steps:
 - Add a foodplace: `add n/Duplicate a/10 Rd`
@@ -1049,9 +1004,9 @@ Expected:
 - Error details shown in the status message: `This foodplace already exists in BiteBuddy.`
 - `list` shows only one instance.
 
-#### Edge case 1 — Multiple tags and spacing handling: 
+##### Edge case 1 — Multiple tags and spacing handling: 
 
-Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor`
+Command: `add n/TagEdge p/90000000 a/5 Lane t/fast t/ family  t/outdoor `
 
 Expected:
 - Multiple tags parsed correctly (whitespace around tags trimmed).
@@ -1061,504 +1016,668 @@ Expected:
 
 Deleting a foodplace while all foodplaces are being shown
 
-- *Prerequisites:*<br>
-    - **At least one foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
+*Prerequisites:*<br>
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list.
+* Use the `list` command first to show current foodplaces and note the count.
 
 
-1. Valid Test case - Deleting a valid foodplace:<br>
-    Command: `delete 1`<br>
-    Expected:
-    - First foodplace is deleted from the list.
-    - Details of the deleted foodplace shown in the status message: `Deleted Foodplace: ...`
+##### Valid Test case 1 - Deleting a valid foodplace:
 
-1. Invalid Test case - Deleting a **foodplace at an invalid index**:<br>
-    Command: `delete 0`<br>
-    Expected:
-    - No foodplace is deleted.
-    - Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
+Command: `delete 1`
+
+Expected:
+- First foodplace is deleted from the list.
+- Details of the deleted foodplace shown in the status message: `Deleted Foodplace: ...`
+
+##### Invalid Test case 2 - Deleting a **foodplace at an invalid index**:
+
+Command: `delete 0`
+
+Expected:
+- No foodplace is deleted.
+- Error details shown in the status message: `Invalid command format! delete: Deletes the foodplace...`
 
 ### Editing a foodplace
 
 Editing a foodplace while all foodplaces are being shown
 
-- *Prerequisites:*  
-    - **At least one foodplace** must exist in the list.  
-    - Use the `list` command first to list all foodplaces and note the current details.
+*Prerequisites:*  
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list.  
+* Use the `list` command first to list all foodplaces and note the current details.
 
-1. Valid Test case — Editing all fields of a valid foodplace:<br>
-    Command: `edit 1 n/Cafe Luna p/91234567 e/cafe@example.com a/20 Baker St t/cafe t/coffee`<br>  
-    Expected:
-    - Foodplace at index 1 is updated with the new name, phone, email, address and tags.
-    - Details of the updated foodplace shown in the status message: `Edited Foodplace: Cafe Luna ...`
+##### Valid Test case 1 — Editing all fields of a valid foodplace:
 
-1. Valid Test case — Editing only some fields:<br>
-    Command: `edit 1 n/Cafe Luna`<br>  
-    Expected:
-    - Only the name of the first foodplace is changed; other fields remain unchanged.
-    - Status message shows the edited entry with unchanged fields preserved.
+Command: `edit 1 n/Cafe Luna p/91234567 e/cafe@example.com a/20 Baker St t/cafe t/coffee`
 
-1. Valid Test case — Replacing tags with a new set:<br>
-    Command: `edit 1 t/brunch t/outdoor`<br> 
-    Expected:
-    - Tags of the first foodplace are replaced by `brunch` and `outdoor`.
-    - Status message shows the edited entry with unchanged fields preserved.
+Expected:
+- Foodplace at index 1 is updated with the new name, phone, email, address and tags.
+- Details of the updated foodplace shown in the status message: `Edited Foodplace: Cafe Luna ...`
 
-1. Valid Test case — Clearing all tags:<br>
-    Command: `edit 1 t/`<br>  
-    Expected:
-    - All tags are removed from the first foodplace.
-    - Status message shows the edited entry with unchanged fields preserved.
+##### Valid Test case 2 — Editing only some fields:
 
-1. Invalid Test case — Editing a foodplace at an **invalid index**:<br>
-    Command: `edit 0 n/NewName`<br>  
-    Expected:
-    - No changes applied.
-    - Error details shown in the status message: `Invalid command format!...`
+Command: `edit 1 n/Cafe Luna`
 
-1. Invalid Test case — Editing a foodplace at an **out-of-range index**:<br> 
-    Command: `edit 999 n/Nowhere`  
-    Expected:
-    - No changes applied.
-    - Error details shown in the status message: `The foodplace index provided is invalid`
+Expected:
+- Only the name of the first foodplace is changed; other fields remain unchanged.
+- Status message shows the edited entry with unchanged fields preserved.
 
-1. Invalid Test case — Editing with an **invalid field**:<br>
-    Command: `edit 1 p/phone123`<br>  
-    Expected:
-    - No changes applied.
-    - Error details shown in the status message: `Phone numbers should only contain numbers...`
+##### Valid Test case 3 — Replacing tags with a new set:
 
-1. Invalid Test case — Editing results in a **duplicate entry**:<br>  
-    Steps:
-    - Run `add n/ExistingName a/Existing Address`
-    - Run `edit 1 n/ExistingName a/Existing Address`
-    Expected:
-    - No changes applied.
-    - Error details shown in the status message: `This foodplace already exists in BiteBuddy.`
+Command: `edit 1 t/brunch t/outdoor`
 
-1. Edge case — No fields provided to edit:<br>
-    Command: `edit 1`<br>  
-    Expected:
-    - No changes applied.
-    - Error details shown in the status message: `At least one field to edit must be provided.`
+Expected:
+- Tags of the first foodplace are replaced by `brunch` and `outdoor`.
+- Status message shows the edited entry with unchanged fields preserved.
+
+##### Valid Test case 4 — Clearing all tags:
+
+Command: `edit 1 t/`
+
+Expected:
+- All tags are removed from the first foodplace.
+- Status message shows the edited entry with unchanged fields preserved.
+
+##### Invalid Test case 1 — Editing a foodplace at an **invalid index**:
+
+Command: `edit 0 n/NewName`
+
+Expected:
+- No changes applied.
+- Error details shown in the status message: `Invalid command format! edit: Edits the details...`
+
+##### Invalid Test case 2 — Editing a foodplace at an **out-of-range index**:
+
+Command: `edit 999 n/Nowhere`
+
+Expected:
+- No changes applied.
+- Error details shown in the status message: `The foodplace index provided is invalid`
+
+##### Invalid Test case 3 — Editing with an **invalid field**:
+
+Command: `edit 1 p/phone123`
+
+Expected:
+- No changes applied.
+- Error details shown in the status message: `Phone numbers should only contain numbers...`
+
+##### Invalid Test case 4 — Editing results in a **duplicate entry**:
+
+Steps:
+- Run `add n/ExistingName a/Existing Address`
+- Run `edit 1 n/ExistingName a/Existing Address`
+
+Expected:
+- No changes applied.
+- Error details shown in the status message: `This foodplace already exists in BiteBuddy.`
+
+##### Edge case 1 — No fields provided to edit:
+
+Command: `edit 1`
+
+Expected:
+- No changes applied.
+- Error details shown in the status message: `At least one field to edit must be provided.`
 
 ### Adding/deleting tags to a foodplace
+
 Adding/deleting tags to a foodplace while all foodplaces are being shown
 
-- *Prerequisites:*<br>
-    - **At least one foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
+*Prerequisites:*
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list. 
+* Use the `list` command first to list all foodplaces and note the current details.
 
 
-1. Valid Test case – Adding tags to a valid foodplace:<br>
-    Command: `tag 1 FastFood Cheap`<br>
-    Expected:
-    - First foodplace in the list will be assigned tags: `FastFood` and `Cheap`.
-    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+##### Valid Test case 1 – Adding tags to a valid foodplace:
 
-1. Valid Test case – Deleting a specific tag from a valid foodplace:<br>
-   Command: `tag 1 /d FastFood`<br>
-   Expected:
-    - Tag `FastFood` is deleted from the first foodplace (case-insensitive).
-    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+Command: `tag 1 FastFood Cheap`
 
-1. Valid Test case - Deleting all tags from a valid foodplace:<br>
-   Command: `tag 1 /d`<br>
-   Expected:
-    - All tags are cleared from the first foodplace.
-    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+Expected:
+- First foodplace in the list will be assigned tags: `FastFood` and `Cheap`.
+- Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
 
-1. Valid Test case - Adding duplicate tags with different casing:<br>
-   Command: `tag 1 cheap CHEAP`<br>
-   Expected:
-    - Only one tag `cheap` remains (duplicate ignored case-insensitively).
-    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+##### Valid Test case 2 – Deleting a specific tag from a valid foodplace:
 
-1. Valid Test case - Overriding existing tag casing:<br>
-   Command: `tag 1 Cheap` followed by `tag 1 cheap`<br>
-   Expected:
-    - The existing tag `Cheap` is replaced with `cheap`.
-    - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+Command: `tag 1 /d FastFood`
 
-1. Invalid Test case - Deleting a non-existent tag:<br>
-   Command: `tag 1 /d NonExistent`<br>
-   Expected:
-    - No tags are deleted.
-    - Message displayed: `No matching tags found to delete ...`
+Expected:
+- Tag `FastFood` is deleted from the first foodplace (case-insensitive).
+- Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
 
-1. Invalid Test case - Adding tags to a foodplace at an invalid index:<br>
-   Command: `tag 0 FastFood`<br>
-   Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `The foodplace index provided is invalid`
+##### Valid Test case 3 - Deleting all tags from a valid foodplace:
 
-1. Invalid Test case - Adding an empty tag value:<br>
-   Command: `tag 1` (with a space after the index)<br>
-   Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `Invalid command format! tag: ...`
+Command: `tag 1 /d`
 
-1. Invalid Test case - Adding a non-alphanumeric tag:<br>
-   Command: `tag 1 $$$$`<br>
-   Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `Tags names should be alphanumeric`
+Expected:
+- All tags are cleared from the first foodplace.
+- Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
 
+##### Valid Test case 4 - Adding duplicate tags with different casing:
+
+Command: `tag 1 cheap CHEAP`
+
+Expected:
+- Only one tag `cheap` remains (duplicate ignored case-insensitively).
+- Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+
+##### Valid Test case 5 - Overriding existing tag casing:
+
+Command: `tag 1 Cheap` followed by `tag 1 cheap`
+
+Expected:
+- The existing tag `Cheap` is replaced with `cheap`.
+- Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
+
+##### Invalid Test case 1 - Deleting a non-existent tag:
+
+Command: `tag 1 /d NonExistent`
+
+Expected:
+- No tags are deleted.
+- Message displayed: `No matching tags found to delete ...`
+
+##### Invalid Test case 2 - Adding tags to a foodplace at an invalid index:
+
+Command: `tag 0 FastFood`
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `The foodplace index provided is invalid`
+
+##### Invalid Test case 3 - Adding an empty tag value:
+
+Command: `tag 1` (with a space after the index)
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `Invalid command format! tag: Adds/deletes tags from...`
+
+##### Invalid Test case 4 - Adding a non-alphanumeric tag:
+
+Command: `tag 1 $$$$`
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `Tags names should be alphanumeric`
 
 ### Adding note to a foodplace
 
 Adding note to a foodplace while all foodplaces are being shown
 
-- *Prerequisites:*<br>
-    - **At least one foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
+*Prerequisites:*
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list.
+* Use the `list` command first to list all foodplaces and note the current details.
 
 
-1. Valid Test case - Assigning a valid note to a valid foodplace:<br>
-    Command: `note 1 Good customer service!`<br>
-    Expected:
-    - First foodplace in the list will be assigned a note: `Good customer service!`
-    - Details of the updated foodplace shown in the status message: `Added notes to Foodplace: ...`
+##### Valid Test case 1 - Assigning a valid note to a valid foodplace:
 
-1. Valid Test case - Unassigning any existing note from a valid foodplace:<br>
-    Command: `note 1`<br>
-    Expected:
-    - First foodplace in the list will have no note: `-- No notes yet --`
-    - Details of the updated foodplace shown in the status message: `Removed notes from Foodplace: ...`
+Command: `note 1 Good customer service!`
 
-1. Valid Test case - Assigning same note to a valid foodplace:<br>
-    Steps:
-    - Run `note 1 Good customer service!`<br>
-    - Run `note 1 Good customer service!` again<br>
-    Expected:
-    - No foodplace will be updated.
-    - Info details shown in the status message: `The new note is the same as the current note...`
+Expected:
+- First foodplace in the list will be assigned a note: `Good customer service!`
+- Details of the updated foodplace shown in the status message: `Added notes to Foodplace: ...`
 
-1. Valid Test case - Unassigning any non-existent note from a valid foodplace:<br>
-    Steps:
-    - Run `note 1`<br>
-    - Run `note 1` again<br>
-    Expected:
-    - No foodplace will be updated.
-    - Info details shown in the status message: `No notes to remove from specified Foodplace...`
+##### Valid Test case 2 - Unassigning any existing note from a valid foodplace:
 
-1. Invalid Test case - Assigning a valid note to a **foodplace at an invalid index**:<br>
-    Command: `note 0 Good customer service!`<br>
-    Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `Invalid command format! ...`
+Command: `note 1`
 
-1. Invalid Test case - Assigning a valid note at an **out-of-range index**:<br>
-    Command: `note 999 Good customer service!`<br>
-    Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `The foodplace index provided is invalid`
+Expected:
+- First foodplace in the list will have no note: `-- No notes yet --`
+- Details of the updated foodplace shown in the status message: `Removed notes from Foodplace: ...`
 
-1. Invalid Test case - Assigning a **note that exceeds the character limit of 100** to a valid foodplace:<br>
-    Command: `note 1 aaaaaaa...` (101 `a`s)<br>
-    Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `Note given either exceeds 100 characters OR contained non-ASCII-printable characters...`
+##### Valid Test case 3 - Assigning same note to a valid foodplace:
 
-1. Invalid Test case - Assigning a **note that contains non-ASCII-printable characters** to a valid foodplace:<br>
-    Command: `note 1 ¤¤¤¤`<br>
-    Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `Note given either exceeds 100 characters OR contained non-ASCII-printable characters...`
+Steps:
+- Run `note 1 Good customer service!`
+- Run `note 1 Good customer service!` again
+
+Expected:
+- No foodplace will be updated.
+- Info details shown in the status message: `The new note is the same as the current note...`
+
+##### Valid Test case 4 - Unassigning any non-existent note from a valid foodplace:
+
+Steps:
+- Run `note 1`
+- Run `note 1` again
+
+Expected:
+- No foodplace will be updated.
+- Info details shown in the status message: `No notes to remove from specified Foodplace...`
+
+##### Invalid Test case 1 - Assigning a valid note to a **foodplace at an invalid index**:
+
+Command: `note 0 Good customer service!`
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `Invalid command format! note: Edits the notes...`
+
+##### Invalid Test case 2 - Assigning a valid note at an **out-of-range index**:
+
+Command: `note 999 Good customer service!`
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `The foodplace index provided is invalid`
+
+##### Invalid Test case 3 - Assigning a **note that exceeds the character limit of 100** to a valid foodplace:
+
+Command: `note 1 aaaaaaa...` (101 `a`s)
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `Note given either exceeds 100 characters OR contained non-ASCII-printable characters...`
+
+##### Invalid Test case 4 - Assigning a **note that contains non-ASCII-printable characters** to a valid foodplace:
+
+Command: `note 1 ¤¤¤¤`
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `Note given either exceeds 100 characters OR contained non-ASCII-printable characters...`
 
 
 ### Rating a foodplace
 
 Rating a foodplace while all foodplaces are being shown
 
-- *Prerequisites:*<br>
-    - **At least one foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
+*Prerequisites:*
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list.
+* Use the `list` command first to list all foodplaces and note the current details.
 
 
-1. Valid Test case - Assigning a valid rating to a valid foodplace:<br> 
-    Command: `rate 1 5`<br>
-    Expected:
-    - First foodplace in the list will be assigned a rating: `< 5/10 >`
-    - Details of the rated foodplace shown in the status message: `Added rating to Foodplace: ...`
+##### Valid Test case 1 - Assigning a valid rating to a valid foodplace:
 
-1. Valid Test case - Unassigning any existing rating from a valid foodplace:<br>
-   Command: `rate 1 0`<br>
-   Expected: 
-    - First foodplace in the list will become unrated: `>> No rating yet <<`
-    - Details of the unrated foodplace shown in the status message: `Removed rating from Foodplace: ...`
+Command: `rate 1 5`
 
-1. Invalid Test case - Assigning a valid rating to a **foodplace at an invalid index**:<br>
-   Command: `rate 0 5`<br>
-   Expected:
-    - No foodplace will be rated.
-    - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
+Expected:
+- First foodplace in the list will be assigned a rating: `< 5/10 >`
+- Details of the rated foodplace shown in the status message: `Added rating to Foodplace: ...`
 
-1. Invalid Test case - Assigning a **negative rating** to a valid foodplace:<br>
-   Command: `rate 1 -1`<br>
-   Expected:
-    - No foodplace will be rated.
-    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
+##### Valid Test case 2 - Unassigning any existing rating from a valid foodplace:
 
-1. Invalid Test case - Assigning an **out-of-range rating** to a valid foodplace:<br>
-   Command: `rate 1 11`<br>
-   Expected:
-    - No foodplace will be rated.
-    - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
+Command: `rate 1 0`
 
-1. Invalid Test case - Assigning an **unsigned non-integer rating** to a valid foodplace:<br>
-    Command: `rate 1 1.1`<br>
-    Expected:
-    - No foodplace will be rated.
-    - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
+Expected: 
+- First foodplace in the list will become unrated: `>> No rating yet <<`
+- Details of the unrated foodplace shown in the status message: `Removed rating from Foodplace: ...`
+
+##### Invalid Test case 1 - Assigning a valid rating to a **foodplace at an invalid index**:
+
+Command: `rate 0 5`
+
+Expected:
+- No foodplace will be rated.
+- Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
+
+##### Invalid Test case 2 - Assigning a **negative rating** to a valid foodplace:
+
+Command: `rate 1 -1`
+
+Expected:
+- No foodplace will be rated.
+- Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
+
+##### Invalid Test case 3 - Assigning an **out-of-range rating** to a valid foodplace:
+
+Command: `rate 1 11`
+
+Expected:
+- No foodplace will be rated.
+- Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
+
+##### Invalid Test case 4 - Assigning an **unsigned non-integer rating** to a valid foodplace:
+
+Command: `rate 1 1.1`
+
+Expected:
+- No foodplace will be rated.
+- Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
 
 ### Wishlisting a foodplace
 
 Wishlisting a foodplace while all foodplaces are being shown
 
-- *Prerequisites:*<br>
-    - **At least one foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
+*Prerequisites:*
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list.
+* Use the `list` command first to list all foodplaces and note the current details.
 
 
-1. Valid Test case - Adding a valid foodplace to wishlist:<br>
-    Command: `wishlist 1`<br>
-    Expected:
-    - First foodplace in the list will be added to wishlist.
-    - Details of the updated foodplace shown in the status message: `Add Foodplace to wishlist: ...`
+##### Valid Test case 1 - Adding a valid foodplace to wishlist:
 
-1. Valid Test case - Removing a valid foodplace from wishlist:<br>
-    Steps:
-    - Run `wishlist 1` to add the foodplace to wishlist first<br>
-    - Run `wishlist 1` again to remove the foodplace from wishlist<br>
-    Expected:
-    - First foodplace in the list will be removed from wishlist.
-    - Details of the updated foodplace shown in the status message: `Remove Foodplace from wishlist: ...`
+Command: `wishlist 1`
 
-1. Valid Test case - Adding a valid foodplace that is **blacklisted** to wishlist:<br>
-    Steps:
-    - Run `blacklist 1` to add the foodplace to blacklist first<br>
-    - Run `wishlist 1` to remove the foodplace from blacklist and add it to wishlist<br>
-    Expected:
-    - First foodplace in the list will be added to wishlist.
-    - First foodplace in the list will be removed from blacklist.
-    - Details of the updated foodplace shown in the status message: `Add Foodplace to wishlist: ...`
-    - Extra details of the updated foodplace shown in the status message: `Additionally removed Foodplace from blacklist`
+Expected:
+- First foodplace in the list will be added to wishlist.
+- Details of the updated foodplace shown in the status message: `Add Foodplace to wishlist: ...`
 
-1. Valid Test case - Displaying wishlist:<br>
-    Command: `wishlist`<br>
-    Expected:
-    - Displays all foodplaces that are added to wishlist.
-    - Info details shown in the status message: `Listed all foodplaces that are wishlisted`
+##### Valid Test case 2 - Removing a valid foodplace from wishlist:
 
-1. Invalid Test case - Adding / removing a foodplace to wishlist at an **invalid index**:<br>
-    Command: `wishlist 0`<br>
-    Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `Invalid command format! ...`
+Steps:
+- Run `wishlist 1` to add the foodplace to wishlist first
+- Run `wishlist 1` again to remove the foodplace from wishlist
 
-1. Invalid Test case - Adding / removing a foodplace to wishlist at an **out-of-range index**:<br>
-    Command: `wishlist 999`<br>
-    Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `The foodplace index provided is invalid`
+Expected:
+- First foodplace in the list will be removed from wishlist.
+- Details of the updated foodplace shown in the status message: `Remove Foodplace from wishlist: ...`
+
+##### Valid Test case 3 - Adding a valid foodplace that is **blacklisted** to wishlist:
+
+Steps:
+- Run `blacklist 1` to add the foodplace to blacklist first
+- Run `wishlist 1` to remove the foodplace from blacklist and add it to wishlist
+
+Expected:
+- First foodplace in the list will be added to wishlist.
+- First foodplace in the list will be removed from blacklist.
+- Details of the updated foodplace shown in the status message: `Add Foodplace to wishlist: ...`
+- Extra details of the updated foodplace shown in the status message: `Additionally removed Foodplace from blacklist`
+
+##### Valid Test case 4 - Displaying wishlist:
+
+Command: `wishlist`
+
+Expected:
+- Displays all foodplaces that are added to wishlist.
+- Info details shown in the status message: `Listed all foodplaces that are wishlisted`
+
+##### Invalid Test case 1 - Adding / removing a foodplace to wishlist at an **invalid index**:
+
+Command: `wishlist 0`
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `Invalid command format! wishlist: Wishlists the foodplace...`
+
+##### Invalid Test case 2 - Adding / removing a foodplace to wishlist at an **out-of-range index**:
+
+Command: `wishlist 999`
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `The foodplace index provided is invalid`
 
 
 ### Blacklisting a foodplace
 
 Blacklisting a foodplace while all foodplaces are being shown
 
-- *Prerequisites:*<br>
-    - **At least one foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
+*Prerequisites:*
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list.
+* Use the `list` command first to list all foodplaces and note the current details.
 
 
-1. Valid Test case - Adding a valid foodplace to blacklist:<br>
-    Command: `blacklist 1`<br>
-    Expected:
-    - First foodplace in the list will be added to blacklist.
-    - Details of the updated foodplace shown in the status message: `Add Foodplace to blacklist: ...`
+##### Valid Test case 1 - Adding a valid foodplace to blacklist:
 
-1. Valid Test case - Removing a valid foodplace from blacklist:<br>
-    Steps:
-    - Run `blacklist 1` to add the foodplace to blacklist first<br>
-    - Run `blacklist 1` again to remove the foodplace from blacklist<br>
-    Expected:
-    - First foodplace in the list will be removed from blacklist.
-    - Details of the updated foodplace shown in the status message: `Remove Foodplace from blacklist: ...`
+Command: `blacklist 1`
 
-1. Valid Test case - Adding a valid foodplace that is **wishlisted** to blacklist:<br>
-    Steps:
-    - Run `wishlist 1` to add the foodplace to wishlist first<br>
-    - Run `blacklist 1` to remove the foodplace from wishlist and add it to blacklist<br>
-    Expected:
-    - First foodplace in the list will be added to blacklist.
-    - First foodplace in the list will be removed from wishlist.
-    - Details of the updated foodplace shown in the status message: `Add Foodplace to blacklist: ...`
-    - Extra details of the updated foodplace shown in the status message: `Additionally removed Foodplace from wishlist`
+Expected:
+- First foodplace in the list will be added to blacklist.
+- Details of the updated foodplace shown in the status message: `Add Foodplace to blacklist: ...`
 
-1. Valid Test case - Displaying blacklist:<br>
-    Command: `blacklist`<br>
-    Expected:
-    - Displays all foodplaces that are added to blacklist.
-    - Info details shown in the status message: `Listed all foodplaces that are blacklisted`
+##### Valid Test case 2 - Removing a valid foodplace from blacklist:
 
-1. Invalid Test case - Adding / removing a foodplace to blacklist at an **invalid index**:<br>
-    Command: `blacklist 0`<br>
-    Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `Invalid command format! ...`
+Steps:
+- Run `blacklist 1` to add the foodplace to blacklist first
+- Run `blacklist 1` again to remove the foodplace from blacklist
 
-1. Invalid Test case - Adding / removing a foodplace to blacklist at an **out-of-range index**:<br>
-    Command: `blacklist 999`<br>
-    Expected:
-    - No foodplace will be updated.
-    - Error details shown in the status message: `The foodplace index provided is invalid`
+Expected:
+- First foodplace in the list will be removed from blacklist.
+- Details of the updated foodplace shown in the status message: `Remove Foodplace from blacklist: ...`
+
+##### Valid Test case 3 - Adding a valid foodplace that is **wishlisted** to blacklist:
+
+Steps:
+- Run `wishlist 1` to add the foodplace to wishlist first
+- Run `blacklist 1` to remove the foodplace from wishlist and add it to blacklist
+
+Expected:
+- First foodplace in the list will be added to blacklist.
+- First foodplace in the list will be removed from wishlist.
+- Details of the updated foodplace shown in the status message: `Add Foodplace to blacklist: ...`
+- Extra details of the updated foodplace shown in the status message: `Additionally removed Foodplace from wishlist`
+
+##### Valid Test case 4 - Displaying blacklist:
+
+Command: `blacklist`
+
+Expected:
+- Displays all foodplaces that are added to blacklist.
+- Info details shown in the status message: `Listed all foodplaces that are blacklisted`
+
+##### Invalid Test case 1 - Adding / removing a foodplace to blacklist at an **invalid index**:
+
+Command: `blacklist 0`
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `Invalid command format! blacklist: Blacklists the foodplace...`
+
+##### Invalid Test case 2 - Adding / removing a foodplace to blacklist at an **out-of-range index**:
+
+Command: `blacklist 999`
+
+Expected:
+- No foodplace will be updated.
+- Error details shown in the status message: `The foodplace index provided is invalid`
 
 
 ### Pinning a foodplace
 
 Pinning a foodplace while all foodplaces are being shown
 
-- *Prerequisites:*<br>
-    - **At least one foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
-    - Foodplace being pinned is currently not pinned.
-    - There are less than 5 pinned foodplaces.
+*Prerequisites:*
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list.
+* Use the `list` command first to list all foodplaces and note the current details.
+* Foodplace being pinned is currently not pinned. 
+* There are less than 5 pinned foodplaces.
 
 
-1. Valid Test case - Pinning an unpinned foodplace when there are less than 5 pins:<br>
-    Command: `pin 1`<br>
-    Expected:
-    - The first foodplace will be pinned.
-    - Details of the pinned foodplace shown in the status message: `Pinned Foodplace: ...`
+##### Valid Test case 1 - Pinning an unpinned foodplace when there are less than 5 pins:
 
-1. Invalid Test case - Pinning a **foodplace at an invalid index**:<br>
-   Command: `pin 0`<br>
-   Expected:
-    - No foodplace will be pinned.
-    - Error details shown in the status message: `Invalid command format!...`
+Command: `pin 1`
 
-1. Invalid Test case - Pinning a previously pinned foodplace:<br>
-    Steps:
-    - Pin the first foodplace using `pin 1`
-    - Attempt to pin the same foodplace again using `pin 1`
-    Expected:
-    - The first foodplace will remain pinned.
-    - Error details shown in the status message: `This foodplace is already pinned`
+Expected:
+- The first foodplace will be pinned.
+- Details of the pinned foodplace shown in the status message: `Pinned Foodplace: ...`
 
-1. Invalid Test case - Pinning an unpinned foodplace when there are 5 pins already:<br>
-    Steps:
-    - Pin 5 foodplaces using `pin x` 5 times.
-    - Attempt to pin another foodplace using `pin x`
-    Expected:
-    - The foodplace will not be pinned.
-    - Error details shown in the status message: `This foodplace is not pinned. The maximum of 5 pins has been reached`
+##### Invalid Test case 1 - Pinning a **foodplace at an invalid index**:
+
+Command: `pin 0`
+
+Expected:
+- No foodplace will be pinned.
+- Error details shown in the status message: `Invalid command format! pin: Pins the foodplace...`
+
+##### Invalid Test case 2 - Pinning a previously pinned foodplace:
+
+Steps:
+- Pin the first foodplace using `pin 1`
+- Attempt to pin the same foodplace again using `pin 1`
+
+Expected:
+- The first foodplace will remain pinned.
+- Error details shown in the status message: `This foodplace is already pinned`
+
+##### Invalid Test case 3 - Pinning an unpinned foodplace when there are 5 pins already:
+
+Steps:
+- Pin 5 foodplaces using `pin x` 5 times.
+- Attempt to pin another foodplace using `pin x`
+
+Expected:
+- The foodplace will not be pinned.
+- Error details shown in the status message: `This foodplace is not pinned. The maximum of 5 pins has been reached`
 
 ### Unpinning a foodplace
 
 Unpinning a foodplace while all foodplaces are being shown
 
-- *Prerequisites:*<br>
-    - **At least one foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
-    - Foodplace being unpinned is currently pinned.
+*Prerequisites:*
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list.
+* Use the `list` command first to list all foodplaces and note the current details.
+* Foodplace being unpinned is currently pinned.
 
 
-1. Valid Test case - Unpinning an pinned foodplace:<br>
-    Command: `unpin 1`<br>
-    Expected:
-    - The first foodplace will be unpinned.
-    - Details of the unpinned foodplace shown in the status message: `Unpinned Foodplace: ...`
+##### Valid Test case 1 - Unpinning a pinned foodplace:
 
-1. Invalid Test case - Unpinning a **foodplace at an invalid index**:<br>
-   Command: `unpin 0`<br>
-   Expected:
-    - No foodplace will be pinned.
-    - Error details shown in the status message: `Invalid command format!...`
+Command: `unpin 1`
 
-1. Invalid Test case - Unpinning a foodplace that is not pinned:<br>
-    Command: `unpin 2`<br>
-    Expected:
-    - The second foodplace remains the same.
-    - Error details shown in the status message: `This foodplace was not pinned`
+Expected:
+- The first foodplace will be unpinned.
+- Details of the unpinned foodplace shown in the status message: `Unpinned Foodplace: ...`
+
+##### Invalid Test case 1 - Unpinning a **foodplace at an invalid index**:
+
+Command: `unpin 0`
+
+Expected:
+- No foodplace will be pinned.
+- Error details shown in the status message: `Invalid command format! unpin: Unpins the foodplace...`
+
+##### Invalid Test case 2 - Unpinning a foodplace that is not pinned:
+
+Command: `unpin 2`
+
+Expected:
+- The second foodplace remains the same.
+- Error details shown in the status message: `This foodplace was not pinned`
 
 ### Finding a foodplace
 
-- *Prerequisites:*<br>
-    - **At least two foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
+*Prerequisites:*
+* BiteBuddy is running.
+* **At least one foodplace** must exist in the list.
+* Use the `list` command first to list all foodplaces and note the current details.
 
-1. Valid Test case - Finding a foodplace by keywords:<br>
-   Command: `find western`<br>
-   Expected:
-    - The list updates to show foodplaces with matching fields.
-    - Info details shown in the status message: `2 foodplaces listed!`
+##### Valid Test case 1 - Finding a foodplace by keywords:
 
-1. Valid Test case - Finding a foodplace by specified fields:<br>
-   Command: `find t/hawker r/8`<br>
-   Expected:
-    - The list updates to show foodplaces with matching fields.
-    - Info details shown in the status message: `3 foodplaces listed!`
+Command: `find western`
+
+Expected:
+- The list updates to show foodplaces with matching fields.
+- Info details shown in the status message: `2 foodplaces listed!`
+
+##### Valid Test case 2 - Finding a foodplace by specified fields:
+
+Command: `find t/hawker r/8`
+
+Expected:
+- The list updates to show foodplaces with matching fields.
+- Info details shown in the status message: `3 foodplaces listed!`
 
 ### Comparing two foodplaces
 
 Comparing two foodplaces from the list shown
 
-- *Prerequisites:*<br>
-    - **At least two foodplace** must exist in the list.
-    - Use the `list` command first to list all foodplaces.
+*Prerequisites:*
+* BiteBuddy is running.
+* **At least two foodplaces** must exist in the list.
+* Use the `list` command first to list all foodplaces and note the current details.
 
 
-1. Valid Test case - Comparing two different foodplaces:<br>
-    Command: `compare 1 2`<br>
-    Expected:
-    - The first and second foodplace will be compared.
-    - Details of the comparison shown in the status message.
+##### Valid Test case 1 - Comparing two different foodplaces:
 
-1. Invalid Test case - Comparing the same foodplace:<br>
-    Command: `compare 1 1`<br>
-    Expected:
-    - No comparison will be made.
-    - Error details shown in the status message: `The two foodplace indexes cannot be the same`
+Command: `compare 1 2`
 
-1. Invalid Test case - Comparing a **foodplace at an invalid index**:<br>
-    Command: `compare 1 999`<br>
-    Expected:
-    - No comparison will be made.
-    - Error details shown in the status message: `The second foodplace index provided is invalid`
+Expected:
+- The first and second foodplace will be compared.
+- Details of the comparison shown in the status message.
+
+##### Invalid Test case 1 - Comparing the same foodplace:
+
+Command: `compare 1 1`
+
+Expected:
+- No comparison will be made.
+- Error details shown in the status message: `The two foodplace indexes cannot be the same`
+
+##### Invalid Test case 2 - Comparing a **foodplace at an invalid index**:
+
+Command: `compare 1 999`
+
+Expected:
+- No comparison will be made.
+- Error details shown in the status message: `The second foodplace index provided is invalid`
 
 ### Getting Help
 
-- *Prerequisites:* <br>
-    - BiteBuddy is running.
+*Prerequisites:*
+* BiteBuddy is running.
 
-1. Valid Test case - Using the help button:<br>
-    Steps:
-    - Click the help button on the top left side of the window.
-    Expected:
-    - Help window should open with a link to the user guide.
 
-1. Valid Test case - Using the help command to get user guide:<br>
-    Command: `help`<br>
-    Expected:
-    - Help window should open with a link to the user guide.
+##### Valid Test case 1 - Using the help button:
 
-1. Valid Test case - Using the help command to get specific command usage:<br>
-    Command: `help list`<br>
-    Expected:
-    - Command usage of `list` is shown in status message: `list: Lists all foodplaces in BiteBuddy...`
+Steps:
+- Click the help button on the top left side of the window.
 
-1. Invalid Test case - Using an **invalid command word** as a parameter for the help command:<br>
-    Command: `help unknown`<br>
-    Expected:
-    - Error details shown in the status message: `Unknown command`
+Expected:
+- Help window should open with a link to the user guide.
+
+##### Valid Test case 2 - Using the help command to get user guide:
+
+Command: `help`
+
+Expected:
+- Help window should open with a link to the user guide.
+
+##### Valid Test case 3 - Using the help command to get specific command usage:
+
+Command: `help list`
+
+Expected:
+- Command usage of `list` is shown in status message: `list: Lists all foodplaces in BiteBuddy...`
+
+##### Invalid Test case 1 - Using an **invalid command word** as a parameter for the help command:
+
+Command: `help unknown`
+
+Expected:
+- Error details shown in the status message: `Unknown command`
+
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+##### Valid Test case 1 - Saving data after adding entries:
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+Steps:
+- Add a new foodplace using `add` command.
+- Close BiteBuddy.
 
-1. _{ more test cases …​ }_
+Expected:
+- Data is persisted correctly in the `addressbook.json` file.
+
+##### Valid Test case 2 - Missing data file:
+
+Steps:
+- Navigate to the `data` folder.
+- Delete the `addressbook.json` file.
+- Launch BiteBuddy.
+
+Expected:
+- BiteBuddy generates a new `addressbook.json` file with default sample data.
+
+##### Valid Test case 3 - Corrupted data file:
+
+Steps:
+- Navigate to the `data` folder.
+- Open the `addressbook.json` file.
+- Delete or modify one or more fields such that the data file is no longer valid.
+- Save the changes.
+- Launch BiteBuddy.
+
+Expected:
+- BiteBuddy opens in a blank state.
+
+
