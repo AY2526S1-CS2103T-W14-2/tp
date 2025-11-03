@@ -629,12 +629,12 @@ Guarantees: A note is stored for the foodplace and existing note is overwritten 
       Use case ends.
 
 * 3c. The given note is empty.
-    * 3b1. BiteBuddy treats this as discarding the existing note.
+    * 3c1. BiteBuddy treats this as discarding the existing note.
 
       Use case ends.
 
 * 3d. The given note is a duplicate of the existing note.
-    * 3c1. BiteBuddy does not change the entry.
+    * 3d1. BiteBuddy does not change the entry.
 
       Use case ends.
 
