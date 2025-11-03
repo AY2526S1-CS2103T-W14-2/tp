@@ -201,7 +201,7 @@ This section describes some noteworthy details on how certain features are imple
 The wishlist/blacklist feature is implemented as two different boolean value objects on each `Foodplace` to indicate whether it is wishlisted or blacklisted respectively:
 
 - `Wishlist` — `isWishlisted()` returns an immutable boolean value to determine whether the foodplace is wishlisted (`true` if wishlisted, `false` otherwise)
-- `Blacklist` — `isBlacklisted()`
+- `Blacklist` — `isBlacklisted()` returns an immutable boolean value to determine whether the foodplace is blacklisted (`true` if blacklisted, `false` otherwise)
 - Both have a `getOpposite()` method that returns a new instance with the opposite boolean value.
 - Both have a `toString()` method that returns a user-friendly string representation of the status (e.g., "Wishlisted" or "Not Wishlisted").
 
@@ -212,7 +212,7 @@ At the model level, both values are stored inside the `Foodplace` entity with an
 - When an `INDEX` is supplied, toggles the relevant state on the specified `Foodplace` by index creating a new immutable `Foodplace` with the updated field, and then calling `model.setFoodplace(old, updated)` to update the change.
 
 Conflict resolution of status is handled inside each command before constructing the edited `Foodplace`:
-- In `WishlistCommand`, if the target is already blacklisted but not wishlisted, it first set `Blacklist` to `false` and set `Wishlist` to `true`. A secondary status line clarifies that the blacklist status was removed.
+- In `WishlistCommand`, if the target is already blacklisted but not wishlisted, it first sets `Blacklist` to `false` and then sets `Wishlist` to `true`. A secondary status line clarifies that the blacklist status was removed.
 - Otherwise, it simply toggles the `Wishlist` status. (if `true`, set to `false` and vice versa)
 - This is similar for `BlacklistCommand`.
 
@@ -227,7 +227,7 @@ The following activity diagram summarises the control flow when a user executes 
 
 * Alternatively, conflict resolution could be handled in the `Model#setFoodplace()` method.
   * Pros: Centralised logic for maintaining the invariant.
-  * Cons: Hides the conflict resolution logic away from the commands into `Model#setFoodplace()`
+  * Cons: Hides the conflict resolution logic away from the commands into `Model#setFoodplace()`.
 
 
 ### \[Proposed\] Undo/redo feature
