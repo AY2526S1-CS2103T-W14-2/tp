@@ -2,7 +2,6 @@ package seedu.bitebuddy.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.bitebuddy.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.bitebuddy.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -27,7 +26,7 @@ public class HelpCommandParserTest {
 
     @Test
     public void parse_unknownCommand_throwsParseException() {
-        assertParseFailure(parser, "unknowncommand", MESSAGE_UNKNOWN_COMMAND);
+        assertParseFailure(parser, "unknowncommand", HelpCommandParser.COMMAND_WORD_UNKNOWN);
     }
 
     @Test
