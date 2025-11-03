@@ -29,6 +29,7 @@
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
+- [Glossary](#glossary)
 
 
 ## Introduction
@@ -45,14 +46,15 @@ BiteBuddy is **designed by foodies, for the foodies**! Add your go-to _(and not 
 - Adding a rating so you know exactly where that restaurant stands in your own records!
 - and more!
 
-<br>For the power users, there are even more things to explore, including:
+For the power users, there are even more things to explore, including:
 - Adding new food places with all additional features in one inline command
 - Finding keyword matches across all your food places in a blink of an eye
 - Edit any entry any time to fix those pesky typos
 - Use the `find` command to filter results, before chaining the `edit` command on the filtered results!
 
 Curious? Give the app a try!<br>
-Check out the [Quick Start](#quick-start) section right below!
+**New users** should check out the [Quick Start](#quick-start) section right below!<br>
+*Power users* can jump straight into the commands [here](#viewing-help-help)!
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -71,10 +73,10 @@ Follow these steps to install and start using **BiteBuddy**!
 ![Check Java Version](images/java_version.png)
 
 ### Step 2 — Download and Run BiteBuddy
-1. Head over to our [GitHub Releases page here](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases)!
+1. Head over to our GitHub Releases page [here](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases)!
 2. Download the latest file named **`bitebuddy.jar`**. There may be other files shown, but you'll only need `bitebuddy.jar`.
    ![Download BiteBuddy.jar](images/download_jar.png)
-3. Choose a folder you want to use as the **home folder** for your BiteBuddy installation, choosing any folder is fine! Then, place `bitebuddy.jar` in this folder.
+3. Choose a folder you want to use as the **home folder** for your BiteBuddy installation, choosing an empty folder is preferred! Then, place `bitebuddy.jar` in this folder.
 4. Open a command terminal in the folder where you placed `bitebuddy.jar`:<br>
     - **Recommended:** In your file explorer, right-click an empty space and select **“Open in Terminal”** to start a command terminal directly from this folder.<br>
     - **If the above didn't work:** Open a command terminal (`cmd` for Windows or `Terminal` for Mac), then type in `cd YOUR/FILE/PATH` (replacing `YOUR/FILE/PATH` with the path to the folder holding `bitebuddy.jar`) and hit your 'Enter' key.<br>
@@ -89,7 +91,7 @@ Follow these steps to install and start using **BiteBuddy**!
 
 ### Step 3 — Try Out a Command!
 - To get started, in the Command Box, try typing **`help`** and hitting 'Enter' to open the help window!<br>
-  This will be how commands are ran: *type a command in the Command Box and press the 'Enter' key to execute it*.<br>
+  This will be how commands are run: *type a command in the Command Box and press the 'Enter' key to execute it*.<br>
   Here are some example commands you can try to get the ball rolling:
 
    * `list` : This shows you all foodplaces in BiteBuddy!
@@ -108,9 +110,17 @@ Follow these steps to install and start using **BiteBuddy**!
 
 ## Features
 
-<box type="info" seamless>
+<box type="tip" header="Using previously entered commands">
 
-**Some tips about the command format:**<br>
+* Hate retyping commands? Press the `↑` / `↓` arrow keys in the command box!
+
+* Swap between your previously-used and currently-typing-in-progress commands!
+
+</box>
+
+<box type="info" header="Some notes about the command format" seamless>
+
+*For new users, check out the Glossary [here](#glossary) first!*
 
 * You must replace the words in `UPPER_CASE` with your input parameters. Different parameters have different rules, so check out the commands' section below first if you need help!<br>
   - In `delete INDEX`, `INDEX` is a required parameter here and `delete` expects a numerical input, so you can use the command as `delete 3`.
@@ -123,7 +133,7 @@ Follow these steps to install and start using **BiteBuddy**!
 * You can use items with a trailing `…`​ any number of times, including removing them.<br>
   - `[t/TAG]…​` can be an empty space (` `, i.e. 0 times), `t/famous`, `t/famous t/hawker`, etc.
 
-* The order of all items doesn't matter.<br>
+* The order of all the items doesn't matter.<br>
   - If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also accepted!
 
 * For commands that have required items (i.e. without square brackets), you must minimally provide all items the command requires!
@@ -136,13 +146,9 @@ Follow these steps to install and start using **BiteBuddy**!
 * If you are providing any timings, they must all follow the HH:mm 24-hour format!<br>
   - 12pm should be typed as `12:00` and 7pm should be typed as `19:00`.
 
+<box type="warning">
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
-**Using previously entered commands:**<br>
-
-* Hate retyping commands? Press the `↑` / `↓` arrow keys in the command box!
-
-* Swap between your previously-used and currently-typing-in-progress commands!
+</box>
 
 </box>
 
@@ -549,3 +555,72 @@ Action     | Format                                                             
 [**Compare**](#comparing-two-foodplaces-compare) | `compare [INDEX1] [INDEX2]`<br>                                                                                                        | `compare 1 3`
 [**Clear**](#clearing-all-entries-clear) | `clear`                                                                                                                                | `clear`
 [**Exit**](#exiting-the-program-exit) | `exit`                                                                                                                                 | `exit`
+
+## Glossary
+
+<box type="info" header="Glossary of terms in BiteBuddy">
+
+*Alphanumeric characters include all lower & upper case letters and numbers only! (`[a-zA-Z0-9]`)*
+
+**Items**: Refers to any input parameter that is accepted by any command<br>
+\- Examples: `n/NAME`, `t/TAG`, `INDEX`, etc
+
+<box type="tip" header="All Items">
+
+- **INDEX**: The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
+  - **Must be a positive integer**: 1, 2, 3, …​
+  - Must be an integer in the **range of the displayed Foodplace list**
+    - Example: In a displayed list of 5 foodplaces, INDEX must be between 1 and 5
+
+- **n/NAME**: Refers to the name of a Foodplace
+  - Contains only alphanumeric characters and whitespaces (` `)
+
+- **a/ADDRESS**: Refers to the address of a Foodplace
+  - The 1st character **cannot be a space character**. All whitespace leading to a non-space character will be removed
+  - All other characters of an address can be anything, there is no length limit
+
+- **ot/OPENING_TIME**: Refers to the opening time of a Foodplace
+- Must form a pair with a closing time (see below)
+- Cannot be equal to the corresponding closing time
+- Must follow the **HH:mm 24-hour format**
+  - Examples: `12:00` for 12pm, `19:00` for 7pm
+
+- **ct/CLOSING_TIME**: Refers to the closing time of a Foodplace
+  - Must form a pair with a opening time (see above)
+  - Cannot be equal to the corresponding opening time
+  - Must follow the **HH:mm 24-hour format**
+    - Examples: `12:00` for 12pm, `19:00` for 7pm
+
+- **p/PHONE_NUMBER**: Refers to the phone number linked to a Foodplace
+  - Contains only numbers (`0 - 9`), no other characters allowed
+  - Must be between 3 and 15 digits long
+    - Examples: `999`, `98765432`, `1234432101`
+
+- **e/EMAIL**: Refers to the email linked to a Foodplace
+  - It must be in the format `LOCAL@DOMAINS`:
+    - `LOCAL` contains only alphanumeric characters and `+_.-`, and the 1st character cannot be `+_.-`.
+    - `DOMAINS` consist of at least one `DOMAIN` label(s) seperated by `.`
+      - It must end with a domain label at least 2 characters long
+      - Each domain label starts and ends with alphanumeric characters
+      - Each domain label consists of alphanumeric characters, separated only by hyphens `-`, if any.
+
+- **c/CUISINE**: Refers to the cuisine offered by a Foodplace
+  - Contains only alphanumeric characters and spaces
+
+- **no/NOTE**: Refers to the note linked to a Foodplace
+  - Contains only ASCII printable characters [here](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm)
+  - Must be up to 100 characters long
+
+- **r/RATING**: Refers to the score linked to a Foodplace
+  - Contains only numbers (`0 - 9`)
+  - A valid rating must be between 1 and 10
+  - A rating of 0 can be used for removing ratings in applicable commands (e.g. `rate`, `edit`, `add`, etc)
+
+- **t/TAG**: Refers to the tags linked to a Foodplace
+  - Contains only alphanumeric characters
+
+</box>
+
+[Return to Features](#features)
+
+</box>
