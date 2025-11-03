@@ -128,8 +128,8 @@ public class TagCommandParserTest {
     }
 
     @Test
-    public void parse_misplacedDeleteFlag_throwsParseException() {
-        // /d appears after tags instead of right after index
+    public void parse_misplacedDeleteFlagCondition_throwsParseException() {
+        // /d exists in args but is not immediately after the index
         String input = "1 FastFood /d Cheap";
         ParseException exception = assertThrows(ParseException.class, () -> parser.parse(input));
 
