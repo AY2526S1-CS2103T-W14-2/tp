@@ -25,6 +25,7 @@ public class EmailTest {
     public void constructor_emptyEmail_success() {
         String emptyEmail = "";
         assertEquals("", new Email(emptyEmail).value);
+        assertEquals("<Empty email>", new Email(emptyEmail).toString());
     }
 
     @Test

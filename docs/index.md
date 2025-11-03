@@ -19,3 +19,4 @@
 **Acknowledgements**
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* Icons used: [Pin 3](https://www.iconsdb.com/gray-icons/pin-3-icon.html) icon by [Icons8](https://icons8.com), [Burger](https://icon-icons.com/download/181517/PNG/32/) icon by [Asryraf Aribi](https://www.behance.net/asyrafaribi)

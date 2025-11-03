@@ -321,7 +321,7 @@ Format (2 types):<br>
 
 * Finds the foodplace at the specified `INDEX` and edits its tags.
 * Tags must be made of **any letters and numbers only**, meaning special characters like whitespaces and `/`, `-`, etc aren't allowed!
-* Tag duplicates are case-insensitive and will be ignored!
+* Tag duplicates are case-insensitive and will be overridden by the newly added tag."
 * For the **1st format, at least one tag** must be provided.
 * For the **2nd format**, the provided tag(s) will be deleted.
 * Tag additions are **cumulative**, existing tags are kept until manually deleted.
@@ -631,3 +631,10 @@ Action     | Format                                                             
 [Return to Features](#features)
 
 </box>
+
+---
+
+## Acknowledgements
+* “Pin 3” icon used in the application GUI by [Icons8](https://icons8.com), [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/)
+* "Burger" icon used in application GUI: [Asryraf Aribi](https://www.behance.net/asyrafaribi)
+

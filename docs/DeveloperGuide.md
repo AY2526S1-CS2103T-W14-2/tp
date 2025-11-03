@@ -20,8 +20,10 @@
 - Gradle — build scripts and dependency management: https://gradle.org/
 - JUnit 5 — unit testing framework: https://junit.org/junit5/
 - OpenJDK / Java 17 — target runtime: https://openjdk.org/
-- Markbind - used to generate app website: https://markbind.org/
-- GitHub Copilot - used for autocompleting and drafting code, as well as doing initial reviews for pull requests: https://github.com/features/copilot
+- Markbind — used to generate app website: https://markbind.org/
+- GitHub Copilot — used for autocompleting and drafting code, as well as doing initial reviews for pull requests: https://github.com/features/copilot
+- “Pin 3” icon used in the application GUI — [Icons8](https://icons8.com), licensed under [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/). Source: [https://www.iconsdb.com/gray-icons/pin-3-icon.html](https://www.iconsdb.com/gray-icons/pin-3-icon.html)
+- "Burger" icon - used in application GUI: [Asryraf Aribi](https://www.behance.net/asyrafaribi)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -121,11 +123,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
-How the parsing works:
+###### How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-Argument processing helper classes:
+###### Argument processing helper classes:
 
 There are two common styles of argument processing used by command parsers:
 - Prefix-based commands use `ArgumentTokenizer` + `ArgumentMultimap` (e.g. `AddCommand`, `EditCommand`, etc.).
@@ -674,67 +676,15 @@ Guarantees: The full list of wishlisted foodplaces is displayed.
 
 **Use case: UC13 - Add a foodplace to the blacklist**
 
-System: BiteBuddy  
-Actor: User  
-Preconditions: At least one foodplace exists.  
-Guarantees: If successful, the foodplace is marked as blacklisted and excluded from certain recommendations or listings.
-
-**MSS**
-
-1. User requests to list foodplaces.
-2. BiteBuddy shows a list of foodplaces.
-3. User chooses to blacklist a specific foodplace from the list.
-4. BiteBuddy marks the foodplace as blacklisted and displays confirmation.  
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The given index is invalid.
-    * 3a1. BiteBuddy shows an error for invalid index. 
-
-      Use case ends.
-
-* 3b. The chosen foodplace is on the wishlist.
-    * 3a1. BiteBuddy removes the foodplace from the wishlist.
-    
-      Use case resumes from step 4.
+Similar to UC10 - Add a foodplace to wishlist, but for blacklist.
 
 **Use case: UC14 - Remove a foodplace from blacklist**
 
-System: BiteBuddy  
-Actor: User  
-Preconditions: At least one foodplace exists. The specified foodplace is currently on the user's blacklist.  
-Guarantees: If successful, the foodplace is removed from the user's blacklist.
-
-**MSS**
-
-1. User requests to list foodplaces.
-2. BiteBuddy shows a list of foodplaces.
-3. User requests to un-blacklist a specific foodplace in the list.
-4. BiteBuddy removes the foodplace from the blacklist and displays a confirmation message.
-
-    Use case ends.
-
-**Extensions**
-
-* 3a. The given index is invalid.
-    * 3a1. BiteBuddy shows an error message for invalid index.  
-
-        Use case ends.
+Similar to UC11 - Remove a foodplace from wishlist, but for blacklist.
 
 **Use case: UC15 - List all blacklisted foodplaces**
 
-System: BiteBuddy  
-Actor: User  
-Preconditions: At least one blacklisted foodplace exists.  
-Guarantees: The full list of blacklisted foodplaces is displayed.
-
-**MSS**
-1. User requests to list all blacklisted foodplaces.
-2. BiteBuddy retrieves all blacklisted foodplaces and updates the displayed list to show all foodplaces.
-
-    Use case ends.
+Similar to UC12 - List all wishlisted foodplaces, but for blacklist.
 
 **Use case: UC16 - Pin a foodplace**
 
@@ -1582,6 +1532,46 @@ Expected:
 - The list updates to show foodplaces with matching fields.
 - Info details shown in the status message: `3 foodplaces listed!`
 
+##### Valid Test case 3 – Finding with multiple tags (AND search):
+
+Command: `find t/cheap t/clean`
+
+Expected:
+- Displays foodplaces that contain both tags `cheap` and `clean`.
+- Status message shows number of matches.
+
+##### Invalid Test case 1 – Missing arguments:
+
+Command: `find`
+
+Expected:
+- The command fails and no search is performed.
+- Error details shown in the status message: `Invalid command format! find ...`
+
+##### Invalid Test case 2 – Empty prefix value:
+
+Command: `find t/`
+
+Expected:
+- The command fails and no search is performed.
+- Error details shown in the status message: `Prefix provided without value. find: ...`
+
+##### Invalid Test case 3 – Multiple cuisine prefixes:
+
+Command: `find c/japanese c/korean`
+
+Expected:
+- The command fails and no search is performed.
+- Error details shown in the status message: `Only one cuisine (c/) can be specified in a find command.`
+
+##### Invalid Test case 4 – Invalid tag name:
+
+Command: `find t/***`
+
+Expected:
+- The command fails and no search is performed.
+- Error details shown in the status message: `Tags names should be alphanumeric`
+
 ### Comparing two foodplaces
 
 Comparing two foodplaces from the list shown
@@ -1685,4 +1675,37 @@ Steps:
 Expected:
 - BiteBuddy opens in a blank state.
 
+--------------------------------------------------------------------------------------------------------------------
 
+## **Appendix: Effort**
+
+This appendix summarises the overall effort, difficulty, challenges, reuse, and achievements of the project, using AB3 as a reference point.
+
+##### Difficulty level and scope relative to AB3
+
+While AB3 manages a single entity (Person) with basic features, BiteBuddy expands the single entity model (now Foodplace) with more relevant fields to cater for our target users and have constraints of higher complexity:
+- Rating (bounded integer constraints)
+- Note (ASCII + length constraints)
+- Tags (case-insensitive duplicate constraints)
+- Pin/Unpin (global cap)
+- Wishlist/Blacklist (mutual status exclusivity + conflict resolution)
+- Compare (multiple index validation)  
+
+These additional complexities require more intricate designing and testing to ensure correctness within BiteBuddy while maintaining a pleasant user experience.
+Higher parser complexity is achieved through different commands requiring [different parsing strategies](#argument-processing-helper-classes) (i.e. prefix-based and positional/whitespace-based), requiring careful integration to maintain consistency and usability.
+
+##### Reuse and effort savings
+
+- We reused a substantial portion of AB3’s architecture and scaffolding: the Logic/Model/Storage layering, command pattern and parsing framework, Jackson-based JSON storage, JavaFX UI skeleton, Gradle configuration, and the documentation site structure. This reuse enabled us to focus on the features we wanted to build rather than reinventing the foundational architecture.
+- Concrete examples of reuse/adaptation:
+    - Storage and JSON pipeline (Jackson) were extended to accommodate richer `Foodplace` fields without redesigning the persistence layer.
+    - The command pattern and parser framework were adapted to implement new commands with custom parsing logic while preserving the overall flow.
+    - The JavaFX UI components were customized for BiteBuddy’s domain while reusing the overall structure and patterns from AB3.
+    - Using Copilot to perform code reviews and generate boilerplate code snippets, saving time on routine coding tasks.
+
+##### Notable achievements
+
+- Proper and disciplined workflow using Git and GitHub, with frequent commits, descriptive messages, feature branching, and effective collaboration via pull requests and code reviews.
+- Mandatory enforcement of coding standards, tests, and documentation, ensuring code quality and maintainability at all times.
+    - Whenever features were added or bugs fixed, corresponding tests and documentation were updated in the same PR.
+    - This is evident from our high test coverage (almost 90%) as indicated by Codecov reports

@@ -39,7 +39,7 @@ public class Cuisine {
 
     @Override
     public String toString() {
-        return value;
+        return !value.isEmpty() ? value : "<Empty cuisine>";
     }
 
     @Override
