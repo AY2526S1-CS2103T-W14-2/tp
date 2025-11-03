@@ -107,12 +107,12 @@ public class NoteCommand extends Command {
     }
 
     private String generateNoteChangeMessage(String noteBefore, String noteAfter) {
-        noteBefore = noteBefore.isEmpty() ? "<No note>" : "\"" + noteBefore + "\"";
-        noteAfter = noteAfter.isEmpty() ? "<No note>" : "\"" + noteAfter + "\"";
         if (Objects.equals(noteBefore, noteAfter)) {
             return "No changes were made.";
         } else {
-            return String.format("Note changed from %s to %s.", noteBefore, noteAfter);
+            String formattedNoteBefore = noteBefore.isEmpty() ? "<Empty note>" : "\"" + noteBefore + "\"";
+            String formattedNoteAfter = noteAfter.isEmpty() ? "<Empty note>" : "\"" + noteAfter + "\"";
+            return String.format("Note changed from %s to %s.", formattedNoteBefore, formattedNoteAfter);
         }
     }
 
