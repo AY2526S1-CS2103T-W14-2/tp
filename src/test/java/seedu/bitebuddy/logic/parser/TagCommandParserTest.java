@@ -138,6 +138,15 @@ public class TagCommandParserTest {
     }
 
     @Test
+    public void parse_misplacedDeleteFlagWithEmptyFields_throwsParseException() {
+        String input = "/d";
+        ParseException exception = assertThrows(ParseException.class, () -> parser.parse(input));
+
+        assertEquals(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE),
+                exception.getMessage());
+    }
+
+    @Test
     public void isDeleteToken() throws Exception {
         Method isDeleteMethod = TagCommandParser.class.getDeclaredMethod("isDeleteToken", List.class);
         isDeleteMethod.setAccessible(true);
