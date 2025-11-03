@@ -36,6 +36,11 @@ public class TagCommandParser implements Parser<TagCommand> {
                     TagCommand.MESSAGE_USAGE));
         }
 
+        if (args.contains("/d") && (tokens.size() < 2 || !"/d".equals(tokens.get(1)))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    TagCommand.MESSAGE_USAGE));
+        }
+
         Index index = parseIndexToken(tokens.get(0));
 
         boolean isDelete = isDeleteToken(tokens);
