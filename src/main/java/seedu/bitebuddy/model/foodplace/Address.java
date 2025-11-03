@@ -54,7 +54,9 @@ public class Address {
         }
 
         Address otherAddress = (Address) other;
-        return value.equalsIgnoreCase(otherAddress.value);
+        String v = value.replaceAll("\\s+", "");
+        String ov = otherAddress.value.replaceAll("\\s+", "");
+        return v.equalsIgnoreCase(ov);
     }
 
     @Override
