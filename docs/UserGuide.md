@@ -621,3 +621,7 @@ Action     | Format                                                             
 [Return to Features](#features)
 
 </box>
+
+---
+
+*“Pin 3” icon used in the application GUI by [Icons8](https://icons8.com), [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/).*
