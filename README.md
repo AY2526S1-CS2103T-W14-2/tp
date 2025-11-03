@@ -15,3 +15,8 @@ BiteBuddy is a desktop application built upon AddressBook Level 3, designed to h
 For the detailed documentation of this project, see the [BiteBuddy Product Website](https://ay2526s1-cs2103t-w14-2.github.io/tp).
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+### Acknowledgements
+
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+* “Pin 3” icon used in the application GUI by [Icons8](https://icons8.com), licensed under [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/). Source: [https://www.iconsdb.com/gray-icons/pin-3-icon.html](https://www.iconsdb.com/gray-icons/pin-3-icon.html)
