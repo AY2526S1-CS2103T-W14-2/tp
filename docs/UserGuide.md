@@ -67,8 +67,12 @@ Follow these steps to install and start using **BiteBuddy**!
 - Ensure you have Java `17` or above installed on your computer.<br>
    **Windows users:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-- To check your version, open a terminal and type: `java -version`
-![Check Java Version](images/java_version.png)
+- To check your version, open a terminal and type: `java -version`. Something like this should show up in the console:
+```
+openjdk version "17.0.14" 2025-01-21 LTS
+OpenJDK Runtime Environment Zulu17.56+15-CA (build 17.0.14+7-LTS)
+OpenJDK 64-Bit Server VM Zulu17.56+15-CA (build 17.0.14+7-LTS, mixed mode, sharing)
+```
 
 ### Step 2 — Download and Run BiteBuddy
 1. Go to our [GitHub Releases page](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases).
