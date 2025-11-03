@@ -110,25 +110,25 @@ Follow these steps to install and start using **BiteBuddy**!
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Some tips about the command format:**<br>
 
-* You have to replace the words in `UPPER_CASE` as your input parameters. Different parameters have different rules, check out the commands' section below if you need help!<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter here, so you can use it as `add n/KFC`.
+* You must replace the words in `UPPER_CASE` with your input parameters. Different parameters have different rules, so check out the commands' section below first if you need help!<br>
+  - In `add n/NAME`, `NAME` is a required parameter here, so you can use the command as `add n/KFC`.
 
-* Items in square brackets are optional, meaning you don't always have to provide these!<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/KFC t/fried` or as `n/KFC`.
+* Items (e.g. `n/NAME`, `t/TAG`) in square brackets are optional, meaning you don't always have to provide these!<br>
+  - In the items `n/NAME [t/TAG]`, they can be used as either `n/KFC t/fried` or `n/KFC`.
 
-* Items with `…`​ after them can be used any number of times, including not at all.<br>
-  e.g. `[t/TAG]…​` can be an empty space (` `, i.e. 0 times), `t/famous`, `t/famous t/hawker` etc.
+* You can use items with a trailing `…`​ any number of times, including removing them.<br>
+  - `[t/TAG]…​` can be an empty space (` `, i.e. 0 times), `t/famous`, `t/famous t/hawker`, etc.
 
 * The order of all input parameters doesn't matter.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also accepted!
+  - If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also accepted!
 
-* Additional input parameters for commands that do not expect any will be ignored (e.g. `list`, `exit` and `clear`).<br>
-  e.g. if the command specifies `list 123`, it will be interpreted as just `list`.
+* For your commands that do not accept any input parameters (e.g. `list`, `exit`, `clear`), if provided then the parameters will be ignored!<br>
+  - If the command specifies `list 123`, it will be interpreted as just `list`.
 
-* All timings must follow the HH:mm 24-hour format.<br>
-  e.g. 12pm should be typed as `12:00` and 7pm should be typed as `19:00`.
+* If you are providing any timings, they must all follow the HH:mm 24-hour format!<br>
+  - 12pm should be typed as `12:00` and 7pm should be typed as `19:00`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
