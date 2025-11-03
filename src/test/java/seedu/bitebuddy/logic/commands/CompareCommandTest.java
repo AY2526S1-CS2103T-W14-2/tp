@@ -8,9 +8,9 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailur
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
+import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FOURTH_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_SECOND_FOODPLACE;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_THIRD_FOODPLACE;
-import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FOURTH_FOODPLACE;
 
 import org.junit.jupiter.api.Test;
 
