@@ -117,6 +117,8 @@ Follow these steps to install and start using **BiteBuddy**!
 
 * Items (e.g. `n/NAME`, `t/TAG`) in square brackets are optional, meaning you don't always have to provide these!<br>
   - In the items `n/NAME [t/TAG]`, they can be used as either `n/KFC t/fried` or `n/KFC`.
+  - In the item pair `[ot/OPENING_TIME ct/CLOSING_TIME]`, both items must be present to be used, you can't leave either out!<br>
+    A valid example for this item pair you can try is `ot/12:00 ct/22:00`.
 
 * You can use items with a trailing `…`​ any number of times, including removing them.<br>
   - `[t/TAG]…​` can be an empty space (` `, i.e. 0 times), `t/famous`, `t/famous t/hawker`, etc.
@@ -124,11 +126,11 @@ Follow these steps to install and start using **BiteBuddy**!
 * The order of all items doesn't matter.<br>
   - If the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also accepted!
 
-* When running commands that have required items (i.e. without square brackets), you must minimally provide all items the command requires!
+* For commands that have required items (i.e. without square brackets), you must minimally provide all items the command requires!
   - For the `add n/NAME a/ADDRESS [p/PHONE_NUMBER] <shortened for brevity>…` command, you have to provide both `NAME` and `ADDRESS`, but `PHONE_NUMBER` is optional!
   - A pair of valid examples are `add n/HFC a/1 Seasame Street` and `add n/OlDonald a/10 Dimmsdale Avenue`.
 
-* For the commands that do not accept any items or input parameters (e.g. `list`, `exit`, `clear`), if provided then the parameters will be ignored!<br>
+* For commands that do not accept any items or input parameters (e.g. `list`, `exit`, `clear`), if provided then the parameters will be ignored!<br>
   - If the command specifies `list 123`, it will be interpreted as just `list`.
 
 * If you are providing any timings, they must all follow the HH:mm 24-hour format!<br>
@@ -148,18 +150,11 @@ Follow these steps to install and start using **BiteBuddy**!
 
 ### Viewing help: `help`
 
-Directs user to detailed information about the application or specific commands.
+Directs you to more information about BiteBuddy or a requested command's usage!
 
-Format: `help [COMMAND]`
-
-```
-help: Shows program usage instructions.
-Parameters:
-  [COMMAND] 
-Examples:
-  help
-  help find
-```
+Format (2 types):<br>
+\- `help`<br>
+\- `help [COMMAND]`
 
 * If no command is given, the URL for the help page will be shown. ![help message](images/helpMessage.png)
 * If a command parameter is given, the usage for the command will be shown instead.
@@ -175,18 +170,9 @@ Examples:
 
 ### Adding a foodplace: `add`
 
-Adds a new foodplace entry to BiteBuddy.
+Lets you add a new foodplace entry to BiteBuddy!
 
 Format: `add n/NAME a/ADDRESS [ot/OPENING_TIME ct/CLOSING_TIME] [p/PHONE_NUMBER] [e/EMAIL] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`
-
-```
-add: Adds a foodplace to BiteBuddy.
-Parameters:
-  n/FOODPLACE_NAME a/ADDRESS [p/PHONE] [e/EMAIL] [c/CUISINE] [t/TAG]... [no/NOTE] [r/RATE]
-Example:
-  add n/Prata place a/311, Clementi Ave 2, #02-25 p/98765432 e/pratad@example.com c/Indian t/Cheap no/Famous for tandoori chicken r/9
-```
-
 
 Examples:
 * `add n/McRonalds a/John street, block 123, #01-01`
@@ -200,15 +186,9 @@ Examples:
 
 ### Listing all foodplaces: `list`
 
-Shows a list of all foodplace entries in BiteBuddy.
+Shows you a list of all foodplaces in BiteBuddy!
 
 Format: `list`
-
-```
-list: Lists all foodplaces in BiteBuddy.
-Example:
-  list
-```
 
 ![ug_list](images/ug_list.png)
 
@@ -218,18 +198,9 @@ Example:
 
 ### Deleting a foodplace: `delete`
 
-Deletes the specified foodplace entry from BiteBuddy.
+Lets you delete any existing foodplace entry from the current list!
 
 Format: `delete INDEX`
-
-```
-delete: Deletes the foodplace identified by the index number used in the displayed foodplace list.
-• INDEX must be a positive integer.
-Parameters:
-  INDEX
-Example:
-  delete 1
-```
 
 * Deletes the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the `find` command.
@@ -247,20 +218,9 @@ Examples:
 
 ### Editing a foodplace: `edit`
 
-Edits an existing foodplace entry in BiteBuddy.
+Lets you edit an existing foodplace entry!
 
 Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [ot/OPENING_TIME ct/CLOSING_TIME] [c/CUISINE] [no/NOTE] [r/RATING] [t/TAG]…​`
-
-```
-edit: Edits the details of the foodplace identified by the index number used in the displayed foodplace list.
-• INDEX must be a positive integer.
-• At least one optional field must be provided.
-• Existing values will only be overwritten by the supplied input values.
-Parameters:
-  INDEX [n/FOODPLACE_NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [c/CUISINE] [ot/OPENING_TIME ct/CLOSING_TIME] [no/NOTE] [r/RATING] [t/TAG]...
-Example:
-  edit 1 p/91234567 e/johndoe@example.com
-```
 
 * Edits the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
@@ -284,28 +244,19 @@ Examples:
 
 ### Adding a note to a foodplace: `note`
 
-Adds / edits the note of an existing foodplace in BiteBuddy.
+Lets you add / edit the note from an existing foodplace in BiteBuddy!
 
-Format: `note INDEX [note]`
-
-```
-note: Edits the notes of the foodplace identified by the index number used in the displayed foodplace list.
-If NOTE is not supplied, the current note of the foodplace will be erased instead.
-• INDEX must be a positive integer. NOTE has a 100 ASCII-character limit.
-• Existing notes will be overwritten by the input.
-Parameters:
-  INDEX [NOTE]
-Examples:
-  note 1 Very good customer service
-  note 3
-```
+Format (2 types):<br>
+\- `note INDEX [note]`<br>
+\- `note INDEX`
 
 * Edits the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
 * The index **must be a positive integer**: 1, 2, 3, …​
-* You can **remove the foodplace’s notes** by not specifying any notes after `INDEX`.
-* Note have a **maximum character limit of 100**.
-* Note only allows **ASCII-printable characters**. You may refer to [here](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm) for the characters that are accepted.
+* By not specifying any `[NOTE]`, you will **remove the foodplace’s notes**.
+* A note has a **maximum character limit of 100**.
+* A note only allows **ASCII-printable characters**. You may refer to [here](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm) for the characters that are accepted.
+* Only one note can exist per foodplace at a time. A new note assigned to a foodplace will replace the existing note.
 
 Examples:
 * `note 2 Good customer service!` adds / updates the note of the 2nd foodplace to be `Good customer service!`.
@@ -319,27 +270,16 @@ Examples:
 
 ### Rating a foodplace: `rate`
 
-Adds / edits a rating from the specified foodplace in BiteBuddy.
+Lets you add / edit a rating from an existing foodplace in BiteBuddy!
 
 Format: `rate INDEX RATING`
-
-```
-rate: Edits the rating of the foodplace identified by the index number used in the displayed foodplace listing.
-If RATING is 0, then the existing rating will be removed.
-• INDEX and RATING must be positive integers. A RATING to be set must be between 1 and 10.
-• Existing ratings will be overwritten by the input ratings otherwise.
-Parameters:
-  INDEX RATING
-Example:
-  rate 5 1
-  rate 2 0
-```
 
 * Edits the foodplace at the specified `INDEX`.
 * The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the find command.
 * The index **must be a positive integer**: 1, 2, 3, …​
-* Sets the rating of the found foodplace to the specified `RATING`.
-* The rating **must be an integer between 0 and 10**: 0, 1, 2, …​
+* Sets the rating of the foodplace to the specified `RATING`.
+* The rating must be **an integer between 0 and 10**: 0, 1, 2, …​
+* If rating is 0, any existing rating will be removed from the foodplace.
 
 Examples:
 * `rate 2 5` sets the 2nd foodplace to have a rating of 5.
@@ -355,33 +295,23 @@ Examples:
 
 ### Adding Tags to a foodplace: `tag`
 
-Adds / removes one or more tags from the specified foodplace in BiteBuddy.
+Lets you add / remove one or more tags from an existing foodplace in BiteBuddy!
 
-Format 1 : `tag INDEX TAG1 [TAG2]...`
-Format 2 : `tag INDEX /d [TAG1] [TAG2]...`
-
-```
-tag: Adds/deletes tags from the foodplace identified by the index number shown in the displayed foodplace list.
-If the '/d' field is supplied, the foodplace will have the supplied tags deleted instead if they exist.
-• INDEX must be a positive integer.
-• Tags must be alphanumeric (letters and numbers only). Tags cannot contain spaces.
-• Existing tags will be preserved when adding, and duplicate tags (case-insensitive) will be ignored.
-Parameters:
-  INDEX [/d] TAG1 [TAG2]...
-Examples:
-  tag 3 FastFood Expensive
-  tag 1 /d FastFood
-  tag 2 /d
-```
+Format (2 types):<br>
+\- `tag INDEX TAG1 [TAG2]...`<br>
+\- `tag INDEX /d [TAG1] [TAG2]...`
 
 * Finds the foodplace at the specified `INDEX` and edits its tags.
-* **At least one tag** must be provided for **Format 1**.
+* Tags must be made of **any letters and numbers only**, meaning special characters like whitespaces and `/`, `-`, etc aren't allowed!
+* Tag duplicates are case-insensitive and will be ignored!
+* For the **1st format, at least one tag** must be provided.
+* For the **2nd format**, the provided tag(s) will be deleted.
 * Tag additions are **cumulative**, existing tags are kept until manually deleted.
 
 Examples:
 * `tag 3 FastFood Vegan` adds both FastFood and Vegan tags to the 3rd foodplace.
-* `tag 2 /d FastFood` removes the FastFood tag from the 2nd foodplace.
-* `tag INDEX /d` will remove all tags from the selected foodplace.
+* `tag 2 /d FastFood` removes only the FastFood tag from the 2nd foodplace.
+* `tag 1 /d` will remove all tags from the 1st foodplace.
 
 ![ug_tag](images/ug_tag.png)
 
@@ -629,6 +559,7 @@ BiteBuddy data is saved automatically as a JSON file `[JAR file location]/data/a
 **Caution:**
 If your changes to the data file makes its format invalid, BiteBuddy will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the BiteBuddy to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
