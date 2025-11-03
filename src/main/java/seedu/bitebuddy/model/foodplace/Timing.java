@@ -13,8 +13,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Timing {
 
-    public static final String MESSAGE_CONSTRAINTS = "Closing time must be after or equal to opening time";
-
     public static final String MESSAGE_INVALID_TIME = "Invalid time provided. Time must be in HH:mm format";
 
     public static final String MESSAGE_INVALID_TIME_RANGE = "Invalid time range format. "
@@ -44,7 +42,7 @@ public class Timing {
             return;
         }
 
-        checkArgument(isValidTiming(timeRange), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTiming(timeRange), MESSAGE_INVALID_TIME_RANGE);
         LocalTime[] parsed = parseRange(timeRange);
         this.openingTime = parsed[0];
         this.closingTime = parsed[1];
@@ -70,7 +68,6 @@ public class Timing {
         checkArgument(isValidTime(close), MESSAGE_INVALID_TIME);
         LocalTime opening = LocalTime.parse(open, TIME_FORMATTER);
         LocalTime closing = LocalTime.parse(close, TIME_FORMATTER);
-        checkArgument(!closing.isBefore(opening), MESSAGE_CONSTRAINTS);
         this.openingTime = opening;
         this.closingTime = closing;
         this.isSet = true;
@@ -108,16 +105,12 @@ public class Timing {
             return false;
         }
 
-        LocalTime[] parsed;
         try {
-            parsed = parseRange(timeRange);
+            parseRange(timeRange);
+            return true;
         } catch (IllegalArgumentException e) {
             return false;
         }
-
-        LocalTime openingTime = parsed[0];
-        LocalTime closingTime = parsed[1];
-        return !closingTime.isBefore(openingTime);
     }
 
     /**
@@ -139,16 +132,6 @@ public class Timing {
      */
     public Boolean isSet() {
         return isSet;
-    }
-
-    /**
-     * Checks if the foodplace is open at the given time.
-     *
-     * @param time The time to check.
-     * @return true if the foodplace is open at the given time, false otherwise.
-     */
-    public boolean isOpenAt(LocalTime time) {
-        return !time.isBefore(openingTime) && !time.isAfter(closingTime);
     }
 
     /**

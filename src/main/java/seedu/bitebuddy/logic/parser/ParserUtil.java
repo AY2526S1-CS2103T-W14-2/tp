@@ -147,9 +147,6 @@ public class ParserUtil {
         }
         LocalTime opening = LocalTime.parse(trimmedOpen);
         LocalTime closing = LocalTime.parse(trimmedClose);
-        if (closing.isBefore(opening)) {
-            throw new ParseException(Timing.MESSAGE_CONSTRAINTS);
-        }
         return new Timing(opening, closing);
     }
 
