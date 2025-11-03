@@ -991,19 +991,25 @@ testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
 
-##### Initial l:
+##### Initial launch:
 
+Steps:
+- Download the [jar file](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases) from the latest release and copy into an empty folder 
+- Double-click the jar file 
 
-   1. Download the jar file and copy into an empty folder
+Expected: 
+- Shows the GUI with a set of sample foodplaces. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample foodplaces. The window size may not be optimum.
+##### Saving window preferences:
 
-1. Saving window preferences
+Steps:
+- Resize the window to an optimum size. 
+- Move the window to a different location. 
+- Close the window.
+- Re-launch the app by double-clicking the jar file.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+Expected: 
+- The most recent window size and location is retained.
 
 ### Adding a foodplace
 
@@ -1074,7 +1080,7 @@ Deleting a foodplace while all foodplaces are being shown
 * Use the `list` command first to show current foodplaces and note the count.
 
 
-##### Valid Test case - Deleting a valid foodplace:
+##### Valid Test case 1 - Deleting a valid foodplace:
 
 Command: `delete 1`
 
@@ -1082,7 +1088,7 @@ Expected:
 - First foodplace is deleted from the list.
 - Details of the deleted foodplace shown in the status message: `Deleted Foodplace: ...`
 
-##### Invalid Test case - Deleting a **foodplace at an invalid index**:
+##### Invalid Test case 2 - Deleting a **foodplace at an invalid index**:
 
 Command: `delete 0`
 
@@ -1099,7 +1105,7 @@ Editing a foodplace while all foodplaces are being shown
 * **At least one foodplace** must exist in the list.  
 * Use the `list` command first to list all foodplaces and note the current details.
 
-##### Valid Test case — Editing all fields of a valid foodplace:
+##### Valid Test case 1 — Editing all fields of a valid foodplace:
 
 Command: `edit 1 n/Cafe Luna p/91234567 e/cafe@example.com a/20 Baker St t/cafe t/coffee`
 
@@ -1107,7 +1113,7 @@ Expected:
 - Foodplace at index 1 is updated with the new name, phone, email, address and tags.
 - Details of the updated foodplace shown in the status message: `Edited Foodplace: Cafe Luna ...`
 
-##### Valid Test case — Editing only some fields:
+##### Valid Test case 2 — Editing only some fields:
 
 Command: `edit 1 n/Cafe Luna`
 
@@ -1115,7 +1121,7 @@ Expected:
 - Only the name of the first foodplace is changed; other fields remain unchanged.
 - Status message shows the edited entry with unchanged fields preserved.
 
-##### Valid Test case — Replacing tags with a new set:
+##### Valid Test case 3 — Replacing tags with a new set:
 
 Command: `edit 1 t/brunch t/outdoor`
 
@@ -1123,7 +1129,7 @@ Expected:
 - Tags of the first foodplace are replaced by `brunch` and `outdoor`.
 - Status message shows the edited entry with unchanged fields preserved.
 
-##### Valid Test case — Clearing all tags:
+##### Valid Test case 4 — Clearing all tags:
 
 Command: `edit 1 t/`
 
@@ -1131,7 +1137,7 @@ Expected:
 - All tags are removed from the first foodplace.
 - Status message shows the edited entry with unchanged fields preserved.
 
-##### Invalid Test case — Editing a foodplace at an **invalid index**:
+##### Invalid Test case 1 — Editing a foodplace at an **invalid index**:
 
 Command: `edit 0 n/NewName`
 
@@ -1139,7 +1145,7 @@ Expected:
 - No changes applied.
 - Error details shown in the status message: `Invalid command format! edit: Edits the details...`
 
-##### Invalid Test case — Editing a foodplace at an **out-of-range index**:
+##### Invalid Test case 2 — Editing a foodplace at an **out-of-range index**:
 
 Command: `edit 999 n/Nowhere`
 
@@ -1147,7 +1153,7 @@ Expected:
 - No changes applied.
 - Error details shown in the status message: `The foodplace index provided is invalid`
 
-##### Invalid Test case — Editing with an **invalid field**:
+##### Invalid Test case 3 — Editing with an **invalid field**:
 
 Command: `edit 1 p/phone123`
 
@@ -1155,7 +1161,7 @@ Expected:
 - No changes applied.
 - Error details shown in the status message: `Phone numbers should only contain numbers...`
 
-##### Invalid Test case — Editing results in a **duplicate entry**:
+##### Invalid Test case 4 — Editing results in a **duplicate entry**:
 
 Steps:
 - Run `add n/ExistingName a/Existing Address`
@@ -1165,7 +1171,7 @@ Expected:
 - No changes applied.
 - Error details shown in the status message: `This foodplace already exists in BiteBuddy.`
 
-##### Edge case — No fields provided to edit:
+##### Edge case 1 — No fields provided to edit:
 
 Command: `edit 1`
 
@@ -1183,7 +1189,7 @@ Adding/deleting tags to a foodplace while all foodplaces are being shown
 * Use the `list` command first to list all foodplaces and note the current details.
 
 
-##### Valid Test case – Adding tags to a valid foodplace:
+##### Valid Test case 1 – Adding tags to a valid foodplace:
 
 Command: `tag 1 FastFood Cheap`
 
@@ -1191,7 +1197,7 @@ Expected:
 - First foodplace in the list will be assigned tags: `FastFood` and `Cheap`.
 - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
 
-##### Valid Test case – Deleting a specific tag from a valid foodplace:
+##### Valid Test case 2 – Deleting a specific tag from a valid foodplace:
 
 Command: `tag 1 /d FastFood`
 
@@ -1199,7 +1205,7 @@ Expected:
 - Tag `FastFood` is deleted from the first foodplace (case-insensitive).
 - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
 
-##### Valid Test case - Deleting all tags from a valid foodplace:
+##### Valid Test case 3 - Deleting all tags from a valid foodplace:
 
 Command: `tag 1 /d`
 
@@ -1207,7 +1213,7 @@ Expected:
 - All tags are cleared from the first foodplace.
 - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
 
-##### Valid Test case - Adding duplicate tags with different casing:
+##### Valid Test case 4 - Adding duplicate tags with different casing:
 
 Command: `tag 1 cheap CHEAP`
 
@@ -1215,7 +1221,7 @@ Expected:
 - Only one tag `cheap` remains (duplicate ignored case-insensitively).
 - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
 
-##### Valid Test case - Overriding existing tag casing:
+##### Valid Test case 5 - Overriding existing tag casing:
 
 Command: `tag 1 Cheap` followed by `tag 1 cheap`
 
@@ -1223,7 +1229,7 @@ Expected:
 - The existing tag `Cheap` is replaced with `cheap`.
 - Details of the updated foodplace shown in the status message: `Updated tags for Foodplace: ...`
 
-##### Invalid Test case - Deleting a non-existent tag:
+##### Invalid Test case 1 - Deleting a non-existent tag:
 
 Command: `tag 1 /d NonExistent`
 
@@ -1231,7 +1237,7 @@ Expected:
 - No tags are deleted.
 - Message displayed: `No matching tags found to delete ...`
 
-##### Invalid Test case - Adding tags to a foodplace at an invalid index:
+##### Invalid Test case 2 - Adding tags to a foodplace at an invalid index:
 
 Command: `tag 0 FastFood`
 
@@ -1239,7 +1245,7 @@ Expected:
 - No foodplace will be updated.
 - Error details shown in the status message: `The foodplace index provided is invalid`
 
-##### Invalid Test case - Adding an empty tag value:
+##### Invalid Test case 3 - Adding an empty tag value:
 
 Command: `tag 1` (with a space after the index)
 
@@ -1247,7 +1253,7 @@ Expected:
 - No foodplace will be updated.
 - Error details shown in the status message: `Invalid command format! tag: Adds/deletes tags from...`
 
-##### Invalid Test case - Adding a non-alphanumeric tag:
+##### Invalid Test case 4 - Adding a non-alphanumeric tag:
 
 Command: `tag 1 $$$$`
 
@@ -1265,7 +1271,7 @@ Adding note to a foodplace while all foodplaces are being shown
 * Use the `list` command first to list all foodplaces and note the current details.
 
 
-##### Valid Test case - Assigning a valid note to a valid foodplace:
+##### Valid Test case 1 - Assigning a valid note to a valid foodplace:
 
 Command: `note 1 Good customer service!`
 
@@ -1273,7 +1279,7 @@ Expected:
 - First foodplace in the list will be assigned a note: `Good customer service!`
 - Details of the updated foodplace shown in the status message: `Added notes to Foodplace: ...`
 
-##### Valid Test case - Unassigning any existing note from a valid foodplace:
+##### Valid Test case 2 - Unassigning any existing note from a valid foodplace:
 
 Command: `note 1`
 
@@ -1281,7 +1287,7 @@ Expected:
 - First foodplace in the list will have no note: `-- No notes yet --`
 - Details of the updated foodplace shown in the status message: `Removed notes from Foodplace: ...`
 
-##### Valid Test case - Assigning same note to a valid foodplace:
+##### Valid Test case 3 - Assigning same note to a valid foodplace:
 
 Steps:
 - Run `note 1 Good customer service!`
@@ -1291,7 +1297,7 @@ Expected:
 - No foodplace will be updated.
 - Info details shown in the status message: `The new note is the same as the current note...`
 
-##### Valid Test case - Unassigning any non-existent note from a valid foodplace:
+##### Valid Test case 4 - Unassigning any non-existent note from a valid foodplace:
 
 Steps:
 - Run `note 1`
@@ -1301,7 +1307,7 @@ Expected:
 - No foodplace will be updated.
 - Info details shown in the status message: `No notes to remove from specified Foodplace...`
 
-##### Invalid Test case - Assigning a valid note to a **foodplace at an invalid index**:
+##### Invalid Test case 1 - Assigning a valid note to a **foodplace at an invalid index**:
 
 Command: `note 0 Good customer service!`
 
@@ -1309,7 +1315,7 @@ Expected:
 - No foodplace will be updated.
 - Error details shown in the status message: `Invalid command format! note: Edits the notes...`
 
-##### Invalid Test case - Assigning a valid note at an **out-of-range index**:
+##### Invalid Test case 2 - Assigning a valid note at an **out-of-range index**:
 
 Command: `note 999 Good customer service!`
 
@@ -1317,7 +1323,7 @@ Expected:
 - No foodplace will be updated.
 - Error details shown in the status message: `The foodplace index provided is invalid`
 
-##### Invalid Test case - Assigning a **note that exceeds the character limit of 100** to a valid foodplace:
+##### Invalid Test case 3 - Assigning a **note that exceeds the character limit of 100** to a valid foodplace:
 
 Command: `note 1 aaaaaaa...` (101 `a`s)
 
@@ -1325,7 +1331,7 @@ Expected:
 - No foodplace will be updated.
 - Error details shown in the status message: `Note given either exceeds 100 characters OR contained non-ASCII-printable characters...`
 
-##### Invalid Test case - Assigning a **note that contains non-ASCII-printable characters** to a valid foodplace:
+##### Invalid Test case 4 - Assigning a **note that contains non-ASCII-printable characters** to a valid foodplace:
 
 Command: `note 1 ¤¤¤¤`
 
@@ -1344,7 +1350,7 @@ Rating a foodplace while all foodplaces are being shown
 * Use the `list` command first to list all foodplaces and note the current details.
 
 
-##### Valid Test case - Assigning a valid rating to a valid foodplace:
+##### Valid Test case 1 - Assigning a valid rating to a valid foodplace:
 
 Command: `rate 1 5`
 
@@ -1352,7 +1358,7 @@ Expected:
 - First foodplace in the list will be assigned a rating: `< 5/10 >`
 - Details of the rated foodplace shown in the status message: `Added rating to Foodplace: ...`
 
-##### Valid Test case - Unassigning any existing rating from a valid foodplace:
+##### Valid Test case 2 - Unassigning any existing rating from a valid foodplace:
 
 Command: `rate 1 0`
 
@@ -1360,7 +1366,7 @@ Expected:
 - First foodplace in the list will become unrated: `>> No rating yet <<`
 - Details of the unrated foodplace shown in the status message: `Removed rating from Foodplace: ...`
 
-##### Invalid Test case - Assigning a valid rating to a **foodplace at an invalid index**:
+##### Invalid Test case 1 - Assigning a valid rating to a **foodplace at an invalid index**:
 
 Command: `rate 0 5`
 
@@ -1368,7 +1374,7 @@ Expected:
 - No foodplace will be rated.
 - Error details shown in the status message: `Invalid command format! rate: Edits the rating ...`
 
-##### Invalid Test case - Assigning a **negative rating** to a valid foodplace:
+##### Invalid Test case 2 - Assigning a **negative rating** to a valid foodplace:
 
 Command: `rate 1 -1`
 
@@ -1376,7 +1382,7 @@ Expected:
 - No foodplace will be rated.
 - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
 
-##### Invalid Test case - Assigning an **out-of-range rating** to a valid foodplace:
+##### Invalid Test case 3 - Assigning an **out-of-range rating** to a valid foodplace:
 
 Command: `rate 1 11`
 
@@ -1384,7 +1390,7 @@ Expected:
 - No foodplace will be rated.
 - Error details shown in the status message: `Ratings should only contain numbers, and either: A) be ...`
 
-##### Invalid Test case - Assigning an **unsigned non-integer rating** to a valid foodplace:
+##### Invalid Test case 4 - Assigning an **unsigned non-integer rating** to a valid foodplace:
 
 Command: `rate 1 1.1`
 
@@ -1403,7 +1409,7 @@ Wishlisting a foodplace while all foodplaces are being shown
 * Use the `list` command first to list all foodplaces and note the current details.
 
 
-##### Valid Test case - Adding a valid foodplace to wishlist:
+##### Valid Test case 1 - Adding a valid foodplace to wishlist:
 
 Command: `wishlist 1`
 
@@ -1411,7 +1417,7 @@ Expected:
 - First foodplace in the list will be added to wishlist.
 - Details of the updated foodplace shown in the status message: `Add Foodplace to wishlist: ...`
 
-##### Valid Test case - Removing a valid foodplace from wishlist:
+##### Valid Test case 2 - Removing a valid foodplace from wishlist:
 
 Steps:
 - Run `wishlist 1` to add the foodplace to wishlist first
@@ -1421,7 +1427,7 @@ Expected:
 - First foodplace in the list will be removed from wishlist.
 - Details of the updated foodplace shown in the status message: `Remove Foodplace from wishlist: ...`
 
-##### Valid Test case - Adding a valid foodplace that is **blacklisted** to wishlist:
+##### Valid Test case 3 - Adding a valid foodplace that is **blacklisted** to wishlist:
 
 Steps:
 - Run `blacklist 1` to add the foodplace to blacklist first
@@ -1433,7 +1439,7 @@ Expected:
 - Details of the updated foodplace shown in the status message: `Add Foodplace to wishlist: ...`
 - Extra details of the updated foodplace shown in the status message: `Additionally removed Foodplace from blacklist`
 
-##### Valid Test case - Displaying wishlist:
+##### Valid Test case 4 - Displaying wishlist:
 
 Command: `wishlist`
 
@@ -1441,7 +1447,7 @@ Expected:
 - Displays all foodplaces that are added to wishlist.
 - Info details shown in the status message: `Listed all foodplaces that are wishlisted`
 
-##### Invalid Test case - Adding / removing a foodplace to wishlist at an **invalid index**:
+##### Invalid Test case 1 - Adding / removing a foodplace to wishlist at an **invalid index**:
 
 Command: `wishlist 0`
 
@@ -1449,7 +1455,7 @@ Expected:
 - No foodplace will be updated.
 - Error details shown in the status message: `Invalid command format! wishlist: Wishlists the foodplace...`
 
-##### Invalid Test case - Adding / removing a foodplace to wishlist at an **out-of-range index**:
+##### Invalid Test case 2 - Adding / removing a foodplace to wishlist at an **out-of-range index**:
 
 Command: `wishlist 999`
 
@@ -1468,7 +1474,7 @@ Blacklisting a foodplace while all foodplaces are being shown
 * Use the `list` command first to list all foodplaces and note the current details.
 
 
-##### Valid Test case - Adding a valid foodplace to blacklist:
+##### Valid Test case 1 - Adding a valid foodplace to blacklist:
 
 Command: `blacklist 1`
 
@@ -1476,7 +1482,7 @@ Expected:
 - First foodplace in the list will be added to blacklist.
 - Details of the updated foodplace shown in the status message: `Add Foodplace to blacklist: ...`
 
-##### Valid Test case - Removing a valid foodplace from blacklist:
+##### Valid Test case 2 - Removing a valid foodplace from blacklist:
 
 Steps:
 - Run `blacklist 1` to add the foodplace to blacklist first
@@ -1486,7 +1492,7 @@ Expected:
 - First foodplace in the list will be removed from blacklist.
 - Details of the updated foodplace shown in the status message: `Remove Foodplace from blacklist: ...`
 
-##### Valid Test case - Adding a valid foodplace that is **wishlisted** to blacklist:
+##### Valid Test case 3 - Adding a valid foodplace that is **wishlisted** to blacklist:
 
 Steps:
 - Run `wishlist 1` to add the foodplace to wishlist first
@@ -1498,7 +1504,7 @@ Expected:
 - Details of the updated foodplace shown in the status message: `Add Foodplace to blacklist: ...`
 - Extra details of the updated foodplace shown in the status message: `Additionally removed Foodplace from wishlist`
 
-##### Valid Test case - Displaying blacklist:
+##### Valid Test case 4 - Displaying blacklist:
 
 Command: `blacklist`
 
@@ -1506,7 +1512,7 @@ Expected:
 - Displays all foodplaces that are added to blacklist.
 - Info details shown in the status message: `Listed all foodplaces that are blacklisted`
 
-##### Invalid Test case - Adding / removing a foodplace to blacklist at an **invalid index**:
+##### Invalid Test case 1 - Adding / removing a foodplace to blacklist at an **invalid index**:
 
 Command: `blacklist 0`
 
@@ -1514,7 +1520,7 @@ Expected:
 - No foodplace will be updated.
 - Error details shown in the status message: `Invalid command format! blacklist: Blacklists the foodplace...`
 
-##### Invalid Test case - Adding / removing a foodplace to blacklist at an **out-of-range index**:
+##### Invalid Test case 2 - Adding / removing a foodplace to blacklist at an **out-of-range index**:
 
 Command: `blacklist 999`
 
@@ -1535,7 +1541,7 @@ Pinning a foodplace while all foodplaces are being shown
 * There are less than 5 pinned foodplaces.
 
 
-##### Valid Test case - Pinning an unpinned foodplace when there are less than 5 pins:
+##### Valid Test case 1 - Pinning an unpinned foodplace when there are less than 5 pins:
 
 Command: `pin 1`
 
@@ -1543,7 +1549,7 @@ Expected:
 - The first foodplace will be pinned.
 - Details of the pinned foodplace shown in the status message: `Pinned Foodplace: ...`
 
-##### Invalid Test case - Pinning a **foodplace at an invalid index**:
+##### Invalid Test case 1 - Pinning a **foodplace at an invalid index**:
 
 Command: `pin 0`
 
@@ -1551,7 +1557,7 @@ Expected:
 - No foodplace will be pinned.
 - Error details shown in the status message: `Invalid command format! pin: Pins the foodplace...`
 
-##### Invalid Test case - Pinning a previously pinned foodplace:
+##### Invalid Test case 2 - Pinning a previously pinned foodplace:
 
 Steps:
 - Pin the first foodplace using `pin 1`
@@ -1561,7 +1567,7 @@ Expected:
 - The first foodplace will remain pinned.
 - Error details shown in the status message: `This foodplace is already pinned`
 
-##### Invalid Test case - Pinning an unpinned foodplace when there are 5 pins already:
+##### Invalid Test case 3 - Pinning an unpinned foodplace when there are 5 pins already:
 
 Steps:
 - Pin 5 foodplaces using `pin x` 5 times.
@@ -1582,7 +1588,7 @@ Unpinning a foodplace while all foodplaces are being shown
 * Foodplace being unpinned is currently pinned.
 
 
-##### Valid Test case - Unpinning an pinned foodplace:
+##### Valid Test case 1 - Unpinning an pinned foodplace:
 
 Command: `unpin 1`
 
@@ -1590,7 +1596,7 @@ Expected:
 - The first foodplace will be unpinned.
 - Details of the unpinned foodplace shown in the status message: `Unpinned Foodplace: ...`
 
-##### Invalid Test case - Unpinning a **foodplace at an invalid index**:
+##### Invalid Test case 1 - Unpinning a **foodplace at an invalid index**:
 
 Command: `unpin 0`
 
@@ -1598,7 +1604,7 @@ Expected:
 - No foodplace will be pinned.
 - Error details shown in the status message: `Invalid command format! unpin: Unpins the foodplace...`
 
-##### Invalid Test case - Unpinning a foodplace that is not pinned:
+##### Invalid Test case 2 - Unpinning a foodplace that is not pinned:
 
 Command: `unpin 2`
 
@@ -1613,7 +1619,7 @@ Expected:
 * **At least one foodplace** must exist in the list.
 * Use the `list` command first to list all foodplaces and note the current details.
 
-##### Valid Test case - Finding a foodplace by keywords:
+##### Valid Test case 1 - Finding a foodplace by keywords:
 
 Command: `find western`
 
@@ -1621,7 +1627,7 @@ Expected:
 - The list updates to show foodplaces with matching fields.
 - Info details shown in the status message: `2 foodplaces listed!`
 
-##### Valid Test case - Finding a foodplace by specified fields:
+##### Valid Test case 2 - Finding a foodplace by specified fields:
 
 Command: `find t/hawker r/8`
 
@@ -1639,7 +1645,7 @@ Comparing two foodplaces from the list shown
 * Use the `list` command first to list all foodplaces and note the current details.
 
 
-##### Valid Test case - Comparing two different foodplaces:
+##### Valid Test case 1 - Comparing two different foodplaces:
 
 Command: `compare 1 2`
 
@@ -1647,7 +1653,7 @@ Expected:
 - The first and second foodplace will be compared.
 - Details of the comparison shown in the status message.
 
-##### Invalid Test case - Comparing the same foodplace:
+##### Invalid Test case 1 - Comparing the same foodplace:
 
 Command: `compare 1 1`
 
@@ -1655,7 +1661,7 @@ Expected:
 - No comparison will be made.
 - Error details shown in the status message: `The two foodplace indexes cannot be the same`
 
-##### Invalid Test case - Comparing a **foodplace at an invalid index**:
+##### Invalid Test case 2 - Comparing a **foodplace at an invalid index**:
 
 Command: `compare 1 999`
 
@@ -1669,7 +1675,7 @@ Expected:
 * BiteBuddy is running.
 
 
-##### Valid Test case - Using the help button:
+##### Valid Test case 1 - Using the help button:
 
 Steps:
 - Click the help button on the top left side of the window.
@@ -1677,51 +1683,58 @@ Steps:
 Expected:
 - Help window should open with a link to the user guide.
 
-##### Valid Test case - Using the help command to get user guide:
+##### Valid Test case 2 - Using the help command to get user guide:
 
 Command: `help`
 
 Expected:
 - Help window should open with a link to the user guide.
 
-##### Valid Test case - Using the help command to get specific command usage:
+##### Valid Test case 3 - Using the help command to get specific command usage:
 
 Command: `help list`
 
 Expected:
 - Command usage of `list` is shown in status message: `list: Lists all foodplaces in BiteBuddy...`
 
-##### Invalid Test case - Using an **invalid command word** as a parameter for the help command:
+##### Invalid Test case 1 - Using an **invalid command word** as a parameter for the help command:
 
 Command: `help unknown`
 
 Expected:
 - Error details shown in the status message: `Unknown command`
 
+
 ### Saving data
 
-1. Valid Test case - Saving data after adding entries:<br>
-    Steps:
-    - Add a new foodplace using `add` command.
-    - Close BiteBuddy.
-    Expected:
-    - Data is persisted correctly in the `addressbook.json` file.
+##### Valid Test case 1 - Saving data after adding entries:
 
-1. Valid Test case - Missing data file:<br>
-    Steps:
-    - Navigate to the `data` folder.
-    - Delete the `addressbook.json` file.
-    - Launch BiteBuddy.
-    Expected:
-    - BiteBuddy generates a new empty `addressbook.json` file.
+Steps:
+- Add a new foodplace using `add` command.
+- Close BiteBuddy.
 
-1. Valid Test case - Corrupted data file:<br>
-    Steps:
-    - Navigate to the `data` folder.
-    - Open the `addressbook.json` file.
-    - Delete or modify one or more fields such that the data file is no longer valid.
-    - Save the changes.
-    - Launch BiteBuddy.
-    Expected:
-    - BiteBuddy opens in a blank state.
+Expected:
+- Data is persisted correctly in the `addressbook.json` file.
+
+##### Valid Test case 2 - Missing data file:
+
+Steps:
+- Navigate to the `data` folder.
+- Delete the `addressbook.json` file.
+- Launch BiteBuddy.
+
+Expected:
+- BiteBuddy generates a new `addressbook.json` file with default sample data.
+
+##### Valid Test case 3 - Corrupted data file:
+
+Steps:
+- Navigate to the `data` folder.
+- Open the `addressbook.json` file.
+- Delete or modify one or more fields such that the data file is no longer valid.
+- Save the changes.
+- Launch BiteBuddy.
+
+Expected:
+- BiteBuddy opens in a blank state.
 
