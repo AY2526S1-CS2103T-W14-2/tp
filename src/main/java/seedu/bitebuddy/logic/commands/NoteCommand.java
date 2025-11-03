@@ -4,6 +4,7 @@ import static seedu.bitebuddy.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import seedu.bitebuddy.commons.core.LogsCenter;
@@ -33,13 +34,11 @@ public class NoteCommand extends Command {
             + "  " + COMMAND_WORD + " 1 " + "Very good customer service\n"
             + "  " + COMMAND_WORD + " 3";
 
-    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added notes to Foodplace: %1$s";
-    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed notes from Foodplace: %1$s";
+    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Added notes to Foodplace: %1$s\n%2$s";
+    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Removed notes from Foodplace: %1$s\n%2$s";
     // Set as success messages but no changes will be made to the address book
-    public static final String MESSAGE_NO_NOTE_TO_REMOVE_SUCCESS = "No notes to remove from specified Foodplace\n"
-            + "No changes were made.";
-    public static final String MESSAGE_SAME_NOTE_SUCCESS = "The new note is the same as the current note\n"
-            + "No changes were made.";
+    public static final String MESSAGE_NO_NOTE_TO_REMOVE_SUCCESS = "No notes to remove from specified Foodplace\n%s";
+    public static final String MESSAGE_SAME_NOTE_SUCCESS = "The new note is the same as the current note\n%s";
 
     // Used for debugging purposes only (fine level)
     private static final Logger logger = LogsCenter.getLogger(NoteCommand.class);
@@ -76,12 +75,14 @@ public class NoteCommand extends Command {
         // If no existing note to remove --> return with no change made
         if (note.value.isEmpty() && noteToEdit.isEmpty()) {
             logger.fine("Successfully executed NoteCommand (No existing note to remove)");
-            return new CommandResult(MESSAGE_NO_NOTE_TO_REMOVE_SUCCESS);
+            return new CommandResult(String.format(MESSAGE_NO_NOTE_TO_REMOVE_SUCCESS,
+                    generateNoteChangeMessage(noteToEdit, note.value)));
         }
         // If new note is the same as existing note --> return with no change made
         if (note.value.equals(noteToEdit)) {
             logger.fine(String.format("Successfully executed NoteCommand (Same existing note: '%s')", noteToEdit));
-            return new CommandResult(MESSAGE_SAME_NOTE_SUCCESS);
+            return new CommandResult(String.format(MESSAGE_SAME_NOTE_SUCCESS,
+                    generateNoteChangeMessage(noteToEdit, note.value)));
         }
 
         Foodplace editedFoodPlace = new Foodplace(foodPlaceToEdit.getName(), foodPlaceToEdit.getPhone(),
@@ -93,16 +94,26 @@ public class NoteCommand extends Command {
         model.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES);
         logger.fine(String.format("Successfully executed NoteCommand (Edited existing note from:'%s' to: '%s')",
                 foodPlaceToEdit.getNote().value, editedFoodPlace.getNote().value));
-        return new CommandResult(generateSuccessMessage(editedFoodPlace));
+        return new CommandResult(generateSuccessMessage(editedFoodPlace, noteToEdit, note.value));
     }
 
     /**
      * Generates a command execution success message based on whether the note is added to or removed from
      * {@code foodPlaceToEdit}.
      */
-    private String generateSuccessMessage(Foodplace foodPlaceToEdit) {
-        String message = !note.value.isEmpty() ? MESSAGE_ADD_NOTE_SUCCESS : MESSAGE_DELETE_NOTE_SUCCESS;
-        return String.format(message, foodPlaceToEdit);
+    private String generateSuccessMessage(Foodplace foodPlaceToEdit, String noteBefore, String noteAfter) {
+        String message = !noteAfter.isEmpty() ? MESSAGE_ADD_NOTE_SUCCESS : MESSAGE_DELETE_NOTE_SUCCESS;
+        return String.format(message, foodPlaceToEdit, generateNoteChangeMessage(noteBefore, noteAfter));
+    }
+
+    private String generateNoteChangeMessage(String noteBefore, String noteAfter) {
+        noteBefore = noteBefore.isEmpty() ? "<No note>" : "\"" + noteBefore + "\"";
+        noteAfter = noteAfter.isEmpty() ? "<No note>" : "\"" + noteAfter + "\"";
+        if (Objects.equals(noteBefore, noteAfter)) {
+            return "No changes were made.";
+        } else {
+            return String.format("Note changed from %s to %s.", noteBefore, noteAfter);
+        }
     }
 
     @Override
