@@ -131,7 +131,7 @@ OpenJDK 64-Bit Server VM Zulu17.56+15-CA (build 17.0.14+7-LTS, mixed mode, shari
 
 <box type="info" header="Some notes about the command format" seamless>
 
-***For new users**, check out the Glossary [here](#glossary) first!*
+**For new users**, check out the Glossary [here](#glossary) first!
 
 * You must replace the words in `UPPER_CASE` with your inputs. Different parameters have different rules, so check out the commands' section below first if you need help!<br>
   - In `delete INDEX`, `INDEX` is a required item here and `delete` expects a numerical item, so you can use the command as `delete 3`.
@@ -565,7 +565,7 @@ Action     | Format                                                             
 **Items**: Refers to any input parameter that is accepted by any command<br>
 \- Examples: `n/NAME`, `t/TAG`, `INDEX`, etc
 
-*As some foodplaces can share a common management in real-life or how foodplaces can be similar in some aspects, the following items are intentionally allowed to be non-unique across multiple foodplaces:
+*As some foodplaces can share a common management in real life or how foodplaces can be similar in some aspects, the following items are intentionally allowed to be non-unique across multiple foodplaces:
   - Names & Addresses (to an extent)
     - Names & addresses **must form a unique pair for a foodplace**, e.g. `KFC` at `1 Changi Street` and `KFC` at `2 Pulau Ubin` are allowed in the same system, but `KFC` at `1 Changi Street` twice isn't!
   - Opening & Closing times
