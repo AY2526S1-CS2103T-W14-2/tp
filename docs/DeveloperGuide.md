@@ -985,7 +985,7 @@ Expected:
 - First foodplace is deleted from the list.
 - Details of the deleted foodplace shown in the status message: `Deleted Foodplace: ...`
 
-##### Invalid Test case 2 - Deleting a **foodplace at an invalid index**:
+##### Invalid Test case 1 - Deleting a **foodplace at an invalid index**:
 
 Command: `delete 0`
 
