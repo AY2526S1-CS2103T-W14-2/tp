@@ -49,7 +49,6 @@ public class PinCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         Foodplace foodplaceToPin = getFoodplaceToPin(model);
 
-        showPinnedFoodplaces(model);
         if (isMaxPinsReached(model)) {
             return new CommandResult(MESSAGE_MAX_PIN_REACHED);
         }
@@ -74,15 +73,11 @@ public class PinCommand extends Command {
     }
 
     private boolean isMaxPinsReached(Model model) {
-        return model.getFilteredFoodplaceList().size() >= 5;
+        return model.getFilteredFoodplaceList().stream().filter(PREDICATE_SHOW_PINNED_FOODPLACES).count() >= 5;
     }
 
     private boolean isAlreadyPinned(Foodplace foodplace) {
         return foodplace.getPinned().isPinned();
-    }
-
-    private void showPinnedFoodplaces(Model model) {
-        model.updateFilteredFoodplaceList(PREDICATE_SHOW_PINNED_FOODPLACES);
     }
 
     private static Foodplace pinFoodplace(Foodplace fp) {
