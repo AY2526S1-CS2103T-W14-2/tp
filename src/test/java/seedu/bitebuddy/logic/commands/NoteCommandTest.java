@@ -57,26 +57,6 @@ public class NoteCommandTest {
     }
 
     @Test
-    public void execute_deleteNoteUnfilteredList_success() {
-        Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
-        Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
-        String firstFoodplaceNote = firstFoodplace.getNote().value;
-        String editedFoodplaceNote = editedFoodplace.getNote().value;
-
-        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
-                new Note(editedFoodplaceNote));
-
-        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
-                Messages.format(editedFoodplace),
-                TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setFoodplace(firstFoodplace, editedFoodplace);
-
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_addNoteFilteredList_success() {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
 
@@ -98,6 +78,27 @@ public class NoteCommandTest {
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void execute_deleteNoteUnfilteredList_success() {
+        Foodplace firstFoodplace = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
+        Foodplace editedFoodplace = new FoodplaceBuilder(firstFoodplace).withNote(EMPTY_NOTE_STUB).build();
+        String firstFoodplaceNote = firstFoodplace.getNote().value;
+        String editedFoodplaceNote = editedFoodplace.getNote().value;
+
+        NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_FOODPLACE,
+                new Note(editedFoodplaceNote));
+
+        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
+                Messages.format(editedFoodplace),
+                TestStubs.NoteCommandStub.generateDifferentNoteMessage(firstFoodplaceNote, editedFoodplaceNote));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setFoodplace(firstFoodplace, editedFoodplace);
+
+        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+    }
+
+    // Not the most efficient since filteredList is tested for addNote already, included for exhaustiveness
     @Test
     public void execute_deleteNoteFilteredList_success() {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
@@ -138,6 +139,7 @@ public class NoteCommandTest {
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Not the most efficient since filteredList is tested for addNote already, included for exhaustiveness
     @Test
     public void execute_noNoteToRemoveFilteredList_success() {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
@@ -172,6 +174,7 @@ public class NoteCommandTest {
         assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
     }
 
+    // Not the most efficient since filteredList is tested for addNote already, included for exhaustiveness
     @Test
     public void execute_addSameNoteFilteredList_success() {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);
@@ -198,10 +201,7 @@ public class NoteCommandTest {
         assertCommandFailure(noteCommand, model, Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
     }
 
-    /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
-     */
+    // Not the most efficient since filteredList is tested for addNote already, included for exhaustiveness
     @Test
     public void execute_invalidFoodplaceIndexFilteredList_failure() {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE);

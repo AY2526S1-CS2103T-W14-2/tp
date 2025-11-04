@@ -11,17 +11,9 @@ import org.junit.jupiter.api.Test;
 public class NoteTest {
 
     @Test
-    public void hashCode_sameValue_sameHash() {
-        Note n1 = new Note("hello");
-        Note n2 = new Note("hello");
-        assertEquals(n1.hashCode(), n2.hashCode());
-    }
-
-    @Test
-    public void hashCode_differentValue_differentHash() {
-        Note n1 = new Note("hello");
-        Note n2 = new Note("bye");
-        assertNotEquals(n1.hashCode(), n2.hashCode());
+    public void constructor_validValue_success() {
+        Note validNote = new Note("Hello");
+        assertEquals("Hello", validNote.value);
     }
 
     @Test
@@ -31,21 +23,36 @@ public class NoteTest {
 
     @Test
     public void constructor_invalidNote_throwsIllegalArgumentException() {
-        String invalidNote = "Nice place! \u0081";
-        assertThrows(IllegalArgumentException.class, () -> new Note(invalidNote));
+        String invalidCharacterNote = "Nice place! \u0081";
+        String invalidLengthNote = "a".repeat(101);
+        assertThrows(IllegalArgumentException.class, () -> new Note(invalidCharacterNote));
+        assertThrows(IllegalArgumentException.class, () -> new Note(invalidLengthNote));
+    }
+
+    @Test
+    public void toString_validNote_success() {
+        Note note = new Note("Hello");
+        assertEquals("Hello", note.toString());
+    }
+
+    @Test
+    public void toString_emptyNote_success() {
+        Note note = new Note("");
+        assertEquals("<Empty note>", note.toString());
     }
 
     @Test
     public void isValidNote() {
-        // null email
-        assertThrows(NullPointerException.class, () -> Note.isValidNote(null));
-
+        assertThrows(NullPointerException.class, () -> Note.isValidNote(null)); // null note
         assertTrue(Note.isValidNote("")); // empty string
         assertTrue(Note.isValidNote("    ")); // space-filled string
-        assertTrue(Note.isValidNote("Hello"));
-
+        assertTrue(Note.isValidNote("a")); // valid string
+        assertTrue(Note.isValidNote("Hello!")); // valid string
         assertFalse(Note.isValidNote("Nice place! \u0081")); // Contains non-printable character
-        assertFalse(Note.isValidNote("a".repeat(150))); // Exceed character limit
+        assertTrue(Note.isValidNote("a".repeat(100))); // valid string at character limit
+        // valid string at character limit with whitespaces
+        assertTrue(Note.isValidNote("  " + "a".repeat(100) + "   "));
+        assertFalse(Note.isValidNote("a".repeat(101))); // Exceed character limit
     }
 
     @Test
@@ -59,6 +66,10 @@ public class NoteTest {
         Note noteCopy = new Note("Hello");
         assertTrue(note.equals(noteCopy));
 
+        // same values with leading/trailing spaces -> returns true
+        Note noteCopyWithWhitespaces = new Note("  Hello    ");
+        assertTrue(note.equals(noteCopyWithWhitespaces));
+
         // different types -> returns false
         assertNotEquals(note, 1);
 
@@ -68,5 +79,19 @@ public class NoteTest {
         // different note -> returns false
         Note differentNote = new Note("Bye");
         assertFalse(note.equals(differentNote));
+    }
+
+    @Test
+    public void hashCode_sameValue_sameHash() {
+        Note n1 = new Note("hello");
+        Note n2 = new Note("hello");
+        assertEquals(n1.hashCode(), n2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentValue_differentHash() {
+        Note n1 = new Note("hello");
+        Note n2 = new Note("bye");
+        assertNotEquals(n1.hashCode(), n2.hashCode());
     }
 }

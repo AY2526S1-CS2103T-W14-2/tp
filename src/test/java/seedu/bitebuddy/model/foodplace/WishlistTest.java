@@ -11,17 +11,17 @@ import org.junit.jupiter.api.Test;
 public class WishlistTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Wishlist(null));
-    }
-
-    @Test
     public void constructor_validValue_success() {
         Wishlist trueWishlist = new Wishlist(true);
         assertTrue(trueWishlist.isWishlisted);
 
         Wishlist falseWishlist = new Wishlist(false);
         assertFalse(falseWishlist.isWishlisted);
+    }
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Wishlist(null));
     }
 
     @Test
@@ -48,12 +48,15 @@ public class WishlistTest {
     }
 
     @Test
-    public void toString_returnsCorrectString() {
-        Wishlist trueWishlist = new Wishlist(true);
-        assertEquals("Wishlisted", trueWishlist.toString());
+    public void toString_wishlistTrue_returnsCorrectString() {
+        Wishlist wishlistTrue = new Wishlist(true);
+        assertEquals("Wishlisted", wishlistTrue.toString());
+    }
 
-        Wishlist falseWishlist = new Wishlist(false);
-        assertEquals("Not wishlisted", falseWishlist.toString());
+    @Test
+    public void toString_wishlistFalse_returnsCorrectString() {
+        Wishlist wishlistFalse = new Wishlist(false);
+        assertEquals("Not wishlisted", wishlistFalse.toString());
     }
 
     @Test
@@ -79,15 +82,16 @@ public class WishlistTest {
     }
 
     @Test
-    public void hashCode_test() {
+    public void hashCode_sameValue_sameHash() {
         Wishlist wishlistTrue = new Wishlist(true);
         Wishlist wishlistTrueCopy = new Wishlist(true);
-        Wishlist wishlistFalse = new Wishlist(false);
-
-        // same values -> same hashcode
         assertEquals(wishlistTrue.hashCode(), wishlistTrueCopy.hashCode());
+    }
 
-        // different values -> different hashcode
+    @Test
+    public void hashCode_differentValue_differentHash() {
+        Wishlist wishlistTrue = new Wishlist(true);
+        Wishlist wishlistFalse = new Wishlist(false);
         assertNotEquals(wishlistTrue.hashCode(), wishlistFalse.hashCode());
     }
 }

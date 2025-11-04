@@ -18,7 +18,7 @@ import seedu.bitebuddy.model.foodplace.Note;
 public class NoteCommandParserTest {
     private static final String VALID_NOTE = "Some note.";
     private static final String INVALID_CHAR_NOTE = "Nice place! \u0081";
-    private static final String INVALID_LONG_NOTE = "a".repeat(150);
+    private static final String INVALID_LONG_NOTE = "a".repeat(101);
     private NoteCommandParser parser = new NoteCommandParser();
 
     @Test
@@ -38,8 +38,9 @@ public class NoteCommandParserTest {
     @Test
     public void parse_invalidIndex_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE);
-        assertParseFailure(parser, "one " + VALID_NOTE, expectedMessage);
+        assertParseFailure(parser, "0 " + VALID_NOTE, expectedMessage);
         assertParseFailure(parser, "-1 " + VALID_NOTE, expectedMessage);
+        assertParseFailure(parser, "one " + VALID_NOTE, expectedMessage);
     }
 
     @Test

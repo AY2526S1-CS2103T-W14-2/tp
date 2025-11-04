@@ -8,7 +8,6 @@ import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandFailur
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.bitebuddy.logic.commands.CommandTestUtil.showFoodplaceAtIndex;
 import static seedu.bitebuddy.logic.commands.WishlistCommand.MESSAGE_REMOVE_BLACKLIST_STATUS_SUCCESS;
-import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_FOODPLACES;
 import static seedu.bitebuddy.model.Model.PREDICATE_SHOW_ALL_WISHLISTED_FOODPLACES;
 import static seedu.bitebuddy.testutil.TypicalFoodplace.getTypicalAddressBook;
 import static seedu.bitebuddy.testutil.TypicalIndexes.INDEX_FIRST_FOODPLACE;
@@ -34,11 +33,13 @@ public class WishlistCommandTest {
     public void execute_addWishlistUnfilteredList_success() {
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_THIRD_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withWishlist(true).build();
+
         WishlistCommand command = new WishlistCommand(INDEX_THIRD_FOODPLACE);
         String expectedMessage = String.format(WishlistCommand.MESSAGE_ADD_WISHLIST_SUCCESS,
                 Messages.format(editedFoodplace));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -47,38 +48,43 @@ public class WishlistCommandTest {
         showFoodplaceAtIndex(model, INDEX_THIRD_FOODPLACE); // Show CARLSHOP
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withWishlist(true).build();
+
         WishlistCommand command = new WishlistCommand(INDEX_FIRST_FOODPLACE); // Filtered index is 1
         String expectedMessage = String.format(WishlistCommand.MESSAGE_ADD_WISHLIST_SUCCESS,
                 Messages.format(editedFoodplace));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
-        expectedModel.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES); // Command resets filter
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_removeWishlistWasWishlistedUnfilteredList_success() {
+    public void execute_removeWishlistUnfilteredList_success() {
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_SECOND_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withWishlist(false).build();
+
         WishlistCommand command = new WishlistCommand(INDEX_SECOND_FOODPLACE);
         String expectedMessage = String.format(WishlistCommand.MESSAGE_REMOVE_WISHLIST_SUCCESS,
                 Messages.format(editedFoodplace));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
+    // Not the most efficient since filteredList is tested for addWishlist already, included for exhaustiveness
     @Test
-    public void execute_removeWishlistWasWishlistedFilteredList_success() {
+    public void execute_removeWishlistFilteredList_success() {
         showFoodplaceAtIndex(model, INDEX_SECOND_FOODPLACE); // Show DAEBAKSHOP
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withWishlist(false).build();
+
         WishlistCommand command = new WishlistCommand(INDEX_FIRST_FOODPLACE); // Filtered index is 1
         String expectedMessage = String.format(WishlistCommand.MESSAGE_REMOVE_WISHLIST_SUCCESS,
                 Messages.format(editedFoodplace));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
-        expectedModel.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES); // Command resets filter
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -87,28 +93,32 @@ public class WishlistCommandTest {
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withWishlist(true)
                 .withBlacklist(false).build();
+
         WishlistCommand command = new WishlistCommand(INDEX_FIRST_FOODPLACE);
         String expectedMessage = String.format(WishlistCommand.MESSAGE_ADD_WISHLIST_SUCCESS,
                 Messages.format(editedFoodplace))
                 + "\n" + MESSAGE_REMOVE_BLACKLIST_STATUS_SUCCESS;
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
+    // Not the most efficient since filteredList is tested for addWishlist already, included for exhaustiveness
     @Test
     public void execute_addWishlistWasBlacklistedFilteredList_success() {
         showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE); // Show PRATASHOP
         Foodplace foodplaceToEdit = model.getFilteredFoodplaceList().get(INDEX_FIRST_FOODPLACE.getZeroBased());
         Foodplace editedFoodplace = new FoodplaceBuilder(foodplaceToEdit).withWishlist(true)
                 .withBlacklist(false).build();
-        WishlistCommand command = new WishlistCommand(INDEX_FIRST_FOODPLACE); // Filtered index is 1
+
+        WishlistCommand command = new WishlistCommand(INDEX_FIRST_FOODPLACE);
         String expectedMessage = String.format(WishlistCommand.MESSAGE_ADD_WISHLIST_SUCCESS,
                 Messages.format(editedFoodplace))
                 + "\n" + MESSAGE_REMOVE_BLACKLIST_STATUS_SUCCESS;
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setFoodplace(foodplaceToEdit, editedFoodplace);
-        expectedModel.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_FOODPLACES); // Command resets filter
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -118,6 +128,7 @@ public class WishlistCommandTest {
         String expectedMessage = WishlistCommand.MESSAGE_DISPLAY_SUCCESS;
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateFilteredFoodplaceList(PREDICATE_SHOW_ALL_WISHLISTED_FOODPLACES);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
@@ -130,11 +141,11 @@ public class WishlistCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE); // Filtered list size is 1
-        Index outOfBoundIndex = INDEX_SECOND_FOODPLACE; // Index 2 is out of bounds for filtered list
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFoodplaceList().size());
+        showFoodplaceAtIndex(model, INDEX_FIRST_FOODPLACE); // Filtered list now has size 1
+        Index outOfBoundIndex = INDEX_SECOND_FOODPLACE;
         WishlistCommand command = new WishlistCommand(outOfBoundIndex);
+
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getFoodplaceList().size());
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_FOODPLACE_DISPLAYED_INDEX);
     }
 
