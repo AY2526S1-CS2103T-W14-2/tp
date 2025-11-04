@@ -137,4 +137,16 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "t/**1",
                 Tag.MESSAGE_CONSTRAINTS);
     }
+
+    @Test
+    public void parse_multipleRatings_throwsParseException() {
+        assertParseFailure(parser, "r/8 r/9",
+                "Only one rating (r/) can be specified in a find command.");
+    }
+
+    @Test
+    public void parse_multipleCuisines_throwsParseException() {
+        assertParseFailure(parser, "c/japanese c/korean",
+                "Only one cuisine (c/) can be specified in a find command.");
+    }
 }
