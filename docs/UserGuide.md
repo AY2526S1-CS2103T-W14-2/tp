@@ -125,15 +125,13 @@ OpenJDK 64-Bit Server VM Zulu17.56+15-CA (build 17.0.14+7-LTS, mixed mode, shari
 
 <box type="tip" header="Using previously entered commands">
 
-* Hate retyping commands? Press the `↑` / `↓` arrow keys in the command box!
-
-* Swap between your previously-used and currently-typing-in-progress commands!
+* Hate retyping commands? Press the `↑` / `↓` arrow keys in the command box! Swap between your previously-used and currently-typing-in-progress commands!
 
 </box>
 
 <box type="info" header="Some notes about the command format" seamless>
 
-*For new users, check out the Glossary [here](#glossary) first!*
+***For new users**, check out the Glossary [here](#glossary) first!*
 
 * You must replace the words in `UPPER_CASE` with your inputs. Different parameters have different rules, so check out the commands' section below first if you need help!<br>
   - In `delete INDEX`, `INDEX` is a required item here and `delete` expects a numerical item, so you can use the command as `delete 3`.
@@ -225,8 +223,6 @@ Sometimes, it's best to forget ever having visited a foodplace, especially one t
 Format: `delete INDEX`
 
 * Deletes the foodplace at the specified `INDEX`.
-* The index refers to the index number shown in the displayed foodplace list. Alternatively, it can be an index number from after using the `find` command.
-* The index **must be a positive integer**: 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd foodplace.
@@ -289,7 +285,7 @@ Examples:
 ### Rating a foodplace: `rate`
 
 Trust your food palate to know exactly how much you like a foodplace, and trust BiteBuddy to remember it for you!<br>
-You can add / edit a *rating* for a foodplace in BiteBuddy!
+You can add / edit a **rating** for a foodplace in BiteBuddy!
 
 Format: `rate INDEX RATING`
 
@@ -321,7 +317,7 @@ Format (2 types):<br>
 
 * Finds the foodplace at the specified `INDEX` and edits its tags.
 * Tags must be made of **any letters and numbers only**, meaning special characters like whitespaces and `/`, `-`, etc aren't allowed!
-* Tag duplicates are case-insensitive and will be overridden by the newly added tag."
+* Tag duplicates are case-insensitive and will be overridden by the newly added tag.
 * For the **1st format, at least one tag** must be provided.
 * For the **2nd format**, the provided tag(s) will be deleted.
 * Tag additions are **cumulative**, existing tags are kept until manually deleted.
@@ -346,8 +342,8 @@ Format: `wishlist [INDEX]`
 
 * Wishlists the foodplace at the specified `INDEX`.
 * You can **display your wishlist** by not specifying an `INDEX`.
-* If a foodplace is currently wishlisted, you can use `wishlist` on it again to **remove the wishlist status**.
-* If a foodplace **is currently blacklisted**, adding this foodplace to wishlist **removes its blacklist status**.
+* If a foodplace is **currently wishlisted**, you can use `wishlist` on it again to **remove the wishlist status**.
+* If a foodplace is **currently blacklisted**, adding this foodplace to wishlist **removes its blacklist status**.
 
 Examples:
 * `wishlist 2` wishlists the 2nd foodplace.
@@ -368,8 +364,8 @@ Format: `blacklist [INDEX]`
 
 * Blacklists the foodplace at the specified `INDEX`.
 * You can **display your blacklist** by not specifying an `INDEX`.
-* If a foodplace is currently **blacklisted**, you can use `blacklist` on it again to **remove the blacklist status**.
-* If a foodplace is currently **wishlisted**, adding this foodplace to blacklist **removes its wishlist status**.
+* If a foodplace is **currently blacklisted**, you can use `blacklist` on it again to **remove the blacklist status**.
+* If a foodplace is **currently wishlisted**, adding this foodplace to blacklist **removes its wishlist status**.
 
 Examples:
 * `blacklist 2` Blacklists the 2nd foodplace.
@@ -454,9 +450,9 @@ Make a more informed decision by **comparing** the ratings and tags of any two f
 
 Format: `compare INDEX1 INDEX2`
 
-* Compares the ratings of the two specified foodplaces.
-* Displays common tags shared by both foodplaces.
-* Displays unique tags for each foodplace.
+* **Compares the ratings** of both foodplaces.
+* Displays **common tags** shared by both foodplaces.
+* Displays **unique tags** for each foodplace.
 
 Examples:
 * `compare 1 3` returns a comparison summary between the 1st and 3rd foodplaces.
@@ -477,7 +473,7 @@ Format: `clear`
 
 <box type="warning">
 
-* **This action is IRREVERSIBLY DESTRUCTIVE! Be extremely careful!**
+**This action is IRREVERSIBLY DESTRUCTIVE! Be extremely careful!**
 
 </box>
 
@@ -509,9 +505,7 @@ whenever a command successfully executes for the first time.
 BiteBuddy data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 Users are intended to only edit BiteBuddy's JSON file when BiteBuddy is not open. On startup, if the JSON file exists,
-BiteBuddy will only read all data from the JSON file **once** into the program's memory. No subsequent reads to this file  
-are made, and successful commands will cause a write to this file. Closing BiteBuddy will cause the JSON file to be 
-overwritten with BiteBuddy's latest data from the program.
+BiteBuddy will only read all data from the JSON file **once** into the program's memory. No subsequent reads to this file are made, and successful commands will cause a write to this file. Closing BiteBuddy will cause the JSON file to be overwritten with BiteBuddy's latest data from the program.
 
 Any external modifications to the JSON file will not influence a running instance of BiteBuddy. If any are made, when the running instance of BiteBuddy exits, it will overwrite all external modifications made and replace it with the program's data.
 
@@ -564,12 +558,25 @@ Action     | Format                                                             
 
 <box type="info" header="Glossary of terms in BiteBuddy">
 
+<box type="tip" header="Note">
+
 *Alphanumeric characters include all lower & upper case letters and numbers only! (`[a-zA-Z0-9]`)*
 
 **Items**: Refers to any input parameter that is accepted by any command<br>
 \- Examples: `n/NAME`, `t/TAG`, `INDEX`, etc
 
-<box type="tip" header="All Items">
+*As some foodplaces can share a common management in real-life or how foodplaces can be similar in some aspects, the following items are intentionally allowed to be non-unique across multiple foodplaces:
+  - Names & Addresses (to an extent)
+    - Names & addresses **must form a unique pair for a foodplace**, e.g. `KFC` at `1 Changi Street` and `KFC` at `2 Pulau Ubin` are allowed in the same system, but `KFC` at `1 Changi Street` twice isn't!
+  - Opening & Closing times
+  - Phone numbers
+  - Emails
+  - Cuisines
+  - Notes
+  - Ratings
+  - Tags
+
+</box>
 
 - **INDEX**: The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
   - **Must be a positive integer**: 1, 2, 3, …​
@@ -625,8 +632,6 @@ Action     | Format                                                             
 
 - **t/TAG**: Refers to the tags linked to a Foodplace
   - Contains only alphanumeric characters
-
-</box>
 
 [Return to Features](#features)
 
