@@ -581,68 +581,47 @@ Action     | Format                                                             
 - **INDEX**: The index refers to the index number shown in the displayed foodplace list.  Alternatively, it can be an index number from after using the `find` command.
   - **Must be a positive integer**: 1, 2, 3, …​
   - Must be an integer in the **range of the displayed Foodplace list**
-    - Example: In a displayed list of 5 foodplaces, INDEX must be between 1 and 5
-<br>
-
+    - Example: In a displayed list of 5 foodplaces, INDEX must be between 1 and 5<br><br>
 - **n/NAME**: Refers to the name of a Foodplace
   - The 1st character **cannot be a non-alphanumeric character**.
-  - Contains only alphanumeric characters, whitespaces (` `) and certain special characters (`&,'-_@:$#!.`)
-<br>
-
+  - Contains only alphanumeric characters, whitespaces (` `) and certain special characters (`&,'-_@:$#!.`)<br><br>
 - **a/ADDRESS**: Refers to the address of a Foodplace
   - The 1st character **cannot be a space character**. All whitespace leading to a non-space character will be removed
-  - All other characters of an address can be anything, there is no length limit
-<br>
-
+  - All other characters of an address can be anything, there is no length limit<br><br>
 - **ot/OPENING_TIME**: Refers to the opening time of a Foodplace
   - Must form a pair with a **closing time** (see below)
   - Cannot be equal to the corresponding closing time
   - Must follow the **HH:mm 24-hour format**
     - Times with single-digit hours must be padded with a `0` prefix to become double-digit hours
-    - Examples: `09:00` for 9am, `12:00` for 12pm, `19:00` for 7pm
-<br>
-
+    - Examples: `09:00` for 9am, `12:00` for 12pm, `19:00` for 7pm<br><br>
 - **ct/CLOSING_TIME**: Refers to the closing time of a Foodplace
   - Must form a pair with an **opening time** (see above)
   - Cannot be equal to the corresponding opening time
   - Must follow the **HH:mm 24-hour format**
     - Times with single-digit hours must be padded with a `0` prefix to become double-digit hours
-    - Examples: `09:00` for 9am, `12:00` for 12pm, `19:00` for 7pm
-<br>
-
+    - Examples: `09:00` for 9am, `12:00` for 12pm, `19:00` for 7pm<br><br>
 - **p/PHONE_NUMBER**: Refers to the phone number linked to a Foodplace
   - Contains only numbers, no other characters allowed
   - Must be between 3 and 15 digits long
-    - Examples: `999`, `98765432`, `1234432101`
-<br>
-
+    - Examples: `999`, `98765432`, `1234432101`<br><br>
 - **e/EMAIL**: Refers to the email linked to a Foodplace
   - It must be in the format `LOCAL@DOMAINS`:
     - `LOCAL` contains only alphanumeric characters and `+_.-`, and the 1st character cannot be `+_.-`.
     - `DOMAINS` consist of at least one domain label(s) seperated by `.`
       - Must end with a domain label at least 2 characters long
       - Each domain label starts and ends with alphanumeric characters
-      - Each domain label consists of alphanumeric characters, separated only by hyphens `-`, if any.
-<br>
-
+      - Each domain label consists of alphanumeric characters, separated only by hyphens `-`, if any.<br><br>
 - **c/CUISINE**: Refers to the cuisine offered by a Foodplace
-  - Contains only alphanumeric characters and spaces
-<br>
-
+  - Contains only alphanumeric characters and spaces<br><br>
 - **no/NOTE**: Refers to the note linked to a Foodplace
   - Contains only ASCII printable characters [here](http://facweb.cs.depaul.edu/sjost/it212/documents/ascii-pr.htm)
-  - Can be up to 100 characters long
-<br>
-
+  - Can be up to 100 characters long<br><br>
 - **r/RATING**: Refers to the score linked to a Foodplace
   - Contains only numbers
   - A valid rating must be between 1 and 10
-  - A rating of 0 can be used for removing ratings in applicable commands (e.g. `rate`, `edit`, `add`, etc)
-<br>
-
+  - A rating of 0 can be used for removing ratings in applicable commands (e.g. `rate`, `edit`, `add`, etc)<br><br>
 - **t/TAG**: Refers to the tags linked to a Foodplace
-  - Contains only alphanumeric characters
-<br>
+  - Contains only alphanumeric characters<br><br>
 
 [Return to Features](#features)
 
