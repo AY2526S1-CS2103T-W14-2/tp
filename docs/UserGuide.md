@@ -72,25 +72,35 @@ Follow these steps to install and start using **BiteBuddy**!
 - Check that you have Java `17` or above installed on your computer.<br>
    **On Windows 🪟:** Java `17` can be downloaded [here](https://www.oracle.com/java/technologies/downloads/#java17-windows).<br>
    **On Mac 🍎:** Follow the JDK installation guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-- To check your Java version on any system, open a terminal and type: `java -version`
-![Check Java Version](images/java_version.png)
+- To check your Java version on any system, open a terminal and type: `java -version`. Something like this should show up in the console:
+```
+openjdk version "17.0.14" 2025-01-21 LTS
+OpenJDK Runtime Environment Zulu17.56+15-CA (build 17.0.14+7-LTS)
+OpenJDK 64-Bit Server VM Zulu17.56+15-CA (build 17.0.14+7-LTS, mixed mode, sharing)
+```
 
 ### Step 2 — Download and Run BiteBuddy
 1. Head over to our GitHub Releases page [here](https://github.com/AY2526S1-CS2103T-W14-2/tp/releases)!
 2. Download the latest file named **`bitebuddy.jar`**. There may be other files shown, but you'll only need `bitebuddy.jar`.
    ![Download BiteBuddy.jar](images/download_jar.png)
-3. Choose a folder you want to use as the **home folder** for your BiteBuddy installation, choosing an empty folder is preferred! Then, place `bitebuddy.jar` in this folder.
-4. Open a command terminal in the folder where you placed `bitebuddy.jar`:<br>
-    - **Recommended:** In your file explorer, right-click an empty space and select **“Open in Terminal”** to start a command terminal directly from this folder.<br>
-    - **If the above didn't work:** Open a command terminal (`cmd` for Windows or `Terminal` for Mac), then type in `cd YOUR/FILE/PATH` (replacing `YOUR/FILE/PATH` with the path to the folder holding `bitebuddy.jar`) and hit your 'Enter' key.<br>
+3. Copy the file to the folder you want to use as the _home folder_ for your BiteBuddy.
+4. Open a command terminal, navigate (`cd`) to the folder where you placed the `bitebuddy.jar` file.<br>
 
-   **Mac users:** ![Open_in_Terminal](images/open_in_terminal_Mac.png)
-   **Windows users:** ![Open_in_Terminal](images/open_in_terminal_Windows.png)
+<div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap">
+    <figure style="flex:1 1 320px;margin:0">
+        <img src="images/open_in_terminal_Mac.png" alt="Open in Terminal Mac" style="width:100%;height:auto"/>
+        <figcaption style="text-align:center;font-weight:bold">Mac users</figcaption>
+    </figure>
+    <figure style="flex:1 1 320px;margin:0">
+        <img src="images/open_in_terminal_Windows.png" alt="Open in Terminal Windows" style="width:100%;height:auto"/>
+        <figcaption style="text-align:center;font-weight:bold">Windows users</figcaption>
+    </figure>
+</div>
 
 5. In the terminal, type the command `java -jar "bitebuddy.jar"` and hit your 'Enter' key to start BiteBuddy!
 
 6. After BiteBuddy starts, you'll soon be greeted by a window similar to the one below. There'll be some sample foodplaces provided to get you started! <br>
-   ![Ui](images/UI_image.png)
+   ![Ui](images/Ui.png)
 
 ### Step 3 — Try Out a Command!
 - To get started, in the Command Box, try typing **`help`** and hitting 'Enter' to open the help window!<br>
@@ -330,7 +340,7 @@ Examples:
 ### Wishlisting a foodplace: `wishlist`
 
 Have a foodplace that you've had your eye on for some time, but it just keeps getting buried by other foodplaces?<br>
-Wishlist a foodplace in BiteBuddy so you can finally stop making excuses about forgetting all about it!
+**Wishlist** a foodplace in BiteBuddy so you can finally stop making excuses about forgetting all about it!
 
 Format: `wishlist [INDEX]`
 
@@ -352,7 +362,7 @@ Examples:
 ### Blacklisting a foodplace: `blacklist`
 
 Ever gone to a foodplace whose food made your stomach churn just from the thought of it? We definitely have!<br>
-That's why we let you blacklist a foodplace in BiteBuddy too!
+That's why we let you **blacklist** a foodplace in BiteBuddy too!
 
 Format: `blacklist [INDEX]`
 
@@ -374,7 +384,7 @@ Examples:
 ### Pinning a foodplace: `pin`
 
 You can pin an existing unpinned foodplace in BiteBuddy for a quick reference!<br>
-Pinned foodplaces always appear before regular foodplaces when applicable, so you'll never have to scroll too far to look for them!
+**Pinned** foodplaces always appear before regular foodplaces when applicable, so you'll never have to scroll too far to look for them!
 
 Format: `pin INDEX`
 
@@ -394,7 +404,7 @@ Examples:
 ### Unpinning a foodplace: `unpin`
 
 Changed your mind on a pinned foodplace, or gotten sick of it after trying it one time too many?<br>
-You can also unpin an existing pinned foodplace in Bitebuddy!
+You can also **unpin** an existing pinned foodplace in Bitebuddy!
 
 Format: `unpin INDEX`
 
@@ -412,7 +422,7 @@ Examples:
 ### Finding a foodplace: `find`
 
 Craving for something you've had, or need a quick refresh on a foodplace you've visited before?<br>
-BiteBuddy can search for your keywords across all relevant fields to help you find it quickly!
+BiteBuddy can search for your keywords across all relevant fields to help you **find** it quickly!
 
 Format: `find [KEYWORD]... [t/TAG [MORE TAGS]] [c/CUISINE] [r/RATING]`
 
@@ -440,7 +450,7 @@ Examples:
 ### Comparing two foodplaces: `compare`
 
 Torn between picking from two tough contenders for today's lunch, and can't trust your gut?<br>
-Make a more informed decision by comparing the ratings and tags of any two foodplaces!
+Make a more informed decision by **comparing** the ratings and tags of any two foodplaces!
 
 Format: `compare INDEX1 INDEX2`
 
@@ -460,7 +470,7 @@ Examples:
 ### Clearing all entries: `clear`
 
 Sometimes, there's just no hope for every foodplace on the list, and you're looking for a clean slate to start again.<br>
-If you're dead set on clearing the list *after thinking about it long and hard*, you could clear all foodplaces from BiteBuddy 
+If you're dead set on clearing the list *after thinking about it long and hard*, you could **clear** all foodplaces from BiteBuddy 
 *(although we wouldn't recommend it since we believe in second chances!)*.
 
 Format: `clear`
@@ -478,7 +488,7 @@ Format: `clear`
 ### Exiting the program: `exit`
 
 Calling it a day after an exhausting day of *"reviewing"* delicacies from all over?<br>
-BiteBuddy saves your progress automatically, so everything is safe.
+BiteBuddy **saves** your progress automatically, so everything is safe.
 
 Format: `exit`
 
