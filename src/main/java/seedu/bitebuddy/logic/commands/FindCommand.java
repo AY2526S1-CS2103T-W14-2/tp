@@ -27,7 +27,7 @@ public class FindCommand extends Command {
             + "• For specified fields, only foodplaces that match exactly ALL specified fields are returned.\n"
             + "• At least one optional field must be provided.\n"
             + "Parameters:\n"
-            + "  " + "[KEYWORD] [MORE_KEYWORDS]... [t/TAG [MORE_TAGS]...] [c/CUISINE] [r/RATING]\n"
+            + "  " + "[KEYWORD]... [t/TAG [MORE_TAGS]...] [c/CUISINE] [r/RATING]\n"
             + "Examples:\n"
             + "  " + COMMAND_WORD + " western cheap aircon\n"
             + "  " + COMMAND_WORD + " t/ hawker c/ japanese r/ 8\n"
