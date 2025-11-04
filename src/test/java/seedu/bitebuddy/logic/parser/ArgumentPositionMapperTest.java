@@ -72,6 +72,13 @@ public class ArgumentPositionMapperTest {
     }
 
     @Test
+    public void constructor2_ignoreSplitIndexExceedsLength_returnsAllAsSeparateTokens() {
+        ArgumentPositionMapper mapper = new ArgumentPositionMapper(NOTE_MULTI_WORD_WITH_WHITESPACES,
+                NOTE_MULTI_WORD_LENGTH + 1);
+        assertEquals(4, mapper.size());
+    }
+
+    @Test
     public void constructor2_emptyString_returnsEmptyList() {
         ArgumentPositionMapper mapper = new ArgumentPositionMapper("", 2);
         assertTrue(mapper.getAllArguments().isEmpty(), "Expected empty list for empty input");

@@ -44,7 +44,7 @@ public class BlacklistCommandParserTest {
         assertParseFailure(parser, "0", expectedMessage);
 
         // negative index
-        assertParseFailure(parser, "-5", expectedMessage);
+        assertParseFailure(parser, "-1", expectedMessage);
     }
 
     @Test

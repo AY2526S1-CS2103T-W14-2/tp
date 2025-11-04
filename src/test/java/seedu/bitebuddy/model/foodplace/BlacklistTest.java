@@ -11,17 +11,17 @@ import org.junit.jupiter.api.Test;
 public class BlacklistTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Blacklist(null));
-    }
-
-    @Test
     public void constructor_validValue_success() {
         Blacklist trueBlacklist = new Blacklist(true);
         assertTrue(trueBlacklist.isBlacklisted);
 
         Blacklist falseBlacklist = new Blacklist(false);
         assertFalse(falseBlacklist.isBlacklisted);
+    }
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Blacklist(null));
     }
 
     @Test
@@ -48,10 +48,13 @@ public class BlacklistTest {
     }
 
     @Test
-    public void toString_returnsCorrectString() {
+    public void toString_wishlistTrue_returnsCorrectString() {
         Blacklist trueBlacklist = new Blacklist(true);
         assertEquals("Blacklisted", trueBlacklist.toString());
+    }
 
+    @Test
+    public void toString_wishlistFalse_returnsCorrectString() {
         Blacklist falseBlacklist = new Blacklist(false);
         assertEquals("Not blacklisted", falseBlacklist.toString());
     }
@@ -79,15 +82,16 @@ public class BlacklistTest {
     }
 
     @Test
-    public void hashCode_test() {
+    public void hashCode_sameValue_sameHash() {
         Blacklist blacklistTrue = new Blacklist(true);
         Blacklist blacklistTrueCopy = new Blacklist(true);
-        Blacklist blacklistFalse = new Blacklist(false);
-
-        // same values -> same hashcode
         assertEquals(blacklistTrue.hashCode(), blacklistTrueCopy.hashCode());
+    }
 
-        // different values -> different hashcode
+    @Test
+    public void hashCode_differentValue_differentHash() {
+        Blacklist blacklistTrue = new Blacklist(true);
+        Blacklist blacklistFalse = new Blacklist(false);
         assertNotEquals(blacklistTrue.hashCode(), blacklistFalse.hashCode());
     }
 }
