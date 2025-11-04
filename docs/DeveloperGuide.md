@@ -920,7 +920,7 @@ Command: `add n/Golden Wok p/91234567 e/golden@example.com a/123 Orchard Rd t/ch
 
 Expected:
 - Foodplace is added to the list; `list` shows one additional entry. 
-- Details of the new foodplace shown in the status message: `Added Foodplace: Golden Wok ...`
+- Details of the new foodplace shown in the status message: `New foodplace added: Golden Wok ...`
 - Tags `chinese`, `dinner` are present on the new entry.
 
 ##### Valid Test case 2 — Adding with only required fields:
@@ -930,7 +930,7 @@ Command: `add n/Coffee Corner a/50 Coffee St`
 Expected:
 - Foodplace is added successfully.
 - Optional fields are empty/unset.
-- Details of the new foodplace shown in the status message: `Added Foodplace: Coffee Corner ...`
+- Details of the new foodplace shown in the status message: `New foodplace added: Coffee Corner ...`
 
 ##### Invalid Test case 1 — Adding with **missing required field**:
 
@@ -1068,7 +1068,7 @@ Expected:
 - No changes applied.
 - Error details shown in the status message: `This foodplace already exists in BiteBuddy.`
 
-##### Edge case 1 — No fields provided to edit:
+##### Invalid Test case 5 — No fields provided to edit:
 
 Command: `edit 1`
 
@@ -1076,9 +1076,9 @@ Expected:
 - No changes applied.
 - Error details shown in the status message: `At least one field to edit must be provided.`
 
-### Adding/deleting tags to a foodplace
+### Adding/deleting tags from a foodplace
 
-Adding/deleting tags to a foodplace while all foodplaces are being shown
+Adding/deleting tags from a foodplace while all foodplaces are being shown
 
 *Prerequisites:*
 * BiteBuddy is running.
@@ -1639,7 +1639,7 @@ Expected:
 Command: `help unknown`
 
 Expected:
-- Error details shown in the status message: `Unknown command`
+- Error details shown in the status message: `The command word provided to help is unknown.`
 
 
 ### Saving data
