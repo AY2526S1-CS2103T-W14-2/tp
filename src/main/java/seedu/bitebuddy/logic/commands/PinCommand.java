@@ -73,7 +73,7 @@ public class PinCommand extends Command {
     }
 
     private boolean isMaxPinsReached(Model model) {
-        return model.getFilteredFoodplaceList().stream().filter(PREDICATE_SHOW_PINNED_FOODPLACES).count() >= 5;
+        return model.getAddressBook().getFoodplaceList().stream().filter(PREDICATE_SHOW_PINNED_FOODPLACES).count() >= 5;
     }
 
     private boolean isAlreadyPinned(Foodplace foodplace) {
