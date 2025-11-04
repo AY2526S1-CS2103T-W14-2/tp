@@ -368,7 +368,7 @@ Format: `blacklist [INDEX]`
 * If a foodplace is **currently wishlisted**, adding this foodplace to blacklist **removes its wishlist status**.
 
 Examples:
-* `blacklist 2` Blacklists the 2nd foodplace.
+* `blacklist 2` blacklists the 2nd foodplace.
 * `blacklist` displays all foodplaces that are blacklisted.
 
 ![ug_blacklist](images/ug_blacklist.png)
