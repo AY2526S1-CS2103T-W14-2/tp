@@ -340,7 +340,7 @@ Examples:
 ### Wishlisting a foodplace: `wishlist`
 
 Have a foodplace that you've had your eye on for some time, but it just keeps getting buried by other foodplaces?<br>
-Wishlist a foodplace in BiteBuddy so you can finally stop making excuses about forgetting all about it!
+**Wishlist** a foodplace in BiteBuddy so you can finally stop making excuses about forgetting all about it!
 
 Format: `wishlist [INDEX]`
 
@@ -362,7 +362,7 @@ Examples:
 ### Blacklisting a foodplace: `blacklist`
 
 Ever gone to a foodplace whose food made your stomach churn just from the thought of it? We definitely have!<br>
-That's why we let you blacklist a foodplace in BiteBuddy too!
+That's why we let you **blacklist** a foodplace in BiteBuddy too!
 
 Format: `blacklist [INDEX]`
 
@@ -384,7 +384,7 @@ Examples:
 ### Pinning a foodplace: `pin`
 
 You can pin an existing unpinned foodplace in BiteBuddy for a quick reference!<br>
-Pinned foodplaces always appear before regular foodplaces when applicable, so you'll never have to scroll too far to look for them!
+**Pinned** foodplaces always appear before regular foodplaces when applicable, so you'll never have to scroll too far to look for them!
 
 Format: `pin INDEX`
 
@@ -404,7 +404,7 @@ Examples:
 ### Unpinning a foodplace: `unpin`
 
 Changed your mind on a pinned foodplace, or gotten sick of it after trying it one time too many?<br>
-You can also unpin an existing pinned foodplace in Bitebuddy!
+You can also **unpin** an existing pinned foodplace in Bitebuddy!
 
 Format: `unpin INDEX`
 
@@ -422,7 +422,7 @@ Examples:
 ### Finding a foodplace: `find`
 
 Craving for something you've had, or need a quick refresh on a foodplace you've visited before?<br>
-BiteBuddy can search for your keywords across all relevant fields to help you find it quickly!
+BiteBuddy can search for your keywords across all relevant fields to help you **find** it quickly!
 
 Format: `find [KEYWORD]... [t/TAG [MORE TAGS]] [c/CUISINE] [r/RATING]`
 
@@ -450,7 +450,7 @@ Examples:
 ### Comparing two foodplaces: `compare`
 
 Torn between picking from two tough contenders for today's lunch, and can't trust your gut?<br>
-Make a more informed decision by comparing the ratings and tags of any two foodplaces!
+Make a more informed decision by **comparing** the ratings and tags of any two foodplaces!
 
 Format: `compare INDEX1 INDEX2`
 
@@ -470,7 +470,7 @@ Examples:
 ### Clearing all entries: `clear`
 
 Sometimes, there's just no hope for every foodplace on the list, and you're looking for a clean slate to start again.<br>
-If you're dead set on clearing the list *after thinking about it long and hard*, you could clear all foodplaces from BiteBuddy 
+If you're dead set on clearing the list *after thinking about it long and hard*, you could **clear** all foodplaces from BiteBuddy 
 *(although we wouldn't recommend it since we believe in second chances!)*.
 
 Format: `clear`
@@ -488,7 +488,7 @@ Format: `clear`
 ### Exiting the program: `exit`
 
 Calling it a day after an exhausting day of *"reviewing"* delicacies from all over?<br>
-BiteBuddy saves your progress automatically, so everything is safe.
+BiteBuddy **saves** your progress automatically, so everything is safe.
 
 Format: `exit`
 
