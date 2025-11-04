@@ -23,7 +23,7 @@
 - Markbind — used to generate app website: https://markbind.org/
 - GitHub Copilot — used for autocompleting and drafting code, as well as doing initial reviews for pull requests: https://github.com/features/copilot
 - “Pin 3” icon used in the application GUI — [Icons8](https://icons8.com), licensed under [CC BY-ND 3.0](https://creativecommons.org/licenses/by-nd/3.0/). Source: [https://www.iconsdb.com/gray-icons/pin-3-icon.html](https://www.iconsdb.com/gray-icons/pin-3-icon.html)
-- "Burger" icon - used in application GUI: [Asryraf Aribi](https://www.behance.net/asyrafaribi)
+- "Burger" icon - used in application GUI — [Asryraf Aribi](https://www.behance.net/asyrafaribi)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -872,8 +872,8 @@ Organized in alphabetical order
 * **Custom Keyword**: A user-defined word or phrase that can be used to filter, search, or tag specific entries in BiteBuddy.
 * **Foodplace**: A location where food is sold or served, such as a restaurant, hawker stall, food truck, or cafe.
 * **GUI (Graphical User Interface)**: The visual interface of the application that allows users to interact with it using graphical elements.
-* **Pin**: A foodplace marked with a pin icon that always appears at the top of the displayed list when it meets the conditions for being shown. At most 5 foodplaces can be pinned at any time.
 * **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Pin**: A foodplace marked with a pin icon that always appears at the top of the displayed list when it meets the conditions for being shown. At most 5 foodplaces can be pinned at any time.
 * **Tag**: A label that can be assigned to foodplaces to categorize or group them.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -1522,7 +1522,7 @@ Command: `find western`
 
 Expected:
 - The list updates to show foodplaces with matching fields.
-- Info details shown in the status message: `2 foodplaces listed!`
+- Status message shows number of matches.
 
 ##### Valid Test case 2 - Finding a foodplace by specified fields:
 
@@ -1530,7 +1530,7 @@ Command: `find t/hawker r/8`
 
 Expected:
 - The list updates to show foodplaces with matching fields.
-- Info details shown in the status message: `3 foodplaces listed!`
+- Status message shows number of matches.
 
 ##### Valid Test case 3 – Finding with multiple tags (AND search):
 
